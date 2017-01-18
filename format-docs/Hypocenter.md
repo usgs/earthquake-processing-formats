@@ -25,7 +25,7 @@ in input/output messages for seismic processing algorithms.
 ```
 
 ## Glossary
-Required Values:
+**Required (Input) Values:**
 * Latitude - A decimal number that identifies the latitude of this hypocenter in
 degrees.
 * Longitude - A decimal number that identifies the longitude of this hypocenter
@@ -35,7 +35,7 @@ kilometers.
 * Time - A string containing the UTC origin time of this hypocenter, in the
 ISO8601 format `YYYY-MM-DDTHH:MM:SS.SSSZ`.
 
-Optional Values:
+**Optional (Output) Values:**
 
 The following are supplementary values that **may or may not** be provided by
 various algorithms.

@@ -45,6 +45,7 @@ in the ISO8601 format `YYYY-MM-DDTHH:MM:SS.SSSZ`.
 algorithm identified.
 * AssociatedPhase - A string that identifies the seismic phase that the
 association algorithm identified.
+
 **Optional (Output) Values:**
 
 The following are supplementary values that **may or may not** be provided by

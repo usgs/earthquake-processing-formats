@@ -23,7 +23,31 @@ algorithms.
           "LongitudeError"  : Number,
           "DepthError"      : Number,
           "TimeError"       : Number
-      },      
+      },   
+      "Data" :
+      [
+        {
+          "ID"        : String,
+          "Site"      :
+          {
+             "SiteID"    : String,
+             "Station"   : String,
+             "Channel"   : String,
+             "Network"   : String,
+             "Location"  : String
+          },
+          "Time"            : ISO8601,
+          "PickedPhase"     : String,
+          "AssociatedPhase" : String,
+          "LocatedPhase"    : String,
+          "Residual" : Number,
+          "Distance" : Number,
+          "Azimuth"  : Number,
+          "Weight"   : Number,
+          "Importance" : Number
+        },
+        ...
+      ],         
       "NumberOfAssociatedStations" : Number,
       "NumberOfAssociatedPhases"   : Number,
       "NumberOfUsedStations"       : Number,
@@ -59,41 +83,17 @@ algorithms.
               "Azimuth" : Number,
               "Dip"     : Number
           }                  
-      },          
-      "Data" :
-      [
-        {
-          "ID"        : String,
-          "Site"      :
-          {
-             "SiteID"    : String,
-             "Station"   : String,
-             "Channel"   : String,
-             "Network"   : String,
-             "Location"  : String
-          },
-          "Time"            : ISO8601,
-          "PickedPhase"     : String,
-          "AssociatedPhase" : String,
-          "LocatedPhase"    : String,
-          "Residual" : Number,
-          "Distance" : Number,
-          "Azimuth"  : Number,
-          "Weight"   : Number,
-          "Importance" : Number
-        },
-        ...
-      ]
+      }         
     }
 ```
 
 ## Glossary
-Required (Input) Values:
+**Required (Input) Values:**
 * Hypocenter - An object containing the hypocenter of the Location, see
 [Hypocenter](Hypocenter.md).
 * Data - An array of [Pick](Pick.md) objects associated with this Location.
 
-Optional (Output) Values:
+**Optional (Output) Values:**
 
 The following are supplementary values that **may or may not** be provided by
 various algorithms.

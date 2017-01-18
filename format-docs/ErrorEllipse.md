@@ -38,7 +38,7 @@ in input/output messages for seismic processing algorithms.
 ```
 
 ## Glossary
-Required Values:
+**Required Values:**
 * E0 - First error ellipsoid axis.
 * E1 - Second error ellipsoid axis.
 * E2 - Third error ellipsoid axis.
@@ -49,7 +49,7 @@ in degrees.
 * Dip - A number containing the dip of the axis of error ellipsoid in
 degrees.
 
-Optional Values:
+**Optional Values:**
 
 The following are supplementary values that **may or may not** be provided by
 various algorithms.
