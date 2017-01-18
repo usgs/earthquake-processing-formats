@@ -91,7 +91,7 @@ algorithms.
 Required (Input) Values:
 * Hypocenter - An object containing the hypocenter of the Location, see
 [Hypocenter](Hypocenter.md).
-Data - An array of [Pick](Pick.md) objects associated with this Location.
+* Data - An array of [Pick](Pick.md) objects associated with this Location.
 
 Optional (Output) Values:
 
