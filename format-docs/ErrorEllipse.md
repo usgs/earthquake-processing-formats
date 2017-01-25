@@ -39,9 +39,9 @@ in input/output messages for seismic processing algorithms.
 
 ## Glossary
 **Required Values:**
-* E0 - First error ellipsoid axis.
-* E1 - Second error ellipsoid axis.
-* E2 - Third error ellipsoid axis.
+* E0 - First error semi-axis length.
+* E1 - Second error semi-axis length.
+* E2 - Third error semi-axis length.
 * Error - A number containing the length of the axis of the error ellipsoid in
 kilometers.
 * Azimuth - A number containing the azimuth of the axis of the error ellipsoid  

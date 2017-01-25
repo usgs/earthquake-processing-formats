@@ -30,7 +30,7 @@ These are the values **required** to define a Site.
 * SiteID -  A unique string containing an unique identifier for this station
 usually formatted to contain the available station, channel, network, and/or
 location codes.
-* Station - A string the station code.
+* Station - A string containing the station code.
 * Network - A string containing network code.
 
 **Optional Values:**
