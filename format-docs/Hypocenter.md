@@ -31,7 +31,7 @@ degrees.
 * Longitude - A decimal number that identifies the longitude of this hypocenter
 in degrees.
 * Depth - A decimal number that identifies the depth of this hypocenter in
-kilometers.
+kilometers relative to the WGS84 datum.
 * Time - A string containing the UTC origin time of this hypocenter, in the
 ISO8601 format `YYYY-MM-DDTHH:MM:SS.SSSZ`.
 

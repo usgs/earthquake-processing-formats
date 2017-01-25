@@ -4,6 +4,8 @@ of various types of seismic processing algorithms.
 ## Defined formats:
 * [Location](Location.md) Format - A format to contain the processed location
 of a seismic event from a location algorithm
+* [LocatorConfiguration](LocatorConfiguration.md) Format - A format to contain
+the algorithm specific input configuration.
 
 ## Supporting objects:
 * [Hypocenter](Hypocenter.md) Object - An object that contains information about
