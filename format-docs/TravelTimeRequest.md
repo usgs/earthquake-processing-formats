@@ -13,21 +13,27 @@ information service
 ## Output
 ```json
     {
-      "ReceiverDistance"    : Number,
-      "ReceiverElevation"   : Number,
-      "ReceiverLatitude"    : Number,
-      "ReceiverLongitude"   : Number,
-      "Phase"      : String,
-      "TravelTime" : Number,
-      "DistanceDerivative" : Number,
-      "DepthDerivative"    : Number,
-      "RayDerivative"      : Number,
-      "StatisticalSpread"  : Number,
-      "Observability"      : Number,
-      "TeleseismicPhaseGroup" : Number,
-      "AuxiliaryPhaseGroup"   : Number,
-      "LocationUseFlag"       : Boolean,
-      "AssociationWeightFlag" : Boolean
+      "Request" :
+      {
+        "ReceiverDistance"    : Number,
+        "ReceiverElevation"   : Number,
+        "ReceiverLatitude"    : Number,
+        "ReceiverLongitude"   : Number
+      },
+      "Data" :
+      {
+        "Phase"      : String,
+        "TravelTime" : Number,
+        "DistanceDerivative" : Number,
+        "DepthDerivative"    : Number,
+        "RayDerivative"      : Number,
+        "StatisticalSpread"  : Number,
+        "Observability"      : Number,
+        "TeleseismicPhaseGroup" : Number,
+        "AuxiliaryPhaseGroup"   : Number,
+        "LocationUseFlag"       : Boolean,
+        "AssociationWeightFlag" : Boolean
+      }
     }
 ```
 Reciever
