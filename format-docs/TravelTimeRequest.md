@@ -10,15 +10,16 @@ time request and the information returned.  Travel-Time uses the
 Travel-Time Request is intended for use as part of a seismic travel time
 information service
 
-## Output
+## Lookup Request
 ```json
     {
       "Request" :
       {
-        "ReceiverDistance"    : Number,
-        "ReceiverElevation"   : Number,
-        "ReceiverLatitude"    : Number,
-        "ReceiverLongitude"   : Number
+        "RequestType"       : String,
+        "ReceiverDistance"  : Number,
+        "ReceiverElevation" : Number,
+        "ReceiverLatitude"  : Number,
+        "ReceiverLongitude" : Number
       },
       "Data" :
       {
@@ -36,12 +37,44 @@ information service
       }
     }
 ```
-Reciever
+
+## Plot Request
+```json
+    {
+      "Request" :
+      {
+        "RequestType"       : String
+      },
+      "Data" :
+      {
+        "MaximumTravelTime" : Number,
+        "Branches" :
+        [
+          {
+            "Phase" : String,
+            "Samples" :
+            [
+              {
+                "Distance" : Number,
+                "TravelTime" : Number,
+                "StatisticalSpread" : Number,
+                "Observability" : Number              
+              },
+              ...
+            ]
+          },
+          ...
+        ]
+      }
+    }
+```
+
 ## Glossary
 **Required Input Values:**
 
 These are the values **required** to define a Travel-Time request.
-
+* RequestType - A string indicating the type of request, "Standard", "Plot", or
+"PlotStatistics". The default is "Standard"
 * ReceiverDistance -  A number containing the source-receiver distance in
 degrees.
 * ReceiverElevation - A number containing the receiver elevation relative to
@@ -59,23 +92,6 @@ degrees.
 The following are values that are **required** be provided as part of a the
 travel time request information returned.
 
-* Phase - A string containing the seismic phase code.
-* TravelTime - A number containing the travel time in seconds.
-* DistanceDerivative - A number containing the derivative with respect to
-distance of the travel time in seconds/degree.
-* DepthDerivative - A number containing the derivative with respect to
-depth of the travel time in seconds/kilometer.
-* RayDerivative - A number containing the derivative with respect to
-ray parameter of the distance in degrees/second.
-* StatisticalSpread - A number containing the observed travel time scatter in
-seconds.
-* Observability - A number containing the statistical observability of the
-seismic phase.
-* TeleseismicPhaseGroup - A number containing the teleseismic phase group
-identifier.
-* AuxiliaryPhaseGroup - A number containing the auxiliary phase group
-identifier.
-* LocationUseFlag - A boolean flag indicating whether the phase may be used in
-a location.
-* AssociationWeightFlag - A boolean flag indicating whether a phase should be
-down weighted in assocation.
+* Data - A [TravelTimeData](TravelTimeData.md) or
+[TravelTimePlotData](TravelTimePlotData.md)object containing the requested
+travel time information.

@@ -21,7 +21,8 @@ information service
       ],
       "SourceLatitude"   : Number,
       "SourceLongitude" : Number,
-      "UseRSTT" : Boolean
+      "UseRSTT" : Boolean,
+      "IsPlot" : Boolean
     }
 ```
 Reciever
@@ -34,7 +35,6 @@ These are the values **required** to define a Travel-Time Session.
 WGS84 datum in kilometers.
 
 **Optional Values:**
-
 * EarthModel - A string containing the earth model to use, defaults to the
 AK135 earth model.
 * PhaseTypes - An array of strings listing the phase types desired.
@@ -44,3 +44,5 @@ degrees.
 degrees.
 * UseRSTT - A boolean flag that indicates whether the RSTT regional travel-time
 model is to be used.
+* IsPlot - A boolean flag that indicates whether the travel-time session is
+for plotting rather than lookups.
