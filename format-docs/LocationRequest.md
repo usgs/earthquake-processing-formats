@@ -37,7 +37,7 @@ location processing algorithm.
             {
               "AgencyID" : String,
               "Author"   : String,
-              "Type"     : Number
+              "Type"     : String
             },
             "Time"     : ISO8601,
             "Affinity" : Number,
@@ -123,7 +123,7 @@ location processing algorithm.
             {
               "AgencyID" : String,
               "Author"   : String,
-              "Type"     : Number
+              "Type"     : String
             },
             "Time"         : ISO8601,
             "Used"         : Boolean,

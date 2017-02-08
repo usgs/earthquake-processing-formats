@@ -15,7 +15,7 @@ messages for seismic processing algorithms.
     {
       "AgencyID" : String,
       "Author"   : String,
-      "Type"     : Number
+      "Type"     : String
     }
 ```
 
@@ -25,4 +25,5 @@ messages for seismic processing algorithms.
 These are the values **required** to define a Source
 * AgencyID - A string containing the originating agency FDSN ID.
 * Author - A string containing the source author.
-* Type - A number indicating the author type.
+* Type - A string indicating the author type, valid values are: "LocalHuman",
+"LocalAutomatic", "ContributedHuman" and "ContributedAutomatic".
