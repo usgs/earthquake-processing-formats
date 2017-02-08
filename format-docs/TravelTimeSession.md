@@ -21,6 +21,9 @@ information service
       ],
       "SourceLatitude"   : Number,
       "SourceLongitude" : Number,
+      "ReturnAllPhases" : Boolean,
+      "ReturnBackBranches" : Boolean,
+      "ConvertTectonic" : Boolean,
       "UseRSTT" : Boolean,
       "IsPlot" : Boolean
     }
@@ -42,6 +45,12 @@ AK135 earth model.
 degrees.
 * SourceLongitude - A number containing the geographic source longitude in
 degrees.
+* ReturnAllPhases - A boolean flag that indicates whether to return all phases,
+defaults to false.
+* ReturnBackBranches - A boolean flag that indicates whether to return all
+arrivals of all phases, defaults to false.
+* ConvertTectonic - A boolean flag that indicates whether to convert tectonic
+phases (Pb to Pg and Sb to Sg), defaults to false.
 * UseRSTT - A boolean flag that indicates whether the RSTT regional travel-time
 model is to be used.
 * IsPlot - A boolean flag that indicates whether the travel-time session is
