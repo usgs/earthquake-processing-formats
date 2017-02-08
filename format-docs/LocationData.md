@@ -33,9 +33,9 @@ processing algorithms.
       "MinimumDistance" : Number,
       "RMS"             : Number,  
       "Quality"         : String,
-      "SuggestedInputDepth" : Number,
-      "SuggestedDepthRange" : Number,
-      "DataImportance" : Number,
+      "BayesianDepth" : Number,
+      "BayesianRange" : Number,
+      "DepthImportance" : Number,
       "ErrorEllipse" :
       {
           "MaximumHorizontalProjection" : Number,
@@ -78,18 +78,14 @@ processing algorithms.
             "Author"   : String,
             "Type"     : Number
           },
-          "Time"     : ISO8601,
-          "Affinity" : Number,
-          "Quality"  : Number,
-          "Use"      : Boolean,
-          "PickedPhase"     : String,
-          "AssociatedPhase" : String,
-          "LocatedPhase"    : String,
-          "Residual" : Number,
-          "Distance" : Number,
-          "Azimuth"  : Number,
-          "Weight"   : Number,
-          "Importance" : Number
+          "Time"         : ISO8601,
+          "Used"         : Boolean,
+          "LocatedPhase" : String,
+          "Residual"     : Number,
+          "Distance"     : Number,
+          "Azimuth"      : Number,
+          "Weight"       : Number,
+          "Importance"   : Number
         },
         ...
       ]                
@@ -120,11 +116,11 @@ used in the location.
 * MinimumDistance - The minimum distance to the closest station in degrees
 * RMS - A number that indicates the Standard Error of the residual in seconds.
 * Quality - A string containing the quality flag.
-* SuggestedInputDepth - A number containing the suggested input depth in
+* BayesianDepth - A number containing the suggested bayesian depth in
 kilometers
-* SuggestedDepthRange - A number containing the suggested constrained depth
-range (+\-) in kilometers
-* DataImportance - A number containing the data importance from the baysian
+* BayesianRange - A number containing the bayesian depth range (+\-) in
+kilometers
+* DepthImportance - A number containing the importance from the bayesian
 depth constraint
 * ErrorEllipse - An object containing the error ellipse of the Location, see
 [ErrorEllipse](ErrorEllipse.md)

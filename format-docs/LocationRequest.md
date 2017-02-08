@@ -80,9 +80,9 @@ location processing algorithm.
         "MinimumDistance" : Number,
         "RMS"             : Number,  
         "Quality"         : String,
-        "SuggestedInputDepth" : Number,
-        "SuggestedDepthRange" : Number,
-        "DataImportance" : Number,
+        "BayesianDepth" : Number,
+        "BayesianRange" : Number,
+        "DepthImportance" : Number,
         "ErrorEllipse" :
         {
             "MaximumHorizontalProjection" : Number,
@@ -125,18 +125,14 @@ location processing algorithm.
               "Author"   : String,
               "Type"     : Number
             },
-            "Time"     : ISO8601,
-            "Affinity" : Number,
-            "Quality"  : Number,
-            "Use"      : Boolean,
-            "PickedPhase"     : String,
-            "AssociatedPhase" : String,
-            "LocatedPhase"    : String,
-            "Residual" : Number,
-            "Distance" : Number,
-            "Azimuth"  : Number,
-            "Weight"   : Number,
-            "Importance" : Number
+            "Time"         : ISO8601,
+            "Used"         : Boolean,
+            "LocatedPhase" : String,
+            "Residual"     : Number,
+            "Distance"     : Number,
+            "Azimuth"      : Number,
+            "Weight"       : Number,
+            "Importance"   : Number
           },
           ...
         ]        
