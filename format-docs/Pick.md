@@ -27,14 +27,18 @@ in input/output messages for seismic processing algorithms.
         "Author"   : String,
         "Type"     : Number
       },
-      "Time"         : ISO8601,
-      "Used"          : Boolean,
-      "LocatedPhase" : String,
-      "Residual"     : Number,
-      "Distance"     : Number,
-      "Azimuth"      : Number,
-      "Weight"       : Number,
-      "Importance"   : Number
+      "Time"     : ISO8601,
+      "Affinity" : Number,
+      "Quality"  : Number,
+      "Use"      : Boolean,
+      "PickedPhase"     : String,
+      "AssociatedPhase" : String,
+      "LocatedPhase"    : String,
+      "Residual" : Number,
+      "Distance" : Number,
+      "Azimuth"  : Number,
+      "Weight"   : Number,
+      "Importance" : Number
     }
 ```
 
@@ -47,14 +51,22 @@ in input/output messages for seismic processing algorithms.
 * Source - An object containing the source of the pick, see [Source](Source.md).
 * Time - A string containing the UTC arrival time of the phase that was picked,
 in the ISO8601 format `YYYY-MM-DDTHH:MM:SS.SSSZ`.
-* Used - A boolean flag indicating whether the pick should be used in a location.
-* LocatedPhase - A string that identifies the seismic phase the locator selected.
+* Affinity - A number indicating how strongly the pick phase identification
+should be used.
+* Quality - A number indicating the pick quality.
+* Use - A boolean flag indicating whether the pick should be used in a location.
+* PickedPhase - A string that identifies the seismic phase that the picking
+algorithm identified.
+* AssociatedPhase - A string that identifies the seismic phase that the
+association algorithm identified.
+
 
 **Output Values:**
 
 The following are supplementary values that **may or may not** be provided by
 various algorithms.
 
+* LocatedPhase - A string that identifies the seismic phase the locator selected.
 * Residual - A number containing the phase residual in seconds.
 * Distance - A number containing the station distance in degrees.
 * Azimuth - A number containing the station azimuth in degrees.
