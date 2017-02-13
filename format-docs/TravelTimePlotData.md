@@ -43,7 +43,5 @@ travel time plot data.
 
 * MaximumTravelTime - A number containing the maximum travel time for all
 branches in degrees
-* Branches - An array containing all the valid travel time branches.
-* Phase - A string containing the phase code for an individual branch.
-* Samples - An array of [TravelTimePlotDataSample](TravelTimePlotDataSample.md)
-objects containing distance/time samples for an individual branch.
+* Branches - An array of [TravelTimePlotDataBranch](TravelTimePlotDataBranch.md)
+objects containing all the valid travel time branches.

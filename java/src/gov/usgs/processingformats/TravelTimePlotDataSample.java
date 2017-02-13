@@ -6,6 +6,12 @@ import org.json.simple.JSONObject;
 
 import gov.usgs.processingformats.ProcessingInt;
 
+/**
+ * a conversion class used to create, parse, and validate travel time plot
+ * sample data
+ * 
+ * @author U.S. Geological Survey &lt;jpatton at usgs.gov&gt;
+ */
 public class TravelTimePlotDataSample implements ProcessingInt {
 
 	/**

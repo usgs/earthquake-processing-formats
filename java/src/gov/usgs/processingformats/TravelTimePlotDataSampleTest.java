@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class TravelTimePlotDataSampleTest {
 
-	public static String TRAVELTIMEPLOTDATASAMPLE_STRING = "\"Distance\":1.2,"
+	public static String TRAVELTIMEPLOTDATASAMPLE_STRING = "{\"Distance\":1.2,"
 			+ "\"TravelTime\":22.456,\"Observability\":0.34,"
 			+ "\"StatisticalSpread\":1.5}";
 
