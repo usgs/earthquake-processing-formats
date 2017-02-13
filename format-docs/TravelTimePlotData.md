@@ -45,14 +45,5 @@ travel time plot data.
 branches in degrees
 * Branches - An array containing all the valid travel time branches.
 * Phase - A string containing the phase code for an individual branch.
-* Samples - An array containing distance/time samples for an individual branch.
-* Distance - A number containing the source-receiver distance in degrees.
-* TravelTime - A number containing the travel time in seconds.
-
-**Optional Values:**
-
-The following are supplementary values that **may or may not** be provided as
-part of a Travel-Time Plot Data Object.
-
-* StatisticalSpread - A number containing the statistical spread in seconds.
-* Observability - A number containing the relative observability.
+* Samples - An array of [TravelTimePlotDataSample](TravelTimePlotDataSample.md)
+objects containing distance/time samples for an individual branch.

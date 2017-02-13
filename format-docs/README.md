@@ -16,6 +16,8 @@ of a seismic event from a location algorithm
 travel-time information.
 * [TravelTimePlotData](TravelTimePlotData.md) Object - An object to contain
 requested travel-time plot information.
+* [TravelTimePlotDataSample](TravelTimePlotDataSample.md) Object - An object to
+contain individual travel-time plot data samples.
 * [Hypocenter](Hypocenter.md) Object - An object that contains information about
 a hypocenter as part of a location.
 * [ErrorEllipse](ErrorEllipse.md) Object - An object that contains information

@@ -161,7 +161,7 @@ public class TravelTimeDataTest {
 	public void checkData(TravelTimeData travelTimeDataObject,
 			String TestName) {
 
-		// check travelTimeDataObject.ID
+		// check travelTimeDataObject.phase
 		assertEquals(TestName + " Phase Equals", PHASE,
 				travelTimeDataObject.getPhase());
 
