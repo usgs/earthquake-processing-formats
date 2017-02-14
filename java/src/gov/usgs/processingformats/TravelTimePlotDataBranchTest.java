@@ -16,7 +16,7 @@ public class TravelTimePlotDataBranchTest {
 			+ "\"StatisticalSpread\":2.1,\"TravelTime\":72.654}]}";
 
 	public static String PHASE = "Pg";
-	public static Integer NUMSAMPLES = 2;
+	public static int NUMSAMPLES = 2;
 	public static String SAMPLEDATA_STRING = "{\"Distance\":1.2,"
 			+ "\"TravelTime\":22.456,\"Observability\":0.34,"
 			+ "\"StatisticalSpread\":1.5}";
@@ -157,7 +157,7 @@ public class TravelTimePlotDataBranchTest {
 
 		// check sample data
 		// check number of samples
-		assertEquals(TestName + " Number of Samples Equals", (int) NUMSAMPLES,
+		assertEquals(TestName + " Number of Samples Equals", NUMSAMPLES,
 				travelTimePlotDataBranchObject.getSamples().size(), 0);
 
 		// first sample
@@ -215,7 +215,7 @@ public class TravelTimePlotDataBranchTest {
 	public ArrayList<TravelTimePlotDataSample> buildSampleData() {
 		ArrayList<TravelTimePlotDataSample> newSampleData = new ArrayList<TravelTimePlotDataSample>();
 
-		// Pick ?need one more?
+		// samples
 		try {
 			newSampleData.add(new TravelTimePlotDataSample(
 					Utility.fromJSONString(SAMPLEDATA_STRING)));

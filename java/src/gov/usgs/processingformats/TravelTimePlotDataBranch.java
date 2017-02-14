@@ -32,8 +32,8 @@ public class TravelTimePlotDataBranch implements ProcessingInt {
 	private ArrayList<TravelTimePlotDataSample> samples;
 
 	/**
-	 * The constructor for the TravelTimeData class. Initializes members to null
-	 * values.
+	 * The constructor for the TravelTimePlotDataBranch class. Initializes
+	 * members to null values.
 	 */
 	public TravelTimePlotDataBranch() {
 
@@ -101,11 +101,11 @@ public class TravelTimePlotDataBranch implements ProcessingInt {
 	}
 
 	/**
-	 * Constructs the class from a TravelTimeData object, populating members
+	 * Constructs the class from a TravelTimePlotData object, populating members
 	 * (copy constructor)
 	 * 
 	 * @param sourceObject
-	 *            - A TravelTimeData object.
+	 *            - A TravelTimePlotData object.
 	 */
 	public TravelTimePlotDataBranch(TravelTimePlotDataBranch sourceObject) {
 
@@ -159,7 +159,7 @@ public class TravelTimePlotDataBranch implements ProcessingInt {
 			for (Iterator<TravelTimePlotDataSample> samplesIterator = jsonSamples
 					.iterator(); samplesIterator.hasNext();) {
 
-				// convert pick to JSON object
+				// convert sample to JSON object
 				JSONObject pickObject = ((TravelTimePlotDataSample) samplesIterator
 						.next()).toJSON();
 
@@ -209,18 +209,18 @@ public class TravelTimePlotDataBranch implements ProcessingInt {
 			errorList.add("Empty Phase in TravelTimePlotDataBranch Class.");
 		}
 
-		// Picks
+		// Samples
 		if ((jsonSamples != null) && (!jsonSamples.isEmpty())) {
 
 			// enumerate through the whole arraylist
 			for (Iterator<TravelTimePlotDataSample> samplesIterator = jsonSamples
 					.iterator(); samplesIterator.hasNext();) {
 
-				// convert pick to JSON object
-				TravelTimePlotDataSample jsonSample = ((TravelTimePlotDataSample) samplesIterator
+				// get next sample object
+				TravelTimePlotDataSample sampleObject = ((TravelTimePlotDataSample) samplesIterator
 						.next());
 
-				if (!jsonSample.isValid()) {
+				if (!sampleObject.isValid()) {
 					errorList.add(
 							"Invalid TravelTimePlotDataSample in samples in TravelTimePlotDataBranch Class");
 					break;
