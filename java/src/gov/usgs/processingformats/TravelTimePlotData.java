@@ -17,9 +17,15 @@ public class TravelTimePlotData implements ProcessingInt {
 	/**
 	 * JSON Keys
 	 */
+	public static final String TYPE_KEY = "Type";
 	public static final String MAXIMIUMTRAVELTIME_KEY = "MaximumTravelTime";
 	public static final String BRANCHES_KEY = "Branches";
 
+	/**
+	 * Required type of data as a String
+	 */
+	private String type;	
+	
 	/**
 	 * Required maximum travel time in seconds
 	 */
@@ -66,6 +72,13 @@ public class TravelTimePlotData implements ProcessingInt {
 	public TravelTimePlotData(JSONObject newJSONObject) {
 
 		// Required values
+		// type
+		if (newJSONObject.containsKey(TYPE_KEY)) {
+			type = newJSONObject
+					.get(TYPE_KEY).toString();
+		} else {
+			type = null;
+		}		
 		// maximumTravelTime
 		if (newJSONObject.containsKey(MAXIMIUMTRAVELTIME_KEY)) {
 			maximumTravelTime = (double) newJSONObject
@@ -129,6 +142,7 @@ public class TravelTimePlotData implements ProcessingInt {
 	public void reload(Double newMaximumTravelTime,
 			ArrayList<TravelTimePlotDataBranch> newBranches) {
 
+		type = "TTPlotData";
 		maximumTravelTime = newMaximumTravelTime;
 		branches = newBranches;
 
@@ -144,9 +158,15 @@ public class TravelTimePlotData implements ProcessingInt {
 
 		JSONObject newJSONObject = new JSONObject();
 
+		String jsonType = getType();
 		Double jsonMaximumTravelTime = getMaximumTravelTime();
 		ArrayList<TravelTimePlotDataBranch> jsonBranches = getBranches();
 
+		// type
+		if (jsonType != null) {
+			newJSONObject.put(TYPE_KEY, jsonType);
+		}		
+		
 		// phase
 		if (jsonMaximumTravelTime != null) {
 			newJSONObject.put(MAXIMIUMTRAVELTIME_KEY, jsonMaximumTravelTime);
@@ -199,9 +219,22 @@ public class TravelTimePlotData implements ProcessingInt {
 	public ArrayList<String> getErrors() {
 		ArrayList<String> errorList = new ArrayList<String>();
 
+		String jsonType = getType();
 		Double jsonMaximumTravelTime = getMaximumTravelTime();
 		ArrayList<TravelTimePlotDataBranch> jsonBranches = getBranches();
 
+		// type
+		if (jsonType == null) {
+			// type not found
+			errorList.add("No Type in TravelTimePlotData Class.");
+		} else if (jsonType.isEmpty()) {
+			// type empty
+			errorList.add("Empty Type in TravelTimePlotData Class.");
+		} else if (!jsonType.equals("TTPlotData")) {
+			// wrong type
+			errorList.add("Non-TTPlotData type in TravelTimePlotData Class.");
+		}
+		
 		// maximumTravelTime
 		if (jsonMaximumTravelTime == null) {
 			// maximumTravelTime not found
@@ -231,6 +264,13 @@ public class TravelTimePlotData implements ProcessingInt {
 		return (errorList);
 	}
 
+	/**
+	 * @return the type
+	 */
+	public String getType() {
+		return type;
+	}	
+	
 	/**
 	 * @return the maximumTravelTime
 	 */

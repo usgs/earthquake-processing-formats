@@ -9,7 +9,8 @@ import org.junit.Test;
 
 public class TravelTimePlotDataTest {
 
-	public static String TRAVELTIMEPLOTDATA_STRING = "{\"Branches\":[{\"Phase\":\"Pg\""
+	public static String TRAVELTIMEPLOTDATA_STRING = "{\"Type\":\"TTPlotData\","
+			+ "\"Branches\":[{\"Phase\":\"Pg\""
 			+ ",\"Samples\":[{\"Distance\":1.2,\"Observability\":0.34,"
 			+ "\"StatisticalSpread\":1.5,\"TravelTime\":22.456},{\"Distance\":10.5,"
 			+ "\"Observability\":1.63,\"StatisticalSpread\":2.1,\"TravelTime\":72.654}]}"

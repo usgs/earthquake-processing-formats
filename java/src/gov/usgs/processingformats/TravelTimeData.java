@@ -17,6 +17,7 @@ public class TravelTimeData implements ProcessingInt {
 	/**
 	 * JSON Keys
 	 */
+	public static final String TYPE_KEY = "Type";
 	public static final String PHASE_KEY = "Phase";
 	public static final String TRAVELTIME_KEY = "TravelTime";
 	public static final String DISTANCEDERIVATIVE_KEY = "DistanceDerivative";
@@ -29,6 +30,11 @@ public class TravelTimeData implements ProcessingInt {
 	public static final String LOCATIONUSEFLAG_KEY = "LocationUseFlag";
 	public static final String ASSOCIATIONWEIGHTFLAG_KEY = "AssociationWeightFlag";
 
+	/**
+	 * Required type of data as a String
+	 */
+	private String type;		
+	
 	/**
 	 * Required seismic phase code
 	 */
@@ -157,6 +163,14 @@ public class TravelTimeData implements ProcessingInt {
 	public TravelTimeData(JSONObject newJSONObject) {
 
 		// Required values
+		// type
+		if (newJSONObject.containsKey(TYPE_KEY)) {
+			type = newJSONObject
+					.get(TYPE_KEY).toString();
+		} else {
+			type = null;
+		}
+		
 		// phase
 		if (newJSONObject.containsKey(PHASE_KEY)) {
 			phase = newJSONObject.get(PHASE_KEY).toString();
@@ -300,6 +314,7 @@ public class TravelTimeData implements ProcessingInt {
 			Long newAuxiliaryPhaseGroup, Boolean newLocationUseFlag,
 			Boolean newAssociationWeightFlag) {
 
+		type = "TTData";
 		phase = newPhase;
 		travelTime = newTravelTime;
 		distanceDerivative = newDistanceDerivative;
@@ -324,6 +339,7 @@ public class TravelTimeData implements ProcessingInt {
 
 		JSONObject newJSONObject = new JSONObject();
 
+		String jsonType = getType();
 		String jsonPhase = getPhase();
 		Double jsonTravelTime = getTravelTime();
 		Double jsonDistanceDerivative = getDistanceDerivative();
@@ -336,6 +352,11 @@ public class TravelTimeData implements ProcessingInt {
 		Boolean jsonLocationUseFlag = getLocationUseFlag();
 		Boolean jsonAssociationWeightFlag = getAssociationWeightFlag();
 
+		// type
+		if (jsonType != null) {
+			newJSONObject.put(TYPE_KEY, jsonType);
+		}			
+		
 		// phase
 		if (jsonPhase != null) {
 			newJSONObject.put(PHASE_KEY, jsonPhase);
@@ -419,6 +440,7 @@ public class TravelTimeData implements ProcessingInt {
 	public ArrayList<String> getErrors() {
 		ArrayList<String> errorList = new ArrayList<String>();
 
+		String jsonType = getType();
 		String jsonPhase = getPhase();
 		Double jsonTravelTime = getTravelTime();
 		Double jsonDistanceDerivative = getDistanceDerivative();
@@ -432,6 +454,17 @@ public class TravelTimeData implements ProcessingInt {
 		Boolean jsonAssociationWeightFlag = getAssociationWeightFlag();
 
 		// phase
+		if (jsonType == null) {
+			// type not found
+			errorList.add("No Type in TravelTimeData Class.");
+		} else if (jsonType.isEmpty()) {
+			// type empty
+			errorList.add("Empty Type in TravelTimeData Class.");
+		} else if (!jsonType.equals("TTData")) {
+			// wrong type
+			errorList.add("Non-TTData type in TravelTimeData Class.");
+		}
+		
 		if (jsonPhase == null) {
 			// phase not found
 			errorList.add("No Phase in TravelTimeData Class.");
@@ -505,6 +538,13 @@ public class TravelTimeData implements ProcessingInt {
 		return (errorList);
 	}
 
+	/**
+	 * @return the type
+	 */
+	public String getType() {
+		return type;
+	}	
+	
 	/**
 	 * @return the phase
 	 */

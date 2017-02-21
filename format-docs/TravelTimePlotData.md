@@ -13,6 +13,7 @@ information service
 ## Output
 ```json
     {
+      "Type" : String,
       "MaximumTravelTime" : Number,
       "Branches" :
       [
@@ -41,6 +42,7 @@ Reciever
 The following are values that are **required** be provided as part of the
 travel time plot data.
 
+* Type - A String containing the type of data, "TTPlotData"
 * MaximumTravelTime - A number containing the maximum travel time for all
 branches in degrees
 * Branches - An array of [TravelTimePlotDataBranch](TravelTimePlotDataBranch.md)
