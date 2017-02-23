@@ -54,7 +54,7 @@ public class TravelTimeDataTest {
 	@Test
 	public void readsJSON() {
 
-		// build Correlation object
+		// build TravelTimeData object
 		try {
 
 			checkData(

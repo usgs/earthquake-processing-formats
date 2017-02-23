@@ -48,7 +48,7 @@ public class TravelTimePlotDataBranch implements ProcessingInt {
 	 * 
 	 * @param newPhase
 	 *            - A String containing the seismic phase code
-	 * @param newSampleData
+	 * @param newSamples
 	 *            - A ArrayList&lt;TravelTimePlotDataSample&gt; containing the
 	 *            sample data
 	 */
@@ -120,7 +120,7 @@ public class TravelTimePlotDataBranch implements ProcessingInt {
 	 * 
 	 * @param newPhase
 	 *            - A String containing the seismic phase code
-	 * @param newSampleData
+	 * @param newSamples
 	 *            - A ArrayList&lt;TravelTimePlotDataSample&gt; containing the
 	 *            sample data
 	 */
