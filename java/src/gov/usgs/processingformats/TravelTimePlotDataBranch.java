@@ -27,7 +27,7 @@ public class TravelTimePlotDataBranch implements ProcessingInt {
 	private String phase;
 
 	/**
-	 * A required vector of TravelTimePlotDataSample objects
+	 * A required ArrayList of TravelTimePlotDataSample objects
 	 */
 	private ArrayList<TravelTimePlotDataSample> samples;
 
@@ -90,7 +90,7 @@ public class TravelTimePlotDataBranch implements ProcessingInt {
 					// get the object
 					JSONObject samplesObject = (JSONObject) samplesArray.get(i);
 
-					// add to vector
+					// add to ArrayList
 					samples.add(new TravelTimePlotDataSample(samplesObject));
 
 				}
