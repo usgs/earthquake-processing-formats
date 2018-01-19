@@ -15,14 +15,15 @@ information service
     {
       "Request" :
       {
-        "RequestType"       : String,
-        "ReceiverDistance"  : Number,
-        "ReceiverElevation" : Number,
-        "ReceiverLatitude"  : Number,
-        "ReceiverLongitude" : Number
+        "Type"      : String,
+        "Distance"  : Number,
+        "Elevation" : Number,
+        "Latitude"  : Number,
+        "Longitude" : Number
       },
       "Data" :
       {
+        "Type"       : String,
         "Phase"      : String,
         "TravelTime" : Number,
         "DistanceDerivative" : Number,
@@ -43,10 +44,11 @@ information service
     {
       "Request" :
       {
-        "RequestType"       : String
+        "Type"       : String
       },
       "Data" :
       {
+        "Type"              : String,
         "MaximumTravelTime" : Number,
         "Branches" :
         [
@@ -73,18 +75,18 @@ information service
 **Required Input Values:**
 
 These are the values **required** to define a Travel-Time request.
-* RequestType - A string indicating the type of request, "Standard", "Plot", or
+* Type - A string indicating the type of request, "Standard", "Plot", or
 "PlotStatistics". The default is "Standard"
-* ReceiverDistance -  A number containing the source-receiver distance in
+* Distance -  A number containing the source-receiver distance in
 degrees.
-* ReceiverElevation - A number containing the receiver elevation relative to
+* Elevation - A number containing the receiver elevation relative to
 the WGS84 datum in kilometers.
 
 **Optional Input Values:**
 
-* ReceiverLatitude - A number containing the geographic receiver latitude in
+* Latitude - A number containing the geographic receiver latitude in
 degrees.
-* ReceiverLongitude - A number containing the geographic receiver longitude in
+* Longitude - A number containing the geographic receiver longitude in
 degrees.
 
 **Output Values:**

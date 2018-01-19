@@ -13,6 +13,7 @@ information service
 ## Output
 ```json
     {
+      "Type"       : String,
       "Phase"      : String,
       "TravelTime" : Number,
       "DistanceDerivative" : Number,
@@ -34,6 +35,7 @@ Reciever
 The following are values that are **required** be provided as part of the
 travel time data.
 
+* Type - A string containing the type of data, always "TTData"
 * Phase - A string containing the seismic phase code.
 * TravelTime - A number containing the travel time in seconds.
 * DistanceDerivative - A number containing the derivative with respect to

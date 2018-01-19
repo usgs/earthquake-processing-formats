@@ -13,6 +13,7 @@ information service
 ## Output
 ```json
     {
+      "Type" : String,
       "MaximumTravelTime" : Number,
       "Branches" :
       [
@@ -41,18 +42,8 @@ Reciever
 The following are values that are **required** be provided as part of the
 travel time plot data.
 
+* Type - A String containing the type of data, "TTPlotData"
 * MaximumTravelTime - A number containing the maximum travel time for all
 branches in degrees
-* Branches - An array containing all the valid travel time branches.
-* Phase - A string containing the phase code for an individual branch.
-* Samples - An array containing distance/time samples for an individual branch.
-* Distance - A number containing the source-receiver distance in degrees.
-* TravelTime - A number containing the travel time in seconds.
-
-**Optional Values:**
-
-The following are supplementary values that **may or may not** be provided as
-part of a Travel-Time Plot Data Object.
-
-* StatisticalSpread - A number containing the statistical spread in seconds.
-* Observability - A number containing the relative observability.
+* Branches - An array of [TravelTimePlotDataBranch](TravelTimePlotDataBranch.md)
+objects containing all the valid travel time branches.
