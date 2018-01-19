@@ -101,8 +101,8 @@ public class TravelTimePlotDataBranch implements ProcessingInt {
 	}
 
 	/**
-	 * Constructs the class from a TravelTimePlotData object, populating members
-	 * (copy constructor)
+	 * Constructs the class from a TravelTimePlotDataBranch object, populating 
+	 * members (copy constructor)
 	 * 
 	 * @param sourceObject
 	 *            - A TravelTimePlotData object.

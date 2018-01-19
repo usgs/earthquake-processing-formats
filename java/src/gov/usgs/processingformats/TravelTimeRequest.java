@@ -54,7 +54,7 @@ public class TravelTimeRequest implements ProcessingInt {
 	private TravelTimeData data;
 
 	/**
-	 * Returned travel time lot data (empty for requests)
+	 * Returned travel time plot data (empty for requests)
 	 */
 	private TravelTimePlotData plotData;
 

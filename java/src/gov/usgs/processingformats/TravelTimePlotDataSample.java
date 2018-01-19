@@ -116,8 +116,8 @@ public class TravelTimePlotDataSample implements ProcessingInt {
 	}
 
 	/**
-	 * Constructs the class from a TravelTimeData object, populating members
-	 * (copy constructor)
+	 * Constructs the class from a TravelTimePlotDataSample object, populating 
+	 * members (copy constructor)
 	 * 
 	 * @param sourceObject
 	 *            - A TravelTimeData object.
