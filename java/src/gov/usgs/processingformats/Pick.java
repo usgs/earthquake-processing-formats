@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * a conversion class used to create, parse, and validate pick detection data
+ * a conversion class used to create, parse, and validate pick processing data
  *
  * @author U.S. Geological Survey &lt;jpatton at usgs.gov&gt;
  */
@@ -371,7 +371,7 @@ public class Pick implements ProcessingInt {
 
 	/**
 	 * Converts the contents of the class to a json object Overridden from
-	 * DetectionBase.
+	 * ProcessingBase.
 	 *
 	 * @return Returns a JSONObject containing the class contents
 	 */
