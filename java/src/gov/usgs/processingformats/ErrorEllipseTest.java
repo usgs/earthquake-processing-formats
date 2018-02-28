@@ -7,10 +7,12 @@ import org.junit.Test;
 
 public class ErrorEllipseTest {
 
-	public static final String ELLIPSE_STRING = "{\"TimeError\":1.984,"
-			+ "\"Time\":\"2015-12-28T21:32:24.017Z\",\"LongitudeError\":22.64,"
-			+ "\"LatitudeError\":12.5,\"DepthError\":2.44,\"Latitude\":40.3344,"
-			+ "\"Longitude\":-121.44,\"Depth\":32.44}";
+	public static final String ELLIPSE_STRING = "{\"MaximumVerticalProjection\":"
+			+ "1.984,\"EquivalentHorizontalRadius\":1.984,"
+			+ "\"MaximumHorizontalProjection\":1.984,\"E0\":{\"Azimuth\":-121.44,"
+			+ "\"Error\":40.3344,\"Dip\":32.44},\"E1\":{\"Azimuth\":22.64,"
+			+ "\"Error\":12.5,\"Dip\":2.44},\"E2\":{\"Azimuth\":22.64,\"Error\":"
+			+ "12.5,\"Dip\":2.44}}";
 
 	public static double E0ERROR = 40.3344;
 	public static double E0AZIMUTH = -121.44;

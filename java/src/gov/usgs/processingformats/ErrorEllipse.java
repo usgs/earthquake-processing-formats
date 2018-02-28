@@ -141,7 +141,7 @@ public class ErrorEllipse implements ProcessingInt {
 	 *            - A Double containing the vertical projection of the error
 	 *            ellipsoid in km in kilometers
 	 * @param newEquivalentHorizontalRadius
-	 *            - A Boolean containing the equivalent radius of the horizontal
+	 *            - A Double containing the equivalent radius of the horizontal
 	 *            error ellipsoid in kilometers
 	 */
 	public ErrorEllipse(Double newE0Error, Double newE0Azimuth, Double newE0Dip,

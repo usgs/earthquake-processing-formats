@@ -508,12 +508,12 @@ public class Pick implements ProcessingInt {
 		Boolean jsonUse = getUse();
 		String jsonPickedPhase = getPickedPhase();
 		String jsonAssociatedPhase = getAssociatedPhase();
-		String jsonLocatedPhase = getLocatedPhase();
-		Double jsonResidual = getResidual();
-		Double jsonDistance = getDistance();
-		Double jsonAzimuth = getAzimuth();
-		Double jsonWeight = getWeight();
-		Double jsonImportance = getImportance();
+		// String jsonLocatedPhase = getLocatedPhase();
+		// Double jsonResidual = getResidual();
+		// Double jsonDistance = getDistance();
+		// Double jsonAzimuth = getAzimuth();
+		// Double jsonWeight = getWeight();
+		// Double jsonImportance = getImportance();
 
 		ArrayList<String> errorList = new ArrayList<String>();
 
