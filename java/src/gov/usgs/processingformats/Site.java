@@ -52,8 +52,8 @@ public class Site implements ProcessingInt {
 	}
 
 	/**
-	 * The advanced constructor for the Site class. Initializes members to
-	 * provided values.
+	 * The alternate advanced constructor for the Site class. Initializes
+	 * members to provided values.
 	 *
 	 * @param newStation
 	 *            - A String containing the station to use
@@ -64,8 +64,29 @@ public class Site implements ProcessingInt {
 	 * @param newLocation
 	 *            - A String containing the location to use (null omit)
 	 */
-	public Site(String newStation, String newChannel,
-			String newNetwork, String newLocation) {
+	public Site(String newStation, String newChannel, String newNetwork,
+			String newLocation) {
+
+		reload(newStation, newChannel, newNetwork, newLocation);
+	}
+
+	/**
+	 * Reload Function
+	 *
+	 * The reload function for the site class. Initializes members to provided
+	 * values.
+	 *
+	 * @param newStation
+	 *            - A String containing the station to use
+	 * @param newChannel
+	 *            - A String containing the channel to use (null omit)
+	 * @param newNetwork
+	 *            - A String containing the network to use
+	 * @param newLocation
+	 *            - A String containing the location to use (null omit)
+	 */
+	public void reload(String newStation, String newChannel, String newNetwork,
+			String newLocation) {
 
 		station = newStation;
 		channel = newChannel;
@@ -235,5 +256,37 @@ public class Site implements ProcessingInt {
 	 */
 	public String getLocation() {
 		return location;
+	}
+
+	/**
+	 * @param station
+	 *            the station to set
+	 */
+	public void setStation(String station) {
+		this.station = station;
+	}
+
+	/**
+	 * @param channel
+	 *            the channel to set
+	 */
+	public void setChannel(String channel) {
+		this.channel = channel;
+	}
+
+	/**
+	 * @param network
+	 *            the network to set
+	 */
+	public void setNetwork(String network) {
+		this.network = network;
+	}
+
+	/**
+	 * @param location
+	 *            the location to set
+	 */
+	public void setLocation(String location) {
+		this.location = location;
 	}
 }

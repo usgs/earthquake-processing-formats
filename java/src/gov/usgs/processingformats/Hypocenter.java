@@ -107,6 +107,38 @@ public class Hypocenter implements ProcessingInt {
 			Double newDepth, Double newLatitudeError, Double newLongitudeError,
 			Double newTimeError, Double newDepthError) {
 
+		reload(newLatitude, newLongitude, newTime, newDepth, newLatitudeError,
+				newLongitudeError, newTimeError, newDepthError);
+	}
+
+	/**
+	 * Reload Function
+	 *
+	 * The reload function for the Hypo class. Initializes members to provided
+	 * values.
+	 *
+	 *
+	 * @param newLatitude
+	 *            - A Double containing the latitude to use
+	 * @param newLongitude
+	 *            - A Double containing the longitude to use
+	 * @param newTime
+	 *            - A Date containing the new origin time to use
+	 * @param newDepth
+	 *            - A Double containing the depth to use
+	 * @param newLatitudeError
+	 *            - A Double containing the latitude error to use, null to omit
+	 * @param newLongitudeError
+	 *            - A Double containing the longitude error to use, null to omit
+	 * @param newTimeError
+	 *            - A Double containing the new time error to use, null to omit
+	 * @param newDepthError
+	 *            - A Double containing the depth error to use, null to omit
+	 */
+	public void reload(Double newLatitude, Double newLongitude, Date newTime,
+			Double newDepth, Double newLatitudeError, Double newLongitudeError,
+			Double newTimeError, Double newDepthError) {
+
 		latitude = newLatitude;
 		longitude = newLongitude;
 		time = newTime;
@@ -377,6 +409,70 @@ public class Hypocenter implements ProcessingInt {
 	 */
 	public Double getDepthError() {
 		return depthError;
+	}
+
+	/**
+	 * @param latitude
+	 *            the latitude to set
+	 */
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+
+	/**
+	 * @param longitude
+	 *            the longitude to set
+	 */
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+
+	/**
+	 * @param time
+	 *            the time to set
+	 */
+	public void setTime(Date time) {
+		this.time = time;
+	}
+
+	/**
+	 * @param depth
+	 *            the depth to set
+	 */
+	public void setDepth(Double depth) {
+		this.depth = depth;
+	}
+
+	/**
+	 * @param latitudeError
+	 *            the latitudeError to set
+	 */
+	public void setLatitudeError(Double latitudeError) {
+		this.latitudeError = latitudeError;
+	}
+
+	/**
+	 * @param longitudeError
+	 *            the longitudeError to set
+	 */
+	public void setLongitudeError(Double longitudeError) {
+		this.longitudeError = longitudeError;
+	}
+
+	/**
+	 * @param timeError
+	 *            the timeError to set
+	 */
+	public void setTimeError(Double timeError) {
+		this.timeError = timeError;
+	}
+
+	/**
+	 * @param depthError
+	 *            the depthError to set
+	 */
+	public void setDepthError(Double depthError) {
+		this.depthError = depthError;
 	}
 
 }

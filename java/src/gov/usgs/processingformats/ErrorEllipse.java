@@ -104,8 +104,8 @@ public class ErrorEllipse implements ProcessingInt {
 	}
 
 	/**
-	 * The advanced constructor for the ErrorEllipse class. Initializes members
-	 * to provided values.
+	 * The alternate advanced constructor for the ErrorEllipse class.
+	 * Initializes members to provided values.
 	 *
 	 * @param newE0Error
 	 *            - A Double containing the length of the first axis of the
@@ -145,6 +145,62 @@ public class ErrorEllipse implements ProcessingInt {
 	 *            error ellipsoid in kilometers
 	 */
 	public ErrorEllipse(Double newE0Error, Double newE0Azimuth, Double newE0Dip,
+			Double newE1Error, Double newE1Azimuth, Double newE1Dip,
+			Double newE2Error, Double newE2Azimuth, Double newE2Dip,
+			Double newMaximumHorizontalProjection,
+			Double newMaximumVerticalProjection,
+			Double newEquivalentHorizontalRadius) {
+
+		reload(newE0Error, newE0Azimuth, newE0Dip, newE1Error, newE1Azimuth,
+				newE1Dip, newE2Error, newE2Azimuth, newE2Dip,
+				newMaximumHorizontalProjection, newMaximumVerticalProjection,
+				newEquivalentHorizontalRadius);
+	}
+
+	/**
+	 * Reload Function
+	 *
+	 * The reload function for the error ellipse class. Initializes members to
+	 * provided values.
+	 *
+	 * @param newE0Error
+	 *            - A Double containing the length of the first axis of the
+	 *            error ellipsoid in kilometers
+	 * @param newE0Azimuth
+	 *            - A Double containing the azimuth of the first axis of the
+	 *            error ellipsoid in degrees
+	 * @param newE0Dip
+	 *            - A Double containing the dip of the first axis of error
+	 *            ellipsoid in degrees.
+	 * @param newE1Error
+	 *            - A Double containing the length of the second axis of the
+	 *            error ellipsoid in kilometers
+	 * @param newE1Azimuth
+	 *            - A Double containing the azimuth of the second axis of the
+	 *            error ellipsoid in degrees
+	 * @param newE1Dip
+	 *            - A Double containing the dip of the second axis of error
+	 *            ellipsoid in degrees.
+	 * @param newE2Error
+	 *            - A Double containing the length of the third axis of the
+	 *            error ellipsoid in kilometers
+	 * @param newE2Azimuth
+	 *            - A Double containing the the azimuth of the third axis of the
+	 *            error ellipsoid in degrees
+	 * @param newE2Dip
+	 *            - A Double containing the dip of the third axis of error
+	 *            ellipsoid in degrees.
+	 * @param newMaximumHorizontalProjection
+	 *            - A Double containing the horizontal projection of the error
+	 *            ellipsoid in kilometers
+	 * @param newMaximumVerticalProjection
+	 *            - A Double containing the vertical projection of the error
+	 *            ellipsoid in km in kilometers
+	 * @param newEquivalentHorizontalRadius
+	 *            - A Double containing the equivalent radius of the horizontal
+	 *            error ellipsoid in kilometers
+	 */
+	public void reload(Double newE0Error, Double newE0Azimuth, Double newE0Dip,
 			Double newE1Error, Double newE1Azimuth, Double newE1Dip,
 			Double newE2Error, Double newE2Azimuth, Double newE2Dip,
 			Double newMaximumHorizontalProjection,
@@ -475,8 +531,8 @@ public class ErrorEllipse implements ProcessingInt {
 		// MaximumVerticalProjection
 		if (jsonMaximumVerticalProjection == null) {
 			// MaximumVerticalProjection not found
-			errorList.add(
-					"No MaximumVerticalProjection in ErrorEllipse Class.");
+			errorList
+					.add("No MaximumVerticalProjection in ErrorEllipse Class.");
 		}
 
 		// EquivalentHorizontalRadius
@@ -572,6 +628,104 @@ public class ErrorEllipse implements ProcessingInt {
 	 */
 	public Double getEquivalentHorizontalRadius() {
 		return equivalentHorizontalRadius;
+	}
+
+	/**
+	 * @param e0Error
+	 *            the e0Error to set
+	 */
+	public void setE0Error(Double e0Error) {
+		this.e0Error = e0Error;
+	}
+
+	/**
+	 * @param e0Azimuth
+	 *            the e0Azimuth to set
+	 */
+	public void setE0Azimuth(Double e0Azimuth) {
+		this.e0Azimuth = e0Azimuth;
+	}
+
+	/**
+	 * @param e0Dip
+	 *            the e0Dip to set
+	 */
+	public void setE0Dip(Double e0Dip) {
+		this.e0Dip = e0Dip;
+	}
+
+	/**
+	 * @param e1Error
+	 *            the e1Error to set
+	 */
+	public void setE1Error(Double e1Error) {
+		this.e1Error = e1Error;
+	}
+
+	/**
+	 * @param e1Azimuth
+	 *            the e1Azimuth to set
+	 */
+	public void setE1Azimuth(Double e1Azimuth) {
+		this.e1Azimuth = e1Azimuth;
+	}
+
+	/**
+	 * @param e1Dip
+	 *            the e1Dip to set
+	 */
+	public void setE1Dip(Double e1Dip) {
+		this.e1Dip = e1Dip;
+	}
+
+	/**
+	 * @param e2Error
+	 *            the e2Error to set
+	 */
+	public void setE2Error(Double e2Error) {
+		this.e2Error = e2Error;
+	}
+
+	/**
+	 * @param e2Azimuth
+	 *            the e2Azimuth to set
+	 */
+	public void setE2Azimuth(Double e2Azimuth) {
+		this.e2Azimuth = e2Azimuth;
+	}
+
+	/**
+	 * @param e2Dip
+	 *            the e2Dip to set
+	 */
+	public void setE2Dip(Double e2Dip) {
+		this.e2Dip = e2Dip;
+	}
+
+	/**
+	 * @param maximumHorizontalProjection
+	 *            the maximumHorizontalProjection to set
+	 */
+	public void setMaximumHorizontalProjection(
+			Double maximumHorizontalProjection) {
+		this.maximumHorizontalProjection = maximumHorizontalProjection;
+	}
+
+	/**
+	 * @param maximumVerticalProjection
+	 *            the maximumVerticalProjection to set
+	 */
+	public void setMaximumVerticalProjection(Double maximumVerticalProjection) {
+		this.maximumVerticalProjection = maximumVerticalProjection;
+	}
+
+	/**
+	 * @param equivalentHorizontalRadius
+	 *            the equivalentHorizontalRadius to set
+	 */
+	public void setEquivalentHorizontalRadius(
+			Double equivalentHorizontalRadius) {
+		this.equivalentHorizontalRadius = equivalentHorizontalRadius;
 	}
 
 }

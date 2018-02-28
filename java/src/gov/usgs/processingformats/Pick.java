@@ -182,7 +182,7 @@ public class Pick implements ProcessingInt {
 			Double newResidual, Double newDistance, Double newAzimuth,
 			Double newWeight, Double newImportance) {
 
-		this(newID, new Site(newStation, newChannel, newNetwork, newLocation),
+		reload(newID, new Site(newStation, newChannel, newNetwork, newLocation),
 				new Source(newAgencyID, newAuthor, newType), newTime,
 				newAffinity, newQuality, newUse, newPickedPhase,
 				newAssociatedPhase, newLocatedPhase, newResidual, newDistance,
@@ -227,6 +227,55 @@ public class Pick implements ProcessingInt {
 	 */
 	public Pick(String newID, Site newSite, Source newSource, Date newTime,
 			Double newAffinity, Double newQuality, Boolean newUse,
+			String newPickedPhase, String newAssociatedPhase,
+			String newLocatedPhase, Double newResidual, Double newDistance,
+			Double newAzimuth, Double newWeight, Double newImportance) {
+
+		reload(newID, newSite, newSource, newTime, newAffinity, newQuality,
+				newUse, newPickedPhase, newAssociatedPhase, newLocatedPhase,
+				newResidual, newDistance, newAzimuth, newWeight, newImportance);
+	}
+
+	/**
+	 * Reload Function
+	 *
+	 * The reload function for the error ellipse class. Initializes members to
+	 * provided values.
+	 *
+	 * @param newID
+	 *            - A String containing the id to use
+	 * @param newSite
+	 *            - A Site containing the site to use
+	 * @param newSource
+	 *            - A Source containing the source to use
+	 * @param newTime
+	 *            - A Date containing the time to use
+	 * @param newAffinity
+	 *            - A Double containing the affinity to use
+	 * @param newQuality
+	 *            - A Double containing the quality to use
+	 * @param newUse
+	 *            - A Boolean containing the use flag to use
+	 * @param newPickedPhase
+	 *            - A String containing the picked phase to use
+	 * @param newAssociatedPhase
+	 *            - A String containing the associated phase to use
+	 * @param newLocatedPhase
+	 *            - A String containing the located phase to use, empty string
+	 *            to omit
+	 * @param newResidual
+	 *            - A Double containing the residual to use, null to omit
+	 * @param newDistance
+	 *            - A Double containing the distance to use, null to omit
+	 * @param newAzimuth
+	 *            - A Double containing the azimuth to use, null to omit
+	 * @param newWeight
+	 *            - A Double containing the weight to use, null to omit
+	 * @param newImportance
+	 *            - A Double containing the importance to use, null to omit
+	 */
+	public void reload(String newID, Site newSite, Source newSource,
+			Date newTime, Double newAffinity, Double newQuality, Boolean newUse,
 			String newPickedPhase, String newAssociatedPhase,
 			String newLocatedPhase, Double newResidual, Double newDistance,
 			Double newAzimuth, Double newWeight, Double newImportance) {
@@ -697,5 +746,125 @@ public class Pick implements ProcessingInt {
 	 */
 	public Double getImportance() {
 		return importance;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	/**
+	 * @param site
+	 *            the site to set
+	 */
+	public void setSite(Site site) {
+		this.site = site;
+	}
+
+	/**
+	 * @param source
+	 *            the source to set
+	 */
+	public void setSource(Source source) {
+		this.source = source;
+	}
+
+	/**
+	 * @param time
+	 *            the time to set
+	 */
+	public void setTime(Date time) {
+		this.time = time;
+	}
+
+	/**
+	 * @param affinity
+	 *            the affinity to set
+	 */
+	public void setAffinity(Double affinity) {
+		this.affinity = affinity;
+	}
+
+	/**
+	 * @param quality
+	 *            the quality to set
+	 */
+	public void setQuality(Double quality) {
+		this.quality = quality;
+	}
+
+	/**
+	 * @param use
+	 *            the use to set
+	 */
+	public void setUse(Boolean use) {
+		this.use = use;
+	}
+
+	/**
+	 * @param pickedPhase
+	 *            the pickedPhase to set
+	 */
+	public void setPickedPhase(String pickedPhase) {
+		this.pickedPhase = pickedPhase;
+	}
+
+	/**
+	 * @param associatedPhase
+	 *            the associatedPhase to set
+	 */
+	public void setAssociatedPhase(String associatedPhase) {
+		this.associatedPhase = associatedPhase;
+	}
+
+	/**
+	 * @param locatedPhase
+	 *            the locatedPhase to set
+	 */
+	public void setLocatedPhase(String locatedPhase) {
+		this.locatedPhase = locatedPhase;
+	}
+
+	/**
+	 * @param residual
+	 *            the residual to set
+	 */
+	public void setResidual(Double residual) {
+		this.residual = residual;
+	}
+
+	/**
+	 * @param distance
+	 *            the distance to set
+	 */
+	public void setDistance(Double distance) {
+		this.distance = distance;
+	}
+
+	/**
+	 * @param azimuth
+	 *            the azimuth to set
+	 */
+	public void setAzimuth(Double azimuth) {
+		this.azimuth = azimuth;
+	}
+
+	/**
+	 * @param weight
+	 *            the weight to set
+	 */
+	public void setWeight(Double weight) {
+		this.weight = weight;
+	}
+
+	/**
+	 * @param importance
+	 *            the importance to set
+	 */
+	public void setImportance(Double importance) {
+		this.importance = importance;
 	}
 }

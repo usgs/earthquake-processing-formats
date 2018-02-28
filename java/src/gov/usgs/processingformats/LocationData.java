@@ -12,6 +12,7 @@ import org.json.simple.JSONArray;
  * @author U.S. Geological Survey &lt;jpatton at usgs.gov&gt;
  */
 public class LocationData implements ProcessingInt {
+
 	/**
 	 * JSON Keys
 	 */
@@ -74,7 +75,7 @@ public class LocationData implements ProcessingInt {
 	/**
 	 * Required Double containing the Detection minimum distance
 	 */
-	private final Double minimumDistance;
+	private Double minimumDistance;
 
 	/**
 	 * Optional Double containing the rms
@@ -356,6 +357,67 @@ public class LocationData implements ProcessingInt {
 			Double newBayesianDepth, Double newBayesianRange,
 			Double newDepthImportance, ErrorEllipse newErrorEllipse) {
 
+		reload(newHypocenter, newAssociatedData, newAssociatedStations,
+				newAssociatedPhases, newUsedStations, newUsedPhases, newGap,
+				newSecondaryGap, newMinimumDistance, newRMS, newQuality,
+				newBayesianDepth, newBayesianRange, newDepthImportance,
+				newErrorEllipse);
+	}
+
+	/**
+	 * Reload Function
+	 *
+	 * The reload function for the LocationData class. Initializes members to
+	 * provided values.
+	 *
+	 *
+	 * @param newHypocenter
+	 *            - A Hypocenter containing the hypocenter to use
+	 * @param newAssociatedData
+	 *            - A ArrayList&lt;Pick&gt; newPickData containing the data that
+	 *            went into this location
+	 * @param newAssociatedStations
+	 *            - An Integer containing the number of associated stations,
+	 *            null to omit
+	 * @param newAssociatedPhases
+	 *            - An Integercontaining the number of associated phases, null
+	 *            to omit
+	 * @param newUsedStations
+	 *            - An Integer containing the number of used stations, null to
+	 *            omit
+	 * @param newUsedPhases
+	 *            - An Integer containing the number of used phases, null to
+	 *            omit
+	 * @param newGap
+	 *            - A Double containing the gap to use, null to omit
+	 * @param newSecondaryGap
+	 *            - A Double containing the secondary gap to use, null to omit
+	 * @param newMinimumDistance
+	 *            - A Double containing the minimum distance to use, null to
+	 *            omit
+	 * @param newRMS
+	 *            - A Double containing the rms to use, null to omit
+	 * @param newQuality
+	 *            - A String containing the quality to use, null to omit
+	 * @param newBayesianDepth
+	 *            - A Double containing the bayesian depth to use, null to omit
+	 * @param newBayesianRange
+	 *            - A Double containing the bayesian range to use, null to omit
+	 * @param newDepthImportance
+	 *            - A Double containing the depth importance to use, null to
+	 *            omit
+	 * @param newErrorEllipse
+	 *            - An ErrorEllipse containing the error ellipse to use, null to
+	 *            omit
+	 */
+	public void reload(Hypocenter newHypocenter,
+			ArrayList<Pick> newAssociatedData, Integer newAssociatedStations,
+			Integer newAssociatedPhases, Integer newUsedStations,
+			Integer newUsedPhases, Double newGap, Double newSecondaryGap,
+			Double newMinimumDistance, Double newRMS, String newQuality,
+			Double newBayesianDepth, Double newBayesianRange,
+			Double newDepthImportance, ErrorEllipse newErrorEllipse) {
+
 		hypocenter = newHypocenter;
 		associatedData = newAssociatedData;
 		numberOfAssociatedStations = newAssociatedStations;
@@ -409,7 +471,6 @@ public class LocationData implements ProcessingInt {
 			}
 		} else {
 			associatedData = null;
-
 		}
 
 		// optional values
@@ -542,8 +603,8 @@ public class LocationData implements ProcessingInt {
 		}
 
 		// associatedData
-		JSONArray dataArray = new JSONArray();
 		if ((jsonAssociatedData != null) && (!jsonAssociatedData.isEmpty())) {
+			JSONArray dataArray = new JSONArray();
 
 			// enumerate through the whole arraylist
 			for (Iterator<Pick> pickIterator = jsonAssociatedData
@@ -554,10 +615,10 @@ public class LocationData implements ProcessingInt {
 
 				dataArray.add(pickObject);
 			}
-		}
 
-		if (!dataArray.isEmpty()) {
-			newJSONObject.put(ASSOCIATEDDATA_KEY, dataArray);
+			if (!dataArray.isEmpty()) {
+				newJSONObject.put(ASSOCIATEDDATA_KEY, dataArray);
+			}
 		}
 
 		// number of associated stations
@@ -844,6 +905,127 @@ public class LocationData implements ProcessingInt {
 	 */
 	public ErrorEllipse getErrorEllipse() {
 		return errorEllipse;
+	}
+
+	/**
+	 * @param hypocenter
+	 *            the hypocenter to set
+	 */
+	public void setHypocenter(Hypocenter hypocenter) {
+		this.hypocenter = hypocenter;
+	}
+
+	/**
+	 * @param associatedData
+	 *            the associatedData to set
+	 */
+	public void setAssociatedData(ArrayList<Pick> associatedData) {
+		this.associatedData = associatedData;
+	}
+
+	/**
+	 * @param numberOfAssociatedStations
+	 *            the numberOfAssociatedStations to set
+	 */
+	public void setNumberOfAssociatedStations(
+			Integer numberOfAssociatedStations) {
+		this.numberOfAssociatedStations = numberOfAssociatedStations;
+	}
+
+	/**
+	 * @param numberOfAssociatedPhases
+	 *            the numberOfAssociatedPhases to set
+	 */
+	public void setNumberOfAssociatedPhases(Integer numberOfAssociatedPhases) {
+		this.numberOfAssociatedPhases = numberOfAssociatedPhases;
+	}
+
+	/**
+	 * @param numberOfUsedStations
+	 *            the numberOfUsedStations to set
+	 */
+	public void setNumberOfUsedStations(Integer numberOfUsedStations) {
+		this.numberOfUsedStations = numberOfUsedStations;
+	}
+
+	/**
+	 * @param numberOfUsedPhases
+	 *            the numberOfUsedPhases to set
+	 */
+	public void setNumberOfUsedPhases(Integer numberOfUsedPhases) {
+		this.numberOfUsedPhases = numberOfUsedPhases;
+	}
+
+	/**
+	 * @param gap
+	 *            the gap to set
+	 */
+	public void setGap(Double gap) {
+		this.gap = gap;
+	}
+
+	/**
+	 * @param secondaryGap
+	 *            the secondaryGap to set
+	 */
+	public void setSecondaryGap(Double secondaryGap) {
+		this.secondaryGap = secondaryGap;
+	}
+
+	/**
+	 * @param minimumDistance
+	 *            the minimumDistance to set
+	 */
+	public void setMinimumDistance(Double minimumDistance) {
+		this.minimumDistance = minimumDistance;
+	}
+
+	/**
+	 * @param rms
+	 *            the rms to set
+	 */
+	public void setRms(Double rms) {
+		this.rms = rms;
+	}
+
+	/**
+	 * @param quality
+	 *            the quality to set
+	 */
+	public void setQuality(String quality) {
+		this.quality = quality;
+	}
+
+	/**
+	 * @param bayesianDepth
+	 *            the bayesianDepth to set
+	 */
+	public void setBayesianDepth(Double bayesianDepth) {
+		this.bayesianDepth = bayesianDepth;
+	}
+
+	/**
+	 * @param bayesianRange
+	 *            the bayesianRange to set
+	 */
+	public void setBayesianRange(Double bayesianRange) {
+		this.bayesianRange = bayesianRange;
+	}
+
+	/**
+	 * @param depthImportance
+	 *            the depthImportance to set
+	 */
+	public void setDepthImportance(Double depthImportance) {
+		this.depthImportance = depthImportance;
+	}
+
+	/**
+	 * @param errorEllipse
+	 *            the errorEllipse to set
+	 */
+	public void setErrorEllipse(ErrorEllipse errorEllipse) {
+		this.errorEllipse = errorEllipse;
 	}
 
 }

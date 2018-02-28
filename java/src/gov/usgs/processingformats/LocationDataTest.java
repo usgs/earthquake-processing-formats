@@ -185,6 +185,14 @@ public class LocationDataTest {
 
 	public void checkData(LocationData locationDataObject, String TestName) {
 
+		// check locationDataObject.hypocenter.Latitude
+		assertEquals(TestName + " Latitude Equals", LATITUDE,
+				locationDataObject.getHypocenter().getLatitude(), 0);
+
+		// check locationDataObject.hypocenter.Longitude
+		assertEquals(TestName + " Longitude Equals", LONGITUDE,
+				locationDataObject.getHypocenter().getLongitude(), 0);
+
 		// check locationDataObject.hypocenter.Depth
 		assertEquals(TestName + " Depth Equals", DEPTH,
 				locationDataObject.getHypocenter().getDepth(), 0);

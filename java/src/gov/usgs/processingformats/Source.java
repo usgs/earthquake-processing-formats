@@ -45,8 +45,8 @@ public class Source implements ProcessingInt {
 	}
 
 	/**
-	 * The advanced constructor for the Source class. Initializes members to
-	 * provided values.
+	 * The alternate advanced constructor for the Source class. Initializes
+	 * members to provided values.
 	 *
 	 * @param newAgencyID
 	 *            - A String containing the agencyID to use
@@ -56,6 +56,24 @@ public class Source implements ProcessingInt {
 	 *            - A String containing the type to use
 	 */
 	public Source(String newAgencyID, String newAuthor, String newType) {
+
+		reload(newAgencyID, newAuthor, newType);
+	}
+
+	/**
+	 * Reload Function
+	 *
+	 * The reload function for the source class. Initializes members to provided
+	 * values.
+	 *
+	 * @param newAgencyID
+	 *            - A String containing the agencyID to use
+	 * @param newAuthor
+	 *            - A String containing the author to use
+	 * @param newType
+	 *            - A String containing the type to use
+	 */
+	public void reload(String newAgencyID, String newAuthor, String newType) {
 
 		agencyID = newAgencyID;
 		author = newAuthor;
@@ -226,5 +244,29 @@ public class Source implements ProcessingInt {
 	 */
 	public String getType() {
 		return type;
+	}
+
+	/**
+	 * @param agencyID
+	 *            the agencyID to set
+	 */
+	public void setAgencyID(String agencyID) {
+		this.agencyID = agencyID;
+	}
+
+	/**
+	 * @param author
+	 *            the author to set
+	 */
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	/**
+	 * @param type
+	 *            the type to set
+	 */
+	public void setType(String type) {
+		this.type = type;
 	}
 }
