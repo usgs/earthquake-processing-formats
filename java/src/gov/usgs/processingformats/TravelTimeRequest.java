@@ -2,6 +2,7 @@ package gov.usgs.processingformats;
 
 import java.util.*;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import gov.usgs.processingformats.ProcessingInt;
@@ -51,12 +52,12 @@ public class TravelTimeRequest implements ProcessingInt {
 	/**
 	 * Returned travel time data (empty for requests)
 	 */
-	private TravelTimeData data;
+	private ArrayList<TravelTimeData> data;
 
 	/**
 	 * Returned travel time plot data (empty for requests)
 	 */
-	private TravelTimePlotData plotData;
+	private ArrayList<TravelTimePlotData> plotData;
 
 	/**
 	 * The constructor for the TravelTimeData class. Initializes members to null
@@ -88,14 +89,16 @@ public class TravelTimeRequest implements ProcessingInt {
 	 *            - An optional Double containing the geographic receiver
 	 *            longitude in degrees, null to omit
 	 * @param newData
-	 *            - A TravelTimeData containing the returned travel time data
+	 *            - A ArrayList&lt;TravelTimeData&gt; containing the returned
+	 *            travel time data
 	 * @param newPlotData
-	 *            - A TravelTimePlotData containing the returned travel time
-	 *            plot data
+	 *            - A ArrayList&lt;TravelTimePlotData&gt;  containing the
+	 *            returned travel time plot data
 	 */
 	public TravelTimeRequest(String newType, Double newDistance,
 			Double newElevation, Double newLatitude, Double newLongitude,
-			TravelTimeData newData, TravelTimePlotData newPlotData) {
+			ArrayList<TravelTimeData> newData,
+			ArrayList<TravelTimePlotData> newPlotData) {
 
 		reload(newType, newDistance, newElevation, newLatitude, newLongitude,
 				newData, newPlotData);
@@ -145,40 +148,44 @@ public class TravelTimeRequest implements ProcessingInt {
 			longitude = null;
 		}
 
-		// data
+		// Data
 		if (newJSONObject.containsKey(DATA_KEY)) {
-			JSONObject dataObject = (JSONObject) newJSONObject.get(DATA_KEY);
 
-			// did we get an object
-			if (dataObject == null) {
-				data = null;
-				plotData = null;
-			} else {
-				// does it have a type
-				if (dataObject.containsKey(TYPE_KEY)) {
+			data = new ArrayList<TravelTimeData>();
+			plotData = new ArrayList<TravelTimePlotData>();
 
-					// check type
-					String dataType = dataObject.get(TYPE_KEY).toString();
-					if (dataType.equals("TTData")) {
-						data = new TravelTimeData(dataObject);
-						plotData = null;
-					} else if (dataType.equals("TTPlotData")) {
-						data = null;
-						plotData = new TravelTimePlotData(dataObject);
-					} else {
-						data = null;
-						plotData = null;
+			// get the array
+			JSONArray dataArray = (JSONArray) newJSONObject.get(DATA_KEY);
+
+			if ((dataArray != null) && (!dataArray.isEmpty())) {
+
+				// go through the whole array
+				for (int i = 0; i < dataArray.size(); i++) {
+
+					// get the object
+					JSONObject dataObject = (JSONObject) dataArray.get(i);
+
+					// check for type
+					if (dataObject.containsKey(TYPE_KEY)) {
+
+						// Route based on type
+						String TypeString = (String) dataObject.get(TYPE_KEY);
+						if (TypeString.equals("TTData")) {
+
+							// add to vector
+							data.add(new TravelTimeData(dataObject));
+						} else if (TypeString.equals("TTPlotData")) {
+
+							// add to vector
+							plotData.add(new TravelTimePlotData(dataObject));
+						}
 					}
-				} else {
-					data = null;
-					plotData = null;
 				}
 			}
 		} else {
 			data = null;
 			plotData = null;
 		}
-
 	}
 
 	/**
@@ -215,14 +222,16 @@ public class TravelTimeRequest implements ProcessingInt {
 	 *            - An optional Double containing the geographic receiver
 	 *            longitude in degrees, null to omit
 	 * @param newData
-	 *            - A TravelTimeData containing the returned travel time data
+	 *            - A ArrayList&lt;TravelTimeData&gt; containing the returned
+	 *            travel time data
 	 * @param newPlotData
-	 *            - A TravelTimePlotData containing the returned travel time
-	 *            plot data
+	 *            - A ArrayList&lt;TravelTimePlotData&gt;  containing the
+	 *            returned travel time plot data
 	 */
 	public void reload(String newType, Double newDistance, Double newElevation,
-			Double newLatitude, Double newLongitude, TravelTimeData newData,
-			TravelTimePlotData newPlotData) {
+			Double newLatitude, Double newLongitude,
+			ArrayList<TravelTimeData> newData,
+			ArrayList<TravelTimePlotData> newPlotData) {
 
 		if (newType == null) {
 			type = "Standard";
@@ -252,8 +261,8 @@ public class TravelTimeRequest implements ProcessingInt {
 		Double jsonElevation = getElevation();
 		Double jsonLatitude = getLatitude();
 		Double jsonLongitude = getLongitude();
-		TravelTimeData jsonData = getData();
-		TravelTimePlotData jsonPlotData = getPlotData();
+		ArrayList<TravelTimeData> jsonData = getData();
+		ArrayList<TravelTimePlotData> jsonPlotData = getPlotData();
 
 		// required values
 		// type
@@ -283,26 +292,50 @@ public class TravelTimeRequest implements ProcessingInt {
 		}
 
 		// returned data
+		JSONArray dataArray = new JSONArray();
 		if ((jsonType != null) && (jsonType.equals("Standard"))) {
 
-			// data
-			if (jsonData != null) {
-				newJSONObject.put(DATA_KEY, jsonData.toJSON());
-			}
+			// enumerate through the whole arraylist
+			for (Iterator<TravelTimeData> dataIterator = jsonData
+					.iterator(); dataIterator.hasNext();) {
 
+				// convert pick to JSON object
+				JSONObject dataObject = ((TravelTimeData) dataIterator.next())
+						.toJSON();
+
+				dataArray.add(dataObject);
+			}
 		} else if ((jsonType != null) && (jsonType.equals("Plot"))) {
 
-			// plot data
-			if (jsonPlotData != null) {
-				newJSONObject.put(DATA_KEY, jsonPlotData.toJSON());
+			// enumerate through the whole arraylist
+			for (Iterator<TravelTimePlotData> dataIterator = jsonPlotData
+					.iterator(); dataIterator.hasNext();) {
+
+				// convert pick to JSON object
+				JSONObject dataObject = ((TravelTimePlotData) dataIterator
+						.next()).toJSON();
+
+				dataArray.add(dataObject);
 			}
+
 		} else if ((jsonType != null) && (jsonType.equals("PlotStatistics"))) {
 
-			// plot data
-			if (jsonPlotData != null) {
-				newJSONObject.put(DATA_KEY, jsonPlotData.toJSON());
+			// enumerate through the whole arraylist
+			for (Iterator<TravelTimePlotData> dataIterator = jsonPlotData
+					.iterator(); dataIterator.hasNext();) {
+
+				// convert pick to JSON object
+				JSONObject dataObject = ((TravelTimePlotData) dataIterator
+						.next()).toJSON();
+
+				dataArray.add(dataObject);
 			}
 		}
+
+		if (!dataArray.isEmpty()) {
+			newJSONObject.put(DATA_KEY, dataArray);
+		}
+
 		return (newJSONObject);
 	}
 
@@ -334,8 +367,8 @@ public class TravelTimeRequest implements ProcessingInt {
 		Double jsonElevation = getElevation();
 		Double jsonLatitude = getLatitude();
 		Double jsonLongitude = getLongitude();
-		TravelTimeData jsonData = getData();
-		TravelTimePlotData jsonPlotData = getPlotData();
+		ArrayList<TravelTimeData> jsonData = getData();
+		ArrayList<TravelTimePlotData> jsonPlotData = getPlotData();
 
 		// required values
 		// type
@@ -390,14 +423,24 @@ public class TravelTimeRequest implements ProcessingInt {
 
 			// data
 			if (jsonData != null) {
-				if (!jsonData.isValid()) {
-					// data invalid
-					errorList.add("Invalid TravelTimeData in TravelTimeRequest Class of type Standard.");
+				// enumerate through the whole arraylist
+				for (Iterator<TravelTimeData> dataIterator = jsonData
+						.iterator(); dataIterator.hasNext();) {
+
+					// convert pick to JSON object
+					TravelTimeData jsonTTData = ((TravelTimeData) dataIterator
+							.next());
+
+					if (!jsonTTData.isValid()) {
+						errorList.add(
+								"Invalid TravelTimeData in TravelTimeRequest Class of type Standard.");
+						break;
+					}
 				}
-				
-				if (jsonPlotData != null) {
+				if ((jsonPlotData != null) && (!jsonPlotData.isEmpty())) {
 					// wrong data
-					errorList.add("Erroneous TravelTimePlotData in TravelTimeRequest Class of type Standard.");
+					errorList.add(
+							"Erroneous TravelTimePlotData in TravelTimeRequest Class of type Standard.");
 				}
 			}
 
@@ -405,27 +448,48 @@ public class TravelTimeRequest implements ProcessingInt {
 
 			// plot data
 			if (jsonPlotData != null) {
-				if (!jsonPlotData.isValid()) {
-					// data invalid
-					errorList.add("Invalid TravelTimePlotData in TravelTimeRequest Class of type Plot.");
+				// enumerate through the whole arraylist
+				for (Iterator<TravelTimePlotData> dataIterator = jsonPlotData
+						.iterator(); dataIterator.hasNext();) {
+
+					// convert pick to JSON object
+					TravelTimePlotData jsonTTPlotData = ((TravelTimePlotData) dataIterator
+							.next());
+
+					if (!jsonTTPlotData.isValid()) {
+						errorList.add(
+								"Invalid TravelTimePlotData in TravelTimeRequest Class of type Plot.");
+						break;
+					}
 				}
-				
-				if (jsonData != null) {
+
+				if ((jsonData != null) && (!jsonData.isEmpty())) {
 					// wrong data
-					errorList.add("Erroneous TravelTimeData in TravelTimeRequest Class of type Plot.");
+					errorList.add(
+							"Erroneous TravelTimeData in TravelTimeRequest Class of type Plot.");
 				}
 			}
 		} else if ((jsonType != null) && (jsonType.equals("PlotStatistics"))) {
 
-			// plot data
-			if (!jsonPlotData.isValid()) {
-				// data invalid
-				errorList.add("Invalid TravelTimePlotData in TravelTimeRequest Class of type PlotStatistics.");
+			// enumerate through the whole arraylist
+			for (Iterator<TravelTimePlotData> dataIterator = jsonPlotData
+					.iterator(); dataIterator.hasNext();) {
+
+				// convert pick to JSON object
+				TravelTimePlotData jsonTTPlotData = ((TravelTimePlotData) dataIterator
+						.next());
+
+				if (!jsonTTPlotData.isValid()) {
+					errorList.add(
+							"Invalid TravelTimePlotData in TravelTimeRequest Class of type PlotStatistics.");
+					break;
+				}
 			}
-			
-			if (jsonData != null) {
+
+			if ((jsonData != null) && (!jsonData.isEmpty())) {
 				// wrong data
-				errorList.add("Erroneous TravelTimeData in TravelTimeRequest Class of type PlotStatistics.");
+				errorList.add(
+						"Erroneous TravelTimeData in TravelTimeRequest Class of type PlotStatistics.");
 			}
 		}
 
@@ -510,7 +574,7 @@ public class TravelTimeRequest implements ProcessingInt {
 	/**
 	 * @return the data
 	 */
-	public TravelTimeData getData() {
+	public ArrayList<TravelTimeData> getData() {
 		return data;
 	}
 
@@ -518,14 +582,14 @@ public class TravelTimeRequest implements ProcessingInt {
 	 * @param data
 	 *            the data to set
 	 */
-	public void setData(TravelTimeData data) {
+	public void setData(ArrayList<TravelTimeData> data) {
 		this.data = data;
 	}
 
 	/**
 	 * @return the plotData
 	 */
-	public TravelTimePlotData getPlotData() {
+	public ArrayList<TravelTimePlotData> getPlotData() {
 		return plotData;
 	}
 
@@ -533,7 +597,7 @@ public class TravelTimeRequest implements ProcessingInt {
 	 * @param plotData
 	 *            the plotData to set
 	 */
-	public void setPlotData(TravelTimePlotData plotData) {
+	public void setPlotData(ArrayList<TravelTimePlotData> plotData) {
 		this.plotData = plotData;
 	}
 }

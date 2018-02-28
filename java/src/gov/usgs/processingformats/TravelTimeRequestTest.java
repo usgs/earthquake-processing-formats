@@ -2,23 +2,25 @@ package gov.usgs.processingformats;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
 public class TravelTimeRequestTest {
 
 	public static String TRAVELTIMEREQUESTSTANDARD_STRING = "{\"Data\":"
-			+ "{\"LocationUseFlag\":true,\"DistanceDerivative\":1.2,"
+			+ "[{\"LocationUseFlag\":true,\"DistanceDerivative\":1.2,"
 			+ "\"DepthDerivative\":3.45,\"AssociationWeightFlag\":true,"
 			+ "\"Type\":\"TTData\",\"TeleseismicPhaseGroup\":1,\"Phase\":\"Pg\","
 			+ "\"RayDerivative\":5.67,\"AuxiliaryPhaseGroup\":1,"
 			+ "\"Observability\":0.34,\"StatisticalSpread\":1.5,"
-			+ "\"TravelTime\":22.456},\"Distance\":12.45,\"Type\":\"Standard\","
+			+ "\"TravelTime\":22.456}],\"Distance\":12.45,\"Type\":\"Standard\","
 			+ "\"Elevation\":5280.5,\"Latitude\":39.749444,"
 			+ "\"Longitude\":-105.220305}";
 
 	public static String TRAVELTIMEREQUESTPLOT_STRING = "{\"Data\":"
-			+ "{\"Branches\":[{\"Phase\":\"Pg\",\"Samples\":[{\"Distance\":1.2,"
+			+ "[{\"Branches\":[{\"Phase\":\"Pg\",\"Samples\":[{\"Distance\":1.2,"
 			+ "\"Observability\":0.34,\"StatisticalSpread\":1.5,"
 			+ "\"TravelTime\":22.456},{\"Distance\":10.5,\"Observability\":1.63,"
 			+ "\"StatisticalSpread\":2.1,\"TravelTime\":72.654}]},"
@@ -27,11 +29,11 @@ public class TravelTimeRequestTest {
 			+ "\"TravelTime\":132.456},{\"Distance\":100.5,"
 			+ "\"Observability\":6.21,\"StatisticalSpread\":5.1,"
 			+ "\"TravelTime\":542.654}]}],\"Type\":\"TTPlotData\","
-			+ "\"MaximumTravelTime\":12.5},\"Distance\":12.45,\"Type\":\"Plot\","
+			+ "\"MaximumTravelTime\":12.5}],\"Distance\":12.45,\"Type\":\"Plot\","
 			+ "\"Elevation\":5280.5,\"Latitude\":39.749444,\"Longitude\":-105.220305}";
 
 	public static String TRAVELTIMEREQUESTPLOTSTATISTICS_STRING = "{\"Data\":"
-			+ "{\"Branches\":[{\"Phase\":\"Pg\",\"Samples\":[{\"Distance\":1.2,"
+			+ "[{\"Branches\":[{\"Phase\":\"Pg\",\"Samples\":[{\"Distance\":1.2,"
 			+ "\"Observability\":0.34,\"StatisticalSpread\":1.5,"
 			+ "\"TravelTime\":22.456},{\"Distance\":10.5,\"Observability\":1.63,"
 			+ "\"StatisticalSpread\":2.1,\"TravelTime\":72.654}]},"
@@ -40,7 +42,7 @@ public class TravelTimeRequestTest {
 			+ "\"TravelTime\":132.456},{\"Distance\":100.5,"
 			+ "\"Observability\":6.21,\"StatisticalSpread\":5.1,"
 			+ "\"TravelTime\":542.654}]}],\"Type\":\"TTPlotData\","
-			+ "\"MaximumTravelTime\":12.5},\"Distance\":12.45,"
+			+ "\"MaximumTravelTime\":12.5}],\"Distance\":12.45,"
 			+ "\"Type\":\"PlotStatistics\",\"Elevation\":5280.5,"
 			+ "\"Latitude\":39.749444,\"Longitude\":-105.220305}";
 
@@ -292,42 +294,32 @@ public class TravelTimeRequestTest {
 			assertEquals(TestName + " Longitude Equals", LONGITUDE,
 					travelTimeRequestObject.getLongitude(), 0);
 		}
-		// check travelTimeRequestObject.data
-		if (travelTimeRequestObject.getData() != null) {
-			assertTrue(TestName + " Data is valid",
-					travelTimeRequestObject.getData().isValid());
-		}
-		// check travelTimeRequestObject.plotData
-		if (travelTimeRequestObject.getPlotData() != null) {
-			assertTrue(TestName + " Data is valid",
-					travelTimeRequestObject.getPlotData().isValid());
-		}
 	}
 
-	public TravelTimeData buildData() {
-
+	public ArrayList<TravelTimeData> buildData() {
+		ArrayList<TravelTimeData> newData = new ArrayList<TravelTimeData>();
 		try {
-			return (new TravelTimeData(
+			newData.add(new TravelTimeData(
 					Utility.fromJSONString(TRAVELTIMEDATA_STRING)));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return (null);
 		}
-
+		return(newData);
 	}
 
-	public TravelTimePlotData buildPlotData() {
-
+	public ArrayList<TravelTimePlotData> buildPlotData() {
+		ArrayList<TravelTimePlotData> newPlotData = new ArrayList<TravelTimePlotData>();
 		try {
-			return (new TravelTimePlotData(
+			newPlotData.add(new TravelTimePlotData(
 					Utility.fromJSONString(TRAVELTIMEPLOTDATA_STRING)));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return (null);
 		}
-
+		return(newPlotData);
 	}
 
 }
