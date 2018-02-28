@@ -58,7 +58,7 @@ location processing algorithm.
         "UseRSTT" : Boolean,
         "UseSVD"  : boolean  
       },
-      "Data" :
+      "OutputData" :
       {
         "Hypocenter"  :
         {
@@ -181,5 +181,5 @@ decomposition logic is to be used.
 The following are values that are **required** be provided as part of a the
 location information returned.
 
-* Data - A [LocationDataData](LocationData.md) object containing the requested
+* OutputData - A [LocationDataData](LocationData.md) object containing the requested
 location information.
