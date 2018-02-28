@@ -21,8 +21,8 @@ information service
       "RayDerivative"      : Number,
       "StatisticalSpread"  : Number,
       "Observability"      : Number,
-      "TeleseismicPhaseGroup" : Number,
-      "AuxiliaryPhaseGroup"   : Number,
+      "TeleseismicPhaseGroup" : String,
+      "AuxiliaryPhaseGroup"   : String,
       "LocationUseFlag"       : Boolean,
       "AssociationWeightFlag" : Boolean
     }
@@ -48,9 +48,9 @@ ray parameter of the distance in degrees/second.
 seconds.
 * Observability - A number containing the statistical observability of the
 seismic phase.
-* TeleseismicPhaseGroup - A number containing the teleseismic phase group
+* TeleseismicPhaseGroup - A String containing the teleseismic phase group
 identifier.
-* AuxiliaryPhaseGroup - A number containing the auxiliary phase group
+* AuxiliaryPhaseGroup - A String containing the auxiliary phase group
 identifier.
 * LocationUseFlag - A boolean flag indicating whether the phase may be used in
 a location.

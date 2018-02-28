@@ -22,20 +22,22 @@ information service
         "Longitude" : Number
       },
       "Data" :
-      {
-        "Type"       : String,
-        "Phase"      : String,
-        "TravelTime" : Number,
-        "DistanceDerivative" : Number,
-        "DepthDerivative"    : Number,
-        "RayDerivative"      : Number,
-        "StatisticalSpread"  : Number,
-        "Observability"      : Number,
-        "TeleseismicPhaseGroup" : Number,
-        "AuxiliaryPhaseGroup"   : Number,
-        "LocationUseFlag"       : Boolean,
-        "AssociationWeightFlag" : Boolean
-      }
+      [
+        {
+          "Type"       : String,
+          "Phase"      : String,
+          "TravelTime" : Number,
+          "DistanceDerivative" : Number,
+          "DepthDerivative"    : Number,
+          "RayDerivative"      : Number,
+          "StatisticalSpread"  : Number,
+          "Observability"      : Number,
+          "TeleseismicPhaseGroup" : Number,
+          "AuxiliaryPhaseGroup"   : Number,
+          "LocationUseFlag"       : Boolean,
+          "AssociationWeightFlag" : Boolean
+        }
+    ]
     }
 ```
 
@@ -94,6 +96,6 @@ degrees.
 The following are values that are **required** be provided as part of a the
 travel time request information returned.
 
-* Data - A [TravelTimeData](TravelTimeData.md) or
-[TravelTimePlotData](TravelTimePlotData.md)object containing the requested
+* Data - An array of [TravelTimeData](TravelTimeData.md) or
+[TravelTimePlotData](TravelTimePlotData.md) objects containing the requested
 travel time information.
