@@ -17,7 +17,7 @@ location processing algorithm.
       {
         "Type" : String,
         "EarthModel" : String,        
-        "OriginTime" : Number,
+        "SourceOriginTime" : Number,
         "SourceLatitude"  : Number,
         "SourceLongitude" : Number,
         "SourceDepth" : Number,
@@ -146,7 +146,7 @@ location processing algorithm.
 * Type - A String containing the name of the algorithm this request is
 valid for. Ex. "RayLoc".
 * EarthModel - A String containing the Travel Time Earth Model to use.
-* OriginTime - A string containing the UTC origin time of this hypocenter, in
+* SourceOriginTime - A string containing the UTC origin time of this hypocenter, in
 the ISO8601 format `YYYY-MM-DDTHH:MM:SS.SSSZ`.
 * SourceLatitude - A number that identifies the geographic source latitude of  
 this hypocenter in degrees.
