@@ -33,8 +33,8 @@ public class TravelTimeData implements ProcessingInt {
 	/**
 	 * Required type of data as a String
 	 */
-	private String type;		
-	
+	private String type;
+
 	/**
 	 * Required seismic phase code
 	 */
@@ -76,12 +76,12 @@ public class TravelTimeData implements ProcessingInt {
 	/**
 	 * Required teleseismic phase group identifier.
 	 */
-	private Long teleseismicPhaseGroup;
+	private String teleseismicPhaseGroup;
 
 	/**
 	 * Required auxiliary phase group identifier.
 	 */
-	private Long auxiliaryPhaseGroup;
+	private String auxiliaryPhaseGroup;
 
 	/**
 	 * Required flag indicating whether the phase may be used in a location.
@@ -130,9 +130,9 @@ public class TravelTimeData implements ProcessingInt {
 	 *            - A Double containing the statistical observability of the
 	 *            seismic phase
 	 * @param newTeleseismicPhaseGroup
-	 *            - A Long containing the teleseismic phase group identifier
+	 *            - A String containing the teleseismic phase group identifier
 	 * @param newAuxiliaryPhaseGroup
-	 *            - A Long containing the auxiliary phase group identifier
+	 *            - A String containing the auxiliary phase group identifier
 	 * @param newLocationUseFlag
 	 *            - A Boolean containing the flag indicating whether the phase
 	 *            may be used in a location
@@ -143,8 +143,8 @@ public class TravelTimeData implements ProcessingInt {
 	public TravelTimeData(String newPhase, Double newTravelTime,
 			Double newDistanceDerivative, Double newDepthDerivative,
 			Double newRayDerivative, Double newStatisticalSpread,
-			Double newObservability, Long newTeleseismicPhaseGroup,
-			Long newAuxiliaryPhaseGroup, Boolean newLocationUseFlag,
+			Double newObservability, String newTeleseismicPhaseGroup,
+			String newAuxiliaryPhaseGroup, Boolean newLocationUseFlag,
 			Boolean newAssociationWeightFlag) {
 
 		reload(newPhase, newTravelTime, newDistanceDerivative,
@@ -165,12 +165,11 @@ public class TravelTimeData implements ProcessingInt {
 		// Required values
 		// type
 		if (newJSONObject.containsKey(TYPE_KEY)) {
-			type = newJSONObject
-					.get(TYPE_KEY).toString();
+			type = newJSONObject.get(TYPE_KEY).toString();
 		} else {
 			type = null;
 		}
-		
+
 		// phase
 		if (newJSONObject.containsKey(PHASE_KEY)) {
 			phase = newJSONObject.get(PHASE_KEY).toString();
@@ -224,16 +223,16 @@ public class TravelTimeData implements ProcessingInt {
 
 		// teleseismic phase group
 		if (newJSONObject.containsKey(TELESEISMICPHASEGROUP_KEY)) {
-			teleseismicPhaseGroup = (long) newJSONObject
-					.get(TELESEISMICPHASEGROUP_KEY);
+			teleseismicPhaseGroup = newJSONObject.get(TELESEISMICPHASEGROUP_KEY)
+					.toString();
 		} else {
 			teleseismicPhaseGroup = null;
 		}
 
 		// auxiliary phase group
 		if (newJSONObject.containsKey(AUXILIARYPHASEGROUP_KEY)) {
-			auxiliaryPhaseGroup = (long) newJSONObject
-					.get(AUXILIARYPHASEGROUP_KEY);
+			auxiliaryPhaseGroup = newJSONObject.get(AUXILIARYPHASEGROUP_KEY)
+					.toString();
 		} else {
 			auxiliaryPhaseGroup = null;
 		}
@@ -297,9 +296,9 @@ public class TravelTimeData implements ProcessingInt {
 	 *            - A Double containing the statistical observability of the
 	 *            seismic phase
 	 * @param newTeleseismicPhaseGroup
-	 *            - A Long containing the teleseismic phase group identifier
+	 *            - A String containing the teleseismic phase group identifier
 	 * @param newAuxiliaryPhaseGroup
-	 *            - A Long containing the auxiliary phase group identifier
+	 *            - A String containing the auxiliary phase group identifier
 	 * @param newLocationUseFlag
 	 *            - A Boolean containing the flag indicating whether the phase
 	 *            may be used in a location
@@ -310,8 +309,8 @@ public class TravelTimeData implements ProcessingInt {
 	public void reload(String newPhase, Double newTravelTime,
 			Double newDistanceDerivative, Double newDepthDerivative,
 			Double newRayDerivative, Double newStatisticalSpread,
-			Double newObservability, Long newTeleseismicPhaseGroup,
-			Long newAuxiliaryPhaseGroup, Boolean newLocationUseFlag,
+			Double newObservability, String newTeleseismicPhaseGroup,
+			String newAuxiliaryPhaseGroup, Boolean newLocationUseFlag,
 			Boolean newAssociationWeightFlag) {
 
 		type = "TTData";
@@ -347,16 +346,16 @@ public class TravelTimeData implements ProcessingInt {
 		Double jsonRayDerivative = getRayDerivative();
 		Double jsonStatisticalSpread = getStatisticalSpread();
 		Double jsonObservability = getObservability();
-		Long jsonTeleseismicPhaseGroup = getTeleseismicPhaseGroup();
-		Long jsonAuxiliaryPhaseGroup = getAuxiliaryPhaseGroup();
+		String jsonTeleseismicPhaseGroup = getTeleseismicPhaseGroup();
+		String jsonAuxiliaryPhaseGroup = getAuxiliaryPhaseGroup();
 		Boolean jsonLocationUseFlag = getLocationUseFlag();
 		Boolean jsonAssociationWeightFlag = getAssociationWeightFlag();
 
 		// type
 		if (jsonType != null) {
 			newJSONObject.put(TYPE_KEY, jsonType);
-		}			
-		
+		}
+
 		// phase
 		if (jsonPhase != null) {
 			newJSONObject.put(PHASE_KEY, jsonPhase);
@@ -448,8 +447,8 @@ public class TravelTimeData implements ProcessingInt {
 		Double jsonRayDerivative = getRayDerivative();
 		Double jsonStatisticalSpread = getStatisticalSpread();
 		Double jsonObservability = getObservability();
-		Long jsonTeleseismicPhaseGroup = getTeleseismicPhaseGroup();
-		Long jsonAuxiliaryPhaseGroup = getAuxiliaryPhaseGroup();
+		String jsonTeleseismicPhaseGroup = getTeleseismicPhaseGroup();
+		String jsonAuxiliaryPhaseGroup = getAuxiliaryPhaseGroup();
 		Boolean jsonLocationUseFlag = getLocationUseFlag();
 		Boolean jsonAssociationWeightFlag = getAssociationWeightFlag();
 
@@ -464,7 +463,7 @@ public class TravelTimeData implements ProcessingInt {
 			// wrong type
 			errorList.add("Non-TTData type in TravelTimeData Class.");
 		}
-		
+
 		if (jsonPhase == null) {
 			// phase not found
 			errorList.add("No Phase in TravelTimeData Class.");
@@ -543,8 +542,8 @@ public class TravelTimeData implements ProcessingInt {
 	 */
 	public String getType() {
 		return type;
-	}	
-	
+	}
+
 	/**
 	 * @return the phase
 	 */
@@ -653,7 +652,7 @@ public class TravelTimeData implements ProcessingInt {
 	/**
 	 * @return the teleseismicPhaseGroup
 	 */
-	public Long getTeleseismicPhaseGroup() {
+	public String getTeleseismicPhaseGroup() {
 		return teleseismicPhaseGroup;
 	}
 
@@ -661,14 +660,14 @@ public class TravelTimeData implements ProcessingInt {
 	 * @param teleseismicPhaseGroup
 	 *            the teleseismicPhaseGroup to set
 	 */
-	public void setTeleseismicPhaseGroup(Long teleseismicPhaseGroup) {
+	public void setTeleseismicPhaseGroup(String teleseismicPhaseGroup) {
 		this.teleseismicPhaseGroup = teleseismicPhaseGroup;
 	}
 
 	/**
 	 * @return the auxiliaryPhaseGroup
 	 */
-	public Long getAuxiliaryPhaseGroup() {
+	public String getAuxiliaryPhaseGroup() {
 		return auxiliaryPhaseGroup;
 	}
 
@@ -676,7 +675,7 @@ public class TravelTimeData implements ProcessingInt {
 	 * @param auxiliaryPhaseGroup
 	 *            the auxiliaryPhaseGroup to set
 	 */
-	public void setAuxiliaryPhaseGroup(Long auxiliaryPhaseGroup) {
+	public void setAuxiliaryPhaseGroup(String auxiliaryPhaseGroup) {
 		this.auxiliaryPhaseGroup = auxiliaryPhaseGroup;
 	}
 

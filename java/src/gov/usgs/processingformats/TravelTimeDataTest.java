@@ -9,8 +9,8 @@ public class TravelTimeDataTest {
 	public static String TRAVELTIMEDATA_STRING = "{\"Type\":\"TTData\","
 			+ "\"LocationUseFlag\":true,"
 			+ "\"DistanceDerivative\":1.2,\"DepthDerivative\":3.45,"
-			+ "\"AssociationWeightFlag\":true,\"TeleseismicPhaseGroup\":1,"
-			+ "\"Phase\":\"Pg\",\"RayDerivative\":5.67,\"AuxiliaryPhaseGroup\":1,"
+			+ "\"AssociationWeightFlag\":true,\"TeleseismicPhaseGroup\":\"P\","
+			+ "\"Phase\":\"Pg\",\"RayDerivative\":5.67,\"AuxiliaryPhaseGroup\":\"P\","
 			+ "\"Observability\":0.34,\"StatisticalSpread\":1.5,\"TravelTime\":22.456}";
 
 	public static String PHASE = "Pg";
@@ -20,8 +20,8 @@ public class TravelTimeDataTest {
 	public static double RAYDERIVATIVE = 5.67;
 	public static double STATISTICALSPREAD = 1.5;
 	public static double OBSERVABILITY = .34;
-	public static long TELESEISMICPHASEGROUP = 1;
-	public static long AUXILIARYPHASEGROUP = 1;
+	public static String TELESEISMICPHASEGROUP = "P";
+	public static String AUXILIARYPHASEGROUP = "P";
 	public static boolean LOCATIONUSEFLAG = true;
 	public static boolean ASSOCIATIONWEIGHTFLAG = true;
 
@@ -194,12 +194,12 @@ public class TravelTimeDataTest {
 		// check travelTimeDataObject.teleseismicPhaseGroup
 		assertEquals(TestName + " Teleseismic Phase Group Equals",
 				TELESEISMICPHASEGROUP,
-				travelTimeDataObject.getTeleseismicPhaseGroup(), 0);
+				travelTimeDataObject.getTeleseismicPhaseGroup());
 
 		// check travelTimeDataObject.auxiliaryPhaseGroup
 		assertEquals(TestName + " Auxiliary Phase Group Equals",
 				AUXILIARYPHASEGROUP,
-				travelTimeDataObject.getAuxiliaryPhaseGroup(), 0);
+				travelTimeDataObject.getAuxiliaryPhaseGroup());
 
 		// check OriginObject.locationUseFlag
 		assertEquals(TestName + " Location Use Flag Equals", LOCATIONUSEFLAG,
