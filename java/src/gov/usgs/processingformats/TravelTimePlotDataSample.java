@@ -232,20 +232,6 @@ public class TravelTimePlotDataSample implements ProcessingInt {
 			errorList.add("No Travel Time in TravelTimePlotDataSample Class.");
 		}
 
-		// statistical spread
-		if (jsonStatisticalSpread == null) {
-			// statistical spread not found
-			errorList.add(
-					"No Statistical Spread in TravelTimePlotDataSample Class.");
-		}
-
-		// observability
-		if (jsonObservability == null) {
-			// observability not found
-			errorList
-					.add("No Observability in TravelTimePlotDataSample Class.");
-		}
-
 		return (errorList);
 	}
 

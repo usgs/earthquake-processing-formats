@@ -318,5 +318,4 @@ std::vector<std::string> TravelTimeData::getErrors() {
 
 	return (errorlist);
 }
-
 }  // namespace processingformats

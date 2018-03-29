@@ -39,37 +39,26 @@ class TravelTimeData : public ProcessingBase {
 	 * The advanced constructor for the TravelTimeData class. Initializes
 	 * members to provided values.
 	 *
-	 * \param newPhase
-	 *            - A std::string containing the seismic phase code
-	 * \param newTravelTime
-	 *            - A double containing the travel time in seconds
-	 * \param newDistanceDerivative
-	 *            - A double containing the derivative with respect to distance
-	 *            of the travel time in seconds/degree
-	 * \param newDepthDerivative
-	 *            - A double containing the derivative with respect to ray
-	 *            parameter of the travel time in degrees/second
-	 * \param newRayDerivative
-	 *            - A double containing the derivative with respect to ray
-	 *            parameter of the travel time in degrees/second
-	 * \param newStatisticalSpread
-	 *            - A double containing the observed travel time scatter in
-	 *            seconds
-	 * \param newObservability
-	 *            - A double containing the statistical observability of the
-	 *            seismic phase
-	 * \param newTeleseismicPhaseGroup
-	 *            - A std::string containing the teleseismic phase group
-	 *            identifier
-	 * \param newAuxiliaryPhaseGroup
-	 *            - A std::string containing the auxiliary phase group
-	 *            identifier
-	 * \param newLocationUseFlag
-	 *            - A bool containing the flag indicating whether the phase
-	 *            may be used in a location
-	 * \param newAssociationWeightFlag
-	 *            - A bool containing the flag indicating whether the phase
-	 *            should be down weighted in association
+	 * \param newPhase - A std::string containing the seismic phase code
+	 * \param newTravelTime - A double containing the travel time in seconds
+	 * \param newDistanceDerivative - A double containing the derivative with
+	 * respect to distance of the travel time in seconds/degree
+	 * \param newDepthDerivative - A double containing the derivative with
+	 *  respect to ray parameter of the travel time in degrees/second
+	 * \param newRayDerivative - A double containing the derivative with respect
+	 * to ray parameter of the travel time in degrees/second
+	 * \param newStatisticalSpread - A double containing the observed travel
+	 * time scatter in seconds
+	 * \param newObservability - A double containing the statistical
+	 * observability of the seismic phase
+	 * \param newTeleseismicPhaseGroup - A std::string containing the
+	 * teleseismic phase group identifier
+	 * \param newAuxiliaryPhaseGroup - A std::string containing the auxiliary
+	 * phase group identifier
+	 * \param newLocationUseFlag - A bool containing the flag indicating whether
+	 * the phase may be used in a location
+	 * \param newAssociationWeightFlag - A bool containing the flag indicating
+	 * whether the phase should be down weighted in association
 	 */
 	TravelTimeData(std::string newPhase, double newTravelTime,
 					double newDistanceDerivative, double newDepthDerivative,
