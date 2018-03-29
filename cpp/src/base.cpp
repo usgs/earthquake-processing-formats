@@ -1,4 +1,7 @@
-#include "base.h"
+#include <base.h>
+
+#include <vector>
+#include <string>
 
 namespace processingformats {
 

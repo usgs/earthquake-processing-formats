@@ -1,5 +1,6 @@
+#include <util.h>
 #include <regex>
-#include "util.h"
+#include <string>
 
 #if defined(_MSC_VER)
 #define _CRT_SECURE_NO_WARNINGS
@@ -171,8 +172,7 @@ double ConvertISO8601ToEpochTime(std::string TimeString) {
 	// Save current TZ setting locally
 	pTZ = getenv("TZ");
 
-	if(pTZ)
-	{
+	if(pTZ) {
 		/* remember we have "TZ=" stored as the first 3 chars of the array */
 		strncpy(&szTZExisting[3], pTZ, sizeof(szTZExisting) - 4);
 		szTZExisting[sizeof(szTZExisting)-1] = 0x00;
@@ -191,7 +191,7 @@ double ConvertISO8601ToEpochTime(std::string TimeString) {
 	_tzset();
 
 	// convert to epoch time
-	double usableTime = double(mktime(&timeinfo));
+	double usableTime = static_cast<double>(mktime(&timeinfo));
 
 	// Restore original TZ setting
 	_putenv(szTZExisting);
@@ -204,28 +204,28 @@ double ConvertISO8601ToEpochTime(std::string TimeString) {
 
 	// Save current TZ setting locally
 	tz = getenv("TZ");
-	if (tz != (char *) NULL) {
+	if (tz != reinterpret_cast<char *>(NULL)) {
 		if (strlen(tz) > MAXENV - 4) {
 			printf("ConvertISO8601ToEpochTime: unable to store current TZ "
 					"environment variable.\n");
 			return (-1);
 		}
 	}
-	sprintf(TZorig, "TZ=%s", tz);
+	snprintf(TZorig, sizeof(TZorig), "TZ=%s", tz);
 
 	// Change time zone to GMT
-	sprintf(envTZ, "TZ=GMT");
+	snprintf(envTZ, sizeof(envTZ), "TZ=GMT");
 	if (putenv(envTZ) != 0) {
-		printf("ConvertISO8601ToEpochTime: putenv: unable to set TZ environment "
-				"variable.\n");
+		printf("ConvertISO8601ToEpochTime: putenv: unable to set TZ "
+				"environment variable.\n");
 		return (-1);
 	}
 
 	// convert to epoch time
-	double usableTime = double(mktime(&timeinfo));
+	double usableTime = static_cast<double>(mktime(&timeinfo));
 
 	// Restore original TZ setting
-	sprintf(envTZ, "%s", TZorig);
+	snprintf(envTZ, sizeof(TZorig), "%s", TZorig);
 	if (putenv(envTZ) != 0) {
 		printf("ConvertISO8601ToEpochTime: putenv: unable to restore TZ "
 				"environment variable.\n");
@@ -239,22 +239,24 @@ double ConvertISO8601ToEpochTime(std::string TimeString) {
 }
 
 std::string ConvertEpochTimeToISO8601(double epochtime) {
-	time_t time = (int) epochtime;
-	double decimalseconds = epochtime - (int) time;
+	time_t time = static_cast<int>(epochtime);
+	double decimalseconds = epochtime - static_cast<int>(time);
 
 	// build the time portion, all but the seconds which are
 	// seperate since time_t can't do decimal seconds
 	char timebuf[sizeof "2011-10-08T07:07:"];
-	tm* timestruct = gmtime(&time);
+	tm* timestruct = gmtime(&time); // NOLINT
 	strftime(timebuf, sizeof timebuf, "%Y-%m-%dT%H:%M:", timestruct);
 	std::string timestring = timebuf;
 
 	// build the seconds portion
 	char secbuf[sizeof "00.000Z"];
 	if ((timestruct->tm_sec + decimalseconds) < 10)
-		sprintf(secbuf, "0%1.3f", timestruct->tm_sec + decimalseconds);
+		snprintf(secbuf, sizeof(secbuf), "0%1.3f",
+					timestruct->tm_sec + decimalseconds);
 	else
-		sprintf(secbuf, "%2.3f", timestruct->tm_sec + decimalseconds);
+		snprintf(secbuf, sizeof(secbuf), "%2.3f",
+					timestruct->tm_sec + decimalseconds);
 	std::string secondsstring = secbuf;
 
 	// return the combined ISO8601 string
