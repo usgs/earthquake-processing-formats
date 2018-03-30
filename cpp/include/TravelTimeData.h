@@ -131,7 +131,7 @@ class TravelTimeData : public ProcessingBase {
 	/**
 	 * \brief travel time
 	 *
-	 * A required double containing the travel time
+	 * A required double containing the travel time in seconds
 	 */
 	double travelTime;
 
