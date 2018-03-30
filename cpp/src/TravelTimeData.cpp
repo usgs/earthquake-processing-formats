@@ -260,6 +260,7 @@ std::vector<std::string> TravelTimeData::getErrors() {
 		// wrong type
 		errorlist.push_back("Non-TTData type in TravelTimeData Class.");
 	}
+
 	// phase
 	if (phase == "") {
 		// phase empty
