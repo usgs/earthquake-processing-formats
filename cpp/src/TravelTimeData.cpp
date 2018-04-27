@@ -268,37 +268,37 @@ std::vector<std::string> TravelTimeData::getErrors() {
 	}
 
 	// travel time
-	if (std::isnan(travelTime) != true) {
+	if (std::isnan(travelTime) == true) {
 		// travel time not found
 		errorlist.push_back("No Travel Time in TravelTimeData Class.");
 	}
 
 	// distance derivative
-	if (std::isnan(distanceDerivative) != true) {
+	if (std::isnan(distanceDerivative) == true) {
 		// distance derivative not found
 		errorlist.push_back("No Distance Derivative in TravelTimeData Class.");
 	}
 
 	// depth derivative
-	if (std::isnan(depthDerivative) != true) {
+	if (std::isnan(depthDerivative) == true) {
 		// depth derivative not found
 		errorlist.push_back("No Depth Derivative in TravelTimeData Class.");
 	}
 
 	// ray derivative
-	if (std::isnan(rayDerivative) != true) {
+	if (std::isnan(rayDerivative) == true) {
 		// ray derivative not found
 		errorlist.push_back("No Ray Derivative in TravelTimeData Class.");
 	}
 
 	// statistical spread
-	if (std::isnan(statisticalSpread) != true) {
+	if (std::isnan(statisticalSpread) == true) {
 		// statistical spread not found
 		errorlist.push_back("No Statistical Spread in TravelTimeData Class.");
 	}
 
 	// observability
-	if (std::isnan(observability) != true) {
+	if (std::isnan(observability) == true) {
 		// observability not found
 		errorlist.push_back("No Observability in TravelTimeData Class.");
 	}

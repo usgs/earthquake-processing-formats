@@ -60,112 +60,89 @@ TravelTimeRequest::TravelTimeRequest(rapidjson::Value &json) {
 		type = "";
 	}
 
-	// phase
-	if ((json.HasMember(PHASE_KEY) == true)
-			&& (json[PHASE_KEY].IsString() == true)) {
-		phase = std::string(json[PHASE_KEY].GetString(),
-							json[PHASE_KEY].GetStringLength());
-	} else {
-		phase = "";
-	}
-
-	// travelTime
-	if ((json.HasMember(TRAVELTIME_KEY) == true)
-			&& (json[TRAVELTIME_KEY].IsNumber() == true)
-			&& (json[TRAVELTIME_KEY].IsDouble() == true))
-		travelTime = json[TRAVELTIME_KEY].GetDouble();
+	// distance
+	if ((json.HasMember(DISTANCE_KEY) == true)
+			&& (json[DISTANCE_KEY].IsNumber() == true)
+			&& (json[DISTANCE_KEY].IsDouble() == true))
+		distance = json[DISTANCE_KEY].GetDouble();
 	else
-		travelTime = std::numeric_limits<double>::quiet_NaN();
+		distance = std::numeric_limits<double>::quiet_NaN();
 
-	// distanceDerivative
-	if ((json.HasMember(DISTANCEDERIVATIVE_KEY) == true)
-			&& (json[DISTANCEDERIVATIVE_KEY].IsNumber() == true)
-			&& (json[DISTANCEDERIVATIVE_KEY].IsDouble() == true))
-		distanceDerivative = json[DISTANCEDERIVATIVE_KEY].GetDouble();
+	// elevation
+	if ((json.HasMember(ELEVATION_KEY) == true)
+			&& (json[ELEVATION_KEY].IsNumber() == true)
+			&& (json[ELEVATION_KEY].IsDouble() == true))
+		elevation = json[ELEVATION_KEY].GetDouble();
 	else
-		distanceDerivative = std::numeric_limits<double>::quiet_NaN();
+		elevation = std::numeric_limits<double>::quiet_NaN();
 
-	// depthDerivative
-	if ((json.HasMember(DEPTHDERIVATIVE_KEY) == true)
-			&& (json[DEPTHDERIVATIVE_KEY].IsNumber() == true)
-			&& (json[DEPTHDERIVATIVE_KEY].IsDouble() == true))
-		depthDerivative = json[DEPTHDERIVATIVE_KEY].GetDouble();
+	// latitude
+	if ((json.HasMember(LATITUDE_KEY) == true)
+			&& (json[LATITUDE_KEY].IsNumber() == true)
+			&& (json[LATITUDE_KEY].IsDouble() == true))
+		latitude = json[LATITUDE_KEY].GetDouble();
 	else
-		depthDerivative = std::numeric_limits<double>::quiet_NaN();
+		latitude = std::numeric_limits<double>::quiet_NaN();
 
-	// rayDerivative
-	if ((json.HasMember(RAYDERIVATIVE_KEY) == true)
-			&& (json[RAYDERIVATIVE_KEY].IsNumber() == true)
-			&& (json[RAYDERIVATIVE_KEY].IsDouble() == true))
-		rayDerivative = json[RAYDERIVATIVE_KEY].GetDouble();
+	// longitude
+	if ((json.HasMember(LONGITUDE_KEY) == true)
+			&& (json[LONGITUDE_KEY].IsNumber() == true)
+			&& (json[LONGITUDE_KEY].IsDouble() == true))
+		longitude = json[LONGITUDE_KEY].GetDouble();
 	else
-		rayDerivative = std::numeric_limits<double>::quiet_NaN();
+		longitude = std::numeric_limits<double>::quiet_NaN();
 
-	// statisticalSpread
-	if ((json.HasMember(STATISTICALSPREAD_KEY) == true)
-			&& (json[STATISTICALSPREAD_KEY].IsNumber() == true)
-			&& (json[STATISTICALSPREAD_KEY].IsDouble() == true))
-		statisticalSpread = json[STATISTICALSPREAD_KEY].GetDouble();
-	else
-		statisticalSpread = std::numeric_limits<double>::quiet_NaN();
+	// data
+	data.clear();
+	plotData.clear();
+	if ((json.HasMember(DATA_KEY) == true)
+			&& (json[DATA_KEY].IsArray() == true)) {
+		rapidjson::Value dataarray;
+		dataarray = json[DATA_KEY].GetArray();
 
-	// observability
-	if ((json.HasMember(OBSERVABILITY_KEY) == true)
-			&& (json[OBSERVABILITY_KEY].IsNumber() == true)
-			&& (json[OBSERVABILITY_KEY].IsDouble() == true))
-		observability = json[OBSERVABILITY_KEY].GetDouble();
-	else
-		observability = std::numeric_limits<double>::quiet_NaN();
+		for (rapidjson::SizeType i = 0; i < dataarray.Size(); i++) {
+			// parse
+			rapidjson::Value & datavalue = dataarray[i];
 
-	// teleseismicPhaseGroup
-	if ((json.HasMember(TELESEISMICPHASEGROUP_KEY) == true)
-			&& (json[TELESEISMICPHASEGROUP_KEY].IsString() == true))
-		teleseismicPhaseGroup = std::string(
-				json[TELESEISMICPHASEGROUP_KEY].GetString(),
-				json[TELESEISMICPHASEGROUP_KEY].GetStringLength());
-	else
-		teleseismicPhaseGroup = "";
+			if ((datavalue.HasMember(TYPE_KEY) == true)
+					&& (datavalue[TYPE_KEY].IsString() == true)) {
+				std::string typeString = datavalue[TYPE_KEY].GetString();
 
-	// auxiliaryPhaseGroup
-	if ((json.HasMember(AUXILIARYPHASEGROUP_KEY) == true)
-			&& (json[AUXILIARYPHASEGROUP_KEY].IsString() == true))
-		auxiliaryPhaseGroup = std::string(
-				json[AUXILIARYPHASEGROUP_KEY].GetString(),
-				json[AUXILIARYPHASEGROUP_KEY].GetStringLength());
-	else
-		auxiliaryPhaseGroup = "";
+				if (typeString == "TTData") {
+					processingformats::TravelTimeData newData(datavalue);
 
-	// locationUseFlag
-	if ((json.HasMember(LOCATIONUSEFLAG_KEY) == true)
-			&& (json[LOCATIONUSEFLAG_KEY].IsBool() == true)) {
-		locationUseFlag = json[LOCATIONUSEFLAG_KEY].GetBool();
-	} else {
-		locationUseFlag = true;
-	}
+					// add to vector
+					data.push_back(newData);
+				} else if (typeString == "TTPlotData") {
+					processingformats::TravelTimePlotData newData(datavalue);
 
-	// associationWeightFlag
-	if ((json.HasMember(ASSOCIATIONWEIGHTFLAG_KEY) == true)
-			&& (json[ASSOCIATIONWEIGHTFLAG_KEY].IsBool() == true)) {
-		associationWeightFlag = json[ASSOCIATIONWEIGHTFLAG_KEY].GetBool();
-	} else {
-		associationWeightFlag = true;
+					// add to vector
+					plotData.push_back(newData);
+				}
+			}
+		}
 	}
 }
 
 TravelTimeRequest::TravelTimeRequest(
 		const TravelTimeRequest & newTravelTimeRequest) {
-	type = "TTData";
-	phase = newTravelTimeRequest.phase;
-	travelTime = newTravelTimeRequest.travelTime;
-	distanceDerivative = newTravelTimeRequest.distanceDerivative;
-	depthDerivative = newTravelTimeRequest.depthDerivative;
-	rayDerivative = newTravelTimeRequest.rayDerivative;
-	statisticalSpread = newTravelTimeRequest.statisticalSpread;
-	observability = newTravelTimeRequest.observability;
-	teleseismicPhaseGroup = newTravelTimeRequest.teleseismicPhaseGroup;
-	auxiliaryPhaseGroup = newTravelTimeRequest.auxiliaryPhaseGroup;
-	locationUseFlag = newTravelTimeRequest.locationUseFlag;
-	associationWeightFlag = newTravelTimeRequest.associationWeightFlag;
+	type = newTravelTimeRequest.type;
+	distance = newTravelTimeRequest.distance;
+	elevation = newTravelTimeRequest.elevation;
+	latitude = newTravelTimeRequest.latitude;
+	longitude = newTravelTimeRequest.longitude;
+
+	data.clear();
+	for (int i = 0; i < static_cast<int>(newTravelTimeRequest.data.size());
+			i++) {
+		data.push_back(newTravelTimeRequest.data[i]);
+	}
+
+	plotData.clear();
+	for (int i = 0; i < static_cast<int>(newTravelTimeRequest.plotData.size());
+			i++) {
+		plotData.push_back(newTravelTimeRequest.plotData[i]);
+	}
 }
 
 TravelTimeRequest::~TravelTimeRequest() {
@@ -182,58 +159,63 @@ rapidjson::Value & TravelTimeRequest::toJSON(
 	typevalue.SetString(rapidjson::StringRef(type.c_str()), allocator);
 	json.AddMember(TYPE_KEY, typevalue, allocator);
 
-	// phase
-	if (phase != "") {
-		rapidjson::Value phasevalue;
-		phasevalue.SetString(rapidjson::StringRef(phase.c_str()), allocator);
-		json.AddMember(PHASE_KEY, phasevalue, allocator);
+	// distance
+	if (std::isnan(distance) != true)
+		json.AddMember(DISTANCE_KEY, distance, allocator);
+
+	// elevation
+	if (std::isnan(elevation) != true)
+		json.AddMember(ELEVATION_KEY, elevation, allocator);
+
+	// latitude
+	if (std::isnan(latitude) != true)
+		json.AddMember(LATITUDE_KEY, latitude, allocator);
+
+	// longitude
+	if (std::isnan(longitude) != true)
+		json.AddMember(LONGITUDE_KEY, longitude, allocator);
+
+	// data
+	// build json array
+	rapidjson::Value dataarray(rapidjson::kArrayType);
+	if (type == "Standard") {
+		if (data.size() > 0) {
+			// build json array
+			rapidjson::Value dataarray(rapidjson::kArrayType);
+
+			for (int i = 0; i < static_cast<int>(data.size()); i++) {
+				rapidjson::Value datavalue(rapidjson::kObjectType);
+				data[i].toJSON(datavalue, allocator);
+				dataarray.PushBack(datavalue, allocator);
+			}
+		}
+	} else if (type == "Plot") {
+		if (plotData.size() > 0) {
+			// build json array
+			rapidjson::Value dataarray(rapidjson::kArrayType);
+
+			for (int i = 0; i < static_cast<int>(plotData.size()); i++) {
+				rapidjson::Value datavalue(rapidjson::kObjectType);
+				plotData[i].toJSON(datavalue, allocator);
+				dataarray.PushBack(datavalue, allocator);
+			}
+		}
+	} else if (type == "PlotStatistics") {
+		if (plotData.size() > 0) {
+			// build json array
+			rapidjson::Value dataarray(rapidjson::kArrayType);
+
+			for (int i = 0; i < static_cast<int>(plotData.size()); i++) {
+				rapidjson::Value datavalue(rapidjson::kObjectType);
+				plotData[i].toJSON(datavalue, allocator);
+				dataarray.PushBack(datavalue, allocator);
+			}
+		}
 	}
 
-	// travelTime
-	if (std::isnan(travelTime) != true)
-		json.AddMember(TRAVELTIME_KEY, travelTime, allocator);
-
-	// distanceDerivative
-	if (std::isnan(distanceDerivative) != true)
-		json.AddMember(DISTANCEDERIVATIVE_KEY, distanceDerivative, allocator);
-
-	// depthDerivative
-	if (std::isnan(depthDerivative) != true)
-		json.AddMember(DEPTHDERIVATIVE_KEY, depthDerivative, allocator);
-
-	// rayDerivative
-	if (std::isnan(rayDerivative) != true)
-		json.AddMember(RAYDERIVATIVE_KEY, rayDerivative, allocator);
-
-	// statisticalSpread
-	if (std::isnan(statisticalSpread) != true)
-		json.AddMember(STATISTICALSPREAD_KEY, statisticalSpread, allocator);
-
-	// observability
-	if (std::isnan(observability) != true)
-		json.AddMember(OBSERVABILITY_KEY, observability, allocator);
-
-	// teleseismicPhaseGroup
-	if (teleseismicPhaseGroup != "") {
-		rapidjson::Value televalue;
-		televalue.SetString(rapidjson::StringRef(teleseismicPhaseGroup.c_str()),
-							allocator);
-		json.AddMember(TELESEISMICPHASEGROUP_KEY, televalue, allocator);
+	if (dataarray.Size() > 0) {
+		json.AddMember(DATA_KEY, dataarray, allocator);
 	}
-
-	// snr
-	if (auxiliaryPhaseGroup != "") {
-		rapidjson::Value auxvalue;
-		auxvalue.SetString(rapidjson::StringRef(auxiliaryPhaseGroup.c_str()),
-							allocator);
-		json.AddMember(AUXILIARYPHASEGROUP_KEY, auxvalue, allocator);
-	}
-
-	// locationUseFlag
-	json.AddMember(LOCATIONUSEFLAG_KEY, locationUseFlag, allocator);
-
-	// associationWeightFlag
-	json.AddMember(ASSOCIATIONWEIGHTFLAG_KEY, associationWeightFlag, allocator);
 
 	return (json);
 }
@@ -246,67 +228,73 @@ std::vector<std::string> TravelTimeRequest::getErrors() {
 	if (type == "") {
 		// type empty
 		errorlist.push_back("Empty Type in TravelTimeRequest Class.");
-	} else if (type != "TTData") {
+	} else if ((type != "Standard") || (type != "Plot")
+			|| (type != "PlotStatistics")) {
 		// wrong type
-		errorlist.push_back("Non-TTData type in TravelTimeRequest Class.");
+		errorlist.push_back("Unsupported type in TravelTimeRequest Class.");
 	}
 
-	// phase
-	if (phase == "") {
-		// phase empty
-		errorlist.push_back("Empty Phase in TravelTimeRequest Class.");
+	// distance
+	if (std::isnan(distance) == true) {
+		// distance found
+		errorlist.push_back("No Distance in TravelTimeRequest Class.");
 	}
 
-	// travel time
-	if (std::isnan(travelTime) != true) {
-		// travel time not found
-		errorlist.push_back("No Travel Time in TravelTimeRequest Class.");
+	// elevation
+	if (std::isnan(elevation) == true) {
+		// elevation not found
+		errorlist.push_back("No Elevation in TravelTimeRequest Class.");
 	}
 
-	// distance derivative
-	if (std::isnan(distanceDerivative) != true) {
-		// distance derivative not found
-		errorlist.push_back(
-				"No Distance Derivative in TravelTimeRequest Class.");
+	// optional data
+	// latitude
+	if (std::isnan(latitude) != true) {
+		if ((latitude < -90) || (latitude > 90)) {
+			errorlist.push_back("Invalid Latitude in TravelTimeRequest class.");
+		}
 	}
 
-	// depth derivative
-	if (std::isnan(depthDerivative) != true) {
-		// depth derivative not found
-		errorlist.push_back("No Depth Derivative in TravelTimeRequest Class.");
+	// longitude
+	if (std::isnan(longitude) != true) {
+		if ((longitude < -180) || (longitude > 180)) {
+			errorlist.push_back(
+					"Invalid Longitude in TravelTimeRequest class.");
+		}
 	}
 
-	// ray derivative
-	if (std::isnan(rayDerivative) != true) {
-		// ray derivative not found
-		errorlist.push_back("No Ray Derivative in TravelTimeRequest Class.");
-	}
-
-	// statistical spread
-	if (std::isnan(statisticalSpread) != true) {
-		// statistical spread not found
-		errorlist.push_back(
-				"No Statistical Spread in TravelTimeRequest Class.");
-	}
-
-	// observability
-	if (std::isnan(observability) != true) {
-		// observability not found
-		errorlist.push_back("No Observability in TravelTimeRequest Class.");
-	}
-
-	// teleseismic phase group
-	if (teleseismicPhaseGroup == "") {
-		// teleseismic phase group not found
-		errorlist.push_back(
-				"No Teleseismic Phase Group in TravelTimeRequest Class.");
-	}
-
-	// auxiliary phase group
-	if (auxiliaryPhaseGroup == "") {
-		// auxiliary phase group not found
-		errorlist.push_back(
-				"No Auxiliary Phase Group in TravelTimeRequest Class.");
+	if ((type != "") && (type == "Standard")) {
+		if (data.size() > 0) {
+			for (int i = 0; i < static_cast<int>(data.size()); i++) {
+				if (data[i].isValid() == false) {
+					errorlist.push_back(
+							"Invalid TravelTimeData in TravelTimeRequest Class "
+							"of type Standard.");
+					break;
+				}
+			}
+		}
+	} else if ((type != "") && (type == "Plot")) {
+		if (plotData.size() > 0) {
+			for (int i = 0; i < static_cast<int>(plotData.size()); i++) {
+				if (plotData[i].isValid() == false) {
+					errorlist.push_back(
+							"Invalid TravelTimeData in TravelTimeRequest Class "
+							"of type Plot.");
+					break;
+				}
+			}
+		}
+	} else if ((type != "") && (type == "PlotStatistics")) {
+		if (plotData.size() > 0) {
+			for (int i = 0; i < static_cast<int>(plotData.size()); i++) {
+				if (plotData[i].isValid() == false) {
+					errorlist.push_back(
+							"Invalid TravelTimeData in TravelTimeRequest Class "
+							"of type PlotStatistics.");
+					break;
+				}
+			}
+		}
 	}
 
 	return (errorlist);

@@ -129,7 +129,7 @@ std::vector<std::string> TravelTimePlotData::getErrors() {
 	}
 
 	// maximumTravelTime
-	if (std::isnan(maximumTravelTime) != true) {
+	if (std::isnan(maximumTravelTime) == true) {
 		// maximumTravelTime not found
 		errorlist.push_back("No Maximum Travel Time in TravelTimePlotData "
 				"Class.");

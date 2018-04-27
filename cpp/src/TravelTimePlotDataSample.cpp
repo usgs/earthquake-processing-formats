@@ -107,14 +107,14 @@ std::vector<std::string> TravelTimePlotDataSample::getErrors() {
 
 	// required data
 	// distance derivative
-	if (std::isnan(distance) != true) {
+	if (std::isnan(distance) == true) {
 		// distance derivative not found
 		errorlist.push_back(
 				"No Distance in TravelTimePlotDataSample Class.");
 	}
 
 	// travel time
-	if (std::isnan(travelTime) != true) {
+	if (std::isnan(travelTime) == true) {
 		// travel time not found
 		errorlist.push_back(
 				"No Travel Time in TravelTimePlotDataSample Class.");
