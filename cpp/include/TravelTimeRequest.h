@@ -181,7 +181,7 @@ class TravelTimeRequest : public ProcessingBase {
 	double latitude;
 
 	/**
-	 * \brief ray derivative
+	 * \brief longitude
 	 *
 	 * An optional double containing the geographic receiver longitude in
 	 * degrees
