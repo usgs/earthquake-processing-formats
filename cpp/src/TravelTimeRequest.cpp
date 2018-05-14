@@ -228,10 +228,12 @@ std::vector<std::string> TravelTimeRequest::getErrors() {
 	if (type == "") {
 		// type empty
 		errorlist.push_back("Empty Type in TravelTimeRequest Class.");
-	} else if ((type != "Standard") || (type != "Plot")
-			|| (type != "PlotStatistics")) {
+	} else if ((type != "Standard") && (type != "Plot")
+			&& (type != "PlotStatistics")) {
 		// wrong type
-		errorlist.push_back("Unsupported type in TravelTimeRequest Class.");
+		errorlist.push_back(
+				"Unsupported type in TravelTimeRequest Class (" + type
+						+ "), must be Standard, Plot, or PlotStatistics. ");
 	}
 
 	// distance
