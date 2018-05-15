@@ -240,7 +240,7 @@ std::vector<std::string> TravelTimeSession::getErrors() {
 	// required data
 	// sourceDepth
 	if (std::isnan(sourceDepth) == true) {
-		// distance found
+		// depth found
 		errorlist.push_back("No Source Depth in TravelTimeSession Class.");
 	} else if ((sourceDepth < -100) || (sourceDepth > 1500)) {
 		// invalid depth

@@ -96,7 +96,8 @@ class TravelTimeSession : public ProcessingBase {
 	 * Converts the contents of the class to a json object
 	 * \param jsondocument - a reference to the json document to fill in with
 	 * the class contents.
-	 * \return Returns rapidjson::Value & if successful
+	 * \return Returns populated rapidjson::Value & if successful, empty
+	 *  rapidjson::Value & if not
 	 */
 	rapidjson::Value & toJSON(
 			rapidjson::Value &json,
@@ -107,7 +108,8 @@ class TravelTimeSession : public ProcessingBase {
 	 * \brief Gets any errors in the class
 	 *
 	 * Gets any formatting errors in the class
-	 * \return Returns a std::vector<std::string> containing the errors
+	 * \return Returns a std::vector<std::string> containing the errors, empty
+	 * vector if there are no errors.
 	 */
 	std::vector<std::string> getErrors() override;
 

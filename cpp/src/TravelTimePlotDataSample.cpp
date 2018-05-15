@@ -91,6 +91,7 @@ rapidjson::Value & TravelTimePlotDataSample::toJSON(
 	if (std::isnan(travelTime) != true)
 		json.AddMember(TRAVELTIME_KEY, travelTime, allocator);
 
+	// optional values
 	// statisticalSpread
 	if (std::isnan(statisticalSpread) != true)
 		json.AddMember(STATISTICALSPREAD_KEY, statisticalSpread, allocator);

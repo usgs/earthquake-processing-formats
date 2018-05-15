@@ -71,41 +71,6 @@ class TravelTimeRequest : public ProcessingBase {
 						std::vector<TravelTimePlotData> newPlotData);
 
 	/**
-	 * \brief TravelTimeRequest Advanced constructor
-	 *
-	 * The advanced constructor for the TravelTimeRequest class. Initializes
-	 * members to provided values.
-	 *
-	 * \param newPhase - A std::string containing the seismic phase code
-	 * \param newTravelTime - A double containing the travel time in seconds
-	 * \param newDistanceDerivative - A double containing the derivative with
-	 * respect to distance of the travel time in seconds/degree
-	 * \param newDepthDerivative - A double containing the derivative with
-	 *  respect to ray parameter of the travel time in degrees/second
-	 * \param newRayDerivative - A double containing the derivative with respect
-	 * to ray parameter of the travel time in degrees/second
-	 * \param newStatisticalSpread - A double containing the observed travel
-	 * time scatter in seconds
-	 * \param newObservability - A double containing the statistical
-	 * observability of the seismic phase
-	 * \param newTeleseismicPhaseGroup - A std::string containing the
-	 * teleseismic phase group identifier
-	 * \param newAuxiliaryPhaseGroup - A std::string containing the auxiliary
-	 * phase group identifier
-	 * \param newLocationUseFlag - A bool containing the flag indicating whether
-	 * the phase may be used in a location
-	 * \param newAssociationWeightFlag - A bool containing the flag indicating
-	 * whether the phase should be down weighted in association
-	 */
-	TravelTimeRequest(std::string newPhase, double newTravelTime,
-						double newDistanceDerivative, double newDepthDerivative,
-						double newRayDerivative, double newStatisticalSpread,
-						double newObservability,
-						std::string newTeleseismicPhaseGroup,
-						std::string newAuxiliaryPhaseGroup,
-						bool newLocationUseFlag, bool newAssociationWeightFlag);
-
-	/**
 	 * \brief TravelTimeRequest advanced constructor
 	 *
 	 * The advanced constructor for the TravelTimeRequest class.
@@ -136,7 +101,8 @@ class TravelTimeRequest : public ProcessingBase {
 	 * Converts the contents of the class to a json object
 	 * \param jsondocument - a reference to the json document to fill in with
 	 * the class contents.
-	 * \return Returns rapidjson::Value & if successful
+	 * \return Returns populated rapidjson::Value & if successful, empty
+	 *  rapidjson::Value & if not
 	 */
 	rapidjson::Value & toJSON(
 			rapidjson::Value &json,
@@ -147,7 +113,8 @@ class TravelTimeRequest : public ProcessingBase {
 	 * \brief Gets any errors in the class
 	 *
 	 * Gets any formatting errors in the class
-	 * \return Returns a std::vector<std::string> containing the errors
+	 * \return Returns a std::vector<std::string> containing the errors, empty
+	 * vector if there are no errors.
 	 */
 	std::vector<std::string> getErrors() override;
 

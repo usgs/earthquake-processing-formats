@@ -189,18 +189,7 @@ rapidjson::Value & TravelTimeRequest::toJSON(
 				dataarray.PushBack(datavalue, allocator);
 			}
 		}
-	} else if (type == "Plot") {
-		if (plotData.size() > 0) {
-			// build json array
-			rapidjson::Value dataarray(rapidjson::kArrayType);
-
-			for (int i = 0; i < static_cast<int>(plotData.size()); i++) {
-				rapidjson::Value datavalue(rapidjson::kObjectType);
-				plotData[i].toJSON(datavalue, allocator);
-				dataarray.PushBack(datavalue, allocator);
-			}
-		}
-	} else if (type == "PlotStatistics") {
+	} else if ((type == "Plot") || (type == "PlotStatistics")) {
 		if (plotData.size() > 0) {
 			// build json array
 			rapidjson::Value dataarray(rapidjson::kArrayType);
