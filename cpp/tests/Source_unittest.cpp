@@ -1,4 +1,4 @@
-#include "processing-formats.h"
+#include <processing-formats.h>
 #include <gtest/gtest.h>
 
 #include <string>
@@ -29,7 +29,7 @@ TEST(SourceTest, WritesJSON) {
 	processingformats::Source sourceObject2(
 			processingformats::FromJSONString(sourceJSON, sourceDocument2));
 
-	// check agencyid
+	// check agencyId
 	std::string sourceAgencyId = sourceObject2.agencyId;
 	std::string expectedAgencyId = std::string(AGENCYID);
 	ASSERT_STREQ(sourceAgencyId.c_str(), expectedAgencyId.c_str());
@@ -54,7 +54,7 @@ TEST(SourceTest, ReadsJSON) {
 			processingformats::FromJSONString(std::string(SOURCESTRING),
 												sourceDocument));
 
-	// check agencyid
+	// check agencyId
 	std::string sourceAgencyId = sourceObject.agencyId;
 	std::string expectedAgencyId = std::string(AGENCYID);
 	ASSERT_STREQ(sourceAgencyId.c_str(), expectedAgencyId.c_str());
@@ -77,14 +77,14 @@ TEST(SourceTest, Constructor) {
 	processingformats::Source sourceObject(AGENCYID, AUTHOR, TYPE);
 
 	// check agencyid
-	std::string Sourceagencyid = sourceObject.agencyId;
-	std::string expectedagencyid = std::string(AGENCYID);
-	ASSERT_STREQ(Sourceagencyid.c_str(), expectedagencyid.c_str());
+	std::string sourceAgencyId = sourceObject.agencyId;
+	std::string expectedAgencyId = std::string(AGENCYID);
+	ASSERT_STREQ(sourceAgencyId.c_str(), expectedAgencyId.c_str());
 
 	// check author
-	std::string Sourceauthor = sourceObject.author;
+	std::string sourceAuthor = sourceObject.author;
 	std::string expectedauthor = std::string(AUTHOR);
-	ASSERT_STREQ(Sourceauthor.c_str(), expectedauthor.c_str());
+	ASSERT_STREQ(sourceAuthor.c_str(), expectedauthor.c_str());
 
 	// check type
 	std::string sourceType = sourceObject.type;

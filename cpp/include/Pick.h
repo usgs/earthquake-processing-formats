@@ -47,7 +47,7 @@ class Pick : public ProcessingBase {
 	 * \param newLocation
 	 *            - A std::string containing the location to use
 	 * \param newAgencyID
-	 *            - A std::string containing the agencyid to use
+	 *            - A std::string containing the agencyId to use
 	 * \param newAuthor
 	 *            - A std::string containing the author to use
 	 * \param newType
@@ -244,7 +244,7 @@ class Pick : public ProcessingBase {
 	/**
 	 * \brief residual
 	 *
-	 * An optional (output) double containing the lresidual
+	 * An optional (output) double containing the residual
 	 */
 	double residual;
 

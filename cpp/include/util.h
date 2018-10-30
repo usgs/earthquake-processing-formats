@@ -54,7 +54,7 @@ namespace processingformats {
 	 * Converts the contents of the class to a serialized json string
 	 * \return Returns a std::string containing the serialized json string
 	 */
-	std::string ToJSONString(rapidjson::Value &json);
+	std::string ToJSONString(rapidjson::Value &json); // NOLINT
 
 	/**
 	 * \brief Convert from json string function
@@ -65,7 +65,7 @@ namespace processingformats {
 	 * \return Returns 1 if successful, 0 otherwise
 	 */
 	rapidjson::Document & FromJSONString(std::string jsonstring,
-											rapidjson::Document & jsondocument);
+										 rapidjson::Document & jsondocument); // NOLINT
 
 }  // namespace processingformats
 #endif  // PROCESSING_UTIL_H

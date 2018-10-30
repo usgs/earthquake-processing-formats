@@ -35,7 +35,7 @@ class Site : public ProcessingBase {
 	 * \brief Site advanced constructor
 	 *
 	 * The advanced constructor for the source class.
-	 * Initilizes members to provided values.
+	 * Initializes members to provided values.
 	 *
 	 * \param newstation - A std::string containing the station to use
 	 * \param newchannel - A std::string containing the channel to use
@@ -52,7 +52,7 @@ class Site : public ProcessingBase {
 	 * Converts the provided object from a json::Object, populating members
 	 * \param jsondocument - A json document.
 	 */
-	explicit Site(rapidjson::Value &json);
+	explicit Site(rapidjson::Value &json); // NOLINT
 
 	/**
 	 * \brief Site copy constructor
