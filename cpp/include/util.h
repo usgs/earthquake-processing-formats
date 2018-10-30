@@ -7,11 +7,12 @@
 #ifndef PROCESSING_UTIL_H
 #define PROCESSING_UTIL_H
 
+#include <rapidjson/document.h>
+#include <rapidjson/writer.h>
+#include <rapidjson/stringbuffer.h>
+
 #include <exception>
 #include <string>
-#include "rapidjson/document.h"
-#include "rapidjson/writer.h"
-#include "rapidjson/stringbuffer.h"
 
 /**
  * @namespace processingformats
