@@ -15,26 +15,26 @@
 
 namespace processingformats {
 /**
- * \brief processingformats hypocenter conversion class
+ * \brief processingformats Hypocenter conversion class
  *
  * The processingformats hypo class is a conversion class used to create, parse,
- * and validate hypocenter data as part of processingformats data.
+ * and validate Hypocenter data as part of processingformats data.
  *
  */
-class hypocenter : public ProcessingBase {
+class Hypocenter : public ProcessingBase {
  public:
 	/**
-	 * \brief hypocenter constructor
+	 * \brief Hypocenter constructor
 	 *
-	 * The constructor for the hypocenter class.
+	 * The constructor for the Hypocenter class.
 	 * Initializes members to null values.
 	 */
-	hypocenter();
+	Hypocenter();
 
 	/**
-	 * \brief hypocenter advanced constructor
+	 * \brief Hypocenter advanced constructor
 	 *
-	 * The advanced constructor for the hypocenter class.
+	 * The advanced constructor for the Hypocenter class.
 	 * Initializes members to provided values.
 	 *
 	 * \param newlatitude - A double containing the latitude to use
@@ -50,35 +50,35 @@ class hypocenter : public ProcessingBase {
 	 * \param newdeptherror - A double containing the depth error to use,
 	 * 		std::numeric_limits<double>::quiet_NaN() to omit
 	 */
-	hypocenter(double newlatitude, double newlongitude, double newtime,
+	Hypocenter(double newlatitude, double newlongitude, double newtime,
 				double newdepth, double newlatitudeerror,
 				double newlongitudeerror, double newtimeerror,
 				double newdeptherror);
 
 	/**
-	 * \brief hypocenter advanced constructor
+	 * \brief Hypocenter advanced constructor
 	 *
-	 * The advanced constructor for the hypocenter class.
+	 * The advanced constructor for the Hypocenter class.
 	 * Converts the provided object from a json::Object, populating members
 	 * \param jsondocument - A json document.
 	 */
-	explicit hypocenter(rapidjson::Value &json); // NOLINT
+	explicit Hypocenter(rapidjson::Value &json); // NOLINT
 
 	/**
-	 * \brief hypocenter copy constructor
+	 * \brief Hypocenter copy constructor
 	 *
-	 * The copy constructor for the hypocenter class.
-	 * Copies the provided object from a hypocenter, populating members
-	 * \param newhypo - A hypocenter.
+	 * The copy constructor for the Hypocenter class.
+	 * Copies the provided object from a Hypocenter, populating members
+	 * \param newhypo - A Hypocenter.
 	 */
-	hypocenter(const hypocenter & newhypo);
+	Hypocenter(const Hypocenter & newhypo);
 
 	/**
-	 * \brief hypocenter destructor
+	 * \brief Hypocenter destructor
 	 *
-	 * The destructor for the hypocenter class.
+	 * The destructor for the Hypocenter class.
 	 */
-	~hypocenter();
+	~Hypocenter();
 
 	/**
 	 * \brief Convert to json object function
@@ -104,56 +104,56 @@ class hypocenter : public ProcessingBase {
 	/**
 	 * \brief latitude value
 	 *
-	 * A required double defining the latitude of this hypocenter
+	 * A required double defining the latitude of this Hypocenter
 	 */
 	double latitude;
 
 	/**
 	 * \brief longitude value
 	 *
-	 * A required double defining the longitude of this hypocenter
+	 * A required double defining the longitude of this Hypocenter
 	 */
 	double longitude;
 
 	/**
 	 * \brief time value
 	 *
-	 * A required double containing the time for this hypocenter
+	 * A required double containing the time for this Hypocenter
 	 */
 	double time;
 
 	/**
 	 * \brief depth value
 	 *
-	 * A required double defining the depth of this hypocenter
+	 * A required double defining the depth of this Hypocenter
 	 */
 	double depth;
 
 	/**
 	 * \brief latitude error value
 	 *
-	 * An optional double defining the latitude error of this hypocenter
+	 * An optional double defining the latitude error of this Hypocenter
 	 */
 	double latitudeError;
 
 	/**
 	 * \brief longitude error value
 	 *
-	 * An optional double defining the longitude error of this hypocenter
+	 * An optional double defining the longitude error of this Hypocenter
 	 */
 	double longitudeError;
 
 	/**
-	 * \brief hypocenter time error value
+	 * \brief Hypocenter time error value
 	 *
-	 * An optional double containing the time error for this hypocenter
+	 * An optional double containing the time error for this Hypocenter
 	 */
 	double timeError;
 
 	/**
 	 * \brief depth error value
 	 *
-	 * An optional double defining the depth error of this hypocenter
+	 * An optional double defining the depth error of this Hypocenter
 	 */
 	double depthError;
 };

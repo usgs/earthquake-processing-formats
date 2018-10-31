@@ -4,6 +4,7 @@
 // Locator interfaces
 #include "./Site.h"
 #include "./Source.h"
+#include "./Hypocenter.h"
 
 // Traveltime interfaces
 #include "./TravelTimeData.h"

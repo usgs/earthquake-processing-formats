@@ -1,4 +1,4 @@
-#include <hypocenter.h>
+#include <Hypocenter.h>
 
 #include <string>
 #include <limits>
@@ -16,7 +16,7 @@
 
 namespace processingformats {
 
-hypocenter::hypocenter() {
+Hypocenter::Hypocenter() {
 	latitude = std::numeric_limits<double>::quiet_NaN();
 	longitude = std::numeric_limits<double>::quiet_NaN();
 	depth = std::numeric_limits<double>::quiet_NaN();
@@ -27,7 +27,7 @@ hypocenter::hypocenter() {
 	timeError = std::numeric_limits<double>::quiet_NaN();
 }
 
-hypocenter::hypocenter(double newlatitude, double newlongitude, double newtime,
+Hypocenter::Hypocenter(double newlatitude, double newlongitude, double newtime,
 						double newdepth, double newlatitudeerror,
 						double newlongitudeerror, double newtimeerror,
 						double newdeptherror) {
@@ -41,7 +41,7 @@ hypocenter::hypocenter(double newlatitude, double newlongitude, double newtime,
 	timeError = newtimeerror;
 }
 
-hypocenter::hypocenter(rapidjson::Value &json) {
+Hypocenter::Hypocenter(rapidjson::Value &json) {
 	// required values
 	// latitude
 	if ((json.HasMember(LATITUDE_KEY) == true)
@@ -110,21 +110,21 @@ hypocenter::hypocenter(rapidjson::Value &json) {
 		depthError = std::numeric_limits<double>::quiet_NaN();
 }
 
-hypocenter::hypocenter(const hypocenter & newhypocenter) {
-	latitude = newhypocenter.latitude;
-	longitude = newhypocenter.longitude;
-	depth = newhypocenter.depth;
-	time = newhypocenter.time;
-	latitudeError = newhypocenter.latitudeError;
-	longitudeError = newhypocenter.longitudeError;
-	depthError = newhypocenter.depthError;
-	timeError = newhypocenter.timeError;
+Hypocenter::Hypocenter(const Hypocenter & newHypocenter) {
+	latitude = newHypocenter.latitude;
+	longitude = newHypocenter.longitude;
+	depth = newHypocenter.depth;
+	time = newHypocenter.time;
+	latitudeError = newHypocenter.latitudeError;
+	longitudeError = newHypocenter.longitudeError;
+	depthError = newHypocenter.depthError;
+	timeError = newHypocenter.timeError;
 }
 
-hypocenter::~hypocenter() {
+Hypocenter::~Hypocenter() {
 }
 
-rapidjson::Value & hypocenter::toJSON(
+rapidjson::Value & Hypocenter::toJSON(
 		rapidjson::Value &json,
 		rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator> &allocator) {
 	json.SetObject();
@@ -172,36 +172,36 @@ rapidjson::Value & hypocenter::toJSON(
 	return (json);
 }
 
-std::vector<std::string> hypocenter::getErrors() {
+std::vector<std::string> Hypocenter::getErrors() {
 	std::vector<std::string> errorlist;
 
 	// check required data
 	// latitude
 	if (std::isnan(latitude) == true) {
 		// latitude not found
-		errorlist.push_back("No Latitude in hypocenter class.");
+		errorlist.push_back("No Latitude in Hypocenter class.");
 	} else if ((latitude < -90) || (latitude > 90)) {
-		errorlist.push_back("Invalid Latitude in hypocenter class.");
+		errorlist.push_back("Invalid Latitude in Hypocenter class.");
 	}
 
 	// longitude
 	if (std::isnan(longitude) == true) {
 		// longitude not found
-		errorlist.push_back("No Longitude in hypocenter class.");
+		errorlist.push_back("No Longitude in Hypocenter class.");
 	} else if ((longitude < -180) || (longitude > 180)) {
-		errorlist.push_back("Invalid Longitude in hypocenter class.");
+		errorlist.push_back("Invalid Longitude in Hypocenter class.");
 	}
 
 	// time
 	if (std::isnan(time) == true) {
-		errorlist.push_back("Time is missing in hypocenter class.");
+		errorlist.push_back("Time is missing in Hypocenter class.");
 	} else {
 		try {
 			if (processingformats::IsStringISO8601(
 					processingformats::ConvertEpochTimeToISO8601(time))
 					== false) {
 				errorlist.push_back(
-						"Time did not validate in hypocenter class.");
+						"Time did not validate in Hypocenter class.");
 			}
 		} catch (const std::exception & e) {
 			errorlist.push_back(std::string(e.what()));
@@ -211,9 +211,9 @@ std::vector<std::string> hypocenter::getErrors() {
 	// depth
 	if (std::isnan(depth) == true) {
 		// depth not found
-		errorlist.push_back("No Depth in hypocenter class.");
+		errorlist.push_back("No Depth in Hypocenter class.");
 	} else if ((depth < -100) || (depth > 1500)) {
-		errorlist.push_back("Invalid Depth in hypocenter class.");
+		errorlist.push_back("Invalid Depth in Hypocenter class.");
 	}
 
 	// optional keys
