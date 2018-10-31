@@ -100,7 +100,7 @@ Pick::Pick(rapidjson::Value &json) {
 	// site
 	if ((json.HasMember(SITE_KEY) == true)
 			&& (json[SITE_KEY].IsObject() == true)) {
-		rapidjson::Value & sitevalue = json["Site"];
+		rapidjson::Value & sitevalue = json[SITE_KEY];
 		site = processingformats::Site(sitevalue);
 	} else {
 		site = processingformats::Site();
