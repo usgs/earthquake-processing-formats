@@ -49,11 +49,11 @@ class ErrorEllipse : public ProcessingBase {
 	 * \param newE2Dip - A double containing the new new E2 dip to use
 	 * \param newdepth - A double containing the depth to use
 	 * \param newMaximumHorizontalProjection - A double containing the maximum
-     *      horizontal projection to use
+     *  horizontal projection to use
 	 * \param newMaximumVerticalProjection - A double containing the maximum
-     *      vertical projection to use
+     *  vertical projection to use
 	 * \param newEquivalentHorizontalRadius - A double containing the equivalent
-     *      horizontal radius to use
+     *  horizontal radius to use
 	 */
 	ErrorEllipse(double newE0Error, double newE0Azimuth, double newE0Dip,
                 double newE1Error, double newE1Azimuth, double newE1Dip,

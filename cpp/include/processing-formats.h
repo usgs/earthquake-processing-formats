@@ -6,6 +6,7 @@
 #include "./Source.h"
 #include "./Hypocenter.h"
 #include "./ErrorEllipse.h"
+#include "./LocationData.h"
 
 // Traveltime interfaces
 #include "./TravelTimeData.h"
