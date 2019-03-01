@@ -43,17 +43,17 @@ public class Site implements ProcessingInt {
 	private String location;
 
 	/**
-	 * Required Double containing the latitude
+	 * Required Double containing the latitude in degreesw
 	 */
 	private Double latitude;
 
 	/**
-	 * Required Double containing the longitude
+	 * Required Double containing the longitude in degreesw
 	 */
 	private Double longitude;
 
 	/**
-	 * Required Double containing the elevation
+	 * Required Double containing the elevation in meters
 	 */
 	private Double elevation;
 
@@ -83,11 +83,11 @@ public class Site implements ProcessingInt {
 	 * @param newLocation
 	 *            - A String containing the location to use (null omit)
 	 * @param newLatitude
-	 *            - A Double containing the latitude to use
+	 *            - A Double containing the latitude in degrees to use
 	 * @param newLongitude
-	 *            - A Double containing the longitude to use
+	 *            - A Double containing the longitude in degrees to use
 	 * @param newElevation
-	 *            - A Double containing the elevation to use
+	 *            - A Double containing the elevation in meters to use
 	 */
 	public Site(String newStation, String newChannel, String newNetwork,
 			String newLocation, Double newLatitude, Double newLongitude,
@@ -112,11 +112,11 @@ public class Site implements ProcessingInt {
 	 * @param newLocation
 	 *            - A String containing the location to use (null omit)
 	 * @param newLatitude
-	 *            - A Double containing the latitude to use
+	 *            - A Double containing the latitude in degrees  to use
 	 * @param newLongitude
-	 *            - A Double containing the longitude to use
+	 *            - A Double containing the longitude in degrees  to use
 	 * @param newElevation
-	 *            - A Double containing the elevation to use
+	 *            - A Double containing the elevation in meters to use
 	 */
 	public void reload(String newStation, String newChannel, String newNetwork,
 			String newLocation, Double newLatitude, Double newLongitude,
@@ -299,7 +299,7 @@ public class Site implements ProcessingInt {
 		if (jsonLatitude == null) {
 			// latitude not found
 			errorList.add("No Latitude in Site Class.");
-		} else if ((jsonLatitude < -90) || (jsonLatitude > 90)) {
+		} else if ((jsonLatitude < -90.0) || (jsonLatitude > 90.0)) {
 			// invalid latitude
 			errorList.add(
 					"Latitude in Site Class not in the range of -90 to 90.");
@@ -309,7 +309,7 @@ public class Site implements ProcessingInt {
 		if (jsonLongitude == null) {
 			// longitude not found
 			errorList.add("No Longitude in Site Class.");
-		} else if ((jsonLongitude < -180) || (jsonLongitude > 180)) {
+		} else if ((jsonLongitude < -180.0) || (jsonLongitude > 180.0)) {
 			// invalid longitude
 			errorList.add(
 					"Longitude in Site Class not in the range of -180 to 180.");

@@ -37,10 +37,10 @@ class Hypocenter : public ProcessingBase {
 	 * The advanced constructor for the Hypocenter class.
 	 * Initializes members to provided values.
 	 *
-	 * \param newlatitude - A double containing the latitude to use
-	 * \param newlongitude - A double containing the longitude to use
+	 * \param newlatitude - A double containing the latitude in degrees to use
+	 * \param newlongitude - A double containing the longitude in degrees to use
 	 * \param newtime - A double containing the new time to use
-	 * \param newdepth - A double containing the depth to use
+	 * \param newdepth - A double containing the depth in kilometers to use
 	 * \param newlatitudeerror - A double containing the latitude error to use,
 	 * 		std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newlongitudeerror - A double containing the longitude error to
@@ -104,14 +104,14 @@ class Hypocenter : public ProcessingBase {
 	/**
 	 * \brief latitude value
 	 *
-	 * A required double defining the latitude of this Hypocenter
+	 * A required double defining the latitude of this Hypocenter in degrees 
 	 */
 	double latitude;
 
 	/**
 	 * \brief longitude value
 	 *
-	 * A required double defining the longitude of this Hypocenter
+	 * A required double defining the longitude of this Hypocenter in degrees 
 	 */
 	double longitude;
 
@@ -125,7 +125,7 @@ class Hypocenter : public ProcessingBase {
 	/**
 	 * \brief depth value
 	 *
-	 * A required double defining the depth of this Hypocenter
+	 * A required double defining the depth of this Hypocenter in kilometers
 	 */
 	double depth;
 

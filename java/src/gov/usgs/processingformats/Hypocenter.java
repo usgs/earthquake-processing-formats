@@ -26,12 +26,12 @@ public class Hypocenter implements ProcessingInt {
 	public static final String TIME_ERROR_KEY = "TimeError";
 
 	/**
-	 * Required Double containing the latitude
+	 * Required Double containing the latitude in degrees 
 	 */
 	private Double latitude;
 
 	/**
-	 * Required Double containing the longitude
+	 * Required Double containing the longitude in degrees 
 	 */
 	private Double longitude;
 
@@ -41,7 +41,7 @@ public class Hypocenter implements ProcessingInt {
 	private Date time;
 
 	/**
-	 * Required Double containing the depth
+	 * Required Double containing the depth in kilometers
 	 */
 	private Double depth;
 
@@ -87,13 +87,13 @@ public class Hypocenter implements ProcessingInt {
 	 * members to provided values.
 	 *
 	 * @param newLatitude
-	 *            - A Double containing the latitude to use
+	 *            - A Double containing the latitude in degrees to use
 	 * @param newLongitude
-	 *            - A Double containing the longitude to use
+	 *            - A Double containing the longitude in degrees to use
 	 * @param newTime
 	 *            - A Date containing the new origin time to use
 	 * @param newDepth
-	 *            - A Double containing the depth to use
+	 *            - A Double containing the depth in kilometers to use
 	 * @param newLatitudeError
 	 *            - A Double containing the latitude error to use, null to omit
 	 * @param newLongitudeError
@@ -119,13 +119,13 @@ public class Hypocenter implements ProcessingInt {
 	 *
 	 *
 	 * @param newLatitude
-	 *            - A Double containing the latitude to use
+	 *            - A Double containing the latitude in degrees to use
 	 * @param newLongitude
-	 *            - A Double containing the longitude to use
+	 *            - A Double containing the longitude in degrees to use
 	 * @param newTime
 	 *            - A Date containing the new origin time to use
 	 * @param newDepth
-	 *            - A Double containing the depth to use
+	 *            - A Double containing the depth in kilometers to use
 	 * @param newLatitudeError
 	 *            - A Double containing the latitude error to use, null to omit
 	 * @param newLongitudeError
@@ -315,7 +315,7 @@ public class Hypocenter implements ProcessingInt {
 		if (jsonLatitude == null) {
 			// latitude not found
 			errorList.add("No Latitude in Hypo Class.");
-		} else if ((jsonLatitude < -90) || (jsonLatitude > 90)) {
+		} else if ((jsonLatitude < -90.0) || (jsonLatitude > 90.0)) {
 			// invalid latitude
 			errorList.add(
 					"Latitude in Hypo Class not in the range of -90 to 90.");
@@ -325,7 +325,7 @@ public class Hypocenter implements ProcessingInt {
 		if (jsonLongitude == null) {
 			// longitude not found
 			errorList.add("No Longitude in Hypo Class.");
-		} else if ((jsonLongitude < -180) || (jsonLongitude > 180)) {
+		} else if ((jsonLongitude < -180.0) || (jsonLongitude > 180.0)) {
 			// invalid longitude
 			errorList.add(
 					"Longitude in Hypo Class not in the range of -180 to 180.");
@@ -341,7 +341,7 @@ public class Hypocenter implements ProcessingInt {
 		if (jsonDepth == null) {
 			// depth not found
 			errorList.add("No Depth in Hypo Class.");
-		} else if ((jsonDepth < -100) || (jsonDepth > 1500)) {
+		} else if ((jsonDepth < -100.0) || (jsonDepth > 1500.0)) {
 			// invalid depth
 			errorList.add(
 					"Depth in Hypo Class not in the range of -100 to 1500.");

@@ -180,7 +180,7 @@ std::vector<std::string> Hypocenter::getErrors() {
 	if (std::isnan(latitude) == true) {
 		// latitude not found
 		errorlist.push_back("No Latitude in Hypocenter class.");
-	} else if ((latitude < -90) || (latitude > 90)) {
+	} else if ((latitude < -90.0) || (latitude > 90.0)) {
 		errorlist.push_back("Invalid Latitude in Hypocenter class.");
 	}
 
@@ -188,7 +188,7 @@ std::vector<std::string> Hypocenter::getErrors() {
 	if (std::isnan(longitude) == true) {
 		// longitude not found
 		errorlist.push_back("No Longitude in Hypocenter class.");
-	} else if ((longitude < -180) || (longitude > 180)) {
+	} else if ((longitude < -180.0) || (longitude > 180.0)) {
 		errorlist.push_back("Invalid Longitude in Hypocenter class.");
 	}
 
