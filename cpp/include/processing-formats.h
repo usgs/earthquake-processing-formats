@@ -1,6 +1,14 @@
 #ifndef PROCESSING_H
 #define PROCESSING_H
 
+// Locator interfaces
+#include "./Site.h"
+#include "./Source.h"
+#include "./Hypocenter.h"
+#include "./ErrorEllipse.h"
+#include "./LocationData.h"
+
+// Traveltime interfaces
 #include "./TravelTimeData.h"
 #include "./TravelTimePlotData.h"
 #include "./TravelTimePlotDataBranch.h"

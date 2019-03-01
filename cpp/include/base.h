@@ -47,8 +47,8 @@ class ProcessingBase {
 	 * \return Returns 1 if successful, 0 otherwise
 	 */
 	virtual rapidjson::Value & toJSON(
-			rapidjson::Value &json,
-			rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator> &allocator) = 0;
+			rapidjson::Value &json, // NOLINT
+			rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator> &allocator) = 0; // NOLINT
 
 	/**
 	 * \brief Validates the values in the class

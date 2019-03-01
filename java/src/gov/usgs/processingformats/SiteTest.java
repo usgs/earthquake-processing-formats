@@ -7,12 +7,17 @@ import static org.junit.Assert.*;
 
 public class SiteTest {
 
-	public static final String SITE_STRING = "{\"Station\":\"BMN\",\"Channel\":"
-			+ "\"HHZ\",\"Network\":\"LB\",\"Location\":\"01\"}";
-	public static final String STATION = "BMN";
-	public static final String CHANNEL = "HHZ";
-	public static final String NETWORK = "LB";
-	public static final String LOCATION = "01";
+	public static String SITE_STRING = "{\"Station\":\"BOZ\",\"Channel\":"
+			+ "\"BHZ\",\"Network\":\"US\",\"Location\":\"00\","
+			+ "\"Latitude\":45.59697,\"Longitude\":-111.62967,"
+			+ "\"Elevation\":1589.0}";
+	public static String STATION = "BOZ";
+	public static String CHANNEL = "BHZ";
+	public static String NETWORK = "US";
+	public static String LOCATION = "00";
+	public static double LATITUDE = 45.596970;
+	public static double LONGITUDE = -111.629670;
+	public static double ELEVATION = 1589.000000;
 
 	/**
 	 * Able to write a JSON string
@@ -20,7 +25,8 @@ public class SiteTest {
 	@Test
 	public void writesJSON() {
 
-		Site SiteObject = new Site(STATION, CHANNEL, NETWORK, LOCATION);
+		Site SiteObject = new Site(STATION, CHANNEL, NETWORK, LOCATION, 
+			LATITUDE, LONGITUDE, ELEVATION);
 
 		// write out to a string
 		String jsonString = Utility.toJSONString(SiteObject.toJSON());
@@ -57,7 +63,8 @@ public class SiteTest {
 	@Test
 	public void validate() {
 
-		Site siteObject = new Site(STATION, CHANNEL, NETWORK, LOCATION);
+		Site siteObject = new Site(STATION, CHANNEL, NETWORK, LOCATION, 
+			LATITUDE, LONGITUDE, ELEVATION);
 
 		// Successful validation
 		boolean rc = siteObject.isValid();
@@ -66,7 +73,7 @@ public class SiteTest {
 		assertEquals("Successful Validation", true, rc);
 
 		// build bad source object
-		Site badSiteObject = new Site(null, null, null, null);
+		Site badSiteObject = new Site(null, null, null, null, null, null, null);
 
 		rc = badSiteObject.isValid();
 
@@ -94,6 +101,24 @@ public class SiteTest {
 		// check SiteObject.Location
 		assertEquals(TestName + " Location Equals", LOCATION,
 				SiteObject.getLocation());
+
+		// check SiteObject.Latitude
+		if (SiteObject.getLatitude() != null) {
+			assertEquals(TestName + " Latitude Equals", LATITUDE,
+				SiteObject.getLatitude(), 0);
+		}
+
+		// check SiteObject.Longitude
+		if (SiteObject.getLongitude() != null) {
+			assertEquals(TestName + " Longitude Equals", LONGITUDE,
+				SiteObject.getLongitude(), 0);
+		}
+
+		// check SiteObject.Elevation
+		if (SiteObject.getElevation() != null) {
+			assertEquals(TestName + " Elevation Equals", ELEVATION,
+				SiteObject.getElevation(), 0);
+		}
 
 	}
 

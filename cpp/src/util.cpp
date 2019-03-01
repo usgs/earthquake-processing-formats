@@ -263,7 +263,7 @@ std::string ConvertEpochTimeToISO8601(double epochtime) {
 	return (timestring + secondsstring + "Z");
 }
 
-std::string ToJSONString(rapidjson::Value &json) {
+std::string ToJSONString(rapidjson::Value &json) { // NOLINT
 	// make the buffer
 	rapidjson::StringBuffer jsonbuffer;
 
@@ -277,8 +277,8 @@ std::string ToJSONString(rapidjson::Value &json) {
 	return (std::string(jsonbuffer.GetString()));
 }
 
-rapidjson::Document & FromJSONString(std::string jsonstring,
-										rapidjson::Document & jsondocument) {
+rapidjson::Document & FromJSONString(std::string jsonstring, // NOLINT
+										rapidjson::Document & jsondocument) { // NOLINT
 	// parse the json into a document
 	if (jsondocument.Parse(jsonstring.c_str()).HasParseError()) {
 		throw std::invalid_argument("Error parsing JSON string into document.");

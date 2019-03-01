@@ -17,7 +17,10 @@ seismic processing algorithms.
       "Station"   : String,
       "Channel"   : String,
       "Network"   : String,
-      "Location"  : String
+      "Location"  : String,
+      "Latitude"  : Number,
+      "Longitude" : Number,
+      "Elevation" : Number
     }
 ```
 
@@ -28,6 +31,9 @@ These are the values **required** to define a Site.
 
 * Station - A string containing the station code.
 * Network - A string containing network code.
+* Latitude - A decimal number that identifies the latitude of this site in degrees.
+* Longitude - A decimal number that identifies the longitude of this site in degrees.
+* Elevation - A decimal number that identifies the elevation of this site in meters.
 
 **Optional Values:**
 

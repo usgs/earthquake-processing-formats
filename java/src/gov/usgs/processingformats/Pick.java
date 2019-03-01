@@ -142,6 +142,12 @@ public class Pick implements ProcessingInt {
 	 *            - A String containing the network to use
 	 * @param newLocation
 	 *            - A String containing the location to use
+	 * @param newLatitude
+	 *            - A Double containing the latitude to use
+	 * @param newLongitude
+	 *            - A Double containing the longitude to use
+	 * @param newElevation
+	 *            - A Double containing the elevation to use
 	 * @param newAgencyID
 	 *            - A String containing the agencyid to use
 	 * @param newAuthor
@@ -175,14 +181,16 @@ public class Pick implements ProcessingInt {
 	 *            - A Double containing the importance to use, null to omit
 	 */
 	public Pick(String newID, String newStation, String newChannel,
-			String newNetwork, String newLocation, String newAgencyID,
+			String newNetwork, String newLocation, Double newLatitude, 
+			Double newLongitude, Double newElevation, String newAgencyID,
 			String newAuthor, String newType, Date newTime, Double newAffinity,
 			Double newQuality, Boolean newUse, String newPickedPhase,
 			String newAssociatedPhase, String newLocatedPhase,
 			Double newResidual, Double newDistance, Double newAzimuth,
 			Double newWeight, Double newImportance) {
 
-		reload(newID, new Site(newStation, newChannel, newNetwork, newLocation),
+		reload(newID, new Site(newStation, newChannel, newNetwork, newLocation, 
+				newLatitude, newLongitude, newElevation),
 				new Source(newAgencyID, newAuthor, newType), newTime,
 				newAffinity, newQuality, newUse, newPickedPhase,
 				newAssociatedPhase, newLocatedPhase, newResidual, newDistance,

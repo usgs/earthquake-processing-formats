@@ -9,9 +9,10 @@ import org.junit.Test;
 public class PickTest {
 
 	public static String PICK_STRING = "{\"ID\":\"12GFH48776857\","
-			+ "\"Site\":{\"Station\":"
-			+ "\"BMN\",\"Channel\":\"HHZ\",\"Network\":\"LB\","
-			+ "\"Location\":\"01\"},\"Source\":{\"Author\":\"TestAuthor\","
+			+ "\"Site\":{\"Station\":\"BOZ\",\"Channel\":"
+			+ "\"BHZ\",\"Network\":\"US\",\"Location\":\"00\","
+			+ "\"Latitude\":45.59697,\"Longitude\":-111.62967,"
+			+ "\"Elevation\":1589.0},\"Source\":{\"Author\":\"TestAuthor\","
 			+ "\"AgencyID\":\"US\",\"Type\":\"Unknown\"},"
 			+ "\"Time\":\"2015-12-28T21:32:24.017Z\",\"Affinity\":1.2,"
 			+ "\"Quality\":0.45,\"Use\":true,\"PickedPhase\":\"P\","
@@ -19,13 +20,16 @@ public class PickTest {
 			+ "\"Residual\":1.05,\"Distance\":2.65,\"Azimuth\":21.5,"
 			+ "\"Weight\":2.65,\"Importance\":3.8}";
 	public static String ID = "12GFH48776857";
-	public static String STATION = "BMN";
-	public static String CHANNEL = "HHZ";
-	public static String NETWORK = "LB";
-	public static String LOCATION = "01";
+	public static String STATION = "BOZ";
+	public static String CHANNEL = "BHZ";
+	public static String NETWORK = "US";
+	public static String LOCATION = "00";
+	public static double LATITUDE = 45.596970;
+	public static double LONGITUDE = -111.629670;
+	public static double ELEVATION = 1589.000000;
 	public static String AGENCYID = "US";
 	public static String AUTHOR = "TestAuthor";
-	public static final String TYPE = "Unknown";
+	public static String TYPE = "Unknown";
 	public static Date TIME = Utility.getDate("2015-12-28T21:32:24.017Z");
 	public static double AFFINITY = 1.2;
 	public static double QUALITY = 0.45;
@@ -45,10 +49,10 @@ public class PickTest {
 	@Test
 	public void writesJSON() {
 
-		Pick pickObject = new Pick(ID, STATION, CHANNEL, NETWORK, LOCATION,
-				AGENCYID, AUTHOR, TYPE, TIME, AFFINITY, QUALITY, USE,
-				PICKEDPHASE, ASSOCIATEDPHASE, LOCATEDPHASE, RESIDUAL, DISTANCE,
-				AZIMUTH, WEIGHT, IMPORTANCE);
+		Pick pickObject = new Pick(ID, STATION, CHANNEL, NETWORK, LOCATION, 
+				LATITUDE, LONGITUDE, ELEVATION, AGENCYID, AUTHOR, TYPE, TIME, 
+				AFFINITY, QUALITY, USE, PICKEDPHASE, ASSOCIATEDPHASE, 
+				LOCATEDPHASE, RESIDUAL, DISTANCE, AZIMUTH, WEIGHT, IMPORTANCE);
 
 		// write out to a string
 		String jsonString = Utility.toJSONString(pickObject.toJSON());
@@ -86,7 +90,8 @@ public class PickTest {
 
 		// use constructor
 		Pick altPickObject = new Pick(ID,
-				new Site(STATION, CHANNEL, NETWORK, LOCATION),
+				new Site(STATION, CHANNEL, NETWORK, LOCATION, LATITUDE, 
+					LONGITUDE, ELEVATION),
 				new Source(AGENCYID, AUTHOR, TYPE), TIME, AFFINITY, QUALITY,
 				USE, PICKEDPHASE, ASSOCIATEDPHASE, LOCATEDPHASE, RESIDUAL,
 				DISTANCE, AZIMUTH, WEIGHT, IMPORTANCE);
@@ -101,10 +106,10 @@ public class PickTest {
 	@Test
 	public void validate() {
 
-		Pick pickObject = new Pick(ID, STATION, CHANNEL, NETWORK, LOCATION,
-				AGENCYID, AUTHOR, TYPE, TIME, AFFINITY, QUALITY, USE,
-				PICKEDPHASE, ASSOCIATEDPHASE, LOCATEDPHASE, RESIDUAL, DISTANCE,
-				AZIMUTH, WEIGHT, IMPORTANCE);
+		Pick pickObject = new Pick(ID, STATION, CHANNEL, NETWORK, LOCATION, 
+			LATITUDE, LONGITUDE, ELEVATION, AGENCYID, AUTHOR, TYPE, TIME, 
+			AFFINITY, QUALITY, USE, PICKEDPHASE, ASSOCIATEDPHASE, 
+			LOCATEDPHASE, RESIDUAL, DISTANCE, AZIMUTH, WEIGHT, IMPORTANCE);
 
 		// Successful validation
 		boolean rc = pickObject.isValid();
@@ -114,9 +119,9 @@ public class PickTest {
 
 		// build bad Pick object
 		Pick badPickObject = new Pick("", null, CHANNEL, NETWORK, LOCATION,
-				AGENCYID, AUTHOR, null, null, AFFINITY, QUALITY, USE,
-				PICKEDPHASE, ASSOCIATEDPHASE, LOCATEDPHASE, RESIDUAL, DISTANCE,
-				AZIMUTH, WEIGHT, IMPORTANCE);
+				LATITUDE, LONGITUDE, ELEVATION, AGENCYID, AUTHOR, null, null, 
+				AFFINITY, QUALITY, USE, PICKEDPHASE, ASSOCIATEDPHASE, 
+				LOCATEDPHASE, RESIDUAL, DISTANCE, AZIMUTH, WEIGHT, IMPORTANCE);
 
 		rc = badPickObject.isValid();
 
@@ -145,6 +150,24 @@ public class PickTest {
 		assertEquals(TestName + " Location Equals", LOCATION,
 				pickObject.getSite().getLocation());
 
+		// check pickObject.site.Latitude
+		if (pickObject.getSite().getLatitude() != null) {
+			assertEquals(TestName + " Latitude Equals", LATITUDE,
+			pickObject.getSite().getLatitude(), 0);
+		}
+
+		// check pickObject.site.Longitude
+		if (pickObject.getSite().getLongitude() != null) {
+			assertEquals(TestName + " Longitude Equals", LONGITUDE,
+			pickObject.getSite().getLongitude(), 0);
+		}
+
+		// check pickObject.site.Elevation
+		if (pickObject.getSite().getElevation() != null) {
+			assertEquals(TestName + " Elevation Equals", ELEVATION,
+			pickObject.getSite().getElevation(), 0);
+		}
+		
 		// check pickObject.Source.AgencyID
 		assertEquals(TestName + " AgencyID Equals", AGENCYID,
 				pickObject.getSource().getAgencyID());

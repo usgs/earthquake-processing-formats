@@ -11,7 +11,6 @@ import org.json.simple.*;
  * @author U.S. Geological Survey &lt;jpatton at usgs.gov&gt;
  */
 public class Site implements ProcessingInt {
-
 	/**
 	 * JSON Keys
 	 */
@@ -19,6 +18,9 @@ public class Site implements ProcessingInt {
 	public static final String CHANNEL_KEY = "Channel";
 	public static final String NETWORK_KEY = "Network";
 	public static final String LOCATION_KEY = "Location";
+	public static final String LATITUDE_KEY = "Latitude";
+	public static final String LONGITUDE_KEY = "Longitude";
+	public static final String ELEVATION_KEY = "Elevation";	
 
 	/**
 	 * Required station code.
@@ -41,14 +43,31 @@ public class Site implements ProcessingInt {
 	private String location;
 
 	/**
+	 * Required Double containing the latitude in degreesw
+	 */
+	private Double latitude;
+
+	/**
+	 * Required Double containing the longitude in degreesw
+	 */
+	private Double longitude;
+
+	/**
+	 * Required Double containing the elevation in meters
+	 */
+	private Double elevation;
+
+	/**
 	 * The constructor for the Site class. Initializes members to null values.
 	 */
 	public Site() {
-
 		station = null;
 		channel = null;
 		network = null;
 		location = null;
+		latitude = null;
+		longitude = null;
+		elevation = null;
 	}
 
 	/**
@@ -63,11 +82,19 @@ public class Site implements ProcessingInt {
 	 *            - A String containing the network to use
 	 * @param newLocation
 	 *            - A String containing the location to use (null omit)
+	 * @param newLatitude
+	 *            - A Double containing the latitude in degrees to use
+	 * @param newLongitude
+	 *            - A Double containing the longitude in degrees to use
+	 * @param newElevation
+	 *            - A Double containing the elevation in meters to use
 	 */
 	public Site(String newStation, String newChannel, String newNetwork,
-			String newLocation) {
+			String newLocation, Double newLatitude, Double newLongitude,
+			Double newElevation) {
 
-		reload(newStation, newChannel, newNetwork, newLocation);
+		reload(newStation, newChannel, newNetwork, newLocation, newLatitude, 
+			newLongitude, newElevation);
 	}
 
 	/**
@@ -84,14 +111,23 @@ public class Site implements ProcessingInt {
 	 *            - A String containing the network to use
 	 * @param newLocation
 	 *            - A String containing the location to use (null omit)
+	 * @param newLatitude
+	 *            - A Double containing the latitude in degrees  to use
+	 * @param newLongitude
+	 *            - A Double containing the longitude in degrees  to use
+	 * @param newElevation
+	 *            - A Double containing the elevation in meters to use
 	 */
 	public void reload(String newStation, String newChannel, String newNetwork,
-			String newLocation) {
-
+			String newLocation, Double newLatitude, Double newLongitude,
+			Double newElevation) {
 		station = newStation;
 		channel = newChannel;
 		network = newNetwork;
 		location = newLocation;
+		latitude = newLatitude;
+		longitude = newLongitude;
+		elevation = newElevation;
 	}
 
 	/**
@@ -101,7 +137,6 @@ public class Site implements ProcessingInt {
 	 *            - A JSONObject.
 	 */
 	public Site(JSONObject newJSONObject) {
-
 		// required values
 		// station
 		if (newJSONObject.containsKey(STATION_KEY)) {
@@ -116,6 +151,27 @@ public class Site implements ProcessingInt {
 		} else {
 			network = null;
 		}
+
+		// latitude
+		if (newJSONObject.containsKey(LATITUDE_KEY)) {
+			latitude = (double) newJSONObject.get(LATITUDE_KEY);
+		} else {
+			latitude = null;
+		}
+
+		// longitude
+		if (newJSONObject.containsKey(LONGITUDE_KEY)) {
+			longitude = (double) newJSONObject.get(LONGITUDE_KEY);
+		} else {
+			longitude = null;
+		}
+
+		// elevation
+		if (newJSONObject.containsKey(ELEVATION_KEY)) {
+			elevation = (double) newJSONObject.get(ELEVATION_KEY);
+		} else {
+			elevation = null;
+		}		
 
 		// optional values
 		// channel
@@ -140,13 +196,15 @@ public class Site implements ProcessingInt {
 	 */
 	@SuppressWarnings("unchecked")
 	public JSONObject toJSON() {
-
 		JSONObject NewJSONObject = new JSONObject();
 
 		String jsonStation = getStation();
 		String jsonNetwork = getNetwork();
 		String jsonChannel = getChannel();
 		String jsonLocation = getLocation();
+		Double jsonLatitude = getLatitude();
+		Double jsonLongitude = getLongitude();
+		Double jsonElevation = getElevation();
 
 		// required values
 		// station
@@ -157,6 +215,21 @@ public class Site implements ProcessingInt {
 		// network
 		if ((jsonNetwork != null) && (!jsonNetwork.isEmpty())) {
 			NewJSONObject.put(NETWORK_KEY, jsonNetwork);
+		}
+
+		// latitude
+		if (jsonLatitude != null) {
+			NewJSONObject.put(LATITUDE_KEY, jsonLatitude);
+		}
+
+		// longitude
+		if (jsonLongitude != null) {
+			NewJSONObject.put(LONGITUDE_KEY, jsonLongitude);
+		}
+
+		// elevation
+		if (jsonElevation != null) {
+			NewJSONObject.put(ELEVATION_KEY, jsonElevation);
 		}
 
 		// optional values
@@ -195,9 +268,11 @@ public class Site implements ProcessingInt {
 	 * @return Returns a List&lt;String&gt; of any errors found
 	 */
 	public ArrayList<String> getErrors() {
-
 		String jsonStation = getStation();
 		String jsonNetwork = getNetwork();
+		Double jsonLatitude = getLatitude();
+		Double jsonLongitude = getLongitude();
+		Double jsonElevation = getElevation();
 
 		ArrayList<String> errorList = new ArrayList<String>();
 
@@ -218,6 +293,32 @@ public class Site implements ProcessingInt {
 		} else if (jsonNetwork.isEmpty()) {
 			// network empty
 			errorList.add("Empty Network in Site Class.");
+		}
+
+		// latitude
+		if (jsonLatitude == null) {
+			// latitude not found
+			errorList.add("No Latitude in Site Class.");
+		} else if ((jsonLatitude < -90.0) || (jsonLatitude > 90.0)) {
+			// invalid latitude
+			errorList.add(
+					"Latitude in Site Class not in the range of -90 to 90.");
+		}
+
+		// longitude
+		if (jsonLongitude == null) {
+			// longitude not found
+			errorList.add("No Longitude in Site Class.");
+		} else if ((jsonLongitude < -180.0) || (jsonLongitude > 180.0)) {
+			// invalid longitude
+			errorList.add(
+					"Longitude in Site Class not in the range of -180 to 180.");
+		}
+
+		// elevation
+		if (jsonElevation == null) {
+			// elevation not found
+			errorList.add("No Elevation in Site Class.");
 		}
 
 		// since station, channel, network, and location are free text
@@ -259,6 +360,27 @@ public class Site implements ProcessingInt {
 	}
 
 	/**
+	 * @return the latitude
+	 */
+	public Double getLatitude() {
+		return latitude;
+	}
+
+	/**
+	 * @return the longitude
+	 */
+	public Double getLongitude() {
+		return longitude;
+	}
+
+	/**
+	 * @return the elevation
+	 */
+	public Double getElevation() {
+		return elevation;
+	}	
+
+	/**
 	 * @param station
 	 *            the station to set
 	 */
@@ -288,5 +410,29 @@ public class Site implements ProcessingInt {
 	 */
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	/**
+	 * @param latitude
+	 *            the latitude to set
+	 */
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}	
+
+	/**
+	 * @param longitude
+	 *            the longitude to set
+	 */
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+
+	/**
+	 * @param elevation
+	 *            the elevation to set
+	 */
+	public void setElevation(Double elevation) {
+		this.elevation = elevation;
 	}
 }
