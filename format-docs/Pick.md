@@ -15,7 +15,6 @@ in input/output messages for seismic processing algorithms.
       "ID"        : String,
       "Site"      :
       {
-         "SiteID"    : String,
          "Station"   : String,
          "Channel"   : String,
          "Network"   : String,
