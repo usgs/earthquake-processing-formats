@@ -1,13 +1,13 @@
-# Location Data Format Specification
+# Location Result Format Specification
 
 ## Description
 
-Location Data is a format designed to encode the specific information for an
+Location Result is a format designed to encode the specific information for an
 earthquake event location.  Location uses the
 [JSON standard](http://www.json.org).
 
 ## Usage
-Location Data is intended for use as an input/output message for seismic
+Location Result is intended for use as an input/output message for seismic
 processing algorithms.
 
 ## Output
@@ -60,7 +60,7 @@ processing algorithms.
               "Dip"     : Number
           }                  
       },
-      "AssociatedData" :
+      "SupportingData" :
       [
         {
           "ID"        : String,
@@ -96,7 +96,7 @@ processing algorithms.
 **Required Values:**
 * Hypocenter - An object containing the hypocenter of the Location, see
 [Hypocenter](Hypocenter.md).
-* AssociatedData - An array of [Pick](Pick.md) objects associated with this
+* SupportingData - An array of [Pick](Pick.md) objects associated with this
 Location.
 
 **Optional Values:**

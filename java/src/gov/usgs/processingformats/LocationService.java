@@ -12,6 +12,6 @@ public interface LocationService {
      * @return calcualated location.
      * @throws LocationException if errors occur.
      */
-    public LocationData getLocation(final LocationRequest request) throws LocationException;
+    public LocationResult getLocation(final LocationRequest request) throws LocationException;
 
 }

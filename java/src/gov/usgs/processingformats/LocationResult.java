@@ -11,13 +11,13 @@ import org.json.simple.JSONArray;
  *
  * @author U.S. Geological Survey &lt;jpatton at usgs.gov&gt;
  */
-public class LocationData implements ProcessingInt {
+public class LocationResult implements ProcessingInt {
 
 	/**
 	 * JSON Keys
 	 */
 	public static final String HYPOCENTER_KEY = "Hypocenter";
-	public static final String ASSOCIATEDDATA_KEY = "AssociatedData";
+	public static final String SUPPORTINGDATA_KEY = "SupportingData";
 	public static final String ASSOCIATEDSTATIONS_KEY = "NumberOfAssociatedStations";
 	public static final String ASSOCIATEDPHASES_KEY = "NumberOfAssociatedPhases";
 	public static final String USEDSTATIONS_KEY = "NumberOfUsedStations";
@@ -40,7 +40,7 @@ public class LocationData implements ProcessingInt {
 	/**
 	 * A required vector of Pick objects used to generate this location
 	 */
-	private ArrayList<Pick> associatedData;
+	private ArrayList<Pick> supportingData;
 
 	/**
 	 * Optional integer containing the number of associated stations
@@ -108,12 +108,12 @@ public class LocationData implements ProcessingInt {
 	private ErrorEllipse errorEllipse;
 
 	/**
-	 * The constructor for the LocationData class. Initializes members to null
+	 * The constructor for the LocationResult class. Initializes members to null
 	 * values.
 	 */
-	public LocationData() {
+	public LocationResult() {
 		hypocenter = null;
-		associatedData = null;
+		supportingData = null;
 		numberOfAssociatedStations = null;
 		numberOfAssociatedPhases = null;
 		numberOfUsedStations = null;
@@ -132,7 +132,7 @@ public class LocationData implements ProcessingInt {
 	/**
 	 * Advanced constructor
 	 *
-	 * The advanced constructor for the LocationData class. Initializes members
+	 * The advanced constructor for the LocationResult class. Initializes members
 	 * to provided values.
 	 *
 	 * @param newLatitude
@@ -151,7 +151,7 @@ public class LocationData implements ProcessingInt {
 	 *            - A Double containing the new time error to use, null to omit
 	 * @param newDepthError
 	 *            - A Double containing the depth error to use, null to omit
-	 * @param newAssociatedData
+	 * @param newSupportingData
 	 *            - A ArrayList&lt;Pick&gt; newPickData containing the data that
 	 *            went into this location
 	 * @param newAssociatedStations
@@ -221,10 +221,10 @@ public class LocationData implements ProcessingInt {
 	 *            - A Double containing the equivalent radius of the horizontal
 	 *            error ellipsoid in kilometers
 	 */
-	public LocationData(Double newLatitude, Double newLongitude, Date newTime,
+	public LocationResult(Double newLatitude, Double newLongitude, Date newTime,
 			Double newDepth, Double newLatitudeError, Double newLongitudeError,
 			Double newTimeError, Double newDepthError,
-			ArrayList<Pick> newAssociatedData, Integer newAssociatedStations,
+			ArrayList<Pick> newSupportingData, Integer newAssociatedStations,
 			Integer newAssociatedPhases, Integer newUsedStations,
 			Integer newUsedPhases, Double newGap, Double newSecondaryGap,
 			Double newMinimumDistance, Double newRMS, String newQuality,
@@ -238,7 +238,7 @@ public class LocationData implements ProcessingInt {
 
 		this(new Hypocenter(newLatitude, newLongitude, newTime, newDepth,
 				newLatitudeError, newLongitudeError, newTimeError,
-				newDepthError), newAssociatedData, newAssociatedStations,
+				newDepthError), newSupportingData, newAssociatedStations,
 				newAssociatedPhases, newUsedStations, newUsedPhases, newGap,
 				newSecondaryGap, newMinimumDistance, newRMS, newQuality,
 				newBayesianDepth, newBayesianRange, newDepthImportance,
@@ -252,7 +252,7 @@ public class LocationData implements ProcessingInt {
 	/**
 	 * Alternate Advanced constructor
 	 *
-	 * The alternate advanced constructor for the LocationData class.
+	 * The alternate advanced constructor for the LocationResult class.
 	 * Initializes members to provided values.
 	 *
 	 * @param newLatitude
@@ -271,48 +271,48 @@ public class LocationData implements ProcessingInt {
 	 *            - A Double containing the new time error to use, null to omit
 	 * @param newDepthError
 	 *            - A Double containing the depth error to use, null to omit
-	 * @param newAssociatedData
+	 * @param newSupportingData
 	 *            - A ArrayList&lt;Pick&gt; newPickData containing the data that
 	 *            went into this location
 	 */
-	public LocationData(Double newLatitude, Double newLongitude, Date newTime,
+	public LocationResult(Double newLatitude, Double newLongitude, Date newTime,
 			Double newDepth, Double newLatitudeError, Double newLongitudeError,
 			Double newTimeError, Double newDepthError,
-			ArrayList<Pick> newAssociatedData) {
+			ArrayList<Pick> newSupportingData) {
 		this(new Hypocenter(newLatitude, newLongitude, newTime, newDepth,
 				newLatitudeError, newLongitudeError, newTimeError,
-				newDepthError), newAssociatedData, null, null, null, null, null,
+				newDepthError), newSupportingData, null, null, null, null, null,
 				null, null, null, null, null, null, null, null);
 	}
 
 	/**
 	 * Alternate Advanced constructor
 	 *
-	 * The alternate advanced constructor for the LocationData class.
+	 * The alternate advanced constructor for the LocationResult class.
 	 * Initializes members to provided values.
 	 *
 	 * @param newHypocenter
 	 *            - A Hypocenter containing the hypocenter to use
-	 * @param newAssociatedData
+	 * @param newSupportingData
 	 *            - A ArrayList&lt;Pick&gt; newPickData containing the data that
 	 *            went into this location
 	 */
-	public LocationData(Hypocenter newHypocenter,
-			ArrayList<Pick> newAssociatedData) {
+	public LocationResult(Hypocenter newHypocenter,
+			ArrayList<Pick> newSupportingData) {
 
-		this(newHypocenter, newAssociatedData, null, null, null, null, null,
+		this(newHypocenter, newSupportingData, null, null, null, null, null,
 				null, null, null, null, null, null, null, null);
 	}
 
 	/**
 	 * Alternate advanced constructor
 	 *
-	 * The alternate advanced constructor for the LocationData class.
+	 * The alternate advanced constructor for the LocationResult class.
 	 * Initializes members to provided values.
 	 *
 	 * @param newHypocenter
 	 *            - A Hypocenter containing the hypocenter to use
-	 * @param newAssociatedData
+	 * @param newSupportingData
 	 *            - A ArrayList&lt;Pick&gt; newPickData containing the data that
 	 *            went into this location
 	 * @param newAssociatedStations
@@ -349,15 +349,15 @@ public class LocationData implements ProcessingInt {
 	 *            - An ErrorEllipse containing the error ellipse to use, null to
 	 *            omit
 	 */
-	public LocationData(Hypocenter newHypocenter,
-			ArrayList<Pick> newAssociatedData, Integer newAssociatedStations,
+	public LocationResult(Hypocenter newHypocenter,
+			ArrayList<Pick> newSupportingData, Integer newAssociatedStations,
 			Integer newAssociatedPhases, Integer newUsedStations,
 			Integer newUsedPhases, Double newGap, Double newSecondaryGap,
 			Double newMinimumDistance, Double newRMS, String newQuality,
 			Double newBayesianDepth, Double newBayesianRange,
 			Double newDepthImportance, ErrorEllipse newErrorEllipse) {
 
-		reload(newHypocenter, newAssociatedData, newAssociatedStations,
+		reload(newHypocenter, newSupportingData, newAssociatedStations,
 				newAssociatedPhases, newUsedStations, newUsedPhases, newGap,
 				newSecondaryGap, newMinimumDistance, newRMS, newQuality,
 				newBayesianDepth, newBayesianRange, newDepthImportance,
@@ -367,13 +367,13 @@ public class LocationData implements ProcessingInt {
 	/**
 	 * Reload Function
 	 *
-	 * The reload function for the LocationData class. Initializes members to
+	 * The reload function for the LocationResult class. Initializes members to
 	 * provided values.
 	 *
 	 *
 	 * @param newHypocenter
 	 *            - A Hypocenter containing the hypocenter to use
-	 * @param newAssociatedData
+	 * @param newSupportingData
 	 *            - A ArrayList&lt;Pick&gt; newPickData containing the data that
 	 *            went into this location
 	 * @param newAssociatedStations
@@ -411,7 +411,7 @@ public class LocationData implements ProcessingInt {
 	 *            omit
 	 */
 	public void reload(Hypocenter newHypocenter,
-			ArrayList<Pick> newAssociatedData, Integer newAssociatedStations,
+			ArrayList<Pick> newSupportingData, Integer newAssociatedStations,
 			Integer newAssociatedPhases, Integer newUsedStations,
 			Integer newUsedPhases, Double newGap, Double newSecondaryGap,
 			Double newMinimumDistance, Double newRMS, String newQuality,
@@ -419,7 +419,7 @@ public class LocationData implements ProcessingInt {
 			Double newDepthImportance, ErrorEllipse newErrorEllipse) {
 
 		hypocenter = newHypocenter;
-		associatedData = newAssociatedData;
+		supportingData = newSupportingData;
 		numberOfAssociatedStations = newAssociatedStations;
 		numberOfAssociatedPhases = newAssociatedPhases;
 		numberOfUsedStations = newUsedStations;
@@ -441,7 +441,7 @@ public class LocationData implements ProcessingInt {
 	 * @param newJSONObject
 	 *            - A JSONObject.
 	 */
-	public LocationData(JSONObject newJSONObject) {
+	public LocationResult(JSONObject newJSONObject) {
 		// Required values
 		// hypocenter
 		if (newJSONObject.containsKey(HYPOCENTER_KEY)) {
@@ -452,13 +452,13 @@ public class LocationData implements ProcessingInt {
 		}
 
 		// associated data
-		if (newJSONObject.containsKey(ASSOCIATEDDATA_KEY)) {
+		if (newJSONObject.containsKey(SUPPORTINGDATA_KEY)) {
 
-			associatedData = new ArrayList<Pick>();
+			supportingData = new ArrayList<Pick>();
 
 			// get the array
 			JSONArray dataArray = (JSONArray) newJSONObject
-					.get(ASSOCIATEDDATA_KEY);
+					.get(SUPPORTINGDATA_KEY);
 
 			if ((dataArray != null) && (!dataArray.isEmpty())) {
 
@@ -466,11 +466,11 @@ public class LocationData implements ProcessingInt {
 				for (int i = 0; i < dataArray.size(); i++) {
 
 					// add to vector
-					associatedData.add(new Pick((JSONObject) dataArray.get(i)));
+					supportingData.add(new Pick((JSONObject) dataArray.get(i)));
 				}
 			}
 		} else {
-			associatedData = null;
+			supportingData = null;
 		}
 
 		// optional values
@@ -582,7 +582,7 @@ public class LocationData implements ProcessingInt {
 		JSONObject newJSONObject = new JSONObject();
 
 		Hypocenter jsonHypocenter = getHypocenter();
-		ArrayList<Pick> jsonAssociatedData = getAssociatedData();
+		ArrayList<Pick> jsonSupportingData = getSupportingData();
 		Integer jsonNumberOfAssociatedStations = getNumberOfAssociatedStations();
 		Integer jsonNumberOfAssociatedPhases = getNumberOfAssociatedPhases();
 		Integer jsonNumberOfUsedStations = getNumberOfUsedStations();
@@ -602,12 +602,12 @@ public class LocationData implements ProcessingInt {
 			newJSONObject.put(HYPOCENTER_KEY, jsonHypocenter.toJSON());
 		}
 
-		// associatedData
-		if ((jsonAssociatedData != null) && (!jsonAssociatedData.isEmpty())) {
+		// supportingData
+		if ((jsonSupportingData != null) && (!jsonSupportingData.isEmpty())) {
 			JSONArray dataArray = new JSONArray();
 
 			// enumerate through the whole arraylist
-			for (Iterator<Pick> pickIterator = jsonAssociatedData
+			for (Iterator<Pick> pickIterator = jsonSupportingData
 					.iterator(); pickIterator.hasNext();) {
 
 				// convert pick to JSON object
@@ -617,7 +617,7 @@ public class LocationData implements ProcessingInt {
 			}
 
 			if (!dataArray.isEmpty()) {
-				newJSONObject.put(ASSOCIATEDDATA_KEY, dataArray);
+				newJSONObject.put(SUPPORTINGDATA_KEY, dataArray);
 			}
 		}
 
@@ -714,7 +714,7 @@ public class LocationData implements ProcessingInt {
 	public ArrayList<String> getErrors() {
 
 		Hypocenter jsonHypocenter = getHypocenter();
-		ArrayList<Pick> jsonAssociatedData = getAssociatedData();
+		ArrayList<Pick> jsonSupportingData = getSupportingData();
 		// Integer jsonNumberOfAssociatedStations =
 		// getNumberOfAssociatedStations();
 		// Integer jsonNumberOfAssociatedPhases = getNumberOfAssociatedPhases();
@@ -735,32 +735,39 @@ public class LocationData implements ProcessingInt {
 		// hypocenter
 		if (jsonHypocenter == null) {
 			// hypocenter not found
-			errorList.add("No Hypocenter in LocationData Class.");
+			errorList.add("No Hypocenter in LocationResult Class.");
 		} else if (!jsonHypocenter.isValid()) {
 			// hypocenter invalid
-			errorList.add("Invalid Hypocenter in LocationData Class.");
+			errorList.add("Invalid Hypocenter in LocationResult Class.");
 		}
 
 		// Data
 		// Picks
-		if ((jsonAssociatedData != null) && (!jsonAssociatedData.isEmpty())) {
+		if ((jsonSupportingData != null) && (!jsonSupportingData.isEmpty())) {
 
 			// enumerate through the whole arraylist
-			for (Iterator<Pick> pickIterator = jsonAssociatedData
+			for (Iterator<Pick> pickIterator = jsonSupportingData
 					.iterator(); pickIterator.hasNext();) {
 
 				// convert pick to JSON object
 				Pick jsonPick = ((Pick) pickIterator.next());
 
 				if (!jsonPick.isValid()) {
-					errorList.add(
-							"Invalid Pick in AssociatedData in LocationData Class");
+          ArrayList<String> pickErrorList = jsonPick.getErrors();
+
+          // combine the errors into a single string
+          String errorString = new String();
+          for (int i = 0; i < pickErrorList.size(); i++) {
+            errorString += " " + pickErrorList.get(i);
+          }   
+          errorList.add(
+          "Invalid Pick in SupportingData in LocationRequest Class: " + errorString);      
 					break;
 				}
 			}
 		} else {
 			// hypocenter not found
-			errorList.add("No pick data in LocationData Class.");
+			errorList.add("No pick data in LocationResult Class.");
 		}
 
 		// gap
@@ -768,7 +775,7 @@ public class LocationData implements ProcessingInt {
 			if ((jsonGap < 0) || (jsonGap > 360)) {
 				// invalid Magnitude
 				errorList.add(
-						"Gap in LocationData Class not in the range of 0 to 360.");
+						"Gap in LocationResult Class not in the range of 0 to 360.");
 			}
 		}
 
@@ -777,7 +784,7 @@ public class LocationData implements ProcessingInt {
 			if ((jsonSecondaryGap < 0) || (jsonSecondaryGap > 360)) {
 				// invalid Magnitude
 				errorList.add(
-						"Secondary gap in LocationData Class not in the range of 0 to 360.");
+						"Secondary gap in LocationResult Class not in the range of 0 to 360.");
 			}
 		}
 
@@ -786,7 +793,7 @@ public class LocationData implements ProcessingInt {
 			if (jsonMinimumDistance < 0) {
 				// invalid minimum distance
 				errorList.add(
-						"MinimumDistance in LocationData Class is not greater than 0.");
+						"MinimumDistance in LocationResult Class is not greater than 0.");
 			}
 		}
 
@@ -794,7 +801,7 @@ public class LocationData implements ProcessingInt {
 		if (jsonErrorEllipse != null) {
 			if (!jsonErrorEllipse.isValid()) {
 				// hypocenter invalid
-				errorList.add("Invalid ErrorEllipse in LocationData Class.");
+				errorList.add("Invalid ErrorEllipse in LocationResult Class.");
 			}
 		}
 
@@ -810,10 +817,10 @@ public class LocationData implements ProcessingInt {
 	}
 
 	/**
-	 * @return the associatedData
+	 * @return the supportingData
 	 */
-	public ArrayList<Pick> getAssociatedData() {
-		return associatedData;
+	public ArrayList<Pick> getSupportingData() {
+		return supportingData;
 	}
 
 	/**
@@ -916,11 +923,11 @@ public class LocationData implements ProcessingInt {
 	}
 
 	/**
-	 * @param associatedData
-	 *            the associatedData to set
+	 * @param supportingData
+	 *            the supportingData to set
 	 */
-	public void setAssociatedData(ArrayList<Pick> associatedData) {
-		this.associatedData = associatedData;
+	public void setSupportingData(ArrayList<Pick> supportingData) {
+		this.supportingData = supportingData;
 	}
 
 	/**

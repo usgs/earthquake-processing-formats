@@ -109,9 +109,9 @@ public class LocationRequest implements ProcessingInt {
 	 */
 	private Boolean useSVD;
 	/**
-	 * A LocationData object to contain the output from the locator
+	 * A LocationResult object to contain the output from the locator
 	 */
-	private LocationData outputData;
+	private LocationResult outputData;
 
 	/**
 	 * The constructor for the LocationRequest class. Initializes members to
@@ -139,7 +139,7 @@ public class LocationRequest implements ProcessingInt {
 	/**
 	 * Advanced constructor
 	 *
-	 * The advanced constructor for the LocationData class. Initializes members
+	 * The advanced constructor for the LocationResult class. Initializes members
 	 * to provided values.
 	 *
 	 * @param newType
@@ -397,7 +397,7 @@ public class LocationRequest implements ProcessingInt {
 		// Output values
 		// outputData
 		if (newJSONObject.containsKey(OUTPUTDATA_KEY)) {
-			outputData = new LocationData(
+			outputData = new LocationResult(
 					(JSONObject) newJSONObject.get(OUTPUTDATA_KEY));
 		} else {
 			outputData = null;
@@ -430,7 +430,7 @@ public class LocationRequest implements ProcessingInt {
 		Double jsonBayesianSpread = getBayesianSpread();
 		Boolean jsonUseRSTT = getUseRSTT();
 		Boolean jsonUseSVD = getUseSVD();
-		LocationData jsonOutputData = getOutputData();
+		LocationResult jsonOutputData = getOutputData();
 
 		// Required values
 		// type
@@ -571,7 +571,7 @@ public class LocationRequest implements ProcessingInt {
 		// Double jsonBayesianSpread = getBayesianSpread();
 		// Boolean jsonUseRSTT = getUseRSTT();
 		// Boolean jsonUseSVD = getUseSVD();
-		LocationData jsonOutputData = getOutputData();
+		LocationResult jsonOutputData = getOutputData();
 
 		ArrayList<String> errorList = new ArrayList<String>();
 
@@ -624,8 +624,15 @@ public class LocationRequest implements ProcessingInt {
 				Pick jsonPick = ((Pick) pickIterator.next());
 
 				if (!jsonPick.isValid()) {
-					errorList.add(
-							"Invalid Pick in InputData in LocationRequest Class");
+					    ArrayList<String> pickErrorList = jsonPick.getErrors();
+
+              // combine the errors into a single string
+              String errorString = new String();
+              for (int i = 0; i < pickErrorList.size(); i++) {
+                errorString += " " + pickErrorList.get(i);
+              }   
+              errorList.add(
+              "Invalid Pick in InputData in LocationRequest Class: " + errorString);          
 					break;
 				}
 			}
@@ -649,14 +656,14 @@ public class LocationRequest implements ProcessingInt {
 	/**
 	 * @return the outputData
 	 */
-	public LocationData getOutputData() {
+	public LocationResult getOutputData() {
 		return outputData;
 	}
 	/**
 	 * @param outputData
 	 *            the outputData to set
 	 */
-	public void setOutputData(LocationData outputData) {
+	public void setOutputData(LocationResult outputData) {
 		this.outputData = outputData;
 	}
 	/**

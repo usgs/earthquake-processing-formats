@@ -63,7 +63,7 @@ public class LocationRequestTest {
 			+ "\"MaximumHorizontalProjection\":1.984,\"E0\":{\"Azimuth\":-121.44,"
 			+ "\"Error\":40.3344,\"Dip\":32.44},\"E1\":{\"Azimuth\":22.64,"
 			+ "\"Error\":12.5,\"Dip\":2.44},\"E2\":{\"Azimuth\":22.64,"
-			+ "\"Error\":12.5,\"Dip\":2.44}},\"AssociatedData\":[{\"Site\":"
+			+ "\"Error\":12.5,\"Dip\":2.44}},\"SupportingData\":[{\"Site\":"
 			+ "{\"Station\":\"BMN\",\"Network\":\"LB\",\"Channel\":\"HHZ\","
 			+ "\"Location\":\"01\"},\"PickedPhase\":\"P\",\"Use\":true,"
 			+ "\"AssociatedPhase\":\"P\",\"Time\":\"2015-12-28T21:32:24.017Z\","
@@ -156,19 +156,19 @@ public class LocationRequestTest {
 	public void checkData(LocationRequest locationRequestObject,
 			String TestName) {
 
-		// check locationDataObject.sourceLatitude
+		// check LocationResultObject.sourceLatitude
 		assertEquals(TestName + " Latitude Equals", SOURCELATITUDE,
 				locationRequestObject.getSourceLatitude(), 0);
 
-		// check locationDataObject.sourceLongitude
+		// check LocationResultObject.sourceLongitude
 		assertEquals(TestName + " Longitude Equals", SOURCELONGITUDE,
 				locationRequestObject.getSourceLongitude(), 0);
 
-		// check locationDataObject.sourceDepth
+		// check LocationResultObject.sourceDepth
 		assertEquals(TestName + " Depth Equals", SOURCEDEPTH,
 				locationRequestObject.getSourceDepth(), 0);
 
-		// check locationDataObject.sourceOriginTime
+		// check LocationResultObject.sourceOriginTime
 		assertEquals(TestName + " OriginTime Equals", SOURCEORIGINTIME,
 				locationRequestObject.getSourceOriginTime());
 
