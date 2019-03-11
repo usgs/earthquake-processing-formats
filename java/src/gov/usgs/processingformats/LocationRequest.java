@@ -30,7 +30,6 @@ public class LocationRequest implements ProcessingInt {
 	public static final String ISBAYESIANDEPTH_KEY = "IsBayesianDepth";
 	public static final String BAYESIANDEPTH_KEY = "BayesianDepth";
 	public static final String BAYESIANSPREAD_KEY = "BayesianSpread";
-	public static final String USERSTT_KEY = "UseRSTT";
 	public static final String USESVD_KEY = "UseSVD";
 	public static final String OUTPUTDATA_KEY = "OutputData";
 
@@ -100,18 +99,13 @@ public class LocationRequest implements ProcessingInt {
 	private Double bayesianSpread;
 
 	/**
-	 * Optional Boolean indicating whether to use RSTT
-	 */
-	private Boolean useRSTT;
-
-	/**
 	 * Optional Boolean indicating whether use SVD
 	 */
 	private Boolean useSVD;
 	/**
-	 * A LocationData object to contain the output from the locator
+	 * A LocationResult object to contain the output from the locator
 	 */
-	private LocationData outputData;
+	private LocationResult outputData;
 
 	/**
 	 * The constructor for the LocationRequest class. Initializes members to
@@ -131,7 +125,6 @@ public class LocationRequest implements ProcessingInt {
 		isBayesianDepth = null;
 		bayesianDepth = null;
 		bayesianSpread = null;
-		useRSTT = null;
 		useSVD = null;
 		outputData = null;
 	}
@@ -139,7 +132,7 @@ public class LocationRequest implements ProcessingInt {
 	/**
 	 * Advanced constructor
 	 *
-	 * The advanced constructor for the LocationData class. Initializes members
+	 * The advanced constructor for the LocationResult class. Initializes members
 	 * to provided values.
 	 *
 	 * @param newType
@@ -174,8 +167,6 @@ public class LocationRequest implements ProcessingInt {
 	 *            - A Double containing the bayesian depth to use, null to omit
 	 * @param newBayesianSpread
 	 *            - A Double containing the bayesian spread to use, null to omit
-	 * @param newUseRSTT
-	 *            - A Boolean indicating whether to use RSTT, null to omit
 	 * @param newUseSVD
 	 *            - A Boolean indicating whether to use SVD, null to omit
 	 */
@@ -185,13 +176,13 @@ public class LocationRequest implements ProcessingInt {
 			ArrayList<Pick> newInputData, Boolean newIsLocationNew,
 			Boolean newIsLocationHeld, Boolean newIsDepthHeld,
 			Boolean newIsBayesianDepth, Double newBayesianDepth,
-			Double newBayesianSpread, Boolean newUseRSTT, Boolean newUseSVD) {
+			Double newBayesianSpread, Boolean newUseSVD) {
 
 		reload(newType, newEarthModel, newSourceLatitude, newSourceLongitude,
 				newSourceOriginTime, newSourceDepth, newInputData,
 				newIsLocationNew, newIsLocationHeld, newIsDepthHeld,
 				newIsBayesianDepth, newBayesianDepth, newBayesianSpread,
-				newUseRSTT, newUseSVD);
+				newUseSVD);
 	}
 
 	/**
@@ -233,8 +224,6 @@ public class LocationRequest implements ProcessingInt {
 	 *            - A Double containing the bayesian depth to use, null to omit
 	 * @param newBayesianSpread
 	 *            - A Double containing the bayesian spread to use, null to omit
-	 * @param newUseRSTT
-	 *            - A Boolean indicating whether to use RSTT, null to omit
 	 * @param newUseSVD
 	 *            - A Boolean indicating whether to use SVD, null to omit
 	 */
@@ -244,7 +233,7 @@ public class LocationRequest implements ProcessingInt {
 			ArrayList<Pick> newInputData, Boolean newIsLocationNew,
 			Boolean newIsLocationHeld, Boolean newIsDepthHeld,
 			Boolean newIsBayesianDepth, Double newBayesianDepth,
-			Double newBayesianSpread, Boolean newUseRSTT, Boolean newUseSVD) {
+			Double newBayesianSpread, Boolean newUseSVD) {
 
 		type = newType;
 		earthModel = newEarthModel;
@@ -259,7 +248,6 @@ public class LocationRequest implements ProcessingInt {
 		isBayesianDepth = newIsBayesianDepth;
 		bayesianDepth = newBayesianDepth;
 		bayesianSpread = newBayesianSpread;
-		useRSTT = newUseRSTT;
 		useSVD = newUseSVD;
 		outputData = null;
 	}
@@ -380,13 +368,6 @@ public class LocationRequest implements ProcessingInt {
 			bayesianSpread = null;
 		}
 
-		// useRSTT
-		if (newJSONObject.containsKey(USERSTT_KEY)) {
-			useRSTT = (boolean) newJSONObject.get(USERSTT_KEY);
-		} else {
-			useRSTT = null;
-		}
-
 		// useSVD
 		if (newJSONObject.containsKey(USESVD_KEY)) {
 			useSVD = (boolean) newJSONObject.get(USESVD_KEY);
@@ -397,7 +378,7 @@ public class LocationRequest implements ProcessingInt {
 		// Output values
 		// outputData
 		if (newJSONObject.containsKey(OUTPUTDATA_KEY)) {
-			outputData = new LocationData(
+			outputData = new LocationResult(
 					(JSONObject) newJSONObject.get(OUTPUTDATA_KEY));
 		} else {
 			outputData = null;
@@ -428,9 +409,8 @@ public class LocationRequest implements ProcessingInt {
 		Boolean jsonIsBayesianDepth = getIsBayesianDepth();
 		Double jsonBayesianDepth = getBayesianDepth();
 		Double jsonBayesianSpread = getBayesianSpread();
-		Boolean jsonUseRSTT = getUseRSTT();
 		Boolean jsonUseSVD = getUseSVD();
-		LocationData jsonOutputData = getOutputData();
+		LocationResult jsonOutputData = getOutputData();
 
 		// Required values
 		// type
@@ -514,11 +494,6 @@ public class LocationRequest implements ProcessingInt {
 			newJSONObject.put(BAYESIANSPREAD_KEY, jsonBayesianSpread);
 		}
 
-		// use RSTT
-		if (jsonUseRSTT != null) {
-			newJSONObject.put(USERSTT_KEY, jsonUseRSTT);
-		}
-
 		// use SVD
 		if (jsonUseSVD != null) {
 			newJSONObject.put(USESVD_KEY, jsonUseSVD);
@@ -569,9 +544,8 @@ public class LocationRequest implements ProcessingInt {
 		// Boolean jsonIsBayesianDepth = getIsBayesianDepth();
 		// Double jsonBayesianDepth = getBayesianDepth();
 		// Double jsonBayesianSpread = getBayesianSpread();
-		// Boolean jsonUseRSTT = getUseRSTT();
 		// Boolean jsonUseSVD = getUseSVD();
-		LocationData jsonOutputData = getOutputData();
+		LocationResult jsonOutputData = getOutputData();
 
 		ArrayList<String> errorList = new ArrayList<String>();
 
@@ -624,8 +598,15 @@ public class LocationRequest implements ProcessingInt {
 				Pick jsonPick = ((Pick) pickIterator.next());
 
 				if (!jsonPick.isValid()) {
-					errorList.add(
-							"Invalid Pick in InputData in LocationRequest Class");
+					    ArrayList<String> pickErrorList = jsonPick.getErrors();
+
+              // combine the errors into a single string
+              String errorString = new String();
+              for (int i = 0; i < pickErrorList.size(); i++) {
+                errorString += " " + pickErrorList.get(i);
+              }   
+              errorList.add(
+              "Invalid Pick in InputData in LocationRequest Class: " + errorString);          
 					break;
 				}
 			}
@@ -649,14 +630,14 @@ public class LocationRequest implements ProcessingInt {
 	/**
 	 * @return the outputData
 	 */
-	public LocationData getOutputData() {
+	public LocationResult getOutputData() {
 		return outputData;
 	}
 	/**
 	 * @param outputData
 	 *            the outputData to set
 	 */
-	public void setOutputData(LocationData outputData) {
+	public void setOutputData(LocationResult outputData) {
 		this.outputData = outputData;
 	}
 	/**
@@ -736,12 +717,6 @@ public class LocationRequest implements ProcessingInt {
 	 */
 	public Double getBayesianSpread() {
 		return bayesianSpread;
-	}
-	/**
-	 * @return the useRSTT
-	 */
-	public Boolean getUseRSTT() {
-		return useRSTT;
 	}
 	/**
 	 * @return the useSVD
@@ -852,14 +827,6 @@ public class LocationRequest implements ProcessingInt {
 	 */
 	public void setBayesianSpread(Double bayesianSpread) {
 		this.bayesianSpread = bayesianSpread;
-	}
-
-	/**
-	 * @param useRSTT
-	 *            the useRSTT to set
-	 */
-	public void setUseRSTT(Boolean useRSTT) {
-		this.useRSTT = useRSTT;
 	}
 
 	/**

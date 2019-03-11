@@ -12,7 +12,7 @@ public class LocationRequestTest {
 
 	public static final String LOCATIONREQUEST_STRING = "{\"EarthModel\":\"AK135\","
 			+ "\"SourceLatitude\":40.3344,\"SourceLongitude\":-121.44,"
-			+ "\"UseRSTT\":false,\"IsDepthHeld\":false,\"Type\":\"RayLoc\","
+			+ "\"IsDepthHeld\":false,\"Type\":\"RayLoc\","
 			+ "\"SourceDepth\":32.44,\"IsLocationHeld\":false,\"BayesianSpread\":"
 			+ "20.3,\"UseSVD\":true,\"BayesianDepth\":66.7,"
 			+ "\"SourceOriginTime\":\"2015-12-28T21:32:24.017Z\",\"InputData\":"
@@ -53,7 +53,6 @@ public class LocationRequestTest {
 	public static boolean ISBAYESIANDEPTH = true;
 	public static double BAYESIANDEPTH = 66.7;
 	public static double BAYESIANSPREAD = 20.3;
-	public static boolean USERSTT = false;
 	public static boolean USESVD = true;
 
 	public static final String OUTPUTDATA_STRING = "{\"MinimumDistance\":2.14,"
@@ -63,7 +62,7 @@ public class LocationRequestTest {
 			+ "\"MaximumHorizontalProjection\":1.984,\"E0\":{\"Azimuth\":-121.44,"
 			+ "\"Error\":40.3344,\"Dip\":32.44},\"E1\":{\"Azimuth\":22.64,"
 			+ "\"Error\":12.5,\"Dip\":2.44},\"E2\":{\"Azimuth\":22.64,"
-			+ "\"Error\":12.5,\"Dip\":2.44}},\"AssociatedData\":[{\"Site\":"
+			+ "\"Error\":12.5,\"Dip\":2.44}},\"SupportingData\":[{\"Site\":"
 			+ "{\"Station\":\"BMN\",\"Network\":\"LB\",\"Channel\":\"HHZ\","
 			+ "\"Location\":\"01\"},\"PickedPhase\":\"P\",\"Use\":true,"
 			+ "\"AssociatedPhase\":\"P\",\"Time\":\"2015-12-28T21:32:24.017Z\","
@@ -89,7 +88,7 @@ public class LocationRequestTest {
 				EARTHMODEL, SOURCELATITUDE, SOURCELONGITUDE, SOURCEORIGINTIME,
 				SOURCEDEPTH, buildInputData(), ISLOCATIONNEW, ISLOCATIONHELD,
 				ISDEPTHHELD, ISBAYESIANDEPTH, BAYESIANDEPTH, BAYESIANSPREAD,
-				USERSTT, USESVD);
+				USESVD);
 
 		// write out to a string
 		String jsonString = Utility
@@ -132,7 +131,7 @@ public class LocationRequestTest {
 				EARTHMODEL, SOURCELATITUDE, SOURCELONGITUDE, SOURCEORIGINTIME,
 				SOURCEDEPTH, buildInputData(), ISLOCATIONNEW, ISLOCATIONHELD,
 				ISDEPTHHELD, ISBAYESIANDEPTH, BAYESIANDEPTH, BAYESIANSPREAD,
-				USERSTT, USESVD);
+				USESVD);
 
 
 		// Successful validation
@@ -145,7 +144,7 @@ public class LocationRequestTest {
 				EARTHMODEL, SOURCELATITUDE, null, SOURCEORIGINTIME,
 				SOURCEDEPTH, null, ISLOCATIONNEW, ISLOCATIONHELD,
 				ISDEPTHHELD, ISBAYESIANDEPTH, BAYESIANDEPTH, BAYESIANSPREAD,
-				USERSTT, USESVD);
+				USESVD);
 
 		rc = badLocationRequestObject.isValid();
 
@@ -156,19 +155,19 @@ public class LocationRequestTest {
 	public void checkData(LocationRequest locationRequestObject,
 			String TestName) {
 
-		// check locationDataObject.sourceLatitude
+		// check LocationResultObject.sourceLatitude
 		assertEquals(TestName + " Latitude Equals", SOURCELATITUDE,
 				locationRequestObject.getSourceLatitude(), 0);
 
-		// check locationDataObject.sourceLongitude
+		// check LocationResultObject.sourceLongitude
 		assertEquals(TestName + " Longitude Equals", SOURCELONGITUDE,
 				locationRequestObject.getSourceLongitude(), 0);
 
-		// check locationDataObject.sourceDepth
+		// check LocationResultObject.sourceDepth
 		assertEquals(TestName + " Depth Equals", SOURCEDEPTH,
 				locationRequestObject.getSourceDepth(), 0);
 
-		// check locationDataObject.sourceOriginTime
+		// check LocationResultObject.sourceOriginTime
 		assertEquals(TestName + " OriginTime Equals", SOURCEORIGINTIME,
 				locationRequestObject.getSourceOriginTime());
 
@@ -210,12 +209,6 @@ public class LocationRequestTest {
 		if (locationRequestObject.getBayesianSpread() != null) {
 			assertEquals(TestName + " Bayesian Spread Equals", BAYESIANSPREAD,
 					locationRequestObject.getBayesianSpread(), 0);
-		}
-
-		// check locationRequestObject.useRSTT
-		if (locationRequestObject.getUseRSTT() != null) {
-			assertEquals(TestName + " UseRSTT Equals", USERSTT,
-					locationRequestObject.getUseRSTT());
 		}
 
 		// check locationRequestObject.useSVD

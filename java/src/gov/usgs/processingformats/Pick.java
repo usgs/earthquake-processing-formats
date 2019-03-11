@@ -565,7 +565,7 @@ public class Pick implements ProcessingInt {
 		Boolean jsonUse = getUse();
 		String jsonPickedPhase = getPickedPhase();
 		String jsonAssociatedPhase = getAssociatedPhase();
-		// String jsonLocatedPhase = getLocatedPhase();
+		String jsonLocatedPhase = getLocatedPhase();
 		// Double jsonResidual = getResidual();
 		// Double jsonDistance = getDistance();
 		// Double jsonAzimuth = getAzimuth();
@@ -626,26 +626,32 @@ public class Pick implements ProcessingInt {
 			errorList.add("No Use in Pick Class.");
 		}
 
+		// Optional Keys
 		// pickedPhase
-		if (jsonPickedPhase == null) {
-			// pickedPhase not found
-			errorList.add("No Picked Phase in Pick Class.");
-		} else if (jsonPickedPhase.isEmpty()) {
-			// pickedPhase empty
-			errorList.add("Empty Picked Phase in Pick Class.");
+		if (jsonPickedPhase != null) {
+			if (jsonPickedPhase.isEmpty()) {
+				// pickedPhase empty
+				errorList.add("Empty Picked Phase in Pick Class.");
+			}
 		}
 
 		// associatedPhase
-		if (jsonAssociatedPhase == null) {
-			// associatedPhase not found
-			errorList.add("No Associated Phase in Pick Class.");
-		} else if (jsonAssociatedPhase.isEmpty()) {
-			// associatedPhase empty
-			errorList.add("Empty Associated Phase in Pick Class.");
+		if (jsonAssociatedPhase != null) {
+			if (jsonAssociatedPhase.isEmpty()) {
+				// associatedPhase empty
+				errorList.add("Empty Associated Phase in Pick Class.");
+			}
 		}
 
-		// Optional (Output) Keys
-		// Currently no validation criteria for optional (output) values
+		// locatedPhase
+		if (jsonLocatedPhase != null) {
+			if (jsonLocatedPhase.isEmpty()) {
+				// locatedPhase empty
+				errorList.add("Empty Located Phase in Pick Class.");
+			}
+		}		
+
+		// Currently no validation criteria for other optional (output) values
 
 		// success
 		return (errorList);

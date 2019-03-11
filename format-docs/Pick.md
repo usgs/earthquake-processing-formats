@@ -54,16 +54,16 @@ in the ISO8601 format `YYYY-MM-DDTHH:MM:SS.SSSZ`.
 should be used.
 * Quality - A number indicating the pick quality.
 * Use - A boolean flag indicating whether the pick should be used in a location.
-* PickedPhase - A string that identifies the seismic phase that the picking
-algorithm identified.
-* AssociatedPhase - A string that identifies the seismic phase that the
-association algorithm identified.
 
 **Output Values:**
 
 The following are supplementary values that **may or may not** be provided by
 various algorithms.
 
+* PickedPhase - A string that identifies the seismic phase that the picking
+algorithm identified.
+* AssociatedPhase - A string that identifies the seismic phase that the
+association algorithm identified.
 * LocatedPhase - A string that identifies the seismic phase the locator selected.
 * Residual - A number containing the phase residual in seconds.
 * Distance - A number containing the station distance in degrees.

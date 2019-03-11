@@ -1,13 +1,13 @@
-# Location Data Format Specification
+# Location Result Format Specification
 
 ## Description
 
-Location Data is a format designed to encode the specific information for an
+Location Result is a format designed to encode the specific information for an
 earthquake event location.  Location uses the
 [JSON standard](http://www.json.org).
 
 ## Usage
-Location Data is intended for use as an input/output message for seismic
+Location Result is intended for use as an input/output message for seismic
 processing algorithms.
 
 ## Output
@@ -17,17 +17,17 @@ processing algorithms.
       {
           "Latitude"        : Number,
           "Longitude"       : Number,
-          "Depth"           : Number,         
+          "Depth"           : Number,
           "Time"            : ISO8601,
           "LatitudeError"   : Number,
           "LongitudeError"  : Number,
           "DepthError"      : Number,
           "TimeError"       : Number
-      },           
+      },
       "NumberOfAssociatedStations" : Number,
       "NumberOfAssociatedPhases"   : Number,
       "NumberOfUsedStations"       : Number,
-      "NumberOfUsedPhases"         : Number,   
+      "NumberOfUsedPhases"         : Number,
       "Gap"             : Number,  
       "SecondaryGap"    : Number,  
       "MinimumDistance" : Number,
@@ -36,6 +36,7 @@ processing algorithms.
       "BayesianDepth" : Number,
       "BayesianRange" : Number,
       "DepthImportance" : Number,
+      "LocatorExitCode" : String,
       "ErrorEllipse" :
       {
           "MaximumHorizontalProjection" : Number,
@@ -58,9 +59,9 @@ processing algorithms.
               "Error"   : Number,
               "Azimuth" : Number,
               "Dip"     : Number
-          }                  
+          }
       },
-      "AssociatedData" :
+      "SupportingData" :
       [
         {
           "ID"        : String,
@@ -88,21 +89,23 @@ processing algorithms.
           "Importance"   : Number
         },
         ...
-      ]                
+      ]
     }
 ```
 
 ## Glossary
 **Required Values:**
+
 * Hypocenter - An object containing the hypocenter of the Location, see
 [Hypocenter](Hypocenter.md).
-* AssociatedData - An array of [Pick](Pick.md) objects associated with this
+* SupportingData - An array of [Pick](Pick.md) objects associated with this
 Location.
 
 **Optional Values:**
 
 The following are supplementary values that **may or may not** be provided by
 various algorithms.
+
 * NumberOfAssociatedStations - A number that indicates how many stations were
 associated with the location.
 * NumberOfAssociatedPhases - A number that indicates how many phases were
@@ -111,8 +114,8 @@ associated with the location.
 used in the location.
 * NumberOfUsedPhases - A number that indicates how many phases were
 used in the location.
-* Gap - A number containing the largest azmuthal gap in degrees.
-* SecondaryGap - A number containing the second largest azmuthal gap in degrees.
+* Gap - A number containing the largest azimuthal gap in degrees.
+* SecondaryGap - A number containing the second largest azimuthal gap in degrees.
 * MinimumDistance - The minimum distance to the closest station in degrees
 * RMS - A number that indicates the Standard Error of the residual in seconds.
 * Quality - A string containing the quality flag.
@@ -122,5 +125,7 @@ kilometers
 kilometers
 * DepthImportance - A number containing the importance from the bayesian
 depth constraint
+* LocatorExitCode - A String containing the locator exit code, allowed values
+are: "Success", "DidNotMove", "ErrorsNotComputed", "Failed", and "Unknown"
 * ErrorEllipse - An object containing the error ellipse of the Location, see
 [ErrorEllipse](ErrorEllipse.md)
