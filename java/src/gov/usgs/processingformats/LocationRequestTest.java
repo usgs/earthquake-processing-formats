@@ -12,7 +12,7 @@ public class LocationRequestTest {
 
 	public static final String LOCATIONREQUEST_STRING = "{\"EarthModel\":\"AK135\","
 			+ "\"SourceLatitude\":40.3344,\"SourceLongitude\":-121.44,"
-			+ "\"UseRSTT\":false,\"IsDepthHeld\":false,\"Type\":\"RayLoc\","
+			+ "\"IsDepthHeld\":false,\"Type\":\"RayLoc\","
 			+ "\"SourceDepth\":32.44,\"IsLocationHeld\":false,\"BayesianSpread\":"
 			+ "20.3,\"UseSVD\":true,\"BayesianDepth\":66.7,"
 			+ "\"SourceOriginTime\":\"2015-12-28T21:32:24.017Z\",\"InputData\":"
@@ -53,7 +53,6 @@ public class LocationRequestTest {
 	public static boolean ISBAYESIANDEPTH = true;
 	public static double BAYESIANDEPTH = 66.7;
 	public static double BAYESIANSPREAD = 20.3;
-	public static boolean USERSTT = false;
 	public static boolean USESVD = true;
 
 	public static final String OUTPUTDATA_STRING = "{\"MinimumDistance\":2.14,"
@@ -89,7 +88,7 @@ public class LocationRequestTest {
 				EARTHMODEL, SOURCELATITUDE, SOURCELONGITUDE, SOURCEORIGINTIME,
 				SOURCEDEPTH, buildInputData(), ISLOCATIONNEW, ISLOCATIONHELD,
 				ISDEPTHHELD, ISBAYESIANDEPTH, BAYESIANDEPTH, BAYESIANSPREAD,
-				USERSTT, USESVD);
+				USESVD);
 
 		// write out to a string
 		String jsonString = Utility
@@ -132,7 +131,7 @@ public class LocationRequestTest {
 				EARTHMODEL, SOURCELATITUDE, SOURCELONGITUDE, SOURCEORIGINTIME,
 				SOURCEDEPTH, buildInputData(), ISLOCATIONNEW, ISLOCATIONHELD,
 				ISDEPTHHELD, ISBAYESIANDEPTH, BAYESIANDEPTH, BAYESIANSPREAD,
-				USERSTT, USESVD);
+				USESVD);
 
 
 		// Successful validation
@@ -145,7 +144,7 @@ public class LocationRequestTest {
 				EARTHMODEL, SOURCELATITUDE, null, SOURCEORIGINTIME,
 				SOURCEDEPTH, null, ISLOCATIONNEW, ISLOCATIONHELD,
 				ISDEPTHHELD, ISBAYESIANDEPTH, BAYESIANDEPTH, BAYESIANSPREAD,
-				USERSTT, USESVD);
+				USESVD);
 
 		rc = badLocationRequestObject.isValid();
 
@@ -210,12 +209,6 @@ public class LocationRequestTest {
 		if (locationRequestObject.getBayesianSpread() != null) {
 			assertEquals(TestName + " Bayesian Spread Equals", BAYESIANSPREAD,
 					locationRequestObject.getBayesianSpread(), 0);
-		}
-
-		// check locationRequestObject.useRSTT
-		if (locationRequestObject.getUseRSTT() != null) {
-			assertEquals(TestName + " UseRSTT Equals", USERSTT,
-					locationRequestObject.getUseRSTT());
 		}
 
 		// check locationRequestObject.useSVD

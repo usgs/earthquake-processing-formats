@@ -30,9 +30,9 @@ public class LocationResultTest {
 			+ "\"Hypocenter\":{\"LatitudeError\":12.5,\"DepthError\":2.44,"
 			+ "\"TimeError\":1.984,\"Latitude\":40.3344,\"Time\":"
 			+ "\"2015-12-28T21:32:24.017Z\",\"Longitude\":-121.44,\"Depth\":32.44,"
-			+ "\"LongitudeError\":22.64},\"DepthImportance\":1.8,\"Quality\":\"A\","
-			+ "\"Gap\":33.67,\"BayesianDepth\":66.7,\"SecondaryGap\":33.67,"
-			+ "\"RMS\":3.8,\"NumberOfAssociatedStations\":11,"
+      + "\"LongitudeError\":22.64},\"DepthImportance\":1.8,\"LocatorExitCode\":"
+      + "\"Success\",\"Quality\":\"A\",\"Gap\":33.67,\"BayesianDepth\":66.7,"
+      + "\"SecondaryGap\":33.67,\"RMS\":3.8,\"NumberOfAssociatedStations\":11,"
 			+ "\"NumberOfAssociatedPhases\":22,\"NumberOfUsedPhases\":44}";
 
 	public static double LATITUDE = 40.3344;
@@ -70,6 +70,7 @@ public class LocationResultTest {
 	public static double BAYESIANDEPTH = 66.7;
 	public static double BAYESIANRANGE = 20.3;
 	public static double DEPTHIMPORTANCE = 1.8;
+  public static String LOCATOREXITCODE = "Success";
 
 	public static double E0ERROR = 40.3344;
 	public static double E0AZIMUTH = -121.44;
@@ -95,7 +96,7 @@ public class LocationResultTest {
 				DEPTHERROR, buildSupportingData(), NUMASSOCIATEDSTATIONS,
 				NUMASSOCIATEDPHASES, NUMUSEDSTATIONS, NUMUSEDPHASES, GAP,
 				SECONDARYGAP, MINIMUMDISTANCE, RMS, QUALITY, BAYESIANDEPTH,
-				BAYESIANRANGE, DEPTHIMPORTANCE, E0ERROR, E0AZIMUTH, E0DIP,
+				BAYESIANRANGE, DEPTHIMPORTANCE, LOCATOREXITCODE, E0ERROR, E0AZIMUTH, E0DIP,
 				E1ERROR, E1AZIMUTH, E1DIP, E2ERROR, E2AZIMUTH, E2DIP,
 				MAXIMUMHORIZONTALPROJECTION, MAXIMUMVERTICALPROJECTION,
 				EQUIVILENTHORIZONTALRADIUS);
@@ -160,7 +161,7 @@ public class LocationResultTest {
 				DEPTHERROR, buildSupportingData(), NUMASSOCIATEDSTATIONS,
 				NUMASSOCIATEDPHASES, NUMUSEDSTATIONS, NUMUSEDPHASES, GAP,
 				SECONDARYGAP, MINIMUMDISTANCE, RMS, QUALITY, BAYESIANDEPTH,
-				BAYESIANRANGE, DEPTHIMPORTANCE, E0ERROR, E0AZIMUTH, E0DIP,
+				BAYESIANRANGE, DEPTHIMPORTANCE, LOCATOREXITCODE, E0ERROR, E0AZIMUTH, E0DIP,
 				E1ERROR, E1AZIMUTH, E1DIP, E2ERROR, E2AZIMUTH, E2DIP,
 				MAXIMUMHORIZONTALPROJECTION, MAXIMUMVERTICALPROJECTION,
 				EQUIVILENTHORIZONTALRADIUS);
@@ -176,7 +177,7 @@ public class LocationResultTest {
 				DEPTHERROR, null, NUMASSOCIATEDSTATIONS, NUMASSOCIATEDPHASES,
 				NUMUSEDSTATIONS, NUMUSEDPHASES, GAP, SECONDARYGAP,
 				MINIMUMDISTANCE, RMS, QUALITY, BAYESIANDEPTH, BAYESIANRANGE,
-				DEPTHIMPORTANCE, E0ERROR, E0AZIMUTH, E0DIP, E1ERROR, null,
+				DEPTHIMPORTANCE, LOCATOREXITCODE, E0ERROR, E0AZIMUTH, E0DIP, E1ERROR, null,
 				E1DIP, E2ERROR, E2AZIMUTH, null, MAXIMUMHORIZONTALPROJECTION,
 				MAXIMUMVERTICALPROJECTION, EQUIVILENTHORIZONTALRADIUS);
 
@@ -298,6 +299,12 @@ public class LocationResultTest {
 		if (LocationResultObject.getDepthImportance() != null) {
 			assertEquals(TestName + " Depth Importance Equals", DEPTHIMPORTANCE,
 					LocationResultObject.getDepthImportance(), 0);
+		}
+
+		// check LocationResultObject.locatorExitCode
+		if (LocationResultObject.getLocatorExitCode() != null) {
+			assertEquals(TestName + " Locator Exit Code Equals", LOCATOREXITCODE,
+					LocationResultObject.getLocatorExitCode());
 		}
 
 		// error ellipse

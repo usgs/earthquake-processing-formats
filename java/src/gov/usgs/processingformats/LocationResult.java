@@ -29,7 +29,8 @@ public class LocationResult implements ProcessingInt {
 	public static final String QUALITY_KEY = "Quality";
 	public static final String BAYESIANDEPTH_KEY = "BayesianDepth";
 	public static final String BAYESIANRANGE_KEY = "BayesianRange";
-	public static final String DEPTHIMPORTANCE_KEY = "DepthImportance";
+  public static final String DEPTHIMPORTANCE_KEY = "DepthImportance";
+  public static final String LOCATOREXITCODE_KEY = "LocatorExitCode";
 	public static final String ERRORELLIPSE_KEY = "ErrorEllipse";
 
 	/**
@@ -103,6 +104,11 @@ public class LocationResult implements ProcessingInt {
 	private Double depthImportance;
 
 	/**
+	 * Optional String containing the locator exit code
+	 */
+	private String locatorExitCode;
+
+	/**
 	 * Optional error ellipse
 	 */
 	private ErrorEllipse errorEllipse;
@@ -125,7 +131,8 @@ public class LocationResult implements ProcessingInt {
 		quality = null;
 		bayesianDepth = null;
 		bayesianRange = null;
-		depthImportance = null;
+    depthImportance = null;
+    locatorExitCode = null;
 		errorEllipse = null;
 	}
 
@@ -184,6 +191,8 @@ public class LocationResult implements ProcessingInt {
 	 * @param newDepthImportance
 	 *            - A Double containing the depth importance to use, null to
 	 *            omit
+   * @param newLocatorExitCode
+   *            - A String containing the locator exit code, null to omit
 	 * @param newE0Error
 	 *            - A Double containing the length of the first axis of the
 	 *            error ellipsoid in kilometers
@@ -229,19 +238,21 @@ public class LocationResult implements ProcessingInt {
 			Integer newUsedPhases, Double newGap, Double newSecondaryGap,
 			Double newMinimumDistance, Double newRMS, String newQuality,
 			Double newBayesianDepth, Double newBayesianRange,
-			Double newDepthImportance, Double newE0Error, Double newE0Azimuth,
-			Double newE0Dip, Double newE1Error, Double newE1Azimuth,
-			Double newE1Dip, Double newE2Error, Double newE2Azimuth,
-			Double newE2Dip, Double newMaximumHorizontalProjection,
+      Double newDepthImportance, String newLocatorExitCode, Double newE0Error, 
+      Double newE0Azimuth, Double newE0Dip, Double newE1Error, 
+      Double newE1Azimuth, Double newE1Dip, Double newE2Error, 
+      Double newE2Azimuth, Double newE2Dip, 
+      Double newMaximumHorizontalProjection,
 			Double newMaximumVerticalProjection,
 			Double newEquivalentHorizontalRadius) {
 
 		this(new Hypocenter(newLatitude, newLongitude, newTime, newDepth,
-				newLatitudeError, newLongitudeError, newTimeError,
-				newDepthError), newSupportingData, newAssociatedStations,
-				newAssociatedPhases, newUsedStations, newUsedPhases, newGap,
-				newSecondaryGap, newMinimumDistance, newRMS, newQuality,
-				newBayesianDepth, newBayesianRange, newDepthImportance,
+				    newLatitudeError, newLongitudeError, newTimeError,
+            newDepthError), 
+        newSupportingData, newAssociatedStations, newAssociatedPhases, 
+        newUsedStations, newUsedPhases, newGap, newSecondaryGap, 
+        newMinimumDistance, newRMS, newQuality, newBayesianDepth, 
+        newBayesianRange, newDepthImportance, newLocatorExitCode,
 				new ErrorEllipse(newE0Error, newE0Azimuth, newE0Dip, newE1Error,
 						newE1Azimuth, newE1Dip, newE2Error, newE2Azimuth,
 						newE2Dip, newMaximumHorizontalProjection,
@@ -281,7 +292,7 @@ public class LocationResult implements ProcessingInt {
 			ArrayList<Pick> newSupportingData) {
 		this(new Hypocenter(newLatitude, newLongitude, newTime, newDepth,
 				newLatitudeError, newLongitudeError, newTimeError,
-				newDepthError), newSupportingData, null, null, null, null, null,
+				newDepthError), newSupportingData, null, null, null, null, null, null,
 				null, null, null, null, null, null, null, null);
 	}
 
@@ -301,7 +312,7 @@ public class LocationResult implements ProcessingInt {
 			ArrayList<Pick> newSupportingData) {
 
 		this(newHypocenter, newSupportingData, null, null, null, null, null,
-				null, null, null, null, null, null, null, null);
+				null, null, null, null, null, null, null, null, null);
 	}
 
 	/**
@@ -345,6 +356,8 @@ public class LocationResult implements ProcessingInt {
 	 * @param newDepthImportance
 	 *            - A Double containing the depth importance to use, null to
 	 *            omit
+   * @param newLocatorExitCode
+   *            - A String containing the locator exit code, null to omit
 	 * @param newErrorEllipse
 	 *            - An ErrorEllipse containing the error ellipse to use, null to
 	 *            omit
@@ -355,13 +368,14 @@ public class LocationResult implements ProcessingInt {
 			Integer newUsedPhases, Double newGap, Double newSecondaryGap,
 			Double newMinimumDistance, Double newRMS, String newQuality,
 			Double newBayesianDepth, Double newBayesianRange,
-			Double newDepthImportance, ErrorEllipse newErrorEllipse) {
+      Double newDepthImportance, String newLocatorExitCode, 
+      ErrorEllipse newErrorEllipse) {
 
 		reload(newHypocenter, newSupportingData, newAssociatedStations,
 				newAssociatedPhases, newUsedStations, newUsedPhases, newGap,
 				newSecondaryGap, newMinimumDistance, newRMS, newQuality,
 				newBayesianDepth, newBayesianRange, newDepthImportance,
-				newErrorEllipse);
+				newLocatorExitCode, newErrorEllipse);
 	}
 
 	/**
@@ -406,6 +420,8 @@ public class LocationResult implements ProcessingInt {
 	 * @param newDepthImportance
 	 *            - A Double containing the depth importance to use, null to
 	 *            omit
+   * @param newLocatorExitCode
+   *            - A String containing the locator exit code, null to omit
 	 * @param newErrorEllipse
 	 *            - An ErrorEllipse containing the error ellipse to use, null to
 	 *            omit
@@ -416,7 +432,8 @@ public class LocationResult implements ProcessingInt {
 			Integer newUsedPhases, Double newGap, Double newSecondaryGap,
 			Double newMinimumDistance, Double newRMS, String newQuality,
 			Double newBayesianDepth, Double newBayesianRange,
-			Double newDepthImportance, ErrorEllipse newErrorEllipse) {
+      Double newDepthImportance, String newLocatorExitCode, 
+      ErrorEllipse newErrorEllipse) {
 
 		hypocenter = newHypocenter;
 		supportingData = newSupportingData;
@@ -431,7 +448,8 @@ public class LocationResult implements ProcessingInt {
 		quality = newQuality;
 		bayesianDepth = newBayesianDepth;
 		bayesianRange = newBayesianRange;
-		depthImportance = newDepthImportance;
+    depthImportance = newDepthImportance;
+    locatorExitCode = newLocatorExitCode;
 		errorEllipse = newErrorEllipse;
 	}
 
@@ -562,6 +580,13 @@ public class LocationResult implements ProcessingInt {
 			depthImportance = null;
 		}
 
+		// locatorExitCode
+		if (newJSONObject.containsKey(LOCATOREXITCODE_KEY)) {
+			locatorExitCode = (String) newJSONObject.get(LOCATOREXITCODE_KEY);
+		} else {
+			locatorExitCode = null;
+		}
+
 		// error ellipse
 		if (newJSONObject.containsKey(ERRORELLIPSE_KEY)) {
 			errorEllipse = new ErrorEllipse(
@@ -594,7 +619,8 @@ public class LocationResult implements ProcessingInt {
 		String jsonQuality = getQuality();
 		Double jsonBayesianDepth = getBayesianDepth();
 		Double jsonBayesianRange = getBayesianRange();
-		Double jsonDepthImportance = getDepthImportance();
+    Double jsonDepthImportance = getDepthImportance();
+    String jsonLocatorExitCode = getLocatorExitCode();
 		ErrorEllipse jsonErrorEllipse = getErrorEllipse();
 
 		// hypocenter
@@ -683,6 +709,11 @@ public class LocationResult implements ProcessingInt {
 			newJSONObject.put(DEPTHIMPORTANCE_KEY, jsonDepthImportance);
 		}
 
+		// locator exit code
+		if (jsonLocatorExitCode != null) {
+			newJSONObject.put(LOCATOREXITCODE_KEY, jsonLocatorExitCode);
+		}
+
 		// error ellipse
 		if (jsonErrorEllipse != null) {
 			newJSONObject.put(ERRORELLIPSE_KEY, jsonErrorEllipse.toJSON());
@@ -727,7 +758,8 @@ public class LocationResult implements ProcessingInt {
 		// String jsonQuality = getQuality();
 		// Double jsonBayesianDepth = getBayesianDepth();
 		// Double jsonBayesianRange = getBayesianRange();
-		// Double jsonDepthImportance = getDepthImportance();
+    // Double jsonDepthImportance = getDepthImportance();
+    String jsonLocatorExitCode = getLocatorExitCode();
 		ErrorEllipse jsonErrorEllipse = getErrorEllipse();
 
 		ArrayList<String> errorList = new ArrayList<String>();
@@ -796,6 +828,30 @@ public class LocationResult implements ProcessingInt {
 						"MinimumDistance in LocationResult Class is not greater than 0.");
 			}
 		}
+
+    // locator exit code
+    if (jsonLocatorExitCode != null) {
+      boolean match = false;
+			if (jsonLocatorExitCode.equals("Success")) {
+				match = true;
+			} else if (jsonLocatorExitCode.equals("DidNotMove")) {
+				match = true;
+			} else if (jsonLocatorExitCode.equals("ErrorsNotComputed")) {
+				match = true;
+			} else if (jsonLocatorExitCode.equals("Failed")) {
+				match = true;
+			} else if (jsonLocatorExitCode.equals("Unknown")) {
+				match = true;
+			} else {
+   				match = false;
+			}
+
+			if (!match) {
+				// invalid eventType
+				errorList.add("Invalid locator exit code in LocationResult Class.");
+			}
+    }
+    
 
 		// error ellipse
 		if (jsonErrorEllipse != null) {
@@ -905,6 +961,13 @@ public class LocationResult implements ProcessingInt {
 	 */
 	public Double getDepthImportance() {
 		return depthImportance;
+	}
+
+	/**
+	 * @return the locatorExitCode
+	 */
+	public String getLocatorExitCode() {
+		return locatorExitCode;
 	}
 
 	/**
@@ -1025,6 +1088,14 @@ public class LocationResult implements ProcessingInt {
 	 */
 	public void setDepthImportance(Double depthImportance) {
 		this.depthImportance = depthImportance;
+	}
+
+	/**
+	 * @param locatorExitCode
+	 *            the locatorExitCode to set
+	 */
+	public void setLocatorExitCode(String locatorExitCode) {
+		this.locatorExitCode = locatorExitCode;
 	}
 
 	/**

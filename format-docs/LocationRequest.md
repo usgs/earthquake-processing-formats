@@ -7,16 +7,18 @@ for configuring the locator algorithm.  Locator Request uses the
 [JSON standard](http://www.json.org).
 
 ## Usage
+
 Location Request is intended for use as part of an input/output message for the
 location processing algorithm.
 
 ## Output
+
 ```json
     {
       "Request" :
       {
         "Type" : String,
-        "EarthModel" : String,        
+        "EarthModel" : String,
         "SourceOriginTime" : Number,
         "SourceLatitude"  : Number,
         "SourceLongitude" : Number,
@@ -48,14 +50,13 @@ location processing algorithm.
             "LocatedPhase"    : String
           },
           ...
-        ],        
+        ],
         "IsLocationNew"  : Boolean,
-        "IsLocationHeld" : Boolean,   
+        "IsLocationHeld" : Boolean,
         "IsDepthHeld"    : Boolean,  
         "IsBayesianDepth": Boolean,  
         "BayesianDepth"  : Number,
         "BayesianSpread" : Number,
-        "UseRSTT" : Boolean,
         "UseSVD"  : boolean  
       },
       "OutputData" :
@@ -64,17 +65,17 @@ location processing algorithm.
         {
             "Latitude"        : Number,
             "Longitude"       : Number,
-            "Depth"           : Number,         
+            "Depth"           : Number,
             "Time"            : ISO8601,
             "LatitudeError"   : Number,
             "LongitudeError"  : Number,
             "DepthError"      : Number,
             "TimeError"       : Number
-        },           
+        },
         "NumberOfAssociatedStations" : Number,
         "NumberOfAssociatedPhases"   : Number,
         "NumberOfUsedStations"       : Number,
-        "NumberOfUsedPhases"         : Number,   
+        "NumberOfUsedPhases"         : Number,
         "Gap"             : Number,  
         "SecondaryGap"    : Number,  
         "MinimumDistance" : Number,
@@ -105,7 +106,7 @@ location processing algorithm.
                 "Error"   : Number,
                 "Azimuth" : Number,
                 "Dip"     : Number
-            }                  
+            }
         },
         "AssociatedData" :
         [
@@ -117,7 +118,10 @@ location processing algorithm.
                "Station"   : String,
                "Channel"   : String,
                "Network"   : String,
-               "Location"  : String
+               "Location"  : String,
+               "Latitude"  : Number,
+               "Longitude" : Number,
+               "Elevation" : Number
             },
             "Source" :
             {
@@ -135,12 +139,13 @@ location processing algorithm.
             "Importance"   : Number
           },
           ...
-        ]        
+        ]
       }  
     }
 ```
 
 ## Glossary
+
 **Required Input Values:**
 
 * Type - A String containing the name of the algorithm this request is
@@ -159,6 +164,7 @@ kilometers relative to the WGS84 datum.
 **Optional Input Values:**
 
 The following are supplementary values that **may or may not** be provided.
+
 * IsLocationNew - A boolean flag that indicates if the location has been changed
 outside the locator.
 * IsLocationHeld - A boolean flag that indicates whether the location can be
@@ -171,8 +177,6 @@ spread are to be used.
 relative to the WGS84 datum.
 * BayesianSpread - A number that indicates the standard deviation of the
 bayesian depth in kilometers.
-* UseRSTT - A boolean flag that indicates whether the RSTT regional travel-time
-model is to be used.
 * UseSVD - A boolean flag that indicates whether the singular valued
 decomposition logic is to be used.
 
@@ -181,5 +185,5 @@ decomposition logic is to be used.
 The following are values that are **required** be provided as part of a the
 location information returned.
 
-* OutputData - A [LocationDataData](LocationData.md) object containing the requested
-location information.
+* OutputData - A [LocationResult](LocationResult.md) object containing the
+requested location information.

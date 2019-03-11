@@ -30,7 +30,6 @@ public class LocationRequest implements ProcessingInt {
 	public static final String ISBAYESIANDEPTH_KEY = "IsBayesianDepth";
 	public static final String BAYESIANDEPTH_KEY = "BayesianDepth";
 	public static final String BAYESIANSPREAD_KEY = "BayesianSpread";
-	public static final String USERSTT_KEY = "UseRSTT";
 	public static final String USESVD_KEY = "UseSVD";
 	public static final String OUTPUTDATA_KEY = "OutputData";
 
@@ -100,11 +99,6 @@ public class LocationRequest implements ProcessingInt {
 	private Double bayesianSpread;
 
 	/**
-	 * Optional Boolean indicating whether to use RSTT
-	 */
-	private Boolean useRSTT;
-
-	/**
 	 * Optional Boolean indicating whether use SVD
 	 */
 	private Boolean useSVD;
@@ -131,7 +125,6 @@ public class LocationRequest implements ProcessingInt {
 		isBayesianDepth = null;
 		bayesianDepth = null;
 		bayesianSpread = null;
-		useRSTT = null;
 		useSVD = null;
 		outputData = null;
 	}
@@ -174,8 +167,6 @@ public class LocationRequest implements ProcessingInt {
 	 *            - A Double containing the bayesian depth to use, null to omit
 	 * @param newBayesianSpread
 	 *            - A Double containing the bayesian spread to use, null to omit
-	 * @param newUseRSTT
-	 *            - A Boolean indicating whether to use RSTT, null to omit
 	 * @param newUseSVD
 	 *            - A Boolean indicating whether to use SVD, null to omit
 	 */
@@ -185,13 +176,13 @@ public class LocationRequest implements ProcessingInt {
 			ArrayList<Pick> newInputData, Boolean newIsLocationNew,
 			Boolean newIsLocationHeld, Boolean newIsDepthHeld,
 			Boolean newIsBayesianDepth, Double newBayesianDepth,
-			Double newBayesianSpread, Boolean newUseRSTT, Boolean newUseSVD) {
+			Double newBayesianSpread, Boolean newUseSVD) {
 
 		reload(newType, newEarthModel, newSourceLatitude, newSourceLongitude,
 				newSourceOriginTime, newSourceDepth, newInputData,
 				newIsLocationNew, newIsLocationHeld, newIsDepthHeld,
 				newIsBayesianDepth, newBayesianDepth, newBayesianSpread,
-				newUseRSTT, newUseSVD);
+				newUseSVD);
 	}
 
 	/**
@@ -233,8 +224,6 @@ public class LocationRequest implements ProcessingInt {
 	 *            - A Double containing the bayesian depth to use, null to omit
 	 * @param newBayesianSpread
 	 *            - A Double containing the bayesian spread to use, null to omit
-	 * @param newUseRSTT
-	 *            - A Boolean indicating whether to use RSTT, null to omit
 	 * @param newUseSVD
 	 *            - A Boolean indicating whether to use SVD, null to omit
 	 */
@@ -244,7 +233,7 @@ public class LocationRequest implements ProcessingInt {
 			ArrayList<Pick> newInputData, Boolean newIsLocationNew,
 			Boolean newIsLocationHeld, Boolean newIsDepthHeld,
 			Boolean newIsBayesianDepth, Double newBayesianDepth,
-			Double newBayesianSpread, Boolean newUseRSTT, Boolean newUseSVD) {
+			Double newBayesianSpread, Boolean newUseSVD) {
 
 		type = newType;
 		earthModel = newEarthModel;
@@ -259,7 +248,6 @@ public class LocationRequest implements ProcessingInt {
 		isBayesianDepth = newIsBayesianDepth;
 		bayesianDepth = newBayesianDepth;
 		bayesianSpread = newBayesianSpread;
-		useRSTT = newUseRSTT;
 		useSVD = newUseSVD;
 		outputData = null;
 	}
@@ -380,13 +368,6 @@ public class LocationRequest implements ProcessingInt {
 			bayesianSpread = null;
 		}
 
-		// useRSTT
-		if (newJSONObject.containsKey(USERSTT_KEY)) {
-			useRSTT = (boolean) newJSONObject.get(USERSTT_KEY);
-		} else {
-			useRSTT = null;
-		}
-
 		// useSVD
 		if (newJSONObject.containsKey(USESVD_KEY)) {
 			useSVD = (boolean) newJSONObject.get(USESVD_KEY);
@@ -428,7 +409,6 @@ public class LocationRequest implements ProcessingInt {
 		Boolean jsonIsBayesianDepth = getIsBayesianDepth();
 		Double jsonBayesianDepth = getBayesianDepth();
 		Double jsonBayesianSpread = getBayesianSpread();
-		Boolean jsonUseRSTT = getUseRSTT();
 		Boolean jsonUseSVD = getUseSVD();
 		LocationResult jsonOutputData = getOutputData();
 
@@ -514,11 +494,6 @@ public class LocationRequest implements ProcessingInt {
 			newJSONObject.put(BAYESIANSPREAD_KEY, jsonBayesianSpread);
 		}
 
-		// use RSTT
-		if (jsonUseRSTT != null) {
-			newJSONObject.put(USERSTT_KEY, jsonUseRSTT);
-		}
-
 		// use SVD
 		if (jsonUseSVD != null) {
 			newJSONObject.put(USESVD_KEY, jsonUseSVD);
@@ -569,7 +544,6 @@ public class LocationRequest implements ProcessingInt {
 		// Boolean jsonIsBayesianDepth = getIsBayesianDepth();
 		// Double jsonBayesianDepth = getBayesianDepth();
 		// Double jsonBayesianSpread = getBayesianSpread();
-		// Boolean jsonUseRSTT = getUseRSTT();
 		// Boolean jsonUseSVD = getUseSVD();
 		LocationResult jsonOutputData = getOutputData();
 
@@ -745,12 +719,6 @@ public class LocationRequest implements ProcessingInt {
 		return bayesianSpread;
 	}
 	/**
-	 * @return the useRSTT
-	 */
-	public Boolean getUseRSTT() {
-		return useRSTT;
-	}
-	/**
 	 * @return the useSVD
 	 */
 	public Boolean getUseSVD() {
@@ -859,14 +827,6 @@ public class LocationRequest implements ProcessingInt {
 	 */
 	public void setBayesianSpread(Double bayesianSpread) {
 		this.bayesianSpread = bayesianSpread;
-	}
-
-	/**
-	 * @param useRSTT
-	 *            the useRSTT to set
-	 */
-	public void setUseRSTT(Boolean useRSTT) {
-		this.useRSTT = useRSTT;
 	}
 
 	/**
