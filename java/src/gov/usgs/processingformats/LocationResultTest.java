@@ -35,6 +35,7 @@ public class LocationResultTest {
       + "\"SecondaryGap\":33.67,\"RMS\":3.8,\"NumberOfAssociatedStations\":11,"
 			+ "\"NumberOfAssociatedPhases\":22,\"NumberOfUsedPhases\":44}";
 
+	public static String ID = "12345678";
 	public static double LATITUDE = 40.3344;
 	public static double LONGITUDE = -121.44;
 	public static Date TIME = Utility.getDate("2015-12-28T21:32:24.017Z");
@@ -91,7 +92,7 @@ public class LocationResultTest {
 	@Test
 	public void writesJSON() {
 
-		LocationResult LocationResultObject = new LocationResult(LATITUDE, LONGITUDE,
+		LocationResult LocationResultObject = new LocationResult(ID, LATITUDE, LONGITUDE,
 				TIME, DEPTH, LATITUDEERROR, LONGITUDEERROR, TIMEERROR,
 				DEPTHERROR, buildSupportingData(), NUMASSOCIATEDSTATIONS,
 				NUMASSOCIATEDPHASES, NUMUSEDSTATIONS, NUMUSEDPHASES, GAP,
@@ -136,13 +137,13 @@ public class LocationResultTest {
 	 */
 	@Test
 	public void altConstructors() {
-		LocationResult LocationResultObject = new LocationResult(LATITUDE, LONGITUDE,
+		LocationResult LocationResultObject = new LocationResult(ID, LATITUDE, LONGITUDE,
 				TIME, DEPTH, LATITUDEERROR, LONGITUDEERROR, TIMEERROR,
 				DEPTHERROR, buildSupportingData());
 
 		checkData(LocationResultObject, "Alternate Constructor 1");
 
-		LocationResult LocationResultObject2 = new LocationResult(
+		LocationResult LocationResultObject2 = new LocationResult( 
 				new Hypocenter(LATITUDE, LONGITUDE, TIME, DEPTH, LATITUDEERROR,
 						LONGITUDEERROR, TIMEERROR, DEPTHERROR),
 				buildSupportingData());
@@ -156,7 +157,7 @@ public class LocationResultTest {
 	@Test
 	public void validate() {
 
-		LocationResult LocationResultObject = new LocationResult(LATITUDE, LONGITUDE,
+		LocationResult LocationResultObject = new LocationResult(ID, LATITUDE, LONGITUDE,
 				TIME, DEPTH, LATITUDEERROR, LONGITUDEERROR, TIMEERROR,
 				DEPTHERROR, buildSupportingData(), NUMASSOCIATEDSTATIONS,
 				NUMASSOCIATEDPHASES, NUMUSEDSTATIONS, NUMUSEDPHASES, GAP,
@@ -172,7 +173,7 @@ public class LocationResultTest {
 		// check return code
 		assertEquals("Successful Validation", true, rc);
 
-		LocationResult badLocationResultObject = new LocationResult(null, LONGITUDE,
+		LocationResult badLocationResultObject = new LocationResult(ID, null, LONGITUDE,
 				TIME, DEPTH, LATITUDEERROR, LONGITUDEERROR, TIMEERROR,
 				DEPTHERROR, null, NUMASSOCIATEDSTATIONS, NUMASSOCIATEDPHASES,
 				NUMUSEDSTATIONS, NUMUSEDPHASES, GAP, SECONDARYGAP,
@@ -225,6 +226,13 @@ public class LocationResultTest {
 		// somehow?
 
 		// optional values
+		// check LocationResultObject.id
+		if (LocationResultObject.getID() != null) {
+			assertEquals(TestName + " ID Equals",
+					ID,
+					LocationResultObject.getID());
+		}
+
 		// check LocationResultObject.numberOfAssociatedStations
 		if (LocationResultObject.getNumberOfAssociatedStations() != null) {
 			assertEquals(TestName + " Number of Associated Stations Equals",

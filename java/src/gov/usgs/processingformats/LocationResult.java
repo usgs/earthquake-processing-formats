@@ -16,6 +16,7 @@ public class LocationResult implements ProcessingInt {
 	/**
 	 * JSON Keys
 	 */
+	public static final String ID_KEY = "ID";
 	public static final String HYPOCENTER_KEY = "Hypocenter";
 	public static final String SUPPORTINGDATA_KEY = "SupportingData";
 	public static final String ASSOCIATEDSTATIONS_KEY = "NumberOfAssociatedStations";
@@ -32,6 +33,11 @@ public class LocationResult implements ProcessingInt {
   public static final String DEPTHIMPORTANCE_KEY = "DepthImportance";
   public static final String LOCATOREXITCODE_KEY = "LocatorExitCode";
 	public static final String ERRORELLIPSE_KEY = "ErrorEllipse";
+
+	/**
+	 * Optional string containing the id.
+	 */
+	private String id;
 
 	/**
 	 * Required hypocenter
@@ -118,6 +124,7 @@ public class LocationResult implements ProcessingInt {
 	 * values.
 	 */
 	public LocationResult() {
+		id = null;
 		hypocenter = null;
 		supportingData = null;
 		numberOfAssociatedStations = null;
@@ -142,6 +149,8 @@ public class LocationResult implements ProcessingInt {
 	 * The advanced constructor for the LocationResult class. Initializes members
 	 * to provided values.
 	 *
+	 * @param newID
+	 * 					  - A String containing the optional ID
 	 * @param newLatitude
 	 *            - A Double containing the latitude to use
 	 * @param newLongitude
@@ -230,7 +239,7 @@ public class LocationResult implements ProcessingInt {
 	 *            - A Double containing the equivalent radius of the horizontal
 	 *            error ellipsoid in kilometers
 	 */
-	public LocationResult(Double newLatitude, Double newLongitude, Date newTime,
+	public LocationResult(String newID, Double newLatitude, Double newLongitude, Date newTime,
 			Double newDepth, Double newLatitudeError, Double newLongitudeError,
 			Double newTimeError, Double newDepthError,
 			ArrayList<Pick> newSupportingData, Integer newAssociatedStations,
@@ -246,7 +255,7 @@ public class LocationResult implements ProcessingInt {
 			Double newMaximumVerticalProjection,
 			Double newEquivalentHorizontalRadius) {
 
-		this(new Hypocenter(newLatitude, newLongitude, newTime, newDepth,
+		this(newID, new Hypocenter(newLatitude, newLongitude, newTime, newDepth,
 				    newLatitudeError, newLongitudeError, newTimeError,
             newDepthError), 
         newSupportingData, newAssociatedStations, newAssociatedPhases, 
@@ -266,6 +275,8 @@ public class LocationResult implements ProcessingInt {
 	 * The alternate advanced constructor for the LocationResult class.
 	 * Initializes members to provided values.
 	 *
+	 * @param newID
+	 * 					  - A String containing the optional ID
 	 * @param newLatitude
 	 *            - A Double containing the latitude to use
 	 * @param newLongitude
@@ -286,11 +297,11 @@ public class LocationResult implements ProcessingInt {
 	 *            - A ArrayList&lt;Pick&gt; newPickData containing the data that
 	 *            went into this location
 	 */
-	public LocationResult(Double newLatitude, Double newLongitude, Date newTime,
+	public LocationResult(String newID, Double newLatitude, Double newLongitude, Date newTime,
 			Double newDepth, Double newLatitudeError, Double newLongitudeError,
 			Double newTimeError, Double newDepthError,
 			ArrayList<Pick> newSupportingData) {
-		this(new Hypocenter(newLatitude, newLongitude, newTime, newDepth,
+		this(newID, new Hypocenter(newLatitude, newLongitude, newTime, newDepth,
 				newLatitudeError, newLongitudeError, newTimeError,
 				newDepthError), newSupportingData, null, null, null, null, null, null,
 				null, null, null, null, null, null, null, null);
@@ -311,7 +322,7 @@ public class LocationResult implements ProcessingInt {
 	public LocationResult(Hypocenter newHypocenter,
 			ArrayList<Pick> newSupportingData) {
 
-		this(newHypocenter, newSupportingData, null, null, null, null, null,
+		this(null, newHypocenter, newSupportingData, null, null, null, null, null,
 				null, null, null, null, null, null, null, null, null);
 	}
 
@@ -321,6 +332,8 @@ public class LocationResult implements ProcessingInt {
 	 * The alternate advanced constructor for the LocationResult class.
 	 * Initializes members to provided values.
 	 *
+	 * @param newID
+	 * 					  - A String containing the optional ID
 	 * @param newHypocenter
 	 *            - A Hypocenter containing the hypocenter to use
 	 * @param newSupportingData
@@ -362,7 +375,7 @@ public class LocationResult implements ProcessingInt {
 	 *            - An ErrorEllipse containing the error ellipse to use, null to
 	 *            omit
 	 */
-	public LocationResult(Hypocenter newHypocenter,
+	public LocationResult(String newID, Hypocenter newHypocenter,
 			ArrayList<Pick> newSupportingData, Integer newAssociatedStations,
 			Integer newAssociatedPhases, Integer newUsedStations,
 			Integer newUsedPhases, Double newGap, Double newSecondaryGap,
@@ -371,7 +384,7 @@ public class LocationResult implements ProcessingInt {
       Double newDepthImportance, String newLocatorExitCode, 
       ErrorEllipse newErrorEllipse) {
 
-		reload(newHypocenter, newSupportingData, newAssociatedStations,
+		reload(newID, newHypocenter, newSupportingData, newAssociatedStations,
 				newAssociatedPhases, newUsedStations, newUsedPhases, newGap,
 				newSecondaryGap, newMinimumDistance, newRMS, newQuality,
 				newBayesianDepth, newBayesianRange, newDepthImportance,
@@ -384,7 +397,8 @@ public class LocationResult implements ProcessingInt {
 	 * The reload function for the LocationResult class. Initializes members to
 	 * provided values.
 	 *
-	 *
+	 * @param newID
+	 * 					  - A String containing the optional ID
 	 * @param newHypocenter
 	 *            - A Hypocenter containing the hypocenter to use
 	 * @param newSupportingData
@@ -426,7 +440,7 @@ public class LocationResult implements ProcessingInt {
 	 *            - An ErrorEllipse containing the error ellipse to use, null to
 	 *            omit
 	 */
-	public void reload(Hypocenter newHypocenter,
+	public void reload(String newID, Hypocenter newHypocenter,
 			ArrayList<Pick> newSupportingData, Integer newAssociatedStations,
 			Integer newAssociatedPhases, Integer newUsedStations,
 			Integer newUsedPhases, Double newGap, Double newSecondaryGap,
@@ -435,6 +449,7 @@ public class LocationResult implements ProcessingInt {
       Double newDepthImportance, String newLocatorExitCode, 
       ErrorEllipse newErrorEllipse) {
 
+		id = newID;
 		hypocenter = newHypocenter;
 		supportingData = newSupportingData;
 		numberOfAssociatedStations = newAssociatedStations;
@@ -492,6 +507,13 @@ public class LocationResult implements ProcessingInt {
 		}
 
 		// optional values
+		// id
+		if (newJSONObject.containsKey(ID_KEY)) {
+			id = newJSONObject.get(ID_KEY).toString();
+		} else {
+			id = null;
+		}
+
 		// associated stations
 		if (newJSONObject.containsKey(ASSOCIATEDSTATIONS_KEY)) {
 			numberOfAssociatedStations = ((Long) newJSONObject
@@ -606,6 +628,7 @@ public class LocationResult implements ProcessingInt {
 
 		JSONObject newJSONObject = new JSONObject();
 
+		String jsonID = getID();
 		Hypocenter jsonHypocenter = getHypocenter();
 		ArrayList<Pick> jsonSupportingData = getSupportingData();
 		Integer jsonNumberOfAssociatedStations = getNumberOfAssociatedStations();
@@ -622,6 +645,11 @@ public class LocationResult implements ProcessingInt {
     Double jsonDepthImportance = getDepthImportance();
     String jsonLocatorExitCode = getLocatorExitCode();
 		ErrorEllipse jsonErrorEllipse = getErrorEllipse();
+
+		// id
+		if (jsonID != null) {
+			newJSONObject.put(ID_KEY, jsonID);
+		}
 
 		// hypocenter
 		if (jsonHypocenter != null) {
@@ -866,6 +894,62 @@ public class LocationResult implements ProcessingInt {
 	}
 
 	/**
+	 * Converts the contents of the class to a csv formatted summary string
+	 *
+	 * @return Returns a String containing the csv formatted summary string
+	 */
+	public String toCSV() {
+		String csvString = "";
+
+		if(getID() != null) {
+			csvString += getID() + ",";
+		} else {
+			csvString += "null,";
+		}
+
+		csvString += String.format("%f,", getHypocenter().getLatitude());
+		csvString += String.format("%f,", getHypocenter().getLongitude());
+		csvString += String.format("%f,", getHypocenter().getDepth());
+		csvString += String.format("%f,", (getHypocenter().getTime().getTime() * 0.001d));
+
+		if(getRMS() != null) {
+			csvString += String.format("%f,", getRMS());
+		} else {
+			csvString += "0.0,";
+		}
+
+		if(getMinimumDistance() != null) {
+			csvString += String.format("%f,", getMinimumDistance());
+		} else {
+			csvString += "0.0,";
+		}
+
+		if(getGap() != null) {
+			csvString += String.format("%f,", getGap());
+		} else {
+			csvString += "0.0,";
+		}
+
+		if(getNumberOfAssociatedPhases() != null) {
+			csvString += String.format("%d,", getNumberOfAssociatedPhases());
+		} else {
+			csvString += "0,";
+		}
+
+		csvString += "0.0,"; // mag
+		csvString += "0.0,"; // detectiontime
+
+		return csvString;
+	} 
+
+	/**
+	 * @return the id
+	 */
+	public String getID() {
+		return id;
+	}
+
+	/**
 	 * @return the hypocenter
 	 */
 	public Hypocenter getHypocenter() {
@@ -975,6 +1059,13 @@ public class LocationResult implements ProcessingInt {
 	 */
 	public ErrorEllipse getErrorEllipse() {
 		return errorEllipse;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setID(String id) {
+		this.id = id;
 	}
 
 	/**

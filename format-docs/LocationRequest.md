@@ -18,6 +18,7 @@ location processing algorithm.
       "Request" :
       {
         "Type" : String,
+        "ID" : String,
         "EarthModel" : String,
         "SourceOriginTime" : Number,
         "SourceLatitude"  : Number,
@@ -165,6 +166,7 @@ kilometers relative to the WGS84 datum.
 
 The following are supplementary values that **may or may not** be provided.
 
+* ID - A String containing the identifier for the location request.
 * IsLocationNew - A boolean flag that indicates if the location has been changed
 outside the locator.
 * IsLocationHeld - A boolean flag that indicates whether the location can be

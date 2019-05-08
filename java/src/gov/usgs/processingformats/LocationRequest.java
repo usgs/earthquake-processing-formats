@@ -18,6 +18,7 @@ public class LocationRequest implements ProcessingInt {
 	 * JSON Keys
 	 */
 	public static final String TYPE_KEY = "Type";
+	public static final String ID_KEY = "ID";
 	public static final String EARTHMODEL_KEY = "EarthModel";
 	public static final String SOURCEORIGINTIME_KEY = "SourceOriginTime";
 	public static final String SOURCELATITUDE_KEY = "SourceLatitude";
@@ -32,6 +33,11 @@ public class LocationRequest implements ProcessingInt {
 	public static final String BAYESIANSPREAD_KEY = "BayesianSpread";
 	public static final String USESVD_KEY = "UseSVD";
 	public static final String OUTPUTDATA_KEY = "OutputData";
+
+	/**
+	 * Optional string containing the id.
+	 */
+	private String id;
 
 	/**
 	 * Required type identifier for this LocationRequest
@@ -112,6 +118,7 @@ public class LocationRequest implements ProcessingInt {
 	 * null values.
 	 */
 	public LocationRequest() {
+		id = null;
 		type = null;
 		earthModel = null;
 		sourceLatitude = null;
@@ -135,6 +142,8 @@ public class LocationRequest implements ProcessingInt {
 	 * The advanced constructor for the LocationResult class. Initializes members
 	 * to provided values.
 	 *
+	 * @param newID
+	 * 					  - A String containing the optional ID
 	 * @param newType
 	 *            - A String containing the name of the algorithm this request
 	 *            is valid for
@@ -170,7 +179,7 @@ public class LocationRequest implements ProcessingInt {
 	 * @param newUseSVD
 	 *            - A Boolean indicating whether to use SVD, null to omit
 	 */
-	public LocationRequest(String newType, String newEarthModel,
+	public LocationRequest(String newID, String newType, String newEarthModel,
 			Double newSourceLatitude, Double newSourceLongitude,
 			Date newSourceOriginTime, Double newSourceDepth,
 			ArrayList<Pick> newInputData, Boolean newIsLocationNew,
@@ -178,7 +187,7 @@ public class LocationRequest implements ProcessingInt {
 			Boolean newIsBayesianDepth, Double newBayesianDepth,
 			Double newBayesianSpread, Boolean newUseSVD) {
 
-		reload(newType, newEarthModel, newSourceLatitude, newSourceLongitude,
+		reload(newID, newType, newEarthModel, newSourceLatitude, newSourceLongitude,
 				newSourceOriginTime, newSourceDepth, newInputData,
 				newIsLocationNew, newIsLocationHeld, newIsDepthHeld,
 				newIsBayesianDepth, newBayesianDepth, newBayesianSpread,
@@ -191,7 +200,8 @@ public class LocationRequest implements ProcessingInt {
 	 * The reload function for the LocationRequest class. Initializes members to
 	 * provided values.
 	 *
-	 *
+	 * @param newID
+	 * 					  - A String containing the optional ID
 	 * @param newType
 	 *            - A String containing the name of the algorithm this request
 	 *            is valid for
@@ -227,7 +237,7 @@ public class LocationRequest implements ProcessingInt {
 	 * @param newUseSVD
 	 *            - A Boolean indicating whether to use SVD, null to omit
 	 */
-	public void reload(String newType, String newEarthModel,
+	public void reload(String newID, String newType, String newEarthModel,
 			Double newSourceLatitude, Double newSourceLongitude,
 			Date newSourceOriginTime, Double newSourceDepth,
 			ArrayList<Pick> newInputData, Boolean newIsLocationNew,
@@ -235,6 +245,7 @@ public class LocationRequest implements ProcessingInt {
 			Boolean newIsBayesianDepth, Double newBayesianDepth,
 			Double newBayesianSpread, Boolean newUseSVD) {
 
+		id = newID;
 		type = newType;
 		earthModel = newEarthModel;
 		sourceLatitude = newSourceLatitude;
@@ -326,6 +337,13 @@ public class LocationRequest implements ProcessingInt {
 		}
 
 		// Optional values
+		// id
+		if (newJSONObject.containsKey(ID_KEY)) {
+			id = newJSONObject.get(ID_KEY).toString();
+		} else {
+			id = null;
+		}
+
 		// isLocationNew
 		if (newJSONObject.containsKey(ISLOCATIONNEW_KEY)) {
 			isLocationNew = (boolean) newJSONObject.get(ISLOCATIONNEW_KEY);
@@ -395,6 +413,7 @@ public class LocationRequest implements ProcessingInt {
 
 		JSONObject newJSONObject = new JSONObject();
 
+		String jsonID = getID();
 		String jsonType = getType();
 		String jsonEarthModel = getEarthModel();
 		Double jsonSourceLatitude = getSourceLatitude();
@@ -411,6 +430,11 @@ public class LocationRequest implements ProcessingInt {
 		Double jsonBayesianSpread = getBayesianSpread();
 		Boolean jsonUseSVD = getUseSVD();
 		LocationResult jsonOutputData = getOutputData();
+
+		// id
+		if (jsonID != null) {
+			newJSONObject.put(ID_KEY, jsonID);
+		}
 
 		// Required values
 		// type
@@ -647,6 +671,12 @@ public class LocationRequest implements ProcessingInt {
 		return type;
 	}
 	/**
+	 * @return the id
+	 */
+	public String getID() {
+		return id;
+	}
+	/**
 	 * @return the earthModel
 	 */
 	public String getEarthModel() {
@@ -732,7 +762,14 @@ public class LocationRequest implements ProcessingInt {
 	public void setType(String type) {
 		this.type = type;
 	}
-
+	
+	/**
+	 * @param id the id to set
+	 */
+	public void setID(String id) {
+		this.id = id;
+	}
+	
 	/**
 	 * @param earthModel
 	 *            the earthModel to set
