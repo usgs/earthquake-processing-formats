@@ -27,6 +27,7 @@ public class LocationRequestTest {
 			+ "\"ID\":\"12GFH48776857\",\"LocatedPhase\":\"P\",\"Distance\":2.65}],"
 			+ "\"IsLocationNew\":false,\"IsBayesianDepth\":true}";
 
+	public static String ID = "12345678";
 	public static String TYPE = "RayLoc";
 	public static String EARTHMODEL = "AK135";
 	public static double SOURCELATITUDE = 40.3344;
@@ -84,7 +85,7 @@ public class LocationRequestTest {
 	@Test
 	public void writesJSON() {
 
-		LocationRequest locationRequestObject = new LocationRequest(TYPE,
+		LocationRequest locationRequestObject = new LocationRequest(ID, TYPE,
 				EARTHMODEL, SOURCELATITUDE, SOURCELONGITUDE, SOURCEORIGINTIME,
 				SOURCEDEPTH, buildInputData(), ISLOCATIONNEW, ISLOCATIONHELD,
 				ISDEPTHHELD, ISBAYESIANDEPTH, BAYESIANDEPTH, BAYESIANSPREAD,
@@ -127,7 +128,7 @@ public class LocationRequestTest {
 	@Test
 	public void validate() {
 
-		LocationRequest locationRequestObject = new LocationRequest(TYPE,
+		LocationRequest locationRequestObject = new LocationRequest(ID, TYPE,
 				EARTHMODEL, SOURCELATITUDE, SOURCELONGITUDE, SOURCEORIGINTIME,
 				SOURCEDEPTH, buildInputData(), ISLOCATIONNEW, ISLOCATIONHELD,
 				ISDEPTHHELD, ISBAYESIANDEPTH, BAYESIANDEPTH, BAYESIANSPREAD,
@@ -140,7 +141,7 @@ public class LocationRequestTest {
 		// check return code
 		assertEquals("Successful Validation", true, rc);
 
-		LocationRequest badLocationRequestObject = new LocationRequest(null,
+		LocationRequest badLocationRequestObject = new LocationRequest(ID, null,
 				EARTHMODEL, SOURCELATITUDE, null, SOURCEORIGINTIME,
 				SOURCEDEPTH, null, ISLOCATIONNEW, ISLOCATIONHELD,
 				ISDEPTHHELD, ISBAYESIANDEPTH, BAYESIANDEPTH, BAYESIANSPREAD,
@@ -175,6 +176,13 @@ public class LocationRequestTest {
 		// somehow?
 
 		// optional values
+		// check locationRequestObject.id
+		if (locationRequestObject.getID() != null) {
+			assertEquals(TestName + " ID Equals",
+					ID,
+					locationRequestObject.getID());
+		}
+
 		// check locationRequestObject.isLocationNew
 		if (locationRequestObject.getIsLocationNew() != null) {
 			assertEquals(TestName + " IsLocationNew Equals", ISLOCATIONNEW,

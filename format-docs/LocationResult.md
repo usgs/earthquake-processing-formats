@@ -13,6 +13,7 @@ processing algorithms.
 ## Output
 ```json
     {
+      "ID" : String,
       "Hypocenter"  :
       {
           "Latitude"        : Number,
@@ -106,6 +107,7 @@ Location.
 The following are supplementary values that **may or may not** be provided by
 various algorithms.
 
+* ID - A String containing the identifier for the location result.
 * NumberOfAssociatedStations - A number that indicates how many stations were
 associated with the location.
 * NumberOfAssociatedPhases - A number that indicates how many phases were
