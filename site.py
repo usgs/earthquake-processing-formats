@@ -162,6 +162,3 @@ class Site:
         return errorList
             
         
-        
-        
-
