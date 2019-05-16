@@ -100,7 +100,7 @@ class Source:
             if self.type == '':
                 errorList.append('Empty Type in Source Class')
             
-            elif self.type == 'Unkown':
+            elif self.type == 'Unknown':
                 match = true
                     
             elif self.type == 'LocalHuman':
