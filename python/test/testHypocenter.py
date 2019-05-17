@@ -71,7 +71,24 @@ class TestHypocenter(unittest.TestCase):
         self.assertEqual(hypocenter.longitudeError, self.LONGITUDEERROR)
         self.assertEqual(hypocenter.depthError, self.DEPTHERROR)
         self.assertEqual(hypocenter.timeError, self.TIMEERROR)
+    
+    def test_toDict(self):
+        hypocenter = processingformats.hypocenter.Hypocenter(self.LATITUDE, self.LONGITUDE, self.DEPTH, self.TIME, self.LATITUDEERROR, self.LONGITUDEERROR, self.DEPTHERROR, self.TIMEERROR)
+        self.assertEqual(hypocenter.toDict(), self.DICT)
         
+    def test_fromDict(self):
+        hypocenter = processingformats.hypocenter.Hypocenter()
+        hypocenter.fromDict(self.DICT)
+        
+        self.assertEqual(hypocenter.latitude, self.LATITUDE)
+        self.assertEqual(hypocenter.longitude, self.LONGITUDE)
+        self.assertEqual(hypocenter.depth, self.DEPTH)
+        self.assertEqual(hypocenter.time, self.TIME)
+        self.assertEqual(hypocenter.latitudeError, self.LATITUDEERROR)
+        self.assertEqual(hypocenter.longitudeError, self.LONGITUDEERROR)
+        self.assertEqual(hypocenter.depthError, self.DEPTHERROR)
+        self.assertEqual(hypocenter.timeError, self.TIMEERROR)
+    
     def test_isValid(self):
         hypocenter = processingformats.hypocenter.Hypocenter(self.LATITUDE, self.LONGITUDE, self.DEPTH, self.TIME, self.LATITUDEERROR, self.LONGITUDEERROR, self.DEPTHERROR, self.TIMEERROR)
         self.assertTrue(hypocenter.isValid())
