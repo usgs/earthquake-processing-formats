@@ -102,8 +102,8 @@ class Pick:
         #Required Keys
         try:
             self.id = aDict[self.ID_KEY]
-            self.site = fromDict(aDict[self.SITE_KEY])
-            self.source = fromDict(aDict[self.SOURCE_KEY])
+            self.site.fromDict(aDict[self.SITE_KEY])
+            self.source.fromDict(aDict[self.SOURCE_KEY])
             timeString = aDict[self.TIME_KEY] [:-1] + "000Z"
             self.time = datetime.datetime.strptime(timeString, "%Y-%m-%dT%H:%M:%S.%fZ")
             self.affinity = aDict[self.AFFINITY_KEY]
