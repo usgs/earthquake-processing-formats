@@ -62,4 +62,62 @@ class ErrorEllipse:
         
     #Populates object from a dictionary
     def fromDict (self, aDict):
+        return None
         
+    #Converts the object to a JSON formatted string
+    def toJSONString(self):
+        JSONObject = self.toDict()
+        
+        return json.dumps(JSONObject, ensure_ascii=False)
+    
+    #Converts the object to a dictionary
+    def toDict(self):
+        
+        aDict = {}
+        
+        #Required Keys
+    
+    #Check to see if object is valid
+    def isValid (self):
+        errorList = self.getErrors()
+        
+        return not errorList
+    
+    #Gets list of object validation errors
+    def getErrors (self):
+        errorList = []
+        
+        #E0 Error
+        
+        
+        #E0 Azimuth
+        
+        #E0 Dip
+        
+        #E1 Error
+        
+        #E1 Azimuth
+        
+        #E1 Dip
+        
+        #E2 Error
+        
+        #E2 Azimuth
+        
+        #E2 Dip
+        
+        #MaximumHorizontalProjection
+        
+        #MaximumVerticalProjection
+        
+        #EquivalentHorizontalRadius\
+        
+        return errorList
+    
+    #checks to see if object is empty
+    def isEmpty(self):
+        
+        if hasattr(self, ''):
+            return False
+        
+        return True
