@@ -95,28 +95,28 @@ class Source:
             
         #Type
         try:
-            match = false
+            match = False
             
             if self.type == '':
                 errorList.append('Empty Type in Source Class')
             
             elif self.type == 'Unknown':
-                match = true
+                match = True
                     
             elif self.type == 'LocalHuman':
-                match = true
+                match = True
                     
             elif self.type == 'LocalAutomatic':
-                match = true
+                match = True
     
             elif self.type == 'ContributedHuman':
-                match = true
+                match = True
                 
             elif self.type == 'ContributedAutomatic':
-                match = true
+                match = True
                 
             else:
-                match = false
+                match = False
                 
             if not match:
                 errorList.append('Invalid Type in Source Class')
