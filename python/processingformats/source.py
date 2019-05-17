@@ -46,7 +46,7 @@ class Source:
             
     #Converts object to JSON formatted string
     def toJSONString(self):
-        JSONObect = self.toDict()
+        JSONObject = self.toDict()
         
         return json.dumps(JSONObject, ensure_ascii=False)
     
