@@ -40,13 +40,13 @@ class TestSite(unittest.TestCase):
         self.assertTrue(hasattr(site, 'longitude'))
         self.assertTrue(hasattr(site, 'elevation'))
         
-        self.assertEqual(hasattr(site, self.STATION))
-        self.assertEqual(hasattr(site, self.CHANNEL))
-        self.assertEqual(hasattr(site, self.NETWORK))
-        self.assertEqual(hasattr(site, self.LOCATION))
-        self.assertEqual(hasattr(site, self.LATITUDE))
-        self.assertEqual(hasattr(site, self.LONGITUDE))
-        self.assertEqual(hasattr(site, self.ELEVATION))
+        self.assertEqual(site.station, self.STATION)
+        self.assertEqual(site.channel, self.CHANNEL)
+        self.assertEqual(site.network, self.NETWORK)
+        self.assertEqual(site.location, self.LOCATION)
+        self.assertEqual(site.latitude, self.LATITUDE)
+        self.assertEqual(site.longitude, self.LONGITUDE)
+        self.assertEqual(site.elevation, self.ELEVATION)
         
     def test_toJSON(self):
         site = processingformats.site.Site(self.STATION, self.CHANNEL, self.NETWORK, self.LOCATION, self.LATITUDE, self.LONGITUDE, self.ELEVATION)
@@ -57,13 +57,13 @@ class TestSite(unittest.TestCase):
         site = processingformats.site.Site()
         site.fromJSONString(self.JSONSTRING)
         
-        self.assertEqual(hasattr(site, self.STATION))
-        self.assertEqual(hasattr(site, self.CHANNEL))
-        self.assertEqual(hasattr(site, self.NETWORK))
-        self.assertEqual(hasattr(site, self.LOCATION))
-        self.assertEqual(hasattr(site, self.LATITUDE))
-        self.assertEqual(hasattr(site, self.LONGITUDE))
-        self.assertEqual(hasattr(site, self.ELEVATION))
+        self.assertEqual(site.station, self.STATION)
+        self.assertEqual(site.channel, self.CHANNEL)
+        self.assertEqual(site.network, self.NETWORK)
+        self.assertEqual(site.location, self.LOCATION)
+        self.assertEqual(site.latitude, self.LATITUDE)
+        self.assertEqual(site.longitude, self.LONGITUDE)
+        self.assertEqual(site.elevation, self.ELEVATION)
         
     def test_toDict(self):
         site = processingformats.site.Site(self.STATION, self.CHANNEL, self.NETWORK, self.LOCATION, self.LATITUDE, self.LONGITUDE, self.ELEVATION)
@@ -73,13 +73,13 @@ class TestSite(unittest.TestCase):
         site = processingformats.site.Site()
         site.fromDict(self.DICT)
         
-        self.assertEqual(hasattr(site, self.STATION))
-        self.assertEqual(hasattr(site, self.CHANNEL))
-        self.assertEqual(hasattr(site, self.NETWORK))
-        self.assertEqual(hasattr(site, self.LOCATION))
-        self.assertEqual(hasattr(site, self.LATITUDE))
-        self.assertEqual(hasattr(site, self.LONGITUDE))
-        self.assertEqual(hasattr(site, self.ELEVATION))
+        self.assertEqual(site.station, self.STATION)
+        self.assertEqual(site.channel, self.CHANNEL)
+        self.assertEqual(site.network, self.NETWORK)
+        self.assertEqual(site.location, self.LOCATION)
+        self.assertEqual(site.latitude, self.LATITUDE)
+        self.assertEqual(site.longitude, self.LONGITUDE)
+        self.assertEqual(site.elevation, self.ELEVATION)
         
     def test_isValid(self):
         site = processingformats.site.Site(self.STATION, self.CHANNEL, self.NETWORK, self.LOCATION, self.LATITUDE, self.LONGITUDE, self.ELEVATION)
