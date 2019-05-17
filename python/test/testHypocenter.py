@@ -45,16 +45,15 @@ class TestHypocenter(unittest.TestCase):
         self.assertTrue(hasattr(hypocenter, 'depthError'))
         self.assertTrue(hasattr(hypocenter, 'timeError'))
         
-        self.assertEqual(hasattr(hypocenter, self.LATITUDE))
-        self.assertEqual(hasattr(hypocenter, self.LONGITUDE))
-        self.assertEqual(hasattr(hypocenter, self.DEPTH))
-        self.assertEqual(hasattr(hypocenter, self.TIME))
-        self.assertEqual(hasattr(hypocenter, self.LATITUDEERROR))
-        self.assertEqual(hasattr(hypocenter, self.LONGITUDEERROR))
-        self.assertEqual(hasattr(hypocenter, self.DEPTHERROR))
-        self.assertEqual(hasattr(hypocenter, self.TIMEERROR))
+        self.assertEqual(hasattr(hypocenter.latitude, self.LATITUDE))
+        self.assertEqual(hasattr(hypocenter.longitude, self.LONGITUDE))
+        self.assertEqual(hasattr(hypocenter.depth, self.DEPTH))
+        self.assertEqual(hasattr(hypocenter.time, self.TIME))
+        self.assertEqual(hasattr(hypocenter.latitudeError, self.LATITUDEERROR))
+        self.assertEqual(hasattr(hypocenter.longitudeError, self.LONGITUDEERROR))
+        self.assertEqual(hasattr(hypocenter.depthError, self.DEPTHERROR))
+        self.assertEqual(hasattr(hypocenter.timeError, self.TIMEERROR))
         
-    
     def test_toJSON(self):
         hypocenter = processingformats.hypocenter.Hypocenter(self.LATITUDE, self.LONGITUDE, self.DEPTH, self.TIME, self.LATITUDEERROR, self.LONGITUDEERROR, self.DEPTHERROR, self.TIMEERROR)
         
