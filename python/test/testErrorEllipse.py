@@ -72,4 +72,57 @@ class TestErrorEllipse(unittest.TestCase):
         
         
     def test_toJSON(self):
-        errorEllipse
+        errorEllipse = processingformats.errorEllipse.ErrorEllipse(self.E0ERROR, self.E0AZIMUTH, self.E0DIP, self.E1ERROR, self.E1AZIMUTH, self.E1DIP, self.E2ERROR, self.E2AZIMUTH, self.E2DIP, self.MAXIMUMHORIZONTALPROJECTION, self.MAXIMUMVERTICALPROJECTION, self.EQUIVALENTHORIZONTALRADIUS)
+        self.assertEqual(errorEllipse.toJSONString(), self.JOSNSTRING)
+        
+    
+    def test_fromJSON(self):
+        errorEllipse = processingformats.errorEllipse.ErrorEllipse()
+        errorEllipse.fromJSONString(self.JSONSTRING)
+        
+        self.assertEqual(errorEllipse.E0Error, self.E0ERROR)
+        self.assertEqual(errorEllipse.E0Azimuth, self.E0AZIMUTH)
+        self.assertEqual(errorEllipse.E0Dip, self.E0DIP)
+        self.assertEqual(errorEllipse.E1Error, self.E1ERROR)
+        self.assertEqual(errorEllipse.E1Azimuth, self.E1AZIMUTH)
+        self.assertEqual(errorEllipse.E1Dip, self.E1DIP)
+        self.assertEqual(errorEllipse.E2Error, self.E2ERROR)
+        self.assertEqual(errorEllipse.E2Azimuth, self.E2AZIMUTH)
+        self.assertEqual(errorEllipse.E2Dip, self.E2DIP)
+        self.assertEqual(errorEllipse.maxmimumHorizontalProjection, self.MAXIMUMHORIZONTALPROJECTION)
+        self.assertEqual(errorEllipse.maximumVerticalProjection, self.MAXIMUMVERTICALPROJECTION)
+        self.assertEqual(errorEllipse.equivalentHorizontalRadius, self.EQUIVALENTHORIZONTALRADIUS)
+        
+    def test_toDict(self):
+        errorEllipse = processingformats.errorEllipse.ErrorEllipse(self.E0ERROR, self.E0AZIMUTH, self.E0DIP, self.E1ERROR, self.E1AZIMUTH, self.E1DIP, self.E2ERROR, self.E2AZIMUTH, self.E2DIP, self.MAXIMUMHORIZONTALPROJECTION, self.MAXIMUMVERTICALPROJECTION, self.EQUIVALENTHORIZONTALRADIUS)
+        self.assertEqual(errorEllipse.toDict(), self.DICT)
+        
+        
+    def test_fromDict(self):
+        errorEllipse = processingformats.errorEllipse.ErrorEllipse()
+        errorEllipse.fromDict(self.DICT)
+        
+        self.assertEqual(errorEllipse.E0Error, self.E0ERROR)
+        self.assertEqual(errorEllipse.E0Azimuth, self.E0AZIMUTH)
+        self.assertEqual(errorEllipse.E0Dip, self.E0DIP)
+        self.assertEqual(errorEllipse.E1Error, self.E1ERROR)
+        self.assertEqual(errorEllipse.E1Azimuth, self.E1AZIMUTH)
+        self.assertEqual(errorEllipse.E1Dip, self.E1DIP)
+        self.assertEqual(errorEllipse.E2Error, self.E2ERROR)
+        self.assertEqual(errorEllipse.E2Azimuth, self.E2AZIMUTH)
+        self.assertEqual(errorEllipse.E2Dip, self.E2DIP)
+        self.assertEqual(errorEllipse.maxmimumHorizontalProjection, self.MAXIMUMHORIZONTALPROJECTION)
+        self.assertEqual(errorEllipse.maximumVerticalProjection, self.MAXIMUMVERTICALPROJECTION)
+        self.assertEqual(errorEllipse.equivalentHorizontalRadius, self.EQUIVALENTHORIZONTALRADIUS)
+        
+        
+    def test_isValid(self):
+        errorEllipse = processingformats.errorEllipse.ErrorEllipse(self.E0ERROR, self.E0AZIMUTH, self.E0DIP, self.E1ERROR, self.E1AZIMUTH, self.E1DIP, self.E2ERROR, self.E2AZIMUTH, self.E2DIP, self.MAXIMUMHORIZONTALPROJECTION, self.MAXIMUMVERTICALPROJECTION, self.EQUIVALENTHORIZONTALRADIUS)
+        self.assertTrue(errorEllipse.isValid())
+
+        badErrorEllipse = processingformats.errorEllipse.ErrorEllipse()
+        self.assertFalse(badErrorEllipse.isValid())
+
+
+if __name__ == '__main__':
+    unittest.main()        
