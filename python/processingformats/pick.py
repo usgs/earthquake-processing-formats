@@ -31,11 +31,28 @@ class Pick:
     WEIGHT_KEY = "Weight" #Optional
     IMPORTANCE_KEY = "Importance" #Optional
     
-    #Initialize the pick object. Constructs empty object if all are none
     def __init__ (self, newID = None, newSite = None, newSource = None, newTime = None, 
                   newAffinity = None, newQuality = None, newUse = None, newPickedPhase = None, 
                   newAssociatedPhase = None, newLocatedPhase = None, newResidual = None,
                   newDistance = None, newAzimuth = None, newWeight = None, newImportance = None):
+    ''' Initializes the pick object. Contructs empty object if all are none
+    
+        newID: A string containing the id to use
+        newSite: a processingformats.site.Site containing desired site (and supporting info)
+        newSource: a processingformats.source.Source containing desired source (and supporting info)
+        newTime: a datetime containing the pick time
+        newAffinity: a Double containing the affinity to use
+        newQuality: a double containing the quality to use
+        newUse: a boolean containing the flag to use
+        newPickedPhase: a string containing the picked phase to use
+        newAssociatedPhase: a string containing the associated phase to use
+        newLocatedPhase: a string containing the located phase to use
+        newResidual: a double containing the residual to use
+        newDistance: a double containing the distance to use
+        newAzimuth: a double containing the azimuth to use
+        newWeight: a double containing the weight to use
+        newImportance: a double containing the importance to use
+    '''
         
         #Required Keys
         if newID is not None:
@@ -88,17 +105,20 @@ class Pick:
         if newImportance is not None:
             self.importance = newImportance
             
-    
-    #Populates object from a JSON formatted string
     def fromJSONString (self, JSONString):
+    ''' Populates object from a JSON formatted string
+    
+        JSONString: a required string containing the JSON formatted text
+    '''
         
         JSONObject = json.loads(JSONString)
         self.fromDict(JSONObject)
         
-    
-    #Populates object from a dictionary
     def fromDict(self, aDict):
-        
+    ''' Populates object from a dictionary
+    
+        aDict: a required dictionary
+    '''    
         #Required Keys
         try:
             self.id = aDict[self.ID_KEY]
@@ -135,14 +155,20 @@ class Pick:
         if self.IMPORTANCE_KEY in aDict:
             self.importance = aDict[self.IMPORTANCE_KEY]
             
-    #Converts the object to a JSON formatted string
     def toJSONString(self):
+    ''' Converts object to a JSON formatted String
+    
+        Returns: JSON formatted message as a String
+    '''
         JSONObject = self.toDict()
         
         return json.dumps(JSONObject, ensure_ascii=False)
     
-    #Converts the object to a dictionary
     def toDict(self):
+    ''' Converts object to a dictionary
+    
+        Returns: the dictionary
+    '''
         
         aDict = {}
         
@@ -181,16 +207,21 @@ class Pick:
         if hasattr(self, 'importance'):
             aDict[self.IMPORTANCE_KEY] = self.importance
         
-    
-    #Checks to see if object is valid
     def isValid(self):
+    ''' Checks to see if object is valid
+    
+        Returns: true if object is valid, false otherwise
+    '''
         
         errorList = self.getErrors()
         
         return not errorList
-    
-    #Gets a list of object validation errors
+
     def getErrors(self):
+    ''' Gets a list of object validation errors
+    
+        Returns: a list of strings containing the validation error messages
+    '''
         
         errorList = []
         
@@ -246,4 +277,3 @@ class Pick:
             
         return errorList
             
-        
