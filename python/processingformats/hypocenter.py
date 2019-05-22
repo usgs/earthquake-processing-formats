@@ -23,10 +23,20 @@ class Hypocenter:
     DEPTH_ERROR_KEY = "DepthError" #Optional
     TIME_ERROR_KEY = "TimeError" #Optional
     
-    #Constructor for Hypo Class. Initializes all members, null if argument is None
     def __init__ (self, newLatitude = None, newLongitude = None, newDepth = None,
                   newTime = None, newLatitudeError = None, newLongitudeError = None,
                   newDepthError = None, newTimeError = None):
+    ''' Initializing the object. Constructs an empty object if all arguments are None
+    
+        newLatitude: a double containing the latitude in degrees
+        newLongitude: a double containing the longitude in degrees
+        newDepth: a double containing the depth in kilometers
+        newTime: a datetime containing the origin time
+        newLatitudeError: a double containing the latitude error
+        newLongitudeError: a double containing the longitude error
+        newDepthError: a double containing the depth error
+        newTimeError: a double containing the time error
+    '''
         
         #required keys
         if newLatitude is not None:
@@ -54,13 +64,19 @@ class Hypocenter:
         if newTimeError is not None:
             self.timeError = newTimeError
     
-    #Populates object from a JSONString
     def fromJSONString(self, JSONString):
+    ''' Populates object from a JSONString
+    
+        JSONString: a required string containing the JSON formatted text
+    '''
         JSONObject = json.loads(JSONString)
         self.fromDict(JSONObject)
-        
-    #Populates object from a dictionary    
+          
     def fromDict (self, aDict):
+    ''' Populates object from a dictionary
+    
+        aDict: required dictionary
+    '''
         
         #required keys
         try:
@@ -86,14 +102,20 @@ class Hypocenter:
         if self.TIME_ERROR_KEY in aDict:
             self.timeError = aDict[self.TIME_ERROR_KEY]
             
-    #converts object to JSON formatted string
     def toJSONString(self):
+    ''' Converts object to JSON formatted string
+    
+        Returns: The JSON formatted message as a string
+    '''
         JSONObject = self.toDict()
         
         return json.dumps(JSONObject, ensure_ascii = False)
-    
-    #converts obejct to a dictionary
+
     def toDict(self):
+    ''' Converts object to a dictionary
+    
+        Returns: The Dictionary
+    '''
         
         aDict = {}
         
@@ -122,15 +144,21 @@ class Hypocenter:
             aDict[self.TIME_ERROR_KEY] = self.timeError
             
         return aDict
-    
-    #Check to see if object is valid
+
     def isValid(self):
+    ''' Checks to see if object is valid
+    
+        Returns: True if object if valid, False otherwise
+    '''
         errorList = self.getErrors()
         
         return not errorList
     
-    #Gets list of object validation errors
     def getErrors(self):
+    ''' Gets list of object validation errors
+    
+        Returns: a list of strings containing the validation error messages
+    '''
         errorList = []
         
         #required keys:
