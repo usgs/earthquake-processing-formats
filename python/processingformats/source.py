@@ -15,7 +15,12 @@ class Source:
     AUTHOR_KEY = "Author" #required
     TYPE_KEY = "Type" #required
     
-    #Intialize source object
+    '''Intialize source object, constructs empty object if all arguments are None
+    
+       newAgencyID: a required String containing the agency identifier
+       newAuthor: a required String containing the author
+       newType: a required String containing the type
+    '''
     def __init__ (self, newAgencyID = None, newAuthor = None, newType = None):
         
         if newAgencyID is not None:
@@ -27,12 +32,18 @@ class Source:
         if newType is not None:
             self.type = newType
             
-    #Populate object from JSON formatted string
+    '''Populate object from JSON formatted string
+    
+       JSONString: a required String containing the JSON formatted text
+    '''
     def fromJSONString (self, JSONString):
         JSONObject = json.loads(JSONString)
         self.fromDict(JSONObject)
         
-    #Populates object from a dictionary
+    '''Populates object from a dictionary
+       
+       aDict: a required dictionary
+    '''
     def fromDict(self, aDict):
         
         try:
@@ -44,13 +55,19 @@ class Source:
             print ("Dictionary format error, missing required keys: %s" % e)
             
             
-    #Converts object to JSON formatted string
+    '''Converts object to JSON formatted string
+    
+       Returns: JSON formatted message as a String
+    '''
     def toJSONString(self):
         JSONObject = self.toDict()
         
         return json.dumps(JSONObject, ensure_ascii=False)
     
-    #Converts the object to a dictionary
+    '''Converts the object to a dictionary
+    
+       Returns: the dictionary
+    '''
     def toDict(self):
         
         aDict = {}
@@ -66,13 +83,19 @@ class Source:
             
         return aDict
     
-    #Checks to see if object is valid
+    '''Checks to see if object is valid
+       
+       Returns: true if object is valid, false otherwise
+    '''
     def isValid(self):
         errorList = self.getErrors()
         
         return not errorList
     
-    #Gets a list of object validation errors
+    '''Gets a list of object validation errors
+       
+       Returns: a list of Strings containing the validation error messages
+    '''
     def getErrors(self):
         
         errorList = []
@@ -127,6 +150,19 @@ class Source:
         
         return errorList
         
+    '''Checks to see if object is empty
     
-    
+       Returns: true if object is empty, false otherwise
+    '''
+    def isEmpty(self):
+        if hasattr(self, 'agencyID'):
+            return False
+        
+        if hasattr(self, 'author'):
+            return False
+        
+        if hasattr(self, 'type'):
+            return False
+        
+        return True
     
