@@ -5,6 +5,7 @@
 #package imports
 import processingformats.hypocenter
 import processingformats.errorEllipse
+import processingformats.pick
 
 #stdlib import
 import json
@@ -33,7 +34,6 @@ class LocationResult:
     LOCATOREXITCODE_KEY = "LocatorExitCode" #Optional
     ERRORELLIPSE_KEY = "ErrorEllipse" #Optional
     
-    #Constructor. Initializes members to null or provided values
     def __init__ (self, newID = None, newHypocenter = None, newSupportingData = None, 
                   newAssociatedStations = None, newAssociatedPhases = None, 
                   newUsedStations = None, newUsedPhases = None, newGap = None, 
@@ -41,6 +41,28 @@ class LocationResult:
                   newRMS = None, newQuality = None, newBayesianDepth = None, 
                   newBayesianRange = None, newDepthImportance = None, 
                   newLocatorExitCode = None, newErrorEllipse = None):
+    ''' Initializing the object. Constructs an empty object if all arguments are None.
+    
+        newID: a string containing the ID
+        newHypocenter: a processingformats.hypocenter.Hypocenter containing the desired
+                hypocenter (and supporting info)
+        newSupportingData: a vector of Pick objects used to generate this location
+        newAssociatedStations: an int containing the number of associated stations
+        newAssociatedPhases: an int containing the number of associated phases
+        newUsedStations: an int containing the number of used stations
+        newUsedPhases: an int containing the number of used phases
+        newGap: a double containing the gap
+        newSecondaryGap: a double containing the secondary gap
+        newMinimumDistance: a double containing the detection minimum distance
+        newRMS: a double containing the RMS
+        newQuality: a string containing the quality flag
+        newBayesianDepth: a double containing the bayesian depth
+        newBayesianRange: a double containng the bayesian range
+        newDepthImportance: a double containing the depth importance
+        newLocatorExitCode: a string containing the locator exit code
+        newErrorEllipse: a processingformats.errorEllipse.ErrorEllipse containing
+                the desired error ellipse (and supporting info)
+    '''
         
         #Required Keys
         if newHypocenter is not None:
@@ -48,9 +70,9 @@ class LocationResult:
         else:
             self.hypocenter = processingformats.hypocenter.Hypocenter()
             
-        #FIXME
         if newSupportingData is not None:
-            self.supportingData = newSupportingData
+            if newSupportingData and len(newSupportingData) > 0:
+                self.supportingData = newSupportingData
             
         if newMinimumDistance is not None:
             self.minimumDistance = newMinimumDistance
@@ -99,22 +121,39 @@ class LocationResult:
             self.errorEllipse = newErrorEllipse
         else:
             self.errorEllipse = processingformats.errorEllipse.ErrorEllipse()
-            
-    #Populates object from a JSON formatted string
+
     def fromJSONString (self, JSONString):
+    ''' Populates object from a JSON formatted string
+    
+        JSONString: a required string containing the JSON formatted text
+    '''
+    
         JSONObject = json.loads(JSONString)
         self.fromDict(JSONObject)
-        
-    #Populates object from a dictionary
+
     def fromDict(self, aDict):
+    ''' Populates object from a dictionary
+    
+        aDict: a required dictionary
+    '''
         
         #Required keys
         try:
             self.hypocenter.fromDict(aDict[self.HYPOCENTER_KEY])
-            self.supportingData = aDict[self.SUPPORTINGDATA_KEY]
             self.minimumDistance = aDict[self.MINIMUMDISTANCE_KEY]
         except(ValueError, KeyError, TypeError) as e:
             print("Dictionary format error, missing required keys: %s" % e)
+        
+        aDataList = []
+        if self.SUPPORTINGDATA_KEY in aDict:
+            aDataList = aDict[self.SUPPORTINGDATA_KEY]
+            if aDataList:
+                self.supportingData = []
+                
+                for aData in aDataList:
+                    newPick = processingformats.pick.Pick()
+                    newPick.fromDict(aData)
+                    self.supportingData.append(newPick)
         
         #Optional Keys
         if self.ID_KEY in aDict:
@@ -159,15 +198,22 @@ class LocationResult:
         if self.ERRORELLIPSE_KEY in aDict:
             self.errorEllipse = processingformats.errorEllipse.ErrorEllipse()
             self.errorEllipse.fromDict(aDict[self.ERRORELLIPSE_KEY])
-            
-    #Converts object to a JSON formatted string
+
     def toJSONString(self):
+    ''' Converts object to a JSON formatted string
+    
+        Returns: JSON formatted message as a string
+    '''
+    
         JSONObject = self.toDict()
         
         return json.dumps(JSONObject, ensure_ascii=False)
-    
-    #Converts object to a dictionary
+
     def toDict(self):
+    ''' Converts object to a dictionary
+    
+        Returns: the dictionary
+    '''
         
         aDict = {}
         
@@ -178,6 +224,12 @@ class LocationResult:
             aDict[self.MINIMUMDISTANCE_KEY] = self.minimumDistance
         except(NameError, AttributeError) as e:
             print("Missing required data error: %s" % e)
+        
+        
+        aDataList = []
+        if self.supportingData and len(self.supportingData) > 0:
+            for aData in self.supportingData:
+                aDataList.append(aData.toDict())
             
         #Optional Keys
         if hasattr(self, 'id'):
@@ -224,16 +276,22 @@ class LocationResult:
                 aDict[self.ERRORELLIPSE_KEY] = self.errorEllipse.toDict()
                 
         return aDict
-    
-    #Checks to see if object is valid
+
     def isValid(self):
+    ''' Checks to see if object is valid
+    
+        Returns: true if object is valid, false otherwise
+    '''
         
         errorList = self.getErrors()
         
         return not errorList
-    
-    #Gets a list of object validation errors
+
     def getErrors(self):
+    ''' Gets a list of object validation errors
+    
+        Returns: a list of strings containing the validation error messages
+    '''
         
         errorList = []
         
@@ -246,6 +304,10 @@ class LocationResult:
             errorList.append('No Hypocenter in LocationResult Class.')
             
         #SupportingData
+        if self.supportingData and len(self.supportingData) > 0:
+            for aData in self.supportingData:
+                if not aData.isValid():
+                    errorList.append('Invalid Pick in LocationResult Class')
         
         #Minimum Distance
         try:
