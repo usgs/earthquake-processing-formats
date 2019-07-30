@@ -23,51 +23,51 @@ public class Site implements ProcessingInt {
 	public static final String ELEVATION_KEY = "Elevation";	
 
 	/**
-	 * Required station code.
+	 * Required Station code.
 	 */
-	private String station;
+	private String Station;
 
 	/**
-	 * Optional network/component code.
+	 * Optional Network/component code.
 	 */
-	private String channel;
+	private String Channel;
 
 	/**
-	 * Required network code.
+	 * Required Network code.
 	 */
-	private String network;
+	private String Network;
 
 	/**
-	 * Optional location code.
+	 * Optional Location code.
 	 */
-	private String location;
+	private String Location;
 
 	/**
-	 * Required Double containing the latitude in degreesw
+	 * Required Double containing the Latitude in degrees
 	 */
-	private Double latitude;
+	private Double Latitude;
 
 	/**
-	 * Required Double containing the longitude in degreesw
+	 * Required Double containing the Longitude in degrees
 	 */
-	private Double longitude;
+	private Double Longitude;
 
 	/**
-	 * Required Double containing the elevation in meters
+	 * Required Double containing the Elevation in meters
 	 */
-	private Double elevation;
+	private Double Elevation;
 
 	/**
 	 * The constructor for the Site class. Initializes members to null values.
 	 */
 	public Site() {
-		station = null;
-		channel = null;
-		network = null;
-		location = null;
-		latitude = null;
-		longitude = null;
-		elevation = null;
+		Station = null;
+		Channel = null;
+		Network = null;
+		Location = null;
+		Latitude = null;
+		Longitude = null;
+		Elevation = null;
 	}
 
 	/**
@@ -75,19 +75,19 @@ public class Site implements ProcessingInt {
 	 * members to provided values.
 	 *
 	 * @param newStation
-	 *            - A String containing the station to use
+	 *            - A String containing the Station to use
 	 * @param newChannel
-	 *            - A String containing the channel to use (null omit)
+	 *            - A String containing the Channel to use (null omit)
 	 * @param newNetwork
-	 *            - A String containing the network to use
+	 *            - A String containing the Network to use
 	 * @param newLocation
-	 *            - A String containing the location to use (null omit)
+	 *            - A String containing the Location to use (null omit)
 	 * @param newLatitude
-	 *            - A Double containing the latitude in degrees to use
+	 *            - A Double containing the Latitude in degrees to use
 	 * @param newLongitude
-	 *            - A Double containing the longitude in degrees to use
+	 *            - A Double containing the Longitude in degrees to use
 	 * @param newElevation
-	 *            - A Double containing the elevation in meters to use
+	 *            - A Double containing the Elevation in meters to use
 	 */
 	public Site(String newStation, String newChannel, String newNetwork,
 			String newLocation, Double newLatitude, Double newLongitude,
@@ -104,30 +104,30 @@ public class Site implements ProcessingInt {
 	 * values.
 	 *
 	 * @param newStation
-	 *            - A String containing the station to use
+	 *            - A String containing the Station to use
 	 * @param newChannel
-	 *            - A String containing the channel to use (null omit)
+	 *            - A String containing the Channel to use (null omit)
 	 * @param newNetwork
-	 *            - A String containing the network to use
+	 *            - A String containing the Network to use
 	 * @param newLocation
-	 *            - A String containing the location to use (null omit)
+	 *            - A String containing the Location to use (null omit)
 	 * @param newLatitude
-	 *            - A Double containing the latitude in degrees  to use
+	 *            - A Double containing the Latitude in degrees  to use
 	 * @param newLongitude
-	 *            - A Double containing the longitude in degrees  to use
+	 *            - A Double containing the Longitude in degrees  to use
 	 * @param newElevation
-	 *            - A Double containing the elevation in meters to use
+	 *            - A Double containing the Elevation in meters to use
 	 */
 	public void reload(String newStation, String newChannel, String newNetwork,
 			String newLocation, Double newLatitude, Double newLongitude,
 			Double newElevation) {
-		station = newStation;
-		channel = newChannel;
-		network = newNetwork;
-		location = newLocation;
-		latitude = newLatitude;
-		longitude = newLongitude;
-		elevation = newElevation;
+		Station = newStation;
+		Channel = newChannel;
+		Network = newNetwork;
+		Location = newLocation;
+		Latitude = newLatitude;
+		Longitude = newLongitude;
+		Elevation = newElevation;
 	}
 
 	/**
@@ -138,54 +138,54 @@ public class Site implements ProcessingInt {
 	 */
 	public Site(JSONObject newJSONObject) {
 		// required values
-		// station
+		// Station
 		if (newJSONObject.containsKey(STATION_KEY)) {
-			station = newJSONObject.get(STATION_KEY).toString();
+			Station = newJSONObject.get(STATION_KEY).toString();
 		} else {
-			station = null;
+			Station = null;
 		}
 
-		// network
+		// Network
 		if (newJSONObject.containsKey(NETWORK_KEY)) {
-			network = newJSONObject.get(NETWORK_KEY).toString();
+			Network = newJSONObject.get(NETWORK_KEY).toString();
 		} else {
-			network = null;
+			Network = null;
 		}
 
-		// latitude
+		// Latitude
 		if (newJSONObject.containsKey(LATITUDE_KEY)) {
-			latitude = (double) newJSONObject.get(LATITUDE_KEY);
+			Latitude = (double) newJSONObject.get(LATITUDE_KEY);
 		} else {
-			latitude = null;
+			Latitude = null;
 		}
 
-		// longitude
+		// Longitude
 		if (newJSONObject.containsKey(LONGITUDE_KEY)) {
-			longitude = (double) newJSONObject.get(LONGITUDE_KEY);
+			Longitude = (double) newJSONObject.get(LONGITUDE_KEY);
 		} else {
-			longitude = null;
+			Longitude = null;
 		}
 
-		// elevation
+		// Elevation
 		if (newJSONObject.containsKey(ELEVATION_KEY)) {
-			elevation = (double) newJSONObject.get(ELEVATION_KEY);
+			Elevation = (double) newJSONObject.get(ELEVATION_KEY);
 		} else {
-			elevation = null;
+			Elevation = null;
 		}		
 
 		// optional values
-		// channel
+		// Channel
 		if (newJSONObject.containsKey(CHANNEL_KEY)) {
-			channel = newJSONObject.get(CHANNEL_KEY).toString();
+			Channel = newJSONObject.get(CHANNEL_KEY).toString();
 		} else {
-			channel = null;
+			Channel = null;
 		}
 
-		// location
+		// Location
 		if (newJSONObject.containsKey(LOCATION_KEY)) {
-			location = newJSONObject.get(LOCATION_KEY).toString();
+			Location = newJSONObject.get(LOCATION_KEY).toString();
 		} else {
-			location = null;
+			Location = null;
 		}
 	}
 
@@ -207,38 +207,38 @@ public class Site implements ProcessingInt {
 		Double jsonElevation = getElevation();
 
 		// required values
-		// station
+		// Station
 		if ((jsonStation != null) && (!jsonStation.isEmpty())) {
 			NewJSONObject.put(STATION_KEY, jsonStation);
 		}
 
-		// network
+		// Network
 		if ((jsonNetwork != null) && (!jsonNetwork.isEmpty())) {
 			NewJSONObject.put(NETWORK_KEY, jsonNetwork);
 		}
 
-		// latitude
+		// Latitude
 		if (jsonLatitude != null) {
 			NewJSONObject.put(LATITUDE_KEY, jsonLatitude);
 		}
 
-		// longitude
+		// Longitude
 		if (jsonLongitude != null) {
 			NewJSONObject.put(LONGITUDE_KEY, jsonLongitude);
 		}
 
-		// elevation
+		// Elevation
 		if (jsonElevation != null) {
 			NewJSONObject.put(ELEVATION_KEY, jsonElevation);
 		}
 
 		// optional values
-		// channel
+		// Channel
 		if ((jsonChannel != null) && (!jsonChannel.isEmpty())) {
 			NewJSONObject.put(CHANNEL_KEY, jsonChannel);
 		}
 
-		// location
+		// Location
 		if ((jsonLocation != null) && (!jsonLocation.isEmpty())) {
 			NewJSONObject.put(LOCATION_KEY, jsonLocation);
 		}
@@ -277,52 +277,52 @@ public class Site implements ProcessingInt {
 		ArrayList<String> errorList = new ArrayList<String>();
 
 		// check for required keys
-		// station
+		// Station
 		if (jsonStation == null) {
-			// station not found
+			// Station not found
 			errorList.add("No Station in Site Class.");
 		} else if (jsonStation.isEmpty()) {
-			// station empty
+			// Station empty
 			errorList.add("Empty Station in Site Class.");
 		}
 
-		// network
+		// Network
 		if (jsonNetwork == null) {
-			// network not found
+			// Network not found
 			errorList.add("No Network in Site Class.");
 		} else if (jsonNetwork.isEmpty()) {
-			// network empty
+			// Network empty
 			errorList.add("Empty Network in Site Class.");
 		}
 
-		// latitude
+		// Latitude
 		if (jsonLatitude == null) {
-			// latitude not found
+			// Latitude not found
 			errorList.add("No Latitude in Site Class.");
 		} else if ((jsonLatitude < -90.0) || (jsonLatitude > 90.0)) {
-			// invalid latitude
+			// invalid Latitude
 			errorList.add(
 					"Latitude in Site Class not in the range of -90 to 90.");
 		}
 
-		// longitude
+		// Longitude
 		if (jsonLongitude == null) {
-			// longitude not found
+			// Longitude not found
 			errorList.add("No Longitude in Site Class.");
 		} else if ((jsonLongitude < -180.0) || (jsonLongitude > 180.0)) {
-			// invalid longitude
+			// invalid Longitude
 			errorList.add(
 					"Longitude in Site Class not in the range of -180 to 180.");
 		}
 
-		// elevation
+		// Elevation
 		if (jsonElevation == null) {
-			// elevation not found
+			// Elevation not found
 			errorList.add("No Elevation in Site Class.");
 		}
 
-		// since station, channel, network, and location are free text
-		// strings, no further validation is required. channel and location
+		// since Station, Channel, Network, and Location are free text
+		// strings, no further validation is required. Channel and Location
 		// are also optional.
 		// NOTE: Further validation COULD be done to confirm that values matched
 		// seed standards.
@@ -332,107 +332,107 @@ public class Site implements ProcessingInt {
 	}
 
 	/**
-	 * @return the station
+	 * @return the Station
 	 */
 	public String getStation() {
-		return station;
+		return Station;
 	}
 
 	/**
-	 * @return the channel
+	 * @return the Channel
 	 */
 	public String getChannel() {
-		return channel;
+		return Channel;
 	}
 
 	/**
-	 * @return the network
+	 * @return the Network
 	 */
 	public String getNetwork() {
-		return network;
+		return Network;
 	}
 
 	/**
-	 * @return the location
+	 * @return the Location
 	 */
 	public String getLocation() {
-		return location;
+		return Location;
 	}
 
 	/**
-	 * @return the latitude
+	 * @return the Latitude
 	 */
 	public Double getLatitude() {
-		return latitude;
+		return Latitude;
 	}
 
 	/**
-	 * @return the longitude
+	 * @return the Longitude
 	 */
 	public Double getLongitude() {
-		return longitude;
+		return Longitude;
 	}
 
 	/**
-	 * @return the elevation
+	 * @return the Elevation
 	 */
 	public Double getElevation() {
-		return elevation;
+		return Elevation;
 	}	
 
 	/**
-	 * @param station
-	 *            the station to set
+	 * @param Station
+	 *            the Station to set
 	 */
-	public void setStation(String station) {
-		this.station = station;
+	public void setStation(String Station) {
+		this.Station = Station;
 	}
 
 	/**
-	 * @param channel
-	 *            the channel to set
+	 * @param Channel
+	 *            the Channel to set
 	 */
-	public void setChannel(String channel) {
-		this.channel = channel;
+	public void setChannel(String Channel) {
+		this.Channel = Channel;
 	}
 
 	/**
-	 * @param network
-	 *            the network to set
+	 * @param Network
+	 *            the Network to set
 	 */
-	public void setNetwork(String network) {
-		this.network = network;
+	public void setNetwork(String Network) {
+		this.Network = Network;
 	}
 
 	/**
-	 * @param location
-	 *            the location to set
+	 * @param Location
+	 *            the Location to set
 	 */
-	public void setLocation(String location) {
-		this.location = location;
+	public void setLocation(String Location) {
+		this.Location = Location;
 	}
 
 	/**
-	 * @param latitude
-	 *            the latitude to set
+	 * @param Latitude
+	 *            the Latitude to set
 	 */
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
+	public void setLatitude(Double Latitude) {
+		this.Latitude = Latitude;
 	}	
 
 	/**
-	 * @param longitude
-	 *            the longitude to set
+	 * @param Longitude
+	 *            the Longitude to set
 	 */
-	public void setLongitude(Double longitude) {
-		this.longitude = longitude;
+	public void setLongitude(Double Longitude) {
+		this.Longitude = Longitude;
 	}
 
 	/**
-	 * @param elevation
-	 *            the elevation to set
+	 * @param Elevation
+	 *            the Elevation to set
 	 */
-	public void setElevation(Double elevation) {
-		this.elevation = elevation;
+	public void setElevation(Double Elevation) {
+		this.Elevation = Elevation;
 	}
 }
