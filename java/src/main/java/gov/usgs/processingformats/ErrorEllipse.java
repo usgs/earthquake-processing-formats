@@ -17,90 +17,84 @@ public class ErrorEllipse implements ProcessingInt {
 	public static final String E0_KEY = "E0";
 	public static final String E1_KEY = "E1";
 	public static final String E2_KEY = "E2";
-	public static final String ERROR_KEY = "Error";
-	public static final String AZIMUTH_KEY = "Azimuth";
-	public static final String DIP_KEY = "Dip";
+
 	public static final String MAXIMUM_HORIZONTAL_KEY = "MaximumHorizontalProjection";
 	public static final String MAXIMUM_VERTICAL_KEY = "MaximumVerticalProjection";
 	public static final String EQUIVALENT_HORIZONTAL_KEY = "EquivalentHorizontalRadius";
 
 	/**
-	 * Required E0 error.
+	 * Required E0.
 	 */
-	private Double e0Error;
+	public ErrorEllipseAxis E0;
 
 	/**
-	 * Required E0 azimuth.
+	 * Required E1.
 	 */
-	private Double e0Azimuth;
+	public ErrorEllipseAxis E1;
 
 	/**
-	 * Required E0 dip.
+	 * Required E2.
 	 */
-	private Double e0Dip;
-
-	/**
-	 * Required E1 error.
-	 */
-	private Double e1Error;
-
-	/**
-	 * Required E1 azimuth.
-	 */
-	private Double e1Azimuth;
-
-	/**
-	 * Required E1 dip.
-	 */
-	private Double e1Dip;
-
-	/**
-	 * Required E2 error.
-	 */
-	private Double e2Error;
-
-	/**
-	 * Required E2 azimuth.
-	 */
-	private Double e2Azimuth;
-
-	/**
-	 * Required E2 dip.
-	 */
-	private Double e2Dip;
-
+	public ErrorEllipseAxis E2;
+	
 	/**
 	 * Required Maximum horizontal projection.
 	 */
-	private Double maximumHorizontalProjection;
+	public Double MaximumHorizontalProjection;
 
 	/**
 	 * Required Maximum vertical projection.
 	 */
-	private Double maximumVerticalProjection;
+	public Double MaximumVerticalProjection;
 
 	/**
 	 * Required Equivalent horizontal radius.
 	 */
-	private Double equivalentHorizontalRadius;
+	public Double EquivalentHorizontalRadius;
 
 	/**
 	 * The constructor for the ErrorEllipse class. Initializes members to null
 	 * values.
 	 */
 	public ErrorEllipse() {
-		e0Error = null;
-		e0Azimuth = null;
-		e0Dip = null;
-		e1Error = null;
-		e1Azimuth = null;
-		e1Dip = null;
-		e2Error = null;
-		e2Azimuth = null;
-		e2Dip = null;
-		maximumHorizontalProjection = null;
-		maximumVerticalProjection = null;
-		equivalentHorizontalRadius = null;
+		E0 = null;
+		E1 = null;
+		E2 = null;
+		MaximumHorizontalProjection = null;
+		MaximumVerticalProjection = null;
+		EquivalentHorizontalRadius = null;
+	}
+
+	/**
+	 * The alternate advanced constructor for the ErrorEllipse class.
+	 * Initializes members to provided values.
+	 *
+	 * @param newE0
+	 *            - An ErrorEllipseAxis containing the first axis of the
+	 *            error ellipsoid 
+	 * @param newE1
+	 *            - An ErrorEllipseAxis containing the second axis of the
+	 *            error ellipsoid
+	 * @param newE2
+	 *            - An ErrorEllipseAxis containing the third axis of the
+	 *            error ellipsoid
+	 * @param newMaximumHorizontalProjection
+	 *            - A Double containing the horizontal projection of the error
+	 *            ellipsoid in kilometers
+	 * @param newMaximumVerticalProjection
+	 *            - A Double containing the vertical projection of the error
+	 *            ellipsoid in km in kilometers
+	 * @param newEquivalentHorizontalRadius
+	 *            - A Double containing the equivalent radius of the horizontal
+	 *            error ellipsoid in kilometers
+	 */
+	public ErrorEllipse(ErrorEllipseAxis newE0, ErrorEllipseAxis newE1, 
+			ErrorEllipseAxis newE2, Double newMaximumHorizontalProjection,
+			Double newMaximumVerticalProjection,
+			Double newEquivalentHorizontalRadius) {
+
+		reload(newE0, newE1, newE2, newMaximumHorizontalProjection, 
+				newMaximumVerticalProjection, newEquivalentHorizontalRadius);
 	}
 
 	/**
@@ -151,8 +145,9 @@ public class ErrorEllipse implements ProcessingInt {
 			Double newMaximumVerticalProjection,
 			Double newEquivalentHorizontalRadius) {
 
-		reload(newE0Error, newE0Azimuth, newE0Dip, newE1Error, newE1Azimuth,
-				newE1Dip, newE2Error, newE2Azimuth, newE2Dip,
+		reload(new ErrorEllipseAxis(newE0Error, newE0Azimuth, newE0Dip), 
+				new ErrorEllipseAxis(newE1Error, newE1Azimuth, newE1Dip), 
+				new ErrorEllipseAxis(newE2Error, newE2Azimuth, newE2Dip),
 				newMaximumHorizontalProjection, newMaximumVerticalProjection,
 				newEquivalentHorizontalRadius);
 	}
@@ -163,33 +158,15 @@ public class ErrorEllipse implements ProcessingInt {
 	 * The reload function for the error ellipse class. Initializes members to
 	 * provided values.
 	 *
-	 * @param newE0Error
-	 *            - A Double containing the length of the first axis of the
-	 *            error ellipsoid in kilometers
-	 * @param newE0Azimuth
-	 *            - A Double containing the azimuth of the first axis of the
-	 *            error ellipsoid in degrees
-	 * @param newE0Dip
-	 *            - A Double containing the dip of the first axis of error
-	 *            ellipsoid in degrees.
-	 * @param newE1Error
-	 *            - A Double containing the length of the second axis of the
-	 *            error ellipsoid in kilometers
-	 * @param newE1Azimuth
-	 *            - A Double containing the azimuth of the second axis of the
-	 *            error ellipsoid in degrees
-	 * @param newE1Dip
-	 *            - A Double containing the dip of the second axis of error
-	 *            ellipsoid in degrees.
-	 * @param newE2Error
-	 *            - A Double containing the length of the third axis of the
-	 *            error ellipsoid in kilometers
-	 * @param newE2Azimuth
-	 *            - A Double containing the the azimuth of the third axis of the
-	 *            error ellipsoid in degrees
-	 * @param newE2Dip
-	 *            - A Double containing the dip of the third axis of error
-	 *            ellipsoid in degrees.
+	 * @param newE0
+	 *            - An ErrorEllipseAxis containing the first axis of the
+	 *            error ellipsoid 
+	 * @param newE1
+	 *            - An ErrorEllipseAxis containing the second axis of the
+	 *            error ellipsoid
+	 * @param newE2
+	 *            - An ErrorEllipseAxis containing the third axis of the
+	 *            error ellipsoid
 	 * @param newMaximumHorizontalProjection
 	 *            - A Double containing the horizontal projection of the error
 	 *            ellipsoid in kilometers
@@ -200,24 +177,15 @@ public class ErrorEllipse implements ProcessingInt {
 	 *            - A Double containing the equivalent radius of the horizontal
 	 *            error ellipsoid in kilometers
 	 */
-	public void reload(Double newE0Error, Double newE0Azimuth, Double newE0Dip,
-			Double newE1Error, Double newE1Azimuth, Double newE1Dip,
-			Double newE2Error, Double newE2Azimuth, Double newE2Dip,
-			Double newMaximumHorizontalProjection,
-			Double newMaximumVerticalProjection,
-			Double newEquivalentHorizontalRadius) {
-		e0Error = newE0Error;
-		e0Azimuth = newE0Azimuth;
-		e0Dip = newE0Dip;
-		e1Error = newE1Error;
-		e1Azimuth = newE1Azimuth;
-		e1Dip = newE1Dip;
-		e2Error = newE2Error;
-		e2Azimuth = newE2Azimuth;
-		e2Dip = newE2Dip;
-		maximumHorizontalProjection = newMaximumHorizontalProjection;
-		maximumVerticalProjection = newMaximumVerticalProjection;
-		equivalentHorizontalRadius = newEquivalentHorizontalRadius;
+	public void reload(ErrorEllipseAxis newE0, ErrorEllipseAxis newE1, 
+			ErrorEllipseAxis newE2, Double newMaximumHorizontalProjection,
+			Double newMaximumVerticalProjection, Double newEquivalentHorizontalRadius) {
+		E0 = newE0;
+		E1 = newE1;
+		E2 = newE2;
+		MaximumHorizontalProjection = newMaximumHorizontalProjection;
+		MaximumVerticalProjection = newMaximumVerticalProjection;
+		EquivalentHorizontalRadius = newEquivalentHorizontalRadius;
 	}
 
 	/**
@@ -230,116 +198,47 @@ public class ErrorEllipse implements ProcessingInt {
 		// Required values
 		// E0
 		if (newJSONObject.containsKey(E0_KEY)) {
-			JSONObject e0JSONObject = (JSONObject) newJSONObject.get(E0_KEY);
-
-			// error
-			if (e0JSONObject.containsKey(ERROR_KEY)) {
-				e0Error = (double) e0JSONObject.get(ERROR_KEY);
-			} else {
-				e0Error = null;
-			}
-
-			// azimuth
-			if (e0JSONObject.containsKey(AZIMUTH_KEY)) {
-				e0Azimuth = (double) e0JSONObject.get(AZIMUTH_KEY);
-			} else {
-				e0Azimuth = null;
-			}
-
-			// dip
-			if (e0JSONObject.containsKey(DIP_KEY)) {
-				e0Dip = (double) e0JSONObject.get(DIP_KEY);
-			} else {
-				e0Dip = null;
-			}
+			E0 = new ErrorEllipseAxis((JSONObject) newJSONObject.get(E0_KEY));
 		} else {
-			e0Error = null;
-			e0Azimuth = null;
-			e0Dip = null;
+			E0 = null;
 		}
 
 		// E1
 		if (newJSONObject.containsKey(E1_KEY)) {
-			JSONObject e1JSONObject = (JSONObject) newJSONObject.get(E1_KEY);
-
-			// error
-			if (e1JSONObject.containsKey(ERROR_KEY)) {
-				e1Error = (double) e1JSONObject.get(ERROR_KEY);
-			} else {
-				e1Error = null;
-			}
-
-			// azimuth
-			if (e1JSONObject.containsKey(AZIMUTH_KEY)) {
-				e1Azimuth = (double) e1JSONObject.get(AZIMUTH_KEY);
-			} else {
-				e1Azimuth = null;
-			}
-
-			// dip
-			if (e1JSONObject.containsKey(DIP_KEY)) {
-				e1Dip = (double) e1JSONObject.get(DIP_KEY);
-			} else {
-				e1Dip = null;
-			}
+			E1 = new ErrorEllipseAxis((JSONObject) newJSONObject.get(E1_KEY));
 		} else {
-			e1Error = null;
-			e1Azimuth = null;
-			e1Dip = null;
+			E1 = null;
 		}
-
+			
 		// E2
 		if (newJSONObject.containsKey(E2_KEY)) {
-			JSONObject e2JSONObject = (JSONObject) newJSONObject.get(E2_KEY);
-
-			// error
-			if (e2JSONObject.containsKey(ERROR_KEY)) {
-				e2Error = (double) e2JSONObject.get(ERROR_KEY);
-			} else {
-				e2Error = null;
-			}
-
-			// azimuth
-			if (e2JSONObject.containsKey(AZIMUTH_KEY)) {
-				e2Azimuth = (double) e2JSONObject.get(AZIMUTH_KEY);
-			} else {
-				e2Azimuth = null;
-			}
-
-			// dip
-			if (e2JSONObject.containsKey(DIP_KEY)) {
-				e2Dip = (double) e2JSONObject.get(DIP_KEY);
-			} else {
-				e2Dip = null;
-			}
+			E2 = new ErrorEllipseAxis((JSONObject) newJSONObject.get(E2_KEY));
 		} else {
-			e2Error = null;
-			e2Azimuth = null;
-			e2Dip = null;
+			E2 = null;
 		}
 
-		// maximumHorizontalProjection
+		// MaximumHorizontalProjection
 		if (newJSONObject.containsKey(MAXIMUM_HORIZONTAL_KEY)) {
-			maximumHorizontalProjection = (double) newJSONObject
+			MaximumHorizontalProjection = (double) newJSONObject
 					.get(MAXIMUM_HORIZONTAL_KEY);
 		} else {
-			maximumHorizontalProjection = null;
+			MaximumHorizontalProjection = null;
 		}
 
-		// maximumVerticalProjection
+		// MaximumVerticalProjection
 		if (newJSONObject.containsKey(MAXIMUM_VERTICAL_KEY)) {
-			maximumVerticalProjection = (double) newJSONObject
+			MaximumVerticalProjection = (double) newJSONObject
 					.get(MAXIMUM_VERTICAL_KEY);
 		} else {
-			maximumVerticalProjection = null;
+			MaximumVerticalProjection = null;
 		}
 
-		// equivalentHorizontalRadius
+		// EquivalentHorizontalRadius
 		if (newJSONObject.containsKey(EQUIVALENT_HORIZONTAL_KEY)) {
-			equivalentHorizontalRadius = (double) newJSONObject
+			EquivalentHorizontalRadius = (double) newJSONObject
 					.get(EQUIVALENT_HORIZONTAL_KEY);
 		} else {
-			equivalentHorizontalRadius = null;
+			EquivalentHorizontalRadius = null;
 		}
 
 	}
@@ -355,75 +254,38 @@ public class ErrorEllipse implements ProcessingInt {
 
 		JSONObject newJSONObject = new JSONObject();
 
-		Double jsonE0Error = getE0Error();
-		Double jsonE0Azimuth = getE0Azimuth();
-		Double jsonE0Dip = getE0Dip();
-		Double jsonE1Error = getE1Error();
-		Double jsonE1Azimuth = getE1Azimuth();
-		Double jsonE1Dip = getE1Dip();
-		Double jsonE2Error = getE2Error();
-		Double jsonE2Azimuth = getE2Azimuth();
-		Double jsonE2Dip = getE2Dip();
-		Double jsonMaximumHorizontalProjection = getMaximumHorizontalProjection();
-		Double jsonMaximumVerticalProjection = getMaximumVerticalProjection();
-		Double jsonEquivalentHorizontalRadius = getEquivalentHorizontalRadius();
-
 		// Required values
 		// E0
-		JSONObject newE0JSONObject = new JSONObject();
-		if (jsonE0Error != null) {
-			newE0JSONObject.put(ERROR_KEY, jsonE0Error);
+		if (E0 != null) {
+			newJSONObject.put(E0_KEY, E0);
 		}
-		if (jsonE0Azimuth != null) {
-			newE0JSONObject.put(AZIMUTH_KEY, jsonE0Azimuth);
-		}
-		if (jsonE0Dip != null) {
-			newE0JSONObject.put(DIP_KEY, jsonE0Dip);
-		}
-		newJSONObject.put(E0_KEY, newE0JSONObject);
 
 		// E1
-		JSONObject newE1JSONObject = new JSONObject();
-		if (jsonE1Error != null) {
-			newE1JSONObject.put(ERROR_KEY, jsonE1Error);
+		if (E1 != null) {
+			newJSONObject.put(E1_KEY, E1);
 		}
-		if (jsonE1Azimuth != null) {
-			newE1JSONObject.put(AZIMUTH_KEY, jsonE1Azimuth);
-		}
-		if (jsonE1Dip != null) {
-			newE1JSONObject.put(DIP_KEY, jsonE1Dip);
-		}
-		newJSONObject.put(E1_KEY, newE1JSONObject);
 
 		// E2
-		JSONObject newE2JSONObject = new JSONObject();
-		if (jsonE2Error != null) {
-			newE2JSONObject.put(ERROR_KEY, jsonE2Error);
+		if (E2 != null) {
+			newJSONObject.put(E2_KEY, E2);
 		}
-		if (jsonE2Azimuth != null) {
-			newE2JSONObject.put(AZIMUTH_KEY, jsonE2Azimuth);
-		}
-		if (jsonE2Dip != null) {
-			newE2JSONObject.put(DIP_KEY, jsonE2Dip);
-		}
-		newJSONObject.put(E2_KEY, newE2JSONObject);
 
-		// maximumHorizontalProjection
-		if (jsonMaximumHorizontalProjection != null) {
+		// MaximumHorizontalProjection
+		if (MaximumHorizontalProjection != null) {
 			newJSONObject.put(MAXIMUM_HORIZONTAL_KEY,
-					jsonMaximumHorizontalProjection);
+					MaximumHorizontalProjection);
 		}
 
-		// maximumVerticalProjection
-		if (jsonMaximumVerticalProjection != null) {
+		// MaximumVerticalProjection
+		if (MaximumVerticalProjection != null) {
 			newJSONObject.put(MAXIMUM_VERTICAL_KEY,
-					jsonMaximumVerticalProjection);
+					MaximumVerticalProjection);
 		}
 
-		// jequivalentHorizontalRadius
-		if (jsonEquivalentHorizontalRadius != null) {
+		// jEquivalentHorizontalRadius
+		if (EquivalentHorizontalRadius != null) {
 			newJSONObject.put(EQUIVALENT_HORIZONTAL_KEY,
-					jsonEquivalentHorizontalRadius);
+					EquivalentHorizontalRadius);
 		}
 
 		return (newJSONObject);
@@ -452,91 +314,51 @@ public class ErrorEllipse implements ProcessingInt {
 	 */
 	public ArrayList<String> getErrors() {
 
-		Double jsonE0Error = getE0Error();
-		Double jsonE0Azimuth = getE0Azimuth();
-		Double jsonE0Dip = getE0Dip();
-		Double jsonE1Error = getE1Error();
-		Double jsonE1Azimuth = getE1Azimuth();
-		Double jsonE1Dip = getE1Dip();
-		Double jsonE2Error = getE2Error();
-		Double jsonE2Azimuth = getE2Azimuth();
-		Double jsonE2Dip = getE2Dip();
-		Double jsonMaximumHorizontalProjection = getMaximumHorizontalProjection();
-		Double jsonMaximumVerticalProjection = getMaximumVerticalProjection();
-		Double jsonEquivalentHorizontalRadius = getEquivalentHorizontalRadius();
-
 		ArrayList<String> errorList = new ArrayList<String>();
 
-		// E0 errpr
-		if (jsonE0Error == null) {
-			// error not found
-			errorList.add("No E0 error in ErrorEllipse Class.");
+		// E0
+		if (E0 == null) {
+			// E0 not found
+			errorList.add("No E0 in ErrorEllipse Class.");
+		} else if (!E0.isValid()) {
+			// E0 invalid
+			errorList.add("Invalid E0 in ErrorEllipse Class.");
 		}
-
-		// E0 azimuth
-		if (jsonE0Azimuth == null) {
-			// azimuth not found
-			errorList.add("No E0 azimuth in ErrorEllipse Class.");
+		
+		// E1
+		if (E1 == null) {
+			// E1 not found
+			errorList.add("No E1 in ErrorEllipse Class.");
+		} else if (!E1.isValid()) {
+			// E1 invalid
+			errorList.add("Invalid E1 in ErrorEllipse Class.");
 		}
-
-		// E0 dip
-		if (jsonE0Dip == null) {
-			// dip not found
-			errorList.add("No E0 dip in ErrorEllipse Class.");
-		}
-
-		// E1 errpr
-		if (jsonE1Error == null) {
-			// error not found
-			errorList.add("No E1 error in ErrorEllipse Class.");
-		}
-
-		// E1 azimuth
-		if (jsonE1Azimuth == null) {
-			// azimuth not found
-			errorList.add("No E1 azimuth in ErrorEllipse Class.");
-		}
-
-		// E1 dip
-		if (jsonE1Dip == null) {
-			// dip not found
-			errorList.add("No E1 dip in ErrorEllipse Class.");
-		}
-
-		// E2 errpr
-		if (jsonE2Error == null) {
-			// error not found
-			errorList.add("No E2 error in ErrorEllipse Class.");
-		}
-
-		// E2 azimuth
-		if (jsonE2Azimuth == null) {
-			// azimuth not found
-			errorList.add("No E2 azimuth in ErrorEllipse Class.");
-		}
-
-		// E2 dip
-		if (jsonE2Dip == null) {
-			// dip not found
-			errorList.add("No E2 dip in ErrorEllipse Class.");
+		
+		// E2
+		if (E2 == null) {
+			// E2 not found
+			errorList.add("No E2 in ErrorEllipse Class.");
+		} else if (!E2.isValid()) {
+			// E2 invalid
+			errorList.add("Invalid E2 in ErrorEllipse Class.");
 		}
 
 		// MaximumHorizontalProjection
-		if (jsonMaximumHorizontalProjection == null) {
+		if (MaximumHorizontalProjection == null) {
 			// MaximumHorizontalProjection not found
 			errorList.add(
 					"No MaximumHorizontalProjection in ErrorEllipse Class.");
 		}
 
 		// MaximumVerticalProjection
-		if (jsonMaximumVerticalProjection == null) {
+		if (MaximumVerticalProjection == null) {
 			// MaximumVerticalProjection not found
 			errorList
 					.add("No MaximumVerticalProjection in ErrorEllipse Class.");
 		}
 
 		// EquivalentHorizontalRadius
-		if (jsonEquivalentHorizontalRadius == null) {
+		if (EquivalentHorizontalRadius == null) {
 			// EquivalentHorizontalRadius not found
 			errorList.add(
 					"No EquivalentHorizontalRadius in ErrorEllipse Class.");
@@ -545,187 +367,4 @@ public class ErrorEllipse implements ProcessingInt {
 		// success
 		return (errorList);
 	}
-
-	/**
-	 * @return the e0Error
-	 */
-	public Double getE0Error() {
-		return e0Error;
-	}
-
-	/**
-	 * @return the e0Azimuth
-	 */
-	public Double getE0Azimuth() {
-		return e0Azimuth;
-	}
-
-	/**
-	 * @return the e0Dip
-	 */
-	public Double getE0Dip() {
-		return e0Dip;
-	}
-
-	/**
-	 * @return the e1Error
-	 */
-	public Double getE1Error() {
-		return e1Error;
-	}
-
-	/**
-	 * @return the e1Azimuth
-	 */
-	public Double getE1Azimuth() {
-		return e1Azimuth;
-	}
-
-	/**
-	 * @return the e1Dip
-	 */
-	public Double getE1Dip() {
-		return e1Dip;
-	}
-
-	/**
-	 * @return the e2Error
-	 */
-	public Double getE2Error() {
-		return e2Error;
-	}
-
-	/**
-	 * @return the e2Azimuth
-	 */
-	public Double getE2Azimuth() {
-		return e2Azimuth;
-	}
-
-	/**
-	 * @return the e2Dip
-	 */
-	public Double getE2Dip() {
-		return e2Dip;
-	}
-
-	/**
-	 * @return the maximumHorizontalProjection
-	 */
-	public Double getMaximumHorizontalProjection() {
-		return maximumHorizontalProjection;
-	}
-
-	/**
-	 * @return the maximumVerticallProjection
-	 */
-	public Double getMaximumVerticalProjection() {
-		return maximumVerticalProjection;
-	}
-
-	/**
-	 * @return the equivalentHorizontalRadius
-	 */
-	public Double getEquivalentHorizontalRadius() {
-		return equivalentHorizontalRadius;
-	}
-
-	/**
-	 * @param e0Error
-	 *            the e0Error to set
-	 */
-	public void setE0Error(Double e0Error) {
-		this.e0Error = e0Error;
-	}
-
-	/**
-	 * @param e0Azimuth
-	 *            the e0Azimuth to set
-	 */
-	public void setE0Azimuth(Double e0Azimuth) {
-		this.e0Azimuth = e0Azimuth;
-	}
-
-	/**
-	 * @param e0Dip
-	 *            the e0Dip to set
-	 */
-	public void setE0Dip(Double e0Dip) {
-		this.e0Dip = e0Dip;
-	}
-
-	/**
-	 * @param e1Error
-	 *            the e1Error to set
-	 */
-	public void setE1Error(Double e1Error) {
-		this.e1Error = e1Error;
-	}
-
-	/**
-	 * @param e1Azimuth
-	 *            the e1Azimuth to set
-	 */
-	public void setE1Azimuth(Double e1Azimuth) {
-		this.e1Azimuth = e1Azimuth;
-	}
-
-	/**
-	 * @param e1Dip
-	 *            the e1Dip to set
-	 */
-	public void setE1Dip(Double e1Dip) {
-		this.e1Dip = e1Dip;
-	}
-
-	/**
-	 * @param e2Error
-	 *            the e2Error to set
-	 */
-	public void setE2Error(Double e2Error) {
-		this.e2Error = e2Error;
-	}
-
-	/**
-	 * @param e2Azimuth
-	 *            the e2Azimuth to set
-	 */
-	public void setE2Azimuth(Double e2Azimuth) {
-		this.e2Azimuth = e2Azimuth;
-	}
-
-	/**
-	 * @param e2Dip
-	 *            the e2Dip to set
-	 */
-	public void setE2Dip(Double e2Dip) {
-		this.e2Dip = e2Dip;
-	}
-
-	/**
-	 * @param maximumHorizontalProjection
-	 *            the maximumHorizontalProjection to set
-	 */
-	public void setMaximumHorizontalProjection(
-			Double maximumHorizontalProjection) {
-		this.maximumHorizontalProjection = maximumHorizontalProjection;
-	}
-
-	/**
-	 * @param maximumVerticalProjection
-	 *            the maximumVerticalProjection to set
-	 */
-	public void setMaximumVerticalProjection(Double maximumVerticalProjection) {
-		this.maximumVerticalProjection = maximumVerticalProjection;
-	}
-
-	/**
-	 * @param equivalentHorizontalRadius
-	 *            the equivalentHorizontalRadius to set
-	 */
-	public void setEquivalentHorizontalRadius(
-			Double equivalentHorizontalRadius) {
-		this.equivalentHorizontalRadius = equivalentHorizontalRadius;
-	}
-
 }

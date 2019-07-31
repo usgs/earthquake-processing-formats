@@ -34,98 +34,98 @@ public class Pick implements ProcessingInt {
 	/**
 	 * Required unique identifier for this Pick
 	 */
-	private String id;
+	public String ID;
 
 	/**
-	 * Required site.
+	 * Required Site.
 	 */
-	private Site site;
+	public Site Site;
 
 	/**
-	 * Required source.
+	 * Required Source.
 	 */
-	private Source source;
+	public Source Source;
 
 	/**
-	 * Required time for this Pick
+	 * Required Time for this Pick
 	 */
-	private Date time;
+	public Date Time;
 
 	/**
-	 * Required double containing the affinity
+	 * Required double containing the Affinity
 	 */
-	private Double affinity;
+	public Double Affinity;
 
 	/**
-	 * Required double containing the quality
+	 * Required double containing the Quality
 	 */
-	private Double quality;
+	public Double Quality;
 
 	/**
-	 * Required boolean containing the use flag
+	 * Required boolean containing the Use flag
 	 */
-	private Boolean use;
+	public Boolean Use;
 
 	/**
 	 * Required String containing the picked phase
 	 */
-	private String pickedPhase;
+	public String PickedPhase;
 
 	/**
 	 * Required String containing the associated phase
 	 */
-	private String associatedPhase;
+	public String AssociatedPhase;
 
 	/**
 	 * Optional (output) String containing the located phase
 	 */
-	private String locatedPhase;
+	public String LocatedPhase;
 
 	/**
-	 * Optional (output) double containing the residual
+	 * Optional (output) double containing the Residual
 	 */
-	private Double residual;
+	public Double Residual;
 
 	/**
-	 * Optional (output) double containing the distance
+	 * Optional (output) double containing the Distance
 	 */
-	private Double distance;
+	public Double Distance;
 
 	/**
-	 * Optional (output) double containing the azimuth
+	 * Optional (output) double containing the Azimuth
 	 */
-	private Double azimuth;
+	public Double Azimuth;
 
 	/**
-	 * Optional (output) double containing the weight
+	 * Optional (output) double containing the Weight
 	 */
-	private Double weight;
+	public Double Weight;
 
 	/**
-	 * Optional (output) double containing the importance
+	 * Optional (output) double containing the Importance
 	 */
-	private Double importance;
+	public Double Importance;
 
 	/**
 	 * The constructor for the Pick class. Initializes members to null values.
 	 */
 	public Pick() {
 
-		id = null;
-		site = null;
-		source = null;
-		time = null;
-		affinity = null;
-		quality = null;
-		use = null;
-		pickedPhase = null;
-		associatedPhase = null;
-		locatedPhase = null;
-		residual = null;
-		distance = null;
-		azimuth = null;
-		weight = null;
-		importance = null;
+		ID = null;
+		Site = null;
+		Source = null;
+		Time = null;
+		Affinity = null;
+		Quality = null;
+		Use = null;
+		PickedPhase = null;
+		AssociatedPhase = null;
+		LocatedPhase = null;
+		Residual = null;
+		Distance = null;
+		Azimuth = null;
+		Weight = null;
+		Importance = null;
 	}
 
 	/**
@@ -133,52 +133,52 @@ public class Pick implements ProcessingInt {
 	 * provided values.
 	 *
 	 * @param newID
-	 *            - A String containing the id to use
+	 *            - A String containing the ID to Use
 	 * @param newStation
-	 *            - A String containing the station to use
+	 *            - A String containing the station to Use
 	 * @param newChannel
-	 *            - A String containing the channel to use
+	 *            - A String containing the channel to Use
 	 * @param newNetwork
-	 *            - A String containing the network to use
+	 *            - A String containing the network to Use
 	 * @param newLocation
-	 *            - A String containing the location to use
+	 *            - A String containing the location to Use
 	 * @param newLatitude
-	 *            - A Double containing the latitude to use
+	 *            - A Double containing the latitude to Use
 	 * @param newLongitude
-	 *            - A Double containing the longitude to use
+	 *            - A Double containing the longitude to Use
 	 * @param newElevation
-	 *            - A Double containing the elevation to use
+	 *            - A Double containing the elevation to Use
 	 * @param newAgencyID
-	 *            - A String containing the agencyid to use
+	 *            - A String containing the agencyid to Use
 	 * @param newAuthor
-	 *            - A String containing the author to use
+	 *            - A String containing the author to Use
 	 * @param newType
-	 *            - A String containing the type to use
+	 *            - A String containing the type to Use
 	 * @param newTime
-	 *            - A Date containing the time to use
+	 *            - A Date containing the Time to Use
 	 * @param newAffinity
-	 *            - A Double containing the affinity to use
+	 *            - A Double containing the Affinity to Use
 	 * @param newQuality
-	 *            - A Double containing the quality to use
+	 *            - A Double containing the Quality to Use
 	 * @param newUse
-	 *            - A Boolean containing the use flag to use
+	 *            - A Boolean containing the Use flag to Use
 	 * @param newPickedPhase
-	 *            - A String containing the picked phase to use
+	 *            - A String containing the picked phase to Use
 	 * @param newAssociatedPhase
-	 *            - A String containing the associated phase to use
+	 *            - A String containing the associated phase to Use
 	 * @param newLocatedPhase
-	 *            - A String containing the located phase to use, empty string
+	 *            - A String containing the located phase to Use, empty string
 	 *            to omit
 	 * @param newResidual
-	 *            - A Double containing the residual to use, null to omit
+	 *            - A Double containing the Residual to Use, null to omit
 	 * @param newDistance
-	 *            - A Double containing the distance to use, null to omit
+	 *            - A Double containing the Distance to Use, null to omit
 	 * @param newAzimuth
-	 *            - A Double containing the azimuth to use, null to omit
+	 *            - A Double containing the Azimuth to Use, null to omit
 	 * @param newWeight
-	 *            - A Double containing the weight to use, null to omit
+	 *            - A Double containing the Weight to Use, null to omit
 	 * @param newImportance
-	 *            - A Double containing the importance to use, null to omit
+	 *            - A Double containing the Importance to Use, null to omit
 	 */
 	public Pick(String newID, String newStation, String newChannel,
 			String newNetwork, String newLocation, Double newLatitude, 
@@ -202,36 +202,36 @@ public class Pick implements ProcessingInt {
 	 * members to provided values.
 	 *
 	 * @param newID
-	 *            - A String containing the id to use
+	 *            - A String containing the ID to Use
 	 * @param newSite
-	 *            - A Site containing the site to use
+	 *            - A Site containing the Site to Use
 	 * @param newSource
-	 *            - A Source containing the source to use
+	 *            - A Source containing the Source to Use
 	 * @param newTime
-	 *            - A Date containing the time to use
+	 *            - A Date containing the Time to Use
 	 * @param newAffinity
-	 *            - A Double containing the affinity to use
+	 *            - A Double containing the Affinity to Use
 	 * @param newQuality
-	 *            - A Double containing the quality to use
+	 *            - A Double containing the Quality to Use
 	 * @param newUse
-	 *            - A Boolean containing the use flag to use
+	 *            - A Boolean containing the Use flag to Use
 	 * @param newPickedPhase
-	 *            - A String containing the picked phase to use
+	 *            - A String containing the picked phase to Use
 	 * @param newAssociatedPhase
-	 *            - A String containing the associated phase to use
+	 *            - A String containing the associated phase to Use
 	 * @param newLocatedPhase
-	 *            - A String containing the located phase to use, empty string
+	 *            - A String containing the located phase to Use, empty string
 	 *            to omit
 	 * @param newResidual
-	 *            - A Double containing the residual to use, null to omit
+	 *            - A Double containing the Residual to Use, null to omit
 	 * @param newDistance
-	 *            - A Double containing the distance to use, null to omit
+	 *            - A Double containing the Distance to Use, null to omit
 	 * @param newAzimuth
-	 *            - A Double containing the azimuth to use, null to omit
+	 *            - A Double containing the Azimuth to Use, null to omit
 	 * @param newWeight
-	 *            - A Double containing the weight to use, null to omit
+	 *            - A Double containing the Weight to Use, null to omit
 	 * @param newImportance
-	 *            - A Double containing the importance to use, null to omit
+	 *            - A Double containing the Importance to Use, null to omit
 	 */
 	public Pick(String newID, Site newSite, Source newSource, Date newTime,
 			Double newAffinity, Double newQuality, Boolean newUse,
@@ -251,36 +251,36 @@ public class Pick implements ProcessingInt {
 	 * provided values.
 	 *
 	 * @param newID
-	 *            - A String containing the id to use
+	 *            - A String containing the ID to Use
 	 * @param newSite
-	 *            - A Site containing the site to use
+	 *            - A Site containing the Site to Use
 	 * @param newSource
-	 *            - A Source containing the source to use
+	 *            - A Source containing the Source to Use
 	 * @param newTime
-	 *            - A Date containing the time to use
+	 *            - A Date containing the Time to Use
 	 * @param newAffinity
-	 *            - A Double containing the affinity to use
+	 *            - A Double containing the Affinity to Use
 	 * @param newQuality
-	 *            - A Double containing the quality to use
+	 *            - A Double containing the Quality to Use
 	 * @param newUse
-	 *            - A Boolean containing the use flag to use
+	 *            - A Boolean containing the Use flag to Use
 	 * @param newPickedPhase
-	 *            - A String containing the picked phase to use
+	 *            - A String containing the picked phase to Use
 	 * @param newAssociatedPhase
-	 *            - A String containing the associated phase to use
+	 *            - A String containing the associated phase to Use
 	 * @param newLocatedPhase
-	 *            - A String containing the located phase to use, empty string
+	 *            - A String containing the located phase to Use, empty string
 	 *            to omit
 	 * @param newResidual
-	 *            - A Double containing the residual to use, null to omit
+	 *            - A Double containing the Residual to Use, null to omit
 	 * @param newDistance
-	 *            - A Double containing the distance to use, null to omit
+	 *            - A Double containing the Distance to Use, null to omit
 	 * @param newAzimuth
-	 *            - A Double containing the azimuth to use, null to omit
+	 *            - A Double containing the Azimuth to Use, null to omit
 	 * @param newWeight
-	 *            - A Double containing the weight to use, null to omit
+	 *            - A Double containing the Weight to Use, null to omit
 	 * @param newImportance
-	 *            - A Double containing the importance to use, null to omit
+	 *            - A Double containing the Importance to Use, null to omit
 	 */
 	public void reload(String newID, Site newSite, Source newSource,
 			Date newTime, Double newAffinity, Double newQuality, Boolean newUse,
@@ -288,21 +288,21 @@ public class Pick implements ProcessingInt {
 			String newLocatedPhase, Double newResidual, Double newDistance,
 			Double newAzimuth, Double newWeight, Double newImportance) {
 
-		id = newID;
-		site = newSite;
-		time = newTime;
-		source = newSource;
-		affinity = newAffinity;
-		quality = newQuality;
-		use = newUse;
-		pickedPhase = newPickedPhase;
-		associatedPhase = newAssociatedPhase;
-		locatedPhase = newLocatedPhase;
-		residual = newResidual;
-		distance = newDistance;
-		azimuth = newAzimuth;
-		weight = newWeight;
-		importance = newImportance;
+		ID = newID;
+		Site = newSite;
+		Time = newTime;
+		Source = newSource;
+		Affinity = newAffinity;
+		Quality = newQuality;
+		Use = newUse;
+		PickedPhase = newPickedPhase;
+		AssociatedPhase = newAssociatedPhase;
+		LocatedPhase = newLocatedPhase;
+		Residual = newResidual;
+		Distance = newDistance;
+		Azimuth = newAzimuth;
+		Weight = newWeight;
+		Importance = newImportance;
 	}
 
 	/**
@@ -314,120 +314,120 @@ public class Pick implements ProcessingInt {
 	public Pick(JSONObject newJSONObject) {
 
 		// Required values
-		// id
+		// ID
 		if (newJSONObject.containsKey(ID_KEY)) {
-			id = newJSONObject.get(ID_KEY).toString();
+			ID = newJSONObject.get(ID_KEY).toString();
 		} else {
-			id = null;
+			ID = null;
 		}
 
-		// site
+		// Site
 		if (newJSONObject.containsKey(SITE_KEY)) {
-			site = new Site((JSONObject) newJSONObject.get(SITE_KEY));
+			Site = new Site((JSONObject) newJSONObject.get(SITE_KEY));
 		} else {
-			site = null;
+			Site = null;
 		}
 
-		// source
+		// Source
 		if (newJSONObject.containsKey(SOURCE_KEY)) {
-			source = new Source((JSONObject) newJSONObject.get(SOURCE_KEY));
+			Source = new Source((JSONObject) newJSONObject.get(SOURCE_KEY));
 		} else {
-			source = null;
+			Source = null;
 		}
 
-		// time
+		// Time
 		if (newJSONObject.containsKey(TIME_KEY)) {
-			time = Utility.getDate(newJSONObject.get(TIME_KEY).toString());
+			Time = Utility.getDate(newJSONObject.get(TIME_KEY).toString());
 		} else {
-			time = null;
+			Time = null;
 		}
 
-		// affinity
+		// Affinity
 		if (newJSONObject.containsKey(AFFINITY_KEY)) {
-			affinity = Double
+			Affinity = Double
 					.valueOf(newJSONObject.get(AFFINITY_KEY).toString());
 		} else {
-			affinity = null;
+			Affinity = null;
 		}
 
-		// quality
+		// Quality
 		if (newJSONObject.containsKey(QUALITY_KEY)) {
-			quality = Double.valueOf(newJSONObject.get(QUALITY_KEY).toString());
+			Quality = Double.valueOf(newJSONObject.get(QUALITY_KEY).toString());
 		} else {
-			quality = null;
+			Quality = null;
 		}
 
-		// use
+		// Use
 		if (newJSONObject.containsKey(USE_KEY)) {
-			use = Boolean.valueOf(newJSONObject.get(USE_KEY).toString());
+			Use = Boolean.valueOf(newJSONObject.get(USE_KEY).toString());
 		} else {
-			use = null;
+			Use = null;
 		}
 
-		// pickedPhase
+		// PickedPhase
 		if (newJSONObject.containsKey(PICKED_PHASE_KEY)) {
-			pickedPhase = newJSONObject.get(PICKED_PHASE_KEY).toString();
+			PickedPhase = newJSONObject.get(PICKED_PHASE_KEY).toString();
 		} else {
-			pickedPhase = null;
+			PickedPhase = null;
 		}
 
-		// associatedPhase
+		// AssociatedPhase
 		if (newJSONObject.containsKey(ASSOCIATED_PHASE_KEY)) {
-			associatedPhase = newJSONObject.get(ASSOCIATED_PHASE_KEY)
+			AssociatedPhase = newJSONObject.get(ASSOCIATED_PHASE_KEY)
 					.toString();
 		} else {
-			associatedPhase = null;
+			AssociatedPhase = null;
 		}
 
 		// Optional (output) values
-		// locatedPhase
+		// LocatedPhase
 		if (newJSONObject.containsKey(LOCATED_PHASE_KEY)) {
-			locatedPhase = newJSONObject.get(LOCATED_PHASE_KEY).toString();
+			LocatedPhase = newJSONObject.get(LOCATED_PHASE_KEY).toString();
 		} else {
-			locatedPhase = null;
+			LocatedPhase = null;
 		}
 
-		// residual
+		// Residual
 		if (newJSONObject.containsKey(RESIDUAL_KEY)) {
-			residual = Double
+			Residual = Double
 					.valueOf(newJSONObject.get(RESIDUAL_KEY).toString());
 		} else {
-			residual = null;
+			Residual = null;
 		}
 
-		// distance
+		// Distance
 		if (newJSONObject.containsKey(DISTANCE_KEY)) {
-			distance = Double
+			Distance = Double
 					.valueOf(newJSONObject.get(DISTANCE_KEY).toString());
 		} else {
-			distance = null;
+			Distance = null;
 		}
 
-		// azimuth
+		// Azimuth
 		if (newJSONObject.containsKey(AZIMUTH_KEY)) {
-			azimuth = Double.valueOf(newJSONObject.get(AZIMUTH_KEY).toString());
+			Azimuth = Double.valueOf(newJSONObject.get(AZIMUTH_KEY).toString());
 		} else {
-			azimuth = null;
+			Azimuth = null;
 		}
 
-		// weight
+		// Weight
 		if (newJSONObject.containsKey(WEIGHT_KEY)) {
-			weight = Double.valueOf(newJSONObject.get(WEIGHT_KEY).toString());
+			Weight = Double.valueOf(newJSONObject.get(WEIGHT_KEY).toString());
 		} else {
-			weight = null;
+			Weight = null;
 		}
 
-		// importance
+		// Importance
 		if (newJSONObject.containsKey(IMPORTANCE_KEY)) {
-			importance = Double
+			Importance = Double
 					.valueOf(newJSONObject.get(IMPORTANCE_KEY).toString());
 		} else {
-			importance = null;
+			Importance = null;
 		}
 	}
 
 	/**
-	 * Converts the contents of the class to a json object Overridden from
+	 * Converts the contents of the class to a  object Overridden from
 	 * ProcessingBase.
 	 *
 	 * @return Returns a JSONObject containing the class contents
@@ -437,97 +437,81 @@ public class Pick implements ProcessingInt {
 
 		JSONObject newJSONObject = new JSONObject();
 
-		String jsonID = getID();
-		Site jsonSite = getSite();
-		Source jsonSource = getSource();
-		Date jsonTime = getTime();
-		Double jsonAffinity = getAffinity();
-		Double jsonQuality = getQuality();
-		Boolean jsonUse = getUse();
-		String jsonPickedPhase = getPickedPhase();
-		String jsonAssociatedPhase = getAssociatedPhase();
-		String jsonLocatedPhase = getLocatedPhase();
-		Double jsonResidual = getResidual();
-		Double jsonDistance = getDistance();
-		Double jsonAzimuth = getAzimuth();
-		Double jsonWeight = getWeight();
-		Double jsonImportance = getImportance();
-
 		// Required values
-		// id
-		if (jsonID != null) {
-			newJSONObject.put(ID_KEY, jsonID);
+		// ID
+		if (ID != null) {
+			newJSONObject.put(ID_KEY, ID);
 		}
 
-		// site
-		if (jsonSite != null) {
-			newJSONObject.put(SITE_KEY, jsonSite.toJSON());
+		// Site
+		if (Site != null) {
+			newJSONObject.put(SITE_KEY, Site.toJSON());
 		}
 
-		// source
-		if (jsonSource != null) {
-			newJSONObject.put(SOURCE_KEY, jsonSource.toJSON());
+		// Source
+		if (Source != null) {
+			newJSONObject.put(SOURCE_KEY, Source.toJSON());
 		}
 
-		// time
-		if (jsonTime != null) {
-			newJSONObject.put(TIME_KEY, Utility.formatDate(jsonTime));
+		// Time
+		if (Time != null) {
+			newJSONObject.put(TIME_KEY, Utility.formatDate(Time));
 		}
 
-		// affinity
-		if (jsonAffinity != null) {
-			newJSONObject.put(AFFINITY_KEY, jsonAffinity);
+		// Affinity
+		if (Affinity != null) {
+			newJSONObject.put(AFFINITY_KEY, Affinity);
 		}
 
-		// quality
-		if (jsonQuality != null) {
-			newJSONObject.put(QUALITY_KEY, jsonQuality);
+		// Quality
+		if (Quality != null) {
+			newJSONObject.put(QUALITY_KEY, Quality);
 		}
 
-		// use
-		if (jsonUse != null) {
-			newJSONObject.put(USE_KEY, jsonUse);
+		// Use
+		if (Use != null) {
+			newJSONObject.put(USE_KEY, Use);
 		}
 
-		// pickedPhase
-		if (jsonPickedPhase != null) {
-			newJSONObject.put(PICKED_PHASE_KEY, jsonPickedPhase);
+		// PickedPhase
+		if (PickedPhase != null) {
+			newJSONObject.put(PICKED_PHASE_KEY, PickedPhase);
 		}
 
 		// asociatedPhase
-		if (jsonAssociatedPhase != null) {
-			newJSONObject.put(ASSOCIATED_PHASE_KEY, jsonAssociatedPhase);
+		if (AssociatedPhase != null) {
+			newJSONObject.put(ASSOCIATED_PHASE_KEY, AssociatedPhase);
 		}
 
 		// Optional (output) values
-		// locatedPhase
-		if (jsonLocatedPhase != null) {
-			newJSONObject.put(LOCATED_PHASE_KEY, jsonLocatedPhase);
+		// LocatedPhase
+		if (LocatedPhase != null) {
+			newJSONObject.put(LOCATED_PHASE_KEY, LocatedPhase);
 		}
 
-		// residual
-		if (jsonResidual != null) {
-			newJSONObject.put(RESIDUAL_KEY, jsonResidual);
+		// Residual
+		if (Residual != null) {
+			newJSONObject.put(RESIDUAL_KEY, Residual);
 		}
 
-		// distance
-		if (jsonDistance != null) {
-			newJSONObject.put(DISTANCE_KEY, jsonDistance);
+		// Distance
+		if (Distance != null) {
+			newJSONObject.put(DISTANCE_KEY, Distance);
 		}
 
-		// azimuth
-		if (jsonAzimuth != null) {
-			newJSONObject.put(AZIMUTH_KEY, jsonAzimuth);
+		// Azimuth
+		if (Azimuth != null) {
+			newJSONObject.put(AZIMUTH_KEY, Azimuth);
 		}
 
-		// weight
-		if (jsonWeight != null) {
-			newJSONObject.put(WEIGHT_KEY, jsonWeight);
+		// Weight
+		if (Weight != null) {
+			newJSONObject.put(WEIGHT_KEY, Weight);
 		}
 
-		// importance
-		if (jsonImportance != null) {
-			newJSONObject.put(IMPORTANCE_KEY, jsonImportance);
+		// Importance
+		if (Importance != null) {
+			newJSONObject.put(IMPORTANCE_KEY, Importance);
 		}
 
 		return (newJSONObject);
@@ -556,97 +540,81 @@ public class Pick implements ProcessingInt {
 	 */
 	public ArrayList<String> getErrors() {
 
-		String jsonID = getID();
-		Site jsonSite = getSite();
-		Source jsonSource = getSource();
-		Date jsonTime = getTime();
-		Double jsonAffinity = getAffinity();
-		Double jsonQuality = getQuality();
-		Boolean jsonUse = getUse();
-		String jsonPickedPhase = getPickedPhase();
-		String jsonAssociatedPhase = getAssociatedPhase();
-		String jsonLocatedPhase = getLocatedPhase();
-		// Double jsonResidual = getResidual();
-		// Double jsonDistance = getDistance();
-		// Double jsonAzimuth = getAzimuth();
-		// Double jsonWeight = getWeight();
-		// Double jsonImportance = getImportance();
-
 		ArrayList<String> errorList = new ArrayList<String>();
 
 		// Required Keys
-		// id
-		if (jsonID == null) {
-			// id not found
+		// ID
+		if (ID == null) {
+			// ID not found
 			errorList.add("No ID in Pick Class.");
-		} else if (jsonID.isEmpty()) {
-			// id empty
+		} else if (ID.isEmpty()) {
+			// ID empty
 			errorList.add("Empty ID in Pick Class.");
 		}
 
-		// site
-		if (jsonSite == null) {
-			// site not found
+		// Site
+		if (Site == null) {
+			// Site not found
 			errorList.add("No Site in Pick Class.");
-		} else if (!jsonSite.isValid()) {
-			// site invalid
+		} else if (!Site.isValid()) {
+			// Site invalid
 			errorList.add("Invalid Site in Pick Class.");
 		}
 
-		// source
-		if (jsonSource == null) {
-			// source not found
+		// Source
+		if (Source == null) {
+			// Source not found
 			errorList.add("No Source in Pick Class.");
-		} else if (!jsonSource.isValid()) {
-			// source invalid
+		} else if (!Source.isValid()) {
+			// Source invalid
 			errorList.add("Invalid Source in Pick Class.");
 		}
 
-		// time
-		if (jsonTime == null) {
-			// time not found
+		// Time
+		if (Time == null) {
+			// Time not found
 			errorList.add("No Time in Pick Class.");
 		}
 
-		// affinity
-		if (jsonAffinity == null) {
-			// affinity not found
+		// Affinity
+		if (Affinity == null) {
+			// Affinity not found
 			errorList.add("No Affinity in Pick Class.");
 		}
 
-		// quality
-		if (jsonQuality == null) {
-			// quality not found
+		// Quality
+		if (Quality == null) {
+			// Quality not found
 			errorList.add("No Quality in Pick Class.");
 		}
 
-		// use
-		if (jsonUse == null) {
-			// use not found
+		// Use
+		if (Use == null) {
+			// Use not found
 			errorList.add("No Use in Pick Class.");
 		}
 
 		// Optional Keys
-		// pickedPhase
-		if (jsonPickedPhase != null) {
-			if (jsonPickedPhase.isEmpty()) {
-				// pickedPhase empty
+		// PickedPhase
+		if (PickedPhase != null) {
+			if (PickedPhase.isEmpty()) {
+				// PickedPhase empty
 				errorList.add("Empty Picked Phase in Pick Class.");
 			}
 		}
 
-		// associatedPhase
-		if (jsonAssociatedPhase != null) {
-			if (jsonAssociatedPhase.isEmpty()) {
-				// associatedPhase empty
+		// AssociatedPhase
+		if (AssociatedPhase != null) {
+			if (AssociatedPhase.isEmpty()) {
+				// AssociatedPhase empty
 				errorList.add("Empty Associated Phase in Pick Class.");
 			}
 		}
 
-		// locatedPhase
-		if (jsonLocatedPhase != null) {
-			if (jsonLocatedPhase.isEmpty()) {
-				// locatedPhase empty
+		// LocatedPhase
+		if (LocatedPhase != null) {
+			if (LocatedPhase.isEmpty()) {
+				// LocatedPhase empty
 				errorList.add("Empty Located Phase in Pick Class.");
 			}
 		}		
@@ -655,230 +623,5 @@ public class Pick implements ProcessingInt {
 
 		// success
 		return (errorList);
-	}
-
-	/**
-	 * @return the id
-	 */
-	public String getID() {
-		return id;
-	}
-
-	/**
-	 * @return the site
-	 */
-	public Site getSite() {
-		return site;
-	}
-
-	/**
-	 * @return the source
-	 */
-	public Source getSource() {
-		return source;
-	}
-
-	/**
-	 * @return the time
-	 */
-	public Date getTime() {
-		return time;
-	}
-
-	/**
-	 * @return the affinity
-	 */
-	public Double getAffinity() {
-		return affinity;
-	}
-
-	/**
-	 * @return the quality
-	 */
-	public Double getQuality() {
-		return quality;
-	}
-
-	/**
-	 * @return the use
-	 */
-	public Boolean getUse() {
-		return use;
-	}
-
-	/**
-	 * @return the pickedPhase
-	 */
-	public String getPickedPhase() {
-		return pickedPhase;
-	}
-
-	/**
-	 * @return the associatedPhase
-	 */
-	public String getAssociatedPhase() {
-		return associatedPhase;
-	}
-
-	/**
-	 * @return the locatedPhase
-	 */
-	public String getLocatedPhase() {
-		return locatedPhase;
-	}
-
-	/**
-	 * @return the residual
-	 */
-	public Double getResidual() {
-		return residual;
-	}
-
-	/**
-	 * @return the distance
-	 */
-	public Double getDistance() {
-		return distance;
-	}
-
-	/**
-	 * @return the azimuth
-	 */
-	public Double getAzimuth() {
-		return azimuth;
-	}
-
-	/**
-	 * @return the weight
-	 */
-	public Double getWeight() {
-		return weight;
-	}
-
-	/**
-	 * @return the importance
-	 */
-	public Double getImportance() {
-		return importance;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	/**
-	 * @param site
-	 *            the site to set
-	 */
-	public void setSite(Site site) {
-		this.site = site;
-	}
-
-	/**
-	 * @param source
-	 *            the source to set
-	 */
-	public void setSource(Source source) {
-		this.source = source;
-	}
-
-	/**
-	 * @param time
-	 *            the time to set
-	 */
-	public void setTime(Date time) {
-		this.time = time;
-	}
-
-	/**
-	 * @param affinity
-	 *            the affinity to set
-	 */
-	public void setAffinity(Double affinity) {
-		this.affinity = affinity;
-	}
-
-	/**
-	 * @param quality
-	 *            the quality to set
-	 */
-	public void setQuality(Double quality) {
-		this.quality = quality;
-	}
-
-	/**
-	 * @param use
-	 *            the use to set
-	 */
-	public void setUse(Boolean use) {
-		this.use = use;
-	}
-
-	/**
-	 * @param pickedPhase
-	 *            the pickedPhase to set
-	 */
-	public void setPickedPhase(String pickedPhase) {
-		this.pickedPhase = pickedPhase;
-	}
-
-	/**
-	 * @param associatedPhase
-	 *            the associatedPhase to set
-	 */
-	public void setAssociatedPhase(String associatedPhase) {
-		this.associatedPhase = associatedPhase;
-	}
-
-	/**
-	 * @param locatedPhase
-	 *            the locatedPhase to set
-	 */
-	public void setLocatedPhase(String locatedPhase) {
-		this.locatedPhase = locatedPhase;
-	}
-
-	/**
-	 * @param residual
-	 *            the residual to set
-	 */
-	public void setResidual(Double residual) {
-		this.residual = residual;
-	}
-
-	/**
-	 * @param distance
-	 *            the distance to set
-	 */
-	public void setDistance(Double distance) {
-		this.distance = distance;
-	}
-
-	/**
-	 * @param azimuth
-	 *            the azimuth to set
-	 */
-	public void setAzimuth(Double azimuth) {
-		this.azimuth = azimuth;
-	}
-
-	/**
-	 * @param weight
-	 *            the weight to set
-	 */
-	public void setWeight(Double weight) {
-		this.weight = weight;
-	}
-
-	/**
-	 * @param importance
-	 *            the importance to set
-	 */
-	public void setImportance(Double importance) {
-		this.importance = importance;
 	}
 }

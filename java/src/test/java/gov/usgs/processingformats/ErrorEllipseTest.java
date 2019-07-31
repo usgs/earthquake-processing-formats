@@ -98,54 +98,54 @@ public class ErrorEllipseTest {
 
 		// check ellipseObject.e0Error
 		assertEquals(TestName + " e0Error Equals", E0ERROR,
-				ellipseObject.getE0Error(), 0);
+				ellipseObject.E0.Error, 0);
 
 		// check ellipseObject.e0Azimuth
 		assertEquals(TestName + " e0Azimuth Equals", E0AZIMUTH,
-				ellipseObject.getE0Azimuth(), 0);
+				ellipseObject.E0.Azimuth, 0);
 
 		// check ellipseObject.e0Dip
 		assertEquals(TestName + " e0Dip Equals", E0DIP,
-				ellipseObject.getE0Dip(), 0);
+				ellipseObject.E0.Dip, 0);
 
 		// check ellipseObject.e1Error
 		assertEquals(TestName + " e1Error Equals", E1ERROR,
-				ellipseObject.getE1Error(), 0);
+				ellipseObject.E1.Error, 0);
 
 		// check ellipseObject.e1Azimuth
 		assertEquals(TestName + " e1Azimuth Equals", E1AZIMUTH,
-				ellipseObject.getE1Azimuth(), 0);
+				ellipseObject.E1.Azimuth, 0);
 
 		// check ellipseObject.e1Dip
 		assertEquals(TestName + " e1Dip Equals", E1DIP,
-				ellipseObject.getE1Dip(), 0);
+				ellipseObject.E1.Dip, 0);
 
 		// check ellipseObject.e2Error
 		assertEquals(TestName + " e2Error Equals", E2ERROR,
-				ellipseObject.getE2Error(), 0);
+				ellipseObject.E2.Error, 0);
 
 		// check ellipseObject.e2Azimuth
 		assertEquals(TestName + " e2Azimuth Equals", E2AZIMUTH,
-				ellipseObject.getE2Azimuth(), 0);
+				ellipseObject.E2.Azimuth, 0);
 
 		// check ellipseObject.e2Dip
 		assertEquals(TestName + " e2Dip Equals", E2DIP,
-				ellipseObject.getE2Dip(), 0);
+				ellipseObject.E2.Dip, 0);
 
 		// check ellipseObject.maximumHorizontalProjection
 		assertEquals(TestName + " maximumHorizontalProjection Equals",
 				MAXIMUMHORIZONTALPROJECTION,
-				ellipseObject.getMaximumHorizontalProjection(), 0);
+				ellipseObject.MaximumHorizontalProjection, 0);
 
 		// check ellipseObject.maximumVerticalProjection
 		assertEquals(TestName + " maximumVerticalProjection Equals",
 				MAXIMUMVERTICALPROJECTION,
-				ellipseObject.getMaximumVerticalProjection(), 0);
+				ellipseObject.MaximumVerticalProjection, 0);
 
 		// check ellipseObject.equivalentHorizontalRadius
 		assertEquals(TestName + " equivalentHorizontalRadius Equals",
 				EQUIVILENTHORIZONTALRADIUS,
-				ellipseObject.getEquivalentHorizontalRadius(), 0);
+				ellipseObject.EquivalentHorizontalRadius, 0);
 
 	}
 

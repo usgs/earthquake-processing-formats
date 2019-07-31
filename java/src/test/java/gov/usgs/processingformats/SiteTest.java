@@ -38,7 +38,6 @@ public class SiteTest {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	/**
@@ -46,10 +45,8 @@ public class SiteTest {
 	 */
 	@Test
 	public void readsJSON() {
-
 		// build Amplitude object
 		try {
-
 			checkData(new Site(Utility.fromJSONString(SITE_STRING)),
 					"ReadsJSON");
 		} catch (ParseException e) {
@@ -88,36 +85,36 @@ public class SiteTest {
 
 		// check SiteObject.Station
 		assertEquals(TestName + " Site Equals", STATION,
-				SiteObject.getStation());
+				SiteObject.Station);
 
 		// check SiteObject.Channel
 		assertEquals(TestName + " Channel Equals", CHANNEL,
-				SiteObject.getChannel());
+				SiteObject.Channel);
 
 		// check SiteObject.Network
 		assertEquals(TestName + " Network Equals", NETWORK,
-				SiteObject.getNetwork());
+				SiteObject.Network);
 
 		// check SiteObject.Location
 		assertEquals(TestName + " Location Equals", LOCATION,
-				SiteObject.getLocation());
+				SiteObject.Location);
 
 		// check SiteObject.Latitude
-		if (SiteObject.getLatitude() != null) {
+		if (SiteObject.Latitude != null) {
 			assertEquals(TestName + " Latitude Equals", LATITUDE,
-				SiteObject.getLatitude(), 0);
+				SiteObject.Latitude, 0);
 		}
 
 		// check SiteObject.Longitude
-		if (SiteObject.getLongitude() != null) {
+		if (SiteObject.Longitude != null) {
 			assertEquals(TestName + " Longitude Equals", LONGITUDE,
-				SiteObject.getLongitude(), 0);
+				SiteObject.Longitude, 0);
 		}
 
 		// check SiteObject.Elevation
-		if (SiteObject.getElevation() != null) {
+		if (SiteObject.Elevation != null) {
 			assertEquals(TestName + " Elevation Equals", ELEVATION,
-				SiteObject.getElevation(), 0);
+				SiteObject.Elevation, 0);
 		}
 
 	}

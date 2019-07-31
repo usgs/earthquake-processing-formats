@@ -117,7 +117,7 @@ public class LocationResult implements ProcessingInt {
 	/**
 	 * Optional error ellipse
 	 */
-	private ErrorEllipse errorEllipse;
+	public ErrorEllipse ErrorEllipse;
 
 	/**
 	 * The constructor for the LocationResult class. Initializes members to null
@@ -140,7 +140,7 @@ public class LocationResult implements ProcessingInt {
 		bayesianRange = null;
     depthImportance = null;
     locatorExitCode = null;
-		errorEllipse = null;
+		ErrorEllipse = null;
 	}
 
 	/**
@@ -465,7 +465,7 @@ public class LocationResult implements ProcessingInt {
 		bayesianRange = newBayesianRange;
     depthImportance = newDepthImportance;
     locatorExitCode = newLocatorExitCode;
-		errorEllipse = newErrorEllipse;
+		ErrorEllipse = newErrorEllipse;
 	}
 
 	/**
@@ -611,10 +611,10 @@ public class LocationResult implements ProcessingInt {
 
 		// error ellipse
 		if (newJSONObject.containsKey(ERRORELLIPSE_KEY)) {
-			errorEllipse = new ErrorEllipse(
+			ErrorEllipse = new ErrorEllipse(
 					(JSONObject) newJSONObject.get(ERRORELLIPSE_KEY));
 		} else {
-			errorEllipse = null;
+			ErrorEllipse = null;
 		}
 	}
 
@@ -1055,10 +1055,10 @@ public class LocationResult implements ProcessingInt {
 	}
 
 	/**
-	 * @return the errorEllipse
+	 * @return the ErrorEllipse
 	 */
 	public ErrorEllipse getErrorEllipse() {
-		return errorEllipse;
+		return ErrorEllipse;
 	}
 
 	/**
@@ -1190,11 +1190,11 @@ public class LocationResult implements ProcessingInt {
 	}
 
 	/**
-	 * @param errorEllipse
-	 *            the errorEllipse to set
+	 * @param ErrorEllipse
+	 *            the ErrorEllipse to set
 	 */
-	public void setErrorEllipse(ErrorEllipse errorEllipse) {
-		this.errorEllipse = errorEllipse;
+	public void setErrorEllipse(ErrorEllipse ErrorEllipse) {
+		this.ErrorEllipse = ErrorEllipse;
 	}
 
 }

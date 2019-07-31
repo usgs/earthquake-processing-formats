@@ -132,99 +132,99 @@ public class PickTest {
 	public void checkData(Pick pickObject, String TestName) {
 
 		// check pickObject.ID
-		assertEquals(TestName + " ID Equals", ID, pickObject.getID());
+		assertEquals(TestName + " ID Equals", ID, pickObject.ID);
 
 		// check pickObject.site.Station
 		assertEquals(TestName + " Station Equals", STATION,
-				pickObject.getSite().getStation());
+				pickObject.Site.Station);
 
 		// check pickObject.site.Channel
 		assertEquals(TestName + " Channel Equals", CHANNEL,
-				pickObject.getSite().getChannel());
+				pickObject.Site.Channel);
 
 		// check pickObject.site.Network
 		assertEquals(TestName + " Network Equals", NETWORK,
-				pickObject.getSite().getNetwork());
+				pickObject.Site.Network);
 
 		// check pickObject.site.Location
 		assertEquals(TestName + " Location Equals", LOCATION,
-				pickObject.getSite().getLocation());
+				pickObject.Site.Location);
 
 		// check pickObject.site.Latitude
-		if (pickObject.getSite().getLatitude() != null) {
+		if (pickObject.Site.Latitude != null) {
 			assertEquals(TestName + " Latitude Equals", LATITUDE,
-			pickObject.getSite().getLatitude(), 0);
+			pickObject.Site.Latitude, 0);
 		}
 
 		// check pickObject.site.Longitude
-		if (pickObject.getSite().getLongitude() != null) {
+		if (pickObject.Site.Longitude != null) {
 			assertEquals(TestName + " Longitude Equals", LONGITUDE,
-			pickObject.getSite().getLongitude(), 0);
+			pickObject.Site.Longitude, 0);
 		}
 
 		// check pickObject.site.Elevation
-		if (pickObject.getSite().getElevation() != null) {
+		if (pickObject.Site.Elevation != null) {
 			assertEquals(TestName + " Elevation Equals", ELEVATION,
-			pickObject.getSite().getElevation(), 0);
+			pickObject.Site.Elevation, 0);
 		}
 		
 		// check pickObject.Source.AgencyID
 		assertEquals(TestName + " AgencyID Equals", AGENCYID,
-				pickObject.getSource().getAgencyID());
+				pickObject.Source.AgencyID);
 
 		// check pickObject.Source.Author
 		assertEquals(TestName + " Author Equals", AUTHOR,
-				pickObject.getSource().getAuthor());
+				pickObject.Source.Author);
 
 		// check pickObject.Source.Author
 		assertEquals(TestName + " Type Equals", TYPE,
-				pickObject.getSource().getType());
+				pickObject.Source.Type);
 
 		// check pickObject.Time
-		assertEquals(TestName + " Time Equals", TIME, pickObject.getTime());
+		assertEquals(TestName + " Time Equals", TIME, pickObject.Time);
 
 		// check pickObject.affinity
 		assertEquals(TestName + " Affinity Equals", AFFINITY,
-				pickObject.getAffinity(), 0);
+				pickObject.Affinity, 0);
 
 		// check pickObject.quality
 		assertEquals(TestName + " Quality Equals", QUALITY,
-				pickObject.getQuality(), 0);
+				pickObject.Quality, 0);
 
 		// check pickObject.use
-		assertEquals(TestName + " Use Equals", USE, pickObject.getUse());
+		assertEquals(TestName + " Use Equals", USE, pickObject.Use);
 
 		// check pickObject.pickedPhase
 		assertEquals(TestName + " Picked Phase Equals", PICKEDPHASE,
-				pickObject.getPickedPhase());
+				pickObject.PickedPhase);
 
 		// check pickObject.associatedPhase
 		assertEquals(TestName + " Associated Phase Equals", ASSOCIATEDPHASE,
-				pickObject.getAssociatedPhase());
+				pickObject.AssociatedPhase);
 
 		// check pickObject.locatedPhase
 		assertEquals(TestName + " Located Phase Equals", LOCATEDPHASE,
-				pickObject.getLocatedPhase());
+				pickObject.LocatedPhase);
 
 		// check pickObject.residual
 		assertEquals(TestName + " Residual Equals", RESIDUAL,
-				pickObject.getResidual(), 0);
+				pickObject.Residual, 0);
 
 		// check pickObject.distance
 		assertEquals(TestName + " Distance Equals", DISTANCE,
-				pickObject.getDistance(), 0);
+				pickObject.Distance, 0);
 
 		// check pickObject.azimuth
 		assertEquals(TestName + " Azimuth Equals", AZIMUTH,
-				pickObject.getAzimuth(), 0);
+				pickObject.Azimuth, 0);
 
 		// check pickObject.weight
 		assertEquals(TestName + " Weight Equals", WEIGHT,
-				pickObject.getWeight(), 0);
+				pickObject.Weight, 0);
 
 		// check pickObject.importance
 		assertEquals(TestName + " Importance Equals", IMPORTANCE,
-				pickObject.getImportance(), 0);
+				pickObject.Importance, 0);
 
 	}
 

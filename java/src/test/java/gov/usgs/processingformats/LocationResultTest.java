@@ -316,59 +316,59 @@ public class LocationResultTest {
 		}
 
 		// error ellipse
-		if (LocationResultObject.getErrorEllipse() != null) {
+		if (LocationResultObject.ErrorEllipse != null) {
 			// check ellipseObject.e0Error
 			assertEquals(TestName + " e0Error Equals", E0ERROR,
-					LocationResultObject.getErrorEllipse().getE0Error(), 0);
+					LocationResultObject.ErrorEllipse.E0.Error, 0);
 
 			// check ellipseObject.e0Azimuth
 			assertEquals(TestName + " e0Azimuth Equals", E0AZIMUTH,
-					LocationResultObject.getErrorEllipse().getE0Azimuth(), 0);
+					LocationResultObject.ErrorEllipse.E0.Azimuth, 0);
 
 			// check ellipseObject.e0Dip
 			assertEquals(TestName + " e0Dip Equals", E0DIP,
-					LocationResultObject.getErrorEllipse().getE0Dip(), 0);
+					LocationResultObject.ErrorEllipse.E0.Dip, 0);
 
 			// check ellipseObject.e1Error
 			assertEquals(TestName + " e1Error Equals", E1ERROR,
-					LocationResultObject.getErrorEllipse().getE1Error(), 0);
+					LocationResultObject.ErrorEllipse.E1.Error, 0);
 
 			// check ellipseObject.e1Azimuth
 			assertEquals(TestName + " e1Azimuth Equals", E1AZIMUTH,
-					LocationResultObject.getErrorEllipse().getE1Azimuth(), 0);
+					LocationResultObject.ErrorEllipse.E1.Azimuth, 0);
 
 			// check ellipseObject.e1Dip
 			assertEquals(TestName + " e1Dip Equals", E1DIP,
-					LocationResultObject.getErrorEllipse().getE1Dip(), 0);
+					LocationResultObject.ErrorEllipse.E1.Dip, 0);
 
 			// check ellipseObject.e2Error
 			assertEquals(TestName + " e2Error Equals", E2ERROR,
-					LocationResultObject.getErrorEllipse().getE2Error(), 0);
+					LocationResultObject.ErrorEllipse.E2.Error, 0);
 
 			// check ellipseObject.e2Azimuth
 			assertEquals(TestName + " e2Azimuth Equals", E2AZIMUTH,
-					LocationResultObject.getErrorEllipse().getE2Azimuth(), 0);
+					LocationResultObject.ErrorEllipse.E2.Azimuth, 0);
 
 			// check ellipseObject.e2Dip
 			assertEquals(TestName + " e2Dip Equals", E2DIP,
-					LocationResultObject.getErrorEllipse().getE2Dip(), 0);
+					LocationResultObject.ErrorEllipse.E2.Dip, 0);
 
 			// check ellipseObject.maximumHorizontalProjection
 			assertEquals(TestName + " maximumHorizontalProjection Equals",
 					MAXIMUMHORIZONTALPROJECTION, LocationResultObject
-							.getErrorEllipse().getMaximumHorizontalProjection(),
+							.ErrorEllipse.MaximumHorizontalProjection,
 					0);
 
 			// check ellipseObject.maximumVerticalProjection
 			assertEquals(TestName + " maximumVerticalProjection Equals",
 					MAXIMUMVERTICALPROJECTION, LocationResultObject
-							.getErrorEllipse().getMaximumVerticalProjection(),
+							.ErrorEllipse.MaximumVerticalProjection,
 					0);
 
 			// check ellipseObject.equivalentHorizontalRadius
 			assertEquals(TestName + " equivalentHorizontalRadius Equals",
 					EQUIVILENTHORIZONTALRADIUS, LocationResultObject
-							.getErrorEllipse().getEquivalentHorizontalRadius(),
+							.ErrorEllipse.EquivalentHorizontalRadius,
 					0);
 		}
 

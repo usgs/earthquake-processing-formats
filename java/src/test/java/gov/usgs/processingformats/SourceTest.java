@@ -79,15 +79,15 @@ public class SourceTest {
 
 		// check SourceObject.AgencyID
 		assertEquals(TestName + " AgencyID Equals", AGENCYID,
-				SourceObject.getAgencyID());
+				SourceObject.AgencyID);
 
 		// check SourceObject.Author
 		assertEquals(TestName + " Author Equals", AUTHOR,
-				SourceObject.getAuthor());
+				SourceObject.Author);
 
 		// check SourceObject.Author
 		assertEquals(TestName + " Type Equals", TYPE,
-				SourceObject.getType());
+				SourceObject.Type);
 
 
 	}

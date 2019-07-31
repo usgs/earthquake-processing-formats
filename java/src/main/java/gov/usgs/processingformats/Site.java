@@ -25,37 +25,37 @@ public class Site implements ProcessingInt {
 	/**
 	 * Required Station code.
 	 */
-	private String Station;
+	public String Station;
 
 	/**
 	 * Optional Network/component code.
 	 */
-	private String Channel;
+	public String Channel;
 
 	/**
 	 * Required Network code.
 	 */
-	private String Network;
+	public String Network;
 
 	/**
 	 * Optional Location code.
 	 */
-	private String Location;
+	public String Location;
 
 	/**
 	 * Required Double containing the Latitude in degrees
 	 */
-	private Double Latitude;
+	public Double Latitude;
 
 	/**
 	 * Required Double containing the Longitude in degrees
 	 */
-	private Double Longitude;
+	public Double Longitude;
 
 	/**
 	 * Required Double containing the Elevation in meters
 	 */
-	private Double Elevation;
+	public Double Elevation;
 
 	/**
 	 * The constructor for the Site class. Initializes members to null values.
@@ -198,49 +198,41 @@ public class Site implements ProcessingInt {
 	public JSONObject toJSON() {
 		JSONObject NewJSONObject = new JSONObject();
 
-		String jsonStation = getStation();
-		String jsonNetwork = getNetwork();
-		String jsonChannel = getChannel();
-		String jsonLocation = getLocation();
-		Double jsonLatitude = getLatitude();
-		Double jsonLongitude = getLongitude();
-		Double jsonElevation = getElevation();
-
 		// required values
 		// Station
-		if ((jsonStation != null) && (!jsonStation.isEmpty())) {
-			NewJSONObject.put(STATION_KEY, jsonStation);
+		if ((Station != null) && (!Station.isEmpty())) {
+			NewJSONObject.put(STATION_KEY, Station);
 		}
 
 		// Network
-		if ((jsonNetwork != null) && (!jsonNetwork.isEmpty())) {
-			NewJSONObject.put(NETWORK_KEY, jsonNetwork);
+		if ((Network != null) && (!Network.isEmpty())) {
+			NewJSONObject.put(NETWORK_KEY, Network);
 		}
 
 		// Latitude
-		if (jsonLatitude != null) {
-			NewJSONObject.put(LATITUDE_KEY, jsonLatitude);
+		if (Latitude != null) {
+			NewJSONObject.put(LATITUDE_KEY, Latitude);
 		}
 
 		// Longitude
-		if (jsonLongitude != null) {
-			NewJSONObject.put(LONGITUDE_KEY, jsonLongitude);
+		if (Longitude != null) {
+			NewJSONObject.put(LONGITUDE_KEY, Longitude);
 		}
 
 		// Elevation
-		if (jsonElevation != null) {
-			NewJSONObject.put(ELEVATION_KEY, jsonElevation);
+		if (Elevation != null) {
+			NewJSONObject.put(ELEVATION_KEY, Elevation);
 		}
 
 		// optional values
 		// Channel
-		if ((jsonChannel != null) && (!jsonChannel.isEmpty())) {
-			NewJSONObject.put(CHANNEL_KEY, jsonChannel);
+		if ((Channel != null) && (!Channel.isEmpty())) {
+			NewJSONObject.put(CHANNEL_KEY, Channel);
 		}
 
 		// Location
-		if ((jsonLocation != null) && (!jsonLocation.isEmpty())) {
-			NewJSONObject.put(LOCATION_KEY, jsonLocation);
+		if ((Location != null) && (!Location.isEmpty())) {
+			NewJSONObject.put(LOCATION_KEY, Location);
 		}
 
 		// return valid object
@@ -268,55 +260,49 @@ public class Site implements ProcessingInt {
 	 * @return Returns a List&lt;String&gt; of any errors found
 	 */
 	public ArrayList<String> getErrors() {
-		String jsonStation = getStation();
-		String jsonNetwork = getNetwork();
-		Double jsonLatitude = getLatitude();
-		Double jsonLongitude = getLongitude();
-		Double jsonElevation = getElevation();
-
 		ArrayList<String> errorList = new ArrayList<String>();
 
 		// check for required keys
 		// Station
-		if (jsonStation == null) {
+		if (Station == null) {
 			// Station not found
 			errorList.add("No Station in Site Class.");
-		} else if (jsonStation.isEmpty()) {
+		} else if (Station.isEmpty()) {
 			// Station empty
 			errorList.add("Empty Station in Site Class.");
 		}
 
 		// Network
-		if (jsonNetwork == null) {
+		if (Network == null) {
 			// Network not found
 			errorList.add("No Network in Site Class.");
-		} else if (jsonNetwork.isEmpty()) {
+		} else if (Network.isEmpty()) {
 			// Network empty
 			errorList.add("Empty Network in Site Class.");
 		}
 
 		// Latitude
-		if (jsonLatitude == null) {
+		if (Latitude == null) {
 			// Latitude not found
 			errorList.add("No Latitude in Site Class.");
-		} else if ((jsonLatitude < -90.0) || (jsonLatitude > 90.0)) {
+		} else if ((Latitude < -90.0) || (Latitude > 90.0)) {
 			// invalid Latitude
 			errorList.add(
 					"Latitude in Site Class not in the range of -90 to 90.");
 		}
 
 		// Longitude
-		if (jsonLongitude == null) {
+		if (Longitude == null) {
 			// Longitude not found
 			errorList.add("No Longitude in Site Class.");
-		} else if ((jsonLongitude < -180.0) || (jsonLongitude > 180.0)) {
+		} else if ((Longitude < -180.0) || (Longitude > 180.0)) {
 			// invalid Longitude
 			errorList.add(
 					"Longitude in Site Class not in the range of -180 to 180.");
 		}
 
 		// Elevation
-		if (jsonElevation == null) {
+		if (Elevation == null) {
 			// Elevation not found
 			errorList.add("No Elevation in Site Class.");
 		}
@@ -329,110 +315,5 @@ public class Site implements ProcessingInt {
 
 		// success
 		return (errorList);
-	}
-
-	/**
-	 * @return the Station
-	 */
-	public String getStation() {
-		return Station;
-	}
-
-	/**
-	 * @return the Channel
-	 */
-	public String getChannel() {
-		return Channel;
-	}
-
-	/**
-	 * @return the Network
-	 */
-	public String getNetwork() {
-		return Network;
-	}
-
-	/**
-	 * @return the Location
-	 */
-	public String getLocation() {
-		return Location;
-	}
-
-	/**
-	 * @return the Latitude
-	 */
-	public Double getLatitude() {
-		return Latitude;
-	}
-
-	/**
-	 * @return the Longitude
-	 */
-	public Double getLongitude() {
-		return Longitude;
-	}
-
-	/**
-	 * @return the Elevation
-	 */
-	public Double getElevation() {
-		return Elevation;
-	}	
-
-	/**
-	 * @param Station
-	 *            the Station to set
-	 */
-	public void setStation(String Station) {
-		this.Station = Station;
-	}
-
-	/**
-	 * @param Channel
-	 *            the Channel to set
-	 */
-	public void setChannel(String Channel) {
-		this.Channel = Channel;
-	}
-
-	/**
-	 * @param Network
-	 *            the Network to set
-	 */
-	public void setNetwork(String Network) {
-		this.Network = Network;
-	}
-
-	/**
-	 * @param Location
-	 *            the Location to set
-	 */
-	public void setLocation(String Location) {
-		this.Location = Location;
-	}
-
-	/**
-	 * @param Latitude
-	 *            the Latitude to set
-	 */
-	public void setLatitude(Double Latitude) {
-		this.Latitude = Latitude;
-	}	
-
-	/**
-	 * @param Longitude
-	 *            the Longitude to set
-	 */
-	public void setLongitude(Double Longitude) {
-		this.Longitude = Longitude;
-	}
-
-	/**
-	 * @param Elevation
-	 *            the Elevation to set
-	 */
-	public void setElevation(Double Elevation) {
-		this.Elevation = Elevation;
 	}
 }

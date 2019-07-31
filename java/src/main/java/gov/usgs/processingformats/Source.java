@@ -8,7 +8,7 @@ import org.json.simple.JSONObject;
  * a conversion class used to create, parse, and validate source data as part of
  * processing data.
  *
- * @author U.S. Geological Survey &lt;jpatton at usgs.gov&gt;
+ * @Author U.S. Geological Survey &lt;jpatton at usgs.gov&gt;
  */
 public class Source implements ProcessingInt {
 
@@ -22,26 +22,25 @@ public class Source implements ProcessingInt {
 	/**
 	 * Required Agency identifier
 	 */
-	private String agencyID;
+	public String AgencyID;
 
 	/**
 	 * Required Author identifier
 	 */
-	private String author;
+	public String Author;
 
 	/**
 	 * Required Type identifier
 	 */
-	private String type;
+	public String Type;
 
 	/**
 	 * The constructor for the Source class. Initializes members to null values.
 	 */
 	public Source() {
-
-		agencyID = null;
-		author = null;
-		type = null;
+		AgencyID = null;
+		Author = null;
+		Type = null;
 	}
 
 	/**
@@ -51,9 +50,9 @@ public class Source implements ProcessingInt {
 	 * @param newAgencyID
 	 *            - A String containing the agencyID to use
 	 * @param newAuthor
-	 *            - A String containing the author to use
+	 *            - A String containing the Author to use
 	 * @param newType
-	 *            - A String containing the type to use
+	 *            - A String containing the Type to use
 	 */
 	public Source(String newAgencyID, String newAuthor, String newType) {
 
@@ -69,15 +68,15 @@ public class Source implements ProcessingInt {
 	 * @param newAgencyID
 	 *            - A String containing the agencyID to use
 	 * @param newAuthor
-	 *            - A String containing the author to use
+	 *            - A String containing the Author to use
 	 * @param newType
-	 *            - A String containing the type to use
+	 *            - A String containing the Type to use
 	 */
 	public void reload(String newAgencyID, String newAuthor, String newType) {
 
-		agencyID = newAgencyID;
-		author = newAuthor;
-		type = newType;
+		AgencyID = newAgencyID;
+		Author = newAuthor;
+		Type = newType;
 	}
 
 	/**
@@ -91,23 +90,23 @@ public class Source implements ProcessingInt {
 		// required values
 		// agencyID
 		if (newJSONObject.containsKey(AGENCYID_KEY)) {
-			agencyID = newJSONObject.get(AGENCYID_KEY).toString();
+			AgencyID = newJSONObject.get(AGENCYID_KEY).toString();
 		} else {
-			agencyID = null;
+			AgencyID = null;
 		}
 
-		// author
+		// Author
 		if (newJSONObject.containsKey(AUTHOR_KEY)) {
-			author = newJSONObject.get(AUTHOR_KEY).toString();
+			Author = newJSONObject.get(AUTHOR_KEY).toString();
 		} else {
-			author = null;
+			Author = null;
 		}
 
-		// type
+		// Type
 		if (newJSONObject.containsKey(TYPE_KEY)) {
-			type = newJSONObject.get(TYPE_KEY).toString();
+			Type = newJSONObject.get(TYPE_KEY).toString();
 		} else {
-			type = null;
+			Type = null;
 		}
 
 	}
@@ -122,24 +121,20 @@ public class Source implements ProcessingInt {
 
 		JSONObject newJSONObject = new JSONObject();
 
-		String jsonAgencyID = getAgencyID();
-		String jsonAuthor = getAuthor();
-		String jsonType = getType();
-
 		// required values
 		// agencyID
-		if ((jsonAgencyID != null) && (!jsonAgencyID.isEmpty())) {
-			newJSONObject.put(AGENCYID_KEY, jsonAgencyID);
+		if ((AgencyID != null) && (!AgencyID.isEmpty())) {
+			newJSONObject.put(AGENCYID_KEY, AgencyID);
 		}
 
-		// author
-		if ((jsonAuthor != null) && (!jsonAuthor.isEmpty())) {
-			newJSONObject.put(AUTHOR_KEY, jsonAuthor);
+		// Author
+		if ((Author != null) && (!Author.isEmpty())) {
+			newJSONObject.put(AUTHOR_KEY, Author);
 		}
 
-		// type
-		if ((jsonType != null) && (!jsonType.isEmpty())) {
-			newJSONObject.put(TYPE_KEY, jsonType);
+		// Type
+		if ((Type != null) && (!Type.isEmpty())) {
+			newJSONObject.put(TYPE_KEY, Type);
 		}
 
 		return (newJSONObject);
@@ -167,106 +162,57 @@ public class Source implements ProcessingInt {
 	 */
 	public ArrayList<String> getErrors() {
 
-		String jsonAgencyID = getAgencyID();
-		String jsonAuthor = getAuthor();
-		String jsonType = getType();
-
 		ArrayList<String> errorList = new ArrayList<String>();
 
 		// check for required keys
 		// agencyID
-		if (jsonAgencyID == null) {
+		if (AgencyID == null) {
 			// agencyID not found
 			errorList.add("No AgencyID in Source Class.");
-		} else if (jsonAgencyID.isEmpty()) {
+		} else if (AgencyID.isEmpty()) {
 			// agencyID empty
 			errorList.add("Empty AgencyID in Source Class.");
 		}
 
-		// author
-		if (jsonAuthor == null) {
-			// author not found
+		// Author
+		if (Author == null) {
+			// Author not found
 			errorList.add("No Author in Source Class.");
-		} else if (jsonAuthor.isEmpty()) {
-			// author empty
+		} else if (Author.isEmpty()) {
+			// Author empty
 			errorList.add("Empty Author in Source Class.");
 		}
 
-		// type
-		if (jsonType == null) {
-			// type not found
+		// Type
+		if (Type == null) {
+			// Type not found
 			errorList.add("No Type in Source Class.");
-		} else if (jsonType.isEmpty()) {
-			// type empty
+		} else if (Type.isEmpty()) {
+			// Type empty
 			errorList.add("Empty Type in Source Class.");
 		} else {
 			boolean match = false;
-			if (jsonType.equals("Unknown")) {
+			if (Type.equals("Unknown")) {
 				match = true;
-			} else if (jsonType.equals("LocalHuman")) {
+			} else if (Type.equals("LocalHuman")) {
 				match = true;
-			} else if (jsonType.equals("LocalAutomatic")) {
+			} else if (Type.equals("LocalAutomatic")) {
 				match = true;
-			} else if (jsonType.equals("ContributedHuman")) {
+			} else if (Type.equals("ContributedHuman")) {
 				match = true;
-			} else if (jsonType.equals("ContributedAutomatic")) {
+			} else if (Type.equals("ContributedAutomatic")) {
 				match = true;
 			} else {
 				match = false;
 			}
 
 			if (!match) {
-				// invalid type
+				// invalid Type
 				errorList.add("Invalid Type in Source Class.");
 			}
 		}
 
 		// success
 		return (errorList);
-	}
-
-	/**
-	 * @return the agencyID
-	 */
-	public String getAgencyID() {
-		return agencyID;
-	}
-
-	/**
-	 * @return the author
-	 */
-	public String getAuthor() {
-		return author;
-	}
-
-	/**
-	 * @return the type
-	 */
-	public String getType() {
-		return type;
-	}
-
-	/**
-	 * @param agencyID
-	 *            the agencyID to set
-	 */
-	public void setAgencyID(String agencyID) {
-		this.agencyID = agencyID;
-	}
-
-	/**
-	 * @param author
-	 *            the author to set
-	 */
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-
-	/**
-	 * @param type
-	 *            the type to set
-	 */
-	public void setType(String type) {
-		this.type = type;
 	}
 }
