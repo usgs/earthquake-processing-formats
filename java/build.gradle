@@ -18,7 +18,7 @@ plugins {
     // git clone, etc.
     id "org.ajoberstar.grgit" version "2.3.0"
     // google java format
-    // id "com.github.sherter.google-java-format" version "0.8"
+    id "com.github.sherter.google-java-format" version "0.8"
 }
 
 sourceCompatibility = '1.10'
@@ -56,13 +56,12 @@ jar {
   }
 }
 
-// Note: To reformat all java code (not in lib) into the
-// google java style, run ./gradlew goJF
-// googleJavaFormat {
-//   exclude "lib/**"
-// }
+// Note: To reformat all java code manually, run ./gradlew goJF
+// always format to google style prior to the build
+compileJava.dependsOn 'googleJavaFormat'
+
 // Google java style is checked automatically as part of the check task
-// project.tasks.check.dependsOn(verifyGoogleJavaFormat)
+project.tasks.check.dependsOn(verifyGoogleJavaFormat)
 
 // coverage reports
 jacoco {

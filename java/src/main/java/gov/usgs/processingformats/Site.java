@@ -1,319 +1,291 @@
 package gov.usgs.processingformats;
 
 import java.util.ArrayList;
-
 import org.json.simple.*;
 
 /**
- * a conversion class used to create, parse, and validate site data as part of
- * processing data.
+ * a conversion class used to create, parse, and validate site data as part of processing data.
  *
  * @author U.S. Geological Survey &lt;jpatton at usgs.gov&gt;
  */
 public class Site implements ProcessingInt {
-	/**
-	 * JSON Keys
-	 */
-	public static final String STATION_KEY = "Station";
-	public static final String CHANNEL_KEY = "Channel";
-	public static final String NETWORK_KEY = "Network";
-	public static final String LOCATION_KEY = "Location";
-	public static final String LATITUDE_KEY = "Latitude";
-	public static final String LONGITUDE_KEY = "Longitude";
-	public static final String ELEVATION_KEY = "Elevation";	
+  /** JSON Keys */
+  public static final String STATION_KEY = "Station";
 
-	/**
-	 * Required Station code.
-	 */
-	public String Station;
+  public static final String CHANNEL_KEY = "Channel";
+  public static final String NETWORK_KEY = "Network";
+  public static final String LOCATION_KEY = "Location";
+  public static final String LATITUDE_KEY = "Latitude";
+  public static final String LONGITUDE_KEY = "Longitude";
+  public static final String ELEVATION_KEY = "Elevation";
 
-	/**
-	 * Optional Network/component code.
-	 */
-	public String Channel;
+  /** Required Station code. */
+  public String Station;
 
-	/**
-	 * Required Network code.
-	 */
-	public String Network;
+  /** Optional Network/component code. */
+  public String Channel;
 
-	/**
-	 * Optional Location code.
-	 */
-	public String Location;
+  /** Required Network code. */
+  public String Network;
 
-	/**
-	 * Required Double containing the Latitude in degrees
-	 */
-	public Double Latitude;
+  /** Optional Location code. */
+  public String Location;
 
-	/**
-	 * Required Double containing the Longitude in degrees
-	 */
-	public Double Longitude;
+  /** Required Double containing the Latitude in degrees */
+  public Double Latitude;
 
-	/**
-	 * Required Double containing the Elevation in meters
-	 */
-	public Double Elevation;
+  /** Required Double containing the Longitude in degrees */
+  public Double Longitude;
 
-	/**
-	 * The constructor for the Site class. Initializes members to null values.
-	 */
-	public Site() {
-		Station = null;
-		Channel = null;
-		Network = null;
-		Location = null;
-		Latitude = null;
-		Longitude = null;
-		Elevation = null;
-	}
+  /** Required Double containing the Elevation in meters */
+  public Double Elevation;
 
-	/**
-	 * The alternate advanced constructor for the Site class. Initializes
-	 * members to provided values.
-	 *
-	 * @param newStation
-	 *            - A String containing the Station to use
-	 * @param newChannel
-	 *            - A String containing the Channel to use (null omit)
-	 * @param newNetwork
-	 *            - A String containing the Network to use
-	 * @param newLocation
-	 *            - A String containing the Location to use (null omit)
-	 * @param newLatitude
-	 *            - A Double containing the Latitude in degrees to use
-	 * @param newLongitude
-	 *            - A Double containing the Longitude in degrees to use
-	 * @param newElevation
-	 *            - A Double containing the Elevation in meters to use
-	 */
-	public Site(String newStation, String newChannel, String newNetwork,
-			String newLocation, Double newLatitude, Double newLongitude,
-			Double newElevation) {
+  /** The constructor for the Site class. Initializes members to null values. */
+  public Site() {
+    Station = null;
+    Channel = null;
+    Network = null;
+    Location = null;
+    Latitude = null;
+    Longitude = null;
+    Elevation = null;
+  }
 
-		reload(newStation, newChannel, newNetwork, newLocation, newLatitude, 
-			newLongitude, newElevation);
-	}
+  /**
+   * The alternate advanced constructor for the Site class. Initializes members to provided values.
+   *
+   * @param newStation - A String containing the Station to use
+   * @param newChannel - A String containing the Channel to use (null omit)
+   * @param newNetwork - A String containing the Network to use
+   * @param newLocation - A String containing the Location to use (null omit)
+   * @param newLatitude - A Double containing the Latitude in degrees to use
+   * @param newLongitude - A Double containing the Longitude in degrees to use
+   * @param newElevation - A Double containing the Elevation in meters to use
+   */
+  public Site(
+      String newStation,
+      String newChannel,
+      String newNetwork,
+      String newLocation,
+      Double newLatitude,
+      Double newLongitude,
+      Double newElevation) {
 
-	/**
-	 * Reload Function
-	 *
-	 * The reload function for the site class. Initializes members to provided
-	 * values.
-	 *
-	 * @param newStation
-	 *            - A String containing the Station to use
-	 * @param newChannel
-	 *            - A String containing the Channel to use (null omit)
-	 * @param newNetwork
-	 *            - A String containing the Network to use
-	 * @param newLocation
-	 *            - A String containing the Location to use (null omit)
-	 * @param newLatitude
-	 *            - A Double containing the Latitude in degrees  to use
-	 * @param newLongitude
-	 *            - A Double containing the Longitude in degrees  to use
-	 * @param newElevation
-	 *            - A Double containing the Elevation in meters to use
-	 */
-	public void reload(String newStation, String newChannel, String newNetwork,
-			String newLocation, Double newLatitude, Double newLongitude,
-			Double newElevation) {
-		Station = newStation;
-		Channel = newChannel;
-		Network = newNetwork;
-		Location = newLocation;
-		Latitude = newLatitude;
-		Longitude = newLongitude;
-		Elevation = newElevation;
-	}
+    reload(
+        newStation, newChannel, newNetwork, newLocation, newLatitude, newLongitude, newElevation);
+  }
 
-	/**
-	 * Constructs the class from a JSONObject, populating members
-	 *
-	 * @param newJSONObject
-	 *            - A JSONObject.
-	 */
-	public Site(JSONObject newJSONObject) {
-		// required values
-		// Station
-		if (newJSONObject.containsKey(STATION_KEY)) {
-			Station = newJSONObject.get(STATION_KEY).toString();
-		} else {
-			Station = null;
-		}
+  /**
+   * Reload Function
+   *
+   * <p>The reload function for the site class. Initializes members to provided values.
+   *
+   * @param newStation - A String containing the Station to use
+   * @param newChannel - A String containing the Channel to use (null omit)
+   * @param newNetwork - A String containing the Network to use
+   * @param newLocation - A String containing the Location to use (null omit)
+   * @param newLatitude - A Double containing the Latitude in degrees to use
+   * @param newLongitude - A Double containing the Longitude in degrees to use
+   * @param newElevation - A Double containing the Elevation in meters to use
+   */
+  public void reload(
+      String newStation,
+      String newChannel,
+      String newNetwork,
+      String newLocation,
+      Double newLatitude,
+      Double newLongitude,
+      Double newElevation) {
+    Station = newStation;
+    Channel = newChannel;
+    Network = newNetwork;
+    Location = newLocation;
+    Latitude = newLatitude;
+    Longitude = newLongitude;
+    Elevation = newElevation;
+  }
 
-		// Network
-		if (newJSONObject.containsKey(NETWORK_KEY)) {
-			Network = newJSONObject.get(NETWORK_KEY).toString();
-		} else {
-			Network = null;
-		}
+  /**
+   * Constructs the class from a JSONObject, populating members
+   *
+   * @param newJSONObject - A JSONObject.
+   */
+  public Site(JSONObject newJSONObject) {
+    // required values
+    // Station
+    if (newJSONObject.containsKey(STATION_KEY)) {
+      Station = newJSONObject.get(STATION_KEY).toString();
+    } else {
+      Station = null;
+    }
 
-		// Latitude
-		if (newJSONObject.containsKey(LATITUDE_KEY)) {
-			Latitude = (double) newJSONObject.get(LATITUDE_KEY);
-		} else {
-			Latitude = null;
-		}
+    // Network
+    if (newJSONObject.containsKey(NETWORK_KEY)) {
+      Network = newJSONObject.get(NETWORK_KEY).toString();
+    } else {
+      Network = null;
+    }
 
-		// Longitude
-		if (newJSONObject.containsKey(LONGITUDE_KEY)) {
-			Longitude = (double) newJSONObject.get(LONGITUDE_KEY);
-		} else {
-			Longitude = null;
-		}
+    // Latitude
+    if (newJSONObject.containsKey(LATITUDE_KEY)) {
+      Latitude = (double) newJSONObject.get(LATITUDE_KEY);
+    } else {
+      Latitude = null;
+    }
 
-		// Elevation
-		if (newJSONObject.containsKey(ELEVATION_KEY)) {
-			Elevation = (double) newJSONObject.get(ELEVATION_KEY);
-		} else {
-			Elevation = null;
-		}		
+    // Longitude
+    if (newJSONObject.containsKey(LONGITUDE_KEY)) {
+      Longitude = (double) newJSONObject.get(LONGITUDE_KEY);
+    } else {
+      Longitude = null;
+    }
 
-		// optional values
-		// Channel
-		if (newJSONObject.containsKey(CHANNEL_KEY)) {
-			Channel = newJSONObject.get(CHANNEL_KEY).toString();
-		} else {
-			Channel = null;
-		}
+    // Elevation
+    if (newJSONObject.containsKey(ELEVATION_KEY)) {
+      Elevation = (double) newJSONObject.get(ELEVATION_KEY);
+    } else {
+      Elevation = null;
+    }
 
-		// Location
-		if (newJSONObject.containsKey(LOCATION_KEY)) {
-			Location = newJSONObject.get(LOCATION_KEY).toString();
-		} else {
-			Location = null;
-		}
-	}
+    // optional values
+    // Channel
+    if (newJSONObject.containsKey(CHANNEL_KEY)) {
+      Channel = newJSONObject.get(CHANNEL_KEY).toString();
+    } else {
+      Channel = null;
+    }
 
-	/**
-	 * Converts the contents of the class to a JSONObject
-	 *
-	 * @return Returns a JSONObject containing the class contents
-	 */
-	@SuppressWarnings("unchecked")
-	public JSONObject toJSON() {
-		JSONObject NewJSONObject = new JSONObject();
+    // Location
+    if (newJSONObject.containsKey(LOCATION_KEY)) {
+      Location = newJSONObject.get(LOCATION_KEY).toString();
+    } else {
+      Location = null;
+    }
+  }
 
-		// required values
-		// Station
-		if ((Station != null) && (!Station.isEmpty())) {
-			NewJSONObject.put(STATION_KEY, Station);
-		}
+  /**
+   * Converts the contents of the class to a JSONObject
+   *
+   * @return Returns a JSONObject containing the class contents
+   */
+  @SuppressWarnings("unchecked")
+  public JSONObject toJSON() {
+    JSONObject NewJSONObject = new JSONObject();
 
-		// Network
-		if ((Network != null) && (!Network.isEmpty())) {
-			NewJSONObject.put(NETWORK_KEY, Network);
-		}
+    // required values
+    // Station
+    if ((Station != null) && (!Station.isEmpty())) {
+      NewJSONObject.put(STATION_KEY, Station);
+    }
 
-		// Latitude
-		if (Latitude != null) {
-			NewJSONObject.put(LATITUDE_KEY, Latitude);
-		}
+    // Network
+    if ((Network != null) && (!Network.isEmpty())) {
+      NewJSONObject.put(NETWORK_KEY, Network);
+    }
 
-		// Longitude
-		if (Longitude != null) {
-			NewJSONObject.put(LONGITUDE_KEY, Longitude);
-		}
+    // Latitude
+    if (Latitude != null) {
+      NewJSONObject.put(LATITUDE_KEY, Latitude);
+    }
 
-		// Elevation
-		if (Elevation != null) {
-			NewJSONObject.put(ELEVATION_KEY, Elevation);
-		}
+    // Longitude
+    if (Longitude != null) {
+      NewJSONObject.put(LONGITUDE_KEY, Longitude);
+    }
 
-		// optional values
-		// Channel
-		if ((Channel != null) && (!Channel.isEmpty())) {
-			NewJSONObject.put(CHANNEL_KEY, Channel);
-		}
+    // Elevation
+    if (Elevation != null) {
+      NewJSONObject.put(ELEVATION_KEY, Elevation);
+    }
 
-		// Location
-		if ((Location != null) && (!Location.isEmpty())) {
-			NewJSONObject.put(LOCATION_KEY, Location);
-		}
+    // optional values
+    // Channel
+    if ((Channel != null) && (!Channel.isEmpty())) {
+      NewJSONObject.put(CHANNEL_KEY, Channel);
+    }
 
-		// return valid object
-		return (NewJSONObject);
-	}
+    // Location
+    if ((Location != null) && (!Location.isEmpty())) {
+      NewJSONObject.put(LOCATION_KEY, Location);
+    }
 
-	/**
-	 * Validates the class.
-	 *
-	 * @return Returns true if successful
-	 */
-	public boolean isValid() {
-		if (getErrors() == null) {
-			return (true);
-		} else if (getErrors().size() == 0) {
-			return (true);
-		} else {
-			return (false);
-		}
-	}
+    // return valid object
+    return (NewJSONObject);
+  }
 
-	/**
-	 * Gets any validation errors in the class.
-	 *
-	 * @return Returns a List&lt;String&gt; of any errors found
-	 */
-	public ArrayList<String> getErrors() {
-		ArrayList<String> errorList = new ArrayList<String>();
+  /**
+   * Validates the class.
+   *
+   * @return Returns true if successful
+   */
+  public boolean isValid() {
+    if (getErrors() == null) {
+      return (true);
+    } else if (getErrors().size() == 0) {
+      return (true);
+    } else {
+      return (false);
+    }
+  }
 
-		// check for required keys
-		// Station
-		if (Station == null) {
-			// Station not found
-			errorList.add("No Station in Site Class.");
-		} else if (Station.isEmpty()) {
-			// Station empty
-			errorList.add("Empty Station in Site Class.");
-		}
+  /**
+   * Gets any validation errors in the class.
+   *
+   * @return Returns a List&lt;String&gt; of any errors found
+   */
+  public ArrayList<String> getErrors() {
+    ArrayList<String> errorList = new ArrayList<String>();
 
-		// Network
-		if (Network == null) {
-			// Network not found
-			errorList.add("No Network in Site Class.");
-		} else if (Network.isEmpty()) {
-			// Network empty
-			errorList.add("Empty Network in Site Class.");
-		}
+    // check for required keys
+    // Station
+    if (Station == null) {
+      // Station not found
+      errorList.add("No Station in Site Class.");
+    } else if (Station.isEmpty()) {
+      // Station empty
+      errorList.add("Empty Station in Site Class.");
+    }
 
-		// Latitude
-		if (Latitude == null) {
-			// Latitude not found
-			errorList.add("No Latitude in Site Class.");
-		} else if ((Latitude < -90.0) || (Latitude > 90.0)) {
-			// invalid Latitude
-			errorList.add(
-					"Latitude in Site Class not in the range of -90 to 90.");
-		}
+    // Network
+    if (Network == null) {
+      // Network not found
+      errorList.add("No Network in Site Class.");
+    } else if (Network.isEmpty()) {
+      // Network empty
+      errorList.add("Empty Network in Site Class.");
+    }
 
-		// Longitude
-		if (Longitude == null) {
-			// Longitude not found
-			errorList.add("No Longitude in Site Class.");
-		} else if ((Longitude < -180.0) || (Longitude > 180.0)) {
-			// invalid Longitude
-			errorList.add(
-					"Longitude in Site Class not in the range of -180 to 180.");
-		}
+    // Latitude
+    if (Latitude == null) {
+      // Latitude not found
+      errorList.add("No Latitude in Site Class.");
+    } else if ((Latitude < -90.0) || (Latitude > 90.0)) {
+      // invalid Latitude
+      errorList.add("Latitude in Site Class not in the range of -90 to 90.");
+    }
 
-		// Elevation
-		if (Elevation == null) {
-			// Elevation not found
-			errorList.add("No Elevation in Site Class.");
-		}
+    // Longitude
+    if (Longitude == null) {
+      // Longitude not found
+      errorList.add("No Longitude in Site Class.");
+    } else if ((Longitude < -180.0) || (Longitude > 180.0)) {
+      // invalid Longitude
+      errorList.add("Longitude in Site Class not in the range of -180 to 180.");
+    }
 
-		// since Station, Channel, Network, and Location are free text
-		// strings, no further validation is required. Channel and Location
-		// are also optional.
-		// NOTE: Further validation COULD be done to confirm that values matched
-		// seed standards.
+    // Elevation
+    if (Elevation == null) {
+      // Elevation not found
+      errorList.add("No Elevation in Site Class.");
+    }
 
-		// success
-		return (errorList);
-	}
+    // since Station, Channel, Network, and Location are free text
+    // strings, no further validation is required. Channel and Location
+    // are also optional.
+    // NOTE: Further validation COULD be done to confirm that values matched
+    // seed standards.
+
+    // success
+    return (errorList);
+  }
 }

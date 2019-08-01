@@ -1,228 +1,203 @@
 package gov.usgs.processingformats;
 
 import java.util.*;
-
 import org.json.simple.JSONObject;
 
-import gov.usgs.processingformats.ProcessingInt;
-
 /**
- * a conversion class used to create, parse, and validate travel time plot
- * sample data
- * 
+ * a conversion class used to create, parse, and validate travel time plot sample data
+ *
  * @author U.S. Geological Survey &lt;jpatton at usgs.gov&gt;
  */
 public class TravelTimePlotDataSample implements ProcessingInt {
 
-	/**
-	 * JSON Keys
-	 */
-	public static final String DISTANCE_KEY = "Distance";
-	public static final String TRAVELTIME_KEY = "TravelTime";
-	public static final String STATISTICALSPREAD_KEY = "StatisticalSpread";
-	public static final String OBSERVABILITY_KEY = "Observability";
+  /** JSON Keys */
+  public static final String DISTANCE_KEY = "Distance";
 
-	/**
-	 * Required Distance in degrees
-	 */
-	public Double Distance;
+  public static final String TRAVELTIME_KEY = "TravelTime";
+  public static final String STATISTICALSPREAD_KEY = "StatisticalSpread";
+  public static final String OBSERVABILITY_KEY = "Observability";
 
-	/**
-	 * Required travel time in seconds
-	 */
-	public Double TravelTime;
+  /** Required Distance in degrees */
+  public Double Distance;
 
-	/**
-	 * Optional observed travel time scatter in seconds.
-	 */
-	public Double StatisticalSpread;
+  /** Required travel time in seconds */
+  public Double TravelTime;
 
-	/**
-	 * Optional statistical Observability of the seismic phase.
-	 */
-	public Double Observability;
+  /** Optional observed travel time scatter in seconds. */
+  public Double StatisticalSpread;
 
-	/**
-	 * The constructor for the TravelTimePlotDataSample class. Initializes
-	 * members to null values.
-	 */
-	public TravelTimePlotDataSample() {
+  /** Optional statistical Observability of the seismic phase. */
+  public Double Observability;
 
-		reload(null, null, null, null);
-	}
+  /** The constructor for the TravelTimePlotDataSample class. Initializes members to null values. */
+  public TravelTimePlotDataSample() {
 
-	/**
-	 * Advanced constructor
-	 * 
-	 * The advanced constructor for the TravelTimePlotDataSample class.
-	 * Initializes members to provided values.
-	 * 
-	 * @param newDistance
-	 *            - A Double containing the Distance in degrees
-	 * @param newTravelTime
-	 *            - A Double containing the travel time in seconds
-	 * @param newStatisticalSpread
-	 *            - A Double containing the observed travel time scatter in
-	 *            seconds
-	 * @param newObservability
-	 *            - A Double containing the statistical Observability of the
-	 *            sample
-	 */
-	public TravelTimePlotDataSample(Double newDistance, Double newTravelTime,
-			Double newStatisticalSpread, Double newObservability) {
+    reload(null, null, null, null);
+  }
 
-		reload(newDistance, newTravelTime, newStatisticalSpread,
-				newObservability);
-	}
+  /**
+   * Advanced constructor
+   *
+   * <p>The advanced constructor for the TravelTimePlotDataSample class. Initializes members to
+   * provided values.
+   *
+   * @param newDistance - A Double containing the Distance in degrees
+   * @param newTravelTime - A Double containing the travel time in seconds
+   * @param newStatisticalSpread - A Double containing the observed travel time scatter in seconds
+   * @param newObservability - A Double containing the statistical Observability of the sample
+   */
+  public TravelTimePlotDataSample(
+      Double newDistance,
+      Double newTravelTime,
+      Double newStatisticalSpread,
+      Double newObservability) {
 
-	/**
-	 * Constructs the class from a JSONObject, populating members
-	 * 
-	 * @param newJSONObject
-	 *            - A JSONObject.
-	 */
-	public TravelTimePlotDataSample(JSONObject newJSONObject) {
+    reload(newDistance, newTravelTime, newStatisticalSpread, newObservability);
+  }
 
-		// Required values
-		// Distance
-		if (newJSONObject.containsKey(DISTANCE_KEY)) {
-			Distance = (double) newJSONObject.get(DISTANCE_KEY);
-		} else {
-			Distance = null;
-		}
+  /**
+   * Constructs the class from a JSONObject, populating members
+   *
+   * @param newJSONObject - A JSONObject.
+   */
+  public TravelTimePlotDataSample(JSONObject newJSONObject) {
 
-		// travel time
-		if (newJSONObject.containsKey(TRAVELTIME_KEY)) {
-			TravelTime = (double) newJSONObject.get(TRAVELTIME_KEY);
-		} else {
-			TravelTime = null;
-		}
+    // Required values
+    // Distance
+    if (newJSONObject.containsKey(DISTANCE_KEY)) {
+      Distance = (double) newJSONObject.get(DISTANCE_KEY);
+    } else {
+      Distance = null;
+    }
 
-		// Optional values
-		// statistical spread
-		if (newJSONObject.containsKey(STATISTICALSPREAD_KEY)) {
-			StatisticalSpread = (double) newJSONObject
-					.get(STATISTICALSPREAD_KEY);
-		} else {
-			StatisticalSpread = null;
-		}
+    // travel time
+    if (newJSONObject.containsKey(TRAVELTIME_KEY)) {
+      TravelTime = (double) newJSONObject.get(TRAVELTIME_KEY);
+    } else {
+      TravelTime = null;
+    }
 
-		// Observability
-		if (newJSONObject.containsKey(OBSERVABILITY_KEY)) {
-			Observability = (double) newJSONObject.get(OBSERVABILITY_KEY);
-		} else {
-			Observability = null;
-		}
-	}
+    // Optional values
+    // statistical spread
+    if (newJSONObject.containsKey(STATISTICALSPREAD_KEY)) {
+      StatisticalSpread = (double) newJSONObject.get(STATISTICALSPREAD_KEY);
+    } else {
+      StatisticalSpread = null;
+    }
 
-	/**
-	 * Constructs the class from a TravelTimePlotDataSample object, populating 
-	 * members (copy constructor)
-	 * 
-	 * @param sourceObject
-	 *            - A TravelTimeData object.
-	 */
-	public TravelTimePlotDataSample(TravelTimePlotDataSample sourceObject) {
-		reload(sourceObject.Distance, sourceObject.TravelTime,
-				sourceObject.StatisticalSpread, sourceObject.Observability);
-	}
+    // Observability
+    if (newJSONObject.containsKey(OBSERVABILITY_KEY)) {
+      Observability = (double) newJSONObject.get(OBSERVABILITY_KEY);
+    } else {
+      Observability = null;
+    }
+  }
 
-	/**
-	 * Reload Function
-	 * 
-	 * The reload function for the TravelTimeData class. Initializes members to
-	 * provided values.
-	 * 
-	 * @param newDistance
-	 *            - A Double containing the Distance in degrees
-	 * @param newTravelTime
-	 *            - A Double containing the travel time in seconds
-	 * @param newStatisticalSpread
-	 *            - A Double containing the observed travel time scatter in
-	 *            seconds
-	 * @param newObservability
-	 *            - A Double containing the statistical Observability of the
-	 *            sample
-	 */
-	public void reload(Double newDistance, Double newTravelTime,
-			Double newStatisticalSpread, Double newObservability) {
+  /**
+   * Constructs the class from a TravelTimePlotDataSample object, populating members (copy
+   * constructor)
+   *
+   * @param sourceObject - A TravelTimeData object.
+   */
+  public TravelTimePlotDataSample(TravelTimePlotDataSample sourceObject) {
+    reload(
+        sourceObject.Distance,
+        sourceObject.TravelTime,
+        sourceObject.StatisticalSpread,
+        sourceObject.Observability);
+  }
 
-		Distance = newDistance;
-		TravelTime = newTravelTime;
-		StatisticalSpread = newStatisticalSpread;
-		Observability = newObservability;
-	}
+  /**
+   * Reload Function
+   *
+   * <p>The reload function for the TravelTimeData class. Initializes members to provided values.
+   *
+   * @param newDistance - A Double containing the Distance in degrees
+   * @param newTravelTime - A Double containing the travel time in seconds
+   * @param newStatisticalSpread - A Double containing the observed travel time scatter in seconds
+   * @param newObservability - A Double containing the statistical Observability of the sample
+   */
+  public void reload(
+      Double newDistance,
+      Double newTravelTime,
+      Double newStatisticalSpread,
+      Double newObservability) {
 
-	/**
-	 * Converts the contents of the class to a json object
-	 * 
-	 * @return Returns a JSONObject containing the class contents
-	 */
-	@SuppressWarnings("unchecked")
-	public JSONObject toJSON() {
+    Distance = newDistance;
+    TravelTime = newTravelTime;
+    StatisticalSpread = newStatisticalSpread;
+    Observability = newObservability;
+  }
 
-		JSONObject newJSONObject = new JSONObject();
+  /**
+   * Converts the contents of the class to a json object
+   *
+   * @return Returns a JSONObject containing the class contents
+   */
+  @SuppressWarnings("unchecked")
+  public JSONObject toJSON() {
 
-		// Distance
-		if (Distance != null) {
-			newJSONObject.put(DISTANCE_KEY, Distance);
-		}
+    JSONObject newJSONObject = new JSONObject();
 
-		// travel time
-		if (TravelTime != null) {
-			newJSONObject.put(TRAVELTIME_KEY, TravelTime);
-		}
+    // Distance
+    if (Distance != null) {
+      newJSONObject.put(DISTANCE_KEY, Distance);
+    }
 
-		// statistical spread
-		if (StatisticalSpread != null) {
-			newJSONObject.put(STATISTICALSPREAD_KEY, StatisticalSpread);
-		}
+    // travel time
+    if (TravelTime != null) {
+      newJSONObject.put(TRAVELTIME_KEY, TravelTime);
+    }
 
-		// Observability
-		if (Observability != null) {
-			newJSONObject.put(OBSERVABILITY_KEY, Observability);
-		}
+    // statistical spread
+    if (StatisticalSpread != null) {
+      newJSONObject.put(STATISTICALSPREAD_KEY, StatisticalSpread);
+    }
 
-		return (newJSONObject);
-	}
+    // Observability
+    if (Observability != null) {
+      newJSONObject.put(OBSERVABILITY_KEY, Observability);
+    }
 
-	/**
-	 * Validates the class.
-	 * 
-	 * @return Returns true if successful
-	 */
-	public boolean isValid() {
-		if (getErrors() == null) {
-			return (true);
-		} else if (getErrors().size() == 0) {
-			return (true);
-		} else {
-			return (false);
-		}
-	}
+    return (newJSONObject);
+  }
 
-	/**
-	 * Gets any validation errors in the class.
-	 * 
-	 * @return Returns a List&lt;String&gt; of any errors found
-	 */
-	public ArrayList<String> getErrors() {
-		ArrayList<String> errorList = new ArrayList<String>();
+  /**
+   * Validates the class.
+   *
+   * @return Returns true if successful
+   */
+  public boolean isValid() {
+    if (getErrors() == null) {
+      return (true);
+    } else if (getErrors().size() == 0) {
+      return (true);
+    } else {
+      return (false);
+    }
+  }
 
-		// Required values
-		// Distance
-		if (Distance == null) {
-			// Distance not found
-			errorList.add("No Distance in TravelTimePlotDataSample Class.");
-		}
+  /**
+   * Gets any validation errors in the class.
+   *
+   * @return Returns a List&lt;String&gt; of any errors found
+   */
+  public ArrayList<String> getErrors() {
+    ArrayList<String> errorList = new ArrayList<String>();
 
-		// travel time
-		if (TravelTime == null) {
-			// travel time not found
-			errorList.add("No Travel Time in TravelTimePlotDataSample Class.");
-		}
+    // Required values
+    // Distance
+    if (Distance == null) {
+      // Distance not found
+      errorList.add("No Distance in TravelTimePlotDataSample Class.");
+    }
 
-		return (errorList);
-	}
+    // travel time
+    if (TravelTime == null) {
+      // travel time not found
+      errorList.add("No Travel Time in TravelTimePlotDataSample Class.");
+    }
 
+    return (errorList);
+  }
 }

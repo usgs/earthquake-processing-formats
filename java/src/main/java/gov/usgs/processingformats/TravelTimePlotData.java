@@ -1,260 +1,225 @@
 package gov.usgs.processingformats;
 
 import java.util.*;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import gov.usgs.processingformats.ProcessingInt;
-
 /**
  * a conversion class used to create, parse, and validate travel time plot data
- * 
+ *
  * @author U.S. Geological Survey &lt;jpatton at usgs.gov&gt;
  */
 public class TravelTimePlotData implements ProcessingInt {
 
-	/**
-	 * JSON Keys
-	 */
-	public static final String TYPE_KEY = "Type";
-	public static final String MAXIMIUMTRAVELTIME_KEY = "MaximumTravelTime";
-	public static final String BRANCHES_KEY = "Branches";
+  /** JSON Keys */
+  public static final String TYPE_KEY = "Type";
 
-	/**
-	 * Required Type of data as a String
-	 */
-	public String Type;	
-	
-	/**
-	 * Required maximum travel time in seconds
-	 */
-	public Double MaximumTravelTime;
+  public static final String MAXIMIUMTRAVELTIME_KEY = "MaximumTravelTime";
+  public static final String BRANCHES_KEY = "Branches";
 
-	/**
-	 * A required vector of TravelTimePlotDataBranch objects
-	 */
-	public ArrayList<TravelTimePlotDataBranch> Branches;
+  /** Required Type of data as a String */
+  public String Type;
 
-	/**
-	 * The constructor for the TravelTimePlotData class. Initializes members to
-	 * null values.
-	 */
-	public TravelTimePlotData() {
+  /** Required maximum travel time in seconds */
+  public Double MaximumTravelTime;
 
-		reload(null, null);
-	}
+  /** A required vector of TravelTimePlotDataBranch objects */
+  public ArrayList<TravelTimePlotDataBranch> Branches;
 
-	/**
-	 * Advanced constructor
-	 * 
-	 * The advanced constructor for the TravelTimePlotData class. Initializes
-	 * members to provided values.
-	 * 
-	 * @param newMaximumTravelTime
-	 *            - A Double containing the seismic phase code
-	 * @param newBranches
-	 *            - A ArrayList&lt;TravelTimePlotDataSample&gt; containing the
-	 *            sample data
-	 */
-	public TravelTimePlotData(Double newMaximumTravelTime,
-			ArrayList<TravelTimePlotDataBranch> newBranches) {
+  /** The constructor for the TravelTimePlotData class. Initializes members to null values. */
+  public TravelTimePlotData() {
 
-		reload(newMaximumTravelTime, newBranches);
-	}
+    reload(null, null);
+  }
 
-	/**
-	 * Constructs the class from a JSONObject, populating members
-	 * 
-	 * @param newJSONObject
-	 *            - A JSONObject.
-	 */
-	public TravelTimePlotData(JSONObject newJSONObject) {
+  /**
+   * Advanced constructor
+   *
+   * <p>The advanced constructor for the TravelTimePlotData class. Initializes members to provided
+   * values.
+   *
+   * @param newMaximumTravelTime - A Double containing the seismic phase code
+   * @param newBranches - A ArrayList&lt;TravelTimePlotDataSample&gt; containing the sample data
+   */
+  public TravelTimePlotData(
+      Double newMaximumTravelTime, ArrayList<TravelTimePlotDataBranch> newBranches) {
 
-		// Required values
-		// Type
-		if (newJSONObject.containsKey(TYPE_KEY)) {
-			Type = newJSONObject
-					.get(TYPE_KEY).toString();
-		} else {
-			Type = null;
-		}		
-		// MaximumTravelTime
-		if (newJSONObject.containsKey(MAXIMIUMTRAVELTIME_KEY)) {
-			MaximumTravelTime = (double) newJSONObject
-					.get(MAXIMIUMTRAVELTIME_KEY);
-		} else {
-			MaximumTravelTime = null;
-		}
+    reload(newMaximumTravelTime, newBranches);
+  }
 
-		// Branches
-		if (newJSONObject.containsKey(BRANCHES_KEY)) {
+  /**
+   * Constructs the class from a JSONObject, populating members
+   *
+   * @param newJSONObject - A JSONObject.
+   */
+  public TravelTimePlotData(JSONObject newJSONObject) {
 
-			Branches = new ArrayList<TravelTimePlotDataBranch>();
+    // Required values
+    // Type
+    if (newJSONObject.containsKey(TYPE_KEY)) {
+      Type = newJSONObject.get(TYPE_KEY).toString();
+    } else {
+      Type = null;
+    }
+    // MaximumTravelTime
+    if (newJSONObject.containsKey(MAXIMIUMTRAVELTIME_KEY)) {
+      MaximumTravelTime = (double) newJSONObject.get(MAXIMIUMTRAVELTIME_KEY);
+    } else {
+      MaximumTravelTime = null;
+    }
 
-			// get the array
-			JSONArray branchesArray = (JSONArray) newJSONObject
-					.get(BRANCHES_KEY);
+    // Branches
+    if (newJSONObject.containsKey(BRANCHES_KEY)) {
 
-			if ((branchesArray != null) && (!branchesArray.isEmpty())) {
+      Branches = new ArrayList<TravelTimePlotDataBranch>();
 
-				// go through the whole array
-				for (int i = 0; i < branchesArray.size(); i++) {
+      // get the array
+      JSONArray branchesArray = (JSONArray) newJSONObject.get(BRANCHES_KEY);
 
-					// get the object
-					JSONObject branchesObject = (JSONObject) branchesArray
-							.get(i);
+      if ((branchesArray != null) && (!branchesArray.isEmpty())) {
 
-					// add to vector
-					Branches.add(new TravelTimePlotDataBranch(branchesObject));
+        // go through the whole array
+        for (int i = 0; i < branchesArray.size(); i++) {
 
-				}
-			}
-		} else {
-			Branches = null;
-		}
-	}
+          // get the object
+          JSONObject branchesObject = (JSONObject) branchesArray.get(i);
 
-	/**
-	 * Constructs the class from a TravelTimePlotData object, populating members
-	 * (copy constructor)
-	 * 
-	 * @param sourceObject
-	 *            - A TravelTimePlotData object.
-	 */
-	public TravelTimePlotData(TravelTimePlotData sourceObject) {
+          // add to vector
+          Branches.add(new TravelTimePlotDataBranch(branchesObject));
+        }
+      }
+    } else {
+      Branches = null;
+    }
+  }
 
-		reload(sourceObject.MaximumTravelTime, sourceObject.Branches);
-	}
+  /**
+   * Constructs the class from a TravelTimePlotData object, populating members (copy constructor)
+   *
+   * @param sourceObject - A TravelTimePlotData object.
+   */
+  public TravelTimePlotData(TravelTimePlotData sourceObject) {
 
-	/**
-	 * Reload Function
-	 * 
-	 * The reload function for the TravelTimeData class. Initializes members to
-	 * provided values.
-	 * 
-	 * @param newMaximumTravelTime
-	 *            - A Double containing the seismic phase code
-	 * @param newBranches
-	 *            - A ArrayList&lt;TravelTimePlotDataSample&gt; containing the
-	 *            sample data
-	 */
-	public void reload(Double newMaximumTravelTime,
-			ArrayList<TravelTimePlotDataBranch> newBranches) {
+    reload(sourceObject.MaximumTravelTime, sourceObject.Branches);
+  }
 
-		Type = "TTPlotData";
-		MaximumTravelTime = newMaximumTravelTime;
-		Branches = newBranches;
+  /**
+   * Reload Function
+   *
+   * <p>The reload function for the TravelTimeData class. Initializes members to provided values.
+   *
+   * @param newMaximumTravelTime - A Double containing the seismic phase code
+   * @param newBranches - A ArrayList&lt;TravelTimePlotDataSample&gt; containing the sample data
+   */
+  public void reload(Double newMaximumTravelTime, ArrayList<TravelTimePlotDataBranch> newBranches) {
 
-	}
+    Type = "TTPlotData";
+    MaximumTravelTime = newMaximumTravelTime;
+    Branches = newBranches;
+  }
 
-	/**
-	 * Converts the contents of the class to a  object
-	 * 
-	 * @return Returns a JSONObject containing the class contents
-	 */
-	@SuppressWarnings("unchecked")
-	public JSONObject toJSON() {
+  /**
+   * Converts the contents of the class to a object
+   *
+   * @return Returns a JSONObject containing the class contents
+   */
+  @SuppressWarnings("unchecked")
+  public JSONObject toJSON() {
 
-		JSONObject newJSONObject = new JSONObject();
+    JSONObject newJSONObject = new JSONObject();
 
-		// Type
-		if (Type != null) {
-			newJSONObject.put(TYPE_KEY, Type);
-		}		
-		
-		// phase
-		if (MaximumTravelTime != null) {
-			newJSONObject.put(MAXIMIUMTRAVELTIME_KEY, MaximumTravelTime);
-		}
+    // Type
+    if (Type != null) {
+      newJSONObject.put(TYPE_KEY, Type);
+    }
 
-		// Branches
-		if ((Branches != null) && (!Branches.isEmpty())) {
+    // phase
+    if (MaximumTravelTime != null) {
+      newJSONObject.put(MAXIMIUMTRAVELTIME_KEY, MaximumTravelTime);
+    }
 
-			JSONArray branchesArray = new JSONArray();
+    // Branches
+    if ((Branches != null) && (!Branches.isEmpty())) {
 
-			// enumerate through the whole arraylist
-			for (Iterator<TravelTimePlotDataBranch> branchesIterator = Branches
-					.iterator(); branchesIterator.hasNext();) {
+      JSONArray branchesArray = new JSONArray();
 
-				// convert branch to JSON object
-				JSONObject branchObject = ((TravelTimePlotDataBranch) branchesIterator
-						.next()).toJSON();
+      // enumerate through the whole arraylist
+      for (Iterator<TravelTimePlotDataBranch> branchesIterator = Branches.iterator();
+          branchesIterator.hasNext(); ) {
 
-				branchesArray.add(branchObject);
-			}
+        // convert branch to JSON object
+        JSONObject branchObject = ((TravelTimePlotDataBranch) branchesIterator.next()).toJSON();
 
-			if (!branchesArray.isEmpty()) {
-				newJSONObject.put(BRANCHES_KEY, branchesArray);
-			}
-		}
+        branchesArray.add(branchObject);
+      }
 
-		return (newJSONObject);
-	}
+      if (!branchesArray.isEmpty()) {
+        newJSONObject.put(BRANCHES_KEY, branchesArray);
+      }
+    }
 
-	/**
-	 * Validates the class.
-	 * 
-	 * @return Returns true if successful
-	 */
-	public boolean isValid() {
-		if (getErrors() == null) {
-			return (true);
-		} else if (getErrors().size() == 0) {
-			return (true);
-		} else {
-			return (false);
-		}
-	}
+    return (newJSONObject);
+  }
 
-	/**
-	 * Gets any validation errors in the class.
-	 * 
-	 * @return Returns a List&lt;String&gt; of any errors found
-	 */
-	public ArrayList<String> getErrors() {
-		ArrayList<String> errorList = new ArrayList<String>();
+  /**
+   * Validates the class.
+   *
+   * @return Returns true if successful
+   */
+  public boolean isValid() {
+    if (getErrors() == null) {
+      return (true);
+    } else if (getErrors().size() == 0) {
+      return (true);
+    } else {
+      return (false);
+    }
+  }
 
-		// Type
-		if (Type == null) {
-			// Type not found
-			errorList.add("No Type in TravelTimePlotData Class.");
-		} else if (Type.isEmpty()) {
-			// Type empty
-			errorList.add("Empty Type in TravelTimePlotData Class.");
-		} else if (!Type.equals("TTPlotData")) {
-			// wrong Type
-			errorList.add("Non-TTPlotData Type in TravelTimePlotData Class.");
-		}
-		
-		// MaximumTravelTime
-		if (MaximumTravelTime == null) {
-			// MaximumTravelTime not found
-			errorList
-					.add("No Maximum Travel Time in TravelTimePlotData Class.");
-		}
+  /**
+   * Gets any validation errors in the class.
+   *
+   * @return Returns a List&lt;String&gt; of any errors found
+   */
+  public ArrayList<String> getErrors() {
+    ArrayList<String> errorList = new ArrayList<String>();
 
-		// Branches
-		if ((Branches != null) && (!Branches.isEmpty())) {
+    // Type
+    if (Type == null) {
+      // Type not found
+      errorList.add("No Type in TravelTimePlotData Class.");
+    } else if (Type.isEmpty()) {
+      // Type empty
+      errorList.add("Empty Type in TravelTimePlotData Class.");
+    } else if (!Type.equals("TTPlotData")) {
+      // wrong Type
+      errorList.add("Non-TTPlotData Type in TravelTimePlotData Class.");
+    }
 
-			// enumerate through the whole arraylist
-			for (Iterator<TravelTimePlotDataBranch> branchesIterator = Branches
-					.iterator(); branchesIterator.hasNext();) {
+    // MaximumTravelTime
+    if (MaximumTravelTime == null) {
+      // MaximumTravelTime not found
+      errorList.add("No Maximum Travel Time in TravelTimePlotData Class.");
+    }
 
-				// get next branch object
-				TravelTimePlotDataBranch branchObject = ((TravelTimePlotDataBranch) branchesIterator
-						.next());
+    // Branches
+    if ((Branches != null) && (!Branches.isEmpty())) {
 
-				if (!branchObject.isValid()) {
-					errorList.add(
-							"Invalid TravelTimePlotDataBranch in samples in TravelTimePlotData Class");
-					break;
-				}
-			}
-		}
+      // enumerate through the whole arraylist
+      for (Iterator<TravelTimePlotDataBranch> branchesIterator = Branches.iterator();
+          branchesIterator.hasNext(); ) {
 
-		return (errorList);
-	}
+        // get next branch object
+        TravelTimePlotDataBranch branchObject =
+            ((TravelTimePlotDataBranch) branchesIterator.next());
 
-	
+        if (!branchObject.isValid()) {
+          errorList.add("Invalid TravelTimePlotDataBranch in samples in TravelTimePlotData Class");
+          break;
+        }
+      }
+    }
+
+    return (errorList);
+  }
 }

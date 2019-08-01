@@ -1,419 +1,385 @@
 package gov.usgs.processingformats;
 
 import java.util.*;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import gov.usgs.processingformats.ProcessingInt;
-
 /**
  * a conversion class used to create, parse, and validate travel time session
- * 
+ *
  * @author U.S. Geological Survey &lt;jpatton at usgs.gov&gt;
  */
 public class TravelTimeSession implements ProcessingInt {
 
-	/**
-	 * JSON Keys
-	 */
-	public static final String SOURCEDEPTH_KEY = "SourceDepth";
-	public static final String EARTHMODEL_KEY = "EarthModel";
-	public static final String PHASETYPES_KEY = "PhaseTypes";
-	public static final String SOURCELATITUDE_KEY = "SourceLatitude";
-	public static final String SOURCELONGITUDE_KEY = "SourceLongitude";
-	public static final String RETURNALLPHASES_KEY = "ReturnAllPhases";
-	public static final String RETURNBACKBRANCHES_KEY = "ReturnBackBranches";
-	public static final String CONVERTTECTONIC_KEY = "ConvertTectonic";
-	public static final String ISPLOT_KEY = "IsPlot";
+  /** JSON Keys */
+  public static final String SOURCEDEPTH_KEY = "SourceDepth";
 
-	/**
-	 * Required depth of the source relative to the WGS84 datum in kilometers
-	 */
-	public Double SourceDepth;
+  public static final String EARTHMODEL_KEY = "EarthModel";
+  public static final String PHASETYPES_KEY = "PhaseTypes";
+  public static final String SOURCELATITUDE_KEY = "SourceLatitude";
+  public static final String SOURCELONGITUDE_KEY = "SourceLongitude";
+  public static final String RETURNALLPHASES_KEY = "ReturnAllPhases";
+  public static final String RETURNBACKBRANCHES_KEY = "ReturnBackBranches";
+  public static final String CONVERTTECTONIC_KEY = "ConvertTectonic";
+  public static final String ISPLOT_KEY = "IsPlot";
 
-	/**
-	 * Optional earth model to use, defaults to the AK135 earth model
-	 */
-	public String EarthModel;
+  /** Required depth of the source relative to the WGS84 datum in kilometers */
+  public Double SourceDepth;
 
-	/**
-	 * Optional ArrayList of strings listing the phase types desired
-	 */
-	public ArrayList<String> PhaseTypes;
+  /** Optional earth model to use, defaults to the AK135 earth model */
+  public String EarthModel;
 
-	/**
-	 * Optional geographic source latitude in degrees
-	 */
-	public Double SourceLatitude;
+  /** Optional ArrayList of strings listing the phase types desired */
+  public ArrayList<String> PhaseTypes;
 
-	/**
-	 * Optional geographic source longitude in degrees
-	 */
-	public Double SourceLongitude;
+  /** Optional geographic source latitude in degrees */
+  public Double SourceLatitude;
 
-	/**
-	 * Optional flag that indicates whether to return all phases, defaults to
-	 * false
-	 */
-	public Boolean ReturnAllPhases;
+  /** Optional geographic source longitude in degrees */
+  public Double SourceLongitude;
 
-	/**
-	 * Optional flag that indicates whether to return all arrivals of all
-	 * phases, defaults to false
-	 */
-	public Boolean ReturnBackBranches;
+  /** Optional flag that indicates whether to return all phases, defaults to false */
+  public Boolean ReturnAllPhases;
 
-	/**
-	 * Optional flag that indicates whether to convert tectonic phases, defaults
-	 * to false
-	 */
-	public Boolean ConvertTectonic;
+  /**
+   * Optional flag that indicates whether to return all arrivals of all phases, defaults to false
+   */
+  public Boolean ReturnBackBranches;
 
-	/**
-	 * Optional flag that indicates whether the travel-time session is for
-	 * plotting rather than lookups
-	 */
-	public Boolean IsPlot;
+  /** Optional flag that indicates whether to convert tectonic phases, defaults to false */
+  public Boolean ConvertTectonic;
 
-	/**
-	 * The constructor for the TravelTimeSession class. Initializes members to
-	 * null values.
-	 */
-	public TravelTimeSession() {
+  /**
+   * Optional flag that indicates whether the travel-time session is for plotting rather than
+   * lookups
+   */
+  public Boolean IsPlot;
 
-		reload(null, null, null, null, null, null, null, null, null);
-	}
+  /** The constructor for the TravelTimeSession class. Initializes members to null values. */
+  public TravelTimeSession() {
 
-	/**
-	 * Advanced constructor
-	 * 
-	 * The advanced constructor for the TravelTimeSession class. Initializes
-	 * members to provided values.
-	 * 
-	 * @param newSourceDepth
-	 *            - A String containing the seismic phase code
-	 * @param newEarthModel
-	 *            - A Double containing the travel time in seconds
-	 * @param newPhaseTypes
-	 *            - A Double containing the derivative with respect to distance
-	 *            of the travel time in seconds/degree
-	 * @param newSourceLatitude
-	 *            - A Double containing the derivative with respect to ray
-	 *            parameter of the travel time in degrees/second
-	 * @param newSourceLongitude
-	 *            - A Double containing the derivative with respect to ray
-	 *            parameter of the travel time in degrees/second
-	 * @param newReturnAllPhases
-	 *            - A Double containing the observed travel time scatter in
-	 *            seconds
-	 * @param newReturnBackBranches
-	 *            - A Double containing the statistical observability of the
-	 *            seismic phase
-	 * @param newConvertTectonic
-	 *            - A Long containing the teleseismic phase group identifier
-	 * @param newUseRSTT
-	 *            - A Long containing the auxiliary phase group identifier
-	 * @param newIsPlot
-	 *            - A Boolean containing the flag indicating whether the phase
-	 *            may be used in a location
-	 */
-	public TravelTimeSession(Double newSourceDepth, String newEarthModel,
-			ArrayList<String> newPhaseTypes, Double newSourceLatitude,
-			Double newSourceLongitude, Boolean newReturnAllPhases,
-			Boolean newReturnBackBranches, Boolean newConvertTectonic,
-			Boolean newIsPlot) {
+    reload(null, null, null, null, null, null, null, null, null);
+  }
 
-		reload(newSourceDepth, newEarthModel, newPhaseTypes, newSourceLatitude,
-				newSourceLongitude, newReturnAllPhases, newReturnBackBranches,
-				newConvertTectonic, newIsPlot);
-	}
+  /**
+   * Advanced constructor
+   *
+   * <p>The advanced constructor for the TravelTimeSession class. Initializes members to provided
+   * values.
+   *
+   * @param newSourceDepth - A String containing the seismic phase code
+   * @param newEarthModel - A Double containing the travel time in seconds
+   * @param newPhaseTypes - A Double containing the derivative with respect to distance of the
+   *     travel time in seconds/degree
+   * @param newSourceLatitude - A Double containing the derivative with respect to ray parameter of
+   *     the travel time in degrees/second
+   * @param newSourceLongitude - A Double containing the derivative with respect to ray parameter of
+   *     the travel time in degrees/second
+   * @param newReturnAllPhases - A Double containing the observed travel time scatter in seconds
+   * @param newReturnBackBranches - A Double containing the statistical observability of the seismic
+   *     phase
+   * @param newConvertTectonic - A Long containing the teleseismic phase group identifier
+   * @param newUseRSTT - A Long containing the auxiliary phase group identifier
+   * @param newIsPlot - A Boolean containing the flag indicating whether the phase may be used in a
+   *     location
+   */
+  public TravelTimeSession(
+      Double newSourceDepth,
+      String newEarthModel,
+      ArrayList<String> newPhaseTypes,
+      Double newSourceLatitude,
+      Double newSourceLongitude,
+      Boolean newReturnAllPhases,
+      Boolean newReturnBackBranches,
+      Boolean newConvertTectonic,
+      Boolean newIsPlot) {
 
-	/**
-	 * Constructs the class from a JSONObject, populating members
-	 * 
-	 * @param newJSONObject
-	 *            - A JSONObject.
-	 */
-	public TravelTimeSession(JSONObject newJSONObject) {
+    reload(
+        newSourceDepth,
+        newEarthModel,
+        newPhaseTypes,
+        newSourceLatitude,
+        newSourceLongitude,
+        newReturnAllPhases,
+        newReturnBackBranches,
+        newConvertTectonic,
+        newIsPlot);
+  }
 
-		// Required values
-		// SourceDepth
-		if (newJSONObject.containsKey(SOURCEDEPTH_KEY)) {
-			SourceDepth = (double) newJSONObject.get(SOURCEDEPTH_KEY);
-		} else {
-			SourceDepth = null;
-		}
+  /**
+   * Constructs the class from a JSONObject, populating members
+   *
+   * @param newJSONObject - A JSONObject.
+   */
+  public TravelTimeSession(JSONObject newJSONObject) {
 
-		// Optional values
-		// EarthModel
-		if (newJSONObject.containsKey(EARTHMODEL_KEY)) {
-			EarthModel = newJSONObject.get(EARTHMODEL_KEY).toString();
-		} else {
-			EarthModel = null;
-		}
+    // Required values
+    // SourceDepth
+    if (newJSONObject.containsKey(SOURCEDEPTH_KEY)) {
+      SourceDepth = (double) newJSONObject.get(SOURCEDEPTH_KEY);
+    } else {
+      SourceDepth = null;
+    }
 
-		// PhaseTypes
-		if (newJSONObject.containsKey(PHASETYPES_KEY)) {
+    // Optional values
+    // EarthModel
+    if (newJSONObject.containsKey(EARTHMODEL_KEY)) {
+      EarthModel = newJSONObject.get(EARTHMODEL_KEY).toString();
+    } else {
+      EarthModel = null;
+    }
 
-			PhaseTypes = new ArrayList<String>();
+    // PhaseTypes
+    if (newJSONObject.containsKey(PHASETYPES_KEY)) {
 
-			// get the array
-			JSONArray PhaseTypesArray = (JSONArray) newJSONObject
-					.get(PHASETYPES_KEY);
+      PhaseTypes = new ArrayList<String>();
 
-			if ((PhaseTypesArray != null) && (!PhaseTypesArray.isEmpty())) {
+      // get the array
+      JSONArray PhaseTypesArray = (JSONArray) newJSONObject.get(PHASETYPES_KEY);
 
-				// go through the whole array
-				for (int i = 0; i < PhaseTypesArray.size(); i++) {
+      if ((PhaseTypesArray != null) && (!PhaseTypesArray.isEmpty())) {
 
-					// get the String
-					String phaseType = PhaseTypesArray.get(i).toString();
+        // go through the whole array
+        for (int i = 0; i < PhaseTypesArray.size(); i++) {
 
-					// add to ArrayList
-					PhaseTypes.add(phaseType);
+          // get the String
+          String phaseType = PhaseTypesArray.get(i).toString();
 
-				}
-			}
-		} else {
-			PhaseTypes = null;
-		}
+          // add to ArrayList
+          PhaseTypes.add(phaseType);
+        }
+      }
+    } else {
+      PhaseTypes = null;
+    }
 
-		// SourceLatitude
-		if (newJSONObject.containsKey(SOURCELATITUDE_KEY)) {
-			SourceLatitude = (double) newJSONObject.get(SOURCELATITUDE_KEY);
-		} else {
-			SourceLatitude = null;
-		}
+    // SourceLatitude
+    if (newJSONObject.containsKey(SOURCELATITUDE_KEY)) {
+      SourceLatitude = (double) newJSONObject.get(SOURCELATITUDE_KEY);
+    } else {
+      SourceLatitude = null;
+    }
 
-		// SourceLongitude
-		if (newJSONObject.containsKey(SOURCELONGITUDE_KEY)) {
-			SourceLongitude = (double) newJSONObject.get(SOURCELONGITUDE_KEY);
-		} else {
-			SourceLongitude = null;
-		}
+    // SourceLongitude
+    if (newJSONObject.containsKey(SOURCELONGITUDE_KEY)) {
+      SourceLongitude = (double) newJSONObject.get(SOURCELONGITUDE_KEY);
+    } else {
+      SourceLongitude = null;
+    }
 
-		// ReturnAllPhases
-		if (newJSONObject.containsKey(RETURNALLPHASES_KEY)) {
-			ReturnAllPhases = (boolean) newJSONObject.get(RETURNALLPHASES_KEY);
-		} else {
-			ReturnAllPhases = null;
-		}
+    // ReturnAllPhases
+    if (newJSONObject.containsKey(RETURNALLPHASES_KEY)) {
+      ReturnAllPhases = (boolean) newJSONObject.get(RETURNALLPHASES_KEY);
+    } else {
+      ReturnAllPhases = null;
+    }
 
-		// ReturnBackBranches
-		if (newJSONObject.containsKey(RETURNBACKBRANCHES_KEY)) {
-			ReturnBackBranches = (boolean) newJSONObject
-					.get(RETURNBACKBRANCHES_KEY);
-		} else {
-			ReturnBackBranches = null;
-		}
+    // ReturnBackBranches
+    if (newJSONObject.containsKey(RETURNBACKBRANCHES_KEY)) {
+      ReturnBackBranches = (boolean) newJSONObject.get(RETURNBACKBRANCHES_KEY);
+    } else {
+      ReturnBackBranches = null;
+    }
 
-		// ConvertTectonic
-		if (newJSONObject.containsKey(CONVERTTECTONIC_KEY)) {
-			ConvertTectonic = (boolean) newJSONObject.get(CONVERTTECTONIC_KEY);
-		} else {
-			ConvertTectonic = null;
-		}
+    // ConvertTectonic
+    if (newJSONObject.containsKey(CONVERTTECTONIC_KEY)) {
+      ConvertTectonic = (boolean) newJSONObject.get(CONVERTTECTONIC_KEY);
+    } else {
+      ConvertTectonic = null;
+    }
 
-		// IsPlot
-		if (newJSONObject.containsKey(ISPLOT_KEY)) {
-			IsPlot = (boolean) newJSONObject.get(ISPLOT_KEY);
-		} else {
-			IsPlot = null;
-		}
+    // IsPlot
+    if (newJSONObject.containsKey(ISPLOT_KEY)) {
+      IsPlot = (boolean) newJSONObject.get(ISPLOT_KEY);
+    } else {
+      IsPlot = null;
+    }
+  }
 
-	}
+  /**
+   * Constructs the class from a TravelTimeSession object, populating members (copy constructor)
+   *
+   * @param sourceObject - A TravelTimeSession object.
+   */
+  public TravelTimeSession(TravelTimeSession sourceObject) {
+    reload(
+        sourceObject.SourceDepth,
+        sourceObject.EarthModel,
+        sourceObject.PhaseTypes,
+        sourceObject.SourceLatitude,
+        sourceObject.SourceLongitude,
+        sourceObject.ReturnAllPhases,
+        sourceObject.ReturnBackBranches,
+        sourceObject.ConvertTectonic,
+        sourceObject.IsPlot);
+  }
 
-	/**
-	 * Constructs the class from a TravelTimeSession object, populating members
-	 * (copy constructor)
-	 * 
-	 * @param sourceObject
-	 *            - A TravelTimeSession object.
-	 */
-	public TravelTimeSession(TravelTimeSession sourceObject) {
-		reload(sourceObject.SourceDepth, sourceObject.EarthModel,
-				sourceObject.PhaseTypes, sourceObject.SourceLatitude,
-				sourceObject.SourceLongitude, sourceObject.ReturnAllPhases,
-				sourceObject.ReturnBackBranches, sourceObject.ConvertTectonic,
-				sourceObject.IsPlot);
-	}
+  /**
+   * Reload Function
+   *
+   * <p>The reload function for the TravelTimeData class. Initializes members to provided values.
+   *
+   * @param newSourceDepth - A String containing the seismic phase code
+   * @param newEarthModel - A Double containing the travel time in seconds
+   * @param newPhaseTypes - A Double containing the derivative with respect to distance of the
+   *     travel time in seconds/degree
+   * @param newSourceLatitude - A Double containing the derivative with respect to ray parameter of
+   *     the travel time in degrees/second
+   * @param newSourceLongitude - A Double containing the derivative with respect to ray parameter of
+   *     the travel time in degrees/second
+   * @param newReturnAllPhases - A Double containing the observed travel time scatter in seconds
+   * @param newReturnBackBranches - A Double containing the statistical observability of the seismic
+   *     phase
+   * @param newConvertTectonic - A Long containing the teleseismic phase group identifier
+   * @param newIsPlot - A Boolean containing the flag indicating whether the phase may be used in a
+   *     location
+   */
+  public void reload(
+      Double newSourceDepth,
+      String newEarthModel,
+      ArrayList<String> newPhaseTypes,
+      Double newSourceLatitude,
+      Double newSourceLongitude,
+      Boolean newReturnAllPhases,
+      Boolean newReturnBackBranches,
+      Boolean newConvertTectonic,
+      Boolean newIsPlot) {
 
-	/**
-	 * Reload Function
-	 * 
-	 * The reload function for the TravelTimeData class. Initializes members to
-	 * provided values.
-	 * 
-	 * @param newSourceDepth
-	 *            - A String containing the seismic phase code
-	 * @param newEarthModel
-	 *            - A Double containing the travel time in seconds
-	 * @param newPhaseTypes
-	 *            - A Double containing the derivative with respect to distance
-	 *            of the travel time in seconds/degree
-	 * @param newSourceLatitude
-	 *            - A Double containing the derivative with respect to ray
-	 *            parameter of the travel time in degrees/second
-	 * @param newSourceLongitude
-	 *            - A Double containing the derivative with respect to ray
-	 *            parameter of the travel time in degrees/second
-	 * @param newReturnAllPhases
-	 *            - A Double containing the observed travel time scatter in
-	 *            seconds
-	 * @param newReturnBackBranches
-	 *            - A Double containing the statistical observability of the
-	 *            seismic phase
-	 * @param newConvertTectonic
-	 *            - A Long containing the teleseismic phase group identifier
-	 * @param newIsPlot
-	 *            - A Boolean containing the flag indicating whether the phase
-	 *            may be used in a location
-	 */
-	public void reload(Double newSourceDepth, String newEarthModel,
-			ArrayList<String> newPhaseTypes, Double newSourceLatitude,
-			Double newSourceLongitude, Boolean newReturnAllPhases,
-			Boolean newReturnBackBranches, Boolean newConvertTectonic,
-			Boolean newIsPlot) {
+    SourceDepth = newSourceDepth;
+    EarthModel = newEarthModel;
+    PhaseTypes = newPhaseTypes;
+    SourceLatitude = newSourceLatitude;
+    SourceLongitude = newSourceLongitude;
+    ReturnAllPhases = newReturnAllPhases;
+    ReturnBackBranches = newReturnBackBranches;
+    ConvertTectonic = newConvertTectonic;
+    IsPlot = newIsPlot;
+  }
 
-		SourceDepth = newSourceDepth;
-		EarthModel = newEarthModel;
-		PhaseTypes = newPhaseTypes;
-		SourceLatitude = newSourceLatitude;
-		SourceLongitude = newSourceLongitude;
-		ReturnAllPhases = newReturnAllPhases;
-		ReturnBackBranches = newReturnBackBranches;
-		ConvertTectonic = newConvertTectonic;
-		IsPlot = newIsPlot;
+  /**
+   * Converts the contents of the class to a json object
+   *
+   * @return Returns a JSONObject containing the class contents
+   */
+  @SuppressWarnings("unchecked")
+  public JSONObject toJSON() {
 
-	}
+    JSONObject newJSONObject = new JSONObject();
 
-	/**
-	 * Converts the contents of the class to a json object
-	 * 
-	 * @return Returns a JSONObject containing the class contents
-	 */
-	@SuppressWarnings("unchecked")
-	public JSONObject toJSON() {
+    // SourceDepth
+    if (SourceDepth != null) {
+      newJSONObject.put(SOURCEDEPTH_KEY, SourceDepth);
+    }
 
-		JSONObject newJSONObject = new JSONObject();
+    // EarthModel
+    if (EarthModel != null) {
+      newJSONObject.put(EARTHMODEL_KEY, EarthModel);
+    }
 
-		// SourceDepth
-		if (SourceDepth != null) {
-			newJSONObject.put(SOURCEDEPTH_KEY, SourceDepth);
-		}
+    // PhaseTypes
+    if ((PhaseTypes != null) && (!PhaseTypes.isEmpty())) {
 
-		// EarthModel
-		if (EarthModel != null) {
-			newJSONObject.put(EARTHMODEL_KEY, EarthModel);
-		}
+      JSONArray PhaseTypesArray = new JSONArray();
 
-		// PhaseTypes
-		if ((PhaseTypes != null) && (!PhaseTypes.isEmpty())) {
+      // enumerate through the whole arraylist
+      for (Iterator<String> PhaseTypesIterator = PhaseTypes.iterator();
+          PhaseTypesIterator.hasNext(); ) {
 
-			JSONArray PhaseTypesArray = new JSONArray();
+        // add to  array
+        PhaseTypesArray.add(PhaseTypesIterator.next());
+      }
 
-			// enumerate through the whole arraylist
-			for (Iterator<String> PhaseTypesIterator = PhaseTypes
-					.iterator(); PhaseTypesIterator.hasNext();) {
+      if (!PhaseTypesArray.isEmpty()) {
+        newJSONObject.put(PHASETYPES_KEY, PhaseTypesArray);
+      }
+    }
 
-				// add to  array
-				PhaseTypesArray.add(PhaseTypesIterator.next());
-			}
+    // SourceLatitude
+    if (SourceLatitude != null) {
+      newJSONObject.put(SOURCELATITUDE_KEY, SourceLatitude);
+    }
 
-			if (!PhaseTypesArray.isEmpty()) {
-				newJSONObject.put(PHASETYPES_KEY, PhaseTypesArray);
-			}
-		}
+    // SourceLongitude
+    if (SourceLongitude != null) {
+      newJSONObject.put(SOURCELONGITUDE_KEY, SourceLongitude);
+    }
 
-		// SourceLatitude
-		if (SourceLatitude != null) {
-			newJSONObject.put(SOURCELATITUDE_KEY, SourceLatitude);
-		}
+    // ReturnAllPhases
+    if (ReturnAllPhases != null) {
+      newJSONObject.put(RETURNALLPHASES_KEY, ReturnAllPhases);
+    }
 
-		// SourceLongitude
-		if (SourceLongitude != null) {
-			newJSONObject.put(SOURCELONGITUDE_KEY, SourceLongitude);
-		}
+    // ReturnBackBranches
+    if (ReturnBackBranches != null) {
+      newJSONObject.put(RETURNBACKBRANCHES_KEY, ReturnBackBranches);
+    }
 
-		// ReturnAllPhases
-		if (ReturnAllPhases != null) {
-			newJSONObject.put(RETURNALLPHASES_KEY, ReturnAllPhases);
-		}
+    // ConvertTectonic
+    if (ConvertTectonic != null) {
+      newJSONObject.put(CONVERTTECTONIC_KEY, ConvertTectonic);
+    }
 
-		// ReturnBackBranches
-		if (ReturnBackBranches != null) {
-			newJSONObject.put(RETURNBACKBRANCHES_KEY, ReturnBackBranches);
-		}
+    // IsPlot
+    if (IsPlot != null) {
+      newJSONObject.put(ISPLOT_KEY, IsPlot);
+    }
 
-		// ConvertTectonic
-		if (ConvertTectonic != null) {
-			newJSONObject.put(CONVERTTECTONIC_KEY, ConvertTectonic);
-		}
+    return (newJSONObject);
+  }
 
-		// IsPlot
-		if (IsPlot != null) {
-			newJSONObject.put(ISPLOT_KEY, IsPlot);
-		}
+  /**
+   * Validates the class.
+   *
+   * @return Returns true if successful
+   */
+  public boolean isValid() {
+    if (getErrors() == null) {
+      return (true);
+    } else if (getErrors().size() == 0) {
+      return (true);
+    } else {
+      return (false);
+    }
+  }
 
-		return (newJSONObject);
-	}
+  /**
+   * Gets any validation errors in the class.
+   *
+   * @return Returns a List&lt;String&gt; of any errors found
+   */
+  public ArrayList<String> getErrors() {
+    ArrayList<String> errorList = new ArrayList<String>();
 
-	/**
-	 * Validates the class.
-	 * 
-	 * @return Returns true if successful
-	 */
-	public boolean isValid() {
-		if (getErrors() == null) {
-			return (true);
-		} else if (getErrors().size() == 0) {
-			return (true);
-		} else {
-			return (false);
-		}
-	}
+    // SourceDepth
+    if (SourceDepth == null) {
+      // SourceDepth not found
+      errorList.add("No Source Depth in TravelTimeSession Class.");
+    } else if ((SourceDepth < -100) || (SourceDepth > 1500)) {
+      // invalid depth
+      errorList.add("Source Depth in TravelTimeSession Class not in the range of -100 to 1500.");
+    }
 
-	/**
-	 * Gets any validation errors in the class.
-	 * 
-	 * @return Returns a List&lt;String&gt; of any errors found
-	 */
-	public ArrayList<String> getErrors() {
-		ArrayList<String> errorList = new ArrayList<String>();
+    // SourceLatitude
+    if (SourceLatitude != null) {
+      if ((SourceLatitude < -90) || (SourceLatitude > 90)) {
+        // invalid latitude
+        errorList.add("Source Latitude in TravelTimeSession Class not in the range of -90 to 90.");
+      }
+    }
 
-		// SourceDepth
-		if (SourceDepth == null) {
-			// SourceDepth not found
-			errorList.add("No Source Depth in TravelTimeSession Class.");
-		} else if ((SourceDepth < -100) || (SourceDepth > 1500)) {
-			// invalid depth
-			errorList.add(
-					"Source Depth in TravelTimeSession Class not in the range of -100 to 1500.");
-		}
+    // SourceLongitude
+    if (SourceLongitude != null) {
+      if ((SourceLongitude < -180) || (SourceLongitude > 180)) {
+        // invalid longitude
+        errorList.add(
+            "Source Longitude in TravelTimeSession Class not in the range of -180 to 180.");
+      }
+    }
 
-		// SourceLatitude
-		if (SourceLatitude != null) {
-			if ((SourceLatitude < -90) || (SourceLatitude > 90)) {
-				// invalid latitude
-				errorList.add(
-						"Source Latitude in TravelTimeSession Class not in the range of -90 to 90.");
-			}
-		}
+    // EarthModel and PhaseTypes are strings, validation could be done on
+    // them in the future
+    // no validation necessary for boolean values
 
-		// SourceLongitude
-		if (SourceLongitude != null) {
-			if ((SourceLongitude < -180) || (SourceLongitude > 180)) {
-				// invalid longitude
-				errorList.add(
-						"Source Longitude in TravelTimeSession Class not in the range of -180 to 180.");
-			}
-		}
-
-		// EarthModel and PhaseTypes are strings, validation could be done on
-		// them in the future
-		// no validation necessary for boolean values
-		
-		return (errorList);
-	}
+    return (errorList);
+  }
 }

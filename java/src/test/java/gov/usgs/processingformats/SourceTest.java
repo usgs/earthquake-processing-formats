@@ -7,88 +7,73 @@ import org.junit.Test;
 
 public class SourceTest {
 
-	public static final String SOURCE_STRING = "{\"Author\":"
-			+ "\"TestAuthor\",\"AgencyID\":\"US\",\"Type\":\"Unknown\"}";
-	public static final String AGENCYID = "US";
-	public static final String AUTHOR = "TestAuthor";
-	public static final String TYPE = "Unknown";
+  public static final String SOURCE_STRING =
+      "{\"Author\":" + "\"TestAuthor\",\"AgencyID\":\"US\",\"Type\":\"Unknown\"}";
+  public static final String AGENCYID = "US";
+  public static final String AUTHOR = "TestAuthor";
+  public static final String TYPE = "Unknown";
 
-	/**
-	 * Able to write a JSON string
-	 */
-	@Test
-	public void writesJSON() {
+  /** Able to write a JSON string */
+  @Test
+  public void writesJSON() {
 
-		Source sourceObject = new Source(AGENCYID, AUTHOR, TYPE);
+    Source sourceObject = new Source(AGENCYID, AUTHOR, TYPE);
 
-		// write out to a string
-		String jsonString = Utility.toJSONString(sourceObject.toJSON());
+    // write out to a string
+    String jsonString = Utility.toJSONString(sourceObject.toJSON());
 
-		// check the data
-		try {
-			checkData(new Source(Utility.fromJSONString(jsonString)),
-					"WritesJSON");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
+    // check the data
+    try {
+      checkData(new Source(Utility.fromJSONString(jsonString)), "WritesJSON");
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+  }
 
-	/**
-	 * Able to read a JSON string
-	 */
-	@Test
-	public void readsJSON() {
+  /** Able to read a JSON string */
+  @Test
+  public void readsJSON() {
 
-		try {
+    try {
 
-			checkData(new Source(Utility.fromJSONString(SOURCE_STRING)),
-					"ReadsJSON");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
+      checkData(new Source(Utility.fromJSONString(SOURCE_STRING)), "ReadsJSON");
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+  }
 
-	/**
-	 * Able to run validation function
-	 */
-	@Test
-	public void validate() {
+  /** Able to run validation function */
+  @Test
+  public void validate() {
 
-		// build source object
-		Source sourceObject = new Source(AGENCYID, AUTHOR, TYPE);
+    // build source object
+    Source sourceObject = new Source(AGENCYID, AUTHOR, TYPE);
 
-		// Successful validation
-		boolean rc = sourceObject.isValid();
+    // Successful validation
+    boolean rc = sourceObject.isValid();
 
-		// check return code
-		assertEquals("Successful Validation", true, rc);
+    // check return code
+    assertEquals("Successful Validation", true, rc);
 
-		// build bad source object
-		Source badSourceObject = new Source(AGENCYID, null, null);
+    // build bad source object
+    Source badSourceObject = new Source(AGENCYID, null, null);
 
-		rc = badSourceObject.isValid();
+    rc = badSourceObject.isValid();
 
-		// check return code
-		assertEquals("Unsuccessful Validation", false, rc);
-	}
+    // check return code
+    assertEquals("Unsuccessful Validation", false, rc);
+  }
 
-	/**
-	 * Checks the data in the class
-	 */
-	public void checkData(Source SourceObject, String TestName) {
+  /** Checks the data in the class */
+  public void checkData(Source SourceObject, String TestName) {
 
-		// check SourceObject.AgencyID
-		assertEquals(TestName + " AgencyID Equals", AGENCYID,
-				SourceObject.AgencyID);
+    // check SourceObject.AgencyID
+    assertEquals(TestName + " AgencyID Equals", AGENCYID, SourceObject.AgencyID);
 
-		// check SourceObject.Author
-		assertEquals(TestName + " Author Equals", AUTHOR,
-				SourceObject.Author);
+    // check SourceObject.Author
+    assertEquals(TestName + " Author Equals", AUTHOR, SourceObject.Author);
 
-		// check SourceObject.Author
-		assertEquals(TestName + " Type Equals", TYPE,
-				SourceObject.Type);
-
-
-	}
+    // check SourceObject.Author
+    assertEquals(TestName + " Type Equals", TYPE, SourceObject.Type);
+  }
 }
