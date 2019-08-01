@@ -26,7 +26,6 @@ public class TravelTimeSessionTest {
 	public static boolean RETURNALLPHASES = true;
 	public static boolean RETURNBACKBRANCHES = true;
 	public static boolean CONVERTTECTONIC = true;
-	public static boolean USERSTT = false;
 	public static boolean ISPLOT = false;
 
 	/**
@@ -38,7 +37,7 @@ public class TravelTimeSessionTest {
 		TravelTimeSession travelTimeSessionObject = new TravelTimeSession(
 				SOURCEDEPTH, EARTHMODEL, buildPhaseTypes(), SOURCELATITUDE,
 				SOURCELONGITUDE, RETURNALLPHASES, RETURNBACKBRANCHES,
-				CONVERTTECTONIC, USERSTT, ISPLOT);
+				CONVERTTECTONIC, ISPLOT);
 
 		// write out to a string
 		String jsonString = Utility
@@ -82,7 +81,7 @@ public class TravelTimeSessionTest {
 
 		travelTimeSessionObject.reload(SOURCEDEPTH, EARTHMODEL,
 				buildPhaseTypes(), SOURCELATITUDE, SOURCELONGITUDE,
-				RETURNALLPHASES, RETURNBACKBRANCHES, CONVERTTECTONIC, USERSTT,
+				RETURNALLPHASES, RETURNBACKBRANCHES, CONVERTTECTONIC,
 				ISPLOT);
 
 		// check data values
@@ -98,16 +97,15 @@ public class TravelTimeSessionTest {
 		// use constructor
 		TravelTimeSession travelTimeSessionObject = new TravelTimeSession();
 
-		travelTimeSessionObject.setSourceDepth(SOURCEDEPTH);
-		travelTimeSessionObject.setEarthModel(EARTHMODEL);
-		travelTimeSessionObject.setPhaseTypes(buildPhaseTypes());
-		travelTimeSessionObject.setSourceLatitude(SOURCELATITUDE);
-		travelTimeSessionObject.setSourceLongitude(SOURCELONGITUDE);
-		travelTimeSessionObject.setReturnAllPhases(RETURNALLPHASES);
-		travelTimeSessionObject.setReturnBackBranches(RETURNBACKBRANCHES);
-		travelTimeSessionObject.setConvertTectonic(CONVERTTECTONIC);
-		travelTimeSessionObject.setUseRSTT(USERSTT);
-		travelTimeSessionObject.setIsPlot(ISPLOT);
+		travelTimeSessionObject.SourceDepth = SOURCEDEPTH;
+		travelTimeSessionObject.EarthModel = EARTHMODEL;
+		travelTimeSessionObject.PhaseTypes = buildPhaseTypes();
+		travelTimeSessionObject.SourceLatitude = SOURCELATITUDE;
+		travelTimeSessionObject.SourceLongitude = SOURCELONGITUDE;
+		travelTimeSessionObject.ReturnAllPhases = RETURNALLPHASES;
+		travelTimeSessionObject.ReturnBackBranches = RETURNBACKBRANCHES;
+		travelTimeSessionObject.ConvertTectonic = CONVERTTECTONIC;
+		travelTimeSessionObject.IsPlot = ISPLOT;
 
 		// check data values
 		checkData(travelTimeSessionObject, "Set Functions");
@@ -123,7 +121,7 @@ public class TravelTimeSessionTest {
 		TravelTimeSession travelTimeSessionObject = new TravelTimeSession(
 				SOURCEDEPTH, EARTHMODEL, buildPhaseTypes(), SOURCELATITUDE,
 				SOURCELONGITUDE, RETURNALLPHASES, RETURNBACKBRANCHES,
-				CONVERTTECTONIC, USERSTT, ISPLOT);
+				CONVERTTECTONIC, ISPLOT);
 
 		TravelTimeSession travelTimeSessionObject2 = new TravelTimeSession(
 				travelTimeSessionObject);
@@ -142,7 +140,7 @@ public class TravelTimeSessionTest {
 		TravelTimeSession travelTimeSessionObject = new TravelTimeSession(
 				SOURCEDEPTH, EARTHMODEL, buildPhaseTypes(), SOURCELATITUDE,
 				SOURCELONGITUDE, RETURNALLPHASES, RETURNBACKBRANCHES,
-				CONVERTTECTONIC, USERSTT, ISPLOT);
+				CONVERTTECTONIC, ISPLOT);
 
 		// Successful validation
 		boolean rc = travelTimeSessionObject.isValid();
@@ -153,7 +151,7 @@ public class TravelTimeSessionTest {
 		// use constructor
 		TravelTimeSession badtravelTimeSessionObject = new TravelTimeSession(
 				null, EARTHMODEL, null, -220.0, -220.0, RETURNALLPHASES,
-				RETURNBACKBRANCHES, null, USERSTT, ISPLOT);
+				RETURNBACKBRANCHES, null, ISPLOT);
 
 		rc = badtravelTimeSessionObject.isValid();
 
@@ -168,75 +166,69 @@ public class TravelTimeSessionTest {
 		// required
 		// check travelTimeSessionObject.distance
 		assertEquals(TestName + " Source Depth Equals", SOURCEDEPTH,
-				travelTimeSessionObject.getSourceDepth(), 0);
+				travelTimeSessionObject.SourceDepth, 0);
 
 		// optional
 		// travelTimeSessionObject.earthModel
-		if (travelTimeSessionObject.getEarthModel() != null) {
+		if (travelTimeSessionObject.EarthModel != null) {
 			assertEquals(TestName + " Earth Model Equals", EARTHMODEL,
-					travelTimeSessionObject.getEarthModel());
+					travelTimeSessionObject.EarthModel);
 		}
 
 		// check travelTimeSessionObject.phaseTypes
-		if ((travelTimeSessionObject.getPhaseTypes() != null)
-				&& (!travelTimeSessionObject.getPhaseTypes().isEmpty())) {
+		if ((travelTimeSessionObject.PhaseTypes != null)
+				&& (!travelTimeSessionObject.PhaseTypes.isEmpty())) {
 
 			// check travelTimeSessionObject.phaseTypes[0]
 			assertEquals(TestName + " Phase Type 1 Equals", PHASETYPE1,
-					travelTimeSessionObject.getPhaseTypes().get(0));
+					travelTimeSessionObject.PhaseTypes.get(0));
 
 			// check travelTimeSessionObject.phaseTypes[1]
 			assertEquals(TestName + " Phase Type 2 Equals", PHASETYPE2,
-					travelTimeSessionObject.getPhaseTypes().get(1));
+					travelTimeSessionObject.PhaseTypes.get(1));
 
 			// check travelTimeSessionObject.phaseTypes[2]
 			assertEquals(TestName + " Phase Type 3 Equals", PHASETYPE3,
-					travelTimeSessionObject.getPhaseTypes().get(2));
+					travelTimeSessionObject.PhaseTypes.get(2));
 		}
 
 		// check travelTimeSessionObject.sourceLatitude
-		if (travelTimeSessionObject.getSourceLatitude() != null) {
+		if (travelTimeSessionObject.SourceLatitude != null) {
 			assertEquals(TestName + " Latitude Equals", SOURCELATITUDE,
-					travelTimeSessionObject.getSourceLatitude(), 0);
+					travelTimeSessionObject.SourceLatitude, 0);
 		}
 
 		// check travelTimeSessionObject.sourceLongitude
-		if (travelTimeSessionObject.getSourceLongitude() != null) {
+		if (travelTimeSessionObject.SourceLongitude != null) {
 			assertEquals(TestName + " Longitude Equals", SOURCELONGITUDE,
-					travelTimeSessionObject.getSourceLongitude(), 0);
+					travelTimeSessionObject.SourceLongitude, 0);
 		}
 
 		// check travelTimeSessionObject.returnAllPhases
-		if (travelTimeSessionObject.getReturnAllPhases() != null) {
+		if (travelTimeSessionObject.ReturnAllPhases != null) {
 			assertEquals(TestName + " Return All Phases Equals ",
-					travelTimeSessionObject.getReturnAllPhases(),
+					travelTimeSessionObject.ReturnAllPhases,
 					RETURNALLPHASES);
 		}
 
 		// check travelTimeSessionObject.returnBackBranches
-		if (travelTimeSessionObject.getReturnBackBranches() != null) {
+		if (travelTimeSessionObject.ReturnBackBranches != null) {
 			assertEquals(TestName + " Return Back Branchs Equals ",
-					travelTimeSessionObject.getReturnBackBranches(),
+					travelTimeSessionObject.ReturnBackBranches,
 					RETURNBACKBRANCHES);
 		}
 
 		// check travelTimeSessionObject.convertTectonic
-		if (travelTimeSessionObject.getConvertTectonic() != null) {
+		if (travelTimeSessionObject.ConvertTectonic != null) {
 			assertEquals(TestName + " Convert Tectonic Equals ",
-					travelTimeSessionObject.getConvertTectonic(),
+					travelTimeSessionObject.ConvertTectonic,
 					CONVERTTECTONIC);
 		}
 
-		// check travelTimeSessionObject.useRSTT
-		if (travelTimeSessionObject.getUseRSTT() != null) {
-			assertEquals(TestName + " Use RSTT Equals ",
-					travelTimeSessionObject.getUseRSTT(), USERSTT);
-		}
-
 		// check travelTimeSessionObject.isPLot
-		if (travelTimeSessionObject.getIsPlot() != null) {
+		if (travelTimeSessionObject.IsPlot != null) {
 			assertEquals(TestName + " Is Plot Equals ",
-					travelTimeSessionObject.getIsPlot(), ISPLOT);
+					travelTimeSessionObject.IsPlot, ISPLOT);
 		}
 	}
 

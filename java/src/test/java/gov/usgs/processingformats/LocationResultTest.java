@@ -192,35 +192,35 @@ public class LocationResultTest {
 
 		// check LocationResultObject.hypocenter.Latitude
 		assertEquals(TestName + " Latitude Equals", LATITUDE,
-				LocationResultObject.getHypocenter().getLatitude(), 0);
+				LocationResultObject.getHypocenter().Latitude, 0);
 
 		// check LocationResultObject.hypocenter.Longitude
 		assertEquals(TestName + " Longitude Equals", LONGITUDE,
-				LocationResultObject.getHypocenter().getLongitude(), 0);
+				LocationResultObject.getHypocenter().Longitude, 0);
 
 		// check LocationResultObject.hypocenter.Depth
 		assertEquals(TestName + " Depth Equals", DEPTH,
-				LocationResultObject.getHypocenter().getDepth(), 0);
+				LocationResultObject.getHypocenter().Depth, 0);
 
 		// check LocationResultObject.hypocenter.Time
 		assertEquals(TestName + " OriginTime Equals", TIME,
-				LocationResultObject.getHypocenter().getTime());
+				LocationResultObject.getHypocenter().Time);
 
 		// check LocationResultObject.hypocenter.LatitudeError
 		assertEquals(TestName + " LatitudeError Equals", LATITUDEERROR,
-				LocationResultObject.getHypocenter().getLatitudeError(), 0);
+				LocationResultObject.getHypocenter().LatitudeError, 0);
 
 		// check LocationResultObject.hypocenter.LongitudeError
 		assertEquals(TestName + " LongitudError Equals", LONGITUDEERROR,
-				LocationResultObject.getHypocenter().getLongitudeError(), 0);
+				LocationResultObject.getHypocenter().LongitudeError, 0);
 
 		// check LocationResultObject.hypocenter.DepthError
 		assertEquals(TestName + " DepthError Equals", DEPTHERROR,
-				LocationResultObject.getHypocenter().getDepthError(), 0);
+				LocationResultObject.getHypocenter().DepthError, 0);
 
 		// check LocationResultObject.hypocenter.TimeError
 		assertEquals(TestName + " TimeError Equals", TIMEERROR,
-				LocationResultObject.getHypocenter().getTimeError(), 0);
+				LocationResultObject.getHypocenter().TimeError, 0);
 
 		// need to check data still!!!!!!
 		// somehow?

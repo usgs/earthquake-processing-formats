@@ -22,19 +22,19 @@ public class TravelTimePlotData implements ProcessingInt {
 	public static final String BRANCHES_KEY = "Branches";
 
 	/**
-	 * Required type of data as a String
+	 * Required Type of data as a String
 	 */
-	private String type;	
+	public String Type;	
 	
 	/**
 	 * Required maximum travel time in seconds
 	 */
-	private Double maximumTravelTime;
+	public Double MaximumTravelTime;
 
 	/**
 	 * A required vector of TravelTimePlotDataBranch objects
 	 */
-	private ArrayList<TravelTimePlotDataBranch> branches;
+	public ArrayList<TravelTimePlotDataBranch> Branches;
 
 	/**
 	 * The constructor for the TravelTimePlotData class. Initializes members to
@@ -72,25 +72,25 @@ public class TravelTimePlotData implements ProcessingInt {
 	public TravelTimePlotData(JSONObject newJSONObject) {
 
 		// Required values
-		// type
+		// Type
 		if (newJSONObject.containsKey(TYPE_KEY)) {
-			type = newJSONObject
+			Type = newJSONObject
 					.get(TYPE_KEY).toString();
 		} else {
-			type = null;
+			Type = null;
 		}		
-		// maximumTravelTime
+		// MaximumTravelTime
 		if (newJSONObject.containsKey(MAXIMIUMTRAVELTIME_KEY)) {
-			maximumTravelTime = (double) newJSONObject
+			MaximumTravelTime = (double) newJSONObject
 					.get(MAXIMIUMTRAVELTIME_KEY);
 		} else {
-			maximumTravelTime = null;
+			MaximumTravelTime = null;
 		}
 
-		// branches
+		// Branches
 		if (newJSONObject.containsKey(BRANCHES_KEY)) {
 
-			branches = new ArrayList<TravelTimePlotDataBranch>();
+			Branches = new ArrayList<TravelTimePlotDataBranch>();
 
 			// get the array
 			JSONArray branchesArray = (JSONArray) newJSONObject
@@ -106,12 +106,12 @@ public class TravelTimePlotData implements ProcessingInt {
 							.get(i);
 
 					// add to vector
-					branches.add(new TravelTimePlotDataBranch(branchesObject));
+					Branches.add(new TravelTimePlotDataBranch(branchesObject));
 
 				}
 			}
 		} else {
-			branches = null;
+			Branches = null;
 		}
 	}
 
@@ -124,7 +124,7 @@ public class TravelTimePlotData implements ProcessingInt {
 	 */
 	public TravelTimePlotData(TravelTimePlotData sourceObject) {
 
-		reload(sourceObject.maximumTravelTime, sourceObject.branches);
+		reload(sourceObject.MaximumTravelTime, sourceObject.Branches);
 	}
 
 	/**
@@ -142,14 +142,14 @@ public class TravelTimePlotData implements ProcessingInt {
 	public void reload(Double newMaximumTravelTime,
 			ArrayList<TravelTimePlotDataBranch> newBranches) {
 
-		type = "TTPlotData";
-		maximumTravelTime = newMaximumTravelTime;
-		branches = newBranches;
+		Type = "TTPlotData";
+		MaximumTravelTime = newMaximumTravelTime;
+		Branches = newBranches;
 
 	}
 
 	/**
-	 * Converts the contents of the class to a json object
+	 * Converts the contents of the class to a  object
 	 * 
 	 * @return Returns a JSONObject containing the class contents
 	 */
@@ -158,27 +158,23 @@ public class TravelTimePlotData implements ProcessingInt {
 
 		JSONObject newJSONObject = new JSONObject();
 
-		String jsonType = getType();
-		Double jsonMaximumTravelTime = getMaximumTravelTime();
-		ArrayList<TravelTimePlotDataBranch> jsonBranches = getBranches();
-
-		// type
-		if (jsonType != null) {
-			newJSONObject.put(TYPE_KEY, jsonType);
+		// Type
+		if (Type != null) {
+			newJSONObject.put(TYPE_KEY, Type);
 		}		
 		
 		// phase
-		if (jsonMaximumTravelTime != null) {
-			newJSONObject.put(MAXIMIUMTRAVELTIME_KEY, jsonMaximumTravelTime);
+		if (MaximumTravelTime != null) {
+			newJSONObject.put(MAXIMIUMTRAVELTIME_KEY, MaximumTravelTime);
 		}
 
-		// branches
-		if ((jsonBranches != null) && (!jsonBranches.isEmpty())) {
+		// Branches
+		if ((Branches != null) && (!Branches.isEmpty())) {
 
 			JSONArray branchesArray = new JSONArray();
 
 			// enumerate through the whole arraylist
-			for (Iterator<TravelTimePlotDataBranch> branchesIterator = jsonBranches
+			for (Iterator<TravelTimePlotDataBranch> branchesIterator = Branches
 					.iterator(); branchesIterator.hasNext();) {
 
 				// convert branch to JSON object
@@ -219,34 +215,30 @@ public class TravelTimePlotData implements ProcessingInt {
 	public ArrayList<String> getErrors() {
 		ArrayList<String> errorList = new ArrayList<String>();
 
-		String jsonType = getType();
-		Double jsonMaximumTravelTime = getMaximumTravelTime();
-		ArrayList<TravelTimePlotDataBranch> jsonBranches = getBranches();
-
-		// type
-		if (jsonType == null) {
-			// type not found
+		// Type
+		if (Type == null) {
+			// Type not found
 			errorList.add("No Type in TravelTimePlotData Class.");
-		} else if (jsonType.isEmpty()) {
-			// type empty
+		} else if (Type.isEmpty()) {
+			// Type empty
 			errorList.add("Empty Type in TravelTimePlotData Class.");
-		} else if (!jsonType.equals("TTPlotData")) {
-			// wrong type
-			errorList.add("Non-TTPlotData type in TravelTimePlotData Class.");
+		} else if (!Type.equals("TTPlotData")) {
+			// wrong Type
+			errorList.add("Non-TTPlotData Type in TravelTimePlotData Class.");
 		}
 		
-		// maximumTravelTime
-		if (jsonMaximumTravelTime == null) {
-			// maximumTravelTime not found
+		// MaximumTravelTime
+		if (MaximumTravelTime == null) {
+			// MaximumTravelTime not found
 			errorList
 					.add("No Maximum Travel Time in TravelTimePlotData Class.");
 		}
 
 		// Branches
-		if ((jsonBranches != null) && (!jsonBranches.isEmpty())) {
+		if ((Branches != null) && (!Branches.isEmpty())) {
 
 			// enumerate through the whole arraylist
-			for (Iterator<TravelTimePlotDataBranch> branchesIterator = jsonBranches
+			for (Iterator<TravelTimePlotDataBranch> branchesIterator = Branches
 					.iterator(); branchesIterator.hasNext();) {
 
 				// get next branch object
@@ -264,40 +256,5 @@ public class TravelTimePlotData implements ProcessingInt {
 		return (errorList);
 	}
 
-	/**
-	 * @return the type
-	 */
-	public String getType() {
-		return type;
-	}	
 	
-	/**
-	 * @return the maximumTravelTime
-	 */
-	public Double getMaximumTravelTime() {
-		return maximumTravelTime;
-	}
-
-	/**
-	 * @param maximumTravelTime
-	 *            the maximumTravelTime to set
-	 */
-	public void setMaximumTravelTime(Double maximumTravelTime) {
-		this.maximumTravelTime = maximumTravelTime;
-	}
-
-	/**
-	 * @return the vector of TravelTimePlotDataBranch objects
-	 */
-	public ArrayList<TravelTimePlotDataBranch> getBranches() {
-		return branches;
-	}
-
-	/**
-	 * @param branches
-	 *            the vector of TravelTimePlotDataBranch objects to set
-	 */
-	public void setBranches(ArrayList<TravelTimePlotDataBranch> branches) {
-		this.branches = branches;
-	}
 }

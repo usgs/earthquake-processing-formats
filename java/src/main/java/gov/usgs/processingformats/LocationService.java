@@ -9,7 +9,7 @@ public interface LocationService {
      * Process a LocationRequest
      *
      * @param request location inputs.
-     * @return calcualated location.
+     * @return calculated location.
      * @throws LocationException if errors occur.
      */
     public LocationResult getLocation(final LocationRequest request) throws LocationException;

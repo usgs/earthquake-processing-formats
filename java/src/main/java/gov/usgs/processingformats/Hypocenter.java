@@ -26,58 +26,58 @@ public class Hypocenter implements ProcessingInt {
 	public static final String TIME_ERROR_KEY = "TimeError";
 
 	/**
-	 * Required Double containing the latitude in degrees 
+	 * Required Double containing the Latitude in degrees 
 	 */
-	private Double latitude;
+	public Double Latitude;
 
 	/**
-	 * Required Double containing the longitude in degrees 
+	 * Required Double containing the Longitude in degrees 
 	 */
-	private Double longitude;
+	public Double Longitude;
 
 	/**
-	 * Required time for this hypo
+	 * Required Time for this hypo
 	 */
-	private Date time;
+	public Date Time;
 
 	/**
-	 * Required Double containing the depth in kilometers
+	 * Required Double containing the Depth in kilometers
 	 */
-	private Double depth;
+	public Double Depth;
 
 	/**
-	 * Optional Double containing the latitude error
+	 * Optional Double containing the Latitude error
 	 */
-	private Double latitudeError;
+	public Double LatitudeError;
 
 	/**
-	 * Optional Double containing the longitude error
+	 * Optional Double containing the Longitude error
 	 */
-	private Double longitudeError;
+	public Double LongitudeError;
 
 	/**
-	 * Optional Double containing the time error
+	 * Optional Double containing the Time error
 	 */
-	private Double timeError;
+	public Double TimeError;
 
 	/**
-	 * Optional Double containing the depth error
+	 * Optional Double containing the Depth error
 	 */
-	private Double depthError;
+	public Double DepthError;
 
 	/**
 	 * The constructor for the Hypo class. Initializes members to null values.
 	 */
 	public Hypocenter() {
 
-		latitude = null;
-		longitude = null;
-		time = null;
-		depth = null;
-		latitudeError = null;
-		longitudeError = null;
-		timeError = null;
-		depthError = null;
+		Latitude = null;
+		Longitude = null;
+		Time = null;
+		Depth = null;
+		LatitudeError = null;
+		LongitudeError = null;
+		TimeError = null;
+		DepthError = null;
 	}
 
 	/**
@@ -87,21 +87,21 @@ public class Hypocenter implements ProcessingInt {
 	 * members to provided values.
 	 *
 	 * @param newLatitude
-	 *            - A Double containing the latitude in degrees to use
+	 *            - A Double containing the Latitude in degrees to use
 	 * @param newLongitude
-	 *            - A Double containing the longitude in degrees to use
+	 *            - A Double containing the Longitude in degrees to use
 	 * @param newTime
-	 *            - A Date containing the new origin time to use
+	 *            - A Date containing the new origin Time to use
 	 * @param newDepth
-	 *            - A Double containing the depth in kilometers to use
+	 *            - A Double containing the Depth in kilometers to use
 	 * @param newLatitudeError
-	 *            - A Double containing the latitude error to use, null to omit
+	 *            - A Double containing the Latitude error to use, null to omit
 	 * @param newLongitudeError
-	 *            - A Double containing the longitude error to use, null to omit
+	 *            - A Double containing the Longitude error to use, null to omit
 	 * @param newTimeError
-	 *            - A Double containing the new time error to use, null to omit
+	 *            - A Double containing the new Time error to use, null to omit
 	 * @param newDepthError
-	 *            - A Double containing the depth error to use, null to omit
+	 *            - A Double containing the Depth error to use, null to omit
 	 */
 	public Hypocenter(Double newLatitude, Double newLongitude, Date newTime,
 			Double newDepth, Double newLatitudeError, Double newLongitudeError,
@@ -119,34 +119,34 @@ public class Hypocenter implements ProcessingInt {
 	 *
 	 *
 	 * @param newLatitude
-	 *            - A Double containing the latitude in degrees to use
+	 *            - A Double containing the Latitude in degrees to use
 	 * @param newLongitude
-	 *            - A Double containing the longitude in degrees to use
+	 *            - A Double containing the Longitude in degrees to use
 	 * @param newTime
-	 *            - A Date containing the new origin time to use
+	 *            - A Date containing the new origin Time to use
 	 * @param newDepth
-	 *            - A Double containing the depth in kilometers to use
+	 *            - A Double containing the Depth in kilometers to use
 	 * @param newLatitudeError
-	 *            - A Double containing the latitude error to use, null to omit
+	 *            - A Double containing the Latitude error to use, null to omit
 	 * @param newLongitudeError
-	 *            - A Double containing the longitude error to use, null to omit
+	 *            - A Double containing the Longitude error to use, null to omit
 	 * @param newTimeError
-	 *            - A Double containing the new time error to use, null to omit
+	 *            - A Double containing the new Time error to use, null to omit
 	 * @param newDepthError
-	 *            - A Double containing the depth error to use, null to omit
+	 *            - A Double containing the Depth error to use, null to omit
 	 */
 	public void reload(Double newLatitude, Double newLongitude, Date newTime,
 			Double newDepth, Double newLatitudeError, Double newLongitudeError,
 			Double newTimeError, Double newDepthError) {
 
-		latitude = newLatitude;
-		longitude = newLongitude;
-		time = newTime;
-		depth = newDepth;
-		latitudeError = newLatitudeError;
-		longitudeError = newLongitudeError;
-		timeError = newTimeError;
-		depthError = newDepthError;
+		Latitude = newLatitude;
+		Longitude = newLongitude;
+		Time = newTime;
+		Depth = newDepth;
+		LatitudeError = newLatitudeError;
+		LongitudeError = newLongitudeError;
+		TimeError = newTimeError;
+		DepthError = newDepthError;
 	}
 
 	/**
@@ -158,61 +158,61 @@ public class Hypocenter implements ProcessingInt {
 	public Hypocenter(JSONObject newJSONObject) {
 
 		// Required values
-		// latitude
+		// Latitude
 		if (newJSONObject.containsKey(LATITUDE_KEY)) {
-			latitude = (double) newJSONObject.get(LATITUDE_KEY);
+			Latitude = (double) newJSONObject.get(LATITUDE_KEY);
 		} else {
-			latitude = null;
+			Latitude = null;
 		}
 
-		// longitude
+		// Longitude
 		if (newJSONObject.containsKey(LONGITUDE_KEY)) {
-			longitude = (double) newJSONObject.get(LONGITUDE_KEY);
+			Longitude = (double) newJSONObject.get(LONGITUDE_KEY);
 		} else {
-			longitude = null;
+			Longitude = null;
 		}
 
-		// time
+		// Time
 		if (newJSONObject.containsKey(TIME_KEY)) {
-			time = Utility.getDate(newJSONObject.get(TIME_KEY).toString());
+			Time = Utility.getDate(newJSONObject.get(TIME_KEY).toString());
 		} else {
-			time = null;
+			Time = null;
 		}
 
-		// depth
+		// Depth
 		if (newJSONObject.containsKey(DEPTH_KEY)) {
-			depth = (double) newJSONObject.get(DEPTH_KEY);
+			Depth = (double) newJSONObject.get(DEPTH_KEY);
 		} else {
-			depth = null;
+			Depth = null;
 		}
 
 		// optional values
-		// latitude error
+		// Latitude error
 		if (newJSONObject.containsKey(LATITUDE_ERROR_KEY)) {
-			latitudeError = (double) newJSONObject.get(LATITUDE_ERROR_KEY);
+			LatitudeError = (double) newJSONObject.get(LATITUDE_ERROR_KEY);
 		} else {
-			latitudeError = null;
+			LatitudeError = null;
 		}
 
-		// longitude error
+		// Longitude error
 		if (newJSONObject.containsKey(LONGITUDE_ERROR_KEY)) {
-			longitudeError = (double) newJSONObject.get(LONGITUDE_ERROR_KEY);
+			LongitudeError = (double) newJSONObject.get(LONGITUDE_ERROR_KEY);
 		} else {
-			longitudeError = null;
+			LongitudeError = null;
 		}
 
-		// time error
+		// Time error
 		if (newJSONObject.containsKey(TIME_ERROR_KEY)) {
-			timeError = (double) newJSONObject.get(TIME_ERROR_KEY);
+			TimeError = (double) newJSONObject.get(TIME_ERROR_KEY);
 		} else {
-			timeError = null;
+			TimeError = null;
 		}
 
-		// depth error
+		// Depth error
 		if (newJSONObject.containsKey(DEPTH_ERROR_KEY)) {
-			depthError = (double) newJSONObject.get(DEPTH_ERROR_KEY);
+			DepthError = (double) newJSONObject.get(DEPTH_ERROR_KEY);
 		} else {
-			depthError = null;
+			DepthError = null;
 		}
 	}
 
@@ -226,55 +226,46 @@ public class Hypocenter implements ProcessingInt {
 
 		JSONObject newJSONObject = new JSONObject();
 
-		Double jsonLatitude = getLatitude();
-		Double jsonLongitude = getLongitude();
-		Date jsonTime = getTime();
-		Double jsonDepth = getDepth();
-		Double jsonLatitudeError = getLatitudeError();
-		Double jsonLongitudeError = getLongitudeError();
-		Double jsonTimeError = getTimeError();
-		Double jsonDepthError = getDepthError();
-
 		// Required values
-		// latitude
-		if (jsonLatitude != null) {
-			newJSONObject.put(LATITUDE_KEY, jsonLatitude);
+		// Latitude
+		if (Latitude != null) {
+			newJSONObject.put(LATITUDE_KEY, Latitude);
 		}
 
-		// longitude
-		if (jsonLongitude != null) {
-			newJSONObject.put(LONGITUDE_KEY, jsonLongitude);
+		// Longitude
+		if (Longitude != null) {
+			newJSONObject.put(LONGITUDE_KEY, Longitude);
 		}
 
-		// depth
-		if (jsonDepth != null) {
-			newJSONObject.put(DEPTH_KEY, jsonDepth);
+		// Depth
+		if (Depth != null) {
+			newJSONObject.put(DEPTH_KEY, Depth);
 		}
 
-		// time
-		if (jsonTime != null) {
-			newJSONObject.put(TIME_KEY, Utility.formatDate(jsonTime));
+		// Time
+		if (Time != null) {
+			newJSONObject.put(TIME_KEY, Utility.formatDate(Time));
 		}
 
 		// Optional values
-		// latitude error
-		if (jsonLatitudeError != null) {
-			newJSONObject.put(LATITUDE_ERROR_KEY, jsonLatitudeError);
+		// Latitude error
+		if (LatitudeError != null) {
+			newJSONObject.put(LATITUDE_ERROR_KEY, LatitudeError);
 		}
 
-		// longitude error
-		if (jsonLongitudeError != null) {
-			newJSONObject.put(LONGITUDE_ERROR_KEY, jsonLongitudeError);
+		// Longitude error
+		if (LongitudeError != null) {
+			newJSONObject.put(LONGITUDE_ERROR_KEY, LongitudeError);
 		}
 
-		// depth error
-		if (jsonDepthError != null) {
-			newJSONObject.put(DEPTH_ERROR_KEY, jsonDepthError);
+		// Depth error
+		if (DepthError != null) {
+			newJSONObject.put(DEPTH_ERROR_KEY, DepthError);
 		}
 
-		// time error
-		if (jsonTimeError != null) {
-			newJSONObject.put(TIME_ERROR_KEY, jsonTimeError);
+		// Time error
+		if (TimeError != null) {
+			newJSONObject.put(TIME_ERROR_KEY, TimeError);
 		}
 
 		return (newJSONObject);
@@ -303,46 +294,41 @@ public class Hypocenter implements ProcessingInt {
 	 */
 	public ArrayList<String> getErrors() {
 
-		Double jsonLatitude = getLatitude();
-		Double jsonLongitude = getLongitude();
-		Date jsonTime = getTime();
-		Double jsonDepth = getDepth();
-
 		ArrayList<String> errorList = new ArrayList<String>();
 
 		// Required Keys
-		// latitude
-		if (jsonLatitude == null) {
-			// latitude not found
+		// Latitude
+		if (Latitude == null) {
+			// Latitude not found
 			errorList.add("No Latitude in Hypo Class.");
-		} else if ((jsonLatitude < -90.0) || (jsonLatitude > 90.0)) {
-			// invalid latitude
+		} else if ((Latitude < -90.0) || (Latitude > 90.0)) {
+			// invalid Latitude
 			errorList.add(
 					"Latitude in Hypo Class not in the range of -90 to 90.");
 		}
 
-		// longitude
-		if (jsonLongitude == null) {
-			// longitude not found
+		// Longitude
+		if (Longitude == null) {
+			// Longitude not found
 			errorList.add("No Longitude in Hypo Class.");
-		} else if ((jsonLongitude < -180.0) || (jsonLongitude > 180.0)) {
-			// invalid longitude
+		} else if ((Longitude < -180.0) || (Longitude > 180.0)) {
+			// invalid Longitude
 			errorList.add(
 					"Longitude in Hypo Class not in the range of -180 to 180.");
 		}
 
-		// time
-		if (jsonTime == null) {
-			// time not found
+		// Time
+		if (Time == null) {
+			// Time not found
 			errorList.add("No Time in Hypo Class.");
 		}
 
-		// depth
-		if (jsonDepth == null) {
-			// depth not found
+		// Depth
+		if (Depth == null) {
+			// Depth not found
 			errorList.add("No Depth in Hypo Class.");
-		} else if ((jsonDepth < -100.0) || (jsonDepth > 1500.0)) {
-			// invalid depth
+		} else if ((Depth < -100.0) || (Depth > 1500.0)) {
+			// invalid Depth
 			errorList.add(
 					"Depth in Hypo Class not in the range of -100 to 1500.");
 		}
@@ -354,125 +340,4 @@ public class Hypocenter implements ProcessingInt {
 		// success
 		return (errorList);
 	}
-
-	/**
-	 * @return the latitude
-	 */
-	public Double getLatitude() {
-		return latitude;
-	}
-
-	/**
-	 * @return the longitude
-	 */
-	public Double getLongitude() {
-		return longitude;
-	}
-
-	/**
-	 * @return the time
-	 */
-	public Date getTime() {
-		return time;
-	}
-
-	/**
-	 * @return the depth
-	 */
-	public Double getDepth() {
-		return depth;
-	}
-
-	/**
-	 * @return the latitudeError
-	 */
-	public Double getLatitudeError() {
-		return latitudeError;
-	}
-
-	/**
-	 * @return the longitudeError
-	 */
-	public Double getLongitudeError() {
-		return longitudeError;
-	}
-
-	/**
-	 * @return the timeError
-	 */
-	public Double getTimeError() {
-		return timeError;
-	}
-
-	/**
-	 * @return the depthError
-	 */
-	public Double getDepthError() {
-		return depthError;
-	}
-
-	/**
-	 * @param latitude
-	 *            the latitude to set
-	 */
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
-	}
-
-	/**
-	 * @param longitude
-	 *            the longitude to set
-	 */
-	public void setLongitude(Double longitude) {
-		this.longitude = longitude;
-	}
-
-	/**
-	 * @param time
-	 *            the time to set
-	 */
-	public void setTime(Date time) {
-		this.time = time;
-	}
-
-	/**
-	 * @param depth
-	 *            the depth to set
-	 */
-	public void setDepth(Double depth) {
-		this.depth = depth;
-	}
-
-	/**
-	 * @param latitudeError
-	 *            the latitudeError to set
-	 */
-	public void setLatitudeError(Double latitudeError) {
-		this.latitudeError = latitudeError;
-	}
-
-	/**
-	 * @param longitudeError
-	 *            the longitudeError to set
-	 */
-	public void setLongitudeError(Double longitudeError) {
-		this.longitudeError = longitudeError;
-	}
-
-	/**
-	 * @param timeError
-	 *            the timeError to set
-	 */
-	public void setTimeError(Double timeError) {
-		this.timeError = timeError;
-	}
-
-	/**
-	 * @param depthError
-	 *            the depthError to set
-	 */
-	public void setDepthError(Double depthError) {
-		this.depthError = depthError;
-	}
-
 }

@@ -116,8 +116,8 @@ public class TravelTimePlotDataTest {
 		// use constructor
 		TravelTimePlotData travelTimePlotDataObject = new TravelTimePlotData();
 
-		travelTimePlotDataObject.setMaximumTravelTime(MAXIMIUMTRAVELTIME);
-		travelTimePlotDataObject.setBranches(buildBranchData());
+		travelTimePlotDataObject.MaximumTravelTime = MAXIMIUMTRAVELTIME;
+		travelTimePlotDataObject.Branches = buildBranchData();
 
 		// check data values
 		checkData(travelTimePlotDataObject, "Set Functions");
@@ -172,133 +172,133 @@ public class TravelTimePlotDataTest {
 
 		// check travelTimePlotDataObject.maximumTravelTime
 		assertEquals(TestName + " MaximumTravelTime Equals", MAXIMIUMTRAVELTIME,
-				travelTimePlotDataObject.getMaximumTravelTime(), 0);
+				travelTimePlotDataObject.MaximumTravelTime, 0);
 
 		// check branch data
 		// check number of branches
 		assertEquals(TestName + " Number of Branches Equals", (int) NUMBRANCHES,
-				travelTimePlotDataObject.getBranches().size(), 0);
+				travelTimePlotDataObject.Branches.size(), 0);
 
 		// check travelTimePlotDataBranchObject.phase
 		assertEquals(TestName + " Phase Equals", PHASE1,
-				travelTimePlotDataObject.getBranches().get(0).getPhase());
+				travelTimePlotDataObject.Branches.get(0).Phase);
 
 		// check branch data
 		// check number of samples
 		assertEquals(TestName + " Number of Samples Equals", (int) NUMSAMPLES,
-				travelTimePlotDataObject.getBranches().get(0).getSamples()
+				travelTimePlotDataObject.Branches.get(0).Samples
 						.size(),
 				0);
 
 		// first sample
 		// check travelTimePlotDataBranchObject.samples[0].distance
 		assertEquals(TestName + " Distance Equals", DISTANCE1,
-				travelTimePlotDataObject.getBranches().get(0).getSamples()
-						.get(0).getDistance(),
+				travelTimePlotDataObject.Branches.get(0).Samples
+						.get(0).Distance,
 				0);
 
 		// check ravelTimePlotDataBranchObject.samples[0].travelTime
 		assertEquals(TestName + " Travel Time Equals", TRAVELTIME1,
-				travelTimePlotDataObject.getBranches().get(0).getSamples()
-						.get(0).getTravelTime(),
+				travelTimePlotDataObject.Branches.get(0).Samples
+						.get(0).TravelTime,
 				0);
 
 		// check ravelTimePlotDataBranchObject.samples[0].statisticalSpread
 		assertEquals(TestName + " Statistical Spread Equals",
-				STATISTICALSPREAD1, travelTimePlotDataObject.getBranches()
-						.get(0).getSamples().get(0).getStatisticalSpread(),
+				STATISTICALSPREAD1, travelTimePlotDataObject.Branches
+						.get(0).Samples.get(0).StatisticalSpread,
 				0);
 
 		// check travelTimePlotDataBranchObject.samples[0].observability
 		assertEquals(TestName + " Observability Equals", OBSERVABILITY1,
-				travelTimePlotDataObject.getBranches().get(0).getSamples()
-						.get(0).getObservability(),
+				travelTimePlotDataObject.Branches.get(0).Samples
+						.get(0).Observability,
 				0);
 
 		// second sample
 		// check travelTimePlotDataBranchObject.samples[1].distance
 		assertEquals(TestName + " Distance Equals", DISTANCE12,
-				travelTimePlotDataObject.getBranches().get(0).getSamples()
-						.get(1).getDistance(),
+				travelTimePlotDataObject.Branches.get(0).Samples
+						.get(1).Distance,
 				0);
 
 		// check ravelTimePlotDataBranchObject.samples[1].travelTime
 		assertEquals(TestName + " Travel Time Equals", TRAVELTIME12,
-				travelTimePlotDataObject.getBranches().get(0).getSamples()
-						.get(1).getTravelTime(),
+				travelTimePlotDataObject.Branches.get(0).Samples
+						.get(1).TravelTime,
 				0);
 
 		// check ravelTimePlotDataBranchObject.samples[1].statisticalSpread
 		assertEquals(TestName + " Statistical Spread Equals",
-				STATISTICALSPREAD12, travelTimePlotDataObject.getBranches()
-						.get(0).getSamples().get(1).getStatisticalSpread(),
+				STATISTICALSPREAD12, travelTimePlotDataObject.Branches
+						.get(0).Samples.get(1).StatisticalSpread,
 				0);
 
 		// check ravelTimePlotDataBranchObject.samples[1].observability
 		assertEquals(TestName + " Observability Equals", OBSERVABILITY12,
-				travelTimePlotDataObject.getBranches().get(0).getSamples()
-						.get(1).getObservability(),
+				travelTimePlotDataObject.Branches.get(0).Samples
+						.get(1).Observability,
 				0);
 
 		// check travelTimePlotDataBranchObject.phase
 		assertEquals(TestName + " Phase Equals", PHASE2,
-				travelTimePlotDataObject.getBranches().get(1).getPhase());
+				travelTimePlotDataObject.Branches.get(1).Phase);
 
 		// check sample data
 		// check number of samples
 		assertEquals(TestName + " Number of Samples Equals", (int) NUMSAMPLES,
-				travelTimePlotDataObject.getBranches().get(1).getSamples()
+				travelTimePlotDataObject.Branches.get(1).Samples
 						.size(),
 				0);
 
 		// first sample
 		// check travelTimePlotDataBranchObject.samples[0].distance
 		assertEquals(TestName + " Distance Equals", DISTANCE2,
-				travelTimePlotDataObject.getBranches().get(1).getSamples()
-						.get(0).getDistance(),
+				travelTimePlotDataObject.Branches.get(1).Samples
+						.get(0).Distance,
 				0);
 
 		// check ravelTimePlotDataBranchObject.samples[0].travelTime
 		assertEquals(TestName + " Travel Time Equals", TRAVELTIME2,
-				travelTimePlotDataObject.getBranches().get(1).getSamples()
-						.get(0).getTravelTime(),
+				travelTimePlotDataObject.Branches.get(1).Samples
+						.get(0).TravelTime,
 				0);
 
 		// check ravelTimePlotDataBranchObject.samples[0].statisticalSpread
 		assertEquals(TestName + " Statistical Spread Equals",
-				STATISTICALSPREAD2, travelTimePlotDataObject.getBranches()
-						.get(1).getSamples().get(0).getStatisticalSpread(),
+				STATISTICALSPREAD2, travelTimePlotDataObject.Branches
+						.get(1).Samples.get(0).StatisticalSpread,
 				0);
 
 		// check ravelTimePlotDataBranchObject.samples[0].observability
 		assertEquals(TestName + " Observability Equals", OBSERVABILITY2,
-				travelTimePlotDataObject.getBranches().get(1).getSamples()
-						.get(0).getObservability(),
+				travelTimePlotDataObject.Branches.get(1).Samples
+						.get(0).Observability,
 				0);
 
 		// second sample
 		// check travelTimePlotDataBranchObject.samples[1].distance
 		assertEquals(TestName + " Distance Equals", DISTANCE22,
-				travelTimePlotDataObject.getBranches().get(1).getSamples()
-						.get(1).getDistance(),
+				travelTimePlotDataObject.Branches.get(1).Samples
+						.get(1).Distance,
 				0);
 
 		// check ravelTimePlotDataBranchObject.samples[1].travelTime
 		assertEquals(TestName + " Travel Time Equals", TRAVELTIME22,
-				travelTimePlotDataObject.getBranches().get(1).getSamples()
-						.get(1).getTravelTime(),
+				travelTimePlotDataObject.Branches.get(1).Samples
+						.get(1).TravelTime,
 				0);
 
 		// check ravelTimePlotDataBranchObject.samples[1].statisticalSpread
 		assertEquals(TestName + " Statistical Spread Equals",
-				STATISTICALSPREAD22, travelTimePlotDataObject.getBranches()
-						.get(1).getSamples().get(1).getStatisticalSpread(),
+				STATISTICALSPREAD22, travelTimePlotDataObject.Branches
+						.get(1).Samples.get(1).StatisticalSpread,
 				0);
 
 		// check ravelTimePlotDataBranchObject.samples[1].observability
 		assertEquals(TestName + " Observability Equals", OBSERVABILITY22,
-				travelTimePlotDataObject.getBranches().get(1).getSamples()
-						.get(1).getObservability(),
+				travelTimePlotDataObject.Branches.get(1).Samples
+						.get(1).Observability,
 				0);
 
 	}

@@ -80,10 +80,10 @@ public class TravelTimePlotDataSampleTest {
 		// use constructor
 		TravelTimePlotDataSample travelTimePlotDataSampleObject = new TravelTimePlotDataSample();
 
-		travelTimePlotDataSampleObject.setDistance(DISTANCE);
-		travelTimePlotDataSampleObject.setTravelTime(TRAVELTIME);
-		travelTimePlotDataSampleObject.setStatisticalSpread(STATISTICALSPREAD);
-		travelTimePlotDataSampleObject.setObservability(OBSERVABILITY);
+		travelTimePlotDataSampleObject.Distance = DISTANCE;
+		travelTimePlotDataSampleObject.TravelTime = TRAVELTIME;
+		travelTimePlotDataSampleObject.StatisticalSpread = STATISTICALSPREAD;
+		travelTimePlotDataSampleObject.Observability = OBSERVABILITY;
 
 		// check data values
 		checkData(travelTimePlotDataSampleObject, "Set Functions");
@@ -138,21 +138,19 @@ public class TravelTimePlotDataSampleTest {
 
 		// check travelTimeDataObject.distance
 		assertEquals(TestName + " Distance Equals", DISTANCE,
-				travelTimePlotDataSampleObject.getDistance(), 0);
+				travelTimePlotDataSampleObject.Distance, 0);
 
 		// check travelTimeDataObject.travelTime
 		assertEquals(TestName + " Travel Time Equals", TRAVELTIME,
-				travelTimePlotDataSampleObject.getTravelTime(), 0);
+				travelTimePlotDataSampleObject.TravelTime, 0);
 
 		// check travelTimeDataObject.statisticalSpread
 		assertEquals(TestName + " Statistical Spread Equals", STATISTICALSPREAD,
-				travelTimePlotDataSampleObject.getStatisticalSpread(), 0);
+				travelTimePlotDataSampleObject.StatisticalSpread, 0);
 
 		// check travelTimeDataObject.observability
 		assertEquals(TestName + " Observability Equals", OBSERVABILITY,
-				travelTimePlotDataSampleObject.getObservability(), 0);
-
-
+				travelTimePlotDataSampleObject.Observability, 0);
 	}	
 
 }

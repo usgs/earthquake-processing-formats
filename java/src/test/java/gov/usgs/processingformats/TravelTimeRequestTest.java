@@ -200,13 +200,13 @@ public class TravelTimeRequestTest {
 		// use constructor
 		TravelTimeRequest travelTimeRequestObject = new TravelTimeRequest();
 
-		travelTimeRequestObject.setType(TYPE_STANDARD);
-		travelTimeRequestObject.setDistance(DISTANCE);
-		travelTimeRequestObject.setElevation(ELEVATION);
-		travelTimeRequestObject.setLatitude(LATITUDE);
-		travelTimeRequestObject.setLongitude(LONGITUDE);
-		travelTimeRequestObject.setData(buildData());
-		travelTimeRequestObject.setPlotData(buildPlotData());
+		travelTimeRequestObject.Type = TYPE_STANDARD;
+		travelTimeRequestObject.Distance = DISTANCE;
+		travelTimeRequestObject.Elevation = ELEVATION;
+		travelTimeRequestObject.Latitude = LATITUDE;
+		travelTimeRequestObject.Longitude = LONGITUDE;
+		travelTimeRequestObject.Data = buildData();
+		travelTimeRequestObject.PlotData = buildPlotData();
 
 		// check data values
 		checkData(travelTimeRequestObject, "Set Functions");
@@ -264,12 +264,12 @@ public class TravelTimeRequestTest {
 
 		// check travelTimeRequestObject.type
 		assertNotNull(TestName + " Type exists",
-				travelTimeRequestObject.getType());
+				travelTimeRequestObject.Type);
 
 		// check type value
-		if (!(travelTimeRequestObject.getType().equals("Standard")
-				|| (travelTimeRequestObject.getType().equals("Plot"))
-				|| (travelTimeRequestObject.getType()
+		if (!(travelTimeRequestObject.Type.equals("Standard")
+				|| (travelTimeRequestObject.Type.equals("Plot"))
+				|| (travelTimeRequestObject.Type
 						.equals("PlotStatistics")))) {
 			fail(TestName + " Type is not valid");
 		}
@@ -277,22 +277,22 @@ public class TravelTimeRequestTest {
 		// required
 		// check travelTimeRequestObject.distance
 		assertEquals(TestName + " Distance Equals", DISTANCE,
-				travelTimeRequestObject.getDistance(), 0);
+				travelTimeRequestObject.Distance, 0);
 
 		// check travelTimeRequestObject.elevation
 		assertEquals(TestName + " Elevation Equals", ELEVATION,
-				travelTimeRequestObject.getElevation(), 0);
+				travelTimeRequestObject.Elevation, 0);
 
 		// optional
 		// check travelTimeRequestObject.latitude
-		if (travelTimeRequestObject.getLatitude() != null) {
+		if (travelTimeRequestObject.Latitude != null) {
 			assertEquals(TestName + " Latitude Equals", LATITUDE,
-					travelTimeRequestObject.getLatitude(), 0);
+					travelTimeRequestObject.Latitude, 0);
 		}
 		// check travelTimeRequestObject.longitude
-		if (travelTimeRequestObject.getLongitude() != null) {
+		if (travelTimeRequestObject.Longitude != null) {
 			assertEquals(TestName + " Longitude Equals", LONGITUDE,
-					travelTimeRequestObject.getLongitude(), 0);
+					travelTimeRequestObject.Longitude, 0);
 		}
 	}
 

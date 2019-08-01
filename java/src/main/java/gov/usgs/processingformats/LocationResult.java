@@ -907,10 +907,10 @@ public class LocationResult implements ProcessingInt {
 			csvString += "null,";
 		}
 
-		csvString += String.format("%f,", getHypocenter().getLatitude());
-		csvString += String.format("%f,", getHypocenter().getLongitude());
-		csvString += String.format("%f,", getHypocenter().getDepth());
-		csvString += String.format("%f,", (getHypocenter().getTime().getTime() * 0.001d));
+		csvString += String.format("%f,", getHypocenter().Latitude);
+		csvString += String.format("%f,", getHypocenter().Longitude);
+		csvString += String.format("%f,", getHypocenter().Depth);
+		csvString += String.format("%f,", (getHypocenter().Time.getTime() * 0.001d));
 
 		if(getRMS() != null) {
 			csvString += String.format("%f,", getRMS());

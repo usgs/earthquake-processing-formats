@@ -89,34 +89,34 @@ public class HypocenterTest {
 
 		// check hypoObject.Latitude
 		assertEquals(TestName + " Latitude Equals", LATITUDE,
-				hypoObject.getLatitude(), 0);
+				hypoObject.Latitude, 0);
 
 		// check hypoObject.Longitude
 		assertEquals(TestName + " Longitude Equals", LONGITUDE,
-				hypoObject.getLongitude(), 0);
+				hypoObject.Longitude, 0);
 
 		// check hypoObject.Depth
-		assertEquals(TestName + " Depth Equals", DEPTH, hypoObject.getDepth(),
+		assertEquals(TestName + " Depth Equals", DEPTH, hypoObject.Depth,
 				0);
 
 		// check hypoObject.Time
-		assertEquals(TestName + " Time Equals", TIME, hypoObject.getTime());
+		assertEquals(TestName + " Time Equals", TIME, hypoObject.Time);
 
 		// check hypoObject.LatitudeError
 		assertEquals(TestName + " LatitudeError Equals", LATITUDEERROR,
-				hypoObject.getLatitudeError(), 0);
+				hypoObject.LatitudeError, 0);
 
 		// check hypoObject.LongitudeError
 		assertEquals(TestName + " LongitudError Equals", LONGITUDEERROR,
-				hypoObject.getLongitudeError(), 0);
+				hypoObject.LongitudeError, 0);
 
 		// check hypoObject.DepthError
 		assertEquals(TestName + " DepthError Equals", DEPTHERROR,
-				hypoObject.getDepthError(), 0);
+				hypoObject.DepthError, 0);
 
 		// check hypoObject.TimeError
 		assertEquals(TestName + " TimeError Equals", TIMEERROR,
-				hypoObject.getTimeError(), 0);
+				hypoObject.TimeError, 0);
 
 	}
 

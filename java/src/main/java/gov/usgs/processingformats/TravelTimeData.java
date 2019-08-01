@@ -31,68 +31,68 @@ public class TravelTimeData implements ProcessingInt {
 	public static final String ASSOCIATIONWEIGHTFLAG_KEY = "AssociationWeightFlag";
 
 	/**
-	 * Required type of data as a String
+	 * Required Type of data as a String
 	 */
-	private String type;
+	public String Type;
 
 	/**
-	 * Required seismic phase code
+	 * Required seismic Phase code
 	 */
-	private String phase;
+	public String Phase;
 
 	/**
 	 * Required travel time in seconds
 	 */
-	private Double travelTime;
+	public Double TravelTime;
 
 	/**
 	 * Required derivative with respect to distance of the travel time in
 	 * seconds/degree.
 	 */
-	private Double distanceDerivative;
+	public Double DistanceDerivative;
 
 	/**
 	 * Required derivative with respect to depth of the travel time in
 	 * seconds/kilometer.
 	 */
-	private Double depthDerivative;
+	public Double DepthDerivative;
 
 	/**
 	 * Required derivative with respect to ray parameter of the travel time in
 	 * degrees/second.
 	 */
-	private Double rayDerivative;
+	public Double RayDerivative;
 
 	/**
 	 * Required observed travel time scatter in seconds.
 	 */
-	private Double statisticalSpread;
+	public Double StatisticalSpread;
 
 	/**
-	 * Required statistical observability of the seismic phase.
+	 * Required statistical Observability of the seismic Phase.
 	 */
-	private Double observability;
+	public Double Observability;
 
 	/**
-	 * Required teleseismic phase group identifier.
+	 * Required teleseismic Phase group identifier.
 	 */
-	private String teleseismicPhaseGroup;
+	public String TeleseismicPhaseGroup;
 
 	/**
-	 * Required auxiliary phase group identifier.
+	 * Required auxiliary Phase group identifier.
 	 */
-	private String auxiliaryPhaseGroup;
+	public String AuxiliaryPhaseGroup;
 
 	/**
-	 * Required flag indicating whether the phase may be used in a location.
+	 * Required flag indicating whether the Phase may be used in a location.
 	 */
-	private Boolean locationUseFlag;
+	public Boolean LocationUseFlag;
 
 	/**
-	 * Required flag indicating whether the phase should be down weighted in
-	 * assocation.
+	 * Required flag indicating whether the Phase should be down weighted in
+	 * association.
 	 */
-	private Boolean associationWeightFlag;
+	public Boolean AssociationWeightFlag;
 
 	/**
 	 * The constructor for the TravelTimeData class. Initializes members to null
@@ -111,7 +111,7 @@ public class TravelTimeData implements ProcessingInt {
 	 * members to provided values.
 	 * 
 	 * @param newPhase
-	 *            - A String containing the seismic phase code
+	 *            - A String containing the seismic Phase code
 	 * @param newTravelTime
 	 *            - A Double containing the travel time in seconds
 	 * @param newDistanceDerivative
@@ -127,17 +127,17 @@ public class TravelTimeData implements ProcessingInt {
 	 *            - A Double containing the observed travel time scatter in
 	 *            seconds
 	 * @param newObservability
-	 *            - A Double containing the statistical observability of the
-	 *            seismic phase
+	 *            - A Double containing the statistical Observability of the
+	 *            seismic Phase
 	 * @param newTeleseismicPhaseGroup
-	 *            - A String containing the teleseismic phase group identifier
+	 *            - A String containing the teleseismic Phase group identifier
 	 * @param newAuxiliaryPhaseGroup
-	 *            - A String containing the auxiliary phase group identifier
+	 *            - A String containing the auxiliary Phase group identifier
 	 * @param newLocationUseFlag
-	 *            - A Boolean containing the flag indicating whether the phase
+	 *            - A Boolean containing the flag indicating whether the Phase
 	 *            may be used in a location
 	 * @param newAssociationWeightFlag
-	 *            - A Boolean containing the flag indicating whether the phase
+	 *            - A Boolean containing the flag indicating whether the Phase
 	 *            should be down weighted in assocation
 	 */
 	public TravelTimeData(String newPhase, Double newTravelTime,
@@ -163,93 +163,93 @@ public class TravelTimeData implements ProcessingInt {
 	public TravelTimeData(JSONObject newJSONObject) {
 
 		// Required values
-		// type
+		// Type
 		if (newJSONObject.containsKey(TYPE_KEY)) {
-			type = newJSONObject.get(TYPE_KEY).toString();
+			Type = newJSONObject.get(TYPE_KEY).toString();
 		} else {
-			type = null;
+			Type = null;
 		}
 
-		// phase
+		// Phase
 		if (newJSONObject.containsKey(PHASE_KEY)) {
-			phase = newJSONObject.get(PHASE_KEY).toString();
+			Phase = newJSONObject.get(PHASE_KEY).toString();
 		} else {
-			phase = null;
+			Phase = null;
 		}
 
 		// travel time
 		if (newJSONObject.containsKey(TRAVELTIME_KEY)) {
-			travelTime = (double) newJSONObject.get(TRAVELTIME_KEY);
+			TravelTime = (double) newJSONObject.get(TRAVELTIME_KEY);
 		} else {
-			travelTime = null;
+			TravelTime = null;
 		}
 
 		// distance Derivative
 		if (newJSONObject.containsKey(DISTANCEDERIVATIVE_KEY)) {
-			distanceDerivative = (double) newJSONObject
+			DistanceDerivative = (double) newJSONObject
 					.get(DISTANCEDERIVATIVE_KEY);
 		} else {
-			distanceDerivative = null;
+			DistanceDerivative = null;
 		}
 
 		// depth Derivative
 		if (newJSONObject.containsKey(DEPTHDERIVATIVE_KEY)) {
-			depthDerivative = (double) newJSONObject.get(DEPTHDERIVATIVE_KEY);
+			DepthDerivative = (double) newJSONObject.get(DEPTHDERIVATIVE_KEY);
 		} else {
-			depthDerivative = null;
+			DepthDerivative = null;
 		}
 
 		// ray Derivative
 		if (newJSONObject.containsKey(RAYDERIVATIVE_KEY)) {
-			rayDerivative = (double) newJSONObject.get(RAYDERIVATIVE_KEY);
+			RayDerivative = (double) newJSONObject.get(RAYDERIVATIVE_KEY);
 		} else {
-			rayDerivative = null;
+			RayDerivative = null;
 		}
 
 		// statistical spread
 		if (newJSONObject.containsKey(STATISTICALSPREAD_KEY)) {
-			statisticalSpread = (double) newJSONObject
+			StatisticalSpread = (double) newJSONObject
 					.get(STATISTICALSPREAD_KEY);
 		} else {
-			statisticalSpread = null;
+			StatisticalSpread = null;
 		}
 
-		// observability
+		// Observability
 		if (newJSONObject.containsKey(OBSERVABILITY_KEY)) {
-			observability = (double) newJSONObject.get(OBSERVABILITY_KEY);
+			Observability = (double) newJSONObject.get(OBSERVABILITY_KEY);
 		} else {
-			observability = null;
+			Observability = null;
 		}
 
-		// teleseismic phase group
+		// teleseismic Phase group
 		if (newJSONObject.containsKey(TELESEISMICPHASEGROUP_KEY)) {
-			teleseismicPhaseGroup = newJSONObject.get(TELESEISMICPHASEGROUP_KEY)
+			TeleseismicPhaseGroup = newJSONObject.get(TELESEISMICPHASEGROUP_KEY)
 					.toString();
 		} else {
-			teleseismicPhaseGroup = null;
+			TeleseismicPhaseGroup = null;
 		}
 
-		// auxiliary phase group
+		// auxiliary Phase group
 		if (newJSONObject.containsKey(AUXILIARYPHASEGROUP_KEY)) {
-			auxiliaryPhaseGroup = newJSONObject.get(AUXILIARYPHASEGROUP_KEY)
+			AuxiliaryPhaseGroup = newJSONObject.get(AUXILIARYPHASEGROUP_KEY)
 					.toString();
 		} else {
-			auxiliaryPhaseGroup = null;
+			AuxiliaryPhaseGroup = null;
 		}
 
 		// location use flag
 		if (newJSONObject.containsKey(LOCATIONUSEFLAG_KEY)) {
-			locationUseFlag = (boolean) newJSONObject.get(LOCATIONUSEFLAG_KEY);
+			LocationUseFlag = (boolean) newJSONObject.get(LOCATIONUSEFLAG_KEY);
 		} else {
-			locationUseFlag = null;
+			LocationUseFlag = null;
 		}
 
 		// association weight flag
 		if (newJSONObject.containsKey(ASSOCIATIONWEIGHTFLAG_KEY)) {
-			associationWeightFlag = (boolean) newJSONObject
+			AssociationWeightFlag = (boolean) newJSONObject
 					.get(ASSOCIATIONWEIGHTFLAG_KEY);
 		} else {
-			associationWeightFlag = null;
+			AssociationWeightFlag = null;
 		}
 
 	}
@@ -262,12 +262,12 @@ public class TravelTimeData implements ProcessingInt {
 	 *            - A TravelTimeData object.
 	 */
 	public TravelTimeData(TravelTimeData sourceObject) {
-		reload(sourceObject.phase, sourceObject.travelTime,
-				sourceObject.distanceDerivative, sourceObject.depthDerivative,
-				sourceObject.rayDerivative, sourceObject.statisticalSpread,
-				sourceObject.observability, sourceObject.teleseismicPhaseGroup,
-				sourceObject.auxiliaryPhaseGroup, sourceObject.locationUseFlag,
-				sourceObject.associationWeightFlag);
+		reload(sourceObject.Phase, sourceObject.TravelTime,
+				sourceObject.DistanceDerivative, sourceObject.DepthDerivative,
+				sourceObject.RayDerivative, sourceObject.StatisticalSpread,
+				sourceObject.Observability, sourceObject.TeleseismicPhaseGroup,
+				sourceObject.AuxiliaryPhaseGroup, sourceObject.LocationUseFlag,
+				sourceObject.AssociationWeightFlag);
 	}
 
 	/**
@@ -277,7 +277,7 @@ public class TravelTimeData implements ProcessingInt {
 	 * provided values.
 	 * 
 	 * @param newPhase
-	 *            - A String containing the seismic phase code
+	 *            - A String containing the seismic Phase code
 	 * @param newTravelTime
 	 *            - A Double containing the travel time in seconds
 	 * @param newDistanceDerivative
@@ -293,18 +293,18 @@ public class TravelTimeData implements ProcessingInt {
 	 *            - A Double containing the observed travel time scatter in
 	 *            seconds
 	 * @param newObservability
-	 *            - A Double containing the statistical observability of the
-	 *            seismic phase
+	 *            - A Double containing the statistical Observability of the
+	 *            seismic Phase
 	 * @param newTeleseismicPhaseGroup
-	 *            - A String containing the teleseismic phase group identifier
+	 *            - A String containing the teleseismic Phase group identifier
 	 * @param newAuxiliaryPhaseGroup
-	 *            - A String containing the auxiliary phase group identifier
+	 *            - A String containing the auxiliary Phase group identifier
 	 * @param newLocationUseFlag
-	 *            - A Boolean containing the flag indicating whether the phase
+	 *            - A Boolean containing the flag indicating whether the Phase
 	 *            may be used in a location
 	 * @param newAssociationWeightFlag
-	 *            - A Boolean containing the flag indicating whether the phase
-	 *            should be down weighted in assocation
+	 *            - A Boolean containing the flag indicating whether the Phase
+	 *            should be down weighted in association
 	 */
 	public void reload(String newPhase, Double newTravelTime,
 			Double newDistanceDerivative, Double newDepthDerivative,
@@ -313,18 +313,18 @@ public class TravelTimeData implements ProcessingInt {
 			String newAuxiliaryPhaseGroup, Boolean newLocationUseFlag,
 			Boolean newAssociationWeightFlag) {
 
-		type = "TTData";
-		phase = newPhase;
-		travelTime = newTravelTime;
-		distanceDerivative = newDistanceDerivative;
-		depthDerivative = newDepthDerivative;
-		rayDerivative = newRayDerivative;
-		statisticalSpread = newStatisticalSpread;
-		observability = newObservability;
-		teleseismicPhaseGroup = newTeleseismicPhaseGroup;
-		auxiliaryPhaseGroup = newAuxiliaryPhaseGroup;
-		locationUseFlag = newLocationUseFlag;
-		associationWeightFlag = newAssociationWeightFlag;
+		Type = "TTData";
+		Phase = newPhase;
+		TravelTime = newTravelTime;
+		DistanceDerivative = newDistanceDerivative;
+		DepthDerivative = newDepthDerivative;
+		RayDerivative = newRayDerivative;
+		StatisticalSpread = newStatisticalSpread;
+		Observability = newObservability;
+		TeleseismicPhaseGroup = newTeleseismicPhaseGroup;
+		AuxiliaryPhaseGroup = newAuxiliaryPhaseGroup;
+		LocationUseFlag = newLocationUseFlag;
+		AssociationWeightFlag = newAssociationWeightFlag;
 
 	}
 
@@ -338,79 +338,66 @@ public class TravelTimeData implements ProcessingInt {
 
 		JSONObject newJSONObject = new JSONObject();
 
-		String jsonType = getType();
-		String jsonPhase = getPhase();
-		Double jsonTravelTime = getTravelTime();
-		Double jsonDistanceDerivative = getDistanceDerivative();
-		Double jsonDepthDerivative = getDepthDerivative();
-		Double jsonRayDerivative = getRayDerivative();
-		Double jsonStatisticalSpread = getStatisticalSpread();
-		Double jsonObservability = getObservability();
-		String jsonTeleseismicPhaseGroup = getTeleseismicPhaseGroup();
-		String jsonAuxiliaryPhaseGroup = getAuxiliaryPhaseGroup();
-		Boolean jsonLocationUseFlag = getLocationUseFlag();
-		Boolean jsonAssociationWeightFlag = getAssociationWeightFlag();
-
-		// type
-		if (jsonType != null) {
-			newJSONObject.put(TYPE_KEY, jsonType);
+		// Type
+		if (Type != null) {
+			newJSONObject.put(TYPE_KEY, Type);
 		}
 
-		// phase
-		if (jsonPhase != null) {
-			newJSONObject.put(PHASE_KEY, jsonPhase);
+		// Phase
+		if (Phase != null) {
+			newJSONObject.put(PHASE_KEY, Phase);
 		}
 
 		// travel time
-		if (jsonTravelTime != null) {
-			newJSONObject.put(TRAVELTIME_KEY, jsonTravelTime);
+		if (TravelTime != null) {
+			newJSONObject.put(TRAVELTIME_KEY, TravelTime);
 		}
 
 		// distance Derivative
-		if (jsonDistanceDerivative != null) {
-			newJSONObject.put(DISTANCEDERIVATIVE_KEY, jsonDistanceDerivative);
+		if (DistanceDerivative != null) {
+			newJSONObject.put(DISTANCEDERIVATIVE_KEY, DistanceDerivative);
 		}
 
 		// depth Derivative
-		if (jsonDepthDerivative != null) {
-			newJSONObject.put(DEPTHDERIVATIVE_KEY, jsonDepthDerivative);
+		if (DepthDerivative != null) {
+			newJSONObject.put(DEPTHDERIVATIVE_KEY, DepthDerivative);
 		}
 
 		// ray Derivative
-		if (jsonRayDerivative != null) {
-			newJSONObject.put(RAYDERIVATIVE_KEY, jsonRayDerivative);
+		if (RayDerivative != null) {
+			newJSONObject.put(RAYDERIVATIVE_KEY, RayDerivative);
 		}
 
 		// statistical spread
-		if (jsonStatisticalSpread != null) {
-			newJSONObject.put(STATISTICALSPREAD_KEY, jsonStatisticalSpread);
+		if (StatisticalSpread != null) {
+			newJSONObject.put(STATISTICALSPREAD_KEY, StatisticalSpread);
 		}
 
-		// observability
-		if (jsonObservability != null) {
-			newJSONObject.put(OBSERVABILITY_KEY, jsonObservability);
+		// Observability
+		if (Observability != null) {
+			newJSONObject.put(OBSERVABILITY_KEY, Observability);
 		}
 
-		// teleseismic phase group
-		if (jsonTeleseismicPhaseGroup != null) {
+		// teleseismic Phase group
+		if (TeleseismicPhaseGroup != null) {
 			newJSONObject.put(TELESEISMICPHASEGROUP_KEY,
-					jsonTeleseismicPhaseGroup);
+					TeleseismicPhaseGroup);
 		}
 
-		// auxiliary phase group
-		if (jsonAuxiliaryPhaseGroup != null) {
-			newJSONObject.put(AUXILIARYPHASEGROUP_KEY, jsonAuxiliaryPhaseGroup);
+		// auxiliary Phase group
+		if (AuxiliaryPhaseGroup != null) {
+			newJSONObject.put(AUXILIARYPHASEGROUP_KEY, AuxiliaryPhaseGroup);
 		}
 
 		// location use flag
-		if (jsonLocationUseFlag != null) {
-			newJSONObject.put(LOCATIONUSEFLAG_KEY, jsonLocationUseFlag);
+		if (LocationUseFlag != null) {
+			newJSONObject.put(LOCATIONUSEFLAG_KEY, LocationUseFlag);
 		}
 
 		// association use flag
-		if (jsonAssociationWeightFlag != null) {
+		if (AssociationWeightFlag != null) {
 			newJSONObject.put(ASSOCIATIONWEIGHTFLAG_KEY,
-					jsonAssociationWeightFlag);
+					AssociationWeightFlag);
 		}
 
 		return (newJSONObject);
@@ -439,96 +426,83 @@ public class TravelTimeData implements ProcessingInt {
 	public ArrayList<String> getErrors() {
 		ArrayList<String> errorList = new ArrayList<String>();
 
-		String jsonType = getType();
-		String jsonPhase = getPhase();
-		Double jsonTravelTime = getTravelTime();
-		Double jsonDistanceDerivative = getDistanceDerivative();
-		Double jsonDepthDerivative = getDepthDerivative();
-		Double jsonRayDerivative = getRayDerivative();
-		Double jsonStatisticalSpread = getStatisticalSpread();
-		Double jsonObservability = getObservability();
-		String jsonTeleseismicPhaseGroup = getTeleseismicPhaseGroup();
-		String jsonAuxiliaryPhaseGroup = getAuxiliaryPhaseGroup();
-		Boolean jsonLocationUseFlag = getLocationUseFlag();
-		Boolean jsonAssociationWeightFlag = getAssociationWeightFlag();
-
-		// phase
-		if (jsonType == null) {
-			// type not found
+		// Phase
+		if (Type == null) {
+			// Type not found
 			errorList.add("No Type in TravelTimeData Class.");
-		} else if (jsonType.isEmpty()) {
-			// type empty
+		} else if (Type.isEmpty()) {
+			// Type empty
 			errorList.add("Empty Type in TravelTimeData Class.");
-		} else if (!jsonType.equals("TTData")) {
-			// wrong type
-			errorList.add("Non-TTData type in TravelTimeData Class.");
+		} else if (!Type.equals("TTData")) {
+			// wrong Type
+			errorList.add("Non-TTData Type in TravelTimeData Class.");
 		}
 
-		if (jsonPhase == null) {
-			// phase not found
+		if (Phase == null) {
+			// Phase not found
 			errorList.add("No Phase in TravelTimeData Class.");
-		} else if (jsonPhase.isEmpty()) {
-			// phase empty
+		} else if (Phase.isEmpty()) {
+			// Phase empty
 			errorList.add("Empty Phase in TravelTimeData Class.");
 		}
 
 		// travel time
-		if (jsonTravelTime == null) {
+		if (TravelTime == null) {
 			// travel time not found
 			errorList.add("No Travel Time in TravelTimeData Class.");
 		}
 
 		// distance derivative
-		if (jsonDistanceDerivative == null) {
+		if (DistanceDerivative == null) {
 			// distance derivative not found
 			errorList.add("No Distance Derivative in TravelTimeData Class.");
 		}
 
 		// depth derivative
-		if (jsonDepthDerivative == null) {
+		if (DepthDerivative == null) {
 			// depth derivative not found
 			errorList.add("No Depth Derivative in TravelTimeData Class.");
 		}
 
 		// ray derivative
-		if (jsonRayDerivative == null) {
+		if (RayDerivative == null) {
 			// ray derivative not found
 			errorList.add("No Ray Derivative in TravelTimeData Class.");
 		}
 
 		// statistical spread
-		if (jsonStatisticalSpread == null) {
+		if (StatisticalSpread == null) {
 			// statistical spread not found
 			errorList.add("No Statistical Spread in TravelTimeData Class.");
 		}
 
-		// observability
-		if (jsonObservability == null) {
-			// observability not found
+		// Observability
+		if (Observability == null) {
+			// Observability not found
 			errorList.add("No Observability in TravelTimeData Class.");
 		}
 
-		// teleseismic phase group
-		if (jsonTeleseismicPhaseGroup == null) {
-			// teleseismic phase group not found
+		// teleseismic Phase group
+		if (TeleseismicPhaseGroup == null) {
+			// teleseismic Phase group not found
 			errorList
 					.add("No Teleseismic Phase Group in TravelTimeData Class.");
 		}
 
-		// auxiliary phase group
-		if (jsonAuxiliaryPhaseGroup == null) {
-			// auxiliary phase group not found
+		// auxiliary Phase group
+		if (AuxiliaryPhaseGroup == null) {
+			// auxiliary Phase group not found
 			errorList.add("No Auxiliary Phase Group in TravelTimeData Class.");
 		}
 
 		// location use flag
-		if (jsonLocationUseFlag == null) {
+		if (LocationUseFlag == null) {
 			// location use flag not found
 			errorList.add("No Location Use Flag in TravelTimeData Class.");
 		}
 
 		// association weight flag
-		if (jsonAssociationWeightFlag == null) {
+		if (AssociationWeightFlag == null) {
 			// association weight flag not found
 			errorList
 					.add("No Association Weight Flag in TravelTimeData Class.");
@@ -536,177 +510,4 @@ public class TravelTimeData implements ProcessingInt {
 
 		return (errorList);
 	}
-
-	/**
-	 * @return the type
-	 */
-	public String getType() {
-		return type;
-	}
-
-	/**
-	 * @return the phase
-	 */
-	public String getPhase() {
-		return phase;
-	}
-
-	/**
-	 * @param phase
-	 *            the phase to set
-	 */
-	public void setPhase(String phase) {
-		this.phase = phase;
-	}
-
-	/**
-	 * @return the travelTime
-	 */
-	public Double getTravelTime() {
-		return travelTime;
-	}
-
-	/**
-	 * @param travelTime
-	 *            the travelTime to set
-	 */
-	public void setTravelTime(Double travelTime) {
-		this.travelTime = travelTime;
-	}
-
-	/**
-	 * @return the distanceDerivative
-	 */
-	public Double getDistanceDerivative() {
-		return distanceDerivative;
-	}
-
-	/**
-	 * @param distanceDerivative
-	 *            the distanceDerivative to set
-	 */
-	public void setDistanceDerivative(Double distanceDerivative) {
-		this.distanceDerivative = distanceDerivative;
-	}
-
-	/**
-	 * @return the depthDerivative
-	 */
-	public Double getDepthDerivative() {
-		return depthDerivative;
-	}
-
-	/**
-	 * @param depthDerivative
-	 *            the depthDerivative to set
-	 */
-	public void setDepthDerivative(Double depthDerivative) {
-		this.depthDerivative = depthDerivative;
-	}
-
-	/**
-	 * @return the rayDerivative
-	 */
-	public Double getRayDerivative() {
-		return rayDerivative;
-	}
-
-	/**
-	 * @param rayDerivative
-	 *            the rayDerivative to set
-	 */
-	public void setRayDerivative(Double rayDerivative) {
-		this.rayDerivative = rayDerivative;
-	}
-
-	/**
-	 * @return the statisticalSpread
-	 */
-	public Double getStatisticalSpread() {
-		return statisticalSpread;
-	}
-
-	/**
-	 * @param statisticalSpread
-	 *            the statisticalSpread to set
-	 */
-	public void setStatisticalSpread(Double statisticalSpread) {
-		this.statisticalSpread = statisticalSpread;
-	}
-
-	/**
-	 * @return the observability
-	 */
-	public Double getObservability() {
-		return observability;
-	}
-
-	/**
-	 * @param observability
-	 *            the observability to set
-	 */
-	public void setObservability(Double observability) {
-		this.observability = observability;
-	}
-
-	/**
-	 * @return the teleseismicPhaseGroup
-	 */
-	public String getTeleseismicPhaseGroup() {
-		return teleseismicPhaseGroup;
-	}
-
-	/**
-	 * @param teleseismicPhaseGroup
-	 *            the teleseismicPhaseGroup to set
-	 */
-	public void setTeleseismicPhaseGroup(String teleseismicPhaseGroup) {
-		this.teleseismicPhaseGroup = teleseismicPhaseGroup;
-	}
-
-	/**
-	 * @return the auxiliaryPhaseGroup
-	 */
-	public String getAuxiliaryPhaseGroup() {
-		return auxiliaryPhaseGroup;
-	}
-
-	/**
-	 * @param auxiliaryPhaseGroup
-	 *            the auxiliaryPhaseGroup to set
-	 */
-	public void setAuxiliaryPhaseGroup(String auxiliaryPhaseGroup) {
-		this.auxiliaryPhaseGroup = auxiliaryPhaseGroup;
-	}
-
-	/**
-	 * @return the locationUseFlag
-	 */
-	public Boolean getLocationUseFlag() {
-		return locationUseFlag;
-	}
-
-	/**
-	 * @param locationUseFlag
-	 *            the locationUseFlag to set
-	 */
-	public void setLocationUseFlag(Boolean locationUseFlag) {
-		this.locationUseFlag = locationUseFlag;
-	}
-
-	/**
-	 * @return the associationWeightFlag
-	 */
-	public Boolean getAssociationWeightFlag() {
-		return associationWeightFlag;
-	}
-
-	/**
-	 * @param associationWeightFlag
-	 *            the associationWeightFlag to set
-	 */
-	public void setAssociationWeightFlag(Boolean associationWeightFlag) {
-		this.associationWeightFlag = associationWeightFlag;
-	}
-
 }

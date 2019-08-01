@@ -93,17 +93,17 @@ public class TravelTimeDataTest {
 		// use constructor
 		TravelTimeData travelTimeDataObject = new TravelTimeData();
 
-		travelTimeDataObject.setPhase(PHASE);
-		travelTimeDataObject.setTravelTime(TRAVELTIME); 
-		travelTimeDataObject.setDistanceDerivative(DISTANCEDERIVATIVE);
-		travelTimeDataObject.setDepthDerivative(DEPTHDERIVATIVE); 
-		travelTimeDataObject.setRayDerivative(RAYDERIVATIVE); 
-		travelTimeDataObject.setStatisticalSpread(STATISTICALSPREAD);
-		travelTimeDataObject.setObservability(OBSERVABILITY); 
-		travelTimeDataObject.setTeleseismicPhaseGroup(TELESEISMICPHASEGROUP); 
-		travelTimeDataObject.setAuxiliaryPhaseGroup(AUXILIARYPHASEGROUP);
-		travelTimeDataObject.setLocationUseFlag(LOCATIONUSEFLAG); 
-		travelTimeDataObject.setAssociationWeightFlag(ASSOCIATIONWEIGHTFLAG);
+		travelTimeDataObject.Phase = PHASE;
+		travelTimeDataObject.TravelTime = TRAVELTIME; 
+		travelTimeDataObject.DistanceDerivative = DISTANCEDERIVATIVE;
+		travelTimeDataObject.DepthDerivative = DEPTHDERIVATIVE; 
+		travelTimeDataObject.RayDerivative = RAYDERIVATIVE; 
+		travelTimeDataObject.StatisticalSpread = STATISTICALSPREAD;
+		travelTimeDataObject.Observability = OBSERVABILITY; 
+		travelTimeDataObject.TeleseismicPhaseGroup = TELESEISMICPHASEGROUP; 
+		travelTimeDataObject.AuxiliaryPhaseGroup = AUXILIARYPHASEGROUP;
+		travelTimeDataObject.LocationUseFlag = LOCATIONUSEFLAG; 
+		travelTimeDataObject.AssociationWeightFlag = ASSOCIATIONWEIGHTFLAG;
 
 		// check data values
 		checkData(travelTimeDataObject, "Set Functions");
@@ -164,51 +164,51 @@ public class TravelTimeDataTest {
 
 		// check travelTimeDataObject.phase
 		assertEquals(TestName + " Phase Equals", PHASE,
-				travelTimeDataObject.getPhase());
+				travelTimeDataObject.Phase);
 
 		// check travelTimeDataObject.travelTime
 		assertEquals(TestName + " Travel Time Equals", TRAVELTIME,
-				travelTimeDataObject.getTravelTime(), 0);
+				travelTimeDataObject.TravelTime, 0);
 
 		// check travelTimeDataObject.distanceDerivative
 		assertEquals(TestName + " Distance Derivative Equals",
 				DISTANCEDERIVATIVE,
-				travelTimeDataObject.getDistanceDerivative(), 0);
+				travelTimeDataObject.DistanceDerivative, 0);
 
 		// check travelTimeDataObject.depthDerivative
 		assertEquals(TestName + " Depth Derivative Equals", DEPTHDERIVATIVE,
-				travelTimeDataObject.getDepthDerivative(), 0);
+				travelTimeDataObject.DepthDerivative, 0);
 
 		// check travelTimeDataObject.rayDerivative
 		assertEquals(TestName + " Ray Derivative Equals", RAYDERIVATIVE,
-				travelTimeDataObject.getRayDerivative(), 0);
+				travelTimeDataObject.RayDerivative, 0);
 
 		// check travelTimeDataObject.statisticalSpread
 		assertEquals(TestName + " Statistical Spread Equals", STATISTICALSPREAD,
-				travelTimeDataObject.getStatisticalSpread(), 0);
+				travelTimeDataObject.StatisticalSpread, 0);
 
 		// check travelTimeDataObject.observability
 		assertEquals(TestName + " Observability Equals", OBSERVABILITY,
-				travelTimeDataObject.getObservability(), 0);
+				travelTimeDataObject.Observability, 0);
 
 		// check travelTimeDataObject.teleseismicPhaseGroup
 		assertEquals(TestName + " Teleseismic Phase Group Equals",
 				TELESEISMICPHASEGROUP,
-				travelTimeDataObject.getTeleseismicPhaseGroup());
+				travelTimeDataObject.TeleseismicPhaseGroup);
 
 		// check travelTimeDataObject.auxiliaryPhaseGroup
 		assertEquals(TestName + " Auxiliary Phase Group Equals",
 				AUXILIARYPHASEGROUP,
-				travelTimeDataObject.getAuxiliaryPhaseGroup());
+				travelTimeDataObject.AuxiliaryPhaseGroup);
 
 		// check OriginObject.locationUseFlag
 		assertEquals(TestName + " Location Use Flag Equals", LOCATIONUSEFLAG,
-				travelTimeDataObject.getLocationUseFlag());
+				travelTimeDataObject.LocationUseFlag);
 
 		// check travelTimeDataObject.associationWeightFlag
 		assertEquals(TestName + " Association Use Flag Equals",
 				ASSOCIATIONWEIGHTFLAG,
-				travelTimeDataObject.getAssociationWeightFlag());
+				travelTimeDataObject.AssociationWeightFlag);
 
 	}
 

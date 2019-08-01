@@ -158,71 +158,71 @@ public class LocationRequestTest {
 
 		// check LocationResultObject.sourceLatitude
 		assertEquals(TestName + " Latitude Equals", SOURCELATITUDE,
-				locationRequestObject.getSourceLatitude(), 0);
+				locationRequestObject.SourceLatitude, 0);
 
 		// check LocationResultObject.sourceLongitude
 		assertEquals(TestName + " Longitude Equals", SOURCELONGITUDE,
-				locationRequestObject.getSourceLongitude(), 0);
+				locationRequestObject.SourceLongitude, 0);
 
 		// check LocationResultObject.sourceDepth
 		assertEquals(TestName + " Depth Equals", SOURCEDEPTH,
-				locationRequestObject.getSourceDepth(), 0);
+				locationRequestObject.SourceDepth, 0);
 
 		// check LocationResultObject.sourceOriginTime
 		assertEquals(TestName + " OriginTime Equals", SOURCEORIGINTIME,
-				locationRequestObject.getSourceOriginTime());
+				locationRequestObject.SourceOriginTime);
 
 		// need to check data still!!!!!!
 		// somehow?
 
 		// optional values
 		// check locationRequestObject.id
-		if (locationRequestObject.getID() != null) {
+		if (locationRequestObject.ID != null) {
 			assertEquals(TestName + " ID Equals",
 					ID,
-					locationRequestObject.getID());
+					locationRequestObject.ID);
 		}
 
 		// check locationRequestObject.isLocationNew
-		if (locationRequestObject.getIsLocationNew() != null) {
+		if (locationRequestObject.IsLocationNew != null) {
 			assertEquals(TestName + " IsLocationNew Equals", ISLOCATIONNEW,
-					locationRequestObject.getIsLocationNew());
+					locationRequestObject.IsLocationNew);
 		}
 
 		// check locationRequestObject.isLocationHeld
-		if (locationRequestObject.getIsLocationHeld() != null) {
+		if (locationRequestObject.IsLocationHeld != null) {
 			assertEquals(TestName + " IsLocationHeld Equals", ISLOCATIONHELD,
-					locationRequestObject.getIsLocationHeld());
+					locationRequestObject.IsLocationHeld);
 		}
 
 		// check locationRequestObject.isDepthHeld
-		if (locationRequestObject.getIsDepthHeld() != null) {
+		if (locationRequestObject.IsDepthHeld != null) {
 			assertEquals(TestName + " IsDepthHeld Equals", ISDEPTHHELD,
-					locationRequestObject.getIsDepthHeld());
+					locationRequestObject.IsDepthHeld);
 		}
 
 		// check locationRequestObject.isBayesianDepth
-		if (locationRequestObject.getIsBayesianDepth() != null) {
+		if (locationRequestObject.IsBayesianDepth != null) {
 			assertEquals(TestName + " IsBayesianDepth Equals", ISBAYESIANDEPTH,
-					locationRequestObject.getIsBayesianDepth());
+					locationRequestObject.IsBayesianDepth);
 		}
 
 		// check locationRequestObject.baysianDepth
-		if (locationRequestObject.getBayesianDepth() != null) {
+		if (locationRequestObject.BayesianDepth != null) {
 			assertEquals(TestName + " Bayesian Depth Equals", BAYESIANDEPTH,
-					locationRequestObject.getBayesianDepth(), 0);
+					locationRequestObject.BayesianDepth, 0);
 		}
 
 		// check locationRequestObject.baysianSpread
-		if (locationRequestObject.getBayesianSpread() != null) {
+		if (locationRequestObject.BayesianSpread != null) {
 			assertEquals(TestName + " Bayesian Spread Equals", BAYESIANSPREAD,
-					locationRequestObject.getBayesianSpread(), 0);
+					locationRequestObject.BayesianSpread, 0);
 		}
 
 		// check locationRequestObject.useSVD
-		if (locationRequestObject.getUseSVD() != null) {
+		if (locationRequestObject.UseSVD != null) {
 			assertEquals(TestName + " UseSVD Equals", USESVD,
-					locationRequestObject.getUseSVD());
+					locationRequestObject.UseSVD);
 		}
 
 		// Need to check output data somehow!!

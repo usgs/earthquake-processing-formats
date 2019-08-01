@@ -23,24 +23,24 @@ public class TravelTimePlotDataSample implements ProcessingInt {
 	public static final String OBSERVABILITY_KEY = "Observability";
 
 	/**
-	 * Required distance in degrees
+	 * Required Distance in degrees
 	 */
-	private Double distance;
+	public Double Distance;
 
 	/**
 	 * Required travel time in seconds
 	 */
-	private Double travelTime;
+	public Double TravelTime;
 
 	/**
 	 * Optional observed travel time scatter in seconds.
 	 */
-	private Double statisticalSpread;
+	public Double StatisticalSpread;
 
 	/**
-	 * Optional statistical observability of the seismic phase.
+	 * Optional statistical Observability of the seismic phase.
 	 */
-	private Double observability;
+	public Double Observability;
 
 	/**
 	 * The constructor for the TravelTimePlotDataSample class. Initializes
@@ -58,14 +58,14 @@ public class TravelTimePlotDataSample implements ProcessingInt {
 	 * Initializes members to provided values.
 	 * 
 	 * @param newDistance
-	 *            - A Double containing the distance in degrees
+	 *            - A Double containing the Distance in degrees
 	 * @param newTravelTime
 	 *            - A Double containing the travel time in seconds
 	 * @param newStatisticalSpread
 	 *            - A Double containing the observed travel time scatter in
 	 *            seconds
 	 * @param newObservability
-	 *            - A Double containing the statistical observability of the
+	 *            - A Double containing the statistical Observability of the
 	 *            sample
 	 */
 	public TravelTimePlotDataSample(Double newDistance, Double newTravelTime,
@@ -84,34 +84,34 @@ public class TravelTimePlotDataSample implements ProcessingInt {
 	public TravelTimePlotDataSample(JSONObject newJSONObject) {
 
 		// Required values
-		// distance
+		// Distance
 		if (newJSONObject.containsKey(DISTANCE_KEY)) {
-			distance = (double) newJSONObject.get(DISTANCE_KEY);
+			Distance = (double) newJSONObject.get(DISTANCE_KEY);
 		} else {
-			distance = null;
+			Distance = null;
 		}
 
 		// travel time
 		if (newJSONObject.containsKey(TRAVELTIME_KEY)) {
-			travelTime = (double) newJSONObject.get(TRAVELTIME_KEY);
+			TravelTime = (double) newJSONObject.get(TRAVELTIME_KEY);
 		} else {
-			travelTime = null;
+			TravelTime = null;
 		}
 
 		// Optional values
 		// statistical spread
 		if (newJSONObject.containsKey(STATISTICALSPREAD_KEY)) {
-			statisticalSpread = (double) newJSONObject
+			StatisticalSpread = (double) newJSONObject
 					.get(STATISTICALSPREAD_KEY);
 		} else {
-			statisticalSpread = null;
+			StatisticalSpread = null;
 		}
 
-		// observability
+		// Observability
 		if (newJSONObject.containsKey(OBSERVABILITY_KEY)) {
-			observability = (double) newJSONObject.get(OBSERVABILITY_KEY);
+			Observability = (double) newJSONObject.get(OBSERVABILITY_KEY);
 		} else {
-			observability = null;
+			Observability = null;
 		}
 	}
 
@@ -123,8 +123,8 @@ public class TravelTimePlotDataSample implements ProcessingInt {
 	 *            - A TravelTimeData object.
 	 */
 	public TravelTimePlotDataSample(TravelTimePlotDataSample sourceObject) {
-		reload(sourceObject.distance, sourceObject.travelTime,
-				sourceObject.statisticalSpread, sourceObject.observability);
+		reload(sourceObject.Distance, sourceObject.TravelTime,
+				sourceObject.StatisticalSpread, sourceObject.Observability);
 	}
 
 	/**
@@ -134,23 +134,23 @@ public class TravelTimePlotDataSample implements ProcessingInt {
 	 * provided values.
 	 * 
 	 * @param newDistance
-	 *            - A Double containing the distance in degrees
+	 *            - A Double containing the Distance in degrees
 	 * @param newTravelTime
 	 *            - A Double containing the travel time in seconds
 	 * @param newStatisticalSpread
 	 *            - A Double containing the observed travel time scatter in
 	 *            seconds
 	 * @param newObservability
-	 *            - A Double containing the statistical observability of the
+	 *            - A Double containing the statistical Observability of the
 	 *            sample
 	 */
 	public void reload(Double newDistance, Double newTravelTime,
 			Double newStatisticalSpread, Double newObservability) {
 
-		distance = newDistance;
-		travelTime = newTravelTime;
-		statisticalSpread = newStatisticalSpread;
-		observability = newObservability;
+		Distance = newDistance;
+		TravelTime = newTravelTime;
+		StatisticalSpread = newStatisticalSpread;
+		Observability = newObservability;
 	}
 
 	/**
@@ -163,29 +163,24 @@ public class TravelTimePlotDataSample implements ProcessingInt {
 
 		JSONObject newJSONObject = new JSONObject();
 
-		Double jsonDistance = getDistance();
-		Double jsonTravelTime = getTravelTime();
-		Double jsonStatisticalSpread = getStatisticalSpread();
-		Double jsonObservability = getObservability();
-
-		// distance
-		if (jsonDistance != null) {
-			newJSONObject.put(DISTANCE_KEY, jsonDistance);
+		// Distance
+		if (Distance != null) {
+			newJSONObject.put(DISTANCE_KEY, Distance);
 		}
 
 		// travel time
-		if (jsonTravelTime != null) {
-			newJSONObject.put(TRAVELTIME_KEY, jsonTravelTime);
+		if (TravelTime != null) {
+			newJSONObject.put(TRAVELTIME_KEY, TravelTime);
 		}
 
 		// statistical spread
-		if (jsonStatisticalSpread != null) {
-			newJSONObject.put(STATISTICALSPREAD_KEY, jsonStatisticalSpread);
+		if (StatisticalSpread != null) {
+			newJSONObject.put(STATISTICALSPREAD_KEY, StatisticalSpread);
 		}
 
-		// observability
-		if (jsonObservability != null) {
-			newJSONObject.put(OBSERVABILITY_KEY, jsonObservability);
+		// Observability
+		if (Observability != null) {
+			newJSONObject.put(OBSERVABILITY_KEY, Observability);
 		}
 
 		return (newJSONObject);
@@ -214,85 +209,20 @@ public class TravelTimePlotDataSample implements ProcessingInt {
 	public ArrayList<String> getErrors() {
 		ArrayList<String> errorList = new ArrayList<String>();
 
-		Double jsonDistance = getDistance();
-		Double jsonTravelTime = getTravelTime();
-		Double jsonStatisticalSpread = getStatisticalSpread();
-		Double jsonObservability = getObservability();
-
 		// Required values
-		// distance
-		if (jsonDistance == null) {
-			// distance not found
+		// Distance
+		if (Distance == null) {
+			// Distance not found
 			errorList.add("No Distance in TravelTimePlotDataSample Class.");
 		}
 
 		// travel time
-		if (jsonTravelTime == null) {
+		if (TravelTime == null) {
 			// travel time not found
 			errorList.add("No Travel Time in TravelTimePlotDataSample Class.");
 		}
 
 		return (errorList);
-	}
-
-	/**
-	 * @return the distance
-	 */
-	public Double getDistance() {
-		return distance;
-	}
-
-	/**
-	 * @param distance
-	 *            the distance to set
-	 */
-	public void setDistance(Double distance) {
-		this.distance = distance;
-	}
-
-	/**
-	 * @return the travelTime
-	 */
-	public Double getTravelTime() {
-		return travelTime;
-	}
-
-	/**
-	 * @param travelTime
-	 *            the travelTime to set
-	 */
-	public void setTravelTime(Double travelTime) {
-		this.travelTime = travelTime;
-	}
-
-	/**
-	 * @return the statisticalSpread
-	 */
-	public Double getStatisticalSpread() {
-		return statisticalSpread;
-	}
-
-	/**
-	 * @param statisticalSpread
-	 *            the statisticalSpread to set
-	 */
-	public void setStatisticalSpread(Double statisticalSpread) {
-		this.statisticalSpread = statisticalSpread;
-	}
-
-	/**
-	 * @return the observability
-	 */
-	public Double getObservability() {
-		return observability;
-	}
-
-	/**
-	 * @param observability
-	 *            the observability to set
-	 */
-	public void setObservability(Double observability) {
-		this.observability = observability;
 	}
 
 }

@@ -35,105 +35,106 @@ public class LocationRequest implements ProcessingInt {
 	public static final String OUTPUTDATA_KEY = "OutputData";
 
 	/**
-	 * Optional string containing the id.
+	 * Optional string containing the ID.
 	 */
-	private String id;
+	public String ID;
 
 	/**
-	 * Required type identifier for this LocationRequest
+	 * Required Type identifier for this LocationRequest
 	 */
-	private String type;
+	public String Type;
 
 	/**
 	 * Required earth model for this LocationRequest
 	 */
-	private String earthModel;
+	public String EarthModel;
 
 	/**
-	 * Required Double containing the source latitude
+	 * Required Double containing the Source latitude
 	 */
-	private Double sourceLatitude;
+	public Double SourceLatitude;
 
 	/**
-	 * Required Double containing the source longitude
+	 * Required Double containing the Source longitude
 	 */
-	private Double sourceLongitude;
+	public Double SourceLongitude;
 
 	/**
-	 * Required time containing the source time
+	 * Required time containing the Source time
 	 */
-	private Date sourceOriginTime;
+	public Date SourceOriginTime;
 
 	/**
-	 * Required Double containing the sourcedepth
+	 * Required Double containing the Sourcedepth
 	 */
-	private Double sourceDepth;
+	public Double SourceDepth;
 
 	/**
 	 * A required vector of input Pick objects for this LocationRequest
 	 */
-	private ArrayList<Pick> inputData;
+	public ArrayList<Pick> InputData;
 
 	/**
 	 * Optional Boolean indicating whether the location is new
 	 */
-	private Boolean isLocationNew;
+	public Boolean IsLocationNew;
 
 	/**
 	 * Optional Boolean indicating whether the location is held
 	 */
-	private Boolean isLocationHeld;
+	public Boolean IsLocationHeld;
 
 	/**
 	 * Optional Boolean indicating whether the depth is held
 	 */
-	private Boolean isDepthHeld;
+	public Boolean IsDepthHeld;
 
 	/**
 	 * Optional Boolean indicating whether the depth is bayesian
 	 */
-	private Boolean isBayesianDepth;
+	public Boolean IsBayesianDepth;
 
 	/**
 	 * Optional Double containing the bayesan depth
 	 */
-	private Double bayesianDepth;
+	public Double BayesianDepth;
 
 	/**
 	 * Optional Double containing the bayesian spread
 	 */
-	private Double bayesianSpread;
+	public Double BayesianSpread;
 
 	/**
 	 * Optional Boolean indicating whether use SVD
 	 */
-	private Boolean useSVD;
+	public Boolean UseSVD;
+
 	/**
 	 * A LocationResult object to contain the output from the locator
 	 */
-	private LocationResult outputData;
+	public LocationResult OutputData;
 
 	/**
 	 * The constructor for the LocationRequest class. Initializes members to
 	 * null values.
 	 */
 	public LocationRequest() {
-		id = null;
-		type = null;
-		earthModel = null;
-		sourceLatitude = null;
-		sourceLongitude = null;
-		sourceOriginTime = null;
-		sourceDepth = null;
-		inputData = null;
-		isLocationNew = null;
-		isLocationHeld = null;
-		isDepthHeld = null;
-		isBayesianDepth = null;
-		bayesianDepth = null;
-		bayesianSpread = null;
-		useSVD = null;
-		outputData = null;
+		ID = null;
+		Type = null;
+		EarthModel = null;
+		SourceLatitude = null;
+		SourceLongitude = null;
+		SourceOriginTime = null;
+		SourceDepth = null;
+		InputData = null;
+		IsLocationNew = null;
+		IsLocationHeld = null;
+		IsDepthHeld = null;
+		IsBayesianDepth = null;
+		BayesianDepth = null;
+		BayesianSpread = null;
+		UseSVD = null;
+		OutputData = null;
 	}
 
 	/**
@@ -245,22 +246,22 @@ public class LocationRequest implements ProcessingInt {
 			Boolean newIsBayesianDepth, Double newBayesianDepth,
 			Double newBayesianSpread, Boolean newUseSVD) {
 
-		id = newID;
-		type = newType;
-		earthModel = newEarthModel;
-		sourceLatitude = newSourceLatitude;
-		sourceLongitude = newSourceLongitude;
-		sourceOriginTime = newSourceOriginTime;
-		sourceDepth = newSourceDepth;
-		inputData = newInputData;
-		isLocationNew = newIsLocationNew;
-		isLocationHeld = newIsLocationHeld;
-		isDepthHeld = newIsDepthHeld;
-		isBayesianDepth = newIsBayesianDepth;
-		bayesianDepth = newBayesianDepth;
-		bayesianSpread = newBayesianSpread;
-		useSVD = newUseSVD;
-		outputData = null;
+		ID = newID;
+		Type = newType;
+		EarthModel = newEarthModel;
+		SourceLatitude = newSourceLatitude;
+		SourceLongitude = newSourceLongitude;
+		SourceOriginTime = newSourceOriginTime;
+		SourceDepth = newSourceDepth;
+		InputData = newInputData;
+		IsLocationNew = newIsLocationNew;
+		IsLocationHeld = newIsLocationHeld;
+		IsDepthHeld = newIsDepthHeld;
+		IsBayesianDepth = newIsBayesianDepth;
+		BayesianDepth = newBayesianDepth;
+		BayesianSpread = newBayesianSpread;
+		UseSVD = newUseSVD;
+		OutputData = null;
 	}
 
 	/**
@@ -272,53 +273,53 @@ public class LocationRequest implements ProcessingInt {
 	public LocationRequest(JSONObject newJSONObject) {
 
 		// Required values
-		// type
+		// Type
 		if (newJSONObject.containsKey(TYPE_KEY)) {
-			type = newJSONObject.get(TYPE_KEY).toString();
+			Type = newJSONObject.get(TYPE_KEY).toString();
 		} else {
-			type = null;
+			Type = null;
 		}
 
-		// earthModel
+		// EarthModel
 		if (newJSONObject.containsKey(EARTHMODEL_KEY)) {
-			earthModel = newJSONObject.get(EARTHMODEL_KEY).toString();
+			EarthModel = newJSONObject.get(EARTHMODEL_KEY).toString();
 		} else {
-			earthModel = null;
+			EarthModel = null;
 		}
 
 		// latitude
 		if (newJSONObject.containsKey(SOURCELATITUDE_KEY)) {
-			sourceLatitude = (double) newJSONObject.get(SOURCELATITUDE_KEY);
+			SourceLatitude = (double) newJSONObject.get(SOURCELATITUDE_KEY);
 		} else {
-			sourceLatitude = null;
+			SourceLatitude = null;
 		}
 
 		// longitude
 		if (newJSONObject.containsKey(SOURCELONGITUDE_KEY)) {
-			sourceLongitude = (double) newJSONObject.get(SOURCELONGITUDE_KEY);
+			SourceLongitude = (double) newJSONObject.get(SOURCELONGITUDE_KEY);
 		} else {
-			sourceLongitude = null;
+			SourceLongitude = null;
 		}
 
 		// time
 		if (newJSONObject.containsKey(SOURCEORIGINTIME_KEY)) {
-			sourceOriginTime = Utility.getDate(
+			SourceOriginTime = Utility.getDate(
 					newJSONObject.get(SOURCEORIGINTIME_KEY).toString());
 		} else {
-			sourceOriginTime = null;
+			SourceOriginTime = null;
 		}
 
 		// depth
 		if (newJSONObject.containsKey(SOURCEDEPTH_KEY)) {
-			sourceDepth = (double) newJSONObject.get(SOURCEDEPTH_KEY);
+			SourceDepth = (double) newJSONObject.get(SOURCEDEPTH_KEY);
 		} else {
-			sourceDepth = null;
+			SourceDepth = null;
 		}
 
 		// input data
 		if (newJSONObject.containsKey(INPUTDATA_KEY)) {
 
-			inputData = new ArrayList<Pick>();
+			InputData = new ArrayList<Pick>();
 
 			// get the array
 			JSONArray dataArray = (JSONArray) newJSONObject.get(INPUTDATA_KEY);
@@ -329,77 +330,77 @@ public class LocationRequest implements ProcessingInt {
 				for (int i = 0; i < dataArray.size(); i++) {
 
 					// add to vector
-					inputData.add(new Pick((JSONObject) dataArray.get(i)));
+					InputData.add(new Pick((JSONObject) dataArray.get(i)));
 				}
 			}
 		} else {
-			inputData = null;
+			InputData = null;
 		}
 
 		// Optional values
-		// id
+		// ID
 		if (newJSONObject.containsKey(ID_KEY)) {
-			id = newJSONObject.get(ID_KEY).toString();
+			ID = newJSONObject.get(ID_KEY).toString();
 		} else {
-			id = null;
+			ID = null;
 		}
 
-		// isLocationNew
+		// IsLocationNew
 		if (newJSONObject.containsKey(ISLOCATIONNEW_KEY)) {
-			isLocationNew = (boolean) newJSONObject.get(ISLOCATIONNEW_KEY);
+			IsLocationNew = (boolean) newJSONObject.get(ISLOCATIONNEW_KEY);
 		} else {
-			isLocationNew = null;
+			IsLocationNew = null;
 		}
 
-		// isLocationHeld
+		// IsLocationHeld
 		if (newJSONObject.containsKey(ISLOCATIONHELD_KEY)) {
-			isLocationHeld = (boolean) newJSONObject.get(ISLOCATIONHELD_KEY);
+			IsLocationHeld = (boolean) newJSONObject.get(ISLOCATIONHELD_KEY);
 		} else {
-			isLocationHeld = null;
+			IsLocationHeld = null;
 		}
 
-		// isDepthHeld
+		// IsDepthHeld
 		if (newJSONObject.containsKey(ISDEPTHHELD_KEY)) {
-			isDepthHeld = (boolean) newJSONObject.get(ISDEPTHHELD_KEY);
+			IsDepthHeld = (boolean) newJSONObject.get(ISDEPTHHELD_KEY);
 		} else {
-			isDepthHeld = null;
+			IsDepthHeld = null;
 		}
 
-		// isBayesianDepth
+		// IsBayesianDepth
 		if (newJSONObject.containsKey(ISBAYESIANDEPTH_KEY)) {
-			isBayesianDepth = (boolean) newJSONObject.get(ISBAYESIANDEPTH_KEY);
+			IsBayesianDepth = (boolean) newJSONObject.get(ISBAYESIANDEPTH_KEY);
 		} else {
-			isBayesianDepth = null;
+			IsBayesianDepth = null;
 		}
 
 		// baysian depth
 		if (newJSONObject.containsKey(BAYESIANDEPTH_KEY)) {
-			bayesianDepth = (double) newJSONObject.get(BAYESIANDEPTH_KEY);
+			BayesianDepth = (double) newJSONObject.get(BAYESIANDEPTH_KEY);
 		} else {
-			bayesianDepth = null;
+			BayesianDepth = null;
 		}
 
 		// baysian spread
 		if (newJSONObject.containsKey(BAYESIANSPREAD_KEY)) {
-			bayesianSpread = (double) newJSONObject.get(BAYESIANSPREAD_KEY);
+			BayesianSpread = (double) newJSONObject.get(BAYESIANSPREAD_KEY);
 		} else {
-			bayesianSpread = null;
+			BayesianSpread = null;
 		}
 
-		// useSVD
+		// UseSVD
 		if (newJSONObject.containsKey(USESVD_KEY)) {
-			useSVD = (boolean) newJSONObject.get(USESVD_KEY);
+			UseSVD = (boolean) newJSONObject.get(USESVD_KEY);
 		} else {
-			useSVD = null;
+			UseSVD = null;
 		}
 
 		// Output values
-		// outputData
+		// OutputData
 		if (newJSONObject.containsKey(OUTPUTDATA_KEY)) {
-			outputData = new LocationResult(
+			OutputData = new LocationResult(
 					(JSONObject) newJSONObject.get(OUTPUTDATA_KEY));
 		} else {
-			outputData = null;
+			OutputData = null;
 		}
 	}
 
@@ -413,67 +414,49 @@ public class LocationRequest implements ProcessingInt {
 
 		JSONObject newJSONObject = new JSONObject();
 
-		String jsonID = getID();
-		String jsonType = getType();
-		String jsonEarthModel = getEarthModel();
-		Double jsonSourceLatitude = getSourceLatitude();
-		Double jsonSourceLongitude = getSourceLongitude();
-		Date jsonSourceOriginTime = getSourceOriginTime();
-		Double jsonSourceDepth = getSourceDepth();
-		ArrayList<Pick> jsonInputData = getInputData();
-
-		Boolean jsonIsLocationNew = getIsLocationNew();
-		Boolean jsonIsLocationHeld = getIsLocationHeld();
-		Boolean jsonIsDepthHeld = getIsDepthHeld();
-		Boolean jsonIsBayesianDepth = getIsBayesianDepth();
-		Double jsonBayesianDepth = getBayesianDepth();
-		Double jsonBayesianSpread = getBayesianSpread();
-		Boolean jsonUseSVD = getUseSVD();
-		LocationResult jsonOutputData = getOutputData();
-
-		// id
-		if (jsonID != null) {
-			newJSONObject.put(ID_KEY, jsonID);
+		// ID
+		if (ID != null) {
+			newJSONObject.put(ID_KEY, ID);
 		}
 
 		// Required values
-		// type
-		if (jsonType != null) {
-			newJSONObject.put(TYPE_KEY, jsonType);
+		// Type
+		if (Type != null) {
+			newJSONObject.put(TYPE_KEY, Type);
 		}
 
 		// earth model
-		if (jsonEarthModel != null) {
-			newJSONObject.put(EARTHMODEL_KEY, jsonEarthModel);
+		if (EarthModel != null) {
+			newJSONObject.put(EARTHMODEL_KEY, EarthModel);
 		}
 
 		// latitude
-		if (jsonSourceLatitude != null) {
-			newJSONObject.put(SOURCELATITUDE_KEY, jsonSourceLatitude);
+		if (SourceLatitude != null) {
+			newJSONObject.put(SOURCELATITUDE_KEY, SourceLatitude);
 		}
 
 		// longitude
-		if (jsonSourceLongitude != null) {
-			newJSONObject.put(SOURCELONGITUDE_KEY, jsonSourceLongitude);
+		if (SourceLongitude != null) {
+			newJSONObject.put(SOURCELONGITUDE_KEY, SourceLongitude);
 		}
 
 		// time
-		if (jsonSourceOriginTime != null) {
+		if (SourceOriginTime != null) {
 			newJSONObject.put(SOURCEORIGINTIME_KEY,
-					Utility.formatDate(jsonSourceOriginTime));
+					Utility.formatDate(SourceOriginTime));
 		}
 
 		// depth
-		if (jsonSourceDepth != null) {
-			newJSONObject.put(SOURCEDEPTH_KEY, jsonSourceDepth);
+		if (SourceDepth != null) {
+			newJSONObject.put(SOURCEDEPTH_KEY, SourceDepth);
 		}
 
 		// input data
-		if ((jsonInputData != null) && (!jsonInputData.isEmpty())) {
+		if ((InputData != null) && (!InputData.isEmpty())) {
 			JSONArray dataArray = new JSONArray();
 
 			// enumerate through the whole arraylist
-			for (Iterator<Pick> pickIterator = jsonInputData
+			for (Iterator<Pick> pickIterator = InputData
 					.iterator(); pickIterator.hasNext();) {
 
 				// convert pick to JSON object
@@ -488,45 +471,45 @@ public class LocationRequest implements ProcessingInt {
 		}
 
 		// optional values
-		// isLocationNew
-		if (jsonIsLocationNew != null) {
-			newJSONObject.put(ISLOCATIONNEW_KEY, jsonIsLocationNew);
+		// IsLocationNew
+		if (IsLocationNew != null) {
+			newJSONObject.put(ISLOCATIONNEW_KEY, IsLocationNew);
 		}
 
-		// isLocationHeld
-		if (jsonIsLocationHeld != null) {
-			newJSONObject.put(ISLOCATIONHELD_KEY, jsonIsLocationHeld);
+		// IsLocationHeld
+		if (IsLocationHeld != null) {
+			newJSONObject.put(ISLOCATIONHELD_KEY, IsLocationHeld);
 		}
 
-		// isDepthHeld
-		if (jsonIsDepthHeld != null) {
-			newJSONObject.put(ISDEPTHHELD_KEY, jsonIsDepthHeld);
+		// IsDepthHeld
+		if (IsDepthHeld != null) {
+			newJSONObject.put(ISDEPTHHELD_KEY, IsDepthHeld);
 		}
 
-		// isBayesianDepth
-		if (jsonIsBayesianDepth != null) {
-			newJSONObject.put(ISBAYESIANDEPTH_KEY, jsonIsBayesianDepth);
+		// IsBayesianDepth
+		if (IsBayesianDepth != null) {
+			newJSONObject.put(ISBAYESIANDEPTH_KEY, IsBayesianDepth);
 		}
 
 		// bayesian depth
-		if (jsonBayesianDepth != null) {
-			newJSONObject.put(BAYESIANDEPTH_KEY, jsonBayesianDepth);
+		if (BayesianDepth != null) {
+			newJSONObject.put(BAYESIANDEPTH_KEY, BayesianDepth);
 		}
 
 		// bayesian spread
-		if (jsonBayesianSpread != null) {
-			newJSONObject.put(BAYESIANSPREAD_KEY, jsonBayesianSpread);
+		if (BayesianSpread != null) {
+			newJSONObject.put(BAYESIANSPREAD_KEY, BayesianSpread);
 		}
 
 		// use SVD
-		if (jsonUseSVD != null) {
-			newJSONObject.put(USESVD_KEY, jsonUseSVD);
+		if (UseSVD != null) {
+			newJSONObject.put(USESVD_KEY, UseSVD);
 		}
 
 		// output values
 		// output data
-		if (jsonOutputData != null) {
-			newJSONObject.put(OUTPUTDATA_KEY, jsonOutputData.toJSON());
+		if (OutputData != null) {
+			newJSONObject.put(OUTPUTDATA_KEY, OutputData.toJSON());
 		}
 
 		return (newJSONObject);
@@ -554,75 +537,58 @@ public class LocationRequest implements ProcessingInt {
 	 */
 	public ArrayList<String> getErrors() {
 
-		// String jsonType = getType();
-		// String jsonEarthModel = getEarthModel();
-		Double jsonSourceLatitude = getSourceLatitude();
-		Double jsonSourceLongitude = getSourceLongitude();
-		Date jsonSourceOriginTime = getSourceOriginTime();
-		Double jsonSourceDepth = getSourceDepth();
-		ArrayList<Pick> jsonInputData = getInputData();
-
-		// Boolean jsonIsLocationNew = getIsLocationNew();
-		// Boolean jsonIsLocationHeld = getIsLocationHeld();
-		// Boolean jsonIsDepthHeld = getIsDepthHeld();
-		// Boolean jsonIsBayesianDepth = getIsBayesianDepth();
-		// Double jsonBayesianDepth = getBayesianDepth();
-		// Double jsonBayesianSpread = getBayesianSpread();
-		// Boolean jsonUseSVD = getUseSVD();
-		LocationResult jsonOutputData = getOutputData();
-
 		ArrayList<String> errorList = new ArrayList<String>();
 
 		// Required Keys
 		// latitude
-		if (jsonSourceLatitude == null) {
+		if (SourceLatitude == null) {
 			// latitude not found
 			errorList.add("No Source Latitude in LocationRequest Class.");
-		} else if ((jsonSourceLatitude < -90) || (jsonSourceLatitude > 90)) {
+		} else if ((SourceLatitude < -90) || (SourceLatitude > 90)) {
 			// invalid latitude
 			errorList.add(
 					"Source Latitude in LocationRequest Class not in the range of -90 to 90.");
 		}
 
 		// longitude
-		if (jsonSourceLongitude == null) {
+		if (SourceLongitude == null) {
 			// longitude not found
 			errorList.add("No Source Longitude in LocationRequest Class.");
-		} else if ((jsonSourceLongitude < -180)
-				|| (jsonSourceLongitude > 180)) {
+		} else if ((SourceLongitude < -180)
+				|| (SourceLongitude > 180)) {
 			// invalid longitude
 			errorList.add(
 					"Source Longitude in LocationRequest Class not in the range of -180 to 180.");
 		}
 
 		// time
-		if (jsonSourceOriginTime == null) {
+		if (SourceOriginTime == null) {
 			// time not found
 			errorList.add("No Source Origin Time in LocationRequest Class.");
 		}
 
 		// depth
-		if (jsonSourceDepth == null) {
+		if (SourceDepth == null) {
 			// depth not found
 			errorList.add("No Depth in LocationRequest Class.");
-		} else if ((jsonSourceDepth < -100) || (jsonSourceDepth > 1500)) {
+		} else if ((SourceDepth < -100) || (SourceDepth > 1500)) {
 			// invalid depth
 			errorList.add(
 					"Source Depth in LocationRequest Class not in the range of -100 to 1500.");
 		}
 
 		// input data
-		if ((jsonInputData != null) && (!jsonInputData.isEmpty())) {
+		if ((InputData != null) && (!InputData.isEmpty())) {
 
 			// enumerate through the whole arraylist
-			for (Iterator<Pick> pickIterator = jsonInputData
+			for (Iterator<Pick> pickIterator = InputData
 					.iterator(); pickIterator.hasNext();) {
 
 				// convert pick to JSON object
-				Pick jsonPick = ((Pick) pickIterator.next());
+				Pick aPick = ((Pick) pickIterator.next());
 
-				if (!jsonPick.isValid()) {
-					    ArrayList<String> pickErrorList = jsonPick.getErrors();
+				if (!aPick.isValid()) {
+					    ArrayList<String> pickErrorList = aPick.getErrors();
 
               // combine the errors into a single string
               String errorString = new String();
@@ -640,8 +606,8 @@ public class LocationRequest implements ProcessingInt {
 		}
 
 		// output data
-		if (jsonOutputData != null) {
-			if (!jsonOutputData.isValid()) {
+		if (OutputData != null) {
+			if (!OutputData.isValid()) {
 				// hypocenter invalid
 				errorList.add("Invalid OutputData in LocationRequest Class.");
 			}
@@ -649,228 +615,5 @@ public class LocationRequest implements ProcessingInt {
 
 		// success
 		return (errorList);
-	}
-
-	/**
-	 * @return the outputData
-	 */
-	public LocationResult getOutputData() {
-		return outputData;
-	}
-	/**
-	 * @param outputData
-	 *            the outputData to set
-	 */
-	public void setOutputData(LocationResult outputData) {
-		this.outputData = outputData;
-	}
-	/**
-	 * @return the type
-	 */
-	public String getType() {
-		return type;
-	}
-	/**
-	 * @return the id
-	 */
-	public String getID() {
-		return id;
-	}
-	/**
-	 * @return the earthModel
-	 */
-	public String getEarthModel() {
-		return earthModel;
-	}
-	/**
-	 * @return the sourceLatitude
-	 */
-	public Double getSourceLatitude() {
-		return sourceLatitude;
-	}
-	/**
-	 * @return the sourceLongitude
-	 */
-	public Double getSourceLongitude() {
-		return sourceLongitude;
-	}
-	/**
-	 * @return the sourceOriginTime
-	 */
-	public Date getSourceOriginTime() {
-		return sourceOriginTime;
-	}
-	/**
-	 * @return the sourceDepth
-	 */
-	public Double getSourceDepth() {
-		return sourceDepth;
-	}
-	/**
-	 * @return the inputData
-	 */
-	public ArrayList<Pick> getInputData() {
-		return inputData;
-	}
-	/**
-	 * @return the isLocationNew
-	 */
-	public Boolean getIsLocationNew() {
-		return isLocationNew;
-	}
-	/**
-	 * @return the isLocationHeld
-	 */
-	public Boolean getIsLocationHeld() {
-		return isLocationHeld;
-	}
-	/**
-	 * @return the isDepthHeld
-	 */
-	public Boolean getIsDepthHeld() {
-		return isDepthHeld;
-	}
-	/**
-	 * @return the isBayesianDepth
-	 */
-	public Boolean getIsBayesianDepth() {
-		return isBayesianDepth;
-	}
-	/**
-	 * @return the bayesianDepth
-	 */
-	public Double getBayesianDepth() {
-		return bayesianDepth;
-	}
-	/**
-	 * @return the bayesianSpread
-	 */
-	public Double getBayesianSpread() {
-		return bayesianSpread;
-	}
-	/**
-	 * @return the useSVD
-	 */
-	public Boolean getUseSVD() {
-		return useSVD;
-	}
-
-	/**
-	 * @param type
-	 *            the type to set
-	 */
-	public void setType(String type) {
-		this.type = type;
-	}
-	
-	/**
-	 * @param id the id to set
-	 */
-	public void setID(String id) {
-		this.id = id;
-	}
-	
-	/**
-	 * @param earthModel
-	 *            the earthModel to set
-	 */
-	public void setEarthModel(String earthModel) {
-		this.earthModel = earthModel;
-	}
-
-	/**
-	 * @param sourceLatitude
-	 *            the sourceLatitude to set
-	 */
-	public void setSourceLatitude(Double sourceLatitude) {
-		this.sourceLatitude = sourceLatitude;
-	}
-
-	/**
-	 * @param sourceLongitude
-	 *            the sourceLongitude to set
-	 */
-	public void setSourceLongitude(Double sourceLongitude) {
-		this.sourceLongitude = sourceLongitude;
-	}
-
-	/**
-	 * @param sourceOriginTime
-	 *            the sourceOriginTime to set
-	 */
-	public void setSourceOriginTime(Date sourceOriginTime) {
-		this.sourceOriginTime = sourceOriginTime;
-	}
-
-	/**
-	 * @param sourceDepth
-	 *            the sourceDepth to set
-	 */
-	public void setSourceDepth(Double sourceDepth) {
-		this.sourceDepth = sourceDepth;
-	}
-
-	/**
-	 * @param inputData
-	 *            the inputData to set
-	 */
-	public void setInputData(ArrayList<Pick> inputData) {
-		this.inputData = inputData;
-	}
-
-	/**
-	 * @param isLocationNew
-	 *            the isLocationNew to set
-	 */
-	public void setIsLocationNew(Boolean isLocationNew) {
-		this.isLocationNew = isLocationNew;
-	}
-
-	/**
-	 * @param isLocationHeld
-	 *            the isLocationHeld to set
-	 */
-	public void setIsLocationHeld(Boolean isLocationHeld) {
-		this.isLocationHeld = isLocationHeld;
-	}
-
-	/**
-	 * @param isDepthHeld
-	 *            the isDepthHeld to set
-	 */
-	public void setIsDepthHeld(Boolean isDepthHeld) {
-		this.isDepthHeld = isDepthHeld;
-	}
-
-	/**
-	 * @param isBayesianDepth
-	 *            the isBayesianDepth to set
-	 */
-	public void setIsBayesianDepth(Boolean isBayesianDepth) {
-		this.isBayesianDepth = isBayesianDepth;
-	}
-
-	/**
-	 * @param bayesianDepth
-	 *            the bayesianDepth to set
-	 */
-	public void setBayesianDepth(Double bayesianDepth) {
-		this.bayesianDepth = bayesianDepth;
-	}
-
-	/**
-	 * @param bayesianSpread
-	 *            the bayesianSpread to set
-	 */
-	public void setBayesianSpread(Double bayesianSpread) {
-		this.bayesianSpread = bayesianSpread;
-	}
-
-	/**
-	 * @param useSVD
-	 *            the useSVD to set
-	 */
-	public void setUseSVD(Boolean useSVD) {
-		this.useSVD = useSVD;
 	}
 }

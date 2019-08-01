@@ -22,14 +22,14 @@ public class TravelTimePlotDataBranch implements ProcessingInt {
 	public static final String SAMPLES_KEY = "Samples";
 
 	/**
-	 * Required seismic phase code for this branch
+	 * Required seismic Phase code for this branch
 	 */
-	private String phase;
+	public String Phase;
 
 	/**
 	 * A required ArrayList of TravelTimePlotDataSample objects
 	 */
-	private ArrayList<TravelTimePlotDataSample> samples;
+	public ArrayList<TravelTimePlotDataSample> Samples;
 
 	/**
 	 * The constructor for the TravelTimePlotDataBranch class. Initializes
@@ -47,7 +47,7 @@ public class TravelTimePlotDataBranch implements ProcessingInt {
 	 * members to provided values.
 	 * 
 	 * @param newPhase
-	 *            - A String containing the seismic phase code
+	 *            - A String containing the seismic Phase code
 	 * @param newSamples
 	 *            - A ArrayList&lt;TravelTimePlotDataSample&gt; containing the
 	 *            sample data
@@ -67,17 +67,17 @@ public class TravelTimePlotDataBranch implements ProcessingInt {
 	public TravelTimePlotDataBranch(JSONObject newJSONObject) {
 
 		// Required values
-		// phase
+		// Phase
 		if (newJSONObject.containsKey(PHASE_KEY)) {
-			phase = newJSONObject.get(PHASE_KEY).toString();
+			Phase = newJSONObject.get(PHASE_KEY).toString();
 		} else {
-			phase = null;
+			Phase = null;
 		}
 
-		// samples
+		// Samples
 		if (newJSONObject.containsKey(SAMPLES_KEY)) {
 
-			samples = new ArrayList<TravelTimePlotDataSample>();
+			Samples = new ArrayList<TravelTimePlotDataSample>();
 
 			// get the array
 			JSONArray samplesArray = (JSONArray) newJSONObject.get(SAMPLES_KEY);
@@ -91,12 +91,12 @@ public class TravelTimePlotDataBranch implements ProcessingInt {
 					JSONObject samplesObject = (JSONObject) samplesArray.get(i);
 
 					// add to ArrayList
-					samples.add(new TravelTimePlotDataSample(samplesObject));
+					Samples.add(new TravelTimePlotDataSample(samplesObject));
 
 				}
 			}
 		} else {
-			samples = null;
+			Samples = null;
 		}
 	}
 
@@ -109,7 +109,7 @@ public class TravelTimePlotDataBranch implements ProcessingInt {
 	 */
 	public TravelTimePlotDataBranch(TravelTimePlotDataBranch sourceObject) {
 
-		reload(sourceObject.phase, sourceObject.samples);
+		reload(sourceObject.Phase, sourceObject.Samples);
 	}
 
 	/**
@@ -119,7 +119,7 @@ public class TravelTimePlotDataBranch implements ProcessingInt {
 	 * provided values.
 	 * 
 	 * @param newPhase
-	 *            - A String containing the seismic phase code
+	 *            - A String containing the seismic Phase code
 	 * @param newSamples
 	 *            - A ArrayList&lt;TravelTimePlotDataSample&gt; containing the
 	 *            sample data
@@ -127,8 +127,8 @@ public class TravelTimePlotDataBranch implements ProcessingInt {
 	public void reload(String newPhase,
 			ArrayList<TravelTimePlotDataSample> newSamples) {
 
-		phase = newPhase;
-		samples = newSamples;
+		Phase = newPhase;
+		Samples = newSamples;
 
 	}
 
@@ -142,21 +142,18 @@ public class TravelTimePlotDataBranch implements ProcessingInt {
 
 		JSONObject newJSONObject = new JSONObject();
 
-		String jsonPhase = getPhase();
-		ArrayList<TravelTimePlotDataSample> jsonSamples = getSamples();
-
-		// phase
-		if (jsonPhase != null) {
-			newJSONObject.put(PHASE_KEY, jsonPhase);
+		// Phase
+		if (Phase != null) {
+			newJSONObject.put(PHASE_KEY, Phase);
 		}
 
-		// samples
-		if ((jsonSamples != null) && (!jsonSamples.isEmpty())) {
+		// Samples
+		if ((Samples != null) && (!Samples.isEmpty())) {
 
 			JSONArray samplesArray = new JSONArray();
 
 			// enumerate through the whole arraylist
-			for (Iterator<TravelTimePlotDataSample> samplesIterator = jsonSamples
+			for (Iterator<TravelTimePlotDataSample> samplesIterator = Samples
 					.iterator(); samplesIterator.hasNext();) {
 
 				// convert sample to JSON object
@@ -197,23 +194,20 @@ public class TravelTimePlotDataBranch implements ProcessingInt {
 	public ArrayList<String> getErrors() {
 		ArrayList<String> errorList = new ArrayList<String>();
 
-		String jsonPhase = getPhase();
-		ArrayList<TravelTimePlotDataSample> jsonSamples = getSamples();
-
-		// phase
-		if (jsonPhase == null) {
-			// phase not found
+		// Phase
+		if (Phase == null) {
+			// Phase not found
 			errorList.add("No Phase in TravelTimePlotDataBranch Class.");
-		} else if (jsonPhase.isEmpty()) {
-			// phase empty
+		} else if (Phase.isEmpty()) {
+			// Phase empty
 			errorList.add("Empty Phase in TravelTimePlotDataBranch Class.");
 		}
 
 		// Samples
-		if ((jsonSamples != null) && (!jsonSamples.isEmpty())) {
+		if ((Samples != null) && (!Samples.isEmpty())) {
 
 			// enumerate through the whole arraylist
-			for (Iterator<TravelTimePlotDataSample> samplesIterator = jsonSamples
+			for (Iterator<TravelTimePlotDataSample> samplesIterator = Samples
 					.iterator(); samplesIterator.hasNext();) {
 
 				// get next sample object
@@ -229,35 +223,5 @@ public class TravelTimePlotDataBranch implements ProcessingInt {
 		}
 
 		return (errorList);
-	}
-
-	/**
-	 * @return the phase
-	 */
-	public String getPhase() {
-		return phase;
-	}
-
-	/**
-	 * @param phase
-	 *            the phase to set
-	 */
-	public void setPhase(String phase) {
-		this.phase = phase;
-	}
-
-	/**
-	 * @return the vector of TravelTimePlotDataSample objects
-	 */
-	public ArrayList<TravelTimePlotDataSample> getSamples() {
-		return samples;
-	}
-
-	/**
-	 * @param samples
-	 *            the vector of TravelTimePlotDataSample objects to set
-	 */
-	public void setSamples(ArrayList<TravelTimePlotDataSample> samples) {
-		this.samples = samples;
 	}
 }

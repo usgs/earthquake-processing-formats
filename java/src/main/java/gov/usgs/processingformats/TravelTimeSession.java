@@ -25,63 +25,56 @@ public class TravelTimeSession implements ProcessingInt {
 	public static final String RETURNALLPHASES_KEY = "ReturnAllPhases";
 	public static final String RETURNBACKBRANCHES_KEY = "ReturnBackBranches";
 	public static final String CONVERTTECTONIC_KEY = "ConvertTectonic";
-	public static final String USERSTT_KEY = "UseRSTT";
 	public static final String ISPLOT_KEY = "IsPlot";
 
 	/**
 	 * Required depth of the source relative to the WGS84 datum in kilometers
 	 */
-	private Double sourceDepth;
+	public Double SourceDepth;
 
 	/**
 	 * Optional earth model to use, defaults to the AK135 earth model
 	 */
-	private String earthModel;
+	public String EarthModel;
 
 	/**
 	 * Optional ArrayList of strings listing the phase types desired
 	 */
-	private ArrayList<String> phaseTypes;
+	public ArrayList<String> PhaseTypes;
 
 	/**
 	 * Optional geographic source latitude in degrees
 	 */
-	private Double sourceLatitude;
+	public Double SourceLatitude;
 
 	/**
 	 * Optional geographic source longitude in degrees
 	 */
-	private Double sourceLongitude;
+	public Double SourceLongitude;
 
 	/**
 	 * Optional flag that indicates whether to return all phases, defaults to
 	 * false
 	 */
-	private Boolean returnAllPhases;
+	public Boolean ReturnAllPhases;
 
 	/**
 	 * Optional flag that indicates whether to return all arrivals of all
 	 * phases, defaults to false
 	 */
-	private Boolean returnBackBranches;
+	public Boolean ReturnBackBranches;
 
 	/**
 	 * Optional flag that indicates whether to convert tectonic phases, defaults
 	 * to false
 	 */
-	private Boolean convertTectonic;
-
-	/**
-	 * Optional flag that indicates whether theRSTT regional travel-time model
-	 * is to be used
-	 */
-	private Boolean useRSTT;
+	public Boolean ConvertTectonic;
 
 	/**
 	 * Optional flag that indicates whether the travel-time session is for
 	 * plotting rather than lookups
 	 */
-	private Boolean isPlot;
+	public Boolean IsPlot;
 
 	/**
 	 * The constructor for the TravelTimeSession class. Initializes members to
@@ -89,7 +82,7 @@ public class TravelTimeSession implements ProcessingInt {
 	 */
 	public TravelTimeSession() {
 
-		reload(null, null, null, null, null, null, null, null, null, null);
+		reload(null, null, null, null, null, null, null, null, null);
 	}
 
 	/**
@@ -129,11 +122,11 @@ public class TravelTimeSession implements ProcessingInt {
 			ArrayList<String> newPhaseTypes, Double newSourceLatitude,
 			Double newSourceLongitude, Boolean newReturnAllPhases,
 			Boolean newReturnBackBranches, Boolean newConvertTectonic,
-			Boolean newUseRSTT, Boolean newIsPlot) {
+			Boolean newIsPlot) {
 
 		reload(newSourceDepth, newEarthModel, newPhaseTypes, newSourceLatitude,
 				newSourceLongitude, newReturnAllPhases, newReturnBackBranches,
-				newConvertTectonic, newUseRSTT, newIsPlot);
+				newConvertTectonic, newIsPlot);
 	}
 
 	/**
@@ -145,95 +138,88 @@ public class TravelTimeSession implements ProcessingInt {
 	public TravelTimeSession(JSONObject newJSONObject) {
 
 		// Required values
-		// sourceDepth
+		// SourceDepth
 		if (newJSONObject.containsKey(SOURCEDEPTH_KEY)) {
-			sourceDepth = (double) newJSONObject.get(SOURCEDEPTH_KEY);
+			SourceDepth = (double) newJSONObject.get(SOURCEDEPTH_KEY);
 		} else {
-			sourceDepth = null;
+			SourceDepth = null;
 		}
 
 		// Optional values
-		// earthModel
+		// EarthModel
 		if (newJSONObject.containsKey(EARTHMODEL_KEY)) {
-			earthModel = newJSONObject.get(EARTHMODEL_KEY).toString();
+			EarthModel = newJSONObject.get(EARTHMODEL_KEY).toString();
 		} else {
-			earthModel = null;
+			EarthModel = null;
 		}
 
-		// phaseTypes
+		// PhaseTypes
 		if (newJSONObject.containsKey(PHASETYPES_KEY)) {
 
-			phaseTypes = new ArrayList<String>();
+			PhaseTypes = new ArrayList<String>();
 
 			// get the array
-			JSONArray phaseTypesArray = (JSONArray) newJSONObject
+			JSONArray PhaseTypesArray = (JSONArray) newJSONObject
 					.get(PHASETYPES_KEY);
 
-			if ((phaseTypesArray != null) && (!phaseTypesArray.isEmpty())) {
+			if ((PhaseTypesArray != null) && (!PhaseTypesArray.isEmpty())) {
 
 				// go through the whole array
-				for (int i = 0; i < phaseTypesArray.size(); i++) {
+				for (int i = 0; i < PhaseTypesArray.size(); i++) {
 
 					// get the String
-					String phaseType = phaseTypesArray.get(i).toString();
+					String phaseType = PhaseTypesArray.get(i).toString();
 
 					// add to ArrayList
-					phaseTypes.add(phaseType);
+					PhaseTypes.add(phaseType);
 
 				}
 			}
 		} else {
-			phaseTypes = null;
+			PhaseTypes = null;
 		}
 
-		// sourceLatitude
+		// SourceLatitude
 		if (newJSONObject.containsKey(SOURCELATITUDE_KEY)) {
-			sourceLatitude = (double) newJSONObject.get(SOURCELATITUDE_KEY);
+			SourceLatitude = (double) newJSONObject.get(SOURCELATITUDE_KEY);
 		} else {
-			sourceLatitude = null;
+			SourceLatitude = null;
 		}
 
-		// sourceLongitude
+		// SourceLongitude
 		if (newJSONObject.containsKey(SOURCELONGITUDE_KEY)) {
-			sourceLongitude = (double) newJSONObject.get(SOURCELONGITUDE_KEY);
+			SourceLongitude = (double) newJSONObject.get(SOURCELONGITUDE_KEY);
 		} else {
-			sourceLongitude = null;
+			SourceLongitude = null;
 		}
 
-		// returnAllPhases
+		// ReturnAllPhases
 		if (newJSONObject.containsKey(RETURNALLPHASES_KEY)) {
-			returnAllPhases = (boolean) newJSONObject.get(RETURNALLPHASES_KEY);
+			ReturnAllPhases = (boolean) newJSONObject.get(RETURNALLPHASES_KEY);
 		} else {
-			returnAllPhases = null;
+			ReturnAllPhases = null;
 		}
 
-		// returnBackBranches
+		// ReturnBackBranches
 		if (newJSONObject.containsKey(RETURNBACKBRANCHES_KEY)) {
-			returnBackBranches = (boolean) newJSONObject
+			ReturnBackBranches = (boolean) newJSONObject
 					.get(RETURNBACKBRANCHES_KEY);
 		} else {
-			returnBackBranches = null;
+			ReturnBackBranches = null;
 		}
 
-		// convertTectonic
+		// ConvertTectonic
 		if (newJSONObject.containsKey(CONVERTTECTONIC_KEY)) {
-			convertTectonic = (boolean) newJSONObject.get(CONVERTTECTONIC_KEY);
+			ConvertTectonic = (boolean) newJSONObject.get(CONVERTTECTONIC_KEY);
 		} else {
-			convertTectonic = null;
+			ConvertTectonic = null;
 		}
 
-		// useRSTT
-		if (newJSONObject.containsKey(USERSTT_KEY)) {
-			useRSTT = (boolean) newJSONObject.get(USERSTT_KEY);
-		} else {
-			useRSTT = null;
-		}
-
-		// isPlot
+		// IsPlot
 		if (newJSONObject.containsKey(ISPLOT_KEY)) {
-			isPlot = (boolean) newJSONObject.get(ISPLOT_KEY);
+			IsPlot = (boolean) newJSONObject.get(ISPLOT_KEY);
 		} else {
-			isPlot = null;
+			IsPlot = null;
 		}
 
 	}
@@ -246,11 +232,11 @@ public class TravelTimeSession implements ProcessingInt {
 	 *            - A TravelTimeSession object.
 	 */
 	public TravelTimeSession(TravelTimeSession sourceObject) {
-		reload(sourceObject.sourceDepth, sourceObject.earthModel,
-				sourceObject.phaseTypes, sourceObject.sourceLatitude,
-				sourceObject.sourceLongitude, sourceObject.returnAllPhases,
-				sourceObject.returnBackBranches, sourceObject.convertTectonic,
-				sourceObject.useRSTT, sourceObject.isPlot);
+		reload(sourceObject.SourceDepth, sourceObject.EarthModel,
+				sourceObject.PhaseTypes, sourceObject.SourceLatitude,
+				sourceObject.SourceLongitude, sourceObject.ReturnAllPhases,
+				sourceObject.ReturnBackBranches, sourceObject.ConvertTectonic,
+				sourceObject.IsPlot);
 	}
 
 	/**
@@ -280,8 +266,6 @@ public class TravelTimeSession implements ProcessingInt {
 	 *            seismic phase
 	 * @param newConvertTectonic
 	 *            - A Long containing the teleseismic phase group identifier
-	 * @param newUseRSTT
-	 *            - A Long containing the auxiliary phase group identifier
 	 * @param newIsPlot
 	 *            - A Boolean containing the flag indicating whether the phase
 	 *            may be used in a location
@@ -290,18 +274,17 @@ public class TravelTimeSession implements ProcessingInt {
 			ArrayList<String> newPhaseTypes, Double newSourceLatitude,
 			Double newSourceLongitude, Boolean newReturnAllPhases,
 			Boolean newReturnBackBranches, Boolean newConvertTectonic,
-			Boolean newUseRSTT, Boolean newIsPlot) {
+			Boolean newIsPlot) {
 
-		sourceDepth = newSourceDepth;
-		earthModel = newEarthModel;
-		phaseTypes = newPhaseTypes;
-		sourceLatitude = newSourceLatitude;
-		sourceLongitude = newSourceLongitude;
-		returnAllPhases = newReturnAllPhases;
-		returnBackBranches = newReturnBackBranches;
-		convertTectonic = newConvertTectonic;
-		useRSTT = newUseRSTT;
-		isPlot = newIsPlot;
+		SourceDepth = newSourceDepth;
+		EarthModel = newEarthModel;
+		PhaseTypes = newPhaseTypes;
+		SourceLatitude = newSourceLatitude;
+		SourceLongitude = newSourceLongitude;
+		ReturnAllPhases = newReturnAllPhases;
+		ReturnBackBranches = newReturnBackBranches;
+		ConvertTectonic = newConvertTectonic;
+		IsPlot = newIsPlot;
 
 	}
 
@@ -315,78 +298,62 @@ public class TravelTimeSession implements ProcessingInt {
 
 		JSONObject newJSONObject = new JSONObject();
 
-		Double jsonSourceDepth = getSourceDepth();
-		String jsonEarthModel = getEarthModel();
-		ArrayList<String> jsonPhaseTypes = getPhaseTypes();
-		Double jsonSourceLatitude = getSourceLatitude();
-		Double jsonSourceLongitude = getSourceLongitude();
-		Boolean jsonReturnAllPhases = getReturnAllPhases();
-		Boolean jsonReturnBackBranches = getReturnBackBranches();
-		Boolean jsonConvertTectonic = getConvertTectonic();
-		Boolean jsonUseRSTT = getUseRSTT();
-		Boolean jsonIsPlot = getIsPlot();
-
-		// sourceDepth
-		if (jsonSourceDepth != null) {
-			newJSONObject.put(SOURCEDEPTH_KEY, jsonSourceDepth);
+		// SourceDepth
+		if (SourceDepth != null) {
+			newJSONObject.put(SOURCEDEPTH_KEY, SourceDepth);
 		}
 
-		// earthModel
-		if (jsonEarthModel != null) {
-			newJSONObject.put(EARTHMODEL_KEY, jsonEarthModel);
+		// EarthModel
+		if (EarthModel != null) {
+			newJSONObject.put(EARTHMODEL_KEY, EarthModel);
 		}
 
-		// phaseTypes
-		if ((jsonPhaseTypes != null) && (!jsonPhaseTypes.isEmpty())) {
+		// PhaseTypes
+		if ((PhaseTypes != null) && (!PhaseTypes.isEmpty())) {
 
-			JSONArray phaseTypesArray = new JSONArray();
+			JSONArray PhaseTypesArray = new JSONArray();
 
 			// enumerate through the whole arraylist
-			for (Iterator<String> phaseTypesIterator = jsonPhaseTypes
-					.iterator(); phaseTypesIterator.hasNext();) {
+			for (Iterator<String> PhaseTypesIterator = PhaseTypes
+					.iterator(); PhaseTypesIterator.hasNext();) {
 
-				// add to json array
-				phaseTypesArray.add(phaseTypesIterator.next());
+				// add to  array
+				PhaseTypesArray.add(PhaseTypesIterator.next());
 			}
 
-			if (!phaseTypesArray.isEmpty()) {
-				newJSONObject.put(PHASETYPES_KEY, phaseTypesArray);
+			if (!PhaseTypesArray.isEmpty()) {
+				newJSONObject.put(PHASETYPES_KEY, PhaseTypesArray);
 			}
 		}
 
-		// sourceLatitude
-		if (jsonSourceLatitude != null) {
-			newJSONObject.put(SOURCELATITUDE_KEY, jsonSourceLatitude);
+		// SourceLatitude
+		if (SourceLatitude != null) {
+			newJSONObject.put(SOURCELATITUDE_KEY, SourceLatitude);
 		}
 
-		// sourceLongitude
-		if (jsonSourceLongitude != null) {
-			newJSONObject.put(SOURCELONGITUDE_KEY, jsonSourceLongitude);
+		// SourceLongitude
+		if (SourceLongitude != null) {
+			newJSONObject.put(SOURCELONGITUDE_KEY, SourceLongitude);
 		}
 
-		// returnAllPhases
-		if (jsonReturnAllPhases != null) {
-			newJSONObject.put(RETURNALLPHASES_KEY, jsonReturnAllPhases);
+		// ReturnAllPhases
+		if (ReturnAllPhases != null) {
+			newJSONObject.put(RETURNALLPHASES_KEY, ReturnAllPhases);
 		}
 
-		// returnBackBranches
-		if (jsonReturnBackBranches != null) {
-			newJSONObject.put(RETURNBACKBRANCHES_KEY, jsonReturnBackBranches);
+		// ReturnBackBranches
+		if (ReturnBackBranches != null) {
+			newJSONObject.put(RETURNBACKBRANCHES_KEY, ReturnBackBranches);
 		}
 
-		// convertTectonic
-		if (jsonConvertTectonic != null) {
-			newJSONObject.put(CONVERTTECTONIC_KEY, jsonConvertTectonic);
+		// ConvertTectonic
+		if (ConvertTectonic != null) {
+			newJSONObject.put(CONVERTTECTONIC_KEY, ConvertTectonic);
 		}
 
-		// useRSTT
-		if (jsonUseRSTT != null) {
-			newJSONObject.put(USERSTT_KEY, jsonUseRSTT);
-		}
-
-		// isPlot
-		if (jsonIsPlot != null) {
-			newJSONObject.put(ISPLOT_KEY, jsonIsPlot);
+		// IsPlot
+		if (IsPlot != null) {
+			newJSONObject.put(ISPLOT_KEY, IsPlot);
 		}
 
 		return (newJSONObject);
@@ -415,200 +382,38 @@ public class TravelTimeSession implements ProcessingInt {
 	public ArrayList<String> getErrors() {
 		ArrayList<String> errorList = new ArrayList<String>();
 
-		Double jsonSourceDepth = getSourceDepth();
-//		String jsonEarthModel = getEarthModel();
-//		ArrayList<String> jsonPhaseTypes = getPhaseTypes();
-		Double jsonSourceLatitude = getSourceLatitude();
-		Double jsonSourceLongitude = getSourceLongitude();
-//		Boolean jsonReturnAllPhases = getReturnAllPhases();
-//		Boolean jsonReturnBackBranches = getReturnBackBranches();
-//		Boolean jsonConvertTectonic = getConvertTectonic();
-//		Boolean jsonUseRSTT = getUseRSTT();
-//		Boolean jsonIsPlot = getIsPlot();
-
-		// sourceDepth
-		if (jsonSourceDepth == null) {
-			// sourceDepth not found
+		// SourceDepth
+		if (SourceDepth == null) {
+			// SourceDepth not found
 			errorList.add("No Source Depth in TravelTimeSession Class.");
-		} else if ((jsonSourceDepth < -100) || (jsonSourceDepth > 1500)) {
+		} else if ((SourceDepth < -100) || (SourceDepth > 1500)) {
 			// invalid depth
 			errorList.add(
 					"Source Depth in TravelTimeSession Class not in the range of -100 to 1500.");
 		}
 
-		// sourceLatitude
-		if (jsonSourceLatitude != null) {
-			if ((jsonSourceLatitude < -90) || (jsonSourceLatitude > 90)) {
+		// SourceLatitude
+		if (SourceLatitude != null) {
+			if ((SourceLatitude < -90) || (SourceLatitude > 90)) {
 				// invalid latitude
 				errorList.add(
 						"Source Latitude in TravelTimeSession Class not in the range of -90 to 90.");
 			}
 		}
 
-		// sourceLongitude
-		if (jsonSourceLongitude != null) {
-			if ((jsonSourceLongitude < -180) || (jsonSourceLongitude > 180)) {
+		// SourceLongitude
+		if (SourceLongitude != null) {
+			if ((SourceLongitude < -180) || (SourceLongitude > 180)) {
 				// invalid longitude
 				errorList.add(
 						"Source Longitude in TravelTimeSession Class not in the range of -180 to 180.");
 			}
 		}
 
-		// earthModel and phaseTypes are strings, validation could be done on
+		// EarthModel and PhaseTypes are strings, validation could be done on
 		// them in the future
 		// no validation necessary for boolean values
 		
 		return (errorList);
 	}
-
-	/**
-	 * @return the sourceDepth
-	 */
-	public Double getSourceDepth() {
-		return sourceDepth;
-	}
-
-	/**
-	 * @param sourceDepth
-	 *            the sourceDepth to set
-	 */
-	public void setSourceDepth(Double sourceDepth) {
-		this.sourceDepth = sourceDepth;
-	}
-
-	/**
-	 * @return the earthModel
-	 */
-	public String getEarthModel() {
-		return earthModel;
-	}
-
-	/**
-	 * @param earthModel
-	 *            the earthModel to set
-	 */
-	public void setEarthModel(String earthModel) {
-		this.earthModel = earthModel;
-	}
-
-	/**
-	 * @return the phaseTypes
-	 */
-	public ArrayList<String> getPhaseTypes() {
-		return phaseTypes;
-	}
-
-	/**
-	 * @param phaseTypes
-	 *            the phaseTypes to set
-	 */
-	public void setPhaseTypes(ArrayList<String> phaseTypes) {
-		this.phaseTypes = phaseTypes;
-	}
-
-	/**
-	 * @return the sourceLatitude
-	 */
-	public Double getSourceLatitude() {
-		return sourceLatitude;
-	}
-
-	/**
-	 * @param sourceLatitude
-	 *            the sourceLatitude to set
-	 */
-	public void setSourceLatitude(Double sourceLatitude) {
-		this.sourceLatitude = sourceLatitude;
-	}
-
-	/**
-	 * @return the sourceLongitude
-	 */
-	public Double getSourceLongitude() {
-		return sourceLongitude;
-	}
-
-	/**
-	 * @param sourceLongitude
-	 *            the sourceLongitude to set
-	 */
-	public void setSourceLongitude(Double sourceLongitude) {
-		this.sourceLongitude = sourceLongitude;
-	}
-
-	/**
-	 * @return the returnAllPhases
-	 */
-	public Boolean getReturnAllPhases() {
-		return returnAllPhases;
-	}
-
-	/**
-	 * @param returnAllPhases
-	 *            the returnAllPhases to set
-	 */
-	public void setReturnAllPhases(Boolean returnAllPhases) {
-		this.returnAllPhases = returnAllPhases;
-	}
-
-	/**
-	 * @return the returnBackBranches
-	 */
-	public Boolean getReturnBackBranches() {
-		return returnBackBranches;
-	}
-
-	/**
-	 * @param returnBackBranches
-	 *            the returnBackBranches to set
-	 */
-	public void setReturnBackBranches(Boolean returnBackBranches) {
-		this.returnBackBranches = returnBackBranches;
-	}
-
-	/**
-	 * @return the convertTectonic
-	 */
-	public Boolean getConvertTectonic() {
-		return convertTectonic;
-	}
-
-	/**
-	 * @param convertTectonic
-	 *            the convertTectonic to set
-	 */
-	public void setConvertTectonic(Boolean convertTectonic) {
-		this.convertTectonic = convertTectonic;
-	}
-
-	/**
-	 * @return the useRSTT
-	 */
-	public Boolean getUseRSTT() {
-		return useRSTT;
-	}
-
-	/**
-	 * @param useRSTT
-	 *            the useRSTT to set
-	 */
-	public void setUseRSTT(Boolean useRSTT) {
-		this.useRSTT = useRSTT;
-	}
-
-	/**
-	 * @return the isPlot
-	 */
-	public Boolean getIsPlot() {
-		return isPlot;
-	}
-
-	/**
-	 * @param isPlot
-	 *            the isPlot to set
-	 */
-	public void setIsPlot(Boolean isPlot) {
-		this.isPlot = isPlot;
-	}
-
 }
