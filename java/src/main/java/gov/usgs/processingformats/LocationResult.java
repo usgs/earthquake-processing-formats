@@ -31,75 +31,75 @@ public class LocationResult implements ProcessingInt {
   public static final String LOCATOREXITCODE_KEY = "LocatorExitCode";
   public static final String ERRORELLIPSE_KEY = "ErrorEllipse";
 
-  /** Optional string containing the id. */
-  private String id;
+  /** Optional string containing the ID. */
+  private String ID;
 
-  /** Required hypocenter */
-  private Hypocenter hypocenter;
+  /** Required Hypocenter */
+  private Hypocenter Hypocenter;
 
   /** A required vector of Pick objects used to generate this location */
-  private ArrayList<Pick> supportingData;
+  private ArrayList<Pick> SupportingData;
 
   /** Optional integer containing the number of associated stations */
-  private Integer numberOfAssociatedStations;
+  private Integer NumberOfAssociatedStations;
 
   /** Optional integer containing the number of associated phases */
-  private Integer numberOfAssociatedPhases;
+  private Integer NumberOfAssociatedPhases;
 
   /** Optional integer containing the number of used stations */
-  private Integer numberOfUsedStations;
+  private Integer NumberOfUsedStations;
 
   /** Optional integer containing the number of used phases */
-  private Integer numberOfUsedPhases;
+  private Integer NumberOfUsedPhases;
 
-  /** Optional Double containing the gap */
-  private Double gap;
+  /** Optional Double containing the Gap */
+  private Double Gap;
 
-  /** Optional Double containing the secondary gap */
-  private Double secondaryGap;
+  /** Optional Double containing the secondary Gap */
+  private Double SecondaryGap;
 
   /** Required Double containing the Detection minimum distance */
-  private Double minimumDistance;
+  private Double MinimumDistance;
 
-  /** Optional Double containing the rms */
-  private Double rms;
+  /** Optional Double containing the RMS */
+  private Double RMS;
 
-  /** Optional String containing the quality flag */
-  private String quality;
+  /** Optional String containing the Quality flag */
+  private String Quality;
 
   /** Optional Double containing the bayesan depth */
-  private Double bayesianDepth;
+  private Double BayesianDepth;
 
   /** Optional Double containing the bayesian range */
-  private Double bayesianRange;
+  private Double BayesianRange;
 
   /** Optional Double containing the depth importance */
-  private Double depthImportance;
+  private Double DepthImportance;
 
   /** Optional String containing the locator exit code */
-  private String locatorExitCode;
+  private String LocatorExitCode;
 
   /** Optional error ellipse */
   public ErrorEllipse ErrorEllipse;
 
   /** The constructor for the LocationResult class. Initializes members to null values. */
   public LocationResult() {
-    id = null;
-    hypocenter = null;
-    supportingData = null;
-    numberOfAssociatedStations = null;
-    numberOfAssociatedPhases = null;
-    numberOfUsedStations = null;
-    numberOfUsedPhases = null;
-    gap = null;
-    secondaryGap = null;
-    minimumDistance = null;
-    rms = null;
-    quality = null;
-    bayesianDepth = null;
-    bayesianRange = null;
-    depthImportance = null;
-    locatorExitCode = null;
+    ID = null;
+    Hypocenter = null;
+    SupportingData = null;
+    NumberOfAssociatedStations = null;
+    NumberOfAssociatedPhases = null;
+    NumberOfUsedStations = null;
+    NumberOfUsedPhases = null;
+    Gap = null;
+    SecondaryGap = null;
+    MinimumDistance = null;
+    RMS = null;
+    Quality = null;
+    BayesianDepth = null;
+    BayesianRange = null;
+    DepthImportance = null;
+    LocatorExitCode = null;
     ErrorEllipse = null;
   }
 
@@ -125,11 +125,11 @@ public class LocationResult implements ProcessingInt {
    * @param newAssociatedPhases - An Integercontaining the number of associated phases, null to omit
    * @param newUsedStations - An Integer containing the number of used stations, null to omit
    * @param newUsedPhases - An Integer containing the number of used phases, null to omit
-   * @param newGap - A Double containing the gap to use, null to omit
-   * @param newSecondaryGap - A Double containing the secondary gap to use, null to omit
+   * @param newGap - A Double containing the Gap to use, null to omit
+   * @param newSecondaryGap - A Double containing the secondary Gap to use, null to omit
    * @param newMinimumDistance - A Double containing the minimum distance to use, null to omit
-   * @param newRMS - A Double containing the rms to use, null to omit
-   * @param newQuality - A String containing the quality to use, null to omit
+   * @param newRMS - A Double containing the RMS to use, null to omit
+   * @param newQuality - A String containing the Quality to use, null to omit
    * @param newBayesianDepth - A Double containing the bayesian depth to use, null to omit
    * @param newBayesianRange - A Double containing the bayesian range to use, null to omit
    * @param newDepthImportance - A Double containing the depth importance to use, null to omit
@@ -296,7 +296,7 @@ public class LocationResult implements ProcessingInt {
    * <p>The alternate advanced constructor for the LocationResult class. Initializes members to
    * provided values.
    *
-   * @param newHypocenter - A Hypocenter containing the hypocenter to use
+   * @param newHypocenter - A Hypocenter containing the Hypocenter to use
    * @param newSupportingData - A ArrayList&lt;Pick&gt; newPickData containing the data that went
    *     into this location
    */
@@ -329,7 +329,7 @@ public class LocationResult implements ProcessingInt {
    * provided values.
    *
    * @param newID - A String containing the optional ID
-   * @param newHypocenter - A Hypocenter containing the hypocenter to use
+   * @param newHypocenter - A Hypocenter containing the Hypocenter to use
    * @param newSupportingData - A ArrayList&lt;Pick&gt; newPickData containing the data that went
    *     into this location
    * @param newAssociatedStations - An Integer containing the number of associated stations, null to
@@ -337,11 +337,11 @@ public class LocationResult implements ProcessingInt {
    * @param newAssociatedPhases - An Integercontaining the number of associated phases, null to omit
    * @param newUsedStations - An Integer containing the number of used stations, null to omit
    * @param newUsedPhases - An Integer containing the number of used phases, null to omit
-   * @param newGap - A Double containing the gap to use, null to omit
-   * @param newSecondaryGap - A Double containing the secondary gap to use, null to omit
+   * @param newGap - A Double containing the Gap to use, null to omit
+   * @param newSecondaryGap - A Double containing the secondary Gap to use, null to omit
    * @param newMinimumDistance - A Double containing the minimum distance to use, null to omit
-   * @param newRMS - A Double containing the rms to use, null to omit
-   * @param newQuality - A String containing the quality to use, null to omit
+   * @param newRMS - A Double containing the RMS to use, null to omit
+   * @param newQuality - A String containing the Quality to use, null to omit
    * @param newBayesianDepth - A Double containing the bayesian depth to use, null to omit
    * @param newBayesianRange - A Double containing the bayesian range to use, null to omit
    * @param newDepthImportance - A Double containing the depth importance to use, null to omit
@@ -393,7 +393,7 @@ public class LocationResult implements ProcessingInt {
    * <p>The reload function for the LocationResult class. Initializes members to provided values.
    *
    * @param newID - A String containing the optional ID
-   * @param newHypocenter - A Hypocenter containing the hypocenter to use
+   * @param newHypocenter - A Hypocenter containing the Hypocenter to use
    * @param newSupportingData - A ArrayList&lt;Pick&gt; newPickData containing the data that went
    *     into this location
    * @param newAssociatedStations - An Integer containing the number of associated stations, null to
@@ -401,11 +401,11 @@ public class LocationResult implements ProcessingInt {
    * @param newAssociatedPhases - An Integercontaining the number of associated phases, null to omit
    * @param newUsedStations - An Integer containing the number of used stations, null to omit
    * @param newUsedPhases - An Integer containing the number of used phases, null to omit
-   * @param newGap - A Double containing the gap to use, null to omit
-   * @param newSecondaryGap - A Double containing the secondary gap to use, null to omit
+   * @param newGap - A Double containing the Gap to use, null to omit
+   * @param newSecondaryGap - A Double containing the secondary Gap to use, null to omit
    * @param newMinimumDistance - A Double containing the minimum distance to use, null to omit
-   * @param newRMS - A Double containing the rms to use, null to omit
-   * @param newQuality - A String containing the quality to use, null to omit
+   * @param newRMS - A Double containing the RMS to use, null to omit
+   * @param newQuality - A String containing the Quality to use, null to omit
    * @param newBayesianDepth - A Double containing the bayesian depth to use, null to omit
    * @param newBayesianRange - A Double containing the bayesian range to use, null to omit
    * @param newDepthImportance - A Double containing the depth importance to use, null to omit
@@ -431,22 +431,22 @@ public class LocationResult implements ProcessingInt {
       String newLocatorExitCode,
       ErrorEllipse newErrorEllipse) {
 
-    id = newID;
-    hypocenter = newHypocenter;
-    supportingData = newSupportingData;
-    numberOfAssociatedStations = newAssociatedStations;
-    numberOfAssociatedPhases = newAssociatedPhases;
-    numberOfUsedStations = newUsedStations;
-    numberOfUsedPhases = newUsedPhases;
-    gap = newGap;
-    secondaryGap = newSecondaryGap;
-    minimumDistance = newMinimumDistance;
-    rms = newRMS;
-    quality = newQuality;
-    bayesianDepth = newBayesianDepth;
-    bayesianRange = newBayesianRange;
-    depthImportance = newDepthImportance;
-    locatorExitCode = newLocatorExitCode;
+    ID = newID;
+    Hypocenter = newHypocenter;
+    SupportingData = newSupportingData;
+    NumberOfAssociatedStations = newAssociatedStations;
+    NumberOfAssociatedPhases = newAssociatedPhases;
+    NumberOfUsedStations = newUsedStations;
+    NumberOfUsedPhases = newUsedPhases;
+    Gap = newGap;
+    SecondaryGap = newSecondaryGap;
+    MinimumDistance = newMinimumDistance;
+    RMS = newRMS;
+    Quality = newQuality;
+    BayesianDepth = newBayesianDepth;
+    BayesianRange = newBayesianRange;
+    DepthImportance = newDepthImportance;
+    LocatorExitCode = newLocatorExitCode;
     ErrorEllipse = newErrorEllipse;
   }
 
@@ -457,17 +457,17 @@ public class LocationResult implements ProcessingInt {
    */
   public LocationResult(JSONObject newJSONObject) {
     // Required values
-    // hypocenter
+    // Hypocenter
     if (newJSONObject.containsKey(HYPOCENTER_KEY)) {
-      hypocenter = new Hypocenter((JSONObject) newJSONObject.get(HYPOCENTER_KEY));
+      Hypocenter = new Hypocenter((JSONObject) newJSONObject.get(HYPOCENTER_KEY));
     } else {
-      hypocenter = null;
+      Hypocenter = null;
     }
 
     // associated data
     if (newJSONObject.containsKey(SUPPORTINGDATA_KEY)) {
 
-      supportingData = new ArrayList<Pick>();
+      SupportingData = new ArrayList<Pick>();
 
       // get the array
       JSONArray dataArray = (JSONArray) newJSONObject.get(SUPPORTINGDATA_KEY);
@@ -478,110 +478,110 @@ public class LocationResult implements ProcessingInt {
         for (int i = 0; i < dataArray.size(); i++) {
 
           // add to vector
-          supportingData.add(new Pick((JSONObject) dataArray.get(i)));
+          SupportingData.add(new Pick((JSONObject) dataArray.get(i)));
         }
       }
     } else {
-      supportingData = null;
+      SupportingData = null;
     }
 
     // optional values
-    // id
+    // ID
     if (newJSONObject.containsKey(ID_KEY)) {
-      id = newJSONObject.get(ID_KEY).toString();
+      ID = newJSONObject.get(ID_KEY).toString();
     } else {
-      id = null;
+      ID = null;
     }
 
     // associated stations
     if (newJSONObject.containsKey(ASSOCIATEDSTATIONS_KEY)) {
-      numberOfAssociatedStations = ((Long) newJSONObject.get(ASSOCIATEDSTATIONS_KEY)).intValue();
+      NumberOfAssociatedStations = ((Long) newJSONObject.get(ASSOCIATEDSTATIONS_KEY)).intValue();
     } else {
-      numberOfAssociatedStations = null;
+      NumberOfAssociatedStations = null;
     }
 
     // associated phases
     if (newJSONObject.containsKey(ASSOCIATEDPHASES_KEY)) {
-      numberOfAssociatedPhases = ((Long) newJSONObject.get(ASSOCIATEDPHASES_KEY)).intValue();
+      NumberOfAssociatedPhases = ((Long) newJSONObject.get(ASSOCIATEDPHASES_KEY)).intValue();
     } else {
-      numberOfAssociatedPhases = null;
+      NumberOfAssociatedPhases = null;
     }
 
     // used stations
     if (newJSONObject.containsKey(USEDSTATIONS_KEY)) {
-      numberOfUsedStations = ((Long) newJSONObject.get(USEDSTATIONS_KEY)).intValue();
+      NumberOfUsedStations = ((Long) newJSONObject.get(USEDSTATIONS_KEY)).intValue();
     } else {
-      numberOfUsedStations = null;
+      NumberOfUsedStations = null;
     }
 
     // used phases
     if (newJSONObject.containsKey(USEDPHASES_KEY)) {
-      numberOfUsedPhases = ((Long) newJSONObject.get(USEDPHASES_KEY)).intValue();
+      NumberOfUsedPhases = ((Long) newJSONObject.get(USEDPHASES_KEY)).intValue();
     } else {
-      numberOfUsedPhases = null;
+      NumberOfUsedPhases = null;
     }
 
-    // gap
+    // Gap
     if (newJSONObject.containsKey(GAP_KEY)) {
-      gap = (double) newJSONObject.get(GAP_KEY);
+      Gap = (double) newJSONObject.get(GAP_KEY);
     } else {
-      gap = null;
+      Gap = null;
     }
 
-    // secondary gap
+    // secondary Gap
     if (newJSONObject.containsKey(SECONDARYGAP_KEY)) {
-      secondaryGap = (double) newJSONObject.get(SECONDARYGAP_KEY);
+      SecondaryGap = (double) newJSONObject.get(SECONDARYGAP_KEY);
     } else {
-      secondaryGap = null;
+      SecondaryGap = null;
     }
 
-    // minimumDistance
+    // MinimumDistance
     if (newJSONObject.containsKey(MINIMUMDISTANCE_KEY)) {
-      minimumDistance = (double) newJSONObject.get(MINIMUMDISTANCE_KEY);
+      MinimumDistance = (double) newJSONObject.get(MINIMUMDISTANCE_KEY);
     } else {
-      minimumDistance = null;
+      MinimumDistance = null;
     }
 
-    // rms
+    // RMS
     if (newJSONObject.containsKey(RMS_KEY)) {
-      rms = (double) newJSONObject.get(RMS_KEY);
+      RMS = (double) newJSONObject.get(RMS_KEY);
     } else {
-      rms = null;
+      RMS = null;
     }
 
-    // quality
+    // Quality
     if (newJSONObject.containsKey(QUALITY_KEY)) {
-      quality = (String) newJSONObject.get(QUALITY_KEY);
+      Quality = (String) newJSONObject.get(QUALITY_KEY);
     } else {
-      quality = null;
+      Quality = null;
     }
 
     // baysian depth
     if (newJSONObject.containsKey(BAYESIANDEPTH_KEY)) {
-      bayesianDepth = (double) newJSONObject.get(BAYESIANDEPTH_KEY);
+      BayesianDepth = (double) newJSONObject.get(BAYESIANDEPTH_KEY);
     } else {
-      bayesianDepth = null;
+      BayesianDepth = null;
     }
 
     // baysian range
     if (newJSONObject.containsKey(BAYESIANRANGE_KEY)) {
-      bayesianRange = (double) newJSONObject.get(BAYESIANRANGE_KEY);
+      BayesianRange = (double) newJSONObject.get(BAYESIANRANGE_KEY);
     } else {
-      bayesianRange = null;
+      BayesianRange = null;
     }
 
     // depth importance
     if (newJSONObject.containsKey(DEPTHIMPORTANCE_KEY)) {
-      depthImportance = (double) newJSONObject.get(DEPTHIMPORTANCE_KEY);
+      DepthImportance = (double) newJSONObject.get(DEPTHIMPORTANCE_KEY);
     } else {
-      depthImportance = null;
+      DepthImportance = null;
     }
 
-    // locatorExitCode
+    // LocatorExitCode
     if (newJSONObject.containsKey(LOCATOREXITCODE_KEY)) {
-      locatorExitCode = (String) newJSONObject.get(LOCATOREXITCODE_KEY);
+      LocatorExitCode = (String) newJSONObject.get(LOCATOREXITCODE_KEY);
     } else {
-      locatorExitCode = null;
+      LocatorExitCode = null;
     }
 
     // error ellipse
@@ -620,17 +620,17 @@ public class LocationResult implements ProcessingInt {
     String jsonLocatorExitCode = getLocatorExitCode();
     ErrorEllipse jsonErrorEllipse = getErrorEllipse();
 
-    // id
+    // ID
     if (jsonID != null) {
       newJSONObject.put(ID_KEY, jsonID);
     }
 
-    // hypocenter
+    // Hypocenter
     if (jsonHypocenter != null) {
       newJSONObject.put(HYPOCENTER_KEY, jsonHypocenter.toJSON());
     }
 
-    // supportingData
+    // SupportingData
     if ((jsonSupportingData != null) && (!jsonSupportingData.isEmpty())) {
       JSONArray dataArray = new JSONArray();
 
@@ -668,27 +668,27 @@ public class LocationResult implements ProcessingInt {
       newJSONObject.put(USEDPHASES_KEY, jsonNumberOfUsedPhases);
     }
 
-    // gap
+    // Gap
     if (jsonGap != null) {
       newJSONObject.put(GAP_KEY, jsonGap);
     }
 
-    // secondary gap
+    // secondary Gap
     if (jsonSecondaryGap != null) {
       newJSONObject.put(SECONDARYGAP_KEY, jsonSecondaryGap);
     }
 
-    // minimumDistance
+    // MinimumDistance
     if (jsonMinimumDistance != null) {
       newJSONObject.put(MINIMUMDISTANCE_KEY, jsonMinimumDistance);
     }
 
-    // rms
+    // RMS
     if (jsonRMS != null) {
       newJSONObject.put(RMS_KEY, jsonRMS);
     }
 
-    // quality
+    // Quality
     if (jsonQuality != null) {
       newJSONObject.put(QUALITY_KEY, jsonQuality);
     }
@@ -763,12 +763,12 @@ public class LocationResult implements ProcessingInt {
 
     ArrayList<String> errorList = new ArrayList<String>();
 
-    // hypocenter
+    // Hypocenter
     if (jsonHypocenter == null) {
-      // hypocenter not found
+      // Hypocenter not found
       errorList.add("No Hypocenter in LocationResult Class.");
     } else if (!jsonHypocenter.isValid()) {
-      // hypocenter invalid
+      // Hypocenter invalid
       errorList.add("Invalid Hypocenter in LocationResult Class.");
     }
 
@@ -795,11 +795,11 @@ public class LocationResult implements ProcessingInt {
         }
       }
     } else {
-      // hypocenter not found
+      // Hypocenter not found
       errorList.add("No pick data in LocationResult Class.");
     }
 
-    // gap
+    // Gap
     if (jsonGap != null) {
       if ((jsonGap < 0) || (jsonGap > 360)) {
         // invalid Magnitude
@@ -807,15 +807,15 @@ public class LocationResult implements ProcessingInt {
       }
     }
 
-    // gap
+    // Gap
     if (jsonSecondaryGap != null) {
       if ((jsonSecondaryGap < 0) || (jsonSecondaryGap > 360)) {
         // invalid Magnitude
-        errorList.add("Secondary gap in LocationResult Class not in the range of 0 to 360.");
+        errorList.add("Secondary Gap in LocationResult Class not in the range of 0 to 360.");
       }
     }
 
-    // minimumDistance
+    // MinimumDistance
     if (jsonMinimumDistance != null) {
       if (jsonMinimumDistance < 0) {
         // invalid minimum distance
@@ -849,7 +849,7 @@ public class LocationResult implements ProcessingInt {
     // error ellipse
     if (jsonErrorEllipse != null) {
       if (!jsonErrorEllipse.isValid()) {
-        // hypocenter invalid
+        // Hypocenter invalid
         errorList.add("Invalid ErrorEllipse in LocationResult Class.");
       }
     }
@@ -907,84 +907,84 @@ public class LocationResult implements ProcessingInt {
     return csvString;
   }
 
-  /** @return the id */
+  /** @return the ID */
   public String getID() {
-    return id;
+    return ID;
   }
 
-  /** @return the hypocenter */
+  /** @return the Hypocenter */
   public Hypocenter getHypocenter() {
-    return hypocenter;
+    return Hypocenter;
   }
 
-  /** @return the supportingData */
+  /** @return the SupportingData */
   public ArrayList<Pick> getSupportingData() {
-    return supportingData;
+    return SupportingData;
   }
 
-  /** @return the numberOfAssociatedStations */
+  /** @return the NumberOfAssociatedStations */
   public Integer getNumberOfAssociatedStations() {
-    return numberOfAssociatedStations;
+    return NumberOfAssociatedStations;
   }
 
-  /** @return the numberOfAssociatedPhases */
+  /** @return the NumberOfAssociatedPhases */
   public Integer getNumberOfAssociatedPhases() {
-    return numberOfAssociatedPhases;
+    return NumberOfAssociatedPhases;
   }
 
-  /** @return the numberOfUsedStations */
+  /** @return the NumberOfUsedStations */
   public Integer getNumberOfUsedStations() {
-    return numberOfUsedStations;
+    return NumberOfUsedStations;
   }
 
-  /** @return the numberOfUsedPhases */
+  /** @return the NumberOfUsedPhases */
   public Integer getNumberOfUsedPhases() {
-    return numberOfUsedPhases;
+    return NumberOfUsedPhases;
   }
 
-  /** @return the gap */
+  /** @return the Gap */
   public Double getGap() {
-    return gap;
+    return Gap;
   }
 
-  /** @return the secondaryGap */
+  /** @return the SecondaryGap */
   public Double getSecondaryGap() {
-    return secondaryGap;
+    return SecondaryGap;
   }
 
-  /** @return the minimumDistance */
+  /** @return the MinimumDistance */
   public Double getMinimumDistance() {
-    return minimumDistance;
+    return MinimumDistance;
   }
 
-  /** @return the rms */
+  /** @return the RMS */
   public Double getRMS() {
-    return rms;
+    return RMS;
   }
 
-  /** @return the quality */
+  /** @return the Quality */
   public String getQuality() {
-    return quality;
+    return Quality;
   }
 
-  /** @return the bayesianDepth */
+  /** @return the BayesianDepth */
   public Double getBayesianDepth() {
-    return bayesianDepth;
+    return BayesianDepth;
   }
 
-  /** @return the bayesianRange */
+  /** @return the BayesianRange */
   public Double getBayesianRange() {
-    return bayesianRange;
+    return BayesianRange;
   }
 
-  /** @return the depthImportance */
+  /** @return the DepthImportance */
   public Double getDepthImportance() {
-    return depthImportance;
+    return DepthImportance;
   }
 
-  /** @return the locatorExitCode */
+  /** @return the LocatorExitCode */
   public String getLocatorExitCode() {
-    return locatorExitCode;
+    return LocatorExitCode;
   }
 
   /** @return the ErrorEllipse */
@@ -992,84 +992,84 @@ public class LocationResult implements ProcessingInt {
     return ErrorEllipse;
   }
 
-  /** @param id the id to set */
-  public void setID(String id) {
-    this.id = id;
+  /** @param ID the ID to set */
+  public void setID(String ID) {
+    this.ID = ID;
   }
 
-  /** @param hypocenter the hypocenter to set */
-  public void setHypocenter(Hypocenter hypocenter) {
-    this.hypocenter = hypocenter;
+  /** @param Hypocenter the Hypocenter to set */
+  public void setHypocenter(Hypocenter Hypocenter) {
+    this.Hypocenter = Hypocenter;
   }
 
-  /** @param supportingData the supportingData to set */
-  public void setSupportingData(ArrayList<Pick> supportingData) {
-    this.supportingData = supportingData;
+  /** @param SupportingData the SupportingData to set */
+  public void setSupportingData(ArrayList<Pick> SupportingData) {
+    this.SupportingData = SupportingData;
   }
 
-  /** @param numberOfAssociatedStations the numberOfAssociatedStations to set */
-  public void setNumberOfAssociatedStations(Integer numberOfAssociatedStations) {
-    this.numberOfAssociatedStations = numberOfAssociatedStations;
+  /** @param NumberOfAssociatedStations the NumberOfAssociatedStations to set */
+  public void setNumberOfAssociatedStations(Integer NumberOfAssociatedStations) {
+    this.NumberOfAssociatedStations = NumberOfAssociatedStations;
   }
 
-  /** @param numberOfAssociatedPhases the numberOfAssociatedPhases to set */
-  public void setNumberOfAssociatedPhases(Integer numberOfAssociatedPhases) {
-    this.numberOfAssociatedPhases = numberOfAssociatedPhases;
+  /** @param NumberOfAssociatedPhases the NumberOfAssociatedPhases to set */
+  public void setNumberOfAssociatedPhases(Integer NumberOfAssociatedPhases) {
+    this.NumberOfAssociatedPhases = NumberOfAssociatedPhases;
   }
 
-  /** @param numberOfUsedStations the numberOfUsedStations to set */
-  public void setNumberOfUsedStations(Integer numberOfUsedStations) {
-    this.numberOfUsedStations = numberOfUsedStations;
+  /** @param NumberOfUsedStations the NumberOfUsedStations to set */
+  public void setNumberOfUsedStations(Integer NumberOfUsedStations) {
+    this.NumberOfUsedStations = NumberOfUsedStations;
   }
 
-  /** @param numberOfUsedPhases the numberOfUsedPhases to set */
-  public void setNumberOfUsedPhases(Integer numberOfUsedPhases) {
-    this.numberOfUsedPhases = numberOfUsedPhases;
+  /** @param NumberOfUsedPhases the NumberOfUsedPhases to set */
+  public void setNumberOfUsedPhases(Integer NumberOfUsedPhases) {
+    this.NumberOfUsedPhases = NumberOfUsedPhases;
   }
 
-  /** @param gap the gap to set */
-  public void setGap(Double gap) {
-    this.gap = gap;
+  /** @param Gap the Gap to set */
+  public void setGap(Double Gap) {
+    this.Gap = Gap;
   }
 
-  /** @param secondaryGap the secondaryGap to set */
-  public void setSecondaryGap(Double secondaryGap) {
-    this.secondaryGap = secondaryGap;
+  /** @param SecondaryGap the SecondaryGap to set */
+  public void setSecondaryGap(Double SecondaryGap) {
+    this.SecondaryGap = SecondaryGap;
   }
 
-  /** @param minimumDistance the minimumDistance to set */
-  public void setMinimumDistance(Double minimumDistance) {
-    this.minimumDistance = minimumDistance;
+  /** @param MinimumDistance the MinimumDistance to set */
+  public void setMinimumDistance(Double MinimumDistance) {
+    this.MinimumDistance = MinimumDistance;
   }
 
-  /** @param rms the rms to set */
-  public void setRms(Double rms) {
-    this.rms = rms;
+  /** @param RMS the RMS to set */
+  public void setRms(Double RMS) {
+    this.RMS = RMS;
   }
 
-  /** @param quality the quality to set */
-  public void setQuality(String quality) {
-    this.quality = quality;
+  /** @param Quality the Quality to set */
+  public void setQuality(String Quality) {
+    this.Quality = Quality;
   }
 
-  /** @param bayesianDepth the bayesianDepth to set */
-  public void setBayesianDepth(Double bayesianDepth) {
-    this.bayesianDepth = bayesianDepth;
+  /** @param BayesianDepth the BayesianDepth to set */
+  public void setBayesianDepth(Double BayesianDepth) {
+    this.BayesianDepth = BayesianDepth;
   }
 
-  /** @param bayesianRange the bayesianRange to set */
-  public void setBayesianRange(Double bayesianRange) {
-    this.bayesianRange = bayesianRange;
+  /** @param BayesianRange the BayesianRange to set */
+  public void setBayesianRange(Double BayesianRange) {
+    this.BayesianRange = BayesianRange;
   }
 
-  /** @param depthImportance the depthImportance to set */
-  public void setDepthImportance(Double depthImportance) {
-    this.depthImportance = depthImportance;
+  /** @param DepthImportance the DepthImportance to set */
+  public void setDepthImportance(Double DepthImportance) {
+    this.DepthImportance = DepthImportance;
   }
 
-  /** @param locatorExitCode the locatorExitCode to set */
-  public void setLocatorExitCode(String locatorExitCode) {
-    this.locatorExitCode = locatorExitCode;
+  /** @param LocatorExitCode the LocatorExitCode to set */
+  public void setLocatorExitCode(String LocatorExitCode) {
+    this.LocatorExitCode = LocatorExitCode;
   }
 
   /** @param ErrorEllipse the ErrorEllipse to set */
