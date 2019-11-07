@@ -283,160 +283,148 @@ public class LocationResultTest {
 
     // check LocationResultObject.hypocenter.Latitude
     assertEquals(
-        TestName + " Latitude Equals", LATITUDE, LocationResultObject.getHypocenter().Latitude, 0);
+        TestName + " Latitude Equals", LATITUDE, LocationResultObject.Hypocenter.Latitude, 0);
 
     // check LocationResultObject.hypocenter.Longitude
     assertEquals(
-        TestName + " Longitude Equals",
-        LONGITUDE,
-        LocationResultObject.getHypocenter().Longitude,
-        0);
+        TestName + " Longitude Equals", LONGITUDE, LocationResultObject.Hypocenter.Longitude, 0);
 
     // check LocationResultObject.hypocenter.Depth
-    assertEquals(TestName + " Depth Equals", DEPTH, LocationResultObject.getHypocenter().Depth, 0);
+    assertEquals(TestName + " Depth Equals", DEPTH, LocationResultObject.Hypocenter.Depth, 0);
 
     // check LocationResultObject.hypocenter.Time
-    assertEquals(TestName + " OriginTime Equals", TIME, LocationResultObject.getHypocenter().Time);
+    assertEquals(TestName + " OriginTime Equals", TIME, LocationResultObject.Hypocenter.Time);
 
     // check LocationResultObject.hypocenter.LatitudeError
     assertEquals(
         TestName + " LatitudeError Equals",
         LATITUDEERROR,
-        LocationResultObject.getHypocenter().LatitudeError,
+        LocationResultObject.Hypocenter.LatitudeError,
         0);
 
     // check LocationResultObject.hypocenter.LongitudeError
     assertEquals(
-        TestName + " LongitudError Equals",
+        TestName + " LongitudeError Equals",
         LONGITUDEERROR,
-        LocationResultObject.getHypocenter().LongitudeError,
+        LocationResultObject.Hypocenter.LongitudeError,
         0);
 
     // check LocationResultObject.hypocenter.DepthError
     assertEquals(
-        TestName + " DepthError Equals",
-        DEPTHERROR,
-        LocationResultObject.getHypocenter().DepthError,
-        0);
+        TestName + " DepthError Equals", DEPTHERROR, LocationResultObject.Hypocenter.DepthError, 0);
 
     // check LocationResultObject.hypocenter.TimeError
     assertEquals(
-        TestName + " TimeError Equals",
-        TIMEERROR,
-        LocationResultObject.getHypocenter().TimeError,
-        0);
+        TestName + " TimeError Equals", TIMEERROR, LocationResultObject.Hypocenter.TimeError, 0);
 
     // need to check data still!!!!!!
     // somehow?
 
     // optional values
     // check LocationResultObject.id
-    if (LocationResultObject.getID() != null) {
-      assertEquals(TestName + " ID Equals", ID, LocationResultObject.getID());
+    if (LocationResultObject.ID != null) {
+      assertEquals(TestName + " ID Equals", ID, LocationResultObject.ID);
     }
 
     // check LocationResultObject.numberOfAssociatedStations
-    if (LocationResultObject.getNumberOfAssociatedStations() != null) {
+    if (LocationResultObject.NumberOfAssociatedStations != null) {
       assertEquals(
           TestName + " Number of Associated Stations Equals",
           NUMASSOCIATEDSTATIONS,
-          LocationResultObject.getNumberOfAssociatedStations(),
+          LocationResultObject.NumberOfAssociatedStations,
           0);
     }
 
     // check LocationResultObject.numberOfAssociatedPhases
-    if (LocationResultObject.getNumberOfAssociatedPhases() != null) {
+    if (LocationResultObject.NumberOfAssociatedPhases != null) {
       assertEquals(
           TestName + " Number of Associated Phases Equals",
           NUMASSOCIATEDPHASES,
-          LocationResultObject.getNumberOfAssociatedPhases(),
+          LocationResultObject.NumberOfAssociatedPhases,
           0);
     }
 
     // check LocationResultObject.numberOfUsedStations
-    if (LocationResultObject.getNumberOfUsedStations() != null) {
+    if (LocationResultObject.NumberOfUsedStations != null) {
       assertEquals(
           TestName + " Number of Used Stations Equals",
           NUMUSEDSTATIONS,
-          LocationResultObject.getNumberOfUsedStations(),
+          LocationResultObject.NumberOfUsedStations,
           0);
     }
 
     // check LocationResultObject.numberOfUsedPhases
-    if (LocationResultObject.getNumberOfUsedPhases() != null) {
+    if (LocationResultObject.NumberOfUsedPhases != null) {
       assertEquals(
           TestName + " Number of Used Phases Equals",
           NUMUSEDPHASES,
-          LocationResultObject.getNumberOfUsedPhases(),
+          LocationResultObject.NumberOfUsedPhases,
           0);
     }
 
     // check LocationResultObject.Gap
-    if (LocationResultObject.getGap() != null) {
-      assertEquals(TestName + " Gap Equals", GAP, LocationResultObject.getGap(), 0);
+    if (LocationResultObject.Gap != null) {
+      assertEquals(TestName + " Gap Equals", GAP, LocationResultObject.Gap, 0);
     }
 
     // check LocationResultObject.secondaryGap
-    if (LocationResultObject.getSecondaryGap() != null) {
+    if (LocationResultObject.SecondaryGap != null) {
       assertEquals(
-          TestName + " Secondary Gap Equals",
-          SECONDARYGAP,
-          LocationResultObject.getSecondaryGap(),
-          0);
+          TestName + " Secondary Gap Equals", SECONDARYGAP, LocationResultObject.SecondaryGap, 0);
     }
 
     // check LocationResultObject.MinimumDistance
-    if (LocationResultObject.getMinimumDistance() != null) {
+    if (LocationResultObject.MinimumDistance != null) {
       assertEquals(
           TestName + " MinimumDistance Equals",
           MINIMUMDISTANCE,
-          LocationResultObject.getMinimumDistance(),
+          LocationResultObject.MinimumDistance,
           0);
     }
 
     // check LocationResultObject.RMS
-    if (LocationResultObject.getRMS() != null) {
-      assertEquals(TestName + " RMS Equals", RMS, LocationResultObject.getRMS(), 0);
+    if (LocationResultObject.RMS != null) {
+      assertEquals(TestName + " RMS Equals", RMS, LocationResultObject.RMS, 0);
     }
 
     // check LocationResultObject.quality
-    if (LocationResultObject.getQuality() != null) {
-      assertEquals(TestName + " Quality Equals", QUALITY, LocationResultObject.getQuality());
+    if (LocationResultObject.Quality != null) {
+      assertEquals(TestName + " Quality Equals", QUALITY, LocationResultObject.Quality);
     }
 
     // check LocationResultObject.baysianDepth
-    if (LocationResultObject.getBayesianDepth() != null) {
+    if (LocationResultObject.BayesianDepth != null) {
       assertEquals(
           TestName + " Bayesian Depth Equals",
           BAYESIANDEPTH,
-          LocationResultObject.getBayesianDepth(),
+          LocationResultObject.BayesianDepth,
           0);
     }
 
     // check LocationResultObject.baysianRange
-    if (LocationResultObject.getBayesianRange() != null) {
+    if (LocationResultObject.BayesianRange != null) {
       assertEquals(
           TestName + " Bayesian Range Equals",
           BAYESIANRANGE,
-          LocationResultObject.getBayesianRange(),
+          LocationResultObject.BayesianRange,
           0);
     }
 
     // check LocationResultObject.depthImportance
-    if (LocationResultObject.getDepthImportance() != null) {
+    if (LocationResultObject.DepthImportance != null) {
       assertEquals(
           TestName + " Depth Importance Equals",
           DEPTHIMPORTANCE,
-          LocationResultObject.getDepthImportance(),
+          LocationResultObject.DepthImportance,
           0);
     }
 
     // check LocationResultObject.locatorExitCode
-    if (LocationResultObject.getLocatorExitCode() != null) {
+    if (LocationResultObject.LocatorExitCode != null) {
       assertEquals(
           TestName + " Locator Exit Code Equals",
           LOCATOREXITCODE,
-          LocationResultObject.getLocatorExitCode());
+          LocationResultObject.LocatorExitCode);
     }
 
     // error ellipse
