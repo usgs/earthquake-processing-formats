@@ -49,7 +49,7 @@ sudo: false
 
 script:
   - cd ${TRAVIS_BUILD_DIR}/java
-  - ant test
+  - ./gradlew --info build check javadoc
 #  - cd ${TRAVIS_BUILD_DIR}/cpp
 #  - mkdir build
 #  - cd build
