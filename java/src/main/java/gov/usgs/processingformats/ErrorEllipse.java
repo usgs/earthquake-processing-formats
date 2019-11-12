@@ -221,17 +221,17 @@ public class ErrorEllipse implements ProcessingInt {
     // Required values
     // E0
     if (E0 != null) {
-      newJSONObject.put(E0_KEY, E0);
+      newJSONObject.put(E0_KEY, E0.toJSON());
     }
 
     // E1
     if (E1 != null) {
-      newJSONObject.put(E1_KEY, E1);
+      newJSONObject.put(E1_KEY, E1.toJSON());
     }
 
     // E2
     if (E2 != null) {
-      newJSONObject.put(E2_KEY, E2);
+      newJSONObject.put(E2_KEY, E2.toJSON());
     }
 
     // MaximumHorizontalProjection
