@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-#stdlib import
+#package imports
+import processingformats.errorEllipseAxis
+
+#stdlib imports
 import json
 
 class ErrorEllipse:
@@ -9,200 +12,161 @@ class ErrorEllipse:
     A conversion class usd to create, parse, and validate error ellipse data
     """
     
-    #JSON Keys
-    E0_KEY = "E0" #Required
-    E1_KEY = "E1" #Required
-    E2_KEY = "E2" #Required
-    ERROR_KEY = "Error" #Required
-    AZIMUTH_KEY = "Azimuth" #Required
-    DIP_KEY = "Dip" #Required
-    MAXIMUM_HORIZONTAL_KEY = "MaximumHorizontalProjection" #Required
-    MAXIMUM_VERTICAL_KEY = "MaximumVerticalProjection" #Required
-    EQUIVALENT_HORIZONTAL_KEY = "EquivalentHorizontalRadius" #Required
+    # JSON Keys
+    E0_KEY = "E0" # Required
+    E1_KEY = "E1" # Required
+    E2_KEY = "E2" # Required
+    MAXIMUM_HORIZONTAL_KEY = "MaximumHorizontalProjection" # Required
+    MAXIMUM_VERTICAL_KEY = "MaximumVerticalProjection" # Required
+    EQUIVALENT_HORIZONTAL_KEY = "EquivalentHorizontalRadius" # Required
 
-    def __init__ (self, newE0Error = None, newE0Azimuth = None, newE0Dip = None, 
-                  newE1Error = None, newE1Azimuth = None, newE1Dip = None, 
-                  newE2Error = None, newE2Azimuth = None, newE2Dip = None, 
+    def __init__ (self, newE0 = None, newE1 = None, newE2 = None, 
                   newMaximumHorizontalProjection = None, 
                   newMaximumVerticalProjection = None, 
                   newEquivalentHorizontalRadius = None):
-    ''' Initializing the object. Constructs an empty object if all arguments are None.
-    
-        newE0Error: a double containing the length of the first axis of the error
-                ellipsoid in kilometers
-        newE0Azimuth: a double containing the azimuth of the first axis of the
-                error ellipsoid in degrees
-        newE0Dip: a double containing the dip of the first axis of error ellipsoid
-                in degrees
-        newE1Error: a double containing the length of the second axis of the error
-                error ellipsoid in kilometers
-        newE1Azimuth: a double containing the azimuth of the second axis of error
-                error ellipsoid in degrees
-        newE1Dip: a double containing the dip of the second axis of error ellispoid
-                in degrees
-        newE2Error: a double containing the length of the third axis of error
-                ellipsoid in kilometers
-        newE2Azimuth: a double containing the azimth of the third axis of error
-                ellipsoid in degrees
-        newE2Dip: a double containing the dip of the third axis of error ellipsoid
-                in degrees
-        newMaximumHorizontalProjection: a double containing the horizontal projection
-                of the error ellipsoid in kilometers
-        newMaximumVerticalProjection: a double containing the vertical projection
-                of the error ellipsoid in kilometers
-        newEquivalentHorizontalRadius: a double containing the equivalent radius
-                of the horizontal error ellipsoid in kilometers
-    '''
+        ''' Initializing the object. Constructs an empty object if all arguments are None.
         
-        if newE0Error is not None:
-            self.E0Error = newE0Error
-            
-        if newE0Azimuth is not None:
-            self.E0Azimuth = newE0Azimuth
-            
-        if newE0Dip is not None:
-            self.E0Dip = newE0Dip
-            
-        if newE1Error is not None:
-            self.E1Error = newE1Error
+            newE0: an ErrorEllipseAxis containing the first axis of the error ellipsoid
+            newE1: an ErrorEllipseAxis containing the second axis of the error ellipsoid
+            newE2: an ErrorEllipseAxis containing the third axis of error ellipsoid
+            newMaximumHorizontalProjection: a double containing the horizontal projection
+                    of the error ellipsoid in kilometers
+            newMaximumVerticalProjection: a double containing the vertical projection
+                    of the error ellipsoid in kilometers
+            newEquivalentHorizontalRadius: a double containing the equivalent radius
+                    of the horizontal error ellipsoid in kilometers
+        '''
         
-        if newE1Azimuth is not None:
-            self.E1Azimuth = newE1Azimuth
+        # Required Keys
+        if newE0 is not None:
+            self.e0 = newE0
+        else:
+            self.e0 = processingformats.errorEllipseAxis.ErrorEllipseAxis()
             
-        if newE1Dip is not None:
-            self.E1Dip = newE1Dip
+        if newE1 is not None:
+            self.e1 = newE1
+        else:
+            self.e1 = processingformats.errorEllipseAxis.ErrorEllipseAxis()
             
-        if newE2Error is not None:
-            self.E2Error = newE2Error
+        if newE2 is not None:
+            self.e2 = newE2
+        else:
+            self.e2 = processingformats.errorEllipseAxis.ErrorEllipseAxis()
         
-        if newE2Azimuth is not None:
-            self.E2Azimuth = newE2Azimuth
+        if newMaximumHorizontalProjection is not None:
+            self.maximumHorizontalProjection = newMaximumHorizontalProjection
             
-        if newE2Dip is not None:
-            self.E2Dip = newE2Dip
+        if newMaximumVerticalProjection is not None:
+            self.maximumVerticalProjection = newMaximumVerticalProjection
+
+        if newEquivalentHorizontalRadius is not None:
+            self.equivalentHorizontalRadius = newEquivalentHorizontalRadius            
 
     def fromJSONString (self, JSONString):
-    ''' Populates object from a JSON string
-    
-        JSONString: a requred string containing the JSON formatted text
-    '''
+        ''' Populates object from a JSON string
+        
+            JSONString: a required string containing the JSON formatted text
+        '''
         JSONObject = json.loads(JSONString)
         self.fromDict(JSONObject)
 
     def fromDict (self, aDict):
-    ''' Populates object from a dictionary
-    
-        aDict: required dictionary
-    '''
+        ''' Populates object from a dictionary
+        
+            aDict: required dictionary
+        '''
         
         try:
-            self.E0Error = aDict[self.E0ERROR_KEY]
-            self.E0Azimuth = aDict[self.E0AZIMUTH_KEY]
-            self.E0Dip = aDict[self.E0DIP_KEY]
-            self.E1Error = aDict[self.]
+            self.e0.fromDict(aDict[self.E0_KEY])
+            self.e1.fromDict(aDict[self.E1_KEY])
+            self.e2.fromDict(aDict[self.E2_KEY])
+            self.maximumHorizontalProjection = aDict[self.MAXIMUM_HORIZONTAL_KEY]
+            self.maximumVerticalProjection = aDict[self.MAXIMUM_VERTICAL_KEY]
+            self.equivalentHorizontalRadius = aDict[self.EQUIVALENT_HORIZONTAL_KEY]
+        except(ValueError, KeyError, TypeError) as e:
+            print("Dictionary format error, missing required keys: %s" % e)
 
     def toJSONString(self):
-    ''' Converts object to JSON formatted string
-        
-        Returns: the JSON fromatted message as a string
-    '''
+        ''' Converts object to JSON formatted string
+            
+            Returns: the JSON fromatted message as a string
+        '''
         JSONObject = self.toDict()
         
         return json.dumps(JSONObject, ensure_ascii=False)
 
     def toDict(self):
-    ''' Converts object to a dictionary
-    
-        Returns: the dictionary
-    '''
+        ''' Converts object to a dictionary
+        
+            Returns: the dictionary
+        '''
         
         aDict = {}
         
-        #Required Keys
+        # Required Keys
+        try:
+            aDict[self.E0_KEY] = self.e0.toDict()
+            aDict[self.E1_KEY] = self.e1.toDict()
+            aDict[self.E2_KEY] = self.e2.toDict()
+            aDict[self.MAXIMUM_HORIZONTAL_KEY] = self.maximumHorizontalProjection
+            aDict[self.MAXIMUM_VERTICAL_KEY] = self.maximumVerticalProjection
+            aDict[self.EQUIVALENT_HORIZONTAL_KEY] = self.equivalentHorizontalRadius
+            
+        except(NameError, AttributeError) as e:
+            print("Missing required data error: %s" % e)
+
+        return aDict
 
     def isValid (self):
-    ''' Checks to see if object is valid
-        
-        Returns: True if object is valid, False otherwise
-    '''
+        ''' Checks to see if object is valid
+            
+            Returns: True if object is valid, False otherwise
+        '''
         errorList = self.getErrors()
         
         return not errorList
 
     def getErrors (self):
-    ''' Gets a list of object validation errors
-        
-        Returns: a list of strings containing the validation error messages
-    '''
+        ''' Gets a list of object validation errors
+            
+            Returns: a list of strings containing the validation error messages
+        '''
         errorList = []
         
-        #E0 Error
+        # E0
         try:
-            self.E0Error 
+            if not self.e0.isValid():
+                errorList.append('Invalid first error axis in ErrorEllipse Class')
         except(NameError, AttributeError):
-            errorList.append('No first axis error in ErrorEllipse Class')
+            errorList.append('No first error axis in ErrorEllipse Class.')
         
-        #E0 Azimuth
+        # E1
         try:
-            self.E0Azimuth
+            if not self.e1.isValid():
+                errorList.append('Invalid second error axis in ErrorEllipse Class')
         except(NameError, AttributeError):
-            errorList.append('No first axis azimuth in ErrorEllipse Class')
+            errorList.append('No second error axis in ErrorEllipse Class.')
         
-        #E0 Dip
+        # E2
         try:
-            self.E0Dip
+            if not self.e2.isValid():
+                errorList.append('Invalid third error axis in ErrorEllipse Class')
         except(NameError, AttributeError):
-            errorList.append('No first axis dip in ErrorEllipse Class')
+            errorList.append('No third error axis in ErrorEllipse Class.')
         
-        #E1 Error
-        try:
-            self.E1Error
-        except(NameError, AttributeError):
-            errorList.append('No second axis error in ErrorEllipse class')
-        
-        #E1 Azimuth
-        try:
-            self.E1Azimuth
-        except(NameError, AttributeError):
-            errorList.append('No second axis azimuth in ErrorEllipse class')
-        
-        #E1 Dip
-        try:
-            self.E1Dip
-        except(NameError, AttributeError):
-            errorList.append('No second axis dip in ErrorEllipse class')
-        
-        #E2 Error
-        try:
-            self.E2Error
-        except(NameError, AttributeError):
-            errorList.append('No third axis error in ErrorEllipse class.')
-        
-        #E2 Azimuth
-        try:
-            self.E2Azimuth
-        except(NameError, AttributeError):
-            errorList.append('No third axis azimuth in ErrorEllipse class')
-            
-        #E2 Dip
-        try:
-            self.E2Dip
-        except(NameError, AttributeError):
-            errorList.append('No third axis dip in ErrorEllipse class')
-        
-        #MaximumHorizontalProjection
+        # maximumHorizontalProjection
         try:
             self.maximumHorizontalProjection
         except(NameError, AttributeError):
             errorList.append('No MaximumHorizontalProjection in ErrorEllipse Class.')
         
-        #MaximumVerticalProjection
+        # maximumVerticalProjection
         try:
             self.maximumVerticalProjection
         except(NameError, AttributeError):
             errorList.append('No MaximumVerticalProjection in ErrorEllipse Class')
         
-        #EquivalentHorizontalRadius
+        # equivalentHorizontalRadius
         try:
             self.equivalentHorizontalRadius
         except(NameError, AttributeError):
@@ -211,38 +175,20 @@ class ErrorEllipse:
         return errorList
 
     def isEmpty(self):
-    ''' Checks to see if object is empty
-    
-        Returns: True if the object has no attributes, False otherwise
-    '''
+        ''' Checks to see if object is empty
         
-        if hasattr(self, 'E0Error'):
+            Returns: True if the object has no attributes, False otherwise
+        '''
+        
+        if hasattr(self, 'e0'):
             return False
         
-        if hasattr(self, 'E0Azimuth'):
+        if hasattr(self, 'e1'):
             return False
         
-        if hasattr(self, 'E0Dip'):
+        if hasattr(self, 'e2'):
             return False
-        
-        if hasattr(self, 'E1Error'):
-            return False
-        
-        if hasattr(self, 'E1Azimuth'):
-            return False
-        
-        if hasattr(self, 'E1Dip'):
-            return False
-        
-        if hasattr(self, 'E2Error'):
-            return False
-        
-        if hasattr(self, 'E2Azimuth'):
-            return False
-        
-        if hasattr(self, 'E2Dip'):
-            return False
-        
+       
         if hasattr(self, 'maximumHorizontalProjection'):
             return False
         

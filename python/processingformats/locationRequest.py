@@ -27,7 +27,7 @@ class LocationRequest:
     ISLOCATIONNEW_KEY = "IsLocationNew" #Optional
     ISLOCATIONHELD_KEY = "IsLocationHeld" #Optional
     ISDEPTHHELD_KEY = "IsDepthHeld" #Optional
-    ISBAYESIANDEPTH_KEY = "IsBAyesianDepth" #Optional
+    ISBAYESIANDEPTH_KEY = "IsBayesianDepth" #Optional
     BAYESIANDEPTH_KEY = "BayesianDepth" #Optional
     BAYESIANSPREAD_KEY = "BayesianSpread" #Optional
     USESVD_KEY = "UseSVD" #Optional
@@ -40,24 +40,24 @@ class LocationRequest:
                   newInputData = None, newIsLocationNew = None, newIsLocationHeld = None, 
                   newIsDepthHeld = None, newIsBayesianDepth = None, newBayesianDepth = None,
                   newBayesianSpread = None, newUseSVD = None):
-    ''' Initializes the pick object. Constructs empty object if all are none
-    
-        newID: a string containing the ID
-        newType: a type identifier for this Location Request
-        newEarthModel: an earth model for this Location Request
-        newSourceLatitude: a double containing the source latitude
-        newSourceLongitude: a double containing the source longitude
-        newSourceOriginTime: a Datetime containing the source time
-        newSourceDepth: a double containing the source depth
-        newInputData: a vector of input Pick objects for this Location Result
-        newIsLocationNew: a boolean indicating whether the location is new
-        newIsLocationHeld: a boolean indicating whether the location is held
-        newIsDepthHeld: a boolean indicating whether the depth is held
-        newIsBayesianDepth: a boolean indicating whether the depth is bayesian
-        newBayesianDepth: a double containing the bayesian depth
-        newBayesianSpread: a double containing the bayesian spread
-        newUseSVD: a boolean indicating whther use SVD
-    '''
+        ''' Initializes the pick object. Constructs empty object if all are none
+        
+            newID: a string containing the ID
+            newType: a type identifier for this Location Request
+            newEarthModel: an earth model for this Location Request
+            newSourceLatitude: a double containing the source latitude
+            newSourceLongitude: a double containing the source longitude
+            newSourceOriginTime: a Datetime containing the source time
+            newSourceDepth: a double containing the source depth
+            newInputData: a vector of input Pick objects for this Location Result
+            newIsLocationNew: a boolean indicating whether the location is new
+            newIsLocationHeld: a boolean indicating whether the location is held
+            newIsDepthHeld: a boolean indicating whether the depth is held
+            newIsBayesianDepth: a boolean indicating whether the depth is bayesian
+            newBayesianDepth: a double containing the bayesian depth
+            newBayesianSpread: a double containing the bayesian spread
+            newUseSVD: a boolean indicating whether use SVD
+        '''
         
         self.outputData = None
         
@@ -110,18 +110,18 @@ class LocationRequest:
             self.useSVD = newUseSVD
 
     def fromJSONString (self, JSONString):
-    ''' Populates object from a JSON formatted string
-    
-        JSONString: a required string containing the JSON formatted text
-    '''
+        ''' Populates object from a JSON formatted string
+        
+            JSONString: a required string containing the JSON formatted text
+        '''
         JSONObject = json.loads(JSONString)
         self.fromDict(JSONObject)
 
     def fromDict (self, aDict):
-    ''' Populates object from a dictionary
-        
-        aDict: a required dictionary
-    '''
+        ''' Populates object from a dictionary
+            
+            aDict: a required dictionary
+        '''
         
         #Required Keys
         try:
@@ -173,19 +173,19 @@ class LocationRequest:
             self.useSVD = aDict[self.USESVD_KEY]
 
     def toJSONString(self):
-    ''' Converts object to a JSON formatted string
-    
-        Returns: JSON formatted message as a string
-    '''
+        ''' Converts object to a JSON formatted string
+        
+            Returns: JSON formatted message as a string
+        '''
         JSONObject = self.toDict()
         
         return json.dumps(JSONObject, ensure_ascii = False)
 
     def toDict(self):
-    ''' Converts object to a dictionary
-    
-        Returns: the dictionary
-    '''
+        ''' Converts object to a dictionary
+        
+            Returns: the dictionary
+        '''
         
         aDict = {}
         
@@ -200,12 +200,13 @@ class LocationRequest:
             aDict[self.SOURCEORIGINTIME_KEY] = timestring
             
             aDataList = []
-            if self.inputData and len(self.inputData) > :
+            if self.inputData and len(self.inputData) > 0:
                 for aData in self.inputData:
                     aDataList.append(aData.toDict())
             
+            aDict[self.INPUTDATA_KEY] = aDataList
         except(NameError, AttributeError) as e:
-            print("Missing requried data error: %s" % e)
+            print("Missing required data error: %s" % e)
             
         #Optional Keys
         if hasattr (self, 'ID'):
@@ -236,19 +237,19 @@ class LocationRequest:
         return aDict
 
     def isValid(self):
-    ''' Checks to see if object is valid
-    
-        Returns: true if object is valid, false otherwise
-    '''
+        ''' Checks to see if object is valid
+        
+            Returns: true if object is valid, false otherwise
+        '''
         errorList = self.getErrors()
         
         return not errorList
 
     def getErrors (self):
-    ''' Gets a list of object validation errors
-    
-        Returns: a list of string containing the validation error messages
-    '''
+        ''' Gets a list of object validation errors
+        
+            Returns: a list of string containing the validation error messages
+        '''
         errorList = []
         
         #required keys

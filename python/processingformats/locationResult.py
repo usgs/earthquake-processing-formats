@@ -41,28 +41,28 @@ class LocationResult:
                   newRMS = None, newQuality = None, newBayesianDepth = None, 
                   newBayesianRange = None, newDepthImportance = None, 
                   newLocatorExitCode = None, newErrorEllipse = None):
-    ''' Initializing the object. Constructs an empty object if all arguments are None.
-    
-        newID: a string containing the ID
-        newHypocenter: a processingformats.hypocenter.Hypocenter containing the desired
-                hypocenter (and supporting info)
-        newSupportingData: a vector of Pick objects used to generate this location
-        newAssociatedStations: an int containing the number of associated stations
-        newAssociatedPhases: an int containing the number of associated phases
-        newUsedStations: an int containing the number of used stations
-        newUsedPhases: an int containing the number of used phases
-        newGap: a double containing the gap
-        newSecondaryGap: a double containing the secondary gap
-        newMinimumDistance: a double containing the detection minimum distance
-        newRMS: a double containing the RMS
-        newQuality: a string containing the quality flag
-        newBayesianDepth: a double containing the bayesian depth
-        newBayesianRange: a double containng the bayesian range
-        newDepthImportance: a double containing the depth importance
-        newLocatorExitCode: a string containing the locator exit code
-        newErrorEllipse: a processingformats.errorEllipse.ErrorEllipse containing
-                the desired error ellipse (and supporting info)
-    '''
+        ''' Initializing the object. Constructs an empty object if all arguments are None.
+        
+            newID: a string containing the ID
+            newHypocenter: a processingformats.hypocenter.Hypocenter containing the desired
+                    hypocenter (and supporting info)
+            newSupportingData: a vector of Pick objects used to generate this location
+            newAssociatedStations: an int containing the number of associated stations
+            newAssociatedPhases: an int containing the number of associated phases
+            newUsedStations: an int containing the number of used stations
+            newUsedPhases: an int containing the number of used phases
+            newGap: a double containing the gap
+            newSecondaryGap: a double containing the secondary gap
+            newMinimumDistance: a double containing the detection minimum distance
+            newRMS: a double containing the RMS
+            newQuality: a string containing the quality flag
+            newBayesianDepth: a double containing the bayesian depth
+            newBayesianRange: a double containng the bayesian range
+            newDepthImportance: a double containing the depth importance
+            newLocatorExitCode: a string containing the locator exit code
+            newErrorEllipse: a processingformats.errorEllipse.ErrorEllipse containing
+                    the desired error ellipse (and supporting info)
+        '''
         
         #Required Keys
         if newHypocenter is not None:
@@ -123,19 +123,19 @@ class LocationResult:
             self.errorEllipse = processingformats.errorEllipse.ErrorEllipse()
 
     def fromJSONString (self, JSONString):
-    ''' Populates object from a JSON formatted string
-    
-        JSONString: a required string containing the JSON formatted text
-    '''
+        ''' Populates object from a JSON formatted string
+        
+            JSONString: a required string containing the JSON formatted text
+        '''
     
         JSONObject = json.loads(JSONString)
         self.fromDict(JSONObject)
 
     def fromDict(self, aDict):
-    ''' Populates object from a dictionary
-    
-        aDict: a required dictionary
-    '''
+        ''' Populates object from a dictionary
+        
+            aDict: a required dictionary
+        '''
         
         #Required keys
         try:
@@ -200,20 +200,20 @@ class LocationResult:
             self.errorEllipse.fromDict(aDict[self.ERRORELLIPSE_KEY])
 
     def toJSONString(self):
-    ''' Converts object to a JSON formatted string
-    
-        Returns: JSON formatted message as a string
-    '''
+        ''' Converts object to a JSON formatted string
+        
+            Returns: JSON formatted message as a string
+        '''
     
         JSONObject = self.toDict()
         
         return json.dumps(JSONObject, ensure_ascii=False)
 
     def toDict(self):
-    ''' Converts object to a dictionary
-    
-        Returns: the dictionary
-    '''
+        ''' Converts object to a dictionary
+        
+            Returns: the dictionary
+        '''
         
         aDict = {}
         
@@ -278,20 +278,20 @@ class LocationResult:
         return aDict
 
     def isValid(self):
-    ''' Checks to see if object is valid
-    
-        Returns: true if object is valid, false otherwise
-    '''
+        ''' Checks to see if object is valid
+        
+            Returns: true if object is valid, false otherwise
+        '''
         
         errorList = self.getErrors()
         
         return not errorList
 
     def getErrors(self):
-    ''' Gets a list of object validation errors
-    
-        Returns: a list of strings containing the validation error messages
-    '''
+        ''' Gets a list of object validation errors
+        
+            Returns: a list of strings containing the validation error messages
+        '''
         
         errorList = []
         
