@@ -7,12 +7,20 @@
 #ifndef PROCESSING_UTIL_H
 #define PROCESSING_UTIL_H
 
-#include <rapidjson/document.h>
-#include <rapidjson/writer.h>
-#include <rapidjson/stringbuffer.h>
-
 #include <exception>
 #include <string>
+
+// needed to disable rapidjson warnings for clang
+#ifdef __clang__
+	#pragma clang diagnostic push
+	#pragma clang diagnostic ignored "-Wexpansion-to-defined"
+#endif
+#include "document.h" // NOLINT
+#include "writer.h" // NOLINT
+#include "stringbuffer.h"  // NOLINT
+#ifdef __clang__
+	#pragma clang diagnostic pop
+#endif
 
 /**
  * @namespace processingformats
