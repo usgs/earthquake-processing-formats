@@ -122,3 +122,20 @@ class ErrorEllipseAxis:
       errorList.append('No Dip in ErrorEllipseAxis Class.')
          
     return errorList    
+
+  def isEmpty(self):
+    ''' Checks to see if object is empty
+    
+        Returns: True if the object has no attributes, False otherwise
+    '''
+    
+    if hasattr(self, 'error'):
+        return False
+    
+    if hasattr(self, 'azimuth'):
+        return False
+    
+    if hasattr(self, 'dip'):
+        return False
+    
+    return True

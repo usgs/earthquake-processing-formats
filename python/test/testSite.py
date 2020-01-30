@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-#package imports
+# package imports
 import processingformats.site
 
-#stdlib imports
+# stdlib imports
 import unittest
 
 class TestSite(unittest.TestCase):
@@ -16,7 +16,7 @@ class TestSite(unittest.TestCase):
     LATITUDE = 45.596970
     LONGITUDE = -111.629670
     ELEVATION = 1589.000000
-    JSONSTRING = '{"Station": "BOZ", "Channel": "BHZ", "Network": "US", "Location": "00", "Latitude": 45.596970, "Longitude": -111.629670, "Elevation": 1589.000000}'
+    JSONSTRING = '{"Station": "BOZ", "Network": "US", "Latitude": 45.59697, "Longitude": -111.62967, "Elevation": 1589.0, "Channel": "BHZ", "Location": "00"}'
     DICT = {'Station': 'BOZ', 'Channel': 'BHZ', 'Network': 'US', 'Location': '00', 'Latitude': 45.596970, 'Longitude': -111.629670, 'Elevation': 1589.000000}
     
     def test_init(self):

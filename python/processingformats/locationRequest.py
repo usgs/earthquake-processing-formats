@@ -16,22 +16,22 @@ class LocationRequest:
     """
     
     #JSON Keys
-    TYPE_KEY = "Type" #Required
-    ID_KEY = "ID" #Optional
-    EARTHMODEL_KEY = "EarthModel" #Required
-    SOURCEORIGINTIME_KEY = "SourceOriginTime" #Required
-    SOURCELATITUDE_KEY = "SourceLatitude" #Required
-    SOURCELONGITUDE_KEY = "SourceLongitude" #Required
-    SOURCEDEPTH_KEY = "SourceDepth" #Required
-    INPUTDATA_KEY = "InputData" #Required
-    ISLOCATIONNEW_KEY = "IsLocationNew" #Optional
-    ISLOCATIONHELD_KEY = "IsLocationHeld" #Optional
-    ISDEPTHHELD_KEY = "IsDepthHeld" #Optional
-    ISBAYESIANDEPTH_KEY = "IsBayesianDepth" #Optional
-    BAYESIANDEPTH_KEY = "BayesianDepth" #Optional
-    BAYESIANSPREAD_KEY = "BayesianSpread" #Optional
-    USESVD_KEY = "UseSVD" #Optional
-    OUTPUTDATA_KEY = "OutputData" #Contain output from locator
+    TYPE_KEY = "Type" # Required
+    ID_KEY = "ID" # Optional
+    EARTHMODEL_KEY = "EarthModel" # Required
+    SOURCEORIGINTIME_KEY = "SourceOriginTime" # Required
+    SOURCELATITUDE_KEY = "SourceLatitude" # Required
+    SOURCELONGITUDE_KEY = "SourceLongitude" # Required
+    SOURCEDEPTH_KEY = "SourceDepth" # Required
+    INPUTDATA_KEY = "InputData" # Required
+    ISLOCATIONNEW_KEY = "IsLocationNew" # Optional
+    ISLOCATIONHELD_KEY = "IsLocationHeld" # Optional
+    ISDEPTHHELD_KEY = "IsDepthHeld" # Optional
+    ISBAYESIANDEPTH_KEY = "IsBayesianDepth" # Optional
+    BAYESIANDEPTH_KEY = "BayesianDepth" # Optional
+    BAYESIANSPREAD_KEY = "BayesianSpread" # Optional
+    USESVD_KEY = "UseSVD" # Optional
+    OUTPUTDATA_KEY = "OutputData" # Contain output from locator
     
     #Intialize members
     def __init__ (self, newID = None, newType = None, newEarthModel = None, 
@@ -61,7 +61,7 @@ class LocationRequest:
         
         self.outputData = None
         
-        #Required Keys
+        # Required Keys
         if newType is not None:
             self.type = newType
             
@@ -84,9 +84,9 @@ class LocationRequest:
             if newInputData and len(newInputData) > 0:
                 self.inputData = newInputData
             
-        #Optional Keys
+        # Optional Keys
         if newID is not None:
-            self.ID = newID
+            self.id = newID
             
         if newIsLocationNew is not None:
             self.isLocationNew = newIsLocationNew
@@ -130,10 +130,9 @@ class LocationRequest:
             self.sourceLatitude = aDict[self.SOURCELATITUDE_KEY]
             self.sourceLongitude = aDict[self.SOURCELONGITUDE_KEY]
             self.sourceDepth = aDict[self.SOURCEDEPTH_KEY]
-            timestring = aDict[self.SOURCEORIGINTIME_KEY] [:1] + "000Z"
-            self.sourceOriginTime = datetime.datetime.strptime(timestring, "%Y-%m-%dT%H:%M:%S.%fZ")
+            timeString = aDict[self.SOURCEORIGINTIME_KEY][:-1] + "000Z"
+            self.sourceOriginTime = datetime.datetime.strptime(timeString, "%Y-%m-%dT%H:%M:%S.%fZ")
             
-            aDataList = []
             if self.INPUTDATA_KEY in aDict:
                 aDataList = aDict[self.INPUTDATA_KEY]
                 if aDataList:
@@ -149,7 +148,7 @@ class LocationRequest:
             
         #Optional Keys
         if self.ID_KEY in aDict:
-            self.ID = aDict[self.ID_KEY]
+            self.id = aDict[self.ID_KEY]
             
         if self.ISLOCATIONNEW_KEY in aDict:
             self.isLocationNew = aDict[self.ISLOCATIONNEW_KEY]
@@ -209,8 +208,8 @@ class LocationRequest:
             print("Missing required data error: %s" % e)
             
         #Optional Keys
-        if hasattr (self, 'ID'):
-            aDict[self.ID_KEY] = self.ID
+        if hasattr (self, 'id'):
+            aDict[self.ID_KEY] = self.id
             
         if hasattr (self, 'isLocationNew'):
             aDict[self.ISLOCATIONNEW_KEY] = self.isLocationNew
@@ -261,30 +260,31 @@ class LocationRequest:
         except(NameError, AttributeError):
             errorList.append('No Source Latitude in LocationRequest Class.')
             
-        #sourceLongitude
+        # sourceLongitude
         try:
             if self.sourceLongitude < -180 or self.sourceLongitude > 180:
                 errorList.append('Source Longitude in LocationRequest Class not in range of -180 to 180.')
         except(NameError, AttributeError):
             errorList.append('No Source Longitude in LocationRequest Class')
         
-        #sourceDepth
+        # sourceDepth
         try:
             if self.sourceDepth < -100 or self.sourceDepth > 1500:
                 errorList.append('Source Depth in LocationRequest Class not in the range of -100 to 1500')
         except(NameError, AttributeError):
             errorList.append('No Source Depth in LocationRequest Class.')
         
-        #sourceOriginTime
+        # sourceOriginTime
         try:
             self.sourceOriginTime
         except(NameError, AttributeError):
             errorList.append('No Source Origin Time in LocationRequest Class.')
         
-        #inputData
-        if self.inputData and len(self.inputData) > 0:
-            for anInput in self.inputData:
-                if not anInput.isValid():
-                    errorList.append('Invalid Input in LocationRequest Class.')
+        # inputData
+        if hasattr(self, 'inputData'):
+            if self.inputData and len(self.inputData) > 0:
+                for anInput in self.inputData:
+                    if not anInput.isValid():
+                        errorList.append('Invalid Input in LocationRequest Class.')
                     
         return errorList

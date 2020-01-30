@@ -2,15 +2,15 @@
 # -*- coding: utf-8 -*-
 
 
-#package imports
+# package imports
 import processingformats.hypocenter
 
-#stdlib imports
+#s tdlib imports
 import unittest
 import datetime
 
 class TestHypocenter(unittest.TestCase):
-    LATITUDE = 45
+    LATITUDE = 45.6
     LONGITUDE = 111.5
     DEPTH = 12.5
     TIME = datetime.datetime(2019, 5, 17, 9, 24, 59, 0)

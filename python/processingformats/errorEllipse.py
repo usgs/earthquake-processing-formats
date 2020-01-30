@@ -182,12 +182,21 @@ class ErrorEllipse:
         
         if hasattr(self, 'e0'):
             return False
+        else:
+            if not self.e0.isEmpty():
+                return False
         
         if hasattr(self, 'e1'):
             return False
+        else:
+            if not self.e2.isEmpty():
+                return False
         
         if hasattr(self, 'e2'):
             return False
+        else:
+            if not self.e2.isEmpty():
+                return False
        
         if hasattr(self, 'maximumHorizontalProjection'):
             return False

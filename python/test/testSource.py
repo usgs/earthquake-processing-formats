@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 
-#package imports
+# package imports
 import processingformats.source
 
-#stdlib imports
+# stdlib imports
 import unittest
 
 class TestSource(unittest.TestCase):

@@ -16,23 +16,23 @@ class LocationResult:
     """
     
     #JSON Keys
-    ID_KEY = "ID" #Optional
-    HYPOCENTER_KEY = "Hypocenter" #Required
-    SUPPORTINGDATA_KEY = "SupportingData" #Required
-    ASSOCIATEDSTATIONS_KEY = "NumberOfAssociatedStations" #Optional
-    ASSOCIATEDPHASES_KEY = "NumberOfAssociatedPhases" #Optional
-    USEDSTATIONS_KEY = "NumberOfUsedStations" #Optional
-    USEDPHASES_KEY = "NumberOfUsedPhases" #Optional
-    GAP_KEY = "Gap" #Optional
-    SECONDARYGAP_KEY = "SecondaryGap" #Optional
-    MINIMUMDISTANCE_KEY = "MinimumDistance" #Required
-    RMS_KEY = "RMS" #Optional
-    QUALITY_KEY = "Quality" #Optional
-    BAYESIANDEPTH_KEY = "BayesianDepth" #Optional
-    BAYESIANRANGE_KEY = "BayesianRange" #Optional
-    DEPTHIMPORTANCE_KEY = "DepthImportance" #Optional
-    LOCATOREXITCODE_KEY = "LocatorExitCode" #Optional
-    ERRORELLIPSE_KEY = "ErrorEllipse" #Optional
+    ID_KEY = "ID" # Optional
+    HYPOCENTER_KEY = "Hypocenter" # Required
+    SUPPORTINGDATA_KEY = "SupportingData" # Required
+    ASSOCIATEDSTATIONS_KEY = "NumberOfAssociatedStations" # Optional
+    ASSOCIATEDPHASES_KEY = "NumberOfAssociatedPhases" # Optional
+    USEDSTATIONS_KEY = "NumberOfUsedStations" # Optional
+    USEDPHASES_KEY = "NumberOfUsedPhases" # Optional
+    GAP_KEY = "Gap" # Optional
+    SECONDARYGAP_KEY = "SecondaryGap" # Optional
+    MINIMUMDISTANCE_KEY = "MinimumDistance" # Required
+    RMS_KEY = "RMS" # Optional
+    QUALITY_KEY = "Quality" # Optional
+    BAYESIANDEPTH_KEY = "BayesianDepth" # Optional
+    BAYESIANRANGE_KEY = "BayesianRange" # Optional
+    DEPTHIMPORTANCE_KEY = "DepthImportance" # Optional
+    LOCATOREXITCODE_KEY = "LocatorExitCode" # Optional
+    ERRORELLIPSE_KEY = "ErrorEllipse" # Optional
     
     def __init__ (self, newID = None, newHypocenter = None, newSupportingData = None, 
                   newAssociatedStations = None, newAssociatedPhases = None, 
@@ -100,7 +100,7 @@ class LocationResult:
             self.secondaryGap = newSecondaryGap
             
         if newRMS is not None:
-            self.RMS = newRMS
+            self.rms = newRMS
             
         if newQuality is not None:
             self.quality = newQuality
@@ -137,7 +137,7 @@ class LocationResult:
             aDict: a required dictionary
         '''
         
-        #Required keys
+        # Required keys
         try:
             self.hypocenter.fromDict(aDict[self.HYPOCENTER_KEY])
             self.minimumDistance = aDict[self.MINIMUMDISTANCE_KEY]
@@ -155,7 +155,7 @@ class LocationResult:
                     newPick.fromDict(aData)
                     self.supportingData.append(newPick)
         
-        #Optional Keys
+        # Optional Keys
         if self.ID_KEY in aDict:
             self.id = aDict[self.ID_KEY]
             
@@ -178,7 +178,7 @@ class LocationResult:
             self.secondaryGap = aDict[self.SECONDARYGAP_KEY]
             
         if self.RMS_KEY in aDict:
-            self.RMS = aDict[self.RMS_KEY]
+            self.rms = aDict[self.RMS_KEY]
             
         if self.QUALITY_KEY in aDict:
             self.quality = aDict[self.QUALITY_KEY]
@@ -217,21 +217,21 @@ class LocationResult:
         
         aDict = {}
         
-        #Required Keys
+        # Required Keys
         try:
             aDict[self.HYPOCENTER_KEY] = self.hypocenter.toDict()
-            aDict[self.SUPPORTINGDATA_KEY] = self.supportingData
             aDict[self.MINIMUMDISTANCE_KEY] = self.minimumDistance
+
+            aDataList = []
+            if self.supportingData and len(self.supportingData) > 0:
+                for aData in self.supportingData:
+                    aDataList.append(aData.toDict())
+
+            aDict[self.SUPPORTINGDATA_KEY] = aDataList
         except(NameError, AttributeError) as e:
             print("Missing required data error: %s" % e)
         
-        
-        aDataList = []
-        if self.supportingData and len(self.supportingData) > 0:
-            for aData in self.supportingData:
-                aDataList.append(aData.toDict())
-            
-        #Optional Keys
+        # Optional Keys
         if hasattr(self, 'id'):
             aDict[self.ID_KEY] = self.id
         
@@ -253,8 +253,8 @@ class LocationResult:
         if hasattr(self, 'secondaryGap'):
             aDict[self.SECONDARYGAP_KEY] = self.secondaryGap
             
-        if hasattr(self, 'RMS'):
-            aDict[self.RMS_KEY] = self.RMS
+        if hasattr(self, 'rms'):
+            aDict[self.RMS_KEY] = self.rms
             
         if hasattr(self, 'quality'):
             aDict[self.QUALITY_KEY] = self.quality
@@ -295,39 +295,42 @@ class LocationResult:
         
         errorList = []
         
-        #required keys
-        #Hypocenter
+        # required keys
+        # Hypocenter
         try:
             if not self.hypocenter.isValid():
                 errorList.append('Invalid Hypocenter in LocationResult Class.')
         except(NameError, AttributeError):
             errorList.append('No Hypocenter in LocationResult Class.')
             
-        #SupportingData
-        if self.supportingData and len(self.supportingData) > 0:
-            for aData in self.supportingData:
-                if not aData.isValid():
-                    errorList.append('Invalid Pick in LocationResult Class')
+        # SupportingData
+        try:
+            if self.supportingData and len(self.supportingData) > 0:
+                for aData in self.supportingData:
+                    if not aData.isValid():
+                        errorList.append('Invalid Pick in LocationResult Class')
+        except(NameError, AttributeError):
+            errorList.append('No Supporting Data in LocationResult Class.')
         
-        #Minimum Distance
+        # Minimum Distance
         try:
             if self.minimumDistance < 0:
                 errorList.append('MinimumDistance in LocationResult Class is not greater than 0.')
         except(NameError, AttributeError):
             errorList.append('No MinimumDistance in LocationResult Class.')
         
-        #Optional Keys
-        #Gap
+        # Optional Keys
+        # Gap
         if hasattr(self, 'gap'):
             if self.gap < 0 or self.gap > 360:
                 errorList.append('Gap in LocationResult Class not in the range of 0 to 360.')
         
-        #Secondary Gap
+        # Secondary Gap
         if hasattr(self, 'secondaryGap'):
             if self.secondaryGap < 0 or self.secondaryGap > 360:
                 errorList.append('Secondary gap in LocationResult Class not in the range of 0 to 360.')
         
-        #Locator Exit Code
+        # Locator Exit Code
         try:
             match = False
             
@@ -355,7 +358,7 @@ class LocationResult:
             errorList.append('No locator exit code in LocationResult Class.')
                 
         
-        #Error Ellipse
+        # Error Ellipse
         if hasattr(self, 'errorEllipse'):
             if not self.errorEllipse.isEmpty():
                 if not self.errorEllipse.isValid():

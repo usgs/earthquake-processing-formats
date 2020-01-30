@@ -38,7 +38,7 @@ class Hypocenter:
             newTimeError: a double containing the time error
         '''
         
-        #required keys
+        # required keys
         if newLatitude is not None:
             self.latitude = newLatitude
         
@@ -51,7 +51,7 @@ class Hypocenter:
         if newTime is not None:
             self.time = newTime
             
-        #optional keys
+        # optional keys
         if newLatitudeError is not None:
             self.latitudeError = newLatitudeError
         
