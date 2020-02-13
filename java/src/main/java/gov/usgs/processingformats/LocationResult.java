@@ -14,6 +14,7 @@ public class LocationResult implements ProcessingInt {
   /** JSON Keys */
   public static final String ID_KEY = "ID";
 
+  public static final String SOURCE_KEY = "Source";
   public static final String HYPOCENTER_KEY = "Hypocenter";
   public static final String SUPPORTINGDATA_KEY = "SupportingData";
   public static final String ASSOCIATEDSTATIONS_KEY = "NumberOfAssociatedStations";
@@ -33,6 +34,9 @@ public class LocationResult implements ProcessingInt {
 
   /** Optional string containing the ID. */
   public String ID;
+
+  /** Optional Source. */
+  public Source Source;
 
   /** Required Hypocenter */
   public Hypocenter Hypocenter;
@@ -85,6 +89,7 @@ public class LocationResult implements ProcessingInt {
   /** The constructor for the LocationResult class. Initializes members to null values. */
   public LocationResult() {
     ID = null;
+    Source = null;
     Hypocenter = null;
     SupportingData = null;
     NumberOfAssociatedStations = null;
@@ -110,6 +115,9 @@ public class LocationResult implements ProcessingInt {
    * values.
    *
    * @param newID - A String containing the optional ID
+   * @param newAgencyID - A String containing the agencyid to Use
+   * @param newAuthor - A String containing the author to Use
+   * @param newType - A String containing the type to Use
    * @param newLatitude - A Double containing the latitude to use
    * @param newLongitude - A Double containing the longitude to use
    * @param newTime - A Date containing the origin time to use
@@ -158,6 +166,9 @@ public class LocationResult implements ProcessingInt {
    */
   public LocationResult(
       String newID,
+      String newAgencyID,
+      String newAuthor,
+      String newType,
       Double newLatitude,
       Double newLongitude,
       Date newTime,
@@ -195,6 +206,7 @@ public class LocationResult implements ProcessingInt {
 
     this(
         newID,
+        new Source(newAgencyID, newAuthor, newType),
         new Hypocenter(
             newLatitude,
             newLongitude,
@@ -240,6 +252,7 @@ public class LocationResult implements ProcessingInt {
    * provided values.
    *
    * @param newID - A String containing the optional ID
+   * @param newSource - A Source containing the optional Source to Use
    * @param newLatitude - A Double containing the latitude to use
    * @param newLongitude - A Double containing the longitude to use
    * @param newTime - A Date containing the origin time to use
@@ -253,6 +266,7 @@ public class LocationResult implements ProcessingInt {
    */
   public LocationResult(
       String newID,
+      Source newSource,
       Double newLatitude,
       Double newLongitude,
       Date newTime,
@@ -264,6 +278,7 @@ public class LocationResult implements ProcessingInt {
       ArrayList<Pick> newSupportingData) {
     this(
         newID,
+        newSource,
         new Hypocenter(
             newLatitude,
             newLongitude,
@@ -304,6 +319,7 @@ public class LocationResult implements ProcessingInt {
 
     this(
         null,
+        null,
         newHypocenter,
         newSupportingData,
         null,
@@ -329,6 +345,7 @@ public class LocationResult implements ProcessingInt {
    * provided values.
    *
    * @param newID - A String containing the optional ID
+   * @param newSource - A Source containing the Source to Use
    * @param newHypocenter - A Hypocenter containing the Hypocenter to use
    * @param newSupportingData - A ArrayList&lt;Pick&gt; newPickData containing the data that went
    *     into this location
@@ -350,6 +367,7 @@ public class LocationResult implements ProcessingInt {
    */
   public LocationResult(
       String newID,
+      Source newSource,
       Hypocenter newHypocenter,
       ArrayList<Pick> newSupportingData,
       Integer newAssociatedStations,
@@ -369,6 +387,7 @@ public class LocationResult implements ProcessingInt {
 
     reload(
         newID,
+        newSource,
         newHypocenter,
         newSupportingData,
         newAssociatedStations,
@@ -393,6 +412,7 @@ public class LocationResult implements ProcessingInt {
    * <p>The reload function for the LocationResult class. Initializes members to provided values.
    *
    * @param newID - A String containing the optional ID
+   * @param newSource - A Source containing the optional Source to Use
    * @param newHypocenter - A Hypocenter containing the Hypocenter to use
    * @param newSupportingData - A ArrayList&lt;Pick&gt; newPickData containing the data that went
    *     into this location
@@ -414,6 +434,7 @@ public class LocationResult implements ProcessingInt {
    */
   public void reload(
       String newID,
+      Source newSource,
       Hypocenter newHypocenter,
       ArrayList<Pick> newSupportingData,
       Integer newAssociatedStations,
@@ -432,6 +453,7 @@ public class LocationResult implements ProcessingInt {
       ErrorEllipse newErrorEllipse) {
 
     ID = newID;
+    Source = newSource;
     Hypocenter = newHypocenter;
     SupportingData = newSupportingData;
     NumberOfAssociatedStations = newAssociatedStations;
@@ -491,6 +513,13 @@ public class LocationResult implements ProcessingInt {
       ID = newJSONObject.get(ID_KEY).toString();
     } else {
       ID = null;
+    }
+
+    // Source
+    if (newJSONObject.containsKey(SOURCE_KEY)) {
+      Source = new Source((JSONObject) newJSONObject.get(SOURCE_KEY));
+    } else {
+      Source = null;
     }
 
     // associated stations
@@ -605,6 +634,11 @@ public class LocationResult implements ProcessingInt {
     // ID
     if (ID != null) {
       newJSONObject.put(ID_KEY, ID);
+    }
+
+    // Source
+    if (Source != null) {
+      newJSONObject.put(SOURCE_KEY, Source.toJSON());
     }
 
     // Hypocenter
@@ -816,6 +850,12 @@ public class LocationResult implements ProcessingInt {
         // Hypocenter invalid
         errorList.add("Invalid ErrorEllipse in LocationResult Class.");
       }
+    }
+
+    // Source
+    if ((Source != null) && (!Source.isValid())) {
+      // Source invalid
+      errorList.add("Invalid Source in LocationResult Class.");
     }
 
     // success

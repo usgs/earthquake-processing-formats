@@ -16,6 +16,7 @@ public class LocationRequest implements ProcessingInt {
   /** JSON Keys */
   public static final String TYPE_KEY = "Type";
 
+  public static final String SOURCE_KEY = "Source";
   public static final String ID_KEY = "ID";
   public static final String EARTHMODEL_KEY = "EarthModel";
   public static final String SOURCEORIGINTIME_KEY = "SourceOriginTime";
@@ -34,6 +35,9 @@ public class LocationRequest implements ProcessingInt {
 
   /** Optional string containing the ID. */
   public String ID;
+
+  /** Optional Source. */
+  public Source Source;
 
   /** Required Type identifier for this LocationRequest */
   public String Type;
@@ -83,6 +87,7 @@ public class LocationRequest implements ProcessingInt {
   /** The constructor for the LocationRequest class. Initializes members to null values. */
   public LocationRequest() {
     ID = null;
+    Source = null;
     Type = null;
     EarthModel = null;
     SourceLatitude = null;
@@ -107,7 +112,10 @@ public class LocationRequest implements ProcessingInt {
    * values.
    *
    * @param newID - A String containing the optional ID
-   * @param newType - A String containing the name of the algorithm this request is valid for
+   * @param newAgencyID - A String containing the agencyid to Use
+   * @param newAuthor - A String containing the author to Use
+   * @param newType - A String containing the type to Use
+   * @param newLocType - A String containing the name of the algorithm this request is valid for
    * @param newEarthModel - A String containing the name of theTravel Time Earth Model to use
    * @param newSourceLatitude - A Double containing the latitude to use
    * @param newSourceLongitude - A Double containing the longitude to use
@@ -125,7 +133,10 @@ public class LocationRequest implements ProcessingInt {
    */
   public LocationRequest(
       String newID,
+      String newAgencyID,
+      String newAuthor,
       String newType,
+      String newLocType,
       String newEarthModel,
       Double newSourceLatitude,
       Double newSourceLongitude,
@@ -142,7 +153,71 @@ public class LocationRequest implements ProcessingInt {
 
     reload(
         newID,
-        newType,
+        new Source(newAgencyID, newAuthor, newType),
+        newLocType,
+        newEarthModel,
+        newSourceLatitude,
+        newSourceLongitude,
+        newSourceOriginTime,
+        newSourceDepth,
+        newInputData,
+        newIsLocationNew,
+        newIsLocationHeld,
+        newIsDepthHeld,
+        newIsBayesianDepth,
+        newBayesianDepth,
+        newBayesianSpread,
+        newUseSVD);
+  }
+
+  /**
+   * Advanced constructor
+   *
+   * <p>The advanced constructor for the LocationResult class. Initializes members to provided
+   * values.
+   *
+   * @param newID - A String containing the optional ID
+   * @param newAgencyID - A String containing the agencyid to Use
+   * @param newAuthor - A String containing the author to Use
+   * @param newType - A String containing the type to Use
+   * @param newLocType - A String containing the name of the algorithm this request is valid for
+   * @param newEarthModel - A String containing the name of theTravel Time Earth Model to use
+   * @param newSourceLatitude - A Double containing the latitude to use
+   * @param newSourceLongitude - A Double containing the longitude to use
+   * @param newSourceOriginTime - A Date containing the origin time to use
+   * @param newSourceDepth - A Double containing the depth to use
+   * @param newInputData - A ArrayList&lt;Pick&gt; newPickData containing the data to use for this
+   *     location
+   * @param newIsLocationNew - A Boolean indicating whether the location is now, null to omit
+   * @param newIsLocationHeld - A Boolean indicating whether to hold the location, null to omit
+   * @param newIsDepthHeld - A Boolean indicating whether to hold the depth, null to omit
+   * @param newIsBayesianDepth - A Boolean indicating whether to use the baysian depth, null to omit
+   * @param newBayesianDepth - A Double containing the bayesian depth to use, null to omit
+   * @param newBayesianSpread - A Double containing the bayesian spread to use, null to omit
+   * @param newUseSVD - A Boolean indicating whether to use SVD, null to omit
+   */
+  public LocationRequest(
+      String newID,
+      Source newSource,
+      String newLocType,
+      String newEarthModel,
+      Double newSourceLatitude,
+      Double newSourceLongitude,
+      Date newSourceOriginTime,
+      Double newSourceDepth,
+      ArrayList<Pick> newInputData,
+      Boolean newIsLocationNew,
+      Boolean newIsLocationHeld,
+      Boolean newIsDepthHeld,
+      Boolean newIsBayesianDepth,
+      Double newBayesianDepth,
+      Double newBayesianSpread,
+      Boolean newUseSVD) {
+
+    reload(
+        newID,
+        newSource,
+        newLocType,
         newEarthModel,
         newSourceLatitude,
         newSourceLongitude,
@@ -164,6 +239,7 @@ public class LocationRequest implements ProcessingInt {
    * <p>The reload function for the LocationRequest class. Initializes members to provided values.
    *
    * @param newID - A String containing the optional ID
+   * @param newSource - A Source containing the optional Source to Use
    * @param newType - A String containing the name of the algorithm this request is valid for
    * @param newEarthModel - A String containing the name of theTravel Time Earth Model to use
    * @param newSourceLatitude - A Double containing the latitude to use
@@ -182,6 +258,7 @@ public class LocationRequest implements ProcessingInt {
    */
   public void reload(
       String newID,
+      Source newSource,
       String newType,
       String newEarthModel,
       Double newSourceLatitude,
@@ -198,6 +275,7 @@ public class LocationRequest implements ProcessingInt {
       Boolean newUseSVD) {
 
     ID = newID;
+    Source = newSource;
     Type = newType;
     EarthModel = newEarthModel;
     SourceLatitude = newSourceLatitude;
@@ -294,6 +372,13 @@ public class LocationRequest implements ProcessingInt {
       ID = null;
     }
 
+    // Source
+    if (newJSONObject.containsKey(SOURCE_KEY)) {
+      Source = new Source((JSONObject) newJSONObject.get(SOURCE_KEY));
+    } else {
+      Source = null;
+    }
+
     // IsLocationNew
     if (newJSONObject.containsKey(ISLOCATIONNEW_KEY)) {
       IsLocationNew = (boolean) newJSONObject.get(ISLOCATIONNEW_KEY);
@@ -365,6 +450,11 @@ public class LocationRequest implements ProcessingInt {
     // ID
     if (ID != null) {
       newJSONObject.put(ID_KEY, ID);
+    }
+
+    // Source
+    if (Source != null) {
+      newJSONObject.put(SOURCE_KEY, Source.toJSON());
     }
 
     // Required values
@@ -551,6 +641,12 @@ public class LocationRequest implements ProcessingInt {
         // hypocenter invalid
         errorList.add("Invalid OutputData in LocationRequest Class.");
       }
+    }
+
+    // Source
+    if ((Source != null) && (!Source.isValid())) {
+      // Source invalid
+      errorList.add("Invalid Source in LocationRequest Class.");
     }
 
     // success
