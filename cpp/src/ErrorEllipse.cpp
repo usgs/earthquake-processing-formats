@@ -358,4 +358,68 @@ std::vector<std::string> ErrorEllipse::getErrors() {
 	return (errorList);
 }
 
+bool ErrorEllipse::isEmpty() {
+    // E0 error
+    if (std::isnan(e0Error) != true) {
+        return (false);
+    }
+
+    // E0 azimuth
+    if (std::isnan(e0Azimuth) != true) {
+        return (false);
+    }
+
+    // E0 dip
+    if (std::isnan(e0Dip) != true) {
+        return (false);
+    }
+
+    // E1 error
+    if (std::isnan(e1Error) != true) {
+        return (false);
+    }
+
+    // E1 azimuth
+    if (std::isnan(e1Azimuth) != true) {
+        return (false);
+    }
+
+    // E1 dip
+    if (std::isnan(e1Dip) != true) {
+        return (false);
+    }
+
+    // E2 error
+    if (std::isnan(e2Error) != true) {
+        return (false);
+    }
+
+    // E2 azimuth
+    if (std::isnan(e2Azimuth) != true) {
+        return (false);
+    }
+
+    // E2 dip
+    if (std::isnan(e2Dip) != true) {
+        return (false);
+    }
+
+    // MaximumHorizontalProjection
+    if (std::isnan(maximumHorizontalProjection) != true) {
+        return (false);
+    }
+
+    // MaximumVerticalProjection
+    if (std::isnan(maximumVerticalProjection) != true) {
+        return (false);
+    }
+
+    // EquivalentHorizontalRadius
+    if (std::isnan(equivalentHorizontalRadius) != true) {
+        return (false);
+    }
+
+	return (true);
+}
+
 }  // namespace processingformats

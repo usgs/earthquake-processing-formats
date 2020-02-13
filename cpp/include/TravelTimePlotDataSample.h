@@ -59,7 +59,7 @@ class TravelTimePlotDataSample : public ProcessingBase {
 	 * Converts the provided object from a json::Object, populating members
 	 * \param jsondocument - A json document.
 	 */
-	explicit TravelTimePlotDataSample(rapidjson::Value &json);
+	explicit TravelTimePlotDataSample(rapidjson::Value &json); // NOLINT
 
 	/**
 	 * \brief TravelTimePlotDataSample copy constructor
@@ -88,8 +88,8 @@ class TravelTimePlotDataSample : public ProcessingBase {
 	 *  rapidjson::Value & if not
 	 */
 	rapidjson::Value & toJSON(
-			rapidjson::Value &json,
-			rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator> &allocator)
+			rapidjson::Value &json, // NOLINT
+			rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator> &allocator) // NOLINT
 					override;
 
 	/**

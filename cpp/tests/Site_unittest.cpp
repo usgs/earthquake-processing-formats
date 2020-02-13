@@ -4,11 +4,14 @@
 #include <string>
 
 // test data
-#define SITESTRING "{\"Station\":\"BMN\",\"Network\":\"LB\",\"Channel\":\"HHZ\",\"Location\":\"01\"}"
-#define STATION "BMN"
-#define CHANNEL "HHZ"
-#define NETWORK "LB"
-#define LOCATION "01"
+#define SITESTRING "{\"Station\":\"BOZ\",\"Channel\":\"BHZ\",\"Network\":\"US\",\"Location\":\"00\",\"Latitude\":45.59697,\"Longitude\":-111.62967,\"Elevation\":1589.0}" // NOLINT
+#define STATION "BOZ"
+#define CHANNEL "BHZ"
+#define NETWORK "US"
+#define LOCATION "00"
+#define LATITUDE 45.596970
+#define LONGITUDE -111.629670
+#define ELEVATION 1589.000000
 
 void checkdata(processingformats::Site Siteobject, std::string testinfo) {
 	// check station
@@ -30,6 +33,27 @@ void checkdata(processingformats::Site Siteobject, std::string testinfo) {
 	std::string Sitelocation = Siteobject.location;
 	std::string expectedlocation = std::string(LOCATION);
 	ASSERT_STREQ(Sitelocation.c_str(), expectedlocation.c_str());
+
+	// check latitude
+	if (std::isnan(Siteobject.latitude) != true) {
+		double sitelatitude = Siteobject.latitude;
+		double expectedlatitude = LATITUDE;
+		ASSERT_EQ(sitelatitude, expectedlatitude);
+	}
+
+	// check longitude
+	if (std::isnan(Siteobject.longitude) != true) {
+		double sitelongitude = Siteobject.longitude;
+		double expectedlongitude = LONGITUDE;
+		ASSERT_EQ(sitelongitude, expectedlongitude);
+	}
+
+	// check elevation
+	if (std::isnan(Siteobject.elevation) != true) {
+		double siteelevation = Siteobject.elevation;
+		double expectedelevation = ELEVATION;
+		ASSERT_EQ(siteelevation, expectedelevation);
+	}
 }
 
 // tests to see if Site can successfully
@@ -42,6 +66,9 @@ TEST(SiteTest, WritesJSON) {
 	Siteobject.channel = std::string(CHANNEL);
 	Siteobject.network = std::string(NETWORK);
 	Siteobject.location = std::string(LOCATION);
+	Siteobject.latitude = LATITUDE;
+	Siteobject.longitude = LONGITUDE;
+	Siteobject.elevation = ELEVATION;
 
 	// build json string
 	rapidjson::Document Sitedocument;
@@ -72,9 +99,10 @@ TEST(SiteTest, ReadsJSON) {
 
 // tests to see if Site can successfully
 // be constructed
-TEST(SiteTest, Constructor) {
+TEST(SiteTest, Constructors) {
 	// use constructor
-	processingformats::Site Siteobject(STATION, CHANNEL, NETWORK, LOCATION);
+	processingformats::Site Siteobject(STATION, CHANNEL, NETWORK, LOCATION, 
+		LATITUDE, LONGITUDE, ELEVATION);
 
 	// check data values
 	checkdata(Siteobject, "");
@@ -90,6 +118,9 @@ TEST(SiteTest, Validate) {
 	Siteobject.channel = std::string(CHANNEL);
 	Siteobject.network = std::string(NETWORK);
 	Siteobject.location = std::string(LOCATION);
+	Siteobject.latitude = LATITUDE;
+	Siteobject.longitude = LONGITUDE;
+	Siteobject.elevation = ELEVATION;
 
 	// successful validation
 	bool result = Siteobject.isValid();

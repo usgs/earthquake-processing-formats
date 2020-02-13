@@ -41,9 +41,16 @@ class Site : public ProcessingBase {
 	 * \param newchannel - A std::string containing the channel to use
 	 * \param newnetwork - A std::string containing the network to use
 	 * \param newlocation - A std::string containing the location to use
+	 * \param newlatitude - A double containing the latitude to use, 
+	 * std::numeric_limits<double>::quiet_NaN() to omit
+	 * \param newlongitude - A double containing the longitude to use, 
+	 * std::numeric_limits<double>::quiet_NaN() to omit
+	 * \paramnewelevation - A double containing the elevation to use, 
+	 * std::numeric_limits<double>::quiet_NaN() to omit
 	 */
 	Site(std::string newstation, std::string newchannel, std::string newnetwork,
-			std::string newlocation);
+			std::string newlocation, double newlatitude, double newlongitude,
+			double newelevation);
 
 	/**
 	 * \brief Site advanced constructor
@@ -79,8 +86,8 @@ class Site : public ProcessingBase {
 	 * \return Returns rapidjson::Value & if successful
 	 */
 	rapidjson::Value & toJSON(
-			rapidjson::Value &json,
-			rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator> &allocator)
+			rapidjson::Value &json, // NOLINT
+			rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator> &allocator) // NOLINT
 					override;
 
 	/**
@@ -118,6 +125,27 @@ class Site : public ProcessingBase {
 	 * An optional std::string containing the location code for this Site.
 	 */
 	std::string location;
+
+	/**
+	 * \brief latitude value
+	 *
+	 * An optional double defining the latitude of this site.
+	 */
+	double latitude;
+
+	/**
+	 * \brief longitude value
+	 *
+	 * An optional double defining the longitude of this site.
+	 */
+	double longitude;
+
+	/**
+	 * \brief elevation value
+	 *
+	 * An optional double containing the elevation for this site.
+	 */
+	double elevation;
 };
 }  // namespace processingformats
 #endif  // PROCESSING_SITE_H

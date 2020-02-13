@@ -46,6 +46,15 @@ class Pick : public ProcessingBase {
 	 *            - A std::string containing the network to use
 	 * \param newLocation
 	 *            - A std::string containing the location to use
+	 * \param newLatitude 
+	 * 						- A double containing the latitude to use, 
+	 * 						std::numeric_limits<double>::quiet_NaN() to omit
+	 * \param newLongitude 
+	 * 						- A double containing the longitude to use, 
+	 * 						std::numeric_limits<double>::quiet_NaN() to omit
+	 * \param newElevation
+	 * 						- A double containing the elevation to use, 
+	 * 						std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newAgencyID
 	 *            - A std::string containing the agencyId to use
 	 * \param newAuthor
@@ -79,7 +88,8 @@ class Pick : public ProcessingBase {
 	 *            - A double containing the importance to use, null to omit
 	 */
 	Pick(std::string newID, std::string newStation, std::string newChannel,
-			std::string newNetwork, std::string newLocation,
+			std::string newNetwork, std::string newLocation, double newLatitude,
+			double newLongitude, double newElevation,
 			std::string newAgencyID, std::string newAuthor, std::string newType,
 			double newTime, double newAffinity, double newQuality, bool newUse,
 			std::string newPickedPhase, std::string newAssociatedPhase,

@@ -4,11 +4,10 @@
  * the comments so that Doxygen will still
  * be able to work.
  ****************************************/
-#ifndef DETECTION_LOCATIONDATA_H
-#define DETECTION_LOCATIONDATA_H
+#ifndef DETECTION_LOCATIONRESULT_H
+#define DETECTION_LOCATIONRESULT_H
 
 #include <base.h>
-#include <LocationData.h>
 #include <Hypocenter.h>
 #include <ErrorEllipse.h>
 #include <Pick.h>
@@ -25,20 +24,20 @@ namespace processingformats {
  * create, parse, and validate location data as part of processingformats data.
  *
  */
-class LocationData : public ProcessingBase {
+class LocationResult : public ProcessingBase {
  public:
     /**
-	 * \brief LocationData constructor
+	 * \brief LocationResult constructor
 	 *
-	 * The constructor for the LocationData class.
+	 * The constructor for the LocationResult class.
 	 * Initializes members to null values.
 	 */
-	LocationData();
+	LocationResult();
 
     /**
-	 * \brief LocationData advanced constructor
+	 * \brief LocationResult advanced constructor
 	 *
-	 * The advanced constructor for the LocationData class.
+	 * The advanced constructor for the LocationResult class.
 	 * Initializes members to provided values.
 	 *
      * \param newLatitude - A double containing the latitude to use
@@ -53,7 +52,7 @@ class LocationData : public ProcessingBase {
      *  std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newDepthError - A double containing the depth error to use, 
      *  std::numeric_limits<double>::quiet_NaN() to omit
-	 * \param newAssociatedData - A std::vector&lt;Pick&gt; containing the data 
+	 * \param newSupportingData - A std::vector&lt;Pick&gt; containing the data 
      *  that went into this location
 	 * \param newAssociatedStations - An int containing the number of associated 
      *  stations, std::numeric_limits<double>::quiet_NaN() to omit
@@ -79,6 +78,7 @@ class LocationData : public ProcessingBase {
      *  std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newDepthImportance - A double containing the depth importance to 
      *  use, std::numeric_limits<double>::quiet_NaN() to omit
+	 * \param newExitCode - A string containing the locator exit code 
 	 * \param newE0Error - A double containing the length of the first axis of 
      *  the error ellipsoid in kilometers
 	 * \param newE0Azimuth - A double containing the azimuth of the first axis 
@@ -104,26 +104,26 @@ class LocationData : public ProcessingBase {
 	 * \param newEquivalentHorizontalRadius - A double containing the equivalent 
      *  radius of the horizontal error ellipsoid in kilometers
 	 */
-	LocationData(double newLatitude, double newLongitude, double newTime,
-			double newDepth, double newLatitudeError, double newLongitudeError,
-			double newTimeError, double newDepthError,
-			std::vector<processingformats::Pick> newAssociatedData,
-            int newAssociatedStations, int newAssociatedPhases,
-            int newUsedStations, int newUsedPhases, double newGap,
-            double newSecondaryGap, double newMinimumDistance, double newRMS,
-            std::string newQuality, double newBayesianDepth,
-			double newBayesianRange, double newDepthImportance,
-            double newE0Error, double newE0Azimuth,
-			double newE0Dip, double newE1Error, double newE1Azimuth,
-			double newE1Dip, double newE2Error, double newE2Azimuth,
-			double newE2Dip, double newMaximumHorizontalProjection,
-			double newMaximumVerticalProjection,
-			double newEquivalentHorizontalRadius);
+	LocationResult(double newLatitude, double newLongitude,
+		double newTime, double newDepth, double newLatitudeError,
+		double newLongitudeError, double newTimeError, double newDepthError,
+		std::vector<processingformats::Pick> newSupportingData,
+		int newAssociatedStations, int newAssociatedPhases,
+		int newUsedStations, int newUsedPhases, double newGap,
+		double newSecondaryGap, double newMinimumDistance, double newRMS,
+		std::string newQuality, double newBayesianDepth,
+		double newBayesianRange, double newDepthImportance, std::string newExitCode,
+		double newE0Error, double newE0Azimuth,
+		double newE0Dip, double newE1Error, double newE1Azimuth,
+		double newE1Dip, double newE2Error, double newE2Azimuth,
+		double newE2Dip, double newMaximumHorizontalProjection,
+		double newMaximumVerticalProjection,
+		double newEquivalentHorizontalRadius);
 
     /**
      * Alternate Advanced constructor
      *
-     * The alternate advanced constructor for the LocationData class.
+     * The alternate advanced constructor for the LocationResult class.
      * Initializes members to provided values.
      *
      * \param newLatitude - A double containing the latitude to use
@@ -138,51 +138,51 @@ class LocationData : public ProcessingBase {
      *  std::numeric_limits<double>::quiet_NaN() to omit
      * \param newDepthError - A double containing the depth error to use, 
      *  std::numeric_limits<double>::quiet_NaN() to omit
-     * \param newAssociatedData - A std::vector&lt;Pick&gt; newPickData 
+     * \param newSupportingData - A std::vector&lt;Pick&gt; newPickData 
      *  containing the data that went into this location
      */
-    LocationData(double newLatitude, double newLongitude, double newTime,
+    LocationResult(double newLatitude, double newLongitude, double newTime,
             double newDepth, double newLatitudeError, double newLongitudeError,
             double newTimeError, double newDepthError,
-            std::vector<processingformats::Pick> newAssociatedData);
+            std::vector<processingformats::Pick> newSupportingData);
 
     /**
 	 * Alternate Advanced constructor
 	 *
-	 * The alternate advanced constructor for the LocationData class.
+	 * The alternate advanced constructor for the LocationResult class.
 	 * Initializes members to provided values.
 	 *
 	 * \param newHypocenter - A Hypocenter containing the hypocenter to use
-	 * \param newAssociatedData - A std::vector&lt;Pick&gt; newPickData 
+	 * \param newSupportingData - A std::vector&lt;Pick&gt; newPickData 
      *  containing the data that went into this location
 	 */
-	LocationData(processingformats::Hypocenter newHypocenter,
-			std::vector<processingformats::Pick> newAssociatedData);
+	LocationResult(processingformats::Hypocenter newHypocenter,
+			std::vector<processingformats::Pick> newSupportingData);
 
 	/**
-	 * \brief LocationData advanced constructor
+	 * \brief LocationResult advanced constructor
 	 *
-	 * The advanced constructor for the LocationData class.
+	 * The advanced constructor for the LocationResult class.
 	 * Converts the provided object from a json::Object, populating members
 	 * \param jsondocument - A json document.
 	 */
-	explicit LocationData(rapidjson::Value &json); // NOLINT
+	explicit LocationResult(rapidjson::Value &json); // NOLINT
 
 	/**
-	 * \brief LocationData copy constructor
+	 * \brief LocationResult copy constructor
 	 *
-	 * The copy constructor for the LocationData class.
-	 * Copies the provided object from a LocationData, populating members
-	 * \param newData - A LocationData.
+	 * The copy constructor for the LocationResult class.
+	 * Copies the provided object from a LocationResult, populating members
+	 * \param newData - A LocationResult.
 	 */
-	LocationData(const LocationData & newData);
+	LocationResult(const LocationResult & newData);
 
 	/**
-	 * \brief LocationData destructor
+	 * \brief LocationResult destructor
 	 *
-	 * The destructor for the LocationData class.
+	 * The destructor for the LocationResult class.
 	 */
-	~LocationData();
+	~LocationResult();
 
 	/**
 	 * \brief Convert to json object function
@@ -213,7 +213,12 @@ class LocationData : public ProcessingBase {
 	/**
 	 * A required vector of Pick objects used to generate this location
 	 */
-	std::vector<processingformats::Pick> associatedData;
+	std::vector<processingformats::Pick> supportingData;
+
+	/**
+	 * Optional std::string containing the event identifier
+	 */
+	std::string id;
 
 	/**
 	 * Optional integer containing the number of associated stations
@@ -261,7 +266,7 @@ class LocationData : public ProcessingBase {
 	std::string quality;
 
 	/**
-	 * Optional double containing the bayesan depth
+	 * Optional double containing the bayesian depth
 	 */
 	double bayesianDepth;
 
@@ -276,9 +281,14 @@ class LocationData : public ProcessingBase {
 	double depthImportance;
 
 	/**
+	 * Optional std::string containing the exit code
+	 */
+	std::string locatorExitCode;
+
+	/**
 	 * Optional error ellipse
 	 */
 	processingformats::ErrorEllipse errorEllipse;
 };
 }  // namespace processingformats
-#endif  // DETECTION_LOCATIONDATA_H
+#endif  // DETECTION_LOCATIONRESULT_H

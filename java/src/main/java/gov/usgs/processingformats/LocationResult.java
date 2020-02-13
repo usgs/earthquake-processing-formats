@@ -464,7 +464,7 @@ public class LocationResult implements ProcessingInt {
       Hypocenter = null;
     }
 
-    // associated data
+    // supporting data
     if (newJSONObject.containsKey(SUPPORTINGDATA_KEY)) {
 
       SupportingData = new ArrayList<Pick>();

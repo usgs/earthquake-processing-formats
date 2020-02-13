@@ -75,7 +75,7 @@ class TravelTimeData : public ProcessingBase {
 	 * Converts the provided object from a json::Object, populating members
 	 * \param jsondocument - A json document.
 	 */
-	explicit TravelTimeData(rapidjson::Value &json);
+	explicit TravelTimeData(rapidjson::Value &json); // NOLINT
 
 	/**
 	 * \brief TravelTimeData copy constructor
@@ -103,8 +103,8 @@ class TravelTimeData : public ProcessingBase {
 	 *  rapidjson::Value & if not
 	 */
 	rapidjson::Value & toJSON(
-			rapidjson::Value &json,
-			rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator> &allocator)
+			rapidjson::Value &json, // NOLINT
+			rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator> &allocator) // NOLINT
 					override;
 
 	/**

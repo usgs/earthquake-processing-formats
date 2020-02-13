@@ -55,7 +55,7 @@ class TravelTimePlotDataBranch : public ProcessingBase {
 	 * Converts the provided object from a json::Object, populating members
 	 * \param jsondocument - A json document.
 	 */
-	explicit TravelTimePlotDataBranch(rapidjson::Value &json);
+	explicit TravelTimePlotDataBranch(rapidjson::Value &json); // NOLINT
 
 	/**
 	 * \brief TravelTimePlotDataBranch copy constructor
@@ -84,8 +84,8 @@ class TravelTimePlotDataBranch : public ProcessingBase {
 	 *  rapidjson::Value & if not
 	 */
 	rapidjson::Value & toJSON(
-			rapidjson::Value &json,
-			rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator> &allocator)
+			rapidjson::Value &json, // NOLINT
+			rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator> &allocator) // NOLINT
 					override;
 
 	/**
