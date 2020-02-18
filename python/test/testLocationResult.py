@@ -6,6 +6,7 @@
 import processingformats.locationResult
 import processingformats.hypocenter
 import processingformats.errorEllipse
+import processingformats.source
 
 # stdlib imports
 import unittest
@@ -14,6 +15,7 @@ import datetime
 class TestLocationResult(unittest.TestCase):
     
     ID = '12345678'
+    SOURCE = processingformats.source.Source('US', 'TestAuthor', 'Unknown')
     # HYPOCENTER INCLUDES: lat, long, depth, time, latError, longError, depthError, timeError
     HYPOCENTER = processingformats.hypocenter.Hypocenter(40.3344, -121.44, 32.44, datetime.datetime(2019, 5, 17, 15, 53, 00, 0), 12.5, 22.64, 2.44, 1.984)
     PICKJSON = '{"ID": "12GFH48776857", "Site": {"Station": "BOZ", "Channel": "BHZ", "Network": "US", "Location": "00", "Latitude": 45.59697, "Longitude": -111.62967, "Elevation": 1589.0}, "Source": {"Author": "TestAuthor", "AgencyID": "US", "Type": "Unknown"}, "Time": "2015-12-28T21:32:24.017Z", "Affinity": 1.2, "Quality": 0.45, "Use": true, "PickedPhase": "P", "AssociatedPhase": "P", "LocatedPhase": "P", "Residual": 1.05, "Distance": 2.65, "Azimuth": 21.5, "Weight": 2.65, "Importance": 3.8}'
@@ -40,14 +42,17 @@ class TestLocationResult(unittest.TestCase):
     E2 = processingformats.errorEllipseAxis.ErrorEllipseAxis(12.5, 22.64, 2.44)
     ERRORELLIPSE = processingformats.errorEllipse.ErrorEllipse(E0, E1, E2, 1.984, 1.984, 1.984)
     
-    JSONSTRING = '{"Hypocenter": {"Latitude": 40.3344, "Longitude": -121.44, "Depth": 32.44, "Time": "2019-05-17T15:53:00.000Z", "LatitudeError": 12.5, "LongitudeError": 22.64, "DepthError": 2.44, "TimeError": 1.984}, "MinimumDistance": 2.14, "SupportingData": [{"ID": "12GFH48776857", "Site": {"Station": "BOZ", "Network": "US", "Latitude": 45.59697, "Longitude": -111.62967, "Elevation": 1589.0, "Channel": "BHZ", "Location": "00"}, "Source": {"AgencyID": "US", "Author": "TestAuthor", "Type": "Unknown"}, "Time": "2015-12-28T21:32:24.017Z", "Affinity": 1.2, "Quality": 0.45, "Use": true, "PickedPhase": "P", "AssociatedPhase": "P", "LocatedPhase": "P", "Residual": 1.05, "Distance": 2.65, "Azimuth": 21.5, "Weight": 2.65, "Importance": 3.8}], "ID": "12345678", "NumberOfAssociatedStations": 11, "NumberOfAssociatedPhases": 22, "NumberOfUsedStations": 33, "NumberOfUsedPhases": 44, "Gap": 33.67, "SecondaryGap": 33.67, "RMS": 3.8, "Quality": "A", "BayesianDepth": 66.7, "BayesianRange": 20.3, "DepthImportance": 1.8, "LocatorExitCode": "Success", "ErrorEllipse": {"E0": {"Error": 40.3344, "Azimuth": -121.44, "Dip": 32.44}, "E1": {"Error": 12.5, "Azimuth": 22.64, "Dip": 2.44}, "E2": {"Error": 12.5, "Azimuth": 22.64, "Dip": 2.44}, "MaximumHorizontalProjection": 1.984, "MaximumVerticalProjection": 1.984, "EquivalentHorizontalRadius": 1.984}}'
-    DICT = {"ID": "12345678", "Hypocenter": {"Latitude": 40.3344, "Longitude": -121.44, "Time": "2019-05-17T15:53:00.000Z", "Depth": 32.44, "LatitudeError": 12.5, "LongitudeError": 22.64, "DepthError": 2.44, "TimeError": 1.984}, "SupportingData": [{"ID": "12GFH48776857", "Site": {"Station": "BOZ", "Channel": "BHZ", "Network": "US", "Location": "00", "Latitude": 45.59697, "Longitude": -111.62967, "Elevation": 1589.0}, "Source": {"Author": "TestAuthor", "AgencyID": "US", "Type": "Unknown"}, "Time": "2015-12-28T21:32:24.017Z", "Affinity": 1.2, "Quality": 0.45, "Use": True, "PickedPhase": "P", "AssociatedPhase": "P", "LocatedPhase": "P", "Residual": 1.05, "Distance": 2.65, "Azimuth": 21.5, "Weight": 2.65, "Importance": 3.8}], "NumberOfAssociatedStations": 11, "NumberOfAssociatedPhases": 22, "NumberOfUsedStations": 33, "NumberOfUsedPhases": 44, "Gap": 33.67, "SecondaryGap": 33.67, "MinimumDistance": 2.14, "RMS": 3.8, "Quality": "A", "BayesianDepth": 66.7, "BayesianRange": 20.3, "DepthImportance": 1.8, "LocatorExitCode": "Success", "ErrorEllipse": {'E0': {'Error': 40.3344, 'Azimuth': -121.44, 'Dip': 32.44}, 'E1': {'Error': 12.5, 'Azimuth': 22.64, 'Dip': 2.44}, 'E2': {'Error': 12.5, 'Azimuth': 22.64, 'Dip': 2.44}, 'MaximumHorizontalProjection': 1.984, 'MaximumVerticalProjection': 1.984, 'EquivalentHorizontalRadius': 1.984}}
+    JSONSTRING = '{"Hypocenter": {"Latitude": 40.3344, "Longitude": -121.44, "Depth": 32.44, "Time": "2019-05-17T15:53:00.000Z", "LatitudeError": 12.5, "LongitudeError": 22.64, "DepthError": 2.44, "TimeError": 1.984}, "MinimumDistance": 2.14, "SupportingData": [{"ID": "12GFH48776857", "Site": {"Station": "BOZ", "Network": "US", "Latitude": 45.59697, "Longitude": -111.62967, "Elevation": 1589.0, "Channel": "BHZ", "Location": "00"}, "Source": {"AgencyID": "US", "Author": "TestAuthor", "Type": "Unknown"}, "Time": "2015-12-28T21:32:24.017Z", "Affinity": 1.2, "Quality": 0.45, "Use": true, "PickedPhase": "P", "AssociatedPhase": "P", "LocatedPhase": "P", "Residual": 1.05, "Distance": 2.65, "Azimuth": 21.5, "Weight": 2.65, "Importance": 3.8}], "ID": "12345678", "Source": {"AgencyID": "US", "Author": "TestAuthor", "Type": "Unknown"}, "NumberOfAssociatedStations": 11, "NumberOfAssociatedPhases": 22, "NumberOfUsedStations": 33, "NumberOfUsedPhases": 44, "Gap": 33.67, "SecondaryGap": 33.67, "RMS": 3.8, "Quality": "A", "BayesianDepth": 66.7, "BayesianRange": 20.3, "DepthImportance": 1.8, "LocatorExitCode": "Success", "ErrorEllipse": {"E0": {"Error": 40.3344, "Azimuth": -121.44, "Dip": 32.44}, "E1": {"Error": 12.5, "Azimuth": 22.64, "Dip": 2.44}, "E2": {"Error": 12.5, "Azimuth": 22.64, "Dip": 2.44}, "MaximumHorizontalProjection": 1.984, "MaximumVerticalProjection": 1.984, "EquivalentHorizontalRadius": 1.984}}'
+    DICT = {"ID": "12345678", "Source": {"AgencyID": "US", "Author": "TestAuthor", "Type": "Unknown"}, "Hypocenter": {"Latitude": 40.3344, "Longitude": -121.44, "Time": "2019-05-17T15:53:00.000Z", "Depth": 32.44, "LatitudeError": 12.5, "LongitudeError": 22.64, "DepthError": 2.44, "TimeError": 1.984}, "SupportingData": [{"ID": "12GFH48776857", "Site": {"Station": "BOZ", "Channel": "BHZ", "Network": "US", "Location": "00", "Latitude": 45.59697, "Longitude": -111.62967, "Elevation": 1589.0}, "Source": {"Author": "TestAuthor", "AgencyID": "US", "Type": "Unknown"}, "Time": "2015-12-28T21:32:24.017Z", "Affinity": 1.2, "Quality": 0.45, "Use": True, "PickedPhase": "P", "AssociatedPhase": "P", "LocatedPhase": "P", "Residual": 1.05, "Distance": 2.65, "Azimuth": 21.5, "Weight": 2.65, "Importance": 3.8}], "NumberOfAssociatedStations": 11, "NumberOfAssociatedPhases": 22, "NumberOfUsedStations": 33, "NumberOfUsedPhases": 44, "Gap": 33.67, "SecondaryGap": 33.67, "MinimumDistance": 2.14, "RMS": 3.8, "Quality": "A", "BayesianDepth": 66.7, "BayesianRange": 20.3, "DepthImportance": 1.8, "LocatorExitCode": "Success", "ErrorEllipse": {'E0': {'Error': 40.3344, 'Azimuth': -121.44, 'Dip': 32.44}, 'E1': {'Error': 12.5, 'Azimuth': 22.64, 'Dip': 2.44}, 'E2': {'Error': 12.5, 'Azimuth': 22.64, 'Dip': 2.44}, 'MaximumHorizontalProjection': 1.984, 'MaximumVerticalProjection': 1.984, 'EquivalentHorizontalRadius': 1.984}}
     
     def test_init(self):
         
         locationResult = processingformats.locationResult.LocationResult()
         
         self.assertFalse(hasattr(locationResult, 'id'))
+        self.assertFalse(hasattr(locationResult.source, 'agencyID'))
+        self.assertFalse(hasattr(locationResult.source, 'author'))
+        self.assertFalse(hasattr(locationResult.source, 'type'))
         self.assertFalse(hasattr(locationResult.hypocenter, 'latitude'))
         self.assertFalse(hasattr(locationResult.hypocenter, 'longitude'))
         self.assertFalse(hasattr(locationResult.hypocenter, 'depth'))
@@ -83,9 +88,12 @@ class TestLocationResult(unittest.TestCase):
         self.assertFalse(hasattr(locationResult.errorEllipse, 'maximumVerticalProjection'))
         self.assertFalse(hasattr(locationResult.errorEllipse, 'equivalentHorizontalRadius'))
         
-        locationResult = processingformats.locationResult.LocationResult(self.ID, self.HYPOCENTER, self.SUPPORTINGDATA, self.ASSOCIATEDSTATIONS, self.ASSOCIATEDPHASES, self.USEDSTATIONS, self.USEDPHASES, self.GAP, self.SECONDARYGAP, self.MINIMUMDISTANCE, self.RMS, self.QUALITY, self.BAYESIANDEPTH, self.BAYESIANRANGE, self.DEPTHIMPORTANCE, self.LOCATOREXITCODE, self.ERRORELLIPSE)
+        locationResult = processingformats.locationResult.LocationResult(self.ID, self.SOURCE, self.HYPOCENTER, self.SUPPORTINGDATA, self.ASSOCIATEDSTATIONS, self.ASSOCIATEDPHASES, self.USEDSTATIONS, self.USEDPHASES, self.GAP, self.SECONDARYGAP, self.MINIMUMDISTANCE, self.RMS, self.QUALITY, self.BAYESIANDEPTH, self.BAYESIANRANGE, self.DEPTHIMPORTANCE, self.LOCATOREXITCODE, self.ERRORELLIPSE)
         
         self.assertTrue(hasattr(locationResult, 'id'))
+        self.assertTrue(hasattr(locationResult.source, 'agencyID'))
+        self.assertTrue(hasattr(locationResult.source, 'author'))
+        self.assertTrue(hasattr(locationResult.source, 'type'))
         self.assertTrue(hasattr(locationResult.hypocenter, 'latitude'))
         self.assertTrue(hasattr(locationResult.hypocenter, 'longitude'))
         self.assertTrue(hasattr(locationResult.hypocenter, 'depth'))
@@ -122,6 +130,9 @@ class TestLocationResult(unittest.TestCase):
         self.assertTrue(hasattr(locationResult.errorEllipse, 'equivalentHorizontalRadius'))
         
         self.assertEqual(locationResult.id, self.ID)
+        self.assertEqual(locationResult.source.agencyID, self.SOURCE.agencyID)
+        self.assertEqual(locationResult.source.author, self.SOURCE.author)
+        self.assertEqual(locationResult.source.type, self.SOURCE.type)        
         self.assertEqual(locationResult.hypocenter.latitude, self.HYPOCENTER.latitude)
         self.assertEqual(locationResult.hypocenter.longitude, self.HYPOCENTER.longitude)
         self.assertEqual(locationResult.hypocenter.depth, self.HYPOCENTER.depth)
@@ -159,7 +170,7 @@ class TestLocationResult(unittest.TestCase):
         
         
     def test_toJSON(self):
-        locationResult = processingformats.locationResult.LocationResult(self.ID, self.HYPOCENTER, self.SUPPORTINGDATA, self.ASSOCIATEDSTATIONS, self.ASSOCIATEDPHASES, self.USEDSTATIONS, self.USEDPHASES, self.GAP, self.SECONDARYGAP, self.MINIMUMDISTANCE, self.RMS, self.QUALITY, self.BAYESIANDEPTH, self.BAYESIANRANGE, self.DEPTHIMPORTANCE, self.LOCATOREXITCODE, self.ERRORELLIPSE)
+        locationResult = processingformats.locationResult.LocationResult(self.ID, self.SOURCE, self.HYPOCENTER, self.SUPPORTINGDATA, self.ASSOCIATEDSTATIONS, self.ASSOCIATEDPHASES, self.USEDSTATIONS, self.USEDPHASES, self.GAP, self.SECONDARYGAP, self.MINIMUMDISTANCE, self.RMS, self.QUALITY, self.BAYESIANDEPTH, self.BAYESIANRANGE, self.DEPTHIMPORTANCE, self.LOCATOREXITCODE, self.ERRORELLIPSE)
         self.maxDiff = None
         self.assertEqual(locationResult.toJSONString(), self.JSONSTRING)
         
@@ -168,6 +179,9 @@ class TestLocationResult(unittest.TestCase):
         locationResult.fromJSONString(self.JSONSTRING)
         
         self.assertEqual(locationResult.id, self.ID)
+        self.assertEqual(locationResult.source.agencyID, self.SOURCE.agencyID)
+        self.assertEqual(locationResult.source.author, self.SOURCE.author)
+        self.assertEqual(locationResult.source.type, self.SOURCE.type)  
         self.assertEqual(locationResult.hypocenter.latitude, self.HYPOCENTER.latitude)
         self.assertEqual(locationResult.hypocenter.longitude, self.HYPOCENTER.longitude)
         self.assertEqual(locationResult.hypocenter.depth, self.HYPOCENTER.depth)
@@ -176,7 +190,6 @@ class TestLocationResult(unittest.TestCase):
         self.assertEqual(locationResult.hypocenter.longitudeError, self.HYPOCENTER.longitudeError)
         self.assertEqual(locationResult.hypocenter.depthError, self.HYPOCENTER.depthError)
         self.assertEqual(locationResult.hypocenter.timeError, self.HYPOCENTER.timeError)
-
         self.assertEqual(locationResult.associatedStations, self.ASSOCIATEDSTATIONS)
         self.assertEqual(locationResult.associatedPhases, self.ASSOCIATEDPHASES)
         self.assertEqual(locationResult.usedStations, self.USEDSTATIONS)
@@ -205,7 +218,7 @@ class TestLocationResult(unittest.TestCase):
     
         
     def test_toDict(self):
-        locationResult = processingformats.locationResult.LocationResult(self.ID, self.HYPOCENTER, self.SUPPORTINGDATA, self.ASSOCIATEDSTATIONS, self.ASSOCIATEDPHASES, self.USEDSTATIONS, self.USEDPHASES, self.GAP, self.SECONDARYGAP, self.MINIMUMDISTANCE, self.RMS, self.QUALITY, self.BAYESIANDEPTH, self.BAYESIANRANGE, self.DEPTHIMPORTANCE, self.LOCATOREXITCODE, self.ERRORELLIPSE)
+        locationResult = processingformats.locationResult.LocationResult(self.ID, self.SOURCE, self.HYPOCENTER, self.SUPPORTINGDATA, self.ASSOCIATEDSTATIONS, self.ASSOCIATEDPHASES, self.USEDSTATIONS, self.USEDPHASES, self.GAP, self.SECONDARYGAP, self.MINIMUMDISTANCE, self.RMS, self.QUALITY, self.BAYESIANDEPTH, self.BAYESIANRANGE, self.DEPTHIMPORTANCE, self.LOCATOREXITCODE, self.ERRORELLIPSE)
         self.maxDiff = None
         self.assertEqual(locationResult.toDict(), self.DICT)
         
@@ -215,6 +228,9 @@ class TestLocationResult(unittest.TestCase):
         locationResult.fromDict(self.DICT)
         
         self.assertEqual(locationResult.id, self.ID)
+        self.assertEqual(locationResult.source.agencyID, self.SOURCE.agencyID)
+        self.assertEqual(locationResult.source.author, self.SOURCE.author)
+        self.assertEqual(locationResult.source.type, self.SOURCE.type)  
         self.assertEqual(locationResult.hypocenter.latitude, self.HYPOCENTER.latitude)
         self.assertEqual(locationResult.hypocenter.longitude, self.HYPOCENTER.longitude)
         self.assertEqual(locationResult.hypocenter.depth, self.HYPOCENTER.depth)
@@ -222,8 +238,7 @@ class TestLocationResult(unittest.TestCase):
         self.assertEqual(locationResult.hypocenter.latitudeError, self.HYPOCENTER.latitudeError)
         self.assertEqual(locationResult.hypocenter.longitudeError, self.HYPOCENTER.longitudeError)
         self.assertEqual(locationResult.hypocenter.depthError, self.HYPOCENTER.depthError)
-        self.assertEqual(locationResult.hypocenter.timeError, self.HYPOCENTER.timeError)
-        
+        self.assertEqual(locationResult.hypocenter.timeError, self.HYPOCENTER.timeError)    
         self.assertEqual(locationResult.associatedStations, self.ASSOCIATEDSTATIONS)
         self.assertEqual(locationResult.associatedPhases, self.ASSOCIATEDPHASES)
         self.assertEqual(locationResult.usedStations, self.USEDSTATIONS)
@@ -252,7 +267,7 @@ class TestLocationResult(unittest.TestCase):
     
         
     def test_isValid(self):
-        locationResult = processingformats.locationResult.LocationResult(self.ID, self.HYPOCENTER, self.SUPPORTINGDATA, self.ASSOCIATEDSTATIONS, self.ASSOCIATEDPHASES, self.USEDSTATIONS, self.USEDPHASES, self.GAP, self.SECONDARYGAP, self.MINIMUMDISTANCE, self.RMS, self.QUALITY, self.BAYESIANDEPTH, self.BAYESIANRANGE, self.DEPTHIMPORTANCE, self.LOCATOREXITCODE, self.ERRORELLIPSE)
+        locationResult = processingformats.locationResult.LocationResult(self.ID, self.SOURCE, self.HYPOCENTER, self.SUPPORTINGDATA, self.ASSOCIATEDSTATIONS, self.ASSOCIATEDPHASES, self.USEDSTATIONS, self.USEDPHASES, self.GAP, self.SECONDARYGAP, self.MINIMUMDISTANCE, self.RMS, self.QUALITY, self.BAYESIANDEPTH, self.BAYESIANRANGE, self.DEPTHIMPORTANCE, self.LOCATOREXITCODE, self.ERRORELLIPSE)
         self.assertTrue(locationResult.isValid())
         
         badLocationResult = processingformats.locationResult.LocationResult()

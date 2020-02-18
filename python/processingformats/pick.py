@@ -15,21 +15,21 @@ class Pick:
     """
     
     #JSON Keys
-    ID_KEY = "ID" #Required unique identifier for this Pick
-    SITE_KEY = "Site" #Required
-    SOURCE_KEY = "Source" #Required
-    TIME_KEY = "Time" #Required
-    AFFINITY_KEY = "Affinity" #Required
-    QUALITY_KEY = "Quality" #REquired
-    USE_KEY = "Use" #Required
-    PICKED_PHASE_KEY = "PickedPhase" #REquired
-    ASSOCIATED_PHASE_KEY = "AssociatedPhase" #Required
-    LOCATED_PHASE_KEY = "LocatedPhase" #Optional
-    RESIDUAL_KEY = "Residual" #Optional
-    DISTANCE_KEY = "Distance" #Optional
-    AZIMUTH_KEY = "Azimuth" #Optional
-    WEIGHT_KEY = "Weight" #Optional
-    IMPORTANCE_KEY = "Importance" #Optional
+    ID_KEY = "ID" # Required 
+    SITE_KEY = "Site" # Required
+    SOURCE_KEY = "Source" # Required
+    TIME_KEY = "Time" # Required
+    AFFINITY_KEY = "Affinity" # Required
+    QUALITY_KEY = "Quality" # Required
+    USE_KEY = "Use" # Required
+    PICKED_PHASE_KEY = "PickedPhase" # Required
+    ASSOCIATED_PHASE_KEY = "AssociatedPhase" # Required
+    LOCATED_PHASE_KEY = "LocatedPhase" # Optional
+    RESIDUAL_KEY = "Residual" # Optional
+    DISTANCE_KEY = "Distance" # Optional
+    AZIMUTH_KEY = "Azimuth" # Optional
+    WEIGHT_KEY = "Weight" # Optional
+    IMPORTANCE_KEY = "Importance" # Optional
     
     def __init__ (self, newID = None, newSite = None, newSource = None, newTime = None, 
                   newAffinity = None, newQuality = None, newUse = None, newPickedPhase = None, 

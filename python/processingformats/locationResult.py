@@ -6,6 +6,7 @@
 import processingformats.hypocenter
 import processingformats.errorEllipse
 import processingformats.pick
+import processingformats.source
 
 #stdlib import
 import json
@@ -17,6 +18,7 @@ class LocationResult:
     
     #JSON Keys
     ID_KEY = "ID" # Optional
+    SOURCE_KEY = "Source" # Optional
     HYPOCENTER_KEY = "Hypocenter" # Required
     SUPPORTINGDATA_KEY = "SupportingData" # Required
     ASSOCIATEDSTATIONS_KEY = "NumberOfAssociatedStations" # Optional
@@ -34,16 +36,17 @@ class LocationResult:
     LOCATOREXITCODE_KEY = "LocatorExitCode" # Optional
     ERRORELLIPSE_KEY = "ErrorEllipse" # Optional
     
-    def __init__ (self, newID = None, newHypocenter = None, newSupportingData = None, 
-                  newAssociatedStations = None, newAssociatedPhases = None, 
-                  newUsedStations = None, newUsedPhases = None, newGap = None, 
-                  newSecondaryGap = None, newMinimumDistance = None, 
+    def __init__ (self, newID = None, newSource = None, newHypocenter = None, 
+                  newSupportingData = None, newAssociatedStations = None, 
+                  newAssociatedPhases = None, newUsedStations = None, newUsedPhases = None, 
+                  newGap = None, newSecondaryGap = None, newMinimumDistance = None, 
                   newRMS = None, newQuality = None, newBayesianDepth = None, 
                   newBayesianRange = None, newDepthImportance = None, 
                   newLocatorExitCode = None, newErrorEllipse = None):
         ''' Initializing the object. Constructs an empty object if all arguments are None.
         
             newID: a string containing the ID
+            newSource: a processingformats.source.Source containing desired source (and supporting info)
             newHypocenter: a processingformats.hypocenter.Hypocenter containing the desired
                     hypocenter (and supporting info)
             newSupportingData: a vector of Pick objects used to generate this location
@@ -81,6 +84,11 @@ class LocationResult:
         if newID is not None:
             self.id = newID
             
+        if newSource is not None:
+            self.source = newSource
+        else:
+            self.source = processingformats.source.Source()
+
         if newAssociatedStations is not None:
             self.associatedStations = newAssociatedStations
             
@@ -158,6 +166,9 @@ class LocationResult:
         # Optional Keys
         if self.ID_KEY in aDict:
             self.id = aDict[self.ID_KEY]
+
+        if self.SOURCE_KEY in aDict:
+            self.source.fromDict(aDict[self.SOURCE_KEY])
             
         if self.ASSOCIATEDSTATIONS_KEY in aDict:
             self.associatedStations = aDict[self.ASSOCIATEDSTATIONS_KEY]
@@ -234,6 +245,10 @@ class LocationResult:
         # Optional Keys
         if hasattr(self, 'id'):
             aDict[self.ID_KEY] = self.id
+
+        if hasattr(self, 'source'):
+            if not self.source.isEmpty():
+                aDict[self.SOURCE_KEY] = self.source.toDict()
         
         if hasattr(self, 'associatedStations'):
             aDict[self.ASSOCIATEDSTATIONS_KEY] = self.associatedStations
@@ -320,6 +335,11 @@ class LocationResult:
             errorList.append('No MinimumDistance in LocationResult Class.')
         
         # Optional Keys
+        if hasattr(self, 'source'):
+            if not self.source.isEmpty():
+                if not self.source.isValid():
+                    errorList.append('Invalid Source in LocationResult Class.')
+
         # Gap
         if hasattr(self, 'gap'):
             if self.gap < 0 or self.gap > 360:
@@ -363,5 +383,7 @@ class LocationResult:
             if not self.errorEllipse.isEmpty():
                 if not self.errorEllipse.isValid():
                     errorList.append('Invalid ErrorEllipse in LocationResult Class.')
+
+        
         
         return errorList

@@ -33,9 +33,14 @@ public class LocationResultTest {
           + "\"LongitudeError\":22.64},\"DepthImportance\":1.8,\"LocatorExitCode\":"
           + "\"Success\",\"Quality\":\"A\",\"Gap\":33.67,\"BayesianDepth\":66.7,"
           + "\"SecondaryGap\":33.67,\"RMS\":3.8,\"NumberOfAssociatedStations\":11,"
-          + "\"NumberOfAssociatedPhases\":22,\"NumberOfUsedPhases\":44}";
+          + "\"NumberOfAssociatedPhases\":22,\"NumberOfUsedPhases\":44,"
+          + "\"ID\":\"12345678\",\"Source\":{\"Author\":\"TestAuthor\","
+          + "\"AgencyID\":\"US\",\"Type\":\"Unknown\"},}";
 
   public static String ID = "12345678";
+  public static String AGENCYID = "US";
+  public static String AUTHOR = "TestAuthor";
+  public static String TYPE = "Unknown";
   public static double LATITUDE = 40.3344;
   public static double LONGITUDE = -121.44;
   public static Date TIME = Utility.getDate("2015-12-28T21:32:24.017Z");
@@ -73,7 +78,6 @@ public class LocationResultTest {
   public static double BAYESIANRANGE = 20.3;
   public static double DEPTHIMPORTANCE = 1.8;
   public static String LOCATOREXITCODE = "Success";
-
   public static double E0ERROR = 40.3344;
   public static double E0AZIMUTH = -121.44;
   public static double E0DIP = 32.44;
@@ -94,6 +98,9 @@ public class LocationResultTest {
     LocationResult LocationResultObject =
         new LocationResult(
             ID,
+            AGENCYID,
+            AUTHOR,
+            TYPE,
             LATITUDE,
             LONGITUDE,
             TIME,
@@ -159,6 +166,7 @@ public class LocationResultTest {
     LocationResult LocationResultObject =
         new LocationResult(
             ID,
+            new Source(AGENCYID, AUTHOR, TYPE),
             LATITUDE,
             LONGITUDE,
             TIME,
@@ -194,6 +202,9 @@ public class LocationResultTest {
     LocationResult LocationResultObject =
         new LocationResult(
             ID,
+            AGENCYID,
+            AUTHOR,
+            TYPE,
             LATITUDE,
             LONGITUDE,
             TIME,
@@ -238,6 +249,9 @@ public class LocationResultTest {
     LocationResult badLocationResultObject =
         new LocationResult(
             ID,
+            AGENCYID,
+            null,
+            TYPE,
             null,
             LONGITUDE,
             TIME,

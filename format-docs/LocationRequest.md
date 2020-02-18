@@ -19,6 +19,12 @@ location processing algorithm.
       {
         "Type" : String,
         "ID" : String,
+        "Source" :
+        {
+          "AgencyID" : String,
+          "Author"   : String,
+          "Type"     : String
+        },
         "EarthModel" : String,
         "SourceOriginTime" : Number,
         "SourceLatitude"  : Number,
@@ -167,6 +173,8 @@ kilometers relative to the WGS84 datum.
 The following are supplementary values that **may or may not** be provided.
 
 * ID - A String containing the identifier for the location request.
+* Source - An object containing the source of the location result, see 
+[Source](Source.md).
 * IsLocationNew - A boolean flag that indicates if the location has been changed
 outside the locator.
 * IsLocationHeld - A boolean flag that indicates whether the location can be

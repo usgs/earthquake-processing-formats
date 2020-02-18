@@ -14,6 +14,12 @@ processing algorithms.
 ```json
     {
       "ID" : String,
+      "Source" :
+        {
+          "AgencyID" : String,
+          "Author"   : String,
+          "Type"     : String
+        },
       "Hypocenter"  :
       {
           "Latitude"        : Number,
@@ -108,6 +114,8 @@ The following are supplementary values that **may or may not** be provided by
 various algorithms.
 
 * ID - A String containing the identifier for the location result.
+* Source - An object containing the source of the location result, see
+[Source](Source.md).
 * NumberOfAssociatedStations - A number that indicates how many stations were
 associated with the location.
 * NumberOfAssociatedPhases - A number that indicates how many phases were

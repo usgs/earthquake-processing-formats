@@ -18,6 +18,7 @@ class LocationRequest:
     #JSON Keys
     TYPE_KEY = "Type" # Required
     ID_KEY = "ID" # Optional
+    SOURCE_KEY = "Source" # Optional
     EARTHMODEL_KEY = "EarthModel" # Required
     SOURCEORIGINTIME_KEY = "SourceOriginTime" # Required
     SOURCELATITUDE_KEY = "SourceLatitude" # Required
@@ -34,7 +35,7 @@ class LocationRequest:
     OUTPUTDATA_KEY = "OutputData" # Contain output from locator
     
     #Intialize members
-    def __init__ (self, newID = None, newType = None, newEarthModel = None, 
+    def __init__ (self, newID = None, newSource = None, newType = None, newEarthModel = None, 
                   newSourceLatitude = None, newSourceLongitude = None, 
                   newSourceOriginTime = None, newSourceDepth = None, 
                   newInputData = None, newIsLocationNew = None, newIsLocationHeld = None, 
@@ -43,6 +44,7 @@ class LocationRequest:
         ''' Initializes the pick object. Constructs empty object if all are none
         
             newID: a string containing the ID
+            newSource: a processingformats.source.Source containing desired source (and supporting info)
             newType: a type identifier for this Location Request
             newEarthModel: an earth model for this Location Request
             newSourceLatitude: a double containing the source latitude
@@ -87,6 +89,11 @@ class LocationRequest:
         # Optional Keys
         if newID is not None:
             self.id = newID
+
+        if newSource is not None:
+            self.source = newSource
+        else:
+            self.source = processingformats.source.Source()
             
         if newIsLocationNew is not None:
             self.isLocationNew = newIsLocationNew
@@ -149,6 +156,9 @@ class LocationRequest:
         #Optional Keys
         if self.ID_KEY in aDict:
             self.id = aDict[self.ID_KEY]
+
+        if self.SOURCE_KEY in aDict:
+            self.source.fromDict(aDict[self.SOURCE_KEY])
             
         if self.ISLOCATIONNEW_KEY in aDict:
             self.isLocationNew = aDict[self.ISLOCATIONNEW_KEY]
@@ -210,7 +220,11 @@ class LocationRequest:
         #Optional Keys
         if hasattr (self, 'id'):
             aDict[self.ID_KEY] = self.id
-            
+        
+        if hasattr(self, 'source'):
+            if not self.source.isEmpty():
+                aDict[self.SOURCE_KEY] = self.source.toDict()
+
         if hasattr (self, 'isLocationNew'):
             aDict[self.ISLOCATIONNEW_KEY] = self.isLocationNew
         
@@ -286,5 +300,10 @@ class LocationRequest:
                 for anInput in self.inputData:
                     if not anInput.isValid():
                         errorList.append('Invalid Input in LocationRequest Class.')
-                    
+
+        if hasattr(self, 'source'):
+            if not self.source.isEmpty():
+                if not self.source.isValid():
+                    errorList.append('Invalid Source in LocationRequest Class.')        
+
         return errorList
