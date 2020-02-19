@@ -36,11 +36,13 @@ location processing algorithm.
             "ID"        : String,
             "Site"      :
             {
-               "SiteID"    : String,
                "Station"   : String,
                "Channel"   : String,
                "Network"   : String,
-               "Location"  : String
+               "Location"  : String,
+               "Latitude"  : Number,
+               "Longitude" : Number,
+               "Elevation" : Number
             },
             "Source" :
             {
@@ -66,88 +68,7 @@ location processing algorithm.
         "BayesianSpread" : Number,
         "UseSVD"  : boolean  
       },
-      "OutputData" :
-      {
-        "Hypocenter"  :
-        {
-            "Latitude"        : Number,
-            "Longitude"       : Number,
-            "Depth"           : Number,
-            "Time"            : ISO8601,
-            "LatitudeError"   : Number,
-            "LongitudeError"  : Number,
-            "DepthError"      : Number,
-            "TimeError"       : Number
-        },
-        "NumberOfAssociatedStations" : Number,
-        "NumberOfAssociatedPhases"   : Number,
-        "NumberOfUsedStations"       : Number,
-        "NumberOfUsedPhases"         : Number,
-        "Gap"             : Number,  
-        "SecondaryGap"    : Number,  
-        "MinimumDistance" : Number,
-        "RMS"             : Number,  
-        "Quality"         : String,
-        "BayesianDepth" : Number,
-        "BayesianRange" : Number,
-        "DepthImportance" : Number,
-        "ErrorEllipse" :
-        {
-            "MaximumHorizontalProjection" : Number,
-            "MaximumVerticalProjection"   : Number,
-            "EquivalentHorizontalRadius"  : Number,
-            "E0" :
-            {
-                "Error"   : Number,
-                "Azimuth" : Number,
-                "Dip"     : Number
-            },
-            "E1" :
-            {
-                "Error"   : Number,
-                "Azimuth" : Number,
-                "Dip"     : Number
-            },
-            "E2" :
-            {
-                "Error"   : Number,
-                "Azimuth" : Number,
-                "Dip"     : Number
-            }
-        },
-        "AssociatedData" :
-        [
-          {
-            "ID"        : String,
-            "Site"      :
-            {
-               "SiteID"    : String,
-               "Station"   : String,
-               "Channel"   : String,
-               "Network"   : String,
-               "Location"  : String,
-               "Latitude"  : Number,
-               "Longitude" : Number,
-               "Elevation" : Number
-            },
-            "Source" :
-            {
-              "AgencyID" : String,
-              "Author"   : String,
-              "Type"     : String
-            },
-            "Time"         : ISO8601,
-            "Used"         : Boolean,
-            "LocatedPhase" : String,
-            "Residual"     : Number,
-            "Distance"     : Number,
-            "Azimuth"      : Number,
-            "Weight"       : Number,
-            "Importance"   : Number
-          },
-          ...
-        ]
-      }  
+      "OutputData" : { }  
     }
 ```
 

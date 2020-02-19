@@ -58,7 +58,7 @@ public class LocationResultTest {
 
   public static String SUPPORTINGDATA =
       "{\"ID\":\"12GFH48776857\","
-          + "\"Site\"{\"Station\":\"BOZ\",\"Channel\":"
+          + "\"Site\":{\"Station\":\"BOZ\",\"Channel\":"
           + "\"BHZ\",\"Network\":\"US\",\"Location\":\"00\","
           + "\"Latitude\":45.59697,\"Longitude\":-111.62967,"
           + "\"Elevation\":1589.0},\"Source\":{\"Author\":\"TestAuthor\","

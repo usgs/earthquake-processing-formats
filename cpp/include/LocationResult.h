@@ -11,6 +11,7 @@
 #include <Hypocenter.h>
 #include <ErrorEllipse.h>
 #include <Pick.h>
+#include <Source.h>
 
 #include <string>
 #include <exception>
@@ -34,77 +35,83 @@ class LocationResult : public ProcessingBase {
 	 */
 	LocationResult();
 
-    /**
+  /**
 	 * \brief LocationResult advanced constructor
 	 *
 	 * The advanced constructor for the LocationResult class.
 	 * Initializes members to provided values.
 	 *
-     * \param newLatitude - A double containing the latitude to use
+	 * \param newID - A std::string containing the id to use
+	 * \param newAgencyID - A std::string containing the agencyId to use
+	 * \param newAuthor - A std::string containing the author to use
+	 * \param newType - A std::string containing the type to use
+   * \param newLatitude - A double containing the latitude to use
 	 * \param newLongitude - A double containing the longitude to use
 	 * \param newTime - A double containing the origin time to use
 	 * \param newDepth - A double containing the depth to use
 	 * \param newLatitudeError - A double containing the latitude error to use, 
-     *  std::numeric_limits<double>::quiet_NaN() to omit
+   *  std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newLongitudeError - A double containing the longitude error to use, 
-     *  std::numeric_limits<double>::quiet_NaN() to omit
+   *  std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newTimeError - A double containing the new time error to use, 
-     *  std::numeric_limits<double>::quiet_NaN() to omit
+   *  std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newDepthError - A double containing the depth error to use, 
-     *  std::numeric_limits<double>::quiet_NaN() to omit
+   *  std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newSupportingData - A std::vector&lt;Pick&gt; containing the data 
-     *  that went into this location
+   *  that went into this location
 	 * \param newAssociatedStations - An int containing the number of associated 
-     *  stations, std::numeric_limits<double>::quiet_NaN() to omit
+   *  stations, std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newAssociatedPhases - An intcontaining the number of associated 
-     *  phases, std::numeric_limits<double>::quiet_NaN() to omit
+   *  phases, std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newUsedStations - An int containing the number of used stations, 
-     *  std::numeric_limits<double>::quiet_NaN() to omit
+   *  std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newUsedPhases - An int containing the number of used phases, 
-     *  std::numeric_limits<double>::quiet_NaN() to omit
+   *  std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newGap - A double containing the gap to use, 
-     *  std::numeric_limits<double>::quiet_NaN() to omit
+   *  std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newSecondaryGap - A double containing the secondary gap to use, 
-     *  std::numeric_limits<double>::quiet_NaN() to omit
+   *  std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newMinimumDistance - A double containing the minimum distance to 
-     *  use, std::numeric_limits<double>::quiet_NaN() to omit
+   *  use, std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newRMS - A double containing the rms to use, 
-     *  std::numeric_limits<double>::quiet_NaN() to omit
+   *  std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newQuality - A std::string containing the quality to use, 
-     *  std::numeric_limits<double>::quiet_NaN() to omit
+   *  std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newBayesianDepth - A double containing the bayesian depth to use, 
-     *  std::numeric_limits<double>::quiet_NaN() to omit
+   *  std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newBayesianRange - A double containing the bayesian range to use, 
-     *  std::numeric_limits<double>::quiet_NaN() to omit
+   *  std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newDepthImportance - A double containing the depth importance to 
-     *  use, std::numeric_limits<double>::quiet_NaN() to omit
+   *  use, std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newExitCode - A string containing the locator exit code 
 	 * \param newE0Error - A double containing the length of the first axis of 
-     *  the error ellipsoid in kilometers
+   *  the error ellipsoid in kilometers
 	 * \param newE0Azimuth - A double containing the azimuth of the first axis 
-     *  of the error ellipsoid in degrees
+   *  of the error ellipsoid in degrees
 	 * \param newE0Dip - A double containing the dip of the first axis of error 
-     *  ellipsoid in degrees.
+   *  ellipsoid in degrees.
 	 * \param newE1Error - A double containing the length of the second axis of 
-     *  the error ellipsoid in kilometers
+   *  the error ellipsoid in kilometers
 	 * \param newE1Azimuth - A double containing the azimuth of the second axis 
-     *  of the error ellipsoid in degrees
+   *  of the error ellipsoid in degrees
 	 * \param newE1Dip - A double containing the dip of the second axis of error 
-     *  ellipsoid in degrees.
+   *  ellipsoid in degrees.
 	 * \param newE2Error - A double containing the length of the third axis of 
-     *  the error ellipsoid in kilometers
+   *  the error ellipsoid in kilometers
 	 * \param newE2Azimuth - A double containing the the azimuth of the third 
-     *  axis of the error ellipsoid in degrees
+   *  axis of the error ellipsoid in degrees
 	 * \param newE2Dip - A double containing the dip of the third axis of error 
-     *  ellipsoid in degrees.
+   *  ellipsoid in degrees.
 	 * \param newMaximumHorizontalProjection - A double containing the 
-     *  horizontal projection of the error ellipsoid in kilometers
+   *  horizontal projection of the error ellipsoid in kilometers
 	 * \param newMaximumVerticalProjection - A double containing the vertical 
-     *  projection of the error ellipsoid in km in kilometers
+   *  projection of the error ellipsoid in km in kilometers
 	 * \param newEquivalentHorizontalRadius - A double containing the equivalent 
-     *  radius of the horizontal error ellipsoid in kilometers
+   *  radius of the horizontal error ellipsoid in kilometers
 	 */
-	LocationResult(double newLatitude, double newLongitude,
+	LocationResult(std::string newID, std::string newAgencyID,
+		std::string newAuthor,
+		std::string newType, double newLatitude, double newLongitude,
 		double newTime, double newDepth, double newLatitudeError,
 		double newLongitudeError, double newTimeError, double newDepthError,
 		std::vector<processingformats::Pick> newSupportingData,
@@ -205,7 +212,7 @@ class LocationResult : public ProcessingBase {
 	 */
 	std::vector<std::string> getErrors() override;
 
-    /**
+  /**
 	 * Required hypocenter
 	 */
 	processingformats::Hypocenter hypocenter;
@@ -219,6 +226,14 @@ class LocationResult : public ProcessingBase {
 	 * Optional std::string containing the event identifier
 	 */
 	std::string id;
+
+	/**
+	 * \brief pick source
+	 *
+	 * Optional processingformats::source containing the source for this result
+	 * message
+	 */
+	processingformats::Source source;
 
 	/**
 	 * Optional integer containing the number of associated stations

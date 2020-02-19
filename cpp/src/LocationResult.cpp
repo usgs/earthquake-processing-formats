@@ -7,6 +7,7 @@
 #define HYPOCENTER_KEY "Hypocenter"
 #define SUPPORTINGDATA_KEY "SupportingData"
 #define ID_KEY "ID"
+#define SOURCE_KEY "Source"
 #define ASSOCIATEDSTATIONS_KEY "NumberOfAssociatedStations"
 #define ASSOCIATEDPHASES_KEY "NumberOfAssociatedPhases"
 #define USEDSTATIONS_KEY "NumberOfUsedStations"
@@ -27,10 +28,12 @@ namespace processingformats {
 LocationResult::LocationResult() {
 	hypocenter = processingformats::Hypocenter();
 	supportingData.clear();
-	numberOfAssociatedStations = std::numeric_limits<int>::quiet_NaN();
-	numberOfAssociatedPhases = std::numeric_limits<int>::quiet_NaN();
-	numberOfUsedStations = std::numeric_limits<int>::quiet_NaN();
-	numberOfUsedPhases = std::numeric_limits<int>::quiet_NaN();
+	id = "";
+	source = processingformats::Source();
+	numberOfAssociatedStations = -1;
+	numberOfAssociatedPhases = -1;
+	numberOfUsedStations = -1;
+	numberOfUsedPhases = -1;
 	gap = std::numeric_limits<double>::quiet_NaN();
 	secondaryGap = std::numeric_limits<double>::quiet_NaN();
 	minimumDistance = std::numeric_limits<double>::quiet_NaN();
@@ -43,7 +46,9 @@ LocationResult::LocationResult() {
 	errorEllipse = processingformats::ErrorEllipse();
 }
 
-LocationResult::LocationResult(double newLatitude, double newLongitude,
+LocationResult::LocationResult(std::string newID, std::string newAgencyID,
+		std::string newAuthor,
+		std::string newType, double newLatitude, double newLongitude,
 		double newTime, double newDepth, double newLatitudeError,
 		double newLongitudeError, double newTimeError, double newDepthError,
 		std::vector<processingformats::Pick> newSupportingData,
@@ -72,6 +77,8 @@ LocationResult::LocationResult(double newLatitude, double newLongitude,
 		supportingData.push_back(newSupportingData[i]);
 	}
 
+	id = newID;
+	source = processingformats::Source(newAgencyID, newAuthor, newType);
 	numberOfAssociatedStations = newAssociatedStations;
 	numberOfAssociatedPhases = newAssociatedPhases;
 	numberOfUsedStations = newUsedStations;
@@ -112,6 +119,23 @@ LocationResult::LocationResult(double newLatitude, double newLongitude,
 	for (int i = 0; i < static_cast<int>(newSupportingData.size()); i++) {
 		supportingData.push_back(newSupportingData[i]);
 	}
+
+	id = "";
+	source = processingformats::Source();
+	numberOfAssociatedStations = -1;
+	numberOfAssociatedPhases = -1;
+	numberOfUsedStations = -1;
+	numberOfUsedPhases = -1;
+	gap = std::numeric_limits<double>::quiet_NaN();
+	secondaryGap = std::numeric_limits<double>::quiet_NaN();
+	minimumDistance = std::numeric_limits<double>::quiet_NaN();
+	rms = std::numeric_limits<double>::quiet_NaN();
+	quality = "";
+  bayesianDepth = std::numeric_limits<double>::quiet_NaN();
+	bayesianRange = std::numeric_limits<double>::quiet_NaN();
+	depthImportance = std::numeric_limits<double>::quiet_NaN();
+	locatorExitCode = "";
+	errorEllipse = processingformats::ErrorEllipse();
 }
 
 LocationResult::LocationResult(processingformats::Hypocenter newHypocenter,
@@ -123,6 +147,23 @@ LocationResult::LocationResult(processingformats::Hypocenter newHypocenter,
 	for (int i = 0; i < static_cast<int>(newSupportingData.size()); i++) {
 		supportingData.push_back(newSupportingData[i]);
 	}
+
+	id = "";
+	source = processingformats::Source();
+	numberOfAssociatedStations = -1;
+	numberOfAssociatedPhases = -1;
+	numberOfUsedStations = -1;
+	numberOfUsedPhases = -1;
+	gap = std::numeric_limits<double>::quiet_NaN();
+	secondaryGap = std::numeric_limits<double>::quiet_NaN();
+	minimumDistance = std::numeric_limits<double>::quiet_NaN();
+	rms = std::numeric_limits<double>::quiet_NaN();
+	quality = "";
+  bayesianDepth = std::numeric_limits<double>::quiet_NaN();
+	bayesianRange = std::numeric_limits<double>::quiet_NaN();
+	depthImportance = std::numeric_limits<double>::quiet_NaN();
+	locatorExitCode = "";
+	errorEllipse = processingformats::ErrorEllipse();
 }
 
 LocationResult::LocationResult(rapidjson::Value &json) {
@@ -162,13 +203,22 @@ LocationResult::LocationResult(rapidjson::Value &json) {
 		id = "";
 	}
 
+	// source
+	if ((json.HasMember(SOURCE_KEY) == true)
+			&& (json[SOURCE_KEY].IsObject() == true)) {
+		rapidjson::Value & sourcevalue = json[SOURCE_KEY];
+		source = processingformats::Source(sourcevalue);
+	} else {
+		source = processingformats::Source();
+	}
+
 	// associated stations
 	if ((json.HasMember(ASSOCIATEDSTATIONS_KEY) == true)
 			&& (json[ASSOCIATEDSTATIONS_KEY].IsNumber() == true)
 			&& (json[ASSOCIATEDSTATIONS_KEY].IsInt() == true)) {
 		numberOfAssociatedStations = json[ASSOCIATEDSTATIONS_KEY].GetInt();
 	} else {
-		numberOfAssociatedStations = std::numeric_limits<int>::quiet_NaN();
+		numberOfAssociatedStations = -1;
 	}
 
 	// associated phases
@@ -177,7 +227,7 @@ LocationResult::LocationResult(rapidjson::Value &json) {
 			&& (json[ASSOCIATEDPHASES_KEY].IsInt() == true)) {
 		numberOfAssociatedPhases = json[ASSOCIATEDPHASES_KEY].GetInt();
 	} else {
-		numberOfAssociatedPhases = std::numeric_limits<int>::quiet_NaN();
+		numberOfAssociatedPhases = -1;
 	}
 
 	// used stations
@@ -186,7 +236,7 @@ LocationResult::LocationResult(rapidjson::Value &json) {
 			&& (json[USEDSTATIONS_KEY].IsInt() == true)) {
 		numberOfUsedStations = json[USEDSTATIONS_KEY].GetInt();
 	} else {
-		numberOfUsedStations = std::numeric_limits<int>::quiet_NaN();
+		numberOfUsedStations = -1;
 	}
 
 	// used phases
@@ -195,7 +245,7 @@ LocationResult::LocationResult(rapidjson::Value &json) {
 			&& (json[USEDPHASES_KEY].IsInt() == true)) {
 		numberOfUsedPhases = json[USEDPHASES_KEY].GetInt();
 	} else {
-		numberOfUsedPhases = std::numeric_limits<int>::quiet_NaN();
+		numberOfUsedPhases = -1;
 	}
 
 	// gap
@@ -262,12 +312,12 @@ LocationResult::LocationResult(rapidjson::Value &json) {
 	}
 
 	// depth importance
-	if ((json.HasMember(SECONDARYGAP_KEY) == true)
-			&& (json[SECONDARYGAP_KEY].IsNumber() == true)
-			&& (json[SECONDARYGAP_KEY].IsDouble() == true)) {
-		secondaryGap = json[SECONDARYGAP_KEY].GetDouble();
+	if ((json.HasMember(DEPTHIMPORTANCE_KEY) == true)
+			&& (json[DEPTHIMPORTANCE_KEY].IsNumber() == true)
+			&& (json[DEPTHIMPORTANCE_KEY].IsDouble() == true)) {
+		depthImportance = json[DEPTHIMPORTANCE_KEY].GetDouble();
 	} else {
-		secondaryGap = std::numeric_limits<double>::quiet_NaN();
+		depthImportance = std::numeric_limits<double>::quiet_NaN();
 	}
 
 	// locator exit code
@@ -299,6 +349,7 @@ LocationResult::LocationResult(const LocationResult & newResult) {
 	}
 
 	id = newResult.id;
+	source = newResult.source;
 	numberOfAssociatedStations = newResult.numberOfAssociatedStations;
 	numberOfAssociatedPhases = newResult.numberOfAssociatedPhases;
 	numberOfUsedStations = newResult.numberOfUsedStations;
@@ -351,6 +402,13 @@ rapidjson::Value & LocationResult::toJSON(
 		rapidjson::Value idValue;
 		idValue.SetString(rapidjson::StringRef(id.c_str()), allocator);
 		json.AddMember(ID_KEY, idValue, allocator);
+	}
+
+	// source
+	if (source.isEmpty() == false) {
+		rapidjson::Value sourceValue(rapidjson::kObjectType);
+		source.toJSON(sourceValue, allocator);
+		json.AddMember(SOURCE_KEY, sourceValue, allocator);
 	}
 
 	// associated stations
@@ -472,6 +530,23 @@ std::vector<std::string> LocationResult::getErrors() {
 	}
 
 	// optional values
+	// source
+	if (source.isEmpty() == false) {
+		if (source.isValid() != true) {
+			std::vector<std::string> sourceErrors = source.getErrors();
+
+			std::string errorString =
+					"Source object did not validate in LocationResult class:";
+
+			for (int i = 0; i < sourceErrors.size(); i++) {
+				errorString += " " + sourceErrors[i];
+			}
+
+			// bad source
+			errorlist.push_back(errorString);
+		}
+	}
+
 	// gap
 	if (std::isnan(gap) != true) {
 		if ((gap < 0) || (gap > 360)) {

@@ -33,7 +33,7 @@ in input/output messages for seismic processing algorithms.
       },
       "MaximumHorizontalProjection" : Number,
       "MaximumVerticalProjection"   : Number,
-      "EquivalentHorizontalRadius"  : Number,                  
+      "EquivalentHorizontalRadius"  : Number
     }
 ```
 

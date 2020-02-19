@@ -15,12 +15,12 @@ in input/output messages for seismic processing algorithms.
     {
       "Latitude"        : Number,
       "Longitude"       : Number,
-      "Depth"           : Number,         
+      "Depth"           : Number,
       "Time"            : ISO8601,
       "LatitudeError"   : Number,
       "LongitudeError"  : Number,
       "DepthError"      : Number,
-      "TimeError"       : Number        
+      "TimeError"       : Number
     }
 ```
 

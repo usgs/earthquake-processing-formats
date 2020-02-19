@@ -15,11 +15,11 @@ processing algorithms.
     {
       "ID" : String,
       "Source" :
-        {
+      {
           "AgencyID" : String,
           "Author"   : String,
           "Type"     : String
-        },
+      },
       "Hypocenter"  :
       {
           "Latitude"        : Number,
@@ -40,8 +40,8 @@ processing algorithms.
       "MinimumDistance" : Number,
       "RMS"             : Number,  
       "Quality"         : String,
-      "BayesianDepth" : Number,
-      "BayesianRange" : Number,
+      "BayesianDepth"   : Number,
+      "BayesianRange"   : Number,
       "DepthImportance" : Number,
       "LocatorExitCode" : String,
       "ErrorEllipse" :
@@ -74,11 +74,13 @@ processing algorithms.
           "ID"        : String,
           "Site"      :
           {
-             "SiteID"    : String,
              "Station"   : String,
              "Channel"   : String,
              "Network"   : String,
-             "Location"  : String
+             "Location"  : String,
+             "Latitude"  : Number,
+             "Longitude" : Number,
+             "Elevation" : Number
           },
           "Source" :
           {

@@ -18,7 +18,10 @@ in input/output messages for seismic processing algorithms.
          "Station"   : String,
          "Channel"   : String,
          "Network"   : String,
-         "Location"  : String
+         "Location"  : String,
+         "Latitude"  : Number,
+         "Longitude" : Number,
+         "Elevation" : Number
       },
       "Source" :
       {
