@@ -72,7 +72,7 @@ public class LocationRequest implements ProcessingInt {
   /** Optional Boolean indicating whether the depth is bayesian */
   public Boolean IsBayesianDepth;
 
-  /** Optional Double containing the bayesan depth */
+  /** Optional Double containing the bayesian depth */
   public Double BayesianDepth;
 
   /** Optional Double containing the bayesian spread */
