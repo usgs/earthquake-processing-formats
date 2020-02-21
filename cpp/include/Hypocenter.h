@@ -102,6 +102,14 @@ class Hypocenter : public ProcessingBase {
 	std::vector<std::string> getErrors() override;
 
 	/**
+	 * \brief Empty check
+	 *
+	 * Checks to see if this object is empty
+	 * \return Returns true if empty, false otherwise.
+	 */
+	bool isEmpty();
+
+	/**
 	 * \brief latitude value
 	 *
 	 * A required double defining the latitude of this Hypocenter in degrees 

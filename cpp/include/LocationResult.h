@@ -212,6 +212,14 @@ class LocationResult : public ProcessingBase {
 	 */
 	std::vector<std::string> getErrors() override;
 
+	/**
+	 * \brief Empty check
+	 *
+	 * Checks to see if this object is empty
+	 * \return Returns true if empty, false otherwise.
+	 */
+	bool isEmpty();
+
   /**
 	 * Required hypocenter
 	 */

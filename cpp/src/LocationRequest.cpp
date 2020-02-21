@@ -26,7 +26,7 @@
 namespace processingformats {
 LocationRequest::LocationRequest() {
 	  id = "";
-    source = processingformats::source();
+    source = processingformats::Source();
     type = "";
     earthModel = "";
     sourceLatitude = std::numeric_limits<double>::quiet_NaN();
@@ -64,7 +64,7 @@ LocationRequest::LocationRequest(
       double newBayesianSpread,
       bool newUseSVD) {
 	id = newID;
-  LocationRequest::source = processingformats::source(newAgencyID, newAuthor,
+  LocationRequest::source = processingformats::Source(newAgencyID, newAuthor,
     newType);
 	type = newType;
 	sourceLatitude = newSourceLatitude;
@@ -84,7 +84,7 @@ LocationRequest::LocationRequest(
 
 LocationRequest::LocationRequest(
       std::string newID,
-      processingformats::Source newSource
+      processingformats::Source newSource,
       std::string newLocType,
       std::string newEarthModel,
       double newSourceLatitude,
@@ -98,10 +98,10 @@ LocationRequest::LocationRequest(
       bool newIsBayesianDepth,
       double newBayesianDepth,
       double newBayesianSpread,
-      bool newUseSVD)) {
+      bool newUseSVD) {
 	id = newID;
   LocationRequest::source = newSource;
-	type = newType;
+	type = newLocType;
 	sourceLatitude = newSourceLatitude;
   sourceLongitude = newSourceLongitude;
   sourceOriginTime = newSourceOriginTime;
@@ -289,9 +289,9 @@ LocationRequest::LocationRequest(const LocationRequest & newLocationRequest) {
 
     // copy data
     inputData.clear();
-    for (int i = 0; i < static_cast<int>(newLocationRequest.inputData.size()); 
+    for (int i = 0; i < static_cast<int>(newLocationRequest.inputData.size());
         i++) {
-		  inputData.push_back(newResult.inputData[i]);
+		  inputData.push_back(newLocationRequest.inputData[i]);
 	  }
 
     isLocationNew = newLocationRequest.isLocationNew;
@@ -354,10 +354,20 @@ rapidjson::Value & LocationRequest::toJSON(
 		json.AddMember(SOURCEORIGINTIME_KEY, timevalue, allocator);
 	}
 
+  // input data
+	rapidjson::Value dataarray(rapidjson::kArrayType);
+	if (inputData.size() > 0) {
+		for (int i = 0; i < static_cast<int>(inputData.size()); i++) {
+			rapidjson::Value datavalue(rapidjson::kObjectType);
+			inputData[i].toJSON(datavalue, allocator);
+			dataarray.PushBack(datavalue, allocator);
+		}
+	}
 
-
-
-
+	if (dataarray.Size() > 0) {
+		// data
+		json.AddMember(INPUTDATA_KEY, dataarray, allocator);
+	}
 
   // Optional values
 	// id
@@ -374,38 +384,37 @@ rapidjson::Value & LocationRequest::toJSON(
 		json.AddMember(SOURCE_KEY, sourceValue, allocator);
 	}
 
+	// isLocationNew
+	json.AddMember(ISLOCATIONNEW_KEY, isLocationNew, allocator);
+
+	// isLocationHeld
+	json.AddMember(ISLOCATIONHELD_KEY, isLocationHeld, allocator);
+
+	// isDepthHeld
+	json.AddMember(ISDEPTHHELD_KEY, isDepthHeld, allocator);
+
+	// isBayesianDepth
+	json.AddMember(ISBAYESIANDEPTH_KEY, isBayesianDepth, allocator);
 
 
+	// bayesianDepth
+	if (std::isnan(bayesianDepth) != true) {
+		json.AddMember(BAYESIANDEPTH_KEY, bayesianDepth, allocator);
+  }
 
+	// bayesianSpread
+	if (std::isnan(bayesianSpread) != true) {
+		json.AddMember(BAYESIANSPREAD_KEY, bayesianSpread, allocator);
+  }
 
-	if (channel != "") {
-		rapidjson::Value channelvalue;
-		channelvalue.SetString(rapidjson::StringRef(channel.c_str()),
-								allocator);
-		json.AddMember(CHANNEL_KEY, channelvalue, allocator);
-	}
+	// useSVD
+	json.AddMember(USESVD_KEY, useSVD, allocator);
 
-	// location
-	if (location != "") {
-		rapidjson::Value locationvalue;
-		locationvalue.SetString(rapidjson::StringRef(location.c_str()),
-								allocator);
-		json.AddMember(LOCATION_KEY, locationvalue, allocator);
-	}
-
-	// latitude
-	if (std::isnan(latitude) != true) {
-		json.AddMember(LATITUDE_KEY, latitude, allocator);
-	}
-
-	// longitude
-	if (std::isnan(longitude) != true) {
-		json.AddMember(LONGITUDE_KEY, longitude, allocator);
-	}
-
-	// elevation
-	if (std::isnan(elevation) != true) {
-		json.AddMember(ELEVATION_KEY, elevation, allocator);
+	// outputData
+	if (outputData.isEmpty() == false) {
+		rapidjson::Value outputDataValue(rapidjson::kObjectType);
+		outputData.toJSON(outputDataValue, allocator);
+		json.AddMember(OUTPUTDATA_KEY, outputDataValue, allocator);
 	}
 
 	return (json);
@@ -414,47 +423,100 @@ rapidjson::Value & LocationRequest::toJSON(
 std::vector<std::string> LocationRequest::getErrors() {
 	std::vector<std::string> errorlist;
 
-	// check for required keys
-	// Station
-	if (station == "") {
-		// empty Station
-		errorlist.push_back("Empty Station in LocationRequest class.");
+	// check required data
+	// sourceLatitude
+	if (std::isnan(sourceLatitude) == true) {
+		// sourceLatitude not found
+		errorlist.push_back("No sourceLatitude in LocationRequest class.");
+	} else if ((sourceLatitude < -90.0) || (sourceLatitude > 90.0)) {
+		errorlist.push_back("Invalid sourceLatitude in LocationRequest class.");
 	}
 
-	// Network
-	if (network == "") {
-		// empty network
-		errorlist.push_back("Empty Network in LocationRequest class.");
+	// sourceLongitude
+	if (std::isnan(sourceLongitude) == true) {
+		// sourceLongitude not found
+		errorlist.push_back("No sourceLongitude in LocationRequest class.");
+	} else if ((sourceLongitude < -180.0) || (sourceLongitude > 180.0)) {
+		errorlist.push_back("Invalid sourceLongitude in LocationRequest class.");
 	}
 
-	// latitude
-	if (std::isnan(latitude) != true) {
-		if ((latitude < -90) || (latitude > 90)) {
-			errorlist.push_back("Latitude in LocationRequest class not in the range of -90 to "
-				"90 degrees.");
+	// sourceOriginTime
+	if (std::isnan(sourceOriginTime) == true) {
+		errorlist.push_back("sourceOriginTime is missing in LocationRequest class.");
+	} else {
+		try {
+			if (processingformats::IsStringISO8601(
+					processingformats::ConvertEpochTimeToISO8601(sourceOriginTime))
+					== false) {
+				errorlist.push_back(
+						"sourceOriginTime did not validate in LocationRequest class.");
+			}
+		} catch (const std::exception & e) {
+			errorlist.push_back(std::string(e.what()));
 		}
 	}
 
-	// longitude
-	if (std::isnan(longitude) != true) {
-		if ((longitude < -180) || (longitude > 180)) {
-			errorlist.push_back("Longitude in LocationRequest class not in the range of -180 "
-				"to 180 degrees.");
+	// sourceDepth
+	if (std::isnan(sourceDepth) == true) {
+		// sourceDepth not found
+		errorlist.push_back("No sourceDepth in LocationRequest class.");
+	} else if ((sourceDepth < -100) || (sourceDepth > 1500)) {
+		errorlist.push_back("Invalid sourceDepth in LocationRequest class.");
+	}
+
+  // inputData
+	if (inputData.size() > 0) {
+		for (int i = 0; i < static_cast<int>(inputData.size()); i++) {
+			if (inputData[i].isValid() != true) {
+				std::vector<std::string> dataErrors = inputData[i].getErrors();
+
+				std::string errorString =
+						"Invalid input data in LocationRequest class:";
+
+				for (int j = 0; j < dataErrors.size(); j++) {
+					errorString += " " + dataErrors[j];
+				}
+
+				// bad pick
+				errorlist.push_back(errorString);
+			}
 		}
 	}
 
-	// elevation
-	if (std::isnan(elevation) != true) {
-		if ((elevation < -500) || (elevation > 8900)) {
-			errorlist.push_back("Elevation in LocationRequest class not in the range of -500 "
-				"to 8900 meters.");
+  // optional values
+	// source
+	if (source.isEmpty() == false) {
+		if (source.isValid() != true) {
+			std::vector<std::string> sourceErrors = source.getErrors();
+
+			std::string errorString =
+					"Source object did not validate in LocationRequest class:";
+
+			for (int i = 0; i < sourceErrors.size(); i++) {
+				errorString += " " + sourceErrors[i];
+			}
+
+			// bad source
+			errorlist.push_back(errorString);
 		}
 	}
 
-	// since station, channel, network, and location are free text strings, no
-	// further  validation is required.  channel and location are also optional
-	// NOTE: Further validation COULD be done to confirm that values matched
-	// seed standards.
+	// outputData
+	if (outputData.isEmpty() == false) {
+		if (outputData.isValid() != true) {
+			std::vector<std::string> outputDataErrors = outputData.getErrors();
+
+			std::string errorString =
+					"outputData object did not validate in LocationRequest class:";
+
+			for (int i = 0; i < outputDataErrors.size(); i++) {
+				errorString += " " + outputDataErrors[i];
+			}
+
+			// bad outputData
+			errorlist.push_back(errorString);
+		}
+	}
 
 	// return the list of errors
 	return (errorlist);

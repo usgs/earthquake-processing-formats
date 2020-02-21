@@ -132,7 +132,7 @@ class Pick : public ProcessingBase {
 	 * \param newImportance
 	 *            - A double containing the importance to use, null to omit
 	 */
-	Pick(std::string newID, processingformats::Site newSite, 
+	Pick(std::string newID, processingformats::Site newSite,
 			processingformats::Source newSource, double newTime,
 			double newAffinity, double newQuality, bool newUse,
 			std::string newPickedPhase, std::string newAssociatedPhase,

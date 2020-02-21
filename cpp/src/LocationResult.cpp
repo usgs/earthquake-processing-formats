@@ -608,4 +608,63 @@ std::vector<std::string> LocationResult::getErrors() {
 	return (errorlist);
 }
 
+bool LocationResult::isEmpty() {
+	if (hypocenter.isEmpty() == false) {
+		return (false);
+	}
+	if (supportingData.size() > 0) {
+		return (false);
+	}
+	if (id != "") {
+		return (false);
+	}
+	if (source.isEmpty() == false) {
+		return (false);
+	}
+	if (numberOfAssociatedStations > 0) {
+		return (false);
+	}
+	if (numberOfAssociatedPhases > 0) {
+		return (false);
+	}
+	if (numberOfUsedStations > 0) {
+		return (false);
+	}
+	if (numberOfUsedPhases > 0) {
+		return (false);
+	}
+	if (std::isnan(gap) != true) {
+		return(false);
+	}
+	if (std::isnan(secondaryGap) != true) {
+		return(false);
+	}
+	if (std::isnan(minimumDistance) != true) {
+		return(false);
+	}
+	if (std::isnan(rms) != true) {
+		return(false);
+	}
+	if (quality != "") {
+		return (false);
+	}
+	if (std::isnan(bayesianDepth) != true) {
+		return(false);
+	}
+	if (std::isnan(bayesianRange) != true) {
+		return(false);
+	}
+	if (std::isnan(depthImportance) != true) {
+		return(false);
+	}
+	if (locatorExitCode != "") {
+		return (false);
+	}
+	if (errorEllipse.isEmpty() == false) {
+		return (false);
+	}
+
+	return (true);
+}
+
 }  // namespace processingformats

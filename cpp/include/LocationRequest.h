@@ -114,7 +114,7 @@ class LocationRequest : public ProcessingBase {
    */
 	LocationRequest(
       std::string newID,
-      processingformats::Source newSource
+      processingformats::Source newSource,
       std::string newLocType,
       std::string newEarthModel,
       double newSourceLatitude,

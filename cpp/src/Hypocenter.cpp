@@ -223,4 +223,33 @@ std::vector<std::string> Hypocenter::getErrors() {
 	// return the list of errors
 	return (errorlist);
 }
+
+bool Hypocenter::isEmpty() {
+	if (std::isnan(latitude) != true) {
+		return(false);
+	}
+	if (std::isnan(longitude) != true) {
+		return(false);
+	}
+	if (std::isnan(depth) != true) {
+		return(false);
+	}
+	if (std::isnan(time) != true) {
+		return(false);
+	}
+	if (std::isnan(latitudeError) != true) {
+		return(false);
+	}
+	if (std::isnan(longitudeError) != true) {
+		return(false);
+	}
+	if (std::isnan(depthError) != true) {
+		return(false);
+	}
+	if (std::isnan(timeError) != true) {
+		return(false);
+	}
+
+	return (true);
+}
 }  // namespace processingformats
