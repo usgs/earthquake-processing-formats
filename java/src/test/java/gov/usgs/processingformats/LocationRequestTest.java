@@ -27,7 +27,7 @@ public class LocationRequestTest {
           + "\"ID\":\"12GFH48776857\",\"LocatedPhase\":\"P\",\"Distance\":2.65}],"
           + "\"IsLocationNew\":false,\"IsBayesianDepth\":true}"
           + "\"ID\":\"12345678\",\"Source\":{\"Author\":\"TestAuthor\","
-          + "\"AgencyID\":\"US\",\"Type\":\"Unknown\"},}";
+          + "\"AgencyID\":\"US\",\"Type\":\"Unknown\"}}";
 
   public static String ID = "12345678";
   public static String AGENCYID = "US";
