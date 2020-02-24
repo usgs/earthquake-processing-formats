@@ -66,19 +66,22 @@ LocationRequest::LocationRequest(
 	id = newID;
   LocationRequest::source = processingformats::Source(newAgencyID, newAuthor,
     newType);
-	type = newType;
+	type = newLocType;
 	sourceLatitude = newSourceLatitude;
   sourceLongitude = newSourceLongitude;
   sourceOriginTime = newSourceOriginTime;
   sourceDepth = newSourceDepth;
   inputData.clear();
-  isLocationNew = false;
-  isLocationHeld = false;
-  isDepthHeld = false;
-  isBayesianDepth = false;
-  bayesianDepth = std::numeric_limits<double>::quiet_NaN();
-  bayesianSpread = std::numeric_limits<double>::quiet_NaN();
-  useSVD = false;
+  for (int i = 0; i < static_cast<int>(newInputData.size()); i++) {
+		inputData.push_back(newInputData[i]);
+	}
+  isLocationNew = newIsLocationNew;
+  isLocationHeld = newIsLocationHeld;
+  isDepthHeld = newIsDepthHeld;
+  isBayesianDepth = newIsBayesianDepth;
+  bayesianDepth = newBayesianDepth;
+  bayesianSpread = newBayesianSpread;
+  useSVD = newUseSVD;
   outputData = processingformats::LocationResult();
 }
 
@@ -107,13 +110,16 @@ LocationRequest::LocationRequest(
   sourceOriginTime = newSourceOriginTime;
   sourceDepth = newSourceDepth;
   inputData.clear();
-  isLocationNew = false;
-  isLocationHeld = false;
-  isDepthHeld = false;
-  isBayesianDepth = false;
-  bayesianDepth = std::numeric_limits<double>::quiet_NaN();
-  bayesianSpread = std::numeric_limits<double>::quiet_NaN();
-  useSVD = false;
+  for (int i = 0; i < static_cast<int>(newInputData.size()); i++) {
+		inputData.push_back(newInputData[i]);
+	}
+  isLocationNew = newIsLocationNew;
+  isLocationHeld = newIsLocationHeld;
+  isDepthHeld = newIsDepthHeld;
+  isBayesianDepth = newIsBayesianDepth;
+  bayesianDepth = newBayesianDepth;
+  bayesianSpread = newBayesianSpread;
+  useSVD = newUseSVD;
   outputData = processingformats::LocationResult();
 }
 
