@@ -7,10 +7,12 @@ part of a [Location](Location.md).  ErrorEllipse uses the
 [JSON standard](http://www.json.org).
 
 ## Usage
+
 ErrorEllipse is intended for use as part of the [Location](Location.md) Format
 in input/output messages for seismic processing algorithms.
 
 ## Output
+
 ```json
     {
       "E0" :
@@ -38,10 +40,12 @@ in input/output messages for seismic processing algorithms.
 ```
 
 ## Glossary
+
 **Required Values:**
-* E0 - First error semi-axis length.
-* E1 - Second error semi-axis length.
-* E2 - Third error semi-axis length.
+
+* E0 - First error semi-axis.
+* E1 - Second error semi-axis.
+* E2 - Third error semi-axis.
 * Error - A number containing the length of the axis of the error ellipsoid in
 kilometers.
 * Azimuth - A number containing the azimuth of the axis of the error ellipsoid  
@@ -53,6 +57,7 @@ degrees.
 
 The following are supplementary values that **may or may not** be provided by
 various algorithms.
+
 * MaximumHorizontalProjection -  A number containing the horizontal projection
 of the error ellipsoid in kilometers.
 * MaximumVerticalProjection -  A number containing the vertical projection of the

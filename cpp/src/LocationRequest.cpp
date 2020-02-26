@@ -311,6 +311,7 @@ LocationRequest::LocationRequest(const LocationRequest & newLocationRequest) {
 }
 
 LocationRequest::~LocationRequest() {
+	inputData.clear();
 }
 
 rapidjson::Value & LocationRequest::toJSON(

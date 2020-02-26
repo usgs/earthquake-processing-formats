@@ -11,6 +11,7 @@ Travel-Time Request is intended for use as part of a seismic travel time
 information service
 
 ## Lookup Request
+
 ```json
     {
       "Request" :
@@ -42,6 +43,7 @@ information service
 ```
 
 ## Plot Request
+
 ```json
     {
       "Request" :
@@ -62,7 +64,7 @@ information service
                 "Distance" : Number,
                 "TravelTime" : Number,
                 "StatisticalSpread" : Number,
-                "Observability" : Number              
+                "Observability" : Number
               },
               ...
             ]
@@ -74,9 +76,11 @@ information service
 ```
 
 ## Glossary
+
 **Required Input Values:**
 
 These are the values **required** to define a Travel-Time request.
+
 * Type - A string indicating the type of request, "Standard", "Plot", or
 "PlotStatistics". The default is "Standard"
 * Distance -  A number containing the source-receiver distance in

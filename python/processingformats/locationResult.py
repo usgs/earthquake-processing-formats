@@ -54,13 +54,13 @@ class LocationResult:
             newAssociatedPhases: an int containing the number of associated phases
             newUsedStations: an int containing the number of used stations
             newUsedPhases: an int containing the number of used phases
-            newGap: a double containing the gap
-            newSecondaryGap: a double containing the secondary gap
-            newMinimumDistance: a double containing the detection minimum distance
-            newRMS: a double containing the RMS
-            newQuality: a string containing the quality flag
-            newBayesianDepth: a double containing the bayesian depth
-            newBayesianRange: a double containng the bayesian range
+            newGap: a double containing the gap in degrees
+            newSecondaryGap: a double containing the secondary gap in degrees
+            newMinimumDistance: a double containing the detection minimum distance in degrees
+            newRMS: a double containing the RMS in seconds 
+            newQuality: a string containing the quality flags
+            newBayesianDepth: a double containing the bayesian depth in kilometers
+            newBayesianRange: a double containing the bayesian range in kilometers
             newDepthImportance: a double containing the depth importance
             newLocatorExitCode: a string containing the locator exit code
             newErrorEllipse: a processingformats.errorEllipse.ErrorEllipse containing

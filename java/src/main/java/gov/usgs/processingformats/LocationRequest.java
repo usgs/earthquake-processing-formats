@@ -45,16 +45,16 @@ public class LocationRequest implements ProcessingInt {
   /** Required earth model for this LocationRequest */
   public String EarthModel;
 
-  /** Required Double containing the Source latitude */
+  /** Required Double containing the Source latitude in decimal degrees */
   public Double SourceLatitude;
 
-  /** Required Double containing the Source longitude */
+  /** Required Double containing the Source longitude in decimal degrees */
   public Double SourceLongitude;
 
-  /** Required time containing the Source time */
+  /** Required time containing the Source time as a java Date */
   public Date SourceOriginTime;
 
-  /** Required Double containing the Sourcedepth */
+  /** Required Double containing the Source depth in kilometers */
   public Double SourceDepth;
 
   /** A required vector of input Pick objects for this LocationRequest */
@@ -72,10 +72,10 @@ public class LocationRequest implements ProcessingInt {
   /** Optional Boolean indicating whether the depth is bayesian */
   public Boolean IsBayesianDepth;
 
-  /** Optional Double containing the bayesian depth */
+  /** Optional Double containing the bayesian depth in kilometers */
   public Double BayesianDepth;
 
-  /** Optional Double containing the bayesian spread */
+  /** Optional Double containing the bayesian spread in kilometers */
   public Double BayesianSpread;
 
   /** Optional Boolean indicating whether use SVD */

@@ -143,8 +143,8 @@ class Pick : public ProcessingBase {
 	 * \brief Pick advanced constructor
 	 *
 	 * The advanced constructor for the Pick class.
-	 * Converts the provided object from a rapidjson::Value, populating members
-	 * \param json - A rapidjson::Value document.
+	 * Constructs the object from a rapidjson::Value, populating members
+	 * \param json - A reference to a populated rapidjson::Value to use
 	 */
 	explicit Pick(rapidjson::Value &json); // NOLINT
 
@@ -212,78 +212,87 @@ class Pick : public ProcessingBase {
 	/**
 	 * \brief pick time
 	 *
-	 * A required double containing the time for this pick
+	 * A required double containing the time for this pick in decimal epoch seconds
 	 */
 	double time;
 
 	/**
-	 * Required double containing the affinity
+	 * \brief pick affinity
+	 * 
+	 * A required double containing the pick affinity
 	 */
 	double affinity;
 
 	/**
-	 * Required double containing the quality
+	 * \brief pick quality
+	 * 
+	 * A required double containing the pick quality
 	 */
 	double quality;
 
 	/**
-	 * Required boolean containing the use flag
+	 * \brief pick use flag
+	 * 
+	 * A required boolean containing the input use flag
 	 */
 	bool use;
 
 	/**
 	 * \brief picked phase
 	 *
-	 * A required std::string containing the picked phase for this pick
+	 * A required std::string containing the phase name assigned by the picker 
+	 * for this pick
 	 */
 	std::string pickedPhase;
 
 	/**
 	 * \brief associated phase
 	 *
-	 * A required std::string containing the associated phase for this pick
+	 * A required std::string containing the phase name assigned by the associator
+	 * for this pick
 	 */
 	std::string associatedPhase;
 
 	/**
 	 * \brief located phase
 	 *
-	 * An optional (output) std::string containing the located phase
+	 * An optional (output) std::string containing the phase name assigned by the 
+	 * locator for this pick.
 	 */
 	std::string locatedPhase;
 
 	/**
 	 * \brief residual
 	 *
-	 * An optional (output) double containing the residual
+	 * An optional (output) double containing the residual in seconds
 	 */
 	double residual;
 
 	/**
 	 * \brief distance
 	 *
-	 * An optional (output) double containing the distance
+	 * An optional (output) double containing the distance in decimal degrees.
 	 */
 	double distance;
 
 	/**
 	 * \brief azimuth
 	 *
-	 * An optional (output) double containing the azimuth
+	 * An optional (output) double containing the azimuth in decimal degrees
 	 */
 	double azimuth;
 
 	/**
 	 * \brief weight
 	 *
-	 * An optional (output) double containing the weight
+	 * An optional (output) double containing the locator weight
 	 */
 	double weight;
 
 	/**
-	 * \brief importance
+	 * \brief importance value
 	 *
-	 * An optional (output) double containing the importance
+	 * An optional (output) double containing the importance value
 	 */
 	double importance;
 };

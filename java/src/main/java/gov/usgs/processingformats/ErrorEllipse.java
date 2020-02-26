@@ -20,22 +20,22 @@ public class ErrorEllipse implements ProcessingInt {
   public static final String MAXIMUM_VERTICAL_KEY = "MaximumVerticalProjection";
   public static final String EQUIVALENT_HORIZONTAL_KEY = "EquivalentHorizontalRadius";
 
-  /** Required E0. */
+  /** Required first error semi-axis. */
   public ErrorEllipseAxis E0;
 
-  /** Required E1. */
+  /** Required second error semi-axis. */
   public ErrorEllipseAxis E1;
 
-  /** Required E2. */
+  /** Required third error semi-axis. */
   public ErrorEllipseAxis E2;
 
-  /** Required Maximum horizontal projection. */
+  /** Required horizontal projection of the error ellipsoid in kilometers */
   public Double MaximumHorizontalProjection;
 
-  /** Required Maximum vertical projection. */
+  /** Required maximum vertical projection of the error ellipsoid in kilometers. */
   public Double MaximumVerticalProjection;
 
-  /** Required Equivalent horizontal radius. */
+  /** Required equivalent radius of the horizontal error ellipsoid in kilometers. */
   public Double EquivalentHorizontalRadius;
 
   /** The constructor for the ErrorEllipse class. Initializes members to null values. */

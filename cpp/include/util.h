@@ -88,6 +88,8 @@ namespace processingformats {
 	 * Converts the provided string from a serialized json string, populating
 	 * members
 	 * \param jsonstring - A std::string containing the serialized json
+	 * \param jsondocument - A reference to a rapidjson::Document used in parsing
+	 * the string
 	 * \return Returns 1 if successful, 0 otherwise
 	 */
 	rapidjson::Document & FromJSONString(std::string jsonstring,

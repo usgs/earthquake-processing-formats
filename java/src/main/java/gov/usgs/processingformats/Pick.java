@@ -38,7 +38,7 @@ public class Pick implements ProcessingInt {
   /** Required Source. */
   public Source Source;
 
-  /** Required Time for this Pick */
+  /** Required Time for this Pick as a java Date */
   public Date Time;
 
   /** Required double containing the Affinity */
@@ -50,28 +50,30 @@ public class Pick implements ProcessingInt {
   /** Required boolean containing the Use flag */
   public Boolean Use;
 
-  /** Required String containing the picked phase */
+  /** Required String containing the phase named assigned by the picker for this pick */
   public String PickedPhase;
 
-  /** Required String containing the associated phase */
+  /** Required String containing the assigned by the associator for this pick */
   public String AssociatedPhase;
 
-  /** Optional (output) String containing the located phase */
+  /**
+   * Optional (output) String containing the the phase name assigned by the locator for this pick.
+   */
   public String LocatedPhase;
 
-  /** Optional (output) double containing the Residual */
+  /** Optional (output) double containing the Residual in seconds */
   public Double Residual;
 
-  /** Optional (output) double containing the Distance */
+  /** Optional (output) double containing the Distance in decimal degrees */
   public Double Distance;
 
-  /** Optional (output) double containing the Azimuth */
+  /** Optional (output) double containing the Azimuth decimal degrees */
   public Double Azimuth;
 
-  /** Optional (output) double containing the Weight */
+  /** Optional (output) double containing the locator weight */
   public Double Weight;
 
-  /** Optional (output) double containing the Importance */
+  /** Optional (output) double containing the importance value */
   public Double Importance;
 
   /** The constructor for the Pick class. Initializes members to null values. */

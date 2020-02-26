@@ -7,14 +7,16 @@ request session.  Travel-Time Session uses the
 [JSON standard](http://www.json.org).
 
 ## Usage
+
 Travel-Time Session is intended for use as part of a seismic travel time
 information service
 
 ## Output
+
 ```json
     {
       "SourceDepth"   : Number,
-      "EarthModel"    : String,      
+      "EarthModel"    : String,
       "PhaseTypes"    :
       [
         String, ...
@@ -28,8 +30,9 @@ information service
       "IsPlot" : Boolean
     }
 ```
-Reciever
+
 ## Glossary
+
 **Required Input Values:**
 
 These are the values **required** to define a Travel-Time Session.
@@ -38,6 +41,7 @@ These are the values **required** to define a Travel-Time Session.
 WGS84 datum in kilometers.
 
 **Optional Values:**
+
 * EarthModel - A string containing the earth model to use, defaults to the
 AK135 earth model.
 * PhaseTypes - An array of strings listing the phase types desired.

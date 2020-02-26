@@ -56,25 +56,25 @@ public class LocationResult implements ProcessingInt {
   /** Optional integer containing the number of used phases */
   public Integer NumberOfUsedPhases;
 
-  /** Optional Double containing the Gap */
+  /** Optional Double containing the Gap in decimal degrees */
   public Double Gap;
 
-  /** Optional Double containing the secondary Gap */
+  /** Optional Double containing the secondary Gap in decimal degrees */
   public Double SecondaryGap;
 
-  /** Required Double containing the Detection minimum distance */
+  /** Required Double containing the Detection minimum distance in decimal degrees */
   public Double MinimumDistance;
 
-  /** Optional Double containing the RMS */
+  /** Optional Double containing the RMS in seconds */
   public Double RMS;
 
-  /** Optional String containing the Quality flag */
+  /** Optional String containing the Quality flags */
   public String Quality;
 
-  /** Optional Double containing the bayesan depth */
+  /** Optional Double containing the bayesian depth in kilometers */
   public Double BayesianDepth;
 
-  /** Optional Double containing the bayesian range */
+  /** Optional Double containing the bayesian range in kilometers */
   public Double BayesianRange;
 
   /** Optional Double containing the depth importance */

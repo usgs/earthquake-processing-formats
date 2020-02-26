@@ -47,7 +47,6 @@ class ErrorEllipse : public ProcessingBase {
 	 * \param newE2Error - A double containing the E2 error to use
 	 * \param newE2Azimuth - A double containing the E2 azimuth to use
 	 * \param newE2Dip - A double containing the new new E2 dip to use
-	 * \param newdepth - A double containing the depth to use
 	 * \param newMaximumHorizontalProjection - A double containing the maximum
      *  horizontal projection to use
 	 * \param newMaximumVerticalProjection - A double containing the maximum
@@ -66,8 +65,8 @@ class ErrorEllipse : public ProcessingBase {
 	 * \brief ErrorEllipse advanced constructor
 	 *
 	 * The advanced constructor for the ErrorEllipse class.
-	 * Converts the provided object from a json::Object, populating members
-	 * \param jsondocument - A json document.
+	 * Constructs the object from a rapidjson::Value, populating members
+	 * \param json - A reference to a populated rapidjson::Value to use
 	 */
 	explicit ErrorEllipse(rapidjson::Value &json); // NOLINT
 
@@ -91,9 +90,10 @@ class ErrorEllipse : public ProcessingBase {
 	 * \brief Convert to json object function
 	 *
 	 * Converts the contents of the class to a json object
-	 * \param jsondocument - a reference to the json document to fill in with
-	 * 		the class contents.
-	 * \return Returns rapidjson::Value & if successful
+	 * \param json - a reference to the rapidjson::Value to fill in with
+	 * the class contents.
+	 * \param allocator - rapidjson::MemoryPoolAllocator to use
+	 * \return A reference to the filled in rapidjson::Value
 	 */
 	rapidjson::Value & toJSON(
 			rapidjson::Value &json, // NOLINT
@@ -117,86 +117,95 @@ class ErrorEllipse : public ProcessingBase {
 	bool isEmpty();
 
 	/**
-	 * \brief E0 error value
+	 * \brief The E0 error value
 	 * 
-	 * A required double containing the E0 error.
+	 * A required double containing the length of the first error semi-axis in
+	 * kilometers.
 	 */
 	double e0Error;
 
 	/**
-     * \brief E0 azimuth value
-     * 
-	 * A required double containing the E0 azimuth.
+   * \brief The E0 azimuth value
+   * 
+	 * A required double containing the azimuth of the first error semi-axis in
+	 * decimal degrees.
 	 */
 	double e0Azimuth;
 
 	/**
-     * \brief E0 dip value
-     * 
-	 * A required double containing the E0 dip.
+   * \brief The E0 dip value
+   * 
+	 * A required double containing the dip of the first error semi-axis in
+	 * decimal degrees.
 	 */
 	double e0Dip;
 
 	/**
-     * \brief E1 error value
-     * 
-	 * A required double containing the E1 error.
+   * \brief The E1 error value
+   * 
+	 * A required double containing the length of the second error semi-axis in
+	 * kilometers.
 	 */
 	double e1Error;
 
 	/**
-     * \brief E1 azimuth value
-     * 
-	 * A required double containing the E1 azimuth.
+   * \brief The E1 azimuth value
+   * 
+	 * A required double containing the azimuth of the second error semi-axis in
+	 * decimal degrees.
 	 */
 	double e1Azimuth;
 
 	/**
-     * \brief E1 dip value
-     * 
-	 * A required double containing the E1 dip.
+   * \brief The E1 dip value
+   * 
+	 * A required double containing the dip of the second error semi-axis in
+	 * decimal degrees.
 	 */
 	double e1Dip;
 
 	/**
-     * \brief E2 error value
-     * 
-	 * A required double containing the E2 error.
+   * \brief The E2 error value
+   * 
+	 * A required double containing the length of the third error semi-axis in
+	 * kilometers.
 	 */
 	double e2Error;
 
 	/**
-     * \brief E2 azimuth value
-     * 
-	 * A required double containing the E2 azimuth.
+   * \brief The E2 azimuth value
+   * 
+	 * A required double containing the azimuth of the third error semi-axis in
+	 * decimal degrees.
 	 */
 	double e2Azimuth;
 
 	/**
-     * \brief E2 dip value
-     * 
-	 * A required double containing the E2 dip.
+   * \brief The E2 dip value
+   * 
+	 * A required double containing the dip of the third error semi-axis in
+	 * decimal degrees.
 	 */
 	double e2Dip;
 
 	/**
-     * \brief maximum horizontal projection value
+   * \brief The horizontal projection of the error ellipsoid in kilometers
 	 * 
-     * A required double containing the maximum horizontal projection.
+   * A required double containing the maximum horizontal projection.
 	 */
 	double maximumHorizontalProjection;
 
 	/**
-     * \brief maximum vertical projection value
-     * 
-	 * A required double containing the maximum vertical projection.
+   * \brief The maximum vertical projection of the error ellipsoid in kilometers.
+   * 
+	 * A required double containing the vertical projection 
 	 */
 	double maximumVerticalProjection;
 
 	/**
-     * \brief equivalent horizontal radius value
-     * 
-	 * A required double defining the equivalent horizontal radius.
+	 * \brief The equivalent radius of the horizontal error ellipsoid in kilometers.
+	 * 
+	 * A required double containing the equivalent horizontal radius
 	 */
 	double equivalentHorizontalRadius;
 };

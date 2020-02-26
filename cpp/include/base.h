@@ -42,9 +42,10 @@ class ProcessingBase {
 	 * \brief Convert to json value function
 	 *
 	 * Converts the contents of the class to a json object
-	 * \param jsondocument - a reference to the json document to fill in with
+	 * \param json - a reference to the rapidjson::Value to fill in with
 	 * the class contents.
-	 * \return Returns 1 if successful, 0 otherwise
+	 * \param allocator - rapidjson::MemoryPoolAllocator to use
+	 * \return A reference to the filled in rapidjson::Value
 	 */
 	virtual rapidjson::Value & toJSON(
 			rapidjson::Value &json, // NOLINT

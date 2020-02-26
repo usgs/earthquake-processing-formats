@@ -7,10 +7,12 @@ earthquake event location.  Location uses the
 [JSON standard](http://www.json.org).
 
 ## Usage
+
 Location Result is intended for use as an input/output message for seismic
 processing algorithms.
 
 ## Output
+
 ```json
     {
       "ID" : String,
@@ -103,6 +105,7 @@ processing algorithms.
 ```
 
 ## Glossary
+
 **Required Values:**
 
 * Hypocenter - An object containing the hypocenter of the Location, see

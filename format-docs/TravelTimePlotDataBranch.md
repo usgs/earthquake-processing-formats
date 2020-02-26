@@ -7,10 +7,12 @@ information returned for a branch from a travel time plot request.
 Travel-Time Plot Data Branch uses the [JSON standard](http://www.json.org).
 
 ## Usage
+
 Travel-Time Plot Data Branch is intended for use as part of a seismic travel
 time information service
 
 ## Output
+
 ```json
     {
       "Phase" : String,
@@ -20,13 +22,13 @@ time information service
           "Distance" : Number,
           "TravelTime" : Number,
           "StatisticalSpread" : Number,
-          "Observability" : Number              
+          "Observability" : Number
         },
         ...
       ]
     }
 ```
-Reciever
+
 ## Glossary
 
 **Output Values:**

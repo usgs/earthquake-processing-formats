@@ -26,9 +26,9 @@ class ErrorEllipse:
                   newEquivalentHorizontalRadius = None):
         ''' Initializing the object. Constructs an empty object if all arguments are None.
         
-            newE0: an ErrorEllipseAxis containing the first axis of the error ellipsoid
-            newE1: an ErrorEllipseAxis containing the second axis of the error ellipsoid
-            newE2: an ErrorEllipseAxis containing the third axis of error ellipsoid
+            newE0: an ErrorEllipseAxis containing the first semi-axis of the error ellipsoid
+            newE1: an ErrorEllipseAxis containing the second semi-axis of the error ellipsoid
+            newE2: an ErrorEllipseAxis containing the third semi-axis of error ellipsoid
             newMaximumHorizontalProjection: a double containing the horizontal projection
                     of the error ellipsoid in kilometers
             newMaximumVerticalProjection: a double containing the vertical projection

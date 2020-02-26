@@ -45,7 +45,7 @@ class Site : public ProcessingBase {
 	 * std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newlongitude - A double containing the longitude to use, 
 	 * std::numeric_limits<double>::quiet_NaN() to omit
-	 * \paramnewelevation - A double containing the elevation to use, 
+	 * \param newelevation - A double containing the elevation to use, 
 	 * std::numeric_limits<double>::quiet_NaN() to omit
 	 */
 	Site(std::string newstation, std::string newchannel, std::string newnetwork,
@@ -56,8 +56,8 @@ class Site : public ProcessingBase {
 	 * \brief Site advanced constructor
 	 *
 	 * The advanced constructor for the Site class.
-	 * Converts the provided object from a json::Object, populating members
-	 * \param jsondocument - A json document.
+	 * Constructs the object from a rapidjson::Value, populating members
+	 * \param json - A reference to a populated rapidjson::Value to use
 	 */
 	explicit Site(rapidjson::Value &json); // NOLINT
 
@@ -81,9 +81,10 @@ class Site : public ProcessingBase {
 	 * \brief Convert to json object function
 	 *
 	 * Converts the contents of the class to a json object
-	 * \param jsondocument - a reference to the json document to fill in with
+	 * \param json - a reference to the rapidjson::Value to fill in with
 	 * the class contents.
-	 * \return Returns rapidjson::Value & if successful
+	 * \param allocator - rapidjson::MemoryPoolAllocator to use
+	 * \return A reference to the filled in rapidjson::Value
 	 */
 	rapidjson::Value & toJSON(
 			rapidjson::Value &json, // NOLINT
@@ -129,21 +130,21 @@ class Site : public ProcessingBase {
 	/**
 	 * \brief latitude value
 	 *
-	 * An optional double defining the latitude of this site.
+	 * An optional double defining the latitude of this site in decimal degrees.
 	 */
 	double latitude;
 
 	/**
 	 * \brief longitude value
 	 *
-	 * An optional double defining the longitude of this site.
+	 * An optional double defining the longitude of this site in decimal degrees.
 	 */
 	double longitude;
 
 	/**
 	 * \brief elevation value
 	 *
-	 * An optional double containing the elevation for this site.
+	 * An optional double containing the elevation for this site in meters.
 	 */
 	double elevation;
 };

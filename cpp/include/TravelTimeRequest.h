@@ -75,7 +75,7 @@ class TravelTimeRequest : public ProcessingBase {
 	 *
 	 * The advanced constructor for the TravelTimeRequest class.
 	 * Converts the provided object from a json::Object, populating members
-	 * \param jsondocument - A json document.
+	 * \param json - A reference to a populated rapidjson::Value to use
 	 */
 	explicit TravelTimeRequest(rapidjson::Value &json); // NOLINT
 
@@ -99,10 +99,10 @@ class TravelTimeRequest : public ProcessingBase {
 	 * \brief Convert to json object function
 	 *
 	 * Converts the contents of the class to a json object
-	 * \param jsondocument - a reference to the json document to fill in with
+	 * \param json - a reference to the rapidjson::Value to fill in with
 	 * the class contents.
-	 * \return Returns populated rapidjson::Value & if successful, empty
-	 *  rapidjson::Value & if not
+	 * \param allocator - rapidjson::MemoryPoolAllocator to use
+	 * \return A reference to the filled in rapidjson::Value
 	 */
 	rapidjson::Value & toJSON(
 			rapidjson::Value &json, // NOLINT

@@ -170,8 +170,8 @@ class LocationResult : public ProcessingBase {
 	 * \brief LocationResult advanced constructor
 	 *
 	 * The advanced constructor for the LocationResult class.
-	 * Converts the provided object from a json::Object, populating members
-	 * \param jsondocument - A json document.
+	 * Constructs the object from a rapidjson::Value, populating members
+	 * \param json - A reference to a populated rapidjson::Value to use
 	 */
 	explicit LocationResult(rapidjson::Value &json); // NOLINT
 
@@ -195,9 +195,10 @@ class LocationResult : public ProcessingBase {
 	 * \brief Convert to json object function
 	 *
 	 * Converts the contents of the class to a json object
-	 * \param jsondocument - a reference to the json document to fill in with
-	 * 		the class contents.
-	 * \return Returns rapidjson::Value & if successful
+	 * \param json - a reference to the rapidjson::Value to fill in with
+	 * the class contents.
+	 * \param allocator - rapidjson::MemoryPoolAllocator to use
+	 * \return A reference to the filled in rapidjson::Value
 	 */
 	rapidjson::Value & toJSON(
 			rapidjson::Value &json, // NOLINT
@@ -221,95 +222,142 @@ class LocationResult : public ProcessingBase {
 	bool isEmpty();
 
   /**
+	 * \brief The 
 	 * Required hypocenter
 	 */
 	processingformats::Hypocenter hypocenter;
 
 	/**
+	 * \brief The vector of supporting data
+	 * 
 	 * A required vector of Pick objects used to generate this location
 	 */
 	std::vector<processingformats::Pick> supportingData;
 
 	/**
-	 * Optional std::string containing the event identifier
+	 * \brief The result ID
+	 * 
+	 * An optional std::string containing the event identifier for this 
+	 * LocationResult 
 	 */
 	std::string id;
 
 	/**
-	 * \brief pick source
+	 * \brief The Result source
 	 *
-	 * Optional processingformats::source containing the source for this result
-	 * message
+	 * An optional processingformats::source containing the source for this 
+	 * LocationResult.
 	 */
 	processingformats::Source source;
 
 	/**
-	 * Optional integer containing the number of associated stations
+	 * \brief The number of associated stations
+	 * 
+	 * An optional integer containing the number of associated stations for this 
+	 * LocationResult.
 	 */
 	int numberOfAssociatedStations;
 
 	/**
-	 * Optional integer containing the number of associated phases
+	 * \brief The number of associated phases
+	 * 
+	 * An optional integer containing the number of associated phases for this 
+	 * LocationResult.
 	 */
 	int numberOfAssociatedPhases;
 
 	/**
-	 * Optional integer containing the number of used stations
+	 * \brief The number of used stations
+	 * 
+	 * An optional integer containing the number of used stations for this 
+	 * LocationResult.
 	 */
 	int numberOfUsedStations;
 
 	/**
-	 * Optional integer containing the number of used phases
+	 * \brief The number of used phases
+	 * 
+	 * An optional integer containing the number of used phases for this 
+	 * LocationResult.
 	 */
 	int numberOfUsedPhases;
 
 	/**
-	 * Optional double containing the gap
+	 * \brief The gap
+	 * 
+	 * An optional double containing the gap for this LocationResult in decimal
+	 * degrees.
 	 */
 	double gap;
 
 	/**
-	 * Optional double containing the secondary gap
+	 * \brief The secondary gap
+	 * 
+	 * An optional double containing the secondary gap for this LocationResult in
+	 * decimal degrees.
 	 */
 	double secondaryGap;
 
 	/**
-	 * Required double containing the Detection minimum distance
+	 * \brief The minimum distance
+	 * 
+	 * An optional double containing the Detection minimum distance for this 
+	 * LocationResult in decimal degrees.
 	 */
 	double minimumDistance;
 
 	/**
-	 * Optional double containing the rms
+	 * \brief The RMS value
+	 * 
+	 * An optional double containing the rms for this LocationResult in decimal 
+	 * seconds.
 	 */
 	double rms;
 
 	/**
-	 * Optional std::string containing the quality flag
+	 * \brief The location quality flags
+	 * 
+	 * An optional std::string containing the location quality flags for this 
+	 * LocationResult
 	 */
 	std::string quality;
 
 	/**
-	 * Optional double containing the bayesian depth
+	 * \brief The location bayesian depth
+	 * 
+	 * An optional double containing the bayesian depth for this 
+	 * LocationResult in kilometers.
 	 */
 	double bayesianDepth;
 
 	/**
-	 * Optional double containing the bayesian range
+	 * \brief The location bayesian depth range
+	 * 
+	 * An optional double containing the bayesian depth range for this 
+	 * LocationResult in kilometers.
 	 */
 	double bayesianRange;
 
 	/**
-	 * Optional double containing the depth importance
+	 * \brief The depth importance
+	 * 
+	 * An optional double containing the depth importance for this LocationResult.
 	 */
 	double depthImportance;
 
 	/**
-	 * Optional std::string containing the exit code
+	 * \brief The locator exit code string
+	 * 
+	 * An optional std::string containing the locator exit code for this 
+	 * LocationResult.
 	 */
 	std::string locatorExitCode;
 
 	/**
-	 * Optional error ellipse
+	 * \brief The error ellipse
+	 * 
+	 * An optional processingformats::ErrorEllipse object containing the error 
+	 * ellipse for this LocationResult
 	 */
 	processingformats::ErrorEllipse errorEllipse;
 };

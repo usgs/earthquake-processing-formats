@@ -7,10 +7,12 @@ returned from a travel time request.  Travel-Time Data uses the
 [JSON standard](http://www.json.org).
 
 ## Usage
+
 Travel-Time Data is intended for use as part of a seismic travel time
 information service
 
 ## Output
+
 ```json
     {
       "Type"       : String,
@@ -27,7 +29,7 @@ information service
       "AssociationWeightFlag" : Boolean
     }
 ```
-Reciever
+
 ## Glossary
 
 **Output Values:**
@@ -55,4 +57,4 @@ identifier.
 * LocationUseFlag - A boolean flag indicating whether the phase may be used in
 a location.
 * AssociationWeightFlag - A boolean flag indicating whether a phase should be
-down weighted in assocation.
+down weighted in association.

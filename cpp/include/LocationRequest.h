@@ -134,8 +134,8 @@ class LocationRequest : public ProcessingBase {
 	 * \brief LocationRequest advanced constructor
 	 *
 	 * The advanced constructor for the LocationRequest class.
-	 * Converts the provided object from a json::Object, populating members
-	 * \param jsondocument - A json document.
+	 * Constructs the object from a rapidjson::Value, populating members
+	 * \param json - A reference to a populated rapidjson::Value to use
 	 */
 	explicit LocationRequest(rapidjson::Value &json); // NOLINT
 
@@ -159,9 +159,10 @@ class LocationRequest : public ProcessingBase {
 	 * \brief Convert to json object function
 	 *
 	 * Converts the contents of the class to a json object
-	 * \param jsondocument - a reference to the json document to fill in with
+	 * \param json - a reference to the rapidjson::Value to fill in with
 	 * the class contents.
-	 * \return Returns rapidjson::Value & if successful
+	 * \param allocator - rapidjson::MemoryPoolAllocator to use
+	 * \return A reference to the filled in rapidjson::Value
 	 */
 	rapidjson::Value & toJSON(
 			rapidjson::Value &json, // NOLINT
@@ -177,118 +178,128 @@ class LocationRequest : public ProcessingBase {
 	std::vector<std::string> getErrors() override;
 
 	/**
-	 * Optional std::string containing the identifier for this LocationRequest
+	 * \brief The LocationRequest ID
+	 * 
+	 * An optional std::string containing the identifier for this LocationRequest
 	 */
 	std::string id;
 
 	/**
-	 * \brief pick source
+	 * \brief The LocationRequest source
 	 *
-	 * Optional processingformats::source containing the source for this 
+	 * An optional processingformats::source containing the source for this 
    * LocationRequest
 	 */
 	processingformats::Source source;
 
 	/**
-	 * \brief LocationRequest type string 
+	 * \brief The LocationRequest type string 
 	 *
 	 * A required std::string containing the type identifier for this LocationRequest.
 	 */
 	std::string type;
 
 	/**
-	 * \brief LocationRequest earth model
+	 * \brief The LocationRequest earth model
 	 *
 	 * A required std::string containing the earth model for this LocationRequest.
 	 */
 	std::string earthModel;
 
 	/**
-	 * \brief source latitude value
+	 * \brief The source latitude value
 	 *
-	 * A required double defining the source latitude of this LocationRequest.
+	 * A required double defining the source latitude of this LocationRequest in
+	 * decimal degrees.
 	 */
 	double sourceLatitude;
 
 	/**
-	 * \brief source longitude value
+	 * \brief The source longitude value
 	 *
-	 * A required double defining the sourcelongitude of this LocationRequest.
+	 * A required double defining the sourcelongitude of this LocationRequest in
+	 * decimal degrees.
 	 */
 	double sourceLongitude;
 
   /**
-	 * \brief source origin time value
+	 * \brief The source origin time value
 	 *
 	 * A required double containing the source origin time for this LocationRequest
+	 * in decimal epoch seconds.
 	 */
 	double sourceOriginTime;
 
 	/**
-	 * \brief source depth value
+	 * \brief The source depth value
 	 *
-	 * A required double containing the source depth for this LocationRequest.
+	 * A required double containing the source depth for this LocationRequest in
+	 * kilometers.
 	 */
 	double sourceDepth;
 
 	/**
+	 * \brief The vector of input data
+	 * 
 	 * A required vector of input Pick objects for this LocationRequest
 	 */
 	std::vector<processingformats::Pick> inputData;
 
   /**
-	 * \brief is location new value
+	 * \brief The is location new value
 	 *
 	 * An optional bool indicating whether the location is new
 	 */
 	bool isLocationNew;
 
   /**
-	 * \brief is location held value
+	 * \brief The is location held value
 	 *
 	 * An optional bool indicating whether the location is held
 	 */
 	bool isLocationHeld;
 
   /**
-	 * \brief is depth held value
+	 * \brief The is depth held value
 	 *
 	 * An optional bool indicating whether the depth is held
 	 */
 	bool isDepthHeld;
 
   /**
-	 * \brief is depth bayesian value
+	 * \brief The is depth bayesian value
 	 *
 	 * An optional bool indicating whether the depth is bayesian
 	 */
 	bool isBayesianDepth;
 
   /**
-	 * \brief bayesian depth value
+	 * \brief The bayesian depth value
 	 *
-	 * An optional double containing the bayesian depth for this LocationRequest.
+	 * An optional double containing the bayesian depth for this LocationRequest
+	 * in kilometers.
 	 */
 	double bayesianDepth;
 
   /**
-	 * \brief bayesian spread value
+	 * \brief The bayesian depth spread value
 	 *
-	 * An optional double containing the bayesian spread for this LocationRequest.
+	 * An optional double containing the bayesian depth spread for this 
+	 * LocationRequest in kilometers.
 	 */
 	double bayesianSpread;
 
   /**
-	 * \brief use svd value
+	 * \brief The use svd value
 	 *
 	 * An optional bool indicating whether to use singular value decomposition
 	 */
 	bool useSVD;
 
 	/**
-	 * \brief output data
+	 * \brief Teh output data
 	 *
-	 * Optional processingformats::LocationResult containing the output data
+	 * An optional processingformats::LocationResult containing the output data
    * for this LocationRequest
 	 */
 	processingformats::LocationResult outputData;

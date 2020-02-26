@@ -44,9 +44,9 @@ class Pick:
             newAffinity: a Double containing the affinity to use
             newQuality: a double containing the quality to use
             newUse: a boolean containing the flag to use
-            newPickedPhase: a string containing the picked phase to use
-            newAssociatedPhase: a string containing the associated phase to use
-            newLocatedPhase: a string containing the located phase to use
+            newPickedPhase: a string containing phase name assigned by the picker for this pick
+            newAssociatedPhase: a string containing the phase name assigned by the associator for this pick
+            newLocatedPhase: a string containing the phase name assigned by the locator for this pick.
             newResidual: a double containing the residual to use
             newDistance: a double containing the distance to use
             newAzimuth: a double containing the azimuth to use

@@ -23,13 +23,13 @@ public class Hypocenter implements ProcessingInt {
   public static final String DEPTH_ERROR_KEY = "DepthError";
   public static final String TIME_ERROR_KEY = "TimeError";
 
-  /** Required Double containing the Latitude in degrees */
+  /** Required Double containing the Latitude in decimal degrees */
   public Double Latitude;
 
-  /** Required Double containing the Longitude in degrees */
+  /** Required Double containing the Longitude in decimal degrees */
   public Double Longitude;
 
-  /** Required Time for this hypo */
+  /** Required Time for this hypo as a java Date */
   public Date Time;
 
   /** Required Double containing the Depth in kilometers */

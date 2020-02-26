@@ -47,10 +47,10 @@ class LocationRequest:
             newSource: a processingformats.source.Source containing desired source (and supporting info)
             newType: a type identifier for this Location Request
             newEarthModel: an earth model for this Location Request
-            newSourceLatitude: a double containing the source latitude
-            newSourceLongitude: a double containing the source longitude
+            newSourceLatitude: a double containing the source latitude in degrees
+            newSourceLongitude: a double containing the source longitude in degrees
             newSourceOriginTime: a Datetime containing the source time
-            newSourceDepth: a double containing the source depth
+            newSourceDepth: a double containing the source depth in kilometers
             newInputData: a vector of input Pick objects for this Location Result
             newIsLocationNew: a boolean indicating whether the location is new
             newIsLocationHeld: a boolean indicating whether the location is held
