@@ -79,7 +79,6 @@ public class TravelTimeSession implements ProcessingInt {
    * @param newReturnBackBranches - A Double containing the statistical observability of the seismic
    *     phase
    * @param newConvertTectonic - A Long containing the teleseismic phase group identifier
-   * @param newUseRSTT - A Long containing the auxiliary phase group identifier
    * @param newIsPlot - A Boolean containing the flag indicating whether the phase may be used in a
    *     location
    */

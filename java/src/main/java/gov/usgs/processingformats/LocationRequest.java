@@ -177,9 +177,7 @@ public class LocationRequest implements ProcessingInt {
    * values.
    *
    * @param newID - A String containing the optional ID
-   * @param newAgencyID - A String containing the agencyid to Use
-   * @param newAuthor - A String containing the author to Use
-   * @param newType - A String containing the type to Use
+   * @param newSource - A Source object containing the optional source
    * @param newLocType - A String containing the name of the algorithm this request is valid for
    * @param newEarthModel - A String containing the name of theTravel Time Earth Model to use
    * @param newSourceLatitude - A Double containing the latitude to use
