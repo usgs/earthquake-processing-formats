@@ -19,6 +19,12 @@ location processing algorithm.
       {
         "Type" : String,
         "ID" : String,
+        "Source" :
+        {
+          "AgencyID" : String,
+          "Author"   : String,
+          "Type"     : String
+        },
         "EarthModel" : String,
         "SourceOriginTime" : Number,
         "SourceLatitude"  : Number,
@@ -30,11 +36,13 @@ location processing algorithm.
             "ID"        : String,
             "Site"      :
             {
-               "SiteID"    : String,
                "Station"   : String,
                "Channel"   : String,
                "Network"   : String,
-               "Location"  : String
+               "Location"  : String,
+               "Latitude"  : Number,
+               "Longitude" : Number,
+               "Elevation" : Number
             },
             "Source" :
             {
@@ -60,88 +68,7 @@ location processing algorithm.
         "BayesianSpread" : Number,
         "UseSVD"  : boolean  
       },
-      "OutputData" :
-      {
-        "Hypocenter"  :
-        {
-            "Latitude"        : Number,
-            "Longitude"       : Number,
-            "Depth"           : Number,
-            "Time"            : ISO8601,
-            "LatitudeError"   : Number,
-            "LongitudeError"  : Number,
-            "DepthError"      : Number,
-            "TimeError"       : Number
-        },
-        "NumberOfAssociatedStations" : Number,
-        "NumberOfAssociatedPhases"   : Number,
-        "NumberOfUsedStations"       : Number,
-        "NumberOfUsedPhases"         : Number,
-        "Gap"             : Number,  
-        "SecondaryGap"    : Number,  
-        "MinimumDistance" : Number,
-        "RMS"             : Number,  
-        "Quality"         : String,
-        "BayesianDepth" : Number,
-        "BayesianRange" : Number,
-        "DepthImportance" : Number,
-        "ErrorEllipse" :
-        {
-            "MaximumHorizontalProjection" : Number,
-            "MaximumVerticalProjection"   : Number,
-            "EquivalentHorizontalRadius"  : Number,
-            "E0" :
-            {
-                "Error"   : Number,
-                "Azimuth" : Number,
-                "Dip"     : Number
-            },
-            "E1" :
-            {
-                "Error"   : Number,
-                "Azimuth" : Number,
-                "Dip"     : Number
-            },
-            "E2" :
-            {
-                "Error"   : Number,
-                "Azimuth" : Number,
-                "Dip"     : Number
-            }
-        },
-        "AssociatedData" :
-        [
-          {
-            "ID"        : String,
-            "Site"      :
-            {
-               "SiteID"    : String,
-               "Station"   : String,
-               "Channel"   : String,
-               "Network"   : String,
-               "Location"  : String,
-               "Latitude"  : Number,
-               "Longitude" : Number,
-               "Elevation" : Number
-            },
-            "Source" :
-            {
-              "AgencyID" : String,
-              "Author"   : String,
-              "Type"     : String
-            },
-            "Time"         : ISO8601,
-            "Used"         : Boolean,
-            "LocatedPhase" : String,
-            "Residual"     : Number,
-            "Distance"     : Number,
-            "Azimuth"      : Number,
-            "Weight"       : Number,
-            "Importance"   : Number
-          },
-          ...
-        ]
-      }  
+      "OutputData" : { }  
     }
 ```
 
@@ -167,6 +94,8 @@ kilometers relative to the WGS84 datum.
 The following are supplementary values that **may or may not** be provided.
 
 * ID - A String containing the identifier for the location request.
+* Source - An object containing the source of the location result, see 
+[Source](Source.md).
 * IsLocationNew - A boolean flag that indicates if the location has been changed
 outside the locator.
 * IsLocationHeld - A boolean flag that indicates whether the location can be

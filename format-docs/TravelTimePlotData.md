@@ -7,10 +7,12 @@ returned from a travel time plot request.  Travel-Time Plot Data uses the
 [JSON standard](http://www.json.org).
 
 ## Usage
+
 Travel-Time Plot Data is intended for use as part of a seismic travel time
 information service
 
 ## Output
+
 ```json
     {
       "Type" : String,
@@ -25,7 +27,7 @@ information service
               "Distance" : Number,
               "TravelTime" : Number,
               "StatisticalSpread" : Number,
-              "Observability" : Number              
+              "Observability" : Number
             },
             ...
           ]
@@ -34,7 +36,7 @@ information service
       ]
     }
 ```
-Reciever
+
 ## Glossary
 
 **Output Values:**

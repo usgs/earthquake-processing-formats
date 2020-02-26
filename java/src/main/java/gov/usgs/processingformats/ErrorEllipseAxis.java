@@ -15,13 +15,13 @@ public class ErrorEllipseAxis implements ProcessingInt {
   public static final String AZIMUTH_KEY = "Azimuth";
   public static final String DIP_KEY = "Dip";
 
-  /** Required error. */
+  /** Required length of the error semi-axis in kilometers. */
   public Double Error;
 
-  /** Required azimuth. */
+  /** Required azimuth of the error semi-axis in decimal degrees. */
   public Double Azimuth;
 
-  /** Required dip. */
+  /** Required dip of the error semi-axis in decimal degrees. */
   public Double Dip;
 
   /** The constructor for the ErrorEllipseAxis class. Initializes members to null values. */

@@ -47,8 +47,8 @@ class Source : public ProcessingBase {
 	 * \brief Source advanced constructor
 	 *
 	 * The advanced constructor for the Source class.
-	 * Converts the provided object from a json::Object, populating members
-	 * \param jsondocument - A json document.
+	 * Constructs the object from a rapidjson::Value, populating members
+	 * \param json - A reference to a populated rapidjson::Value to use
 	 */
 	explicit Source(rapidjson::Value &json); // NOLINT
 
@@ -72,9 +72,10 @@ class Source : public ProcessingBase {
 	 * \brief Convert to json value function
 	 *
 	 * Converts the contents of the class to a json object
-	 * \param jsondocument - a reference to the json document to fill in with
-	 * 	the class contents.
-	 * \return Returns rapidjson::Value & if successful
+	 * \param json - a reference to the rapidjson::Value to fill in with
+	 * the class contents.
+	 * \param allocator - rapidjson::MemoryPoolAllocator to use
+	 * \return A reference to the filled in rapidjson::Value
 	 */
 	rapidjson::Value & toJSON(
 			rapidjson::Value &json, // NOLINT

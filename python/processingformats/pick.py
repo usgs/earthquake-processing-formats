@@ -15,46 +15,46 @@ class Pick:
     """
     
     #JSON Keys
-    ID_KEY = "ID" #Required unique identifier for this Pick
-    SITE_KEY = "Site" #Required
-    SOURCE_KEY = "Source" #Required
-    TIME_KEY = "Time" #Required
-    AFFINITY_KEY = "Affinity" #Required
-    QUALITY_KEY = "Quality" #REquired
-    USE_KEY = "Use" #Required
-    PICKED_PHASE_KEY = "PickedPhase" #REquired
-    ASSOCIATED_PHASE_KEY = "AssociatedPhase" #Required
-    LOCATED_PHASE_KEY = "LocatedPhase" #Optional
-    RESIDUAL_KEY = "Residual" #Optional
-    DISTANCE_KEY = "Distance" #Optional
-    AZIMUTH_KEY = "Azimuth" #Optional
-    WEIGHT_KEY = "Weight" #Optional
-    IMPORTANCE_KEY = "Importance" #Optional
+    ID_KEY = "ID" # Required 
+    SITE_KEY = "Site" # Required
+    SOURCE_KEY = "Source" # Required
+    TIME_KEY = "Time" # Required
+    AFFINITY_KEY = "Affinity" # Required
+    QUALITY_KEY = "Quality" # Required
+    USE_KEY = "Use" # Required
+    PICKED_PHASE_KEY = "PickedPhase" # Required
+    ASSOCIATED_PHASE_KEY = "AssociatedPhase" # Required
+    LOCATED_PHASE_KEY = "LocatedPhase" # Optional
+    RESIDUAL_KEY = "Residual" # Optional
+    DISTANCE_KEY = "Distance" # Optional
+    AZIMUTH_KEY = "Azimuth" # Optional
+    WEIGHT_KEY = "Weight" # Optional
+    IMPORTANCE_KEY = "Importance" # Optional
     
     def __init__ (self, newID = None, newSite = None, newSource = None, newTime = None, 
                   newAffinity = None, newQuality = None, newUse = None, newPickedPhase = None, 
                   newAssociatedPhase = None, newLocatedPhase = None, newResidual = None,
                   newDistance = None, newAzimuth = None, newWeight = None, newImportance = None):
-    ''' Initializes the pick object. Contructs empty object if all are none
-    
-        newID: A string containing the id to use
-        newSite: a processingformats.site.Site containing desired site (and supporting info)
-        newSource: a processingformats.source.Source containing desired source (and supporting info)
-        newTime: a datetime containing the pick time
-        newAffinity: a Double containing the affinity to use
-        newQuality: a double containing the quality to use
-        newUse: a boolean containing the flag to use
-        newPickedPhase: a string containing the picked phase to use
-        newAssociatedPhase: a string containing the associated phase to use
-        newLocatedPhase: a string containing the located phase to use
-        newResidual: a double containing the residual to use
-        newDistance: a double containing the distance to use
-        newAzimuth: a double containing the azimuth to use
-        newWeight: a double containing the weight to use
-        newImportance: a double containing the importance to use
-    '''
+        ''' Initializes the pick object. Contructs empty object if all are none
         
-        #Required Keys
+            newID: A string containing the id to use
+            newSite: a processingformats.site.Site containing desired site (and supporting info)
+            newSource: a processingformats.source.Source containing desired source (and supporting info)
+            newTime: a datetime containing the pick time
+            newAffinity: a Double containing the affinity to use
+            newQuality: a double containing the quality to use
+            newUse: a boolean containing the flag to use
+            newPickedPhase: a string containing phase name assigned by the picker for this pick
+            newAssociatedPhase: a string containing the phase name assigned by the associator for this pick
+            newLocatedPhase: a string containing the phase name assigned by the locator for this pick.
+            newResidual: a double containing the residual to use
+            newDistance: a double containing the distance to use
+            newAzimuth: a double containing the azimuth to use
+            newWeight: a double containing the weight to use
+            newImportance: a double containing the importance to use
+        '''
+        
+        # Required Keys
         if newID is not None:
             self.id = newID
             
@@ -86,7 +86,7 @@ class Pick:
         if newAssociatedPhase is not None:
             self.associatedPhase = newAssociatedPhase
             
-        #Optional Keys
+        # Optional Keys
         if newLocatedPhase is not None:
             self.locatedPhase = newLocatedPhase
             
@@ -106,19 +106,19 @@ class Pick:
             self.importance = newImportance
             
     def fromJSONString (self, JSONString):
-    ''' Populates object from a JSON formatted string
-    
-        JSONString: a required string containing the JSON formatted text
-    '''
+        ''' Populates object from a JSON formatted string
+        
+            JSONString: a required string containing the JSON formatted text
+        '''
         
         JSONObject = json.loads(JSONString)
         self.fromDict(JSONObject)
         
     def fromDict(self, aDict):
-    ''' Populates object from a dictionary
-    
-        aDict: a required dictionary
-    '''    
+        ''' Populates object from a dictionary
+        
+            aDict: a required dictionary
+        '''    
         #Required Keys
         try:
             self.id = aDict[self.ID_KEY]
@@ -156,23 +156,23 @@ class Pick:
             self.importance = aDict[self.IMPORTANCE_KEY]
             
     def toJSONString(self):
-    ''' Converts object to a JSON formatted String
-    
-        Returns: JSON formatted message as a String
-    '''
+        ''' Converts object to a JSON formatted String
+        
+            Returns: JSON formatted message as a String
+        '''
         JSONObject = self.toDict()
         
         return json.dumps(JSONObject, ensure_ascii=False)
     
     def toDict(self):
-    ''' Converts object to a dictionary
-    
-        Returns: the dictionary
-    '''
+        ''' Converts object to a dictionary
+        
+            Returns: the dictionary
+        '''
         
         aDict = {}
         
-        #Required Keys
+        # Required Keys
         try:
             aDict[self.ID_KEY] = self.id
             aDict[self.SITE_KEY] = self.site.toDict()
@@ -188,7 +188,7 @@ class Pick:
         except(NameError, AttributeError) as e:
             print("Missing required data error: %s" % e)
             
-        #Optional Keys
+        # Optional Keys
         if hasattr(self, 'locatedPhase'):
             aDict[self.LOCATED_PHASE_KEY] = self.locatedPhase
             
@@ -207,21 +207,23 @@ class Pick:
         if hasattr(self, 'importance'):
             aDict[self.IMPORTANCE_KEY] = self.importance
         
+        return aDict
+        
     def isValid(self):
-    ''' Checks to see if object is valid
-    
-        Returns: true if object is valid, false otherwise
-    '''
+        ''' Checks to see if object is valid
+        
+            Returns: true if object is valid, false otherwise
+        '''
         
         errorList = self.getErrors()
         
         return not errorList
 
     def getErrors(self):
-    ''' Gets a list of object validation errors
-    
-        Returns: a list of strings containing the validation error messages
-    '''
+        ''' Gets a list of object validation errors
+        
+            Returns: a list of strings containing the validation error messages
+        '''
         
         errorList = []
         

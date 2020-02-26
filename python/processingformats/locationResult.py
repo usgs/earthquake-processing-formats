@@ -6,6 +6,7 @@
 import processingformats.hypocenter
 import processingformats.errorEllipse
 import processingformats.pick
+import processingformats.source
 
 #stdlib import
 import json
@@ -16,53 +17,55 @@ class LocationResult:
     """
     
     #JSON Keys
-    ID_KEY = "ID" #Optional
-    HYPOCENTER_KEY = "Hypocenter" #Required
-    SUPPORTINGDATA_KEY = "SupportingData" #Required
-    ASSOCIATEDSTATIONS_KEY = "NumberOfAssociatedStations" #Optional
-    ASSOCIATEDPHASES_KEY = "NumberOfAssociatedPhases" #Optional
-    USEDSTATIONS_KEY = "NumberOfUsedStations" #Optional
-    USEDPHASES_KEY = "NumberOfUsedPhases" #Optional
-    GAP_KEY = "Gap" #Optional
-    SECONDARYGAP_KEY = "SecondaryGap" #Optional
-    MINIMUMDISTANCE_KEY = "MinimumDistance" #Required
-    RMS_KEY = "RMS" #Optional
-    QUALITY_KEY = "Quality" #Optional
-    BAYESIANDEPTH_KEY = "BayesianDepth" #Optional
-    BAYESIANRANGE_KEY = "BayesianRange" #Optional
-    DEPTHIMPORTANCE_KEY = "DepthImportance" #Optional
-    LOCATOREXITCODE_KEY = "LocatorExitCode" #Optional
-    ERRORELLIPSE_KEY = "ErrorEllipse" #Optional
+    ID_KEY = "ID" # Optional
+    SOURCE_KEY = "Source" # Optional
+    HYPOCENTER_KEY = "Hypocenter" # Required
+    SUPPORTINGDATA_KEY = "SupportingData" # Required
+    ASSOCIATEDSTATIONS_KEY = "NumberOfAssociatedStations" # Optional
+    ASSOCIATEDPHASES_KEY = "NumberOfAssociatedPhases" # Optional
+    USEDSTATIONS_KEY = "NumberOfUsedStations" # Optional
+    USEDPHASES_KEY = "NumberOfUsedPhases" # Optional
+    GAP_KEY = "Gap" # Optional
+    SECONDARYGAP_KEY = "SecondaryGap" # Optional
+    MINIMUMDISTANCE_KEY = "MinimumDistance" # Required
+    RMS_KEY = "RMS" # Optional
+    QUALITY_KEY = "Quality" # Optional
+    BAYESIANDEPTH_KEY = "BayesianDepth" # Optional
+    BAYESIANRANGE_KEY = "BayesianRange" # Optional
+    DEPTHIMPORTANCE_KEY = "DepthImportance" # Optional
+    LOCATOREXITCODE_KEY = "LocatorExitCode" # Optional
+    ERRORELLIPSE_KEY = "ErrorEllipse" # Optional
     
-    def __init__ (self, newID = None, newHypocenter = None, newSupportingData = None, 
-                  newAssociatedStations = None, newAssociatedPhases = None, 
-                  newUsedStations = None, newUsedPhases = None, newGap = None, 
-                  newSecondaryGap = None, newMinimumDistance = None, 
+    def __init__ (self, newID = None, newSource = None, newHypocenter = None, 
+                  newSupportingData = None, newAssociatedStations = None, 
+                  newAssociatedPhases = None, newUsedStations = None, newUsedPhases = None, 
+                  newGap = None, newSecondaryGap = None, newMinimumDistance = None, 
                   newRMS = None, newQuality = None, newBayesianDepth = None, 
                   newBayesianRange = None, newDepthImportance = None, 
                   newLocatorExitCode = None, newErrorEllipse = None):
-    ''' Initializing the object. Constructs an empty object if all arguments are None.
-    
-        newID: a string containing the ID
-        newHypocenter: a processingformats.hypocenter.Hypocenter containing the desired
-                hypocenter (and supporting info)
-        newSupportingData: a vector of Pick objects used to generate this location
-        newAssociatedStations: an int containing the number of associated stations
-        newAssociatedPhases: an int containing the number of associated phases
-        newUsedStations: an int containing the number of used stations
-        newUsedPhases: an int containing the number of used phases
-        newGap: a double containing the gap
-        newSecondaryGap: a double containing the secondary gap
-        newMinimumDistance: a double containing the detection minimum distance
-        newRMS: a double containing the RMS
-        newQuality: a string containing the quality flag
-        newBayesianDepth: a double containing the bayesian depth
-        newBayesianRange: a double containng the bayesian range
-        newDepthImportance: a double containing the depth importance
-        newLocatorExitCode: a string containing the locator exit code
-        newErrorEllipse: a processingformats.errorEllipse.ErrorEllipse containing
-                the desired error ellipse (and supporting info)
-    '''
+        ''' Initializing the object. Constructs an empty object if all arguments are None.
+        
+            newID: a string containing the ID
+            newSource: a processingformats.source.Source containing desired source (and supporting info)
+            newHypocenter: a processingformats.hypocenter.Hypocenter containing the desired
+                    hypocenter (and supporting info)
+            newSupportingData: a vector of Pick objects used to generate this location
+            newAssociatedStations: an int containing the number of associated stations
+            newAssociatedPhases: an int containing the number of associated phases
+            newUsedStations: an int containing the number of used stations
+            newUsedPhases: an int containing the number of used phases
+            newGap: a double containing the gap in degrees
+            newSecondaryGap: a double containing the secondary gap in degrees
+            newMinimumDistance: a double containing the detection minimum distance in degrees
+            newRMS: a double containing the RMS in seconds 
+            newQuality: a string containing the quality flags
+            newBayesianDepth: a double containing the bayesian depth in kilometers
+            newBayesianRange: a double containing the bayesian range in kilometers
+            newDepthImportance: a double containing the depth importance
+            newLocatorExitCode: a string containing the locator exit code
+            newErrorEllipse: a processingformats.errorEllipse.ErrorEllipse containing
+                    the desired error ellipse (and supporting info)
+        '''
         
         #Required Keys
         if newHypocenter is not None:
@@ -81,6 +84,11 @@ class LocationResult:
         if newID is not None:
             self.id = newID
             
+        if newSource is not None:
+            self.source = newSource
+        else:
+            self.source = processingformats.source.Source()
+
         if newAssociatedStations is not None:
             self.associatedStations = newAssociatedStations
             
@@ -100,7 +108,7 @@ class LocationResult:
             self.secondaryGap = newSecondaryGap
             
         if newRMS is not None:
-            self.RMS = newRMS
+            self.rms = newRMS
             
         if newQuality is not None:
             self.quality = newQuality
@@ -123,21 +131,21 @@ class LocationResult:
             self.errorEllipse = processingformats.errorEllipse.ErrorEllipse()
 
     def fromJSONString (self, JSONString):
-    ''' Populates object from a JSON formatted string
-    
-        JSONString: a required string containing the JSON formatted text
-    '''
+        ''' Populates object from a JSON formatted string
+        
+            JSONString: a required string containing the JSON formatted text
+        '''
     
         JSONObject = json.loads(JSONString)
         self.fromDict(JSONObject)
 
     def fromDict(self, aDict):
-    ''' Populates object from a dictionary
-    
-        aDict: a required dictionary
-    '''
+        ''' Populates object from a dictionary
         
-        #Required keys
+            aDict: a required dictionary
+        '''
+        
+        # Required keys
         try:
             self.hypocenter.fromDict(aDict[self.HYPOCENTER_KEY])
             self.minimumDistance = aDict[self.MINIMUMDISTANCE_KEY]
@@ -155,9 +163,12 @@ class LocationResult:
                     newPick.fromDict(aData)
                     self.supportingData.append(newPick)
         
-        #Optional Keys
+        # Optional Keys
         if self.ID_KEY in aDict:
             self.id = aDict[self.ID_KEY]
+
+        if self.SOURCE_KEY in aDict:
+            self.source.fromDict(aDict[self.SOURCE_KEY])
             
         if self.ASSOCIATEDSTATIONS_KEY in aDict:
             self.associatedStations = aDict[self.ASSOCIATEDSTATIONS_KEY]
@@ -178,7 +189,7 @@ class LocationResult:
             self.secondaryGap = aDict[self.SECONDARYGAP_KEY]
             
         if self.RMS_KEY in aDict:
-            self.RMS = aDict[self.RMS_KEY]
+            self.rms = aDict[self.RMS_KEY]
             
         if self.QUALITY_KEY in aDict:
             self.quality = aDict[self.QUALITY_KEY]
@@ -200,40 +211,44 @@ class LocationResult:
             self.errorEllipse.fromDict(aDict[self.ERRORELLIPSE_KEY])
 
     def toJSONString(self):
-    ''' Converts object to a JSON formatted string
-    
-        Returns: JSON formatted message as a string
-    '''
+        ''' Converts object to a JSON formatted string
+        
+            Returns: JSON formatted message as a string
+        '''
     
         JSONObject = self.toDict()
         
         return json.dumps(JSONObject, ensure_ascii=False)
 
     def toDict(self):
-    ''' Converts object to a dictionary
-    
-        Returns: the dictionary
-    '''
+        ''' Converts object to a dictionary
+        
+            Returns: the dictionary
+        '''
         
         aDict = {}
         
-        #Required Keys
+        # Required Keys
         try:
             aDict[self.HYPOCENTER_KEY] = self.hypocenter.toDict()
-            aDict[self.SUPPORTINGDATA_KEY] = self.supportingData
             aDict[self.MINIMUMDISTANCE_KEY] = self.minimumDistance
+
+            aDataList = []
+            if self.supportingData and len(self.supportingData) > 0:
+                for aData in self.supportingData:
+                    aDataList.append(aData.toDict())
+
+            aDict[self.SUPPORTINGDATA_KEY] = aDataList
         except(NameError, AttributeError) as e:
             print("Missing required data error: %s" % e)
         
-        
-        aDataList = []
-        if self.supportingData and len(self.supportingData) > 0:
-            for aData in self.supportingData:
-                aDataList.append(aData.toDict())
-            
-        #Optional Keys
+        # Optional Keys
         if hasattr(self, 'id'):
             aDict[self.ID_KEY] = self.id
+
+        if hasattr(self, 'source'):
+            if not self.source.isEmpty():
+                aDict[self.SOURCE_KEY] = self.source.toDict()
         
         if hasattr(self, 'associatedStations'):
             aDict[self.ASSOCIATEDSTATIONS_KEY] = self.associatedStations
@@ -253,8 +268,8 @@ class LocationResult:
         if hasattr(self, 'secondaryGap'):
             aDict[self.SECONDARYGAP_KEY] = self.secondaryGap
             
-        if hasattr(self, 'RMS'):
-            aDict[self.RMS_KEY] = self.RMS
+        if hasattr(self, 'rms'):
+            aDict[self.RMS_KEY] = self.rms
             
         if hasattr(self, 'quality'):
             aDict[self.QUALITY_KEY] = self.quality
@@ -278,56 +293,64 @@ class LocationResult:
         return aDict
 
     def isValid(self):
-    ''' Checks to see if object is valid
-    
-        Returns: true if object is valid, false otherwise
-    '''
+        ''' Checks to see if object is valid
+        
+            Returns: true if object is valid, false otherwise
+        '''
         
         errorList = self.getErrors()
         
         return not errorList
 
     def getErrors(self):
-    ''' Gets a list of object validation errors
-    
-        Returns: a list of strings containing the validation error messages
-    '''
+        ''' Gets a list of object validation errors
+        
+            Returns: a list of strings containing the validation error messages
+        '''
         
         errorList = []
         
-        #required keys
-        #Hypocenter
+        # required keys
+        # Hypocenter
         try:
             if not self.hypocenter.isValid():
                 errorList.append('Invalid Hypocenter in LocationResult Class.')
         except(NameError, AttributeError):
             errorList.append('No Hypocenter in LocationResult Class.')
             
-        #SupportingData
-        if self.supportingData and len(self.supportingData) > 0:
-            for aData in self.supportingData:
-                if not aData.isValid():
-                    errorList.append('Invalid Pick in LocationResult Class')
+        # SupportingData
+        try:
+            if self.supportingData and len(self.supportingData) > 0:
+                for aData in self.supportingData:
+                    if not aData.isValid():
+                        errorList.append('Invalid Pick in LocationResult Class')
+        except(NameError, AttributeError):
+            errorList.append('No Supporting Data in LocationResult Class.')
         
-        #Minimum Distance
+        # Minimum Distance
         try:
             if self.minimumDistance < 0:
                 errorList.append('MinimumDistance in LocationResult Class is not greater than 0.')
         except(NameError, AttributeError):
             errorList.append('No MinimumDistance in LocationResult Class.')
         
-        #Optional Keys
-        #Gap
+        # Optional Keys
+        if hasattr(self, 'source'):
+            if not self.source.isEmpty():
+                if not self.source.isValid():
+                    errorList.append('Invalid Source in LocationResult Class.')
+
+        # Gap
         if hasattr(self, 'gap'):
             if self.gap < 0 or self.gap > 360:
                 errorList.append('Gap in LocationResult Class not in the range of 0 to 360.')
         
-        #Secondary Gap
+        # Secondary Gap
         if hasattr(self, 'secondaryGap'):
             if self.secondaryGap < 0 or self.secondaryGap > 360:
                 errorList.append('Secondary gap in LocationResult Class not in the range of 0 to 360.')
         
-        #Locator Exit Code
+        # Locator Exit Code
         try:
             match = False
             
@@ -355,10 +378,12 @@ class LocationResult:
             errorList.append('No locator exit code in LocationResult Class.')
                 
         
-        #Error Ellipse
+        # Error Ellipse
         if hasattr(self, 'errorEllipse'):
             if not self.errorEllipse.isEmpty():
                 if not self.errorEllipse.isValid():
                     errorList.append('Invalid ErrorEllipse in LocationResult Class.')
+
+        
         
         return errorList

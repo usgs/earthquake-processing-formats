@@ -15,13 +15,13 @@ public class Source implements ProcessingInt {
   public static final String AUTHOR_KEY = "Author";
   public static final String TYPE_KEY = "Type";
 
-  /** Required Agency identifier */
+  /** Required Agency identifier string */
   public String AgencyID;
 
-  /** Required Author identifier */
+  /** Required Author identifier string */
   public String Author;
 
-  /** Required Type identifier */
+  /** Required Type identifier string */
   public String Type;
 
   /** The constructor for the Source class. Initializes members to null values. */

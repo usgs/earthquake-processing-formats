@@ -31,10 +31,10 @@ public class Site implements ProcessingInt {
   /** Optional Location code. */
   public String Location;
 
-  /** Required Double containing the Latitude in degrees */
+  /** Required Double containing the Latitude in decimal degrees */
   public Double Latitude;
 
-  /** Required Double containing the Longitude in degrees */
+  /** Required Double containing the Longitude in decimal degrees */
   public Double Longitude;
 
   /** Required Double containing the Elevation in meters */

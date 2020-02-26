@@ -7,13 +7,21 @@ earthquake event location.  Location uses the
 [JSON standard](http://www.json.org).
 
 ## Usage
+
 Location Result is intended for use as an input/output message for seismic
 processing algorithms.
 
 ## Output
+
 ```json
     {
       "ID" : String,
+      "Source" :
+      {
+          "AgencyID" : String,
+          "Author"   : String,
+          "Type"     : String
+      },
       "Hypocenter"  :
       {
           "Latitude"        : Number,
@@ -34,8 +42,8 @@ processing algorithms.
       "MinimumDistance" : Number,
       "RMS"             : Number,  
       "Quality"         : String,
-      "BayesianDepth" : Number,
-      "BayesianRange" : Number,
+      "BayesianDepth"   : Number,
+      "BayesianRange"   : Number,
       "DepthImportance" : Number,
       "LocatorExitCode" : String,
       "ErrorEllipse" :
@@ -68,11 +76,13 @@ processing algorithms.
           "ID"        : String,
           "Site"      :
           {
-             "SiteID"    : String,
              "Station"   : String,
              "Channel"   : String,
              "Network"   : String,
-             "Location"  : String
+             "Location"  : String,
+             "Latitude"  : Number,
+             "Longitude" : Number,
+             "Elevation" : Number
           },
           "Source" :
           {
@@ -95,6 +105,7 @@ processing algorithms.
 ```
 
 ## Glossary
+
 **Required Values:**
 
 * Hypocenter - An object containing the hypocenter of the Location, see
@@ -108,6 +119,8 @@ The following are supplementary values that **may or may not** be provided by
 various algorithms.
 
 * ID - A String containing the identifier for the location result.
+* Source - An object containing the source of the location result, see
+[Source](Source.md).
 * NumberOfAssociatedStations - A number that indicates how many stations were
 associated with the location.
 * NumberOfAssociatedPhases - A number that indicates how many phases were

@@ -7,12 +7,20 @@
 #ifndef PROCESSING_UTIL_H
 #define PROCESSING_UTIL_H
 
-#include <rapidjson/document.h>
-#include <rapidjson/writer.h>
-#include <rapidjson/stringbuffer.h>
-
 #include <exception>
 #include <string>
+
+// needed to disable rapidjson warnings for clang
+#ifdef __clang__
+	#pragma clang diagnostic push
+	#pragma clang diagnostic ignored "-Wexpansion-to-defined"
+#endif
+#include "document.h" // NOLINT
+#include "writer.h" // NOLINT
+#include "stringbuffer.h"  // NOLINT
+#ifdef __clang__
+	#pragma clang diagnostic pop
+#endif
 
 /**
  * @namespace processingformats
@@ -20,6 +28,24 @@
  * convert to/from the USGS json processing formats.
  */
 namespace processingformats {
+	/**
+	 * \brief processingformats valid locator exit code index enum. 
+	 */
+	enum locatorExitCodeIndex {
+		unknown = 0,
+		success = 1,
+		didnotmove = 2,
+		errorsnotcomputed = 3,
+		failed = 4,
+		locatorexitcodecount = 9
+	};
+
+	/**
+	 * \brief processingformats valid locator exit code values.
+	 */
+	static const char *locatorExitCodeValues[] = { "Unknown", "Success",
+			"DidNotMove", "ErrorsNotComputed", "Failed", "" };
+
 	/**
 	 * \brief detectionformats function to validate that a string contains just
 	 * characters
@@ -62,6 +88,8 @@ namespace processingformats {
 	 * Converts the provided string from a serialized json string, populating
 	 * members
 	 * \param jsonstring - A std::string containing the serialized json
+	 * \param jsondocument - A reference to a rapidjson::Document used in parsing
+	 * the string
 	 * \return Returns 1 if successful, 0 otherwise
 	 */
 	rapidjson::Document & FromJSONString(std::string jsonstring,

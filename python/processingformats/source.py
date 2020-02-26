@@ -16,12 +16,12 @@ class Source:
     TYPE_KEY = "Type" #required
     
     def __init__ (self, newAgencyID = None, newAuthor = None, newType = None):
-    '''Intialize source object, constructs empty object if all arguments are None
-    
-       newAgencyID: a required String containing the agency identifier
-       newAuthor: a required String containing the author
-       newType: a required String containing the type
-    '''
+        '''Intialize source object, constructs empty object if all arguments are None
+        
+        newAgencyID: a required String containing the agency identifier
+        newAuthor: a required String containing the author
+        newType: a required String containing the type
+        '''
         
         if newAgencyID is not None:
             self.agencyID = newAgencyID
@@ -33,18 +33,18 @@ class Source:
             self.type = newType
             
     def fromJSONString (self, JSONString):
-    '''Populate object from JSON formatted string
-    
-       JSONString: a required String containing the JSON formatted text
-    '''
+        '''Populate object from JSON formatted string
+        
+        JSONString: a required String containing the JSON formatted text
+        '''
         JSONObject = json.loads(JSONString)
         self.fromDict(JSONObject)
         
     def fromDict(self, aDict):
-    '''Populates object from a dictionary
-       
-       aDict: a required dictionary
-    '''    
+        '''Populates object from a dictionary
+        
+        aDict: a required dictionary
+        '''    
         try:
             self.agencyID = aDict[self.AGENCYID_KEY]
             self.author = aDict[self.AUTHOR_KEY]
@@ -54,19 +54,19 @@ class Source:
             print ("Dictionary format error, missing required keys: %s" % e)
             
     def toJSONString(self):
-    '''Converts object to JSON formatted string
-    
-       Returns: JSON formatted message as a String
-    '''    
+        '''Converts object to JSON formatted string
+        
+        Returns: JSON formatted message as a String
+        '''    
         JSONObject = self.toDict()
         
         return json.dumps(JSONObject, ensure_ascii=False)
   
     def toDict(self):
-    '''Converts the object to a dictionary
-    
-       Returns: the dictionary
-    '''    
+        '''Converts the object to a dictionary
+        
+        Returns: the dictionary
+        '''    
         aDict = {}
         
         try:
@@ -81,19 +81,19 @@ class Source:
         return aDict
     
     def isValid(self):
-    '''Checks to see if object is valid
-       
-       Returns: true if object is valid, false otherwise
-    '''    
+        '''Checks to see if object is valid
+        
+        Returns: true if object is valid, false otherwise
+        '''    
         errorList = self.getErrors()
         
         return not errorList
     
     def getErrors(self):
-    '''Gets a list of object validation errors
-       
-       Returns: a list of Strings containing the validation error messages
-    '''    
+        '''Gets a list of object validation errors
+        
+        Returns: a list of Strings containing the validation error messages
+        '''    
         errorList = []
         
         #AgencyID
@@ -147,10 +147,10 @@ class Source:
         return errorList
         
     def isEmpty(self):
-    '''Checks to see if object is empty
-    
-       Returns: true if object is empty, false otherwise
-    '''    
+        '''Checks to see if object is empty
+        
+        Returns: true if object is empty, false otherwise
+        '''    
         if hasattr(self, 'agencyID'):
             return False
         

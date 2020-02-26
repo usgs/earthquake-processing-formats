@@ -17,7 +17,7 @@ public class PickTest {
           + "\"AgencyID\":\"US\",\"Type\":\"Unknown\"},"
           + "\"Time\":\"2015-12-28T21:32:24.017Z\",\"Affinity\":1.2,"
           + "\"Quality\":0.45,\"Use\":true,\"PickedPhase\":\"P\","
-          + "\"AssociatedPhase\":\"P\",\"LocatedPhase\":\"P\","
+          + "\"AssociatedPhase\":\"Pn\",\"LocatedPhase\":\"Pg\","
           + "\"Residual\":1.05,\"Distance\":2.65,\"Azimuth\":21.5,"
           + "\"Weight\":2.65,\"Importance\":3.8}";
   public static String ID = "12GFH48776857";
@@ -36,8 +36,8 @@ public class PickTest {
   public static double QUALITY = 0.45;
   public static boolean USE = true;
   public static String PICKEDPHASE = "P";
-  public static String ASSOCIATEDPHASE = "P";
-  public static String LOCATEDPHASE = "P";
+  public static String ASSOCIATEDPHASE = "Pn";
+  public static String LOCATEDPHASE = "Pg";
   public static double RESIDUAL = 1.05;
   public static double DISTANCE = 2.65;
   public static double AZIMUTH = 21.5;

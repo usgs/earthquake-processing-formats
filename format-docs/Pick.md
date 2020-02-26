@@ -6,10 +6,12 @@ The Pick object is an object designed to define a pick as part of a
 [Location](Location.md).
 
 ## Usage
+
 Pick is intended for use as part of the [Location](Location.md) Format
 in input/output messages for seismic processing algorithms.
 
 ## Output
+
 ```json
     {
       "ID"        : String,
@@ -18,7 +20,10 @@ in input/output messages for seismic processing algorithms.
          "Station"   : String,
          "Channel"   : String,
          "Network"   : String,
-         "Location"  : String
+         "Location"  : String,
+         "Latitude"  : Number,
+         "Longitude" : Number,
+         "Elevation" : Number
       },
       "Source" :
       {
@@ -42,6 +47,7 @@ in input/output messages for seismic processing algorithms.
 ```
 
 ## Glossary
+
 **Input Values:**
 
 * ID - A string containing an unique identifier for this pick.

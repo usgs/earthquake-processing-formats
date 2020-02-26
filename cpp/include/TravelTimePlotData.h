@@ -40,9 +40,10 @@ class TravelTimePlotData : public ProcessingBase {
 	 * The advanced constructor for the TravelTimePlotData class.
 	 * Initializes members to provided values.
 	 *
-	 * \param newPhase - A string containing the phase code
-	 * \param newSamples - A std::vector of TravelTimePlotDataSample objets
-	 * containing the samples
+	 * \param newMaximumTravelTime - A double containing the  maximum travel time 
+	 * in seconds
+	 * \param newBranches - A std::vector of TravelTimePlotDataBranch objects
+	 * objects defining the branches
 	 */
 	TravelTimePlotData(
 			double newMaximumTravelTime,
@@ -52,10 +53,10 @@ class TravelTimePlotData : public ProcessingBase {
 	 * \brief TravelTimePlotData advanced constructor
 	 *
 	 * The advanced constructor for the TravelTimePlotData class.
-	 * Converts the provided object from a json::Object, populating members
-	 * \param jsondocument - A json document.
+	 * Constructs the object from a rapidjson::Value, populating members
+	 * \param json - A reference to a populated rapidjson::Value to use
 	 */
-	explicit TravelTimePlotData(rapidjson::Value &json);
+	explicit TravelTimePlotData(rapidjson::Value &json); // NOLINT
 
 	/**
 	 * \brief TravelTimePlotData copy constructor
@@ -77,14 +78,14 @@ class TravelTimePlotData : public ProcessingBase {
 	 * \brief Convert to json object function
 	 *
 	 * Converts the contents of the class to a json object
-	 * \param jsondocument - a reference to the json document to fill in with
+	 * \param json - a reference to the rapidjson::Value to fill in with
 	 * the class contents.
-	 * \return Returns populated rapidjson::Value & if successful, empty
-	 *  rapidjson::Value & if not
+	 * \param allocator - rapidjson::MemoryPoolAllocator to use
+	 * \return A reference to the filled in rapidjson::Value
 	 */
 	rapidjson::Value & toJSON(
-			rapidjson::Value &json,
-			rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator> &allocator)
+			rapidjson::Value &json, // NOLINT
+			rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator> &allocator) // NOLINT
 					override;
 
 	/**
@@ -111,9 +112,9 @@ class TravelTimePlotData : public ProcessingBase {
 	double maximumTravelTime;
 
 	/**
-	 * \brief pick data vector
+	 * \brief branch data vector
 	 *
-	 * A required vector of TravelTimePlotDataSample objects
+	 * A required vector of TravelTimePlotDataBranch objects defining the branches
 	 */
 	std::vector<processingformats::TravelTimePlotDataBranch> branches;
 };

@@ -16,52 +16,54 @@ class LocationRequest:
     """
     
     #JSON Keys
-    TYPE_KEY = "Type" #Required
-    ID_KEY = "ID" #Optional
-    EARTHMODEL_KEY = "EarthModel" #Required
-    SOURCEORIGINTIME_KEY = "SourceOriginTime" #Required
-    SOURCELATITUDE_KEY = "SourceLatitude" #Required
-    SOURCELONGITUDE_KEY = "SourceLongitude" #Required
-    SOURCEDEPTH_KEY = "SourceDepth" #Required
-    INPUTDATA_KEY = "InputData" #Required
-    ISLOCATIONNEW_KEY = "IsLocationNew" #Optional
-    ISLOCATIONHELD_KEY = "IsLocationHeld" #Optional
-    ISDEPTHHELD_KEY = "IsDepthHeld" #Optional
-    ISBAYESIANDEPTH_KEY = "IsBAyesianDepth" #Optional
-    BAYESIANDEPTH_KEY = "BayesianDepth" #Optional
-    BAYESIANSPREAD_KEY = "BayesianSpread" #Optional
-    USESVD_KEY = "UseSVD" #Optional
-    OUTPUTDATA_KEY = "OutputData" #Contain output from locator
+    TYPE_KEY = "Type" # Required
+    ID_KEY = "ID" # Optional
+    SOURCE_KEY = "Source" # Optional
+    EARTHMODEL_KEY = "EarthModel" # Required
+    SOURCEORIGINTIME_KEY = "SourceOriginTime" # Required
+    SOURCELATITUDE_KEY = "SourceLatitude" # Required
+    SOURCELONGITUDE_KEY = "SourceLongitude" # Required
+    SOURCEDEPTH_KEY = "SourceDepth" # Required
+    INPUTDATA_KEY = "InputData" # Required
+    ISLOCATIONNEW_KEY = "IsLocationNew" # Optional
+    ISLOCATIONHELD_KEY = "IsLocationHeld" # Optional
+    ISDEPTHHELD_KEY = "IsDepthHeld" # Optional
+    ISBAYESIANDEPTH_KEY = "IsBayesianDepth" # Optional
+    BAYESIANDEPTH_KEY = "BayesianDepth" # Optional
+    BAYESIANSPREAD_KEY = "BayesianSpread" # Optional
+    USESVD_KEY = "UseSVD" # Optional
+    OUTPUTDATA_KEY = "OutputData" # Contain output from locator
     
     #Intialize members
-    def __init__ (self, newID = None, newType = None, newEarthModel = None, 
+    def __init__ (self, newID = None, newSource = None, newType = None, newEarthModel = None, 
                   newSourceLatitude = None, newSourceLongitude = None, 
                   newSourceOriginTime = None, newSourceDepth = None, 
                   newInputData = None, newIsLocationNew = None, newIsLocationHeld = None, 
                   newIsDepthHeld = None, newIsBayesianDepth = None, newBayesianDepth = None,
                   newBayesianSpread = None, newUseSVD = None):
-    ''' Initializes the pick object. Constructs empty object if all are none
-    
-        newID: a string containing the ID
-        newType: a type identifier for this Location Request
-        newEarthModel: an earth model for this Location Request
-        newSourceLatitude: a double containing the source latitude
-        newSourceLongitude: a double containing the source longitude
-        newSourceOriginTime: a Datetime containing the source time
-        newSourceDepth: a double containing the source depth
-        newInputData: a vector of input Pick objects for this Location Result
-        newIsLocationNew: a boolean indicating whether the location is new
-        newIsLocationHeld: a boolean indicating whether the location is held
-        newIsDepthHeld: a boolean indicating whether the depth is held
-        newIsBayesianDepth: a boolean indicating whether the depth is bayesian
-        newBayesianDepth: a double containing the bayesian depth
-        newBayesianSpread: a double containing the bayesian spread
-        newUseSVD: a boolean indicating whther use SVD
-    '''
+        ''' Initializes the pick object. Constructs empty object if all are none
+        
+            newID: a string containing the ID
+            newSource: a processingformats.source.Source containing desired source (and supporting info)
+            newType: a type identifier for this Location Request
+            newEarthModel: an earth model for this Location Request
+            newSourceLatitude: a double containing the source latitude in degrees
+            newSourceLongitude: a double containing the source longitude in degrees
+            newSourceOriginTime: a Datetime containing the source time
+            newSourceDepth: a double containing the source depth in kilometers
+            newInputData: a vector of input Pick objects for this Location Result
+            newIsLocationNew: a boolean indicating whether the location is new
+            newIsLocationHeld: a boolean indicating whether the location is held
+            newIsDepthHeld: a boolean indicating whether the depth is held
+            newIsBayesianDepth: a boolean indicating whether the depth is bayesian
+            newBayesianDepth: a double containing the bayesian depth
+            newBayesianSpread: a double containing the bayesian spread
+            newUseSVD: a boolean indicating whether use SVD
+        '''
         
         self.outputData = None
         
-        #Required Keys
+        # Required Keys
         if newType is not None:
             self.type = newType
             
@@ -84,9 +86,14 @@ class LocationRequest:
             if newInputData and len(newInputData) > 0:
                 self.inputData = newInputData
             
-        #Optional Keys
+        # Optional Keys
         if newID is not None:
-            self.ID = newID
+            self.id = newID
+
+        if newSource is not None:
+            self.source = newSource
+        else:
+            self.source = processingformats.source.Source()
             
         if newIsLocationNew is not None:
             self.isLocationNew = newIsLocationNew
@@ -110,18 +117,18 @@ class LocationRequest:
             self.useSVD = newUseSVD
 
     def fromJSONString (self, JSONString):
-    ''' Populates object from a JSON formatted string
-    
-        JSONString: a required string containing the JSON formatted text
-    '''
+        ''' Populates object from a JSON formatted string
+        
+            JSONString: a required string containing the JSON formatted text
+        '''
         JSONObject = json.loads(JSONString)
         self.fromDict(JSONObject)
 
     def fromDict (self, aDict):
-    ''' Populates object from a dictionary
-        
-        aDict: a required dictionary
-    '''
+        ''' Populates object from a dictionary
+            
+            aDict: a required dictionary
+        '''
         
         #Required Keys
         try:
@@ -130,10 +137,9 @@ class LocationRequest:
             self.sourceLatitude = aDict[self.SOURCELATITUDE_KEY]
             self.sourceLongitude = aDict[self.SOURCELONGITUDE_KEY]
             self.sourceDepth = aDict[self.SOURCEDEPTH_KEY]
-            timestring = aDict[self.SOURCEORIGINTIME_KEY] [:1] + "000Z"
-            self.sourceOriginTime = datetime.datetime.strptime(timestring, "%Y-%m-%dT%H:%M:%S.%fZ")
+            timeString = aDict[self.SOURCEORIGINTIME_KEY][:-1] + "000Z"
+            self.sourceOriginTime = datetime.datetime.strptime(timeString, "%Y-%m-%dT%H:%M:%S.%fZ")
             
-            aDataList = []
             if self.INPUTDATA_KEY in aDict:
                 aDataList = aDict[self.INPUTDATA_KEY]
                 if aDataList:
@@ -149,7 +155,10 @@ class LocationRequest:
             
         #Optional Keys
         if self.ID_KEY in aDict:
-            self.ID = aDict[self.ID_KEY]
+            self.id = aDict[self.ID_KEY]
+
+        if self.SOURCE_KEY in aDict:
+            self.source.fromDict(aDict[self.SOURCE_KEY])
             
         if self.ISLOCATIONNEW_KEY in aDict:
             self.isLocationNew = aDict[self.ISLOCATIONNEW_KEY]
@@ -173,19 +182,19 @@ class LocationRequest:
             self.useSVD = aDict[self.USESVD_KEY]
 
     def toJSONString(self):
-    ''' Converts object to a JSON formatted string
-    
-        Returns: JSON formatted message as a string
-    '''
+        ''' Converts object to a JSON formatted string
+        
+            Returns: JSON formatted message as a string
+        '''
         JSONObject = self.toDict()
         
         return json.dumps(JSONObject, ensure_ascii = False)
 
     def toDict(self):
-    ''' Converts object to a dictionary
-    
-        Returns: the dictionary
-    '''
+        ''' Converts object to a dictionary
+        
+            Returns: the dictionary
+        '''
         
         aDict = {}
         
@@ -200,17 +209,22 @@ class LocationRequest:
             aDict[self.SOURCEORIGINTIME_KEY] = timestring
             
             aDataList = []
-            if self.inputData and len(self.inputData) > :
+            if self.inputData and len(self.inputData) > 0:
                 for aData in self.inputData:
                     aDataList.append(aData.toDict())
             
+            aDict[self.INPUTDATA_KEY] = aDataList
         except(NameError, AttributeError) as e:
-            print("Missing requried data error: %s" % e)
+            print("Missing required data error: %s" % e)
             
         #Optional Keys
-        if hasattr (self, 'ID'):
-            aDict[self.ID_KEY] = self.ID
-            
+        if hasattr (self, 'id'):
+            aDict[self.ID_KEY] = self.id
+        
+        if hasattr(self, 'source'):
+            if not self.source.isEmpty():
+                aDict[self.SOURCE_KEY] = self.source.toDict()
+
         if hasattr (self, 'isLocationNew'):
             aDict[self.ISLOCATIONNEW_KEY] = self.isLocationNew
         
@@ -236,19 +250,19 @@ class LocationRequest:
         return aDict
 
     def isValid(self):
-    ''' Checks to see if object is valid
-    
-        Returns: true if object is valid, false otherwise
-    '''
+        ''' Checks to see if object is valid
+        
+            Returns: true if object is valid, false otherwise
+        '''
         errorList = self.getErrors()
         
         return not errorList
 
     def getErrors (self):
-    ''' Gets a list of object validation errors
-    
-        Returns: a list of string containing the validation error messages
-    '''
+        ''' Gets a list of object validation errors
+        
+            Returns: a list of string containing the validation error messages
+        '''
         errorList = []
         
         #required keys
@@ -260,30 +274,36 @@ class LocationRequest:
         except(NameError, AttributeError):
             errorList.append('No Source Latitude in LocationRequest Class.')
             
-        #sourceLongitude
+        # sourceLongitude
         try:
             if self.sourceLongitude < -180 or self.sourceLongitude > 180:
                 errorList.append('Source Longitude in LocationRequest Class not in range of -180 to 180.')
         except(NameError, AttributeError):
             errorList.append('No Source Longitude in LocationRequest Class')
         
-        #sourceDepth
+        # sourceDepth
         try:
             if self.sourceDepth < -100 or self.sourceDepth > 1500:
                 errorList.append('Source Depth in LocationRequest Class not in the range of -100 to 1500')
         except(NameError, AttributeError):
             errorList.append('No Source Depth in LocationRequest Class.')
         
-        #sourceOriginTime
+        # sourceOriginTime
         try:
             self.sourceOriginTime
         except(NameError, AttributeError):
             errorList.append('No Source Origin Time in LocationRequest Class.')
         
-        #inputData
-        if self.inputData and len(self.inputData) > 0:
-            for anInput in self.inputData:
-                if not anInput.isValid():
-                    errorList.append('Invalid Input in LocationRequest Class.')
-                    
+        # inputData
+        if hasattr(self, 'inputData'):
+            if self.inputData and len(self.inputData) > 0:
+                for anInput in self.inputData:
+                    if not anInput.isValid():
+                        errorList.append('Invalid Input in LocationRequest Class.')
+
+        if hasattr(self, 'source'):
+            if not self.source.isEmpty():
+                if not self.source.isValid():
+                    errorList.append('Invalid Source in LocationRequest Class.')        
+
         return errorList

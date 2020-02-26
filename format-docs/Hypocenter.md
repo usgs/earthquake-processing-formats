@@ -7,25 +7,29 @@ The Hypocenter object is an object designed to define a Hypocenter as part of a
 [JSON standard](http://www.json.org).
 
 ## Usage
+
 Hypocenter is intended for use as part of the [Location](Location.md) Format
 in input/output messages for seismic processing algorithms.
 
 ## Output
+
 ```json
     {
       "Latitude"        : Number,
       "Longitude"       : Number,
-      "Depth"           : Number,         
+      "Depth"           : Number,
       "Time"            : ISO8601,
       "LatitudeError"   : Number,
       "LongitudeError"  : Number,
       "DepthError"      : Number,
-      "TimeError"       : Number        
+      "TimeError"       : Number
     }
 ```
 
 ## Glossary
+
 **Required (Input) Values:**
+
 * Latitude - A decimal number that identifies the latitude of this hypocenter in
 degrees.
 * Longitude - A decimal number that identifies the longitude of this hypocenter
@@ -39,6 +43,7 @@ ISO8601 format `YYYY-MM-DDTHH:MM:SS.SSSZ`.
 
 The following are supplementary values that **may or may not** be provided by
 various algorithms.
+
 * LatitudeError - A decimal number that identifies the error of the latitude of
 this hypocenter in kilometers.
 * LongitudeError - A decimal number that identifies the error of the longitude

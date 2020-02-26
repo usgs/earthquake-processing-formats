@@ -46,6 +46,15 @@ class Pick : public ProcessingBase {
 	 *            - A std::string containing the network to use
 	 * \param newLocation
 	 *            - A std::string containing the location to use
+	 * \param newLatitude 
+	 * 						- A double containing the latitude in degrees to use, 
+	 * 						std::numeric_limits<double>::quiet_NaN() to omit
+	 * \param newLongitude 
+	 * 						- A double containing the longitude in degrees to use, 
+	 * 						std::numeric_limits<double>::quiet_NaN() to omit
+	 * \param newElevation
+	 * 						- A double containing the elevation in meters to use, 
+	 * 						std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newAgencyID
 	 *            - A std::string containing the agencyId to use
 	 * \param newAuthor
@@ -68,18 +77,19 @@ class Pick : public ProcessingBase {
 	 *            - A std::string containing the located phase to use, empty string
 	 *            to omit
 	 * \param newResidual
-	 *            - A double containing the residual to use, null to omit
+	 *            - A double containing the residual in seconds to use, null to omit
 	 * \param newDistance
-	 *            - A double containing the distance to use, null to omit
+	 *            - A double containing the distance in degrees to use, null to omit
 	 * \param newAzimuth
-	 *            - A double containing the azimuth to use, null to omit
+	 *            - A double containing the azimuth in degrees to use, null to omit
 	 * \param newWeight
 	 *            - A double containing the weight to use, null to omit
 	 * \param newImportance
 	 *            - A double containing the importance to use, null to omit
 	 */
 	Pick(std::string newID, std::string newStation, std::string newChannel,
-			std::string newNetwork, std::string newLocation,
+			std::string newNetwork, std::string newLocation, double newLatitude,
+			double newLongitude, double newElevation,
 			std::string newAgencyID, std::string newAuthor, std::string newType,
 			double newTime, double newAffinity, double newQuality, bool newUse,
 			std::string newPickedPhase, std::string newAssociatedPhase,
@@ -112,17 +122,18 @@ class Pick : public ProcessingBase {
 	 *            - A std::string containing the located phase to use, empty string
 	 *            to omit
 	 * \param newResidual
-	 *            - A double containing the residual to use, null to omit
+	 *            - A double containing the residual in seconds to use, null to omit
 	 * \param newDistance
-	 *            - A double containing the distance to use, null to omit
+	 *            - A double containing the distance in degrees to use, null to omit
 	 * \param newAzimuth
-	 *            - A double containing the azimuth to use, null to omit
+	 *            - A double containing the azimuth in degrees to use, null to omit
 	 * \param newWeight
 	 *            - A double containing the weight to use, null to omit
 	 * \param newImportance
 	 *            - A double containing the importance to use, null to omit
 	 */
-	Pick(std::string newID, Site newSite, Source newSource, double newTime,
+	Pick(std::string newID, processingformats::Site newSite,
+			processingformats::Source newSource, double newTime,
 			double newAffinity, double newQuality, bool newUse,
 			std::string newPickedPhase, std::string newAssociatedPhase,
 			std::string newLocatedPhase, double newResidual, double newDistance,
@@ -132,8 +143,8 @@ class Pick : public ProcessingBase {
 	 * \brief Pick advanced constructor
 	 *
 	 * The advanced constructor for the Pick class.
-	 * Converts the provided object from a rapidjson::Value, populating members
-	 * \param json - A rapidjson::Value document.
+	 * Constructs the object from a rapidjson::Value, populating members
+	 * \param json - A reference to a populated rapidjson::Value to use
 	 */
 	explicit Pick(rapidjson::Value &json); // NOLINT
 
@@ -201,78 +212,87 @@ class Pick : public ProcessingBase {
 	/**
 	 * \brief pick time
 	 *
-	 * A required double containing the time for this pick
+	 * A required double containing the time for this pick in decimal epoch seconds
 	 */
 	double time;
 
 	/**
-	 * Required double containing the affinity
+	 * \brief pick affinity
+	 * 
+	 * A required double containing the pick affinity
 	 */
 	double affinity;
 
 	/**
-	 * Required double containing the quality
+	 * \brief pick quality
+	 * 
+	 * A required double containing the pick quality
 	 */
 	double quality;
 
 	/**
-	 * Required boolean containing the use flag
+	 * \brief pick use flag
+	 * 
+	 * A required boolean containing the input use flag
 	 */
 	bool use;
 
 	/**
 	 * \brief picked phase
 	 *
-	 * A required std::string containing the picked phase for this pick
+	 * A required std::string containing the phase name assigned by the picker 
+	 * for this pick
 	 */
 	std::string pickedPhase;
 
 	/**
 	 * \brief associated phase
 	 *
-	 * A required std::string containing the associated phase for this pick
+	 * A required std::string containing the phase name assigned by the associator
+	 * for this pick
 	 */
 	std::string associatedPhase;
 
 	/**
 	 * \brief located phase
 	 *
-	 * An optional (output) std::string containing the located phase
+	 * An optional (output) std::string containing the phase name assigned by the 
+	 * locator for this pick.
 	 */
 	std::string locatedPhase;
 
 	/**
 	 * \brief residual
 	 *
-	 * An optional (output) double containing the residual
+	 * An optional (output) double containing the residual in seconds
 	 */
 	double residual;
 
 	/**
 	 * \brief distance
 	 *
-	 * An optional (output) double containing the distance
+	 * An optional (output) double containing the distance in decimal degrees.
 	 */
 	double distance;
 
 	/**
 	 * \brief azimuth
 	 *
-	 * An optional (output) double containing the azimuth
+	 * An optional (output) double containing the azimuth in decimal degrees
 	 */
 	double azimuth;
 
 	/**
 	 * \brief weight
 	 *
-	 * An optional (output) double containing the weight
+	 * An optional (output) double containing the locator weight
 	 */
 	double weight;
 
 	/**
-	 * \brief importance
+	 * \brief importance value
 	 *
-	 * An optional (output) double containing the importance
+	 * An optional (output) double containing the importance value
 	 */
 	double importance;
 };

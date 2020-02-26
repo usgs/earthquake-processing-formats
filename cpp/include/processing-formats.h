@@ -4,9 +4,11 @@
 // Locator interfaces
 #include "./Site.h"
 #include "./Source.h"
+#include "./Pick.h"
 #include "./Hypocenter.h"
 #include "./ErrorEllipse.h"
-#include "./LocationData.h"
+#include "./LocationRequest.h"
+#include "./LocationResult.h"
 
 // Traveltime interfaces
 #include "./TravelTimeData.h"
@@ -15,6 +17,8 @@
 #include "./TravelTimePlotDataSample.h"
 #include "./TravelTimeRequest.h"
 #include "./TravelTimeSession.h"
+
+// other
 #include "./util.h"
 #include "./base.h"
 

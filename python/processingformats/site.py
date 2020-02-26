@@ -22,16 +22,16 @@ class Site:
     def __init__ (self, newStation = None, newChannel = None, newNetwork = None, 
                   newLocation = None, newLatitude = None, newLongitude = None, 
                   newElevation = None):
-    ''' Initialize the site object, creates empty constructor if all are None
-    
-        newStation: a String containing the station to use
-        newChannel: a String containing the channel to use
-        newNetwork: a String containing the network to use
-        newLocation: a String containing the location to use
-        newLatitude: a Double containing the latitude in degrees to use
-        newLongitude: a Double containing the longitude in degrees to use
-        newElevation: a Double containing the elevation in meters to use
-    '''    
+        ''' Initialize the site object, creates empty constructor if all are None
+        
+            newStation: a String containing the station to use
+            newChannel: a String containing the channel to use
+            newNetwork: a String containing the network to use
+            newLocation: a String containing the location to use
+            newLatitude: a Double containing the latitude in degrees to use
+            newLongitude: a Double containing the longitude in degrees to use
+            newElevation: a Double containing the elevation in meters to use
+        '''    
         
         #required keys
         if newStation is not None:
@@ -59,18 +59,18 @@ class Site:
                 self.location = newLocation
            
     def fromJSONString (self, JSONString):
-    ''' Populates object from json formatted string
-    
-        JSONString: a required String containing the JSON formatted text
-    '''
+        ''' Populates object from json formatted string
+        
+            JSONString: a required String containing the JSON formatted text
+        '''
         JSONObject = json.loads(JSONString)
         self.fromDict(JSONObject)
       
     def fromDict(self, aDict):
-    ''' Populates object from a dictionary
-    
-        aDict: a required dictionary
-    '''
+        ''' Populates object from a dictionary
+        
+            aDict: a required dictionary
+        '''
         
         #required keys
         try:
@@ -91,19 +91,19 @@ class Site:
             self.location = aDict[self.LOCATION_KEY]
             
     def toJSONString(self):
-    ''' Converts object to a JSON formatted string
-    
-        Returns: The JSON formatted message as a String
-    '''
+        ''' Converts object to a JSON formatted string
+        
+            Returns: The JSON formatted message as a String
+        '''
         JSONObject = self.toDict()
         
         return json.dumps(JSONObject, ensure_ascii=False)
     
     def toDict(self):
-    ''' Converts the object to a dictionary
-    
-        Returns: the dictionary
-    '''
+        ''' Converts the object to a dictionary
+        
+            Returns: the dictionary
+        '''
         
         aDict = {}
         
@@ -130,19 +130,19 @@ class Site:
         return aDict
     
     def isValid(self):
-    ''' Checks to see if the object is valid
-        
-        Returns: true if the object is valid, false otherwise
-    '''
+        ''' Checks to see if the object is valid
+            
+            Returns: true if the object is valid, false otherwise
+        '''
         errorList = self.getErrors()
         
         return not errorList
     
     def getErrors(self):
-    ''' Gets a list of object validation errors
-    
-        Returns: a list of strings containing the validation error messages
-    '''    
+        ''' Gets a list of object validation errors
+        
+            Returns: a list of strings containing the validation error messages
+        '''    
         errorList = []
         
         #Station
@@ -179,7 +179,7 @@ class Site:
         
         #Elevation
         try:
-            if self.elevation < -10000 or self.elevation > 30000;:
+            if self.elevation < -10000 or self.elevation > 30000:
                 errorList.append('Elevation in Site Class is out of range.')
                 
         except(NameError, AttributeError):

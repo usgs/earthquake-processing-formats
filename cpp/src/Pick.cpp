@@ -41,7 +41,8 @@ Pick::Pick() {
 }
 
 Pick::Pick(std::string newID, std::string newStation, std::string newChannel,
-			std::string newNetwork, std::string newLocation,
+			std::string newNetwork, std::string newLocation, double newLatitude,
+			double newLongitude, double newElevation,
 			std::string newAgencyID, std::string newAuthor, std::string newType,
 			double newTime, double newAffinity, double newQuality, bool newUse,
 			std::string newPickedPhase, std::string newAssociatedPhase,
@@ -49,7 +50,7 @@ Pick::Pick(std::string newID, std::string newStation, std::string newChannel,
 			double newAzimuth, double newWeight, double newImportance) {
 	id = newID;
 	site = processingformats::Site(newStation, newChannel, newNetwork,
-									newLocation);
+									newLocation, newLatitude, newLongitude, newElevation);
 	source = processingformats::Source(newAgencyID, newAuthor, newType);
 	time = newTime;
 	affinity = newAffinity;

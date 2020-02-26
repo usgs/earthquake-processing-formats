@@ -7,19 +7,21 @@ information for a single sample returned as part of a travel time plot request.
 Travel-Time Plot Data Sample uses the [JSON standard](http://www.json.org).
 
 ## Usage
+
 Travel-Time Plot Data Sample is intended for use as part of a seismic travel
 time information service
 
 ## Output
+
 ```json
     {
       "Distance" : Number,
       "TravelTime" : Number,
       "StatisticalSpread" : Number,
-      "Observability" : Number              
+      "Observability" : Number
     }
 ```
-Reciever
+
 ## Glossary
 
 **Output Values:**

@@ -26,19 +26,19 @@ class Hypocenter:
     def __init__ (self, newLatitude = None, newLongitude = None, newDepth = None,
                   newTime = None, newLatitudeError = None, newLongitudeError = None,
                   newDepthError = None, newTimeError = None):
-    ''' Initializing the object. Constructs an empty object if all arguments are None
-    
-        newLatitude: a double containing the latitude in degrees
-        newLongitude: a double containing the longitude in degrees
-        newDepth: a double containing the depth in kilometers
-        newTime: a datetime containing the origin time
-        newLatitudeError: a double containing the latitude error
-        newLongitudeError: a double containing the longitude error
-        newDepthError: a double containing the depth error
-        newTimeError: a double containing the time error
-    '''
+        ''' Initializing the object. Constructs an empty object if all arguments are None
         
-        #required keys
+            newLatitude: a double containing the latitude in degrees
+            newLongitude: a double containing the longitude in degrees
+            newDepth: a double containing the depth in kilometers
+            newTime: a datetime containing the origin time
+            newLatitudeError: a double containing the latitude error
+            newLongitudeError: a double containing the longitude error
+            newDepthError: a double containing the depth error
+            newTimeError: a double containing the time error
+        '''
+        
+        # required keys
         if newLatitude is not None:
             self.latitude = newLatitude
         
@@ -51,7 +51,7 @@ class Hypocenter:
         if newTime is not None:
             self.time = newTime
             
-        #optional keys
+        # optional keys
         if newLatitudeError is not None:
             self.latitudeError = newLatitudeError
         
@@ -65,18 +65,18 @@ class Hypocenter:
             self.timeError = newTimeError
     
     def fromJSONString(self, JSONString):
-    ''' Populates object from a JSONString
-    
-        JSONString: a required string containing the JSON formatted text
-    '''
+        ''' Populates object from a JSONString
+        
+            JSONString: a required string containing the JSON formatted text
+        '''
         JSONObject = json.loads(JSONString)
         self.fromDict(JSONObject)
           
     def fromDict (self, aDict):
-    ''' Populates object from a dictionary
-    
-        aDict: required dictionary
-    '''
+        ''' Populates object from a dictionary
+        
+            aDict: required dictionary
+        '''
         
         #required keys
         try:
@@ -103,19 +103,19 @@ class Hypocenter:
             self.timeError = aDict[self.TIME_ERROR_KEY]
             
     def toJSONString(self):
-    ''' Converts object to JSON formatted string
-    
-        Returns: The JSON formatted message as a string
-    '''
+        ''' Converts object to JSON formatted string
+        
+            Returns: The JSON formatted message as a string
+        '''
         JSONObject = self.toDict()
         
         return json.dumps(JSONObject, ensure_ascii = False)
 
     def toDict(self):
-    ''' Converts object to a dictionary
-    
-        Returns: The Dictionary
-    '''
+        ''' Converts object to a dictionary
+        
+            Returns: The Dictionary
+        '''
         
         aDict = {}
         
@@ -128,10 +128,10 @@ class Hypocenter:
             aDict[self.TIME_KEY] = timeString
         
         except(NameError, AttributeError) as e:
-            print("Missing requried data error: %s" % e)
+            print("Missing required data error: %s" % e)
             
         #optional keys
-        if hasattr(self, 'lattitudeError'):
+        if hasattr(self, 'latitudeError'):
             aDict[self.LATITUDE_ERROR_KEY] = self.latitudeError
         
         if hasattr(self, 'longitudeError'):
@@ -146,26 +146,26 @@ class Hypocenter:
         return aDict
 
     def isValid(self):
-    ''' Checks to see if object is valid
-    
-        Returns: True if object if valid, False otherwise
-    '''
+        ''' Checks to see if object is valid
+        
+            Returns: True if object if valid, False otherwise
+        '''
         errorList = self.getErrors()
         
         return not errorList
     
     def getErrors(self):
-    ''' Gets list of object validation errors
-    
-        Returns: a list of strings containing the validation error messages
-    '''
+        ''' Gets list of object validation errors
+        
+            Returns: a list of strings containing the validation error messages
+        '''
         errorList = []
         
         #required keys:
         #latitude
         try:
             if self.latitude < -90 or self.latitude > 90:
-                errorList.append('Lattitude in Hypo Class not in the range of -90 to 90.')
+                errorList.append('Latitude in Hypo Class not in the range of -90 to 90.')
         except(NameError, AttributeError):
             errorList.append('No Latitude in Hypo Class.')
             

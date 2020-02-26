@@ -25,10 +25,15 @@ public class LocationRequestTest {
           + "\"US\",\"Author\":\"TestAuthor\"},\"Weight\":2.65,\"Importance\":"
           + "3.8,\"Azimuth\":21.5,\"Quality\":0.45,\"Affinity\":1.2,"
           + "\"ID\":\"12GFH48776857\",\"LocatedPhase\":\"P\",\"Distance\":2.65}],"
-          + "\"IsLocationNew\":false,\"IsBayesianDepth\":true}";
+          + "\"IsLocationNew\":false,\"IsBayesianDepth\":true}"
+          + "\"ID\":\"12345678\",\"Source\":{\"Author\":\"TestAuthor\","
+          + "\"AgencyID\":\"US\",\"Type\":\"Unknown\"}}";
 
   public static String ID = "12345678";
-  public static String TYPE = "RayLoc";
+  public static String AGENCYID = "US";
+  public static String AUTHOR = "TestAuthor";
+  public static String TYPE = "Unknown";
+  public static String LOCTYPE = "RayLoc";
   public static String EARTHMODEL = "AK135";
   public static double SOURCELATITUDE = 40.3344;
   public static double SOURCELONGITUDE = -121.44;
@@ -87,7 +92,10 @@ public class LocationRequestTest {
     LocationRequest locationRequestObject =
         new LocationRequest(
             ID,
+            AGENCYID,
+            AUTHOR,
             TYPE,
+            LOCTYPE,
             EARTHMODEL,
             SOURCELATITUDE,
             SOURCELONGITUDE,
@@ -117,7 +125,7 @@ public class LocationRequestTest {
   @Test
   public void readsJSON() {
 
-    // build Correlation object
+    // build request object
     try {
 
       checkData(new LocationRequest(Utility.fromJSONString(LOCATIONREQUEST_STRING)), "ReadsJSON");
@@ -133,7 +141,10 @@ public class LocationRequestTest {
     LocationRequest locationRequestObject =
         new LocationRequest(
             ID,
+            AGENCYID,
+            AUTHOR,
             TYPE,
+            LOCTYPE,
             EARTHMODEL,
             SOURCELATITUDE,
             SOURCELONGITUDE,
@@ -157,6 +168,9 @@ public class LocationRequestTest {
     LocationRequest badLocationRequestObject =
         new LocationRequest(
             ID,
+            AGENCYID,
+            AUTHOR,
+            null,
             null,
             EARTHMODEL,
             SOURCELATITUDE,

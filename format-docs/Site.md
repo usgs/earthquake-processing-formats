@@ -7,11 +7,13 @@ of the [Pick](Pick.md) format.  Site uses the
 [JSON standard](http://www.json.org).
 
 ## Usage
+
 Site is intended for use as part of the [Pick](Pick.md) format, which is used
 as part of the [Location](Location.md) Format in input/output messages for
 seismic processing algorithms.
 
 ## Output
+
 ```json
     {
       "Station"   : String,
@@ -25,6 +27,7 @@ seismic processing algorithms.
 ```
 
 ## Glossary
+
 **Required Values:**
 
 These are the values **required** to define a Site.
