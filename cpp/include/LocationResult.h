@@ -45,10 +45,10 @@ class LocationResult : public ProcessingBase {
 	 * \param newAgencyID - A std::string containing the agencyId to use
 	 * \param newAuthor - A std::string containing the author to use
 	 * \param newType - A std::string containing the type to use
-   * \param newLatitude - A double containing the latitude to use
-	 * \param newLongitude - A double containing the longitude to use
-	 * \param newTime - A double containing the origin time to use
-	 * \param newDepth - A double containing the depth to use
+   * \param newLatitude - A double containing the latitude in degrees to use
+	 * \param newLongitude - A double containing the longitude in degrees to use
+	 * \param newTime - A double containing the origin time in epoch seconds to use
+	 * \param newDepth - A double containing the depth in kilometers to use
 	 * \param newLatitudeError - A double containing the latitude error to use, 
    *  std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newLongitudeError - A double containing the longitude error to use, 
@@ -67,20 +67,20 @@ class LocationResult : public ProcessingBase {
    *  std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newUsedPhases - An int containing the number of used phases, 
    *  std::numeric_limits<double>::quiet_NaN() to omit
-	 * \param newGap - A double containing the gap to use, 
+	 * \param newGap - A double containing the gap in degrees to use, 
    *  std::numeric_limits<double>::quiet_NaN() to omit
-	 * \param newSecondaryGap - A double containing the secondary gap to use, 
-   *  std::numeric_limits<double>::quiet_NaN() to omit
-	 * \param newMinimumDistance - A double containing the minimum distance to 
+	 * \param newSecondaryGap - A double containing the secondary gap in degrees to 
    *  use, std::numeric_limits<double>::quiet_NaN() to omit
+	 * \param newMinimumDistance - A double containing the minimum distance in 
+   *  degrees to use, std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newRMS - A double containing the rms to use, 
    *  std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newQuality - A std::string containing the quality to use, 
    *  std::numeric_limits<double>::quiet_NaN() to omit
-	 * \param newBayesianDepth - A double containing the bayesian depth to use, 
-   *  std::numeric_limits<double>::quiet_NaN() to omit
-	 * \param newBayesianRange - A double containing the bayesian range to use, 
-   *  std::numeric_limits<double>::quiet_NaN() to omit
+	 * \param newBayesianDepth - A double containing the bayesian depth in
+   *  kilometers to use, std::numeric_limits<double>::quiet_NaN() to omit
+	 * \param newBayesianRange - A double containing the bayesian range 
+   *  kilometers to use, std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newDepthImportance - A double containing the depth importance to 
    *  use, std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newExitCode - A string containing the locator exit code 
@@ -133,10 +133,10 @@ class LocationResult : public ProcessingBase {
      * The alternate advanced constructor for the LocationResult class.
      * Initializes members to provided values.
      *
-     * \param newLatitude - A double containing the latitude to use
-     * \param newLongitude - A double containing the longitude to use
-     * \param newTime - A double containing the origin time to use
-     * \param newDepth - A double containing the depth to use
+		 * \param newLatitude - A double containing the latitude in degrees to use
+		 * \param newLongitude - A double containing the longitude in degrees to use
+		 * \param newTime - A double containing the origin time in epoch seconds to use
+		 * \param newDepth - A double containing the depth in kilometers to use
      * \param newLatitudeError - A double containing the latitude error to use, 
      *  std::numeric_limits<double>::quiet_NaN() to omit
      * \param newLongitudeError - A double containing the longitude error to use, 

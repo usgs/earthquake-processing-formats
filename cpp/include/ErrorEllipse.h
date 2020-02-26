@@ -38,15 +38,15 @@ class ErrorEllipse : public ProcessingBase {
 	 * The advanced constructor for the ErrorEllipse class.
 	 * Initializes members to provided values.
 	 *
-	 * \param newE0Error - A double containing the E0 error to use
-	 * \param newE0Azimuth - A double containing the E0 azimuth to use
-	 * \param newE0Dip - A double containing the new newE0 dip to use
-	 * \param newE1Error - A double containing the E1 error to use
-	 * \param newE1Azimuth - A double containing the E1 azimuth to use
-	 * \param newE1Dip - A double containing the new new E1 dip to use
-	 * \param newE2Error - A double containing the E2 error to use
-	 * \param newE2Azimuth - A double containing the E2 azimuth to use
-	 * \param newE2Dip - A double containing the new new E2 dip to use
+	 * \param newE0Error - A double containing the E0 error in kilometers to use
+	 * \param newE0Azimuth - A double containing the E0 azimuth in degrees to use
+	 * \param newE0Dip - A double containing the new E0 dip in degrees  to use
+	 * \param newE1Error - A double containing the E1 error in kilometers to use
+	 * \param newE1Azimuth - A double containing the E1 azimuth in degrees to use
+	 * \param newE1Dip - A double containing the new E1 dip  in degrees  to use
+	 * \param newE2Error - A double containing the E2 error in kilometers to use
+	 * \param newE2Azimuth - A double containing the E2 azimuth in degrees to use
+	 * \param newE2Dip - A double containing the new E2 dip in degrees to use
 	 * \param newMaximumHorizontalProjection - A double containing the maximum
      *  horizontal projection to use
 	 * \param newMaximumVerticalProjection - A double containing the maximum

@@ -48,20 +48,22 @@ class LocationRequest : public ProcessingBase {
    *  request is valid for
    * \param newEarthModel - A std::string containing the name of theTravel Time 
    *  Earth Model to use
-   * \param newSourceLatitude - A double containing the latitude to use
-   * \param newSourceLongitude - A double containing the longitude to use
-   * \param newSourceOriginTime - A double containing the origin time to use
-   * \param newSourceDepth - A double containing the depth to use
+   * \param newSourceLatitude - A double containing the latitude to use in degrees
+   * \param newSourceLongitude - A double containing the longitude to use in 
+	 *  degrees
+   * \param newSourceOriginTime - A double containing the origin time to use in
+	 *  epoch seconds
+   * \param newSourceDepth - A double containing the depth to use in kilometers
    * \param newInputData - A std::vector&lt;processingformats::Pick&gt; newPickData 
    *  containing the data to use for this location
    * \param newIsLocationNew - A bool indicating whether the location is now, 
    * \param newIsLocationHeld - A bool indicating whether to hold the location, 
    * \param newIsDepthHeld - A bool indicating whether to hold the depth, 
    * \param newIsBayesianDepth - A bool indicating whether to use the baysian 
-   * \param newBayesianDepth - A double containing the bayesian depth to use, 
-   *  std::numeric_limits<double>::quiet_NaN() to omit
-   * \param newBayesianSpread - A double containing the bayesian spread to use, 
-   *  std::numeric_limits<double>::quiet_NaN() to omit
+   * \param newBayesianDepth - A double containing the bayesian depth to use in 
+   *  kilometers, std::numeric_limits<double>::quiet_NaN() to omit
+   * \param newBayesianSpread - A double containing the bayesian spread to use 
+   *  in kilometers, std::numeric_limits<double>::quiet_NaN() to omit
    * \param newUseSVD - A bool indicating whether to use SVD
    */
 	LocationRequest(
@@ -94,22 +96,24 @@ class LocationRequest : public ProcessingBase {
    * \param newSource - A Source containing the source to use
    * \param newLocType - A std::string containing the name of the algorithm this 
    *  request is valid for
-   * \param newEarthModel - A std::string containing the name of theTravel Time 
+   * \param newEarthModel - A std::string containing the name of the Travel Time 
    *  Earth Model to use
-   * \param newSourceLatitude - A double containing the latitude to use
-   * \param newSourceLongitude - A double containing the longitude to use
-   * \param newSourceOriginTime - A double containing the origin time to use
-   * \param newSourceDepth - A double containing the depth to use
+   * \param newSourceLatitude - A double containing the latitude to use in degrees
+   * \param newSourceLongitude - A double containing the longitude to use in 
+	 * degrees
+   * \param newSourceOriginTime - A double containing the origin time to use in 
+	 * epoch seconds
+   * \param newSourceDepth - A double containing the depth to use in kilometers
    * \param newInputData - A std::vector&lt;processingformats::Pick&gt; newPickData 
    *  containing the data to use for this location
    * \param newIsLocationNew - A bool indicating whether the location is now, 
    * \param newIsLocationHeld - A bool indicating whether to hold the location, 
    * \param newIsDepthHeld - A bool indicating whether to hold the depth, 
    * \param newIsBayesianDepth - A bool indicating whether to use the baysian 
-   * \param newBayesianDepth - A double containing the bayesian depth to use, 
-   *  std::numeric_limits<double>::quiet_NaN() to omit
-   * \param newBayesianSpread - A double containing the bayesian spread to use, 
-   *  std::numeric_limits<double>::quiet_NaN() to omit
+   * \param newBayesianDepth - A double containing the bayesian depth to use in 
+   *  kilometers, std::numeric_limits<double>::quiet_NaN() to omit
+   * \param newBayesianSpread - A double containing the bayesian spread to use 
+   *  in kilometers, std::numeric_limits<double>::quiet_NaN() to omit
    * \param newUseSVD - A bool indicating whether to use SVD
    */
 	LocationRequest(

@@ -41,11 +41,11 @@ class Site : public ProcessingBase {
 	 * \param newchannel - A std::string containing the channel to use
 	 * \param newnetwork - A std::string containing the network to use
 	 * \param newlocation - A std::string containing the location to use
-	 * \param newlatitude - A double containing the latitude to use, 
+	 * \param newlatitude - A double containing the latitude in degrees to use, 
 	 * std::numeric_limits<double>::quiet_NaN() to omit
-	 * \param newlongitude - A double containing the longitude to use, 
+	 * \param newlongitude - A double containing the longitude in degrees to use, 
 	 * std::numeric_limits<double>::quiet_NaN() to omit
-	 * \param newelevation - A double containing the elevation to use, 
+	 * \param newelevation - A double containing the elevation in meters to use, 
 	 * std::numeric_limits<double>::quiet_NaN() to omit
 	 */
 	Site(std::string newstation, std::string newchannel, std::string newnetwork,

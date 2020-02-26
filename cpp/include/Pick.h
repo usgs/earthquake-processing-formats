@@ -47,13 +47,13 @@ class Pick : public ProcessingBase {
 	 * \param newLocation
 	 *            - A std::string containing the location to use
 	 * \param newLatitude 
-	 * 						- A double containing the latitude to use, 
+	 * 						- A double containing the latitude in degrees to use, 
 	 * 						std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newLongitude 
-	 * 						- A double containing the longitude to use, 
+	 * 						- A double containing the longitude in degrees to use, 
 	 * 						std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newElevation
-	 * 						- A double containing the elevation to use, 
+	 * 						- A double containing the elevation in meters to use, 
 	 * 						std::numeric_limits<double>::quiet_NaN() to omit
 	 * \param newAgencyID
 	 *            - A std::string containing the agencyId to use
@@ -77,11 +77,11 @@ class Pick : public ProcessingBase {
 	 *            - A std::string containing the located phase to use, empty string
 	 *            to omit
 	 * \param newResidual
-	 *            - A double containing the residual to use, null to omit
+	 *            - A double containing the residual in seconds to use, null to omit
 	 * \param newDistance
-	 *            - A double containing the distance to use, null to omit
+	 *            - A double containing the distance in degrees to use, null to omit
 	 * \param newAzimuth
-	 *            - A double containing the azimuth to use, null to omit
+	 *            - A double containing the azimuth in degrees to use, null to omit
 	 * \param newWeight
 	 *            - A double containing the weight to use, null to omit
 	 * \param newImportance
@@ -122,11 +122,11 @@ class Pick : public ProcessingBase {
 	 *            - A std::string containing the located phase to use, empty string
 	 *            to omit
 	 * \param newResidual
-	 *            - A double containing the residual to use, null to omit
+	 *            - A double containing the residual in seconds to use, null to omit
 	 * \param newDistance
-	 *            - A double containing the distance to use, null to omit
+	 *            - A double containing the distance in degrees to use, null to omit
 	 * \param newAzimuth
-	 *            - A double containing the azimuth to use, null to omit
+	 *            - A double containing the azimuth in degrees to use, null to omit
 	 * \param newWeight
 	 *            - A double containing the weight to use, null to omit
 	 * \param newImportance
