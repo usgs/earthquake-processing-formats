@@ -11,7 +11,7 @@
 #include <exception>
 #include <vector>
 
-#include "./base.h"
+#include "base.h" // NOLINT
 
 namespace processingformats {
 /**

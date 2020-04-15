@@ -7,15 +7,15 @@
 #ifndef DETECTION_LOCATIONRESULT_H
 #define DETECTION_LOCATIONRESULT_H
 
-#include <base.h>
-#include <Hypocenter.h>
-#include <ErrorEllipse.h>
-#include <Pick.h>
-#include <Source.h>
-
 #include <string>
 #include <exception>
 #include <vector>
+
+#include "base.h" // NOLINT
+#include "Hypocenter.h" // NOLINT
+#include "ErrorEllipse.h" // NOLINT
+#include "Pick.h" // NOLINT
+#include "Source.h" // NOLINT
 
 namespace processingformats {
 /**
