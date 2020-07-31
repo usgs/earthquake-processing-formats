@@ -412,22 +412,22 @@ rapidjson::Value & LocationResult::toJSON(
 	}
 
 	// associated stations
-	if (std::isnan(numberOfAssociatedStations) != true) {
+	if (numberOfAssociatedStations >= 0) {
 		json.AddMember(ASSOCIATEDSTATIONS_KEY, numberOfAssociatedStations, allocator);
 	}
 
 	// associated phases
-	if (std::isnan(numberOfAssociatedStations) != true) {
+	if (numberOfAssociatedPhases >= 0) {
 		json.AddMember(ASSOCIATEDPHASES_KEY, numberOfAssociatedPhases, allocator);
 	}
 
 	// used stations
-	if (std::isnan(numberOfUsedStations) != true) {
+	if (numberOfUsedStations >= 0) {
 		json.AddMember(USEDSTATIONS_KEY, numberOfUsedStations, allocator);
 	}
 
-	// used phased
-	if (std::isnan(numberOfAssociatedStations) != true) {
+	// used phases
+	if (numberOfUsedPhases >= 0) {
 		json.AddMember(USEDPHASES_KEY, numberOfUsedPhases, allocator);
 	}
 
