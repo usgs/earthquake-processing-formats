@@ -14,37 +14,49 @@ public class TravelTimeRequest implements ProcessingInt {
   /** JSON Keys */
   public static final String TYPE_KEY = "Type";
 
-  public static final String DISTANCE_KEY = "Distance";
-  public static final String ELEVATION_KEY = "Elevation";
-  public static final String LATITUDE_KEY = "Latitude";
-  public static final String LONGITUDE_KEY = "Longitude";
-  public static final String DATA_KEY = "Data";
+  public static final String SOURCE_KEY = "Source";
+  public static final String RECIEVERS_KEY = "Recievers";
+  public static final String EARTHMODEL_KEY = "EarthModel";
+  public static final String PHASETYPES_KEY = "PhaseTypes";
+  public static final String RETURNALLPHASES_KEY = "ReturnAllPhases";
+  public static final String RETURNBACKBRANCHES_KEY = "ReturnBackBranches";
+  public static final String CONVERTTECTONIC_KEY = "ConvertTectonic";
+
+  public static final String RESPONSE_KEY = "Response";
 
   /** Required Type of Data as a String */
   public String Type;
 
-  /** Required source receiver Distance in seconds */
-  public Double Distance;
+  /** Required source */
+  public TravelTimeSource Source;
 
-  /** Required receiver Elevation relative to the WGS84 datum in kilometers */
-  public Double Elevation;
+  /** Required receivers */
+  public ArrayList<TravelTimeReciever> Recievers;
 
-  /** Optional geographic receiver Latitude in degrees */
-  public Double Latitude;
+  /** Optional earth model to use, defaults to the AK135 earth model */
+  public String EarthModel;
 
-  /** Optional geographic receiver Longitude in degrees */
-  public Double Longitude;
+  /** Optional ArrayList of strings listing the phase types desired */
+  public ArrayList<String> PhaseTypes;
+
+  /** Optional flag that indicates whether to return all phases, defaults to false */
+  public Boolean ReturnAllPhases;
+
+  /**
+   * Optional flag that indicates whether to return all arrivals of all phases, defaults to false
+   */
+  public Boolean ReturnBackBranches;
+
+  /** Optional flag that indicates whether to convert tectonic phases, defaults to false */
+  public Boolean ConvertTectonic;
 
   /** Returned travel time Data (empty for requests) */
-  public ArrayList<TravelTimeData> Data;
+  public ArrayList<TravelTimeReciever> Response;
 
-  /** Returned travel time plot Data (empty for requests) */
-  public ArrayList<TravelTimePlotData> PlotData;
-
-  /** The constructor for the TravelTimeData class. Initializes members to null values. */
+  /** The constructor for the TravelTimeRequest class. Initializes members to null values. */
   public TravelTimeRequest() {
 
-    reload(null, null, null, null, null, null, null);
+    reload(null, null, null, null, null, null, null, null, null);
   }
 
   /**
@@ -55,27 +67,39 @@ public class TravelTimeRequest implements ProcessingInt {
    *
    * @param newType - A String containing the request Type, "Standard", "Plot", or "PlotStatistics",
    *     defaults to standard
-   * @param newDistance - A Double containing the source-receiver Distance in degrees
-   * @param newElevation - A Double containing the receiver Elevation relative to the WGS84 datum in
-   *     kilometers
-   * @param newLatitude - An optional Double containing the geographic receiver Latitude in degrees,
-   *     null to omit
-   * @param newLongitude - An optional Double containing the geographic receiver Longitude in
-   *     degrees, null to omit
-   * @param newData - A ArrayList&lt;TravelTimeData&gt; containing the returned travel time Data
-   * @param newPlotData - A ArrayList&lt;TravelTimePlotData&gt; containing the returned travel time
-   *     plot Data
+   * @param newSource - A TravelTimeSource object containing the source information
+   * @param newReciever - An ArrayList&lt;TravelTimeReciever&gt; objects containing the desired
+   *     recievers
+   * @param newEarthModel - A String containing the earthmodel
+   * @param newPhaseTypes - An ArrayList&lt;String&gt; containing the desired display types
+   * @param newReturnAllPhases - A Boolean indicating whether to return all phases
+   * @param newReturnBackBranches - A Boolean indicating whether to return all arrivals of all
+   *     phases
+   * @param newConvertTectonic - A boolean that indicates whether to convert tectonic phases
+   * @param newResponse - An ArrayList&lt;TravelTimeReciever&gt; objects containing the returned
+   *     recievers with travel time data
    */
   public TravelTimeRequest(
       String newType,
-      Double newDistance,
-      Double newElevation,
-      Double newLatitude,
-      Double newLongitude,
-      ArrayList<TravelTimeData> newData,
-      ArrayList<TravelTimePlotData> newPlotData) {
+      TravelTimeSource newSource,
+      ArrayList<TravelTimeReciever> newRecievers,
+      String newEarthModel,
+      ArrayList<String> newPhaseTypes,
+      Boolean newReturnAllPhases,
+      Boolean newReturnBackBranches,
+      Boolean newConvertTectonic,
+      ArrayList<TravelTimeReciever> newResponse) {
 
-    reload(newType, newDistance, newElevation, newLatitude, newLongitude, newData, newPlotData);
+    reload(
+        newType,
+        newSource,
+        newRecievers,
+        newEarthModel,
+        newPhaseTypes,
+        newReturnAllPhases,
+        newReturnBackBranches,
+        newConvertTectonic,
+        newResponse);
   }
 
   /**
@@ -93,42 +117,96 @@ public class TravelTimeRequest implements ProcessingInt {
       Type = null;
     }
 
-    // Distance
-    if (newJSONObject.containsKey(DISTANCE_KEY)) {
-      Distance = (double) newJSONObject.get(DISTANCE_KEY);
+    // Source
+    if (newJSONObject.containsKey(SOURCE_KEY)) {
+      Source = new TravelTimeSource((JSONObject) newJSONObject.get(SOURCE_KEY));
     } else {
-      Distance = null;
+      Source = null;
     }
 
-    // Elevation
-    if (newJSONObject.containsKey(ELEVATION_KEY)) {
-      Elevation = (double) newJSONObject.get(ELEVATION_KEY);
-    } else {
-      Elevation = null;
-    }
+    // Recievers
+    if (newJSONObject.containsKey(RECIEVERS_KEY)) {
 
-    // Latitude
-    if (newJSONObject.containsKey(LATITUDE_KEY)) {
-      Latitude = (double) newJSONObject.get(LATITUDE_KEY);
-    } else {
-      Latitude = null;
-    }
-
-    // Longitude
-    if (newJSONObject.containsKey(LONGITUDE_KEY)) {
-      Longitude = (double) newJSONObject.get(LONGITUDE_KEY);
-    } else {
-      Longitude = null;
-    }
-
-    // Data
-    if (newJSONObject.containsKey(DATA_KEY)) {
-
-      Data = new ArrayList<TravelTimeData>();
-      PlotData = new ArrayList<TravelTimePlotData>();
+      Recievers = new ArrayList<TravelTimeReciever>();
 
       // get the array
-      JSONArray DataArray = (JSONArray) newJSONObject.get(DATA_KEY);
+      JSONArray RecieversArray = (JSONArray) newJSONObject.get(RECIEVERS_KEY);
+
+      if ((RecieversArray != null) && (!RecieversArray.isEmpty())) {
+
+        // go through the whole array
+        for (int i = 0; i < RecieversArray.size(); i++) {
+
+          // get the object
+          JSONObject DataObject = (JSONObject) RecieversArray.get(i);
+
+          Recievers.add(new TravelTimeReciever(DataObject));
+        }
+      }
+    } else {
+      Recievers = null;
+    }
+
+    // Optional values
+    // EarthModel
+    if (newJSONObject.containsKey(EARTHMODEL_KEY)) {
+      EarthModel = newJSONObject.get(EARTHMODEL_KEY).toString();
+    } else {
+      EarthModel = null;
+    }
+
+    // PhaseTypes
+    if (newJSONObject.containsKey(PHASETYPES_KEY)) {
+
+      PhaseTypes = new ArrayList<String>();
+
+      // get the array
+      JSONArray PhaseTypesArray = (JSONArray) newJSONObject.get(PHASETYPES_KEY);
+
+      if ((PhaseTypesArray != null) && (!PhaseTypesArray.isEmpty())) {
+
+        // go through the whole array
+        for (int i = 0; i < PhaseTypesArray.size(); i++) {
+
+          // get the String
+          String phaseType = PhaseTypesArray.get(i).toString();
+
+          // add to ArrayList
+          PhaseTypes.add(phaseType);
+        }
+      }
+    } else {
+      PhaseTypes = null;
+    }
+
+    // ReturnAllPhases
+    if (newJSONObject.containsKey(RETURNALLPHASES_KEY)) {
+      ReturnAllPhases = (boolean) newJSONObject.get(RETURNALLPHASES_KEY);
+    } else {
+      ReturnAllPhases = null;
+    }
+
+    // ReturnBackBranches
+    if (newJSONObject.containsKey(RETURNBACKBRANCHES_KEY)) {
+      ReturnBackBranches = (boolean) newJSONObject.get(RETURNBACKBRANCHES_KEY);
+    } else {
+      ReturnBackBranches = null;
+    }
+
+    // ConvertTectonic
+    if (newJSONObject.containsKey(CONVERTTECTONIC_KEY)) {
+      ConvertTectonic = (boolean) newJSONObject.get(CONVERTTECTONIC_KEY);
+    } else {
+      ConvertTectonic = null;
+    }
+
+    // Response
+    if (newJSONObject.containsKey(RESPONSE_KEY)) {
+
+      Response = new ArrayList<TravelTimeReciever>();
+
+      // get the array
+      JSONArray DataArray = (JSONArray) newJSONObject.get(RESPONSE_KEY);
 
       if ((DataArray != null) && (!DataArray.isEmpty())) {
 
@@ -138,26 +216,12 @@ public class TravelTimeRequest implements ProcessingInt {
           // get the object
           JSONObject DataObject = (JSONObject) DataArray.get(i);
 
-          // check for Type
-          if (DataObject.containsKey(TYPE_KEY)) {
-
-            // Route based on Type
-            String TypeString = (String) DataObject.get(TYPE_KEY);
-            if (TypeString.equals("TTData")) {
-
-              // add to vector
-              Data.add(new TravelTimeData(DataObject));
-            } else if (TypeString.equals("TTPlotData")) {
-
-              // add to vector
-              PlotData.add(new TravelTimePlotData(DataObject));
-            }
-          }
+          Response.add(new TravelTimeReciever(DataObject));
         }
+
+      } else {
+        Response = null;
       }
-    } else {
-      Data = null;
-      PlotData = null;
     }
   }
 
@@ -169,12 +233,14 @@ public class TravelTimeRequest implements ProcessingInt {
   public TravelTimeRequest(TravelTimeRequest sourceObject) {
     reload(
         sourceObject.Type,
-        sourceObject.Distance,
-        sourceObject.Elevation,
-        sourceObject.Latitude,
-        sourceObject.Longitude,
-        sourceObject.Data,
-        sourceObject.PlotData);
+        sourceObject.Source,
+        sourceObject.Recievers,
+        sourceObject.EarthModel,
+        sourceObject.PhaseTypes,
+        sourceObject.ReturnAllPhases,
+        sourceObject.ReturnBackBranches,
+        sourceObject.ConvertTectonic,
+        sourceObject.Response);
   }
 
   /**
@@ -184,37 +250,45 @@ public class TravelTimeRequest implements ProcessingInt {
    *
    * @param newType - A String containing the request Type, "Standard", "Plot", or "PlotStatistics",
    *     defaults to standard
-   * @param newDistance - A Double containing the source-receiver Distance in degrees
-   * @param newElevation - A Double containing the receiver Elevation relative to the WGS84 datum in
-   *     kilometers
-   * @param newLatitude - An optional Double containing the geographic receiver Latitude in degrees,
-   *     null to omit
-   * @param newLongitude - An optional Double containing the geographic receiver Longitude in
-   *     degrees, null to omit
-   * @param newData - A ArrayList&lt;TravelTimeData&gt; containing the returned travel time Data
-   * @param newPlotData - A ArrayList&lt;TravelTimePlotData&gt; containing the returned travel time
-   *     plot Data
+   * @param newSource - A TravelTimeSource object containing the source information
+   * @param newReciever - An ArrayList&lt;TravelTimeReciever&gt; objects containing the desired
+   *     recievers
+   * @param newEarthModel - A String containing the earthmodel
+   * @param newPhaseTypes - An ArrayList&lt;String&gt; containing the desired display types
+   * @param newReturnAllPhases - A Boolean indicating whether to return all phases
+   * @param newReturnBackBranches - A Boolean indicating whether to return all arrivals of all
+   *     phases
+   * @param newConvertTectonic - A boolean that indicates whether to convert tectonic phases
+   * @param newResponse - An ArrayList&lt;TravelTimeReciever&gt; objects containing the returned
+   *     recievers with travel time data
    */
   public void reload(
       String newType,
-      Double newDistance,
-      Double newElevation,
-      Double newLatitude,
-      Double newLongitude,
-      ArrayList<TravelTimeData> newData,
-      ArrayList<TravelTimePlotData> newPlotData) {
+      TravelTimeSource newSource,
+      ArrayList<TravelTimeReciever> newRecievers,
+      String newEarthModel,
+      ArrayList<String> newPhaseTypes,
+      Boolean newReturnAllPhases,
+      Boolean newReturnBackBranches,
+      Boolean newConvertTectonic,
+      ArrayList<TravelTimeReciever> newResponse) {
 
     if (newType == null) {
       Type = "Standard";
     } else {
       Type = newType;
     }
-    Distance = newDistance;
-    Elevation = newElevation;
-    Latitude = newLatitude;
-    Longitude = newLongitude;
-    Data = newData;
-    PlotData = newPlotData;
+
+    Source = newSource;
+    Recievers = newRecievers;
+
+    EarthModel = newEarthModel;
+    PhaseTypes = newPhaseTypes;
+    ReturnAllPhases = newReturnAllPhases;
+    ReturnBackBranches = newReturnBackBranches;
+    ConvertTectonic = newConvertTectonic;
+
+    Response = newResponse;
   }
 
   /**
@@ -233,66 +307,85 @@ public class TravelTimeRequest implements ProcessingInt {
       newJSONObject.put(TYPE_KEY, Type);
     }
 
-    // Distance
-    if (Distance != null) {
-      newJSONObject.put(DISTANCE_KEY, Distance);
+    // Source
+    if (Source != null) {
+      newJSONObject.put(SOURCE_KEY, Source.toJSON());
     }
 
-    // Elevation
-    if (Elevation != null) {
-      newJSONObject.put(ELEVATION_KEY, Elevation);
-    }
+    // Recievers
+    if ((Recievers != null) && (!Recievers.isEmpty())) {
 
-    // optional values
-    // Latitude
-    if (Latitude != null) {
-      newJSONObject.put(LATITUDE_KEY, Latitude);
-    }
+      JSONArray RecieversArray = new JSONArray();
 
-    // Longitude
-    if (Longitude != null) {
-      newJSONObject.put(LONGITUDE_KEY, Longitude);
-    }
-
-    // returned Data
-    JSONArray DataArray = new JSONArray();
-    if ((Type != null) && (Type.equals("Standard"))) {
-
-      // enumerate through the whole arraylist
-      for (Iterator<TravelTimeData> DataIterator = Data.iterator(); DataIterator.hasNext(); ) {
+      for (Iterator<TravelTimeReciever> RecieversIterator = Recievers.iterator();
+          RecieversIterator.hasNext(); ) {
 
         // convert pick to JSON object
-        JSONObject DataObject = ((TravelTimeData) DataIterator.next()).toJSON();
+        JSONObject ReceiverObject = ((TravelTimeReciever) RecieversIterator.next()).toJSON();
 
-        DataArray.add(DataObject);
-      }
-    } else if ((Type != null) && (Type.equals("Plot"))) {
-
-      // enumerate through the whole arraylist
-      for (Iterator<TravelTimePlotData> DataIterator = PlotData.iterator();
-          DataIterator.hasNext(); ) {
-
-        // convert pick to JSON object
-        JSONObject DataObject = ((TravelTimePlotData) DataIterator.next()).toJSON();
-
-        DataArray.add(DataObject);
+        RecieversArray.add(ReceiverObject);
       }
 
-    } else if ((Type != null) && (Type.equals("PlotStatistics"))) {
-
-      // enumerate through the whole arraylist
-      for (Iterator<TravelTimePlotData> DataIterator = PlotData.iterator();
-          DataIterator.hasNext(); ) {
-
-        // convert pick to JSON object
-        JSONObject DataObject = ((TravelTimePlotData) DataIterator.next()).toJSON();
-
-        DataArray.add(DataObject);
+      if (!RecieversArray.isEmpty()) {
+        newJSONObject.put(RECIEVERS_KEY, RecieversArray);
       }
     }
 
-    if (!DataArray.isEmpty()) {
-      newJSONObject.put(DATA_KEY, DataArray);
+    // EarthModel
+    if (EarthModel != null) {
+      newJSONObject.put(EARTHMODEL_KEY, EarthModel);
+    }
+
+    // PhaseTypes
+    if ((PhaseTypes != null) && (!PhaseTypes.isEmpty())) {
+
+      JSONArray PhaseTypesArray = new JSONArray();
+
+      // enumerate through the whole arraylist
+      for (Iterator<String> PhaseTypesIterator = PhaseTypes.iterator();
+          PhaseTypesIterator.hasNext(); ) {
+
+        // add to  array
+        PhaseTypesArray.add(PhaseTypesIterator.next());
+      }
+
+      if (!PhaseTypesArray.isEmpty()) {
+        newJSONObject.put(PHASETYPES_KEY, PhaseTypesArray);
+      }
+    }
+
+    // ReturnAllPhases
+    if (ReturnAllPhases != null) {
+      newJSONObject.put(RETURNALLPHASES_KEY, ReturnAllPhases);
+    }
+
+    // ReturnBackBranches
+    if (ReturnBackBranches != null) {
+      newJSONObject.put(RETURNBACKBRANCHES_KEY, ReturnBackBranches);
+    }
+
+    // ConvertTectonic
+    if (ConvertTectonic != null) {
+      newJSONObject.put(CONVERTTECTONIC_KEY, ConvertTectonic);
+    }
+
+    // Response
+    if ((Response != null) && (!Response.isEmpty())) {
+
+      JSONArray ResponseArray = new JSONArray();
+
+      for (Iterator<TravelTimeReciever> ResponseIterator = Response.iterator();
+          ResponseIterator.hasNext(); ) {
+
+        // convert pick to JSON object
+        JSONObject ResponseObject = ((TravelTimeReciever) ResponseIterator.next()).toJSON();
+
+        ResponseArray.add(ResponseObject);
+      }
+
+      if (!ResponseArray.isEmpty()) {
+        newJSONObject.put(RESPONSE_KEY, ResponseArray);
+      }
     }
 
     return (newJSONObject);
@@ -334,106 +427,53 @@ public class TravelTimeRequest implements ProcessingInt {
       errorList.add("Unsupported Type in TravelTimeRequest Class.");
     }
 
-    // Distance
-    if (Distance == null) {
-      // Distance not found
-      errorList.add("No Distance in TravelTimeRequest Class.");
+    // Source
+    if (Source == null) {
+      // Source not found
+      errorList.add("No Source in TravelTimeRequest Class.");
+    } else if (!Source.isValid()) {
+      // Hypocenter invalid
+      errorList.add("Invalid Source in TravelTimeRequest Class.");
     }
 
-    // Elevation
-    if (Elevation == null) {
-      // Elevation not found
-      errorList.add("No Elevation in TravelTimeRequest Class.");
-    }
-
-    // optional values
-    // Latitude
-    if (Latitude != null) {
-
-      if ((Latitude < -90) || (Latitude > 90)) {
-        // invalid Latitude
-        errorList.add("Latitude in TravelTimeRequest not in the range of -90 to 90.");
-      }
-    }
-
-    // Longitude
-    if (Longitude != null) {
-
-      if ((Longitude < -180) || (Longitude > 180)) {
-        // invalid Longitude
-        errorList.add("Longitude in TravelTimeRequest not in the range of -180 to 180.");
-      }
-    }
-
-    // Data
-    // returned Data
-    if ((Type != null) && (Type.equals("Standard"))) {
-
-      // Data
-      if (Data != null) {
-        // enumerate through the whole arraylist
-        for (Iterator<TravelTimeData> DataIterator = Data.iterator(); DataIterator.hasNext(); ) {
-
-          // convert pick to JSON object
-          TravelTimeData TTData = ((TravelTimeData) DataIterator.next());
-
-          if (!TTData.isValid()) {
-            errorList.add("Invalid TravelTimeData in TravelTimeRequest Class of Type Standard.");
-            break;
-          }
-        }
-        if ((PlotData != null) && (!PlotData.isEmpty())) {
-          // wrong Data
-          errorList.add(
-              "Erroneous TravelTimePlotData in TravelTimeRequest Class of Type Standard.");
-        }
-      }
-
-    } else if ((Type != null) && (Type.equals("Plot"))) {
-
-      // plot Data
-      if (PlotData != null) {
-        // enumerate through the whole arraylist
-        for (Iterator<TravelTimePlotData> DataIterator = PlotData.iterator();
-            DataIterator.hasNext(); ) {
-
-          // convert pick to JSON object
-          TravelTimePlotData TTPlotData = ((TravelTimePlotData) DataIterator.next());
-
-          if (!TTPlotData.isValid()) {
-            errorList.add("Invalid TravelTimePlotData in TravelTimeRequest Class of Type Plot.");
-            break;
-          }
-        }
-
-        if ((Data != null) && (!Data.isEmpty())) {
-          // wrong Data
-          errorList.add("Erroneous TravelTimeData in TravelTimeRequest Class of Type Plot.");
-        }
-      }
-    } else if ((Type != null) && (Type.equals("PlotStatistics"))) {
-
+    // Recievers
+    if (Recievers == null) {
+      // Recievers not found
+      errorList.add("No Recievers in TravelTimeRequest Class.");
+    } else if (!Recievers.isEmpty()) {
+      // Recievers not found
+      errorList.add("Empty Recievers in TravelTimeRequest Class.");
+    } else {
       // enumerate through the whole arraylist
-      for (Iterator<TravelTimePlotData> DataIterator = PlotData.iterator();
-          DataIterator.hasNext(); ) {
+      for (Iterator<TravelTimeReciever> recieverIterator = Recievers.iterator();
+          recieverIterator.hasNext(); ) {
 
-        // convert pick to JSON object
-        TravelTimePlotData TTPlotData = ((TravelTimePlotData) DataIterator.next());
+        // convert recever to JSON object
+        TravelTimeReciever jsonReceiver = ((TravelTimeReciever) recieverIterator.next());
 
-        if (!TTPlotData.isValid()) {
-          errorList.add(
-              "Invalid TravelTimePlotData in TravelTimeRequest Class of Type PlotStatistics.");
+        if (!jsonReceiver.isValid()) {
+          errorList.add("Invalid Reciever in TravelTimeRequest Class.");
           break;
         }
       }
-
-      if ((Data != null) && (!Data.isEmpty())) {
-        // wrong Data
-        errorList.add(
-            "Erroneous TravelTimeData in TravelTimeRequest Class of Type PlotStatistics.");
-      }
     }
 
+    // Optional Output Response
+    if ((Response != null) && (!Response.isEmpty())) {
+
+      // enumerate through the whole arraylist
+      for (Iterator<TravelTimeReciever> responseIterator = Response.iterator();
+          responseIterator.hasNext(); ) {
+
+        // convert recever to JSON object
+        TravelTimeReciever jsonResponse = ((TravelTimeReciever) responseIterator.next());
+
+        if (!jsonResponse.isValid()) {
+          errorList.add("Invalid Response in TravelTimeRequest Class.");
+          break;
+        }
+      }
+    }
     return (errorList);
   }
 }

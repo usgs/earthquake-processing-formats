@@ -17,63 +17,60 @@ information service
       "Request" :
       {
         "Type"      : String,
-        "Distance"  : Number,
-        "Elevation" : Number,
-        "Latitude"  : Number,
-        "Longitude" : Number
+        "Source" :
+        {
+          "Latitude" : Number,
+          "Longitude": Number,
+          "Depth" : Number
+        },
+        "Recievers" : 
+        [
+          {
+            "ID" : String,
+            "Elevation" : Number,
+            "Distance"  : Number,
+            "Latitude"  : Number,
+            "Longitude" : Number
+          }
+        ],
+        "EarthModel" : String,
+        "PhaseTypes" :
+        [
+          String, ...
+        ],
+        "ReturnAllPhases" : Boolean,
+        "ReturnBackBranches" : Boolean,
+        "ConvertTectonic" : Boolean
       },
-      "Data" :
+      "Response" :
       [
         {
-          "Type"       : String,
-          "Phase"      : String,
-          "TravelTime" : Number,
-          "DistanceDerivative" : Number,
-          "DepthDerivative"    : Number,
-          "RayDerivative"      : Number,
-          "StatisticalSpread"  : Number,
-          "Observability"      : Number,
-          "TeleseismicPhaseGroup" : Number,
-          "AuxiliaryPhaseGroup"   : Number,
-          "LocationUseFlag"       : Boolean,
-          "AssociationWeightFlag" : Boolean
+          "ID" : String,
+          "Elevation" : Number,
+          "Distance"  : Number,
+          "Latitude"  : Number,
+          "Longitude" : Number,
+          "Branches" : 
+          [
+            {
+              "Phase"      : String,
+              "TravelTime" : Number,
+              "DistanceDerivative" : Number,
+              "DepthDerivative"    : Number,
+              "RayDerivative"      : Number,
+              "StatisticalSpread"  : Number,
+              "Observability"      : Number,
+              "TeleseismicPhaseGroup" : Number,
+              "AuxiliaryPhaseGroup"   : Number,
+              "LocationUseFlag"       : Boolean,
+              "AssociationWeightFlag" : Boolean
+            }
+          ]
         }
     ]
     }
 ```
 
-## Plot Request
-
-```json
-    {
-      "Request" :
-      {
-        "Type"       : String
-      },
-      "Data" :
-      {
-        "Type"              : String,
-        "MaximumTravelTime" : Number,
-        "Branches" :
-        [
-          {
-            "Phase" : String,
-            "Samples" :
-            [
-              {
-                "Distance" : Number,
-                "TravelTime" : Number,
-                "StatisticalSpread" : Number,
-                "Observability" : Number
-              },
-              ...
-            ]
-          },
-          ...
-        ]
-      }
-    }
-```
 
 ## Glossary
 
@@ -83,23 +80,24 @@ These are the values **required** to define a Travel-Time request.
 
 * Type - A string indicating the type of request, "Standard", "Plot", or
 "PlotStatistics". The default is "Standard"
-* Distance -  A number containing the source-receiver distance in
-degrees.
-* Elevation - A number containing the receiver elevation relative to
-the WGS84 datum in kilometers.
+* Source -  A [TravelTimeSource](TravelTimeSource.md) object containing the geographic source information
+* Recievers - An array of [TravelTimeReciever](TravelTimeReciever.md) objects containing the geographic distance (or reciever information) to request travel time information for.
 
 **Optional Input Values:**
 
-* Latitude - A number containing the geographic receiver latitude in
-degrees.
-* Longitude - A number containing the geographic receiver longitude in
-degrees.
+* EarthModel - A string containing the earth model to use, defaults to the
+AK135 earth model.
+* PhaseTypes - An array of strings listing the phase types desired. Defaults to all phases.
+* ReturnAllPhases - A boolean flag that indicates whether to return all phases,
+defaults to false.
+* ReturnBackBranches - A boolean flag that indicates whether to return all
+arrivals of all phases, defaults to false.
+* ConvertTectonic - A boolean flag that indicates whether to convert tectonic
+phases (Pb to Pg and Sb to Sg), defaults to false.
 
 **Output Values:**
 
 The following are values that are **required** be provided as part of a the
 travel time request information returned.
 
-* Data - An array of [TravelTimeData](TravelTimeData.md) or
-[TravelTimePlotData](TravelTimePlotData.md) objects containing the requested
-travel time information.
+* Data - An array of [TravelTimeReciever](TravelTimeReciever.md) objects containing the reciever and requested travel time information.
