@@ -16,7 +16,6 @@ information service
     {
       "Request" :
       {
-        "Type"      : String,
         "Source" :
         {
           "Latitude" : Number,
@@ -78,8 +77,6 @@ information service
 
 These are the values **required** to define a Travel-Time request.
 
-* Type - A string indicating the type of request, "Standard", "Plot", or
-"PlotStatistics". The default is "Standard"
 * Source -  A [TravelTimeSource](TravelTimeSource.md) object containing the geographic source information
 * Recievers - An array of [TravelTimeReciever](TravelTimeReciever.md) objects containing the geographic distance (or reciever information) to request travel time information for.
 

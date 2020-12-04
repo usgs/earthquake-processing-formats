@@ -12,9 +12,8 @@ import org.json.simple.JSONObject;
 public class TravelTimeRequest implements ProcessingInt {
 
   /** JSON Keys */
-  public static final String TYPE_KEY = "Type";
-
   public static final String SOURCE_KEY = "Source";
+
   public static final String RECIEVERS_KEY = "Recievers";
   public static final String EARTHMODEL_KEY = "EarthModel";
   public static final String PHASETYPES_KEY = "PhaseTypes";
@@ -23,9 +22,6 @@ public class TravelTimeRequest implements ProcessingInt {
   public static final String CONVERTTECTONIC_KEY = "ConvertTectonic";
 
   public static final String RESPONSE_KEY = "Response";
-
-  /** Required Type of Data as a String */
-  public String Type;
 
   /** Required source */
   public TravelTimeSource Source;
@@ -56,7 +52,7 @@ public class TravelTimeRequest implements ProcessingInt {
   /** The constructor for the TravelTimeRequest class. Initializes members to null values. */
   public TravelTimeRequest() {
 
-    reload(null, null, null, null, null, null, null, null, null);
+    reload(null, null, null, null, null, null, null, null);
   }
 
   /**
@@ -65,8 +61,6 @@ public class TravelTimeRequest implements ProcessingInt {
    * <p>The advanced constructor for the TravelTimeRequest class. Initializes members to provided
    * values.
    *
-   * @param newType - A String containing the request Type, "Standard", "Plot", or "PlotStatistics",
-   *     defaults to standard
    * @param newSource - A TravelTimeSource object containing the source information
    * @param newRecievers - An ArrayList&lt;TravelTimeReciever&gt; objects containing the desired
    *     recievers
@@ -80,7 +74,6 @@ public class TravelTimeRequest implements ProcessingInt {
    *     recievers with travel time data
    */
   public TravelTimeRequest(
-      String newType,
       TravelTimeSource newSource,
       ArrayList<TravelTimeReciever> newRecievers,
       String newEarthModel,
@@ -91,7 +84,6 @@ public class TravelTimeRequest implements ProcessingInt {
       ArrayList<TravelTimeReciever> newResponse) {
 
     reload(
-        newType,
         newSource,
         newRecievers,
         newEarthModel,
@@ -110,13 +102,6 @@ public class TravelTimeRequest implements ProcessingInt {
   public TravelTimeRequest(JSONObject newJSONObject) {
 
     // Required values
-    // Type
-    if (newJSONObject.containsKey(TYPE_KEY)) {
-      Type = newJSONObject.get(TYPE_KEY).toString();
-    } else {
-      Type = null;
-    }
-
     // Source
     if (newJSONObject.containsKey(SOURCE_KEY)) {
       Source = new TravelTimeSource((JSONObject) newJSONObject.get(SOURCE_KEY));
@@ -232,7 +217,6 @@ public class TravelTimeRequest implements ProcessingInt {
    */
   public TravelTimeRequest(TravelTimeRequest sourceObject) {
     reload(
-        sourceObject.Type,
         sourceObject.Source,
         sourceObject.Recievers,
         sourceObject.EarthModel,
@@ -248,8 +232,6 @@ public class TravelTimeRequest implements ProcessingInt {
    *
    * <p>The reload function for the TravelTimeData class. Initializes members to provided values.
    *
-   * @param newType - A String containing the request Type, "Standard", "Plot", or "PlotStatistics",
-   *     defaults to standard
    * @param newSource - A TravelTimeSource object containing the source information
    * @param newReciever - An ArrayList&lt;TravelTimeReciever&gt; objects containing the desired
    *     recievers
@@ -263,7 +245,6 @@ public class TravelTimeRequest implements ProcessingInt {
    *     recievers with travel time data
    */
   public void reload(
-      String newType,
       TravelTimeSource newSource,
       ArrayList<TravelTimeReciever> newRecievers,
       String newEarthModel,
@@ -272,12 +253,6 @@ public class TravelTimeRequest implements ProcessingInt {
       Boolean newReturnBackBranches,
       Boolean newConvertTectonic,
       ArrayList<TravelTimeReciever> newResponse) {
-
-    if (newType == null) {
-      Type = "Standard";
-    } else {
-      Type = newType;
-    }
 
     Source = newSource;
     Recievers = newRecievers;
@@ -302,11 +277,6 @@ public class TravelTimeRequest implements ProcessingInt {
     JSONObject newJSONObject = new JSONObject();
 
     // required values
-    // Type
-    if (Type != null) {
-      newJSONObject.put(TYPE_KEY, Type);
-    }
-
     // Source
     if (Source != null) {
       newJSONObject.put(SOURCE_KEY, Source.toJSON());
@@ -415,18 +385,6 @@ public class TravelTimeRequest implements ProcessingInt {
     ArrayList<String> errorList = new ArrayList<String>();
 
     // required values
-    // Type
-    if (Type == null) {
-      // Type not found
-      errorList.add("No Type in TravelTimeRequest Class.");
-    } else if (Type.isEmpty()) {
-      // Type empty
-      errorList.add("Empty Type in TravelTimeRequest Class.");
-    } else if (!(Type.equals("Standard") || Type.equals("Plot") || Type.equals("PlotStatistics"))) {
-      // wrong Type
-      errorList.add("Unsupported Type in TravelTimeRequest Class.");
-    }
-
     // Source
     if (Source == null) {
       // Source not found

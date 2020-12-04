@@ -9,8 +9,7 @@ import org.junit.Test;
 public class TravelTimeRequestTest {
 
   public static String TRAVELTIMEREQUEST_STRING =
-      "{\"Type\":\"Standard\","
-          + "\"Source\": {\"Latitude\":45.905,\"Longitude\":-112.778,\"Depth\":15.0},"
+      "{\"Source\": {\"Latitude\":45.905,\"Longitude\":-112.778,\"Depth\":15.0},"
           + "\"Recievers\": [{\"ID\":\"45\",\"Elevation\":15.0,\"Latitude\":45.905,"
           + "\"Longitude\":-112.778,\"Distance\":22.123}],"
           + "\"ConvertTectonic\":true,\"ReturnAllPhases\":true,"
@@ -43,8 +42,6 @@ public class TravelTimeRequestTest {
           + "\"Observability\":0.34,\"StatisticalSpread\":1.5,"
           + "\"TravelTime\":22.456}]}";
 
-  public static String TYPE = "Standard";
-
   public static String EARTHMODEL = "AK135";
   public static String PHASETYPE1 = "P";
   public static String PHASETYPE2 = "S";
@@ -60,7 +57,6 @@ public class TravelTimeRequestTest {
     // standard request
     TravelTimeRequest travelTimeRequestObject =
         new TravelTimeRequest(
-            TYPE,
             buildSource(),
             buildRecievers(),
             EARTHMODEL,
@@ -102,7 +98,6 @@ public class TravelTimeRequestTest {
     TravelTimeRequest travelTimeRequestObject = new TravelTimeRequest();
 
     travelTimeRequestObject.reload(
-        TYPE,
         buildSource(),
         buildRecievers(),
         EARTHMODEL,
@@ -123,7 +118,6 @@ public class TravelTimeRequestTest {
     // use constructor
     TravelTimeRequest travelTimeRequestObject = new TravelTimeRequest();
 
-    travelTimeRequestObject.Type = TYPE;
     travelTimeRequestObject.Source = buildSource();
     travelTimeRequestObject.Recievers = buildRecievers();
     travelTimeRequestObject.EarthModel = EARTHMODEL;
@@ -144,7 +138,6 @@ public class TravelTimeRequestTest {
     // use constructor
     TravelTimeRequest travelTimeRequestObject =
         new TravelTimeRequest(
-            TYPE,
             buildSource(),
             buildRecievers(),
             EARTHMODEL,
@@ -167,7 +160,6 @@ public class TravelTimeRequestTest {
     // use constructor
     TravelTimeRequest travelTimeRequestObject =
         new TravelTimeRequest(
-            TYPE,
             buildSource(),
             buildRecievers(),
             EARTHMODEL,
@@ -187,7 +179,7 @@ public class TravelTimeRequestTest {
 
     // use constructor
     TravelTimeRequest badTravelTimeRequestObject =
-        new TravelTimeRequest(null, null, null, null, null, null, null, null, null);
+        new TravelTimeRequest(null, null, null, null, null, null, null, null);
 
     rc = badTravelTimeRequestObject.isValid();
 
@@ -196,14 +188,6 @@ public class TravelTimeRequestTest {
   }
 
   public void checkData(TravelTimeRequest travelTimeRequestObject, String TestName) {
-
-    // check travelTimeRequestObject.type
-    assertNotNull(TestName + " Type exists", travelTimeRequestObject.Type);
-
-    // check type value
-    if (!(travelTimeRequestObject.Type.equals("Standard"))) {
-      fail(TestName + " Type is not valid");
-    }
 
     // travelTimeRequestObject.earthModel
     if (travelTimeRequestObject.EarthModel != null) {
