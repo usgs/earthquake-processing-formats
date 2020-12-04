@@ -68,7 +68,7 @@ public class TravelTimeRequest implements ProcessingInt {
    * @param newType - A String containing the request Type, "Standard", "Plot", or "PlotStatistics",
    *     defaults to standard
    * @param newSource - A TravelTimeSource object containing the source information
-   * @param newReciever - An ArrayList&lt;TravelTimeReciever&gt; objects containing the desired
+   * @param newRecievers - An ArrayList&lt;TravelTimeReciever&gt; objects containing the desired
    *     recievers
    * @param newEarthModel - A String containing the earthmodel
    * @param newPhaseTypes - An ArrayList&lt;String&gt; containing the desired display types
@@ -440,7 +440,7 @@ public class TravelTimeRequest implements ProcessingInt {
     if (Recievers == null) {
       // Recievers not found
       errorList.add("No Recievers in TravelTimeRequest Class.");
-    } else if (!Recievers.isEmpty()) {
+    } else if (Recievers.isEmpty()) {
       // Recievers not found
       errorList.add("Empty Recievers in TravelTimeRequest Class.");
     } else {

@@ -25,7 +25,7 @@ public class LocationRequestTest {
           + "\"US\",\"Author\":\"TestAuthor\"},\"Weight\":2.65,\"Importance\":"
           + "3.8,\"Azimuth\":21.5,\"Quality\":0.45,\"Affinity\":1.2,"
           + "\"ID\":\"12GFH48776857\",\"LocatedPhase\":\"P\",\"Distance\":2.65}],"
-          + "\"IsLocationNew\":false,\"IsBayesianDepth\":true}"
+          + "\"IsLocationNew\":false,\"IsBayesianDepth\":true,"
           + "\"ID\":\"12345678\",\"Source\":{\"Author\":\"TestAuthor\","
           + "\"AgencyID\":\"US\",\"Type\":\"Unknown\"}}";
 
@@ -127,7 +127,7 @@ public class LocationRequestTest {
 
     // build request object
     try {
-
+      System.out.println(LOCATIONREQUEST_STRING);
       checkData(new LocationRequest(Utility.fromJSONString(LOCATIONREQUEST_STRING)), "ReadsJSON");
     } catch (ParseException e) {
       e.printStackTrace();

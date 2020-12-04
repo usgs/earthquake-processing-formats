@@ -8,124 +8,74 @@ import org.junit.Test;
 
 public class TravelTimeRequestTest {
 
-  public static String TRAVELTIMEREQUESTSTANDARD_STRING =
-      "{\"Data\":"
+  public static String TRAVELTIMEREQUEST_STRING =
+      "{\"Type\":\"Standard\","
+          + "\"Source\": {\"Latitude\":45.905,\"Longitude\":-112.778,\"Depth\":15.0},"
+          + "\"Recievers\": [{\"ID\":\"45\",\"Elevation\":15.0,\"Latitude\":45.905,"
+          + "\"Longitude\":-112.778,\"Distance\":22.123}],"
+          + "\"ConvertTectonic\":true,\"ReturnAllPhases\":true,"
+          + "\"EarthModel\":\"AK135\","
+          + "\"ReturnBackBranches\":true,\"PhaseTypes\":[\"P\",\"S\",\"PDiff\"],"
+          + "\"Response\":"
+          + "[{\"ID\":\"45\",\"Elevation\":15.0,\"Latitude\":45.905,"
+          + "\"Longitude\":-112.778,\"Distance\":22.123,\"Branches\":"
           + "[{\"LocationUseFlag\":true,\"DistanceDerivative\":1.2,"
           + "\"DepthDerivative\":3.45,\"AssociationWeightFlag\":true,"
           + "\"Type\":\"TTData\",\"TeleseismicPhaseGroup\":1,\"Phase\":\"Pg\","
           + "\"RayDerivative\":5.67,\"AuxiliaryPhaseGroup\":1,"
           + "\"Observability\":0.34,\"StatisticalSpread\":1.5,"
-          + "\"TravelTime\":22.456}],\"Distance\":12.45,\"Type\":\"Standard\","
-          + "\"Elevation\":5280.5,\"Latitude\":39.749444,"
-          + "\"Longitude\":-105.220305}";
+          + "\"TravelTime\":22.456}]}]}";
 
-  public static String TRAVELTIMEREQUESTPLOT_STRING =
-      "{\"Data\":"
-          + "[{\"Branches\":[{\"Phase\":\"Pg\",\"Samples\":[{\"Distance\":1.2,"
+  public static final String SOURCE_STRING =
+      "{\"Latitude\":45.905,\"Longitude\":-112.778,\"Depth\":15.0}";
+
+  public static final String RECIEVERS_STRING =
+      "{\"ID\":\"45\",\"Elevation\":15.0,\"Latitude\":45.905,"
+          + "\"Longitude\":-112.778,\"Distance\":22.123}";
+
+  public static final String RESPONSE_STRING =
+      "{\"ID\":\"45\",\"Elevation\":15.0,\"Latitude\":45.905,"
+          + "\"Longitude\":-112.778,\"Distance\":22.123,\"Branches\":"
+          + "[{\"LocationUseFlag\":true,\"DistanceDerivative\":1.2,"
+          + "\"DepthDerivative\":3.45,\"AssociationWeightFlag\":true,"
+          + "\"Type\":\"TTData\",\"TeleseismicPhaseGroup\":1,\"Phase\":\"Pg\","
+          + "\"RayDerivative\":5.67,\"AuxiliaryPhaseGroup\":1,"
           + "\"Observability\":0.34,\"StatisticalSpread\":1.5,"
-          + "\"TravelTime\":22.456},{\"Distance\":10.5,\"Observability\":1.63,"
-          + "\"StatisticalSpread\":2.1,\"TravelTime\":72.654}]},"
-          + "{\"Phase\":\"Sg\",\"Samples\":[{\"Distance\":3.2,"
-          + "\"Observability\":1.14,\"StatisticalSpread\":3.25,"
-          + "\"TravelTime\":132.456},{\"Distance\":100.5,"
-          + "\"Observability\":6.21,\"StatisticalSpread\":5.1,"
-          + "\"TravelTime\":542.654}]}],\"Type\":\"TTPlotData\","
-          + "\"MaximumTravelTime\":12.5}],\"Distance\":12.45,\"Type\":\"Plot\","
-          + "\"Elevation\":5280.5,\"Latitude\":39.749444,\"Longitude\":-105.220305}";
+          + "\"TravelTime\":22.456}]}";
 
-  public static String TRAVELTIMEREQUESTPLOTSTATISTICS_STRING =
-      "{\"Data\":"
-          + "[{\"Branches\":[{\"Phase\":\"Pg\",\"Samples\":[{\"Distance\":1.2,"
-          + "\"Observability\":0.34,\"StatisticalSpread\":1.5,"
-          + "\"TravelTime\":22.456},{\"Distance\":10.5,\"Observability\":1.63,"
-          + "\"StatisticalSpread\":2.1,\"TravelTime\":72.654}]},"
-          + "{\"Phase\":\"Sg\",\"Samples\":[{\"Distance\":3.2,"
-          + "\"Observability\":1.14,\"StatisticalSpread\":3.25,"
-          + "\"TravelTime\":132.456},{\"Distance\":100.5,"
-          + "\"Observability\":6.21,\"StatisticalSpread\":5.1,"
-          + "\"TravelTime\":542.654}]}],\"Type\":\"TTPlotData\","
-          + "\"MaximumTravelTime\":12.5}],\"Distance\":12.45,"
-          + "\"Type\":\"PlotStatistics\",\"Elevation\":5280.5,"
-          + "\"Latitude\":39.749444,\"Longitude\":-105.220305}";
+  public static String TYPE = "Standard";
 
-  public static String TRAVELTIMEDATA_STRING =
-      "{\"Type\":\"TTData\","
-          + "\"LocationUseFlag\":true,"
-          + "\"DistanceDerivative\":1.2,\"DepthDerivative\":3.45,"
-          + "\"AssociationWeightFlag\":true,\"TeleseismicPhaseGroup\":1,"
-          + "\"Phase\":\"Pg\",\"RayDerivative\":5.67,\"AuxiliaryPhaseGroup\":1,"
-          + "\"Observability\":0.34,\"StatisticalSpread\":1.5,\"TravelTime\":22.456}";
-
-  public static String TRAVELTIMEPLOTDATA_STRING =
-      "{\"Type\":\"TTPlotData\","
-          + "\"Branches\":[{\"Phase\":\"Pg\""
-          + ",\"Samples\":[{\"Distance\":1.2,\"Observability\":0.34,"
-          + "\"StatisticalSpread\":1.5,\"TravelTime\":22.456},{\"Distance\":10.5,"
-          + "\"Observability\":1.63,\"StatisticalSpread\":2.1,\"TravelTime\":72.654}]}"
-          + ",{\"Phase\":\"Sg\",\"Samples\":[{\"Distance\":3.2,\"Observability\":1.14,"
-          + "\"StatisticalSpread\":3.25,\"TravelTime\":132.456},{\"Distance\":100.5,"
-          + "\"Observability\":6.21,\"StatisticalSpread\":5.1,\"TravelTime\":542.654}]}],"
-          + "\"MaximumTravelTime\":12.5}";
-
-  public static String TYPE_STANDARD = "Standard";
-  public static String TYPE_PLOT = "Plot";
-  public static String TYPE_PLOTSTATISTICS = "PlotStatistics";
-  public static double DISTANCE = 12.45;
-  public static double ELEVATION = 5280.5;
-  public static double LATITUDE = 39.749444;
-  public static double LONGITUDE = -105.220305;
+  public static String EARTHMODEL = "AK135";
+  public static String PHASETYPE1 = "P";
+  public static String PHASETYPE2 = "S";
+  public static String PHASETYPE3 = "PDiff";
+  public static boolean RETURNALLPHASES = true;
+  public static boolean RETURNBACKBRANCHES = true;
+  public static boolean CONVERTTECTONIC = true;
 
   /** Able to write a JSON string */
   @Test
   public void writesJSON() {
 
     // standard request
-    TravelTimeRequest travelTimeRequestStandardObject =
+    TravelTimeRequest travelTimeRequestObject =
         new TravelTimeRequest(
-            TYPE_STANDARD, DISTANCE, ELEVATION, LATITUDE, LONGITUDE, buildData(), null);
+            TYPE,
+            buildSource(),
+            buildRecievers(),
+            EARTHMODEL,
+            buildPhaseTypes(),
+            RETURNALLPHASES,
+            RETURNBACKBRANCHES,
+            CONVERTTECTONIC,
+            buildResponse());
 
     // write out to a string
-    String jsonStandardString = Utility.toJSONString(travelTimeRequestStandardObject.toJSON());
+    String jsonStandardString = Utility.toJSONString(travelTimeRequestObject.toJSON());
 
     // check the data
     try {
-      checkData(
-          new TravelTimeRequest(Utility.fromJSONString(jsonStandardString)),
-          "WritesJSON - Standard");
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
-
-    // plot request
-    TravelTimeRequest travelTimeRequestPlotObject =
-        new TravelTimeRequest(
-            TYPE_PLOT, DISTANCE, ELEVATION, LATITUDE, LONGITUDE, null, buildPlotData());
-
-    // write out to a string
-    String jsonPlotString = Utility.toJSONString(travelTimeRequestPlotObject.toJSON());
-
-    // check the data
-    try {
-      checkData(
-          new TravelTimeRequest(Utility.fromJSONString(jsonPlotString)), "WritesJSON - Standard");
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
-
-    // plot statistics request
-    TravelTimeRequest travelTimeRequestPlotStatisticsObject =
-        new TravelTimeRequest(
-            TYPE_PLOTSTATISTICS, DISTANCE, ELEVATION, LATITUDE, LONGITUDE, null, buildPlotData());
-
-    // write out to a string
-    String jsonPlotStatsiticsString =
-        Utility.toJSONString(travelTimeRequestPlotStatisticsObject.toJSON());
-
-    // check the data
-    try {
-      checkData(
-          new TravelTimeRequest(Utility.fromJSONString(jsonPlotStatsiticsString)),
-          "WritesJSON - Standard");
+      checkData(new TravelTimeRequest(Utility.fromJSONString(jsonStandardString)), "WritesJSON");
     } catch (ParseException e) {
       e.printStackTrace();
     }
@@ -137,30 +87,8 @@ public class TravelTimeRequestTest {
 
     // standard request
     try {
-
       checkData(
-          new TravelTimeRequest(Utility.fromJSONString(TRAVELTIMEREQUESTSTANDARD_STRING)),
-          "ReadsJSON - Standard");
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
-
-    // plot request
-    try {
-
-      checkData(
-          new TravelTimeRequest(Utility.fromJSONString(TRAVELTIMEREQUESTPLOT_STRING)),
-          "ReadsJSON - Plot");
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
-
-    // plot statistics request
-    try {
-
-      checkData(
-          new TravelTimeRequest(Utility.fromJSONString(TRAVELTIMEREQUESTPLOTSTATISTICS_STRING)),
-          "ReadsJSON - Plot Statistics ");
+          new TravelTimeRequest(Utility.fromJSONString(TRAVELTIMEREQUEST_STRING)), "ReadsJSON");
     } catch (ParseException e) {
       e.printStackTrace();
     }
@@ -174,7 +102,15 @@ public class TravelTimeRequestTest {
     TravelTimeRequest travelTimeRequestObject = new TravelTimeRequest();
 
     travelTimeRequestObject.reload(
-        TYPE_STANDARD, DISTANCE, ELEVATION, LATITUDE, LONGITUDE, buildData(), null);
+        TYPE,
+        buildSource(),
+        buildRecievers(),
+        EARTHMODEL,
+        buildPhaseTypes(),
+        RETURNALLPHASES,
+        RETURNBACKBRANCHES,
+        CONVERTTECTONIC,
+        buildResponse());
 
     // check data values
     checkData(travelTimeRequestObject, "Reload Function");
@@ -187,13 +123,15 @@ public class TravelTimeRequestTest {
     // use constructor
     TravelTimeRequest travelTimeRequestObject = new TravelTimeRequest();
 
-    travelTimeRequestObject.Type = TYPE_STANDARD;
-    travelTimeRequestObject.Distance = DISTANCE;
-    travelTimeRequestObject.Elevation = ELEVATION;
-    travelTimeRequestObject.Latitude = LATITUDE;
-    travelTimeRequestObject.Longitude = LONGITUDE;
-    travelTimeRequestObject.Data = buildData();
-    travelTimeRequestObject.PlotData = buildPlotData();
+    travelTimeRequestObject.Type = TYPE;
+    travelTimeRequestObject.Source = buildSource();
+    travelTimeRequestObject.Recievers = buildRecievers();
+    travelTimeRequestObject.EarthModel = EARTHMODEL;
+    travelTimeRequestObject.PhaseTypes = buildPhaseTypes();
+    travelTimeRequestObject.ReturnAllPhases = RETURNALLPHASES;
+    travelTimeRequestObject.ReturnBackBranches = RETURNBACKBRANCHES;
+    travelTimeRequestObject.ConvertTectonic = CONVERTTECTONIC;
+    travelTimeRequestObject.Response = buildResponse();
 
     // check data values
     checkData(travelTimeRequestObject, "Set Functions");
@@ -206,7 +144,15 @@ public class TravelTimeRequestTest {
     // use constructor
     TravelTimeRequest travelTimeRequestObject =
         new TravelTimeRequest(
-            TYPE_STANDARD, DISTANCE, ELEVATION, LATITUDE, LONGITUDE, buildData(), null);
+            TYPE,
+            buildSource(),
+            buildRecievers(),
+            EARTHMODEL,
+            buildPhaseTypes(),
+            RETURNALLPHASES,
+            RETURNBACKBRANCHES,
+            CONVERTTECTONIC,
+            buildResponse());
 
     TravelTimeRequest travelTimeRequestObject2 = new TravelTimeRequest(travelTimeRequestObject);
 
@@ -221,18 +167,27 @@ public class TravelTimeRequestTest {
     // use constructor
     TravelTimeRequest travelTimeRequestObject =
         new TravelTimeRequest(
-            TYPE_STANDARD, DISTANCE, ELEVATION, LATITUDE, LONGITUDE, buildData(), null);
+            TYPE,
+            buildSource(),
+            buildRecievers(),
+            EARTHMODEL,
+            buildPhaseTypes(),
+            RETURNALLPHASES,
+            RETURNBACKBRANCHES,
+            CONVERTTECTONIC,
+            buildResponse());
 
     // Successful validation
     boolean rc = travelTimeRequestObject.isValid();
+
+    ArrayList<String> errors = travelTimeRequestObject.getErrors();
 
     // check return code
     assertEquals("Successful Validation", true, rc);
 
     // use constructor
     TravelTimeRequest badTravelTimeRequestObject =
-        new TravelTimeRequest(
-            TYPE_STANDARD, null, null, LATITUDE, LONGITUDE, buildData(), buildPlotData());
+        new TravelTimeRequest(null, null, null, null, null, null, null, null, null);
 
     rc = badTravelTimeRequestObject.isValid();
 
@@ -246,51 +201,101 @@ public class TravelTimeRequestTest {
     assertNotNull(TestName + " Type exists", travelTimeRequestObject.Type);
 
     // check type value
-    if (!(travelTimeRequestObject.Type.equals("Standard")
-        || (travelTimeRequestObject.Type.equals("Plot"))
-        || (travelTimeRequestObject.Type.equals("PlotStatistics")))) {
+    if (!(travelTimeRequestObject.Type.equals("Standard"))) {
       fail(TestName + " Type is not valid");
     }
 
-    // required
-    // check travelTimeRequestObject.distance
-    assertEquals(TestName + " Distance Equals", DISTANCE, travelTimeRequestObject.Distance, 0);
-
-    // check travelTimeRequestObject.elevation
-    assertEquals(TestName + " Elevation Equals", ELEVATION, travelTimeRequestObject.Elevation, 0);
-
-    // optional
-    // check travelTimeRequestObject.latitude
-    if (travelTimeRequestObject.Latitude != null) {
-      assertEquals(TestName + " Latitude Equals", LATITUDE, travelTimeRequestObject.Latitude, 0);
+    // travelTimeRequestObject.earthModel
+    if (travelTimeRequestObject.EarthModel != null) {
+      assertEquals(
+          TestName + " Earth Model Equals", EARTHMODEL, travelTimeRequestObject.EarthModel);
     }
-    // check travelTimeRequestObject.longitude
-    if (travelTimeRequestObject.Longitude != null) {
-      assertEquals(TestName + " Longitude Equals", LONGITUDE, travelTimeRequestObject.Longitude, 0);
+
+    // check travelTimeRequestObject.phaseTypes
+    if ((travelTimeRequestObject.PhaseTypes != null)
+        && (!travelTimeRequestObject.PhaseTypes.isEmpty())) {
+
+      // check travelTimeRequestObject.phaseTypes[0]
+      assertEquals(
+          TestName + " Phase Type 1 Equals", PHASETYPE1, travelTimeRequestObject.PhaseTypes.get(0));
+
+      // check travelTimeRequestObject.phaseTypes[1]
+      assertEquals(
+          TestName + " Phase Type 2 Equals", PHASETYPE2, travelTimeRequestObject.PhaseTypes.get(1));
+
+      // check travelTimeRequestObject.phaseTypes[2]
+      assertEquals(
+          TestName + " Phase Type 3 Equals", PHASETYPE3, travelTimeRequestObject.PhaseTypes.get(2));
+    }
+
+    // check travelTimeRequestObject.returnAllPhases
+    if (travelTimeRequestObject.ReturnAllPhases != null) {
+      assertEquals(
+          TestName + " Return All Phases Equals ",
+          travelTimeRequestObject.ReturnAllPhases,
+          RETURNALLPHASES);
+    }
+
+    // check travelTimeRequestObject.returnBackBranches
+    if (travelTimeRequestObject.ReturnBackBranches != null) {
+      assertEquals(
+          TestName + " Return Back Branchs Equals ",
+          travelTimeRequestObject.ReturnBackBranches,
+          RETURNBACKBRANCHES);
+    }
+
+    // check travelTimeRequestObject.convertTectonic
+    if (travelTimeRequestObject.ConvertTectonic != null) {
+      assertEquals(
+          TestName + " Convert Tectonic Equals ",
+          travelTimeRequestObject.ConvertTectonic,
+          CONVERTTECTONIC);
     }
   }
 
-  public ArrayList<TravelTimeData> buildData() {
-    ArrayList<TravelTimeData> newData = new ArrayList<TravelTimeData>();
+  public TravelTimeSource buildSource() {
     try {
-      newData.add(new TravelTimeData(Utility.fromJSONString(TRAVELTIMEDATA_STRING)));
+      TravelTimeSource newSource = new TravelTimeSource(Utility.fromJSONString(SOURCE_STRING));
+      return (newSource);
     } catch (ParseException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
       return (null);
     }
-    return (newData);
   }
 
-  public ArrayList<TravelTimePlotData> buildPlotData() {
-    ArrayList<TravelTimePlotData> newPlotData = new ArrayList<TravelTimePlotData>();
+  public ArrayList<TravelTimeReciever> buildRecievers() {
+    ArrayList<TravelTimeReciever> newRecievers = new ArrayList<TravelTimeReciever>();
     try {
-      newPlotData.add(new TravelTimePlotData(Utility.fromJSONString(TRAVELTIMEPLOTDATA_STRING)));
+      newRecievers.add(new TravelTimeReciever(Utility.fromJSONString(RECIEVERS_STRING)));
     } catch (ParseException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
       return (null);
     }
-    return (newPlotData);
+    return (newRecievers);
+  }
+
+  public ArrayList<String> buildPhaseTypes() {
+
+    ArrayList<String> phaseTypes = new ArrayList<String>();
+
+    phaseTypes.add(PHASETYPE1);
+    phaseTypes.add(PHASETYPE2);
+    phaseTypes.add(PHASETYPE3);
+
+    return (phaseTypes);
+  }
+
+  public ArrayList<TravelTimeReciever> buildResponse() {
+    ArrayList<TravelTimeReciever> newResponse = new ArrayList<TravelTimeReciever>();
+    try {
+      newResponse.add(new TravelTimeReciever(Utility.fromJSONString(RESPONSE_STRING)));
+    } catch (ParseException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+      return (null);
+    }
+    return (newResponse);
   }
 }

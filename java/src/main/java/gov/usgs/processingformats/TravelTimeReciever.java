@@ -15,22 +15,26 @@ public class TravelTimeReciever implements ProcessingInt {
   public static final String TYPE_KEY = "Type";
 
   public static final String ID_KEY = "ID";
+  public static final String DISTANCE_KEY = "Distance";
+  public static final String ELEVATION_KEY = "Elevation";
   public static final String LATITUDE_KEY = "Latitude";
   public static final String LONGITUDE_KEY = "Longitude";
-  public static final String ELEVATION_KEY = "Elevation";
   public static final String BRANCHES_KEY = "Branches";
 
   /** Required reciver ID */
   public String ID;
 
-  /** Required geographic reciever Latitude in degrees */
+  /** Required geographic Distance reciever distance relative to the source in degrees */
+  public Double Distance;
+
+  /** Required geographic reciever elevation relative to the WGS84 datum in meters */
+  public Double Elevation;
+
+  /** Optional geographic reciever Latitude in degrees */
   public Double Latitude;
 
-  /** Required geographic reciever Longitude in degrees */
+  /** Optional geographic reciever Longitude in degrees */
   public Double Longitude;
-
-  /** Required geographic reciever depth in kilometers */
-  public Double Elevation;
 
   /** Returned travel time Branches (empty for requests) */
   public ArrayList<TravelTimeData> Branches;
@@ -38,7 +42,7 @@ public class TravelTimeReciever implements ProcessingInt {
   /** The constructor for the TravelTimeData class. Initializes members to null values. */
   public TravelTimeReciever() {
 
-    reload(null, null, null, null, null);
+    reload(null, null, null, null, null, null);
   }
 
   /**
@@ -48,21 +52,26 @@ public class TravelTimeReciever implements ProcessingInt {
    * values.
    *
    * @param newID - A required string containing the reciever id
-   * @param newLatitude - A required Double containing the geographic reciever Latitude in degrees
-   * @param newLongitude - A required Double containing the geographic reciever Longitude in degrees
-   * @param newDepth - A required Double containing the geographic reciever Elevation relative to
-   *     the WGS84 datum in kilometers
+   * @param newDistance - A required Double containing the geographic reciever distance relative to
+   *     the source in degrees
+   * @param newElevation - A required Double containing the geographic reciever Elevation relative
+   *     to the WGS84 datum in meters
+   * @param newLatitude - An optional Double containing the geographic reciever Latitude in degrees,
+   *     null to omit
+   * @param newLongitude - An optional Double containing the geographic reciever Longitude in
+   *     degrees, null to omit
    * @param newBranches - A ArrayList&lt;TravelTimeData&gt; containing the returned travel time
    *     Branches
    */
   public TravelTimeReciever(
       String newID,
+      Double newDistance,
+      Double newElevation,
       Double newLatitude,
       Double newLongitude,
-      Double newDepth,
       ArrayList<TravelTimeData> newBranches) {
 
-    reload(newID, newLatitude, newLongitude, newDepth, newBranches);
+    reload(newID, newDistance, newElevation, newLatitude, newLongitude, newBranches);
   }
 
   /**
@@ -80,6 +89,20 @@ public class TravelTimeReciever implements ProcessingInt {
       ID = null;
     }
 
+    // Distance
+    if (newJSONObject.containsKey(DISTANCE_KEY)) {
+      Distance = (double) newJSONObject.get(DISTANCE_KEY);
+    } else {
+      Distance = null;
+    }
+
+    // Elevation
+    if (newJSONObject.containsKey(ELEVATION_KEY)) {
+      Elevation = (double) newJSONObject.get(ELEVATION_KEY);
+    } else {
+      Elevation = null;
+    }
+
     // Latitude
     if (newJSONObject.containsKey(LATITUDE_KEY)) {
       Latitude = (double) newJSONObject.get(LATITUDE_KEY);
@@ -92,13 +115,6 @@ public class TravelTimeReciever implements ProcessingInt {
       Longitude = (double) newJSONObject.get(LONGITUDE_KEY);
     } else {
       Longitude = null;
-    }
-
-    // Elevation
-    if (newJSONObject.containsKey(ELEVATION_KEY)) {
-      Elevation = (double) newJSONObject.get(ELEVATION_KEY);
-    } else {
-      Elevation = null;
     }
 
     // Branches
@@ -143,9 +159,10 @@ public class TravelTimeReciever implements ProcessingInt {
   public TravelTimeReciever(TravelTimeReciever sourceObject) {
     reload(
         sourceObject.ID,
+        sourceObject.Distance,
+        sourceObject.Elevation,
         sourceObject.Latitude,
         sourceObject.Longitude,
-        sourceObject.Elevation,
         sourceObject.Branches);
   }
 
@@ -155,25 +172,30 @@ public class TravelTimeReciever implements ProcessingInt {
    * <p>The reload function for the TravelTimeData class. Initializes members to provided values.
    *
    * @param newID - A required string containing the reciever id
-   * @param newLatitude - A required Double containing the geographic reciever Latitude in degrees,
+   * @param newDistance - A required Double containing the geographic reciever distance relative to
+   *     the source in degrees
+   * @param newElevation - A required Double containing the geographic reciever Elevation relative
+   *     to the WGS84 datum in meters
+   * @param newLatitude - An optional Double containing the geographic reciever Latitude in degrees,
    *     null to omit
-   * @param newLongitude - A required Double containing the geographic reciever Longitude in degrees
-   * @param newDepth - A required Double containing the geographic reciever Elevation relative to
-   *     the WGS84 datum in kilometers
+   * @param newLongitude - An optional Double containing the geographic reciever Longitude in
+   *     degrees, null to omit
    * @param newBranches - A ArrayList&lt;TravelTimeData&gt; containing the returned travel time
    *     Branches
    */
   public void reload(
       String newID,
+      Double newDistance,
+      Double newElevation,
       Double newLatitude,
       Double newLongitude,
-      Double newDepth,
       ArrayList<TravelTimeData> newBranches) {
 
     ID = newID;
+    Distance = newDistance;
+    Elevation = newElevation;
     Latitude = newLatitude;
     Longitude = newLongitude;
-    Elevation = newDepth;
     Branches = newBranches;
   }
 
@@ -193,6 +215,16 @@ public class TravelTimeReciever implements ProcessingInt {
       newJSONObject.put(ID_KEY, ID);
     }
 
+    // Distance
+    if (Distance != null) {
+      newJSONObject.put(DISTANCE_KEY, Distance);
+    }
+
+    // Elevation
+    if (Elevation != null) {
+      newJSONObject.put(ELEVATION_KEY, Elevation);
+    }
+
     // Latitude
     if (Latitude != null) {
       newJSONObject.put(LATITUDE_KEY, Latitude);
@@ -203,24 +235,21 @@ public class TravelTimeReciever implements ProcessingInt {
       newJSONObject.put(LONGITUDE_KEY, Longitude);
     }
 
-    // Elevation
-    if (Elevation != null) {
-      newJSONObject.put(ELEVATION_KEY, Elevation);
-    }
-
     // returned Branches
-    JSONArray BranchesArray = new JSONArray();
-    // enumerate through the whole arraylist
-    for (Iterator<TravelTimeData> DataIterator = Branches.iterator(); DataIterator.hasNext(); ) {
+    if (Branches != null) {
+      JSONArray BranchesArray = new JSONArray();
+      // enumerate through the whole arraylist
+      for (Iterator<TravelTimeData> DataIterator = Branches.iterator(); DataIterator.hasNext(); ) {
 
-      // convert pick to JSON object
-      JSONObject DataObject = ((TravelTimeData) DataIterator.next()).toJSON();
+        // convert pick to JSON object
+        JSONObject DataObject = ((TravelTimeData) DataIterator.next()).toJSON();
 
-      BranchesArray.add(DataObject);
-    }
+        BranchesArray.add(DataObject);
+      }
 
-    if (!BranchesArray.isEmpty()) {
-      newJSONObject.put(BRANCHES_KEY, BranchesArray);
+      if (!BranchesArray.isEmpty()) {
+        newJSONObject.put(BRANCHES_KEY, BranchesArray);
+      }
     }
 
     return (newJSONObject);
@@ -253,28 +282,24 @@ public class TravelTimeReciever implements ProcessingInt {
     // ID
     if (ID == null) {
       // ID not found
-      errorList.add("No ID in Pick Class.");
+      errorList.add("No ID in TravelTimeReciever Class.");
     } else if (ID.isEmpty()) {
       // ID empty
-      errorList.add("Empty ID in Pick Class.");
+      errorList.add("Empty ID in TravelTimeReciever Class.");
     }
 
-    // Latitude
-    if (Latitude == null) {
-      // Latitude not found
-      errorList.add("No Latitude in TravelTimeReciever Class.");
-    } else if ((Latitude < -90) || (Latitude > 90)) {
-      // invalid Latitude
-      errorList.add("Latitude in TravelTimeReciever not in the range of -90 to 90.");
+    // Distance / Lat Lon check, need one or the other
+    if ((Distance == null) && ((Latitude == null) || (Longitude == null))) {
+      // Distance not found
+      errorList.add("No Distance or Latitude/Longitude in TravelTimeReciever Class.");
     }
 
-    // Longitude
-    if (Longitude == null) {
-      // Longitude not found
-      errorList.add("No Longitude in TravelTimeReciever Class.");
-    } else if ((Longitude < -180) || (Longitude > 180)) {
-      // invalid Longitude
-      errorList.add("Longitude in TravelTimeReciever not in the range of -180 to 180.");
+    // Distance
+    if (Distance != null) {
+      if ((Distance < 0) || (Distance > 360)) {
+        // invalid Distance
+        errorList.add("Distance in TravelTimeReciever not in the range of 0 to 360.");
+      }
     }
 
     // Elevation
@@ -282,11 +307,27 @@ public class TravelTimeReciever implements ProcessingInt {
       // Elevation not found
       errorList.add("No Elevation in TravelTimeReciever Class.");
     } else if ((Elevation < -100) || (Elevation > 1000)) {
-      // invalid Longitude
+      // invalid Elevation
       errorList.add("Elevation in TravelTimeReciever not in the range of -100 to 1000.");
     }
 
     // optional values
+    // Latitude
+    if (Latitude != null) {
+      if ((Latitude < -90) || (Latitude > 90)) {
+        // invalid Latitude
+        errorList.add("Latitude in TravelTimeReciever not in the range of -90 to 90.");
+      }
+    }
+
+    // Longitude
+    if (Longitude != null) {
+      if ((Longitude < -180) || (Longitude > 180)) {
+        // invalid Longitude
+        errorList.add("Longitude in TravelTimeReciever not in the range of -180 to 180.");
+      }
+    }
+
     // Branches
     if (Branches != null) {
       // enumerate through the whole arraylist
@@ -296,7 +337,7 @@ public class TravelTimeReciever implements ProcessingInt {
         TravelTimeData TTData = ((TravelTimeData) DataIterator.next());
 
         if (!TTData.isValid()) {
-          errorList.add("Invalid TravelTimeData in TravelTimeRequest Class of Type Standard.");
+          errorList.add("Invalid Branch TravelTimeData in TravelTimeReciever.");
           break;
         }
       }
