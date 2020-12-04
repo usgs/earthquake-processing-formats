@@ -20,7 +20,7 @@ public class TravelTimeRequestTest {
           + "\"Longitude\":-112.778,\"Distance\":22.123,\"Branches\":"
           + "[{\"LocationUseFlag\":true,\"DistanceDerivative\":1.2,"
           + "\"DepthDerivative\":3.45,\"AssociationWeightFlag\":true,"
-          + "\"Type\":\"TTData\",\"TeleseismicPhaseGroup\":1,\"Phase\":\"Pg\","
+          + "\"TeleseismicPhaseGroup\":1,\"Phase\":\"Pg\","
           + "\"RayDerivative\":5.67,\"AuxiliaryPhaseGroup\":1,"
           + "\"Observability\":0.34,\"StatisticalSpread\":1.5,"
           + "\"TravelTime\":22.456}]}]}";
@@ -37,7 +37,7 @@ public class TravelTimeRequestTest {
           + "\"Longitude\":-112.778,\"Distance\":22.123,\"Branches\":"
           + "[{\"LocationUseFlag\":true,\"DistanceDerivative\":1.2,"
           + "\"DepthDerivative\":3.45,\"AssociationWeightFlag\":true,"
-          + "\"Type\":\"TTData\",\"TeleseismicPhaseGroup\":1,\"Phase\":\"Pg\","
+          + "\"TeleseismicPhaseGroup\":1,\"Phase\":\"Pg\","
           + "\"RayDerivative\":5.67,\"AuxiliaryPhaseGroup\":1,"
           + "\"Observability\":0.34,\"StatisticalSpread\":1.5,"
           + "\"TravelTime\":22.456}]}";

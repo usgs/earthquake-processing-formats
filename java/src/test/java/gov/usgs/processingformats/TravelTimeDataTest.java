@@ -8,8 +8,7 @@ import org.junit.Test;
 public class TravelTimeDataTest {
 
   public static String TRAVELTIMEDATA_STRING =
-      "{\"Type\":\"TTData\","
-          + "\"LocationUseFlag\":true,"
+      "{\"LocationUseFlag\":true,"
           + "\"DistanceDerivative\":1.2,\"DepthDerivative\":3.45,"
           + "\"AssociationWeightFlag\":true,\"TeleseismicPhaseGroup\":\"P\","
           + "\"Phase\":\"Pg\",\"RayDerivative\":5.67,\"AuxiliaryPhaseGroup\":\"P\","

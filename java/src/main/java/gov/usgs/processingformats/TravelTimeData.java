@@ -11,9 +11,8 @@ import org.json.simple.JSONObject;
 public class TravelTimeData implements ProcessingInt {
 
   /** JSON Keys */
-  public static final String TYPE_KEY = "Type";
-
   public static final String PHASE_KEY = "Phase";
+
   public static final String TRAVELTIME_KEY = "TravelTime";
   public static final String DISTANCEDERIVATIVE_KEY = "DistanceDerivative";
   public static final String DEPTHDERIVATIVE_KEY = "DepthDerivative";
@@ -24,9 +23,6 @@ public class TravelTimeData implements ProcessingInt {
   public static final String AUXILIARYPHASEGROUP_KEY = "AuxiliaryPhaseGroup";
   public static final String LOCATIONUSEFLAG_KEY = "LocationUseFlag";
   public static final String ASSOCIATIONWEIGHTFLAG_KEY = "AssociationWeightFlag";
-
-  /** Required Type of data as a String */
-  public String Type;
 
   /** Required seismic Phase code */
   public String Phase;
@@ -126,13 +122,6 @@ public class TravelTimeData implements ProcessingInt {
   public TravelTimeData(JSONObject newJSONObject) {
 
     // Required values
-    // Type
-    if (newJSONObject.containsKey(TYPE_KEY)) {
-      Type = newJSONObject.get(TYPE_KEY).toString();
-    } else {
-      Type = null;
-    }
-
     // Phase
     if (newJSONObject.containsKey(PHASE_KEY)) {
       Phase = newJSONObject.get(PHASE_KEY).toString();
@@ -267,7 +256,6 @@ public class TravelTimeData implements ProcessingInt {
       Boolean newLocationUseFlag,
       Boolean newAssociationWeightFlag) {
 
-    Type = "TTData";
     Phase = newPhase;
     TravelTime = newTravelTime;
     DistanceDerivative = newDistanceDerivative;
@@ -290,11 +278,6 @@ public class TravelTimeData implements ProcessingInt {
   public JSONObject toJSON() {
 
     JSONObject newJSONObject = new JSONObject();
-
-    // Type
-    if (Type != null) {
-      newJSONObject.put(TYPE_KEY, Type);
-    }
 
     // Phase
     if (Phase != null) {
@@ -376,18 +359,6 @@ public class TravelTimeData implements ProcessingInt {
    */
   public ArrayList<String> getErrors() {
     ArrayList<String> errorList = new ArrayList<String>();
-
-    // Phase
-    if (Type == null) {
-      // Type not found
-      errorList.add("No Type in TravelTimeData Class.");
-    } else if (Type.isEmpty()) {
-      // Type empty
-      errorList.add("Empty Type in TravelTimeData Class.");
-    } else if (!Type.equals("TTData")) {
-      // wrong Type
-      errorList.add("Non-TTData Type in TravelTimeData Class.");
-    }
 
     if (Phase == null) {
       // Phase not found
