@@ -14,33 +14,30 @@ information service
 
 ```json
     {
-      "Request" :
+      "Source" :
       {
-        "Source" :
-        {
-          "Latitude" : Number,
-          "Longitude": Number,
-          "Depth" : Number
-        },
-        "Recievers" : 
-        [
-          {
-            "ID" : String,
-            "Elevation" : Number,
-            "Distance"  : Number,
-            "Latitude"  : Number,
-            "Longitude" : Number
-          }
-        ],
-        "EarthModel" : String,
-        "PhaseTypes" :
-        [
-          String, ...
-        ],
-        "ReturnAllPhases" : Boolean,
-        "ReturnBackBranches" : Boolean,
-        "ConvertTectonic" : Boolean
+        "Latitude" : Number,
+        "Longitude": Number,
+        "Depth" : Number
       },
+      "Recievers" : 
+      [
+        {
+          "ID" : String,
+          "Elevation" : Number,
+          "Distance"  : Number,
+          "Latitude"  : Number,
+          "Longitude" : Number
+        }
+      ],
+      "EarthModel" : String,
+      "PhaseTypes" :
+      [
+        String, ...
+      ],
+      "ReturnAllPhases" : Boolean,
+      "ReturnBackBranches" : Boolean,
+      "ConvertTectonic" : Boolean,
       "Response" :
       [
         {
