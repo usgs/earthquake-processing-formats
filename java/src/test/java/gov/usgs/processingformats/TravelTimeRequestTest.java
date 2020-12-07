@@ -10,7 +10,7 @@ public class TravelTimeRequestTest {
 
   public static String TRAVELTIMEREQUEST_STRING =
       "{\"Source\": {\"Latitude\":45.905,\"Longitude\":-112.778,\"Depth\":15.0},"
-          + "\"Recievers\": [{\"ID\":\"45\",\"Elevation\":15.0,\"Latitude\":45.905,"
+          + "\"Receivers\": [{\"ID\":\"45\",\"Elevation\":15.0,\"Latitude\":45.905,"
           + "\"Longitude\":-112.778,\"Distance\":22.123}],"
           + "\"ConvertTectonic\":true,\"ReturnAllPhases\":true,"
           + "\"EarthModel\":\"AK135\","
@@ -28,7 +28,7 @@ public class TravelTimeRequestTest {
   public static final String SOURCE_STRING =
       "{\"Latitude\":45.905,\"Longitude\":-112.778,\"Depth\":15.0}";
 
-  public static final String RECIEVERS_STRING =
+  public static final String Receivers_STRING =
       "{\"ID\":\"45\",\"Elevation\":15.0,\"Latitude\":45.905,"
           + "\"Longitude\":-112.778,\"Distance\":22.123}";
 
@@ -58,7 +58,7 @@ public class TravelTimeRequestTest {
     TravelTimeRequest travelTimeRequestObject =
         new TravelTimeRequest(
             buildSource(),
-            buildRecievers(),
+            buildReceivers(),
             EARTHMODEL,
             buildPhaseTypes(),
             RETURNALLPHASES,
@@ -99,7 +99,7 @@ public class TravelTimeRequestTest {
 
     travelTimeRequestObject.reload(
         buildSource(),
-        buildRecievers(),
+        buildReceivers(),
         EARTHMODEL,
         buildPhaseTypes(),
         RETURNALLPHASES,
@@ -119,7 +119,7 @@ public class TravelTimeRequestTest {
     TravelTimeRequest travelTimeRequestObject = new TravelTimeRequest();
 
     travelTimeRequestObject.Source = buildSource();
-    travelTimeRequestObject.Recievers = buildRecievers();
+    travelTimeRequestObject.Receivers = buildReceivers();
     travelTimeRequestObject.EarthModel = EARTHMODEL;
     travelTimeRequestObject.PhaseTypes = buildPhaseTypes();
     travelTimeRequestObject.ReturnAllPhases = RETURNALLPHASES;
@@ -139,7 +139,7 @@ public class TravelTimeRequestTest {
     TravelTimeRequest travelTimeRequestObject =
         new TravelTimeRequest(
             buildSource(),
-            buildRecievers(),
+            buildReceivers(),
             EARTHMODEL,
             buildPhaseTypes(),
             RETURNALLPHASES,
@@ -161,7 +161,7 @@ public class TravelTimeRequestTest {
     TravelTimeRequest travelTimeRequestObject =
         new TravelTimeRequest(
             buildSource(),
-            buildRecievers(),
+            buildReceivers(),
             EARTHMODEL,
             buildPhaseTypes(),
             RETURNALLPHASES,
@@ -248,16 +248,16 @@ public class TravelTimeRequestTest {
     }
   }
 
-  public ArrayList<TravelTimeReciever> buildRecievers() {
-    ArrayList<TravelTimeReciever> newRecievers = new ArrayList<TravelTimeReciever>();
+  public ArrayList<TravelTimeReciever> buildReceivers() {
+    ArrayList<TravelTimeReciever> newReceivers = new ArrayList<TravelTimeReciever>();
     try {
-      newRecievers.add(new TravelTimeReciever(Utility.fromJSONString(RECIEVERS_STRING)));
+      newReceivers.add(new TravelTimeReciever(Utility.fromJSONString(Receivers_STRING)));
     } catch (ParseException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
       return (null);
     }
-    return (newRecievers);
+    return (newReceivers);
   }
 
   public ArrayList<String> buildPhaseTypes() {

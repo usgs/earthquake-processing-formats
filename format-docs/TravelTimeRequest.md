@@ -20,7 +20,7 @@ information service
         "Longitude": Number,
         "Depth" : Number
       },
-      "Recievers" : 
+      "Receivers" : 
       [
         {
           "ID" : String,
@@ -75,7 +75,7 @@ information service
 These are the values **required** to define a Travel-Time request.
 
 * Source -  A [TravelTimeSource](TravelTimeSource.md) object containing the geographic source information
-* Recievers - An array of [TravelTimeReciever](TravelTimeReciever.md) objects containing the geographic distance (or reciever information) to request travel time information for.
+* Receivers - An array of [TravelTimeReciever](TravelTimeReciever.md) objects containing the geographic distance (or reciever information) to request travel time information for.
 
 **Optional Input Values:**
 

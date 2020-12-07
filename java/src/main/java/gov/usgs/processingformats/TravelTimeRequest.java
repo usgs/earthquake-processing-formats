@@ -14,7 +14,7 @@ public class TravelTimeRequest implements ProcessingInt {
   /** JSON Keys */
   public static final String SOURCE_KEY = "Source";
 
-  public static final String RECIEVERS_KEY = "Recievers";
+  public static final String Receivers_KEY = "Receivers";
   public static final String EARTHMODEL_KEY = "EarthModel";
   public static final String PHASETYPES_KEY = "PhaseTypes";
   public static final String RETURNALLPHASES_KEY = "ReturnAllPhases";
@@ -27,7 +27,7 @@ public class TravelTimeRequest implements ProcessingInt {
   public TravelTimeSource Source;
 
   /** Required receivers */
-  public ArrayList<TravelTimeReciever> Recievers;
+  public ArrayList<TravelTimeReciever> Receivers;
 
   /** Optional earth model to use, defaults to the AK135 earth model */
   public String EarthModel;
@@ -62,8 +62,8 @@ public class TravelTimeRequest implements ProcessingInt {
    * values.
    *
    * @param newSource - A TravelTimeSource object containing the source information
-   * @param newRecievers - An ArrayList&lt;TravelTimeReciever&gt; objects containing the desired
-   *     recievers
+   * @param newReceivers - An ArrayList&lt;TravelTimeReciever&gt; objects containing the desired
+   *     Receivers
    * @param newEarthModel - A String containing the earthmodel
    * @param newPhaseTypes - An ArrayList&lt;String&gt; containing the desired display types
    * @param newReturnAllPhases - A Boolean indicating whether to return all phases
@@ -71,11 +71,11 @@ public class TravelTimeRequest implements ProcessingInt {
    *     phases
    * @param newConvertTectonic - A boolean that indicates whether to convert tectonic phases
    * @param newResponse - An ArrayList&lt;TravelTimeReciever&gt; objects containing the returned
-   *     recievers with travel time data
+   *     Receivers with travel time data
    */
   public TravelTimeRequest(
       TravelTimeSource newSource,
-      ArrayList<TravelTimeReciever> newRecievers,
+      ArrayList<TravelTimeReciever> newReceivers,
       String newEarthModel,
       ArrayList<String> newPhaseTypes,
       Boolean newReturnAllPhases,
@@ -85,7 +85,7 @@ public class TravelTimeRequest implements ProcessingInt {
 
     reload(
         newSource,
-        newRecievers,
+        newReceivers,
         newEarthModel,
         newPhaseTypes,
         newReturnAllPhases,
@@ -109,27 +109,27 @@ public class TravelTimeRequest implements ProcessingInt {
       Source = null;
     }
 
-    // Recievers
-    if (newJSONObject.containsKey(RECIEVERS_KEY)) {
+    // Receivers
+    if (newJSONObject.containsKey(Receivers_KEY)) {
 
-      Recievers = new ArrayList<TravelTimeReciever>();
+      Receivers = new ArrayList<TravelTimeReciever>();
 
       // get the array
-      JSONArray RecieversArray = (JSONArray) newJSONObject.get(RECIEVERS_KEY);
+      JSONArray ReceiversArray = (JSONArray) newJSONObject.get(Receivers_KEY);
 
-      if ((RecieversArray != null) && (!RecieversArray.isEmpty())) {
+      if ((ReceiversArray != null) && (!ReceiversArray.isEmpty())) {
 
         // go through the whole array
-        for (int i = 0; i < RecieversArray.size(); i++) {
+        for (int i = 0; i < ReceiversArray.size(); i++) {
 
           // get the object
-          JSONObject DataObject = (JSONObject) RecieversArray.get(i);
+          JSONObject DataObject = (JSONObject) ReceiversArray.get(i);
 
-          Recievers.add(new TravelTimeReciever(DataObject));
+          Receivers.add(new TravelTimeReciever(DataObject));
         }
       }
     } else {
-      Recievers = null;
+      Receivers = null;
     }
 
     // Optional values
@@ -218,7 +218,7 @@ public class TravelTimeRequest implements ProcessingInt {
   public TravelTimeRequest(TravelTimeRequest sourceObject) {
     reload(
         sourceObject.Source,
-        sourceObject.Recievers,
+        sourceObject.Receivers,
         sourceObject.EarthModel,
         sourceObject.PhaseTypes,
         sourceObject.ReturnAllPhases,
@@ -234,7 +234,7 @@ public class TravelTimeRequest implements ProcessingInt {
    *
    * @param newSource - A TravelTimeSource object containing the source information
    * @param newReciever - An ArrayList&lt;TravelTimeReciever&gt; objects containing the desired
-   *     recievers
+   *     Receivers
    * @param newEarthModel - A String containing the earthmodel
    * @param newPhaseTypes - An ArrayList&lt;String&gt; containing the desired display types
    * @param newReturnAllPhases - A Boolean indicating whether to return all phases
@@ -242,11 +242,11 @@ public class TravelTimeRequest implements ProcessingInt {
    *     phases
    * @param newConvertTectonic - A boolean that indicates whether to convert tectonic phases
    * @param newResponse - An ArrayList&lt;TravelTimeReciever&gt; objects containing the returned
-   *     recievers with travel time data
+   *     Receivers with travel time data
    */
   public void reload(
       TravelTimeSource newSource,
-      ArrayList<TravelTimeReciever> newRecievers,
+      ArrayList<TravelTimeReciever> newReceivers,
       String newEarthModel,
       ArrayList<String> newPhaseTypes,
       Boolean newReturnAllPhases,
@@ -255,7 +255,7 @@ public class TravelTimeRequest implements ProcessingInt {
       ArrayList<TravelTimeReciever> newResponse) {
 
     Source = newSource;
-    Recievers = newRecievers;
+    Receivers = newReceivers;
 
     EarthModel = newEarthModel;
     PhaseTypes = newPhaseTypes;
@@ -282,22 +282,22 @@ public class TravelTimeRequest implements ProcessingInt {
       newJSONObject.put(SOURCE_KEY, Source.toJSON());
     }
 
-    // Recievers
-    if ((Recievers != null) && (!Recievers.isEmpty())) {
+    // Receivers
+    if ((Receivers != null) && (!Receivers.isEmpty())) {
 
-      JSONArray RecieversArray = new JSONArray();
+      JSONArray ReceiversArray = new JSONArray();
 
-      for (Iterator<TravelTimeReciever> RecieversIterator = Recievers.iterator();
-          RecieversIterator.hasNext(); ) {
+      for (Iterator<TravelTimeReciever> ReceiversIterator = Receivers.iterator();
+          ReceiversIterator.hasNext(); ) {
 
         // convert pick to JSON object
-        JSONObject ReceiverObject = ((TravelTimeReciever) RecieversIterator.next()).toJSON();
+        JSONObject ReceiverObject = ((TravelTimeReciever) ReceiversIterator.next()).toJSON();
 
-        RecieversArray.add(ReceiverObject);
+        ReceiversArray.add(ReceiverObject);
       }
 
-      if (!RecieversArray.isEmpty()) {
-        newJSONObject.put(RECIEVERS_KEY, RecieversArray);
+      if (!ReceiversArray.isEmpty()) {
+        newJSONObject.put(Receivers_KEY, ReceiversArray);
       }
     }
 
@@ -394,16 +394,16 @@ public class TravelTimeRequest implements ProcessingInt {
       errorList.add("Invalid Source in TravelTimeRequest Class.");
     }
 
-    // Recievers
-    if (Recievers == null) {
-      // Recievers not found
-      errorList.add("No Recievers in TravelTimeRequest Class.");
-    } else if (Recievers.isEmpty()) {
-      // Recievers not found
-      errorList.add("Empty Recievers in TravelTimeRequest Class.");
+    // Receivers
+    if (Receivers == null) {
+      // Receivers not found
+      errorList.add("No Receivers in TravelTimeRequest Class.");
+    } else if (Receivers.isEmpty()) {
+      // Receivers not found
+      errorList.add("Empty Receivers in TravelTimeRequest Class.");
     } else {
       // enumerate through the whole arraylist
-      for (Iterator<TravelTimeReciever> recieverIterator = Recievers.iterator();
+      for (Iterator<TravelTimeReciever> recieverIterator = Receivers.iterator();
           recieverIterator.hasNext(); ) {
 
         // convert recever to JSON object
