@@ -410,12 +410,6 @@ public class TravelTimeData implements ProcessingInt {
       errorList.add("No Teleseismic Phase Group in TravelTimeData Class.");
     }
 
-    // auxiliary Phase group
-    if (AuxiliaryPhaseGroup == null) {
-      // auxiliary Phase group not found
-      errorList.add("No Auxiliary Phase Group in TravelTimeData Class.");
-    }
-
     // location use flag
     if (LocationUseFlag == null) {
       // location use flag not found
