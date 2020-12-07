@@ -1,15 +1,15 @@
-# Travel-Time Reciever Object Specification
+# Travel-Time Receiver Object Specification
 
 ## Description
 
-The Travel-Time Reciever object is an object designed to define a geographic Reciever for travel time requests.  Travel-Time Reciever uses the
+The Travel-Time Receiver object is an object designed to define a geographic Receiver for travel time requests.  Travel-Time Receiver uses the
 [JSON standard](http://www.json.org).
 
 ## Usage
-Travel-Time Reciever is intended for use as part of a seismic travel time
+Travel-Time Receiver is intended for use as part of a seismic travel time
 information service
 
-## Travel-Time Reciever
+## Travel-Time Receiver
 
 ```json
     {
@@ -41,7 +41,7 @@ information service
 
 **Required Values:**
 
-These are the values **required** to define a Travel-Time Reciever.
+These are the values **required** to define a Travel-Time Receiver.
 
 * ID - A string containing an unique ID for this reciver
 * Distance -  A number containing the source-receiver distance in
@@ -58,7 +58,7 @@ degrees.
 **Output Values:**
 
 The following are values that are **required** be provided as part of a 
-travel time reciever information returned.
+travel time receiver information returned.
 
 * Branches - An array of [TravelTimeData](TravelTimeData.md) objects containing the requested
-travel time information for this geographic reciever.
+travel time information for this geographic receiver.

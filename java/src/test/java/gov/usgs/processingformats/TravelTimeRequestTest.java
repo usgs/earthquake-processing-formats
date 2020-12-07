@@ -248,10 +248,10 @@ public class TravelTimeRequestTest {
     }
   }
 
-  public ArrayList<TravelTimeReciever> buildReceivers() {
-    ArrayList<TravelTimeReciever> newReceivers = new ArrayList<TravelTimeReciever>();
+  public ArrayList<TravelTimeReceiver> buildReceivers() {
+    ArrayList<TravelTimeReceiver> newReceivers = new ArrayList<TravelTimeReceiver>();
     try {
-      newReceivers.add(new TravelTimeReciever(Utility.fromJSONString(Receivers_STRING)));
+      newReceivers.add(new TravelTimeReceiver(Utility.fromJSONString(Receivers_STRING)));
     } catch (ParseException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
@@ -271,10 +271,10 @@ public class TravelTimeRequestTest {
     return (phaseTypes);
   }
 
-  public ArrayList<TravelTimeReciever> buildResponse() {
-    ArrayList<TravelTimeReciever> newResponse = new ArrayList<TravelTimeReciever>();
+  public ArrayList<TravelTimeReceiver> buildResponse() {
+    ArrayList<TravelTimeReceiver> newResponse = new ArrayList<TravelTimeReceiver>();
     try {
-      newResponse.add(new TravelTimeReciever(Utility.fromJSONString(RESPONSE_STRING)));
+      newResponse.add(new TravelTimeReceiver(Utility.fromJSONString(RESPONSE_STRING)));
     } catch (ParseException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();

@@ -9,7 +9,7 @@ import org.json.simple.JSONObject;
  *
  * @author U.S. Geological Survey &lt;jpatton at usgs.gov&gt;
  */
-public class TravelTimeReciever implements ProcessingInt {
+public class TravelTimeReceiver implements ProcessingInt {
 
   /** JSON Keys */
   public static final String TYPE_KEY = "Type";
@@ -24,23 +24,23 @@ public class TravelTimeReciever implements ProcessingInt {
   /** Required reciver ID */
   public String ID;
 
-  /** Required geographic Distance reciever distance relative to the source in degrees */
+  /** Required geographic Distance receiver distance relative to the source in degrees */
   public Double Distance;
 
-  /** Required geographic reciever elevation relative to the WGS84 datum in meters */
+  /** Required geographic receiver elevation relative to the WGS84 datum in meters */
   public Double Elevation;
 
-  /** Optional geographic reciever Latitude in degrees */
+  /** Optional geographic receiver Latitude in degrees */
   public Double Latitude;
 
-  /** Optional geographic reciever Longitude in degrees */
+  /** Optional geographic receiver Longitude in degrees */
   public Double Longitude;
 
   /** Returned travel time Branches (empty for requests) */
   public ArrayList<TravelTimeData> Branches;
 
   /** The constructor for the TravelTimeData class. Initializes members to null values. */
-  public TravelTimeReciever() {
+  public TravelTimeReceiver() {
 
     reload(null, null, null, null, null, null);
   }
@@ -48,22 +48,22 @@ public class TravelTimeReciever implements ProcessingInt {
   /**
    * Advanced constructor
    *
-   * <p>The advanced constructor for the TravelTimeReciever class. Initializes members to provided
+   * <p>The advanced constructor for the TravelTimeReceiver class. Initializes members to provided
    * values.
    *
-   * @param newID - A required string containing the reciever id
-   * @param newDistance - A required Double containing the geographic reciever distance relative to
+   * @param newID - A required string containing the receiver id
+   * @param newDistance - A required Double containing the geographic receiver distance relative to
    *     the source in degrees
-   * @param newElevation - A required Double containing the geographic reciever Elevation relative
+   * @param newElevation - A required Double containing the geographic receiver Elevation relative
    *     to the WGS84 datum in meters
-   * @param newLatitude - An optional Double containing the geographic reciever Latitude in degrees,
+   * @param newLatitude - An optional Double containing the geographic receiver Latitude in degrees,
    *     null to omit
-   * @param newLongitude - An optional Double containing the geographic reciever Longitude in
+   * @param newLongitude - An optional Double containing the geographic receiver Longitude in
    *     degrees, null to omit
    * @param newBranches - A ArrayList&lt;TravelTimeData&gt; containing the returned travel time
    *     Branches
    */
-  public TravelTimeReciever(
+  public TravelTimeReceiver(
       String newID,
       Double newDistance,
       Double newElevation,
@@ -79,7 +79,7 @@ public class TravelTimeReciever implements ProcessingInt {
    *
    * @param newJSONObject - A JSONObject.
    */
-  public TravelTimeReciever(JSONObject newJSONObject) {
+  public TravelTimeReceiver(JSONObject newJSONObject) {
 
     // Required values
     // ID
@@ -156,7 +156,7 @@ public class TravelTimeReciever implements ProcessingInt {
    *
    * @param sourceObject - A TravelTimeData object.
    */
-  public TravelTimeReciever(TravelTimeReciever sourceObject) {
+  public TravelTimeReceiver(TravelTimeReceiver sourceObject) {
     reload(
         sourceObject.ID,
         sourceObject.Distance,
@@ -171,14 +171,14 @@ public class TravelTimeReciever implements ProcessingInt {
    *
    * <p>The reload function for the TravelTimeData class. Initializes members to provided values.
    *
-   * @param newID - A required string containing the reciever id
-   * @param newDistance - A required Double containing the geographic reciever distance relative to
+   * @param newID - A required string containing the receiver id
+   * @param newDistance - A required Double containing the geographic receiver distance relative to
    *     the source in degrees
-   * @param newElevation - A required Double containing the geographic reciever Elevation relative
+   * @param newElevation - A required Double containing the geographic receiver Elevation relative
    *     to the WGS84 datum in meters
-   * @param newLatitude - An optional Double containing the geographic reciever Latitude in degrees,
+   * @param newLatitude - An optional Double containing the geographic receiver Latitude in degrees,
    *     null to omit
-   * @param newLongitude - An optional Double containing the geographic reciever Longitude in
+   * @param newLongitude - An optional Double containing the geographic receiver Longitude in
    *     degrees, null to omit
    * @param newBranches - A ArrayList&lt;TravelTimeData&gt; containing the returned travel time
    *     Branches
@@ -282,33 +282,33 @@ public class TravelTimeReciever implements ProcessingInt {
     // ID
     if (ID == null) {
       // ID not found
-      errorList.add("No ID in TravelTimeReciever Class.");
+      errorList.add("No ID in TravelTimeReceiver Class.");
     } else if (ID.isEmpty()) {
       // ID empty
-      errorList.add("Empty ID in TravelTimeReciever Class.");
+      errorList.add("Empty ID in TravelTimeReceiver Class.");
     }
 
     // Distance / Lat Lon check, need one or the other
     if ((Distance == null) && ((Latitude == null) || (Longitude == null))) {
       // Distance not found
-      errorList.add("No Distance or Latitude/Longitude in TravelTimeReciever Class.");
+      errorList.add("No Distance or Latitude/Longitude in TravelTimeReceiver Class.");
     }
 
     // Distance
     if (Distance != null) {
       if ((Distance < 0) || (Distance > 360)) {
         // invalid Distance
-        errorList.add("Distance in TravelTimeReciever not in the range of 0 to 360.");
+        errorList.add("Distance in TravelTimeReceiver not in the range of 0 to 360.");
       }
     }
 
     // Elevation
     if (Elevation == null) {
       // Elevation not found
-      errorList.add("No Elevation in TravelTimeReciever Class.");
+      errorList.add("No Elevation in TravelTimeReceiver Class.");
     } else if ((Elevation < -100) || (Elevation > 1000)) {
       // invalid Elevation
-      errorList.add("Elevation in TravelTimeReciever not in the range of -100 to 1000.");
+      errorList.add("Elevation in TravelTimeReceiver not in the range of -100 to 1000.");
     }
 
     // optional values
@@ -316,7 +316,7 @@ public class TravelTimeReciever implements ProcessingInt {
     if (Latitude != null) {
       if ((Latitude < -90) || (Latitude > 90)) {
         // invalid Latitude
-        errorList.add("Latitude in TravelTimeReciever not in the range of -90 to 90.");
+        errorList.add("Latitude in TravelTimeReceiver not in the range of -90 to 90.");
       }
     }
 
@@ -324,7 +324,7 @@ public class TravelTimeReciever implements ProcessingInt {
     if (Longitude != null) {
       if ((Longitude < -180) || (Longitude > 180)) {
         // invalid Longitude
-        errorList.add("Longitude in TravelTimeReciever not in the range of -180 to 180.");
+        errorList.add("Longitude in TravelTimeReceiver not in the range of -180 to 180.");
       }
     }
 
@@ -337,7 +337,7 @@ public class TravelTimeReciever implements ProcessingInt {
         TravelTimeData TTData = ((TravelTimeData) DataIterator.next());
 
         if (!TTData.isValid()) {
-          errorList.add("Invalid Branch TravelTimeData in TravelTimeReciever.");
+          errorList.add("Invalid Branch TravelTimeData in TravelTimeReceiver.");
           break;
         }
       }

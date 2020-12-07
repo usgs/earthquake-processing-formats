@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
-public class TravelTimeRecieverTest {
+public class TravelTimeReceiverTest {
 
   public static final String RECIEVER_STRING =
       "{\"ID\":\"45\",\"Elevation\":15.0,\"Latitude\":45.905,"
@@ -35,15 +35,15 @@ public class TravelTimeRecieverTest {
   @Test
   public void writesJSON() {
 
-    TravelTimeReciever sourceObject =
-        new TravelTimeReciever(ID, DISTANCE, ELEVATION, LATITUDE, LONGITUDE, buildData());
+    TravelTimeReceiver sourceObject =
+        new TravelTimeReceiver(ID, DISTANCE, ELEVATION, LATITUDE, LONGITUDE, buildData());
 
     // write out to a string
     String jsonString = Utility.toJSONString(sourceObject.toJSON());
 
     // check the data
     try {
-      checkData(new TravelTimeReciever(Utility.fromJSONString(jsonString)), "WritesJSON");
+      checkData(new TravelTimeReceiver(Utility.fromJSONString(jsonString)), "WritesJSON");
     } catch (ParseException e) {
       e.printStackTrace();
     }
@@ -55,7 +55,7 @@ public class TravelTimeRecieverTest {
 
     try {
 
-      checkData(new TravelTimeReciever(Utility.fromJSONString(RECIEVER_STRING)), "ReadsJSON");
+      checkData(new TravelTimeReceiver(Utility.fromJSONString(RECIEVER_STRING)), "ReadsJSON");
     } catch (ParseException e) {
       e.printStackTrace();
     }
@@ -66,8 +66,8 @@ public class TravelTimeRecieverTest {
   public void validate() {
 
     // build source object
-    TravelTimeReciever sourceObject =
-        new TravelTimeReciever(ID, DISTANCE, ELEVATION, LATITUDE, LONGITUDE, buildData());
+    TravelTimeReceiver sourceObject =
+        new TravelTimeReceiver(ID, DISTANCE, ELEVATION, LATITUDE, LONGITUDE, buildData());
 
     // Successful validation
     boolean rc = sourceObject.isValid();
@@ -76,31 +76,31 @@ public class TravelTimeRecieverTest {
     assertEquals("Successful Validation", true, rc);
 
     // build bad source object
-    TravelTimeReciever badRecieverObject = new TravelTimeReciever(ID, null, null, null, null, null);
+    TravelTimeReceiver badReceiverObject = new TravelTimeReceiver(ID, null, null, null, null, null);
 
-    rc = badRecieverObject.isValid();
+    rc = badReceiverObject.isValid();
 
     // check return code
     assertEquals("Unsuccessful Validation", false, rc);
   }
 
   /** Checks the data in the class */
-  public void checkData(TravelTimeReciever RecieverObject, String TestName) {
+  public void checkData(TravelTimeReceiver ReceiverObject, String TestName) {
 
-    // check RecieverObject.ID
-    assertEquals(TestName + " ID Equals", ID, RecieverObject.ID);
+    // check ReceiverObject.ID
+    assertEquals(TestName + " ID Equals", ID, ReceiverObject.ID);
 
-    // check RecieverObject.Distance
-    assertEquals(TestName + " Distance Equals", DISTANCE, RecieverObject.Distance, 0);
+    // check ReceiverObject.Distance
+    assertEquals(TestName + " Distance Equals", DISTANCE, ReceiverObject.Distance, 0);
 
-    // check RecieverObject.Elevation
-    assertEquals(TestName + " Elevation Equals", ELEVATION, RecieverObject.Elevation, 0);
+    // check ReceiverObject.Elevation
+    assertEquals(TestName + " Elevation Equals", ELEVATION, ReceiverObject.Elevation, 0);
 
-    // check RecieverObject.Latitude
-    assertEquals(TestName + " Latitude Equals", LATITUDE, RecieverObject.Latitude, 0);
+    // check ReceiverObject.Latitude
+    assertEquals(TestName + " Latitude Equals", LATITUDE, ReceiverObject.Latitude, 0);
 
-    // check RecieverObject.Longitude
-    assertEquals(TestName + " Longitude Equals", LONGITUDE, RecieverObject.Longitude, 0);
+    // check ReceiverObject.Longitude
+    assertEquals(TestName + " Longitude Equals", LONGITUDE, ReceiverObject.Longitude, 0);
   }
 
   public ArrayList<TravelTimeData> buildData() {

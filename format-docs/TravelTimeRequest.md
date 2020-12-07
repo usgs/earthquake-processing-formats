@@ -75,7 +75,7 @@ information service
 These are the values **required** to define a Travel-Time request.
 
 * Source -  A [TravelTimeSource](TravelTimeSource.md) object containing the geographic source information
-* Receivers - An array of [TravelTimeReciever](TravelTimeReciever.md) objects containing the geographic distance (or reciever information) to request travel time information for.
+* Receivers - An array of [TravelTimeReceiver](TravelTimeReceiver.md) objects containing the geographic distance (or receiver information) to request travel time information for.
 
 **Optional Input Values:**
 
@@ -94,4 +94,4 @@ phases (Pb to Pg and Sb to Sg), defaults to false.
 The following are values that are **required** be provided as part of a the
 travel time request information returned.
 
-* Data - An array of [TravelTimeReciever](TravelTimeReciever.md) objects containing the reciever and requested travel time information.
+* Data - An array of [TravelTimeReceiver](TravelTimeReceiver.md) objects containing the receiver and requested travel time information.

@@ -27,7 +27,7 @@ public class TravelTimeRequest implements ProcessingInt {
   public TravelTimeSource Source;
 
   /** Required receivers */
-  public ArrayList<TravelTimeReciever> Receivers;
+  public ArrayList<TravelTimeReceiver> Receivers;
 
   /** Optional earth model to use, defaults to the AK135 earth model */
   public String EarthModel;
@@ -47,7 +47,7 @@ public class TravelTimeRequest implements ProcessingInt {
   public Boolean ConvertTectonic;
 
   /** Returned travel time Data (empty for requests) */
-  public ArrayList<TravelTimeReciever> Response;
+  public ArrayList<TravelTimeReceiver> Response;
 
   /** The constructor for the TravelTimeRequest class. Initializes members to null values. */
   public TravelTimeRequest() {
@@ -62,7 +62,7 @@ public class TravelTimeRequest implements ProcessingInt {
    * values.
    *
    * @param newSource - A TravelTimeSource object containing the source information
-   * @param newReceivers - An ArrayList&lt;TravelTimeReciever&gt; objects containing the desired
+   * @param newReceivers - An ArrayList&lt;TravelTimeReceiver&gt; objects containing the desired
    *     Receivers
    * @param newEarthModel - A String containing the earthmodel
    * @param newPhaseTypes - An ArrayList&lt;String&gt; containing the desired display types
@@ -70,18 +70,18 @@ public class TravelTimeRequest implements ProcessingInt {
    * @param newReturnBackBranches - A Boolean indicating whether to return all arrivals of all
    *     phases
    * @param newConvertTectonic - A boolean that indicates whether to convert tectonic phases
-   * @param newResponse - An ArrayList&lt;TravelTimeReciever&gt; objects containing the returned
+   * @param newResponse - An ArrayList&lt;TravelTimeReceiver&gt; objects containing the returned
    *     Receivers with travel time data
    */
   public TravelTimeRequest(
       TravelTimeSource newSource,
-      ArrayList<TravelTimeReciever> newReceivers,
+      ArrayList<TravelTimeReceiver> newReceivers,
       String newEarthModel,
       ArrayList<String> newPhaseTypes,
       Boolean newReturnAllPhases,
       Boolean newReturnBackBranches,
       Boolean newConvertTectonic,
-      ArrayList<TravelTimeReciever> newResponse) {
+      ArrayList<TravelTimeReceiver> newResponse) {
 
     reload(
         newSource,
@@ -112,7 +112,7 @@ public class TravelTimeRequest implements ProcessingInt {
     // Receivers
     if (newJSONObject.containsKey(Receivers_KEY)) {
 
-      Receivers = new ArrayList<TravelTimeReciever>();
+      Receivers = new ArrayList<TravelTimeReceiver>();
 
       // get the array
       JSONArray ReceiversArray = (JSONArray) newJSONObject.get(Receivers_KEY);
@@ -125,7 +125,7 @@ public class TravelTimeRequest implements ProcessingInt {
           // get the object
           JSONObject DataObject = (JSONObject) ReceiversArray.get(i);
 
-          Receivers.add(new TravelTimeReciever(DataObject));
+          Receivers.add(new TravelTimeReceiver(DataObject));
         }
       }
     } else {
@@ -188,7 +188,7 @@ public class TravelTimeRequest implements ProcessingInt {
     // Response
     if (newJSONObject.containsKey(RESPONSE_KEY)) {
 
-      Response = new ArrayList<TravelTimeReciever>();
+      Response = new ArrayList<TravelTimeReceiver>();
 
       // get the array
       JSONArray DataArray = (JSONArray) newJSONObject.get(RESPONSE_KEY);
@@ -201,7 +201,7 @@ public class TravelTimeRequest implements ProcessingInt {
           // get the object
           JSONObject DataObject = (JSONObject) DataArray.get(i);
 
-          Response.add(new TravelTimeReciever(DataObject));
+          Response.add(new TravelTimeReceiver(DataObject));
         }
 
       } else {
@@ -233,7 +233,7 @@ public class TravelTimeRequest implements ProcessingInt {
    * <p>The reload function for the TravelTimeData class. Initializes members to provided values.
    *
    * @param newSource - A TravelTimeSource object containing the source information
-   * @param newReciever - An ArrayList&lt;TravelTimeReciever&gt; objects containing the desired
+   * @param newReceiver - An ArrayList&lt;TravelTimeReceiver&gt; objects containing the desired
    *     Receivers
    * @param newEarthModel - A String containing the earthmodel
    * @param newPhaseTypes - An ArrayList&lt;String&gt; containing the desired display types
@@ -241,18 +241,18 @@ public class TravelTimeRequest implements ProcessingInt {
    * @param newReturnBackBranches - A Boolean indicating whether to return all arrivals of all
    *     phases
    * @param newConvertTectonic - A boolean that indicates whether to convert tectonic phases
-   * @param newResponse - An ArrayList&lt;TravelTimeReciever&gt; objects containing the returned
+   * @param newResponse - An ArrayList&lt;TravelTimeReceiver&gt; objects containing the returned
    *     Receivers with travel time data
    */
   public void reload(
       TravelTimeSource newSource,
-      ArrayList<TravelTimeReciever> newReceivers,
+      ArrayList<TravelTimeReceiver> newReceivers,
       String newEarthModel,
       ArrayList<String> newPhaseTypes,
       Boolean newReturnAllPhases,
       Boolean newReturnBackBranches,
       Boolean newConvertTectonic,
-      ArrayList<TravelTimeReciever> newResponse) {
+      ArrayList<TravelTimeReceiver> newResponse) {
 
     Source = newSource;
     Receivers = newReceivers;
@@ -287,11 +287,11 @@ public class TravelTimeRequest implements ProcessingInt {
 
       JSONArray ReceiversArray = new JSONArray();
 
-      for (Iterator<TravelTimeReciever> ReceiversIterator = Receivers.iterator();
+      for (Iterator<TravelTimeReceiver> ReceiversIterator = Receivers.iterator();
           ReceiversIterator.hasNext(); ) {
 
         // convert pick to JSON object
-        JSONObject ReceiverObject = ((TravelTimeReciever) ReceiversIterator.next()).toJSON();
+        JSONObject ReceiverObject = ((TravelTimeReceiver) ReceiversIterator.next()).toJSON();
 
         ReceiversArray.add(ReceiverObject);
       }
@@ -344,11 +344,11 @@ public class TravelTimeRequest implements ProcessingInt {
 
       JSONArray ResponseArray = new JSONArray();
 
-      for (Iterator<TravelTimeReciever> ResponseIterator = Response.iterator();
+      for (Iterator<TravelTimeReceiver> ResponseIterator = Response.iterator();
           ResponseIterator.hasNext(); ) {
 
         // convert pick to JSON object
-        JSONObject ResponseObject = ((TravelTimeReciever) ResponseIterator.next()).toJSON();
+        JSONObject ResponseObject = ((TravelTimeReceiver) ResponseIterator.next()).toJSON();
 
         ResponseArray.add(ResponseObject);
       }
@@ -403,14 +403,14 @@ public class TravelTimeRequest implements ProcessingInt {
       errorList.add("Empty Receivers in TravelTimeRequest Class.");
     } else {
       // enumerate through the whole arraylist
-      for (Iterator<TravelTimeReciever> recieverIterator = Receivers.iterator();
-          recieverIterator.hasNext(); ) {
+      for (Iterator<TravelTimeReceiver> receiverIterator = Receivers.iterator();
+          receiverIterator.hasNext(); ) {
 
         // convert recever to JSON object
-        TravelTimeReciever jsonReceiver = ((TravelTimeReciever) recieverIterator.next());
+        TravelTimeReceiver jsonReceiver = ((TravelTimeReceiver) receiverIterator.next());
 
         if (!jsonReceiver.isValid()) {
-          errorList.add("Invalid Reciever in TravelTimeRequest Class.");
+          errorList.add("Invalid Receiver in TravelTimeRequest Class.");
           break;
         }
       }
@@ -420,11 +420,11 @@ public class TravelTimeRequest implements ProcessingInt {
     if ((Response != null) && (!Response.isEmpty())) {
 
       // enumerate through the whole arraylist
-      for (Iterator<TravelTimeReciever> responseIterator = Response.iterator();
+      for (Iterator<TravelTimeReceiver> responseIterator = Response.iterator();
           responseIterator.hasNext(); ) {
 
         // convert recever to JSON object
-        TravelTimeReciever jsonResponse = ((TravelTimeReciever) responseIterator.next());
+        TravelTimeReceiver jsonResponse = ((TravelTimeReceiver) responseIterator.next());
 
         if (!jsonResponse.isValid()) {
           errorList.add("Invalid Response in TravelTimeRequest Class.");

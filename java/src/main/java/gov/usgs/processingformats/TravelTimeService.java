@@ -10,5 +10,6 @@ public interface TravelTimeService {
    * @return calculated traveltime.
    * @throws LocationException if errors occur.
    */
-  public TravelTimeRequest getTravelTimes(final TravelTimeRequest request) throws TravelTimeException;
+  public TravelTimeRequest getTravelTimes(final TravelTimeRequest request)
+      throws TravelTimeException;
 }
