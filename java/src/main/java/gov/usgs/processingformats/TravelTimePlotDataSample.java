@@ -16,6 +16,7 @@ public class TravelTimePlotDataSample implements ProcessingInt {
   public static final String TRAVELTIME_KEY = "TravelTime";
   public static final String STATISTICALSPREAD_KEY = "StatisticalSpread";
   public static final String OBSERVABILITY_KEY = "Observability";
+  public static final String RAYPARAMETER_KEY = "RayParameter";
 
   /** Required Distance in degrees */
   public Double Distance;
@@ -29,10 +30,13 @@ public class TravelTimePlotDataSample implements ProcessingInt {
   /** Optional statistical Observability of the seismic phase. */
   public Double Observability;
 
+  /** Optional ray parameter in seconds/degree. */
+  public Double RayParameter;
+
   /** The constructor for the TravelTimePlotDataSample class. Initializes members to null values. */
   public TravelTimePlotDataSample() {
 
-    reload(null, null, null, null);
+    reload(null, null, null, null, null);
   }
 
   /**
@@ -45,14 +49,16 @@ public class TravelTimePlotDataSample implements ProcessingInt {
    * @param newTravelTime - A Double containing the travel time in seconds
    * @param newStatisticalSpread - A Double containing the observed travel time scatter in seconds
    * @param newObservability - A Double containing the statistical Observability of the sample
+   * @param newRayParameter - A Double containing the ray parameter of the sample
    */
   public TravelTimePlotDataSample(
       Double newDistance,
       Double newTravelTime,
       Double newStatisticalSpread,
-      Double newObservability) {
+      Double newObservability,
+      Double newRayParameter) {
 
-    reload(newDistance, newTravelTime, newStatisticalSpread, newObservability);
+    reload(newDistance, newTravelTime, newStatisticalSpread, newObservability, newRayParameter);
   }
 
   /**
@@ -91,6 +97,13 @@ public class TravelTimePlotDataSample implements ProcessingInt {
     } else {
       Observability = null;
     }
+
+    // RayParameter
+    if (newJSONObject.containsKey(RAYPARAMETER_KEY)) {
+      RayParameter = (double) newJSONObject.get(RAYPARAMETER_KEY);
+    } else {
+      RayParameter = null;
+    }
   }
 
   /**
@@ -104,7 +117,8 @@ public class TravelTimePlotDataSample implements ProcessingInt {
         sourceObject.Distance,
         sourceObject.TravelTime,
         sourceObject.StatisticalSpread,
-        sourceObject.Observability);
+        sourceObject.Observability,
+        sourceObject.RayParameter);
   }
 
   /**
@@ -116,17 +130,20 @@ public class TravelTimePlotDataSample implements ProcessingInt {
    * @param newTravelTime - A Double containing the travel time in seconds
    * @param newStatisticalSpread - A Double containing the observed travel time scatter in seconds
    * @param newObservability - A Double containing the statistical Observability of the sample
+   * @param newRayParameter - A Double containing the ray parameter of the sample
    */
   public void reload(
       Double newDistance,
       Double newTravelTime,
       Double newStatisticalSpread,
-      Double newObservability) {
+      Double newObservability,
+      Double newRayParameter) {
 
     Distance = newDistance;
     TravelTime = newTravelTime;
     StatisticalSpread = newStatisticalSpread;
     Observability = newObservability;
+    RayParameter = newRayParameter;
   }
 
   /**
@@ -157,6 +174,11 @@ public class TravelTimePlotDataSample implements ProcessingInt {
     // Observability
     if (Observability != null) {
       newJSONObject.put(OBSERVABILITY_KEY, Observability);
+    }
+
+    // RayParameter
+    if (RayParameter != null) {
+      newJSONObject.put(RAYPARAMETER_KEY, RayParameter);
     }
 
     return (newJSONObject);
