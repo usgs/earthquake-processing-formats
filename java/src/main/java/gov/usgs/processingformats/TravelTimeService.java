@@ -8,8 +8,18 @@ public interface TravelTimeService {
    *
    * @param request traveltime inputs.
    * @return calculated traveltime.
-   * @throws LocationException if errors occur.
+   * @throws TravelTimeException if errors occur.
    */
   public TravelTimeRequest getTravelTimes(final TravelTimeRequest request)
+      throws TravelTimeException;
+
+  /**
+   * Process a TravelTimePlotRequest
+   *
+   * @param request traveltime inputs.
+   * @return calculated traveltime.
+   * @throws TravelTimeException if errors occur.
+   */
+  public TravelTimePlotRequest getTravelTimePlot(final TravelTimePlotRequest request)
       throws TravelTimeException;
 }
