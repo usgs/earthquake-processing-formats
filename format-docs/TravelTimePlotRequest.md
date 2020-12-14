@@ -28,6 +28,8 @@ information service
       "ReturnAllPhases" : Boolean,
       "ReturnBackBranches" : Boolean,
       "ConvertTectonic" : Boolean,
+      "MaximumDistance" : Number,
+      "MaximumTravelTime" : Number,
       "Response" :
       [
         {
@@ -67,6 +69,8 @@ defaults to false.
 arrivals of all phases, defaults to false.
 * ConvertTectonic - A boolean flag that indicates whether to convert tectonic
 phases (Pb to Pg and Sb to Sg), defaults to false.
+* MaximumDistance - A number containing the maximum desired distance in degrees.
+* MaximumTravelTime - A number containing the maximum desired travel time in seconds.
 
 **Output Values:**
 

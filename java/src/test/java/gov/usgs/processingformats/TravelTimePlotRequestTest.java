@@ -13,8 +13,8 @@ public class TravelTimePlotRequestTest {
           + "\"ConvertTectonic\":true,\"ReturnAllPhases\":true,"
           + "\"EarthModel\":\"AK135\","
           + "\"ReturnBackBranches\":true,\"PhaseTypes\":[\"P\",\"S\",\"PDiff\"],"
-          + "\"Response\":"
-          + "[{\"Phase\":\"Pg\","
+          + "\"MaximumDistance\":90.0,\"MaximumTravelTime\":2700.0,"
+          + "\"Response\":[{\"Phase\":\"Pg\","
           + "\"Samples\":[{\"Distance\":1.2,\"Observability\":0.34,"
           + "\"StatisticalSpread\":1.5,\"TravelTime\":22.456},"
           + "{\"Distance\":10.5,\"Observability\":1.63,"
@@ -37,6 +37,8 @@ public class TravelTimePlotRequestTest {
   public static boolean RETURNALLPHASES = true;
   public static boolean RETURNBACKBRANCHES = true;
   public static boolean CONVERTTECTONIC = true;
+  public static double MAXIMUMDISTANCE = 90.0;
+  public static double MAXIMUMTRAVELTIME = 2700.00;
 
   /** Able to write a JSON string */
   @Test
@@ -51,6 +53,8 @@ public class TravelTimePlotRequestTest {
             RETURNALLPHASES,
             RETURNBACKBRANCHES,
             CONVERTTECTONIC,
+            MAXIMUMDISTANCE,
+            MAXIMUMTRAVELTIME,
             buildResponse());
 
     // write out to a string
@@ -93,6 +97,8 @@ public class TravelTimePlotRequestTest {
         RETURNALLPHASES,
         RETURNBACKBRANCHES,
         CONVERTTECTONIC,
+        MAXIMUMDISTANCE,
+        MAXIMUMTRAVELTIME,
         buildResponse());
 
     // check data values
@@ -112,6 +118,8 @@ public class TravelTimePlotRequestTest {
     travelTimeRequestObject.ReturnAllPhases = RETURNALLPHASES;
     travelTimeRequestObject.ReturnBackBranches = RETURNBACKBRANCHES;
     travelTimeRequestObject.ConvertTectonic = CONVERTTECTONIC;
+    travelTimeRequestObject.MaximumDistance = MAXIMUMDISTANCE;
+    travelTimeRequestObject.MaximumTravelTime = MAXIMUMTRAVELTIME;
     travelTimeRequestObject.Response = buildResponse();
 
     // check data values
@@ -131,6 +139,8 @@ public class TravelTimePlotRequestTest {
             RETURNALLPHASES,
             RETURNBACKBRANCHES,
             CONVERTTECTONIC,
+            MAXIMUMDISTANCE,
+            MAXIMUMTRAVELTIME,
             buildResponse());
 
     TravelTimePlotRequest travelTimeRequestObject2 =
@@ -153,6 +163,8 @@ public class TravelTimePlotRequestTest {
             RETURNALLPHASES,
             RETURNBACKBRANCHES,
             CONVERTTECTONIC,
+            MAXIMUMDISTANCE,
+            MAXIMUMTRAVELTIME,
             buildResponse());
 
     // Successful validation
@@ -165,7 +177,7 @@ public class TravelTimePlotRequestTest {
 
     // use constructor
     TravelTimePlotRequest badTravelTimePlotRequestObject =
-        new TravelTimePlotRequest(null, null, null, null, null, null, null);
+        new TravelTimePlotRequest(null, null, null, null, null, null, null, null, null);
 
     rc = badTravelTimePlotRequestObject.isValid();
 
@@ -220,6 +232,24 @@ public class TravelTimePlotRequestTest {
           TestName + " Convert Tectonic Equals ",
           travelTimeRequestObject.ConvertTectonic,
           CONVERTTECTONIC);
+    }
+
+    // check travelTimeRequestObject.MaximumDistance
+    if (travelTimeRequestObject.MaximumDistance != null) {
+      assertEquals(
+          TestName + " Maximum Distance Equals ",
+          travelTimeRequestObject.MaximumDistance,
+          MAXIMUMDISTANCE,
+          0);
+    }
+
+    // check travelTimeRequestObject.MaximumTravelTime
+    if (travelTimeRequestObject.MaximumTravelTime != null) {
+      assertEquals(
+          TestName + " Maximum TravelTime Equals ",
+          travelTimeRequestObject.MaximumTravelTime,
+          MAXIMUMTRAVELTIME,
+          0);
     }
   }
 
