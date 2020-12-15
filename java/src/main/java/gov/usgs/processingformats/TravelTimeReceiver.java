@@ -12,9 +12,8 @@ import org.json.simple.JSONObject;
 public class TravelTimeReceiver implements ProcessingInt {
 
   /** JSON Keys */
-  public static final String TYPE_KEY = "Type";
-
   public static final String ID_KEY = "ID";
+
   public static final String DISTANCE_KEY = "Distance";
   public static final String ELEVATION_KEY = "Elevation";
   public static final String LATITUDE_KEY = "Latitude";
@@ -133,17 +132,8 @@ public class TravelTimeReceiver implements ProcessingInt {
           // get the object
           JSONObject DataObject = (JSONObject) BranchesArray.get(i);
 
-          // check for Type
-          if (DataObject.containsKey(TYPE_KEY)) {
-
-            // Route based on Type
-            String TypeString = (String) DataObject.get(TYPE_KEY);
-            if (TypeString.equals("TTData")) {
-
-              // add to vector
-              Branches.add(new TravelTimeData(DataObject));
-            }
-          }
+          // add to vector
+          Branches.add(new TravelTimeData(DataObject));
         }
       }
     } else {

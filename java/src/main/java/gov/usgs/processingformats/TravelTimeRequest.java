@@ -14,7 +14,7 @@ public class TravelTimeRequest implements ProcessingInt {
   /** JSON Keys */
   public static final String SOURCE_KEY = "Source";
 
-  public static final String Receivers_KEY = "Receivers";
+  public static final String RECEIVERS_KEY = "Receivers";
   public static final String EARTHMODEL_KEY = "EarthModel";
   public static final String PHASETYPES_KEY = "PhaseTypes";
   public static final String RETURNALLPHASES_KEY = "ReturnAllPhases";
@@ -110,12 +110,12 @@ public class TravelTimeRequest implements ProcessingInt {
     }
 
     // Receivers
-    if (newJSONObject.containsKey(Receivers_KEY)) {
+    if (newJSONObject.containsKey(RECEIVERS_KEY)) {
 
       Receivers = new ArrayList<TravelTimeReceiver>();
 
       // get the array
-      JSONArray ReceiversArray = (JSONArray) newJSONObject.get(Receivers_KEY);
+      JSONArray ReceiversArray = (JSONArray) newJSONObject.get(RECEIVERS_KEY);
 
       if ((ReceiversArray != null) && (!ReceiversArray.isEmpty())) {
 
@@ -297,7 +297,7 @@ public class TravelTimeRequest implements ProcessingInt {
       }
 
       if (!ReceiversArray.isEmpty()) {
-        newJSONObject.put(Receivers_KEY, ReceiversArray);
+        newJSONObject.put(RECEIVERS_KEY, ReceiversArray);
       }
     }
 
