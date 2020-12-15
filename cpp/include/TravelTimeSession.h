@@ -7,11 +7,11 @@
 #ifndef PROCESSING_TRAVELTIMESESSION_H
 #define PROCESSING_TRAVELTIMESESSION_H
 
-#include <base.h>
-
 #include <string>
 #include <exception>
 #include <vector>
+
+#include "base.h" // NOLINT
 
 namespace processingformats {
 

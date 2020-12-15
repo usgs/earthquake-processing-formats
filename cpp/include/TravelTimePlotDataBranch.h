@@ -7,12 +7,12 @@
 #ifndef PROCESSING_TRAVELTIMEPLOTDATABRANCH_H
 #define PROCESSING_TRAVELTIMEPLOTDATABRANCH_H
 
-#include <base.h>
-#include <TravelTimePlotDataSample.h>
-
 #include <string>
 #include <exception>
 #include <vector>
+
+#include "base.h" // NOLINT
+#include "TravelTimePlotDataSample.h" // NOLINT
 
 namespace processingformats {
 

@@ -7,13 +7,13 @@
 #ifndef PROCESSING_TRAVELTIMEREQUEST_H
 #define PROCESSING_TRAVELTIMEREQUEST_H
 
-#include <base.h>
-#include <TravelTimeData.h>
-#include <TravelTimePlotData.h>
-
 #include <string>
 #include <exception>
 #include <vector>
+
+#include "base.h" // NOLINT
+#include "TravelTimeData.h" // NOLINT
+#include "TravelTimePlotData.h" // NOLINT
 
 namespace processingformats {
 

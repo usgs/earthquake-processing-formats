@@ -7,11 +7,11 @@
 #ifndef PROCESSING_BASE_H
 #define PROCESSING_BASE_H
 
-#include <util.h>
-
 #include <string>
 #include <vector>
 #include <cmath>
+
+#include "util.h" // NOLINT
 
 namespace processingformats {
 

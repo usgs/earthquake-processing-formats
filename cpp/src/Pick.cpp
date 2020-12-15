@@ -411,18 +411,6 @@ std::vector<std::string> Pick::getErrors() {
 	// use
 	// no validation for booleans
 
-	// pickedPhase
-	if (pickedPhase == "") {
-		// empty pickedPhase
-		errorlist.push_back("Empty Picked Phase in Pick class.");
-	}
-
-	// associatedPhase
-	if (associatedPhase == "") {
-		// empty associatedPhase
-		errorlist.push_back("Empty Associated Phase in Pick class.");
-	}
-
 	// Optional (Output) Keys
 	// Currently no validation criteria for optional (output) values
 

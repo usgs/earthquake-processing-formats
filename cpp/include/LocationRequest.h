@@ -7,14 +7,14 @@
 #ifndef PROCESSING_LOCATIONREQUEST_H
 #define PROCESSING_LOCATIONREQUEST_H
 
-#include <base.h>
-#include <Pick.h>
-#include <Source.h>
-#include <LocationResult.h>
-
 #include <string>
 #include <exception>
 #include <vector>
+
+#include "base.h" // NOLINT
+#include "Pick.h" // NOLINT
+#include "Source.h" // NOLINT
+#include "LocationResult.h" // NOLINT
 
 namespace processingformats {
 /**

@@ -7,11 +7,11 @@
 #ifndef DETECTION_ERRORELLIPSE_H
 #define DETECTION_ERRORELLIPSE_H
 
-#include <base.h>
-
 #include <string>
 #include <exception>
 #include <vector>
+
+#include "base.h" // NOLINT
 
 namespace processingformats {
 /**
