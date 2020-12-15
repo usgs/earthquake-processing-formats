@@ -1,13 +1,13 @@
-# Travel-Time Request Object Specification
+# Travel-Time Plot Request Object Specification
 
 ## Description
 
-The Travel-Time Request object is an object designed to define a seismic travel
-time request and the information returned.  Travel-Time uses the
+The Travel-Time Plot Request object is an object designed to define a seismic travel
+time request and the information returned, optimized for plotting travel time curves.  Travel-Time uses the
 [JSON standard](http://www.json.org).
 
 ## Usage
-Travel-Time Request is intended for use as part of a seismic travel time
+Travel-Time Pot Request is intended for use as part of a seismic travel time
 information service
 
 ## Lookup Request
@@ -20,16 +20,6 @@ information service
         "Longitude": Number,
         "Depth" : Number
       },
-      "Receivers" : 
-      [
-        {
-          "ID" : String,
-          "Elevation" : Number,
-          "Distance"  : Number,
-          "Latitude"  : Number,
-          "Longitude" : Number
-        }
-      ],
       "EarthModel" : String,
       "PhaseTypes" :
       [
@@ -38,32 +28,23 @@ information service
       "ReturnAllPhases" : Boolean,
       "ReturnBackBranches" : Boolean,
       "ConvertTectonic" : Boolean,
+      "MaximumDistance" : Number,
+      "MaximumTravelTime" : Number,
       "Response" :
       [
         {
-          "ID" : String,
-          "Elevation" : Number,
-          "Distance"  : Number,
-          "Latitude"  : Number,
-          "Longitude" : Number,
-          "Branches" : 
+          "Phase" : String,
+          "Samples" :
           [
             {
-              "Phase"      : String,
-              "TravelTime" : Number,
-              "DistanceDerivative" : Number,
-              "DepthDerivative"    : Number,
-              "RayDerivative"      : Number,
-              "StatisticalSpread"  : Number,
-              "Observability"      : Number,
-              "TeleseismicPhaseGroup" : Number,
-              "AuxiliaryPhaseGroup"   : Number,
-              "LocationUseFlag"       : Boolean,
-              "AssociationWeightFlag" : Boolean
-            }
+               "Distance" : Number,
+               "TravelTime" : Number,
+               "StatisticalSpread" : Number,
+               "Observability" : Number
+            },
           ]
-        }
-    ]
+        },
+      ]
     }
 ```
 
@@ -88,6 +69,8 @@ defaults to false.
 arrivals of all phases, defaults to false.
 * ConvertTectonic - A boolean flag that indicates whether to convert tectonic
 phases (Pb to Pg and Sb to Sg), defaults to false.
+* MaximumDistance - A number containing the maximum desired distance in degrees.
+* MaximumTravelTime - A number containing the maximum desired travel time in seconds.
 
 **Output Values:**
 

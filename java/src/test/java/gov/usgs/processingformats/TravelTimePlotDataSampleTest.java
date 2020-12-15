@@ -10,19 +10,22 @@ public class TravelTimePlotDataSampleTest {
   public static String TRAVELTIMEPLOTDATASAMPLE_STRING =
       "{\"Distance\":1.2,"
           + "\"TravelTime\":22.456,\"Observability\":0.34,"
-          + "\"StatisticalSpread\":1.5}";
+          + "\"StatisticalSpread\":1.5,"
+          + "\"RayParameter\":1.4565}";
 
   public static double DISTANCE = 1.2;
   public static double TRAVELTIME = 22.456;
   public static double STATISTICALSPREAD = 1.5;
   public static double OBSERVABILITY = .34;
+  public static double RAYPARAMETER = 1.4565;
 
   /** Able to write a JSON string */
   @Test
   public void writesJSON() {
 
     TravelTimePlotDataSample travelTimePlotDataSampleObject =
-        new TravelTimePlotDataSample(DISTANCE, TRAVELTIME, STATISTICALSPREAD, OBSERVABILITY);
+        new TravelTimePlotDataSample(
+            DISTANCE, TRAVELTIME, STATISTICALSPREAD, OBSERVABILITY, RAYPARAMETER);
 
     // write out to a string
     String jsonString = Utility.toJSONString(travelTimePlotDataSampleObject.toJSON());
@@ -57,7 +60,8 @@ public class TravelTimePlotDataSampleTest {
     // use constructor
     TravelTimePlotDataSample travelTimePlotDataSampleObject = new TravelTimePlotDataSample();
 
-    travelTimePlotDataSampleObject.reload(DISTANCE, TRAVELTIME, STATISTICALSPREAD, OBSERVABILITY);
+    travelTimePlotDataSampleObject.reload(
+        DISTANCE, TRAVELTIME, STATISTICALSPREAD, OBSERVABILITY, RAYPARAMETER);
 
     // check data values
     checkData(travelTimePlotDataSampleObject, "Reload Function");
@@ -74,6 +78,7 @@ public class TravelTimePlotDataSampleTest {
     travelTimePlotDataSampleObject.TravelTime = TRAVELTIME;
     travelTimePlotDataSampleObject.StatisticalSpread = STATISTICALSPREAD;
     travelTimePlotDataSampleObject.Observability = OBSERVABILITY;
+    travelTimePlotDataSampleObject.RayParameter = RAYPARAMETER;
 
     // check data values
     checkData(travelTimePlotDataSampleObject, "Set Functions");
@@ -85,7 +90,8 @@ public class TravelTimePlotDataSampleTest {
 
     // use constructor
     TravelTimePlotDataSample travelTimePlotDataSampleObject =
-        new TravelTimePlotDataSample(DISTANCE, TRAVELTIME, STATISTICALSPREAD, OBSERVABILITY);
+        new TravelTimePlotDataSample(
+            DISTANCE, TRAVELTIME, STATISTICALSPREAD, OBSERVABILITY, RAYPARAMETER);
 
     TravelTimePlotDataSample travelTimePlotDataSampleObject2 =
         new TravelTimePlotDataSample(travelTimePlotDataSampleObject);
@@ -100,7 +106,8 @@ public class TravelTimePlotDataSampleTest {
 
     // use constructor
     TravelTimePlotDataSample travelTimePlotDataSampleObject =
-        new TravelTimePlotDataSample(DISTANCE, TRAVELTIME, STATISTICALSPREAD, OBSERVABILITY);
+        new TravelTimePlotDataSample(
+            DISTANCE, TRAVELTIME, STATISTICALSPREAD, OBSERVABILITY, RAYPARAMETER);
 
     // Successful validation
     boolean rc = travelTimePlotDataSampleObject.isValid();
@@ -110,7 +117,7 @@ public class TravelTimePlotDataSampleTest {
 
     // use constructor
     TravelTimePlotDataSample badTravelTimePlotDataSampleObject =
-        new TravelTimePlotDataSample(null, TRAVELTIME, STATISTICALSPREAD, null);
+        new TravelTimePlotDataSample(null, TRAVELTIME, STATISTICALSPREAD, null, null);
 
     rc = badTravelTimePlotDataSampleObject.isValid();
 
@@ -140,6 +147,13 @@ public class TravelTimePlotDataSampleTest {
         TestName + " Observability Equals",
         OBSERVABILITY,
         travelTimePlotDataSampleObject.Observability,
+        0);
+
+    // check travelTimeDataObject.RayParameter
+    assertEquals(
+        TestName + " RayParameter Equals",
+        RAYPARAMETER,
+        travelTimePlotDataSampleObject.RayParameter,
         0);
   }
 }

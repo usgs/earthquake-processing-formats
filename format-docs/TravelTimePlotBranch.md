@@ -1,14 +1,14 @@
-# Travel-Time Plot Data Branch Object Specification
+# Travel-Time Plot Branch Object Specification
 
 ## Description
 
-The Travel-Time Plot Data Branch object is an object designed to define the
+The Travel-Time Plot Branch object is an object designed to define the
 information returned for a branch from a travel time plot request.  
-Travel-Time Plot Data Branch uses the [JSON standard](http://www.json.org).
+Travel-Time Plot Branch uses the [JSON standard](http://www.json.org).
 
 ## Usage
 
-Travel-Time Plot Data Branch is intended for use as part of a seismic travel
+Travel-Time Plot Branch is intended for use as part of a seismic travel
 time information service
 
 ## Output

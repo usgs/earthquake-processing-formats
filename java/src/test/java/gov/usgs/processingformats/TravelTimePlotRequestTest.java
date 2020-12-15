@@ -6,41 +6,29 @@ import java.util.ArrayList;
 import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
-public class TravelTimeRequestTest {
+public class TravelTimePlotRequestTest {
 
-  public static String TRAVELTIMEREQUEST_STRING =
+  public static String TRAVELTIMEPLOTREQUEST_STRING =
       "{\"Source\": {\"Latitude\":45.905,\"Longitude\":-112.778,\"Depth\":15.0},"
-          + "\"Receivers\": [{\"ID\":\"45\",\"Elevation\":15.0,\"Latitude\":45.905,"
-          + "\"Longitude\":-112.778,\"Distance\":22.123}],"
           + "\"ConvertTectonic\":true,\"ReturnAllPhases\":true,"
           + "\"EarthModel\":\"AK135\","
           + "\"ReturnBackBranches\":true,\"PhaseTypes\":[\"P\",\"S\",\"PDiff\"],"
-          + "\"Response\":"
-          + "[{\"ID\":\"45\",\"Elevation\":15.0,\"Latitude\":45.905,"
-          + "\"Longitude\":-112.778,\"Distance\":22.123,\"Branches\":"
-          + "[{\"LocationUseFlag\":true,\"DistanceDerivative\":1.2,"
-          + "\"DepthDerivative\":3.45,\"AssociationWeightFlag\":true,"
-          + "\"TeleseismicPhaseGroup\":1,\"Phase\":\"Pg\","
-          + "\"RayDerivative\":5.67,\"AuxiliaryPhaseGroup\":1,"
-          + "\"Observability\":0.34,\"StatisticalSpread\":1.5,"
-          + "\"TravelTime\":22.456}]}]}";
+          + "\"MaximumDistance\":90.0,\"MaximumTravelTime\":2700.0,"
+          + "\"Response\":[{\"Phase\":\"Pg\","
+          + "\"Samples\":[{\"Distance\":1.2,\"Observability\":0.34,"
+          + "\"StatisticalSpread\":1.5,\"TravelTime\":22.456},"
+          + "{\"Distance\":10.5,\"Observability\":1.63,"
+          + "\"StatisticalSpread\":2.1,\"TravelTime\":72.654}]}]}";
 
   public static final String SOURCE_STRING =
       "{\"Latitude\":45.905,\"Longitude\":-112.778,\"Depth\":15.0}";
 
-  public static final String Receivers_STRING =
-      "{\"ID\":\"45\",\"Elevation\":15.0,\"Latitude\":45.905,"
-          + "\"Longitude\":-112.778,\"Distance\":22.123}";
-
   public static final String RESPONSE_STRING =
-      "{\"ID\":\"45\",\"Elevation\":15.0,\"Latitude\":45.905,"
-          + "\"Longitude\":-112.778,\"Distance\":22.123,\"Branches\":"
-          + "[{\"LocationUseFlag\":true,\"DistanceDerivative\":1.2,"
-          + "\"DepthDerivative\":3.45,\"AssociationWeightFlag\":true,"
-          + "\"TeleseismicPhaseGroup\":1,\"Phase\":\"Pg\","
-          + "\"RayDerivative\":5.67,\"AuxiliaryPhaseGroup\":1,"
-          + "\"Observability\":0.34,\"StatisticalSpread\":1.5,"
-          + "\"TravelTime\":22.456}]}";
+      "{\"Phase\":\"Pg\","
+          + "\"Samples\":[{\"Distance\":1.2,\"Observability\":0.34,"
+          + "\"StatisticalSpread\":1.5,\"TravelTime\":22.456},"
+          + "{\"Distance\":10.5,\"Observability\":1.63,"
+          + "\"StatisticalSpread\":2.1,\"TravelTime\":72.654}]}";
 
   public static String EARTHMODEL = "AK135";
   public static String PHASETYPE1 = "P";
@@ -49,21 +37,24 @@ public class TravelTimeRequestTest {
   public static boolean RETURNALLPHASES = true;
   public static boolean RETURNBACKBRANCHES = true;
   public static boolean CONVERTTECTONIC = true;
+  public static double MAXIMUMDISTANCE = 90.0;
+  public static double MAXIMUMTRAVELTIME = 2700.00;
 
   /** Able to write a JSON string */
   @Test
   public void writesJSON() {
 
     // standard request
-    TravelTimeRequest travelTimeRequestObject =
-        new TravelTimeRequest(
+    TravelTimePlotRequest travelTimeRequestObject =
+        new TravelTimePlotRequest(
             buildSource(),
-            buildReceivers(),
             EARTHMODEL,
             buildPhaseTypes(),
             RETURNALLPHASES,
             RETURNBACKBRANCHES,
             CONVERTTECTONIC,
+            MAXIMUMDISTANCE,
+            MAXIMUMTRAVELTIME,
             buildResponse());
 
     // write out to a string
@@ -71,7 +62,8 @@ public class TravelTimeRequestTest {
 
     // check the data
     try {
-      checkData(new TravelTimeRequest(Utility.fromJSONString(jsonStandardString)), "WritesJSON");
+      checkData(
+          new TravelTimePlotRequest(Utility.fromJSONString(jsonStandardString)), "WritesJSON");
     } catch (ParseException e) {
       e.printStackTrace();
     }
@@ -84,7 +76,8 @@ public class TravelTimeRequestTest {
     // standard request
     try {
       checkData(
-          new TravelTimeRequest(Utility.fromJSONString(TRAVELTIMEREQUEST_STRING)), "ReadsJSON");
+          new TravelTimePlotRequest(Utility.fromJSONString(TRAVELTIMEPLOTREQUEST_STRING)),
+          "ReadsJSON");
     } catch (ParseException e) {
       e.printStackTrace();
     }
@@ -95,16 +88,17 @@ public class TravelTimeRequestTest {
   public void reload() {
 
     // use constructor
-    TravelTimeRequest travelTimeRequestObject = new TravelTimeRequest();
+    TravelTimePlotRequest travelTimeRequestObject = new TravelTimePlotRequest();
 
     travelTimeRequestObject.reload(
         buildSource(),
-        buildReceivers(),
         EARTHMODEL,
         buildPhaseTypes(),
         RETURNALLPHASES,
         RETURNBACKBRANCHES,
         CONVERTTECTONIC,
+        MAXIMUMDISTANCE,
+        MAXIMUMTRAVELTIME,
         buildResponse());
 
     // check data values
@@ -116,15 +110,16 @@ public class TravelTimeRequestTest {
   public void setters() {
 
     // use constructor
-    TravelTimeRequest travelTimeRequestObject = new TravelTimeRequest();
+    TravelTimePlotRequest travelTimeRequestObject = new TravelTimePlotRequest();
 
     travelTimeRequestObject.Source = buildSource();
-    travelTimeRequestObject.Receivers = buildReceivers();
     travelTimeRequestObject.EarthModel = EARTHMODEL;
     travelTimeRequestObject.PhaseTypes = buildPhaseTypes();
     travelTimeRequestObject.ReturnAllPhases = RETURNALLPHASES;
     travelTimeRequestObject.ReturnBackBranches = RETURNBACKBRANCHES;
     travelTimeRequestObject.ConvertTectonic = CONVERTTECTONIC;
+    travelTimeRequestObject.MaximumDistance = MAXIMUMDISTANCE;
+    travelTimeRequestObject.MaximumTravelTime = MAXIMUMTRAVELTIME;
     travelTimeRequestObject.Response = buildResponse();
 
     // check data values
@@ -136,18 +131,20 @@ public class TravelTimeRequestTest {
   public void copyConstructor() {
 
     // use constructor
-    TravelTimeRequest travelTimeRequestObject =
-        new TravelTimeRequest(
+    TravelTimePlotRequest travelTimeRequestObject =
+        new TravelTimePlotRequest(
             buildSource(),
-            buildReceivers(),
             EARTHMODEL,
             buildPhaseTypes(),
             RETURNALLPHASES,
             RETURNBACKBRANCHES,
             CONVERTTECTONIC,
+            MAXIMUMDISTANCE,
+            MAXIMUMTRAVELTIME,
             buildResponse());
 
-    TravelTimeRequest travelTimeRequestObject2 = new TravelTimeRequest(travelTimeRequestObject);
+    TravelTimePlotRequest travelTimeRequestObject2 =
+        new TravelTimePlotRequest(travelTimeRequestObject);
 
     // check data values
     checkData(travelTimeRequestObject2, "Copy Constructor");
@@ -158,15 +155,16 @@ public class TravelTimeRequestTest {
   public void validate() {
 
     // use constructor
-    TravelTimeRequest travelTimeRequestObject =
-        new TravelTimeRequest(
+    TravelTimePlotRequest travelTimeRequestObject =
+        new TravelTimePlotRequest(
             buildSource(),
-            buildReceivers(),
             EARTHMODEL,
             buildPhaseTypes(),
             RETURNALLPHASES,
             RETURNBACKBRANCHES,
             CONVERTTECTONIC,
+            MAXIMUMDISTANCE,
+            MAXIMUMTRAVELTIME,
             buildResponse());
 
     // Successful validation
@@ -178,16 +176,16 @@ public class TravelTimeRequestTest {
     assertEquals("Successful Validation", true, rc);
 
     // use constructor
-    TravelTimeRequest badTravelTimeRequestObject =
-        new TravelTimeRequest(null, null, null, null, null, null, null, null);
+    TravelTimePlotRequest badTravelTimePlotRequestObject =
+        new TravelTimePlotRequest(null, null, null, null, null, null, null, null, null);
 
-    rc = badTravelTimeRequestObject.isValid();
+    rc = badTravelTimePlotRequestObject.isValid();
 
     // check return code
     assertEquals("Unsuccessful Validation", false, rc);
   }
 
-  public void checkData(TravelTimeRequest travelTimeRequestObject, String TestName) {
+  public void checkData(TravelTimePlotRequest travelTimeRequestObject, String TestName) {
 
     // travelTimeRequestObject.earthModel
     if (travelTimeRequestObject.EarthModel != null) {
@@ -235,6 +233,24 @@ public class TravelTimeRequestTest {
           travelTimeRequestObject.ConvertTectonic,
           CONVERTTECTONIC);
     }
+
+    // check travelTimeRequestObject.MaximumDistance
+    if (travelTimeRequestObject.MaximumDistance != null) {
+      assertEquals(
+          TestName + " Maximum Distance Equals ",
+          travelTimeRequestObject.MaximumDistance,
+          MAXIMUMDISTANCE,
+          0);
+    }
+
+    // check travelTimeRequestObject.MaximumTravelTime
+    if (travelTimeRequestObject.MaximumTravelTime != null) {
+      assertEquals(
+          TestName + " Maximum TravelTime Equals ",
+          travelTimeRequestObject.MaximumTravelTime,
+          MAXIMUMTRAVELTIME,
+          0);
+    }
   }
 
   public TravelTimeSource buildSource() {
@@ -248,18 +264,6 @@ public class TravelTimeRequestTest {
     }
   }
 
-  public ArrayList<TravelTimeReceiver> buildReceivers() {
-    ArrayList<TravelTimeReceiver> newReceivers = new ArrayList<TravelTimeReceiver>();
-    try {
-      newReceivers.add(new TravelTimeReceiver(Utility.fromJSONString(Receivers_STRING)));
-    } catch (ParseException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-      return (null);
-    }
-    return (newReceivers);
-  }
-
   public ArrayList<String> buildPhaseTypes() {
 
     ArrayList<String> phaseTypes = new ArrayList<String>();
@@ -271,10 +275,10 @@ public class TravelTimeRequestTest {
     return (phaseTypes);
   }
 
-  public ArrayList<TravelTimeReceiver> buildResponse() {
-    ArrayList<TravelTimeReceiver> newResponse = new ArrayList<TravelTimeReceiver>();
+  public ArrayList<TravelTimePlotDataBranch> buildResponse() {
+    ArrayList<TravelTimePlotDataBranch> newResponse = new ArrayList<TravelTimePlotDataBranch>();
     try {
-      newResponse.add(new TravelTimeReceiver(Utility.fromJSONString(RESPONSE_STRING)));
+      newResponse.add(new TravelTimePlotDataBranch(Utility.fromJSONString(RESPONSE_STRING)));
     } catch (ParseException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
