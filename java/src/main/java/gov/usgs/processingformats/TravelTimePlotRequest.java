@@ -20,6 +20,7 @@ public class TravelTimePlotRequest implements ProcessingInt {
   public static final String RETURNBACKBRANCHES_KEY = "ReturnBackBranches";
   public static final String CONVERTTECTONIC_KEY = "ConvertTectonic";
   public static final String MAXIMUMDISTANCE_KEY = "MaximumDistance";
+  public static final String DISTANCESTEP_KEY = "DistanceStep";
   public static final String MAXIMUMTRAVELTIME_KEY = "MaximumTravelTime";
 
   public static final String RESPONSE_KEY = "Response";
@@ -50,13 +51,16 @@ public class TravelTimePlotRequest implements ProcessingInt {
   /** Optional double containing the maximum desired travel time in seconds */
   public Double MaximumTravelTime;
 
+  /** Optional double containing the distance step increment in degrees */
+  public Double DistanceStep;
+
   /** Returned travel time Data (empty for requests) */
   public ArrayList<TravelTimePlotDataBranch> Response;
 
   /** The constructor for the TravelTimePlotRequest class. Initializes members to null values. */
   public TravelTimePlotRequest() {
 
-    reload(null, null, null, null, null, null, null, null, null);
+    reload(null, null, null, null, null, null, null, null, null, null);
   }
 
   /**
@@ -73,6 +77,7 @@ public class TravelTimePlotRequest implements ProcessingInt {
    *     phases
    * @param newConvertTectonic - A boolean that indicates whether to convert tectonic phases
    * @param newMaxDistance - A double containing the maximum desired distance in degrees
+   * @param newDistanceStep - A double containing the distance step increment in degrees
    * @param newMaxTT - A double containing the maximum desired travel time in seconds
    * @param newResponse - An ArrayList&lt;TravelTimePlotDataBranch&gt; objects containing the
    *     returned Receivers with travel time data
@@ -85,6 +90,7 @@ public class TravelTimePlotRequest implements ProcessingInt {
       Boolean newReturnBackBranches,
       Boolean newConvertTectonic,
       Double newMaxDistance,
+      Double newDistanceStep,
       Double newMaxTT,
       ArrayList<TravelTimePlotDataBranch> newResponse) {
 
@@ -96,6 +102,7 @@ public class TravelTimePlotRequest implements ProcessingInt {
         newReturnBackBranches,
         newConvertTectonic,
         newMaxDistance,
+        newDistanceStep,
         newMaxTT,
         newResponse);
   }
@@ -175,6 +182,13 @@ public class TravelTimePlotRequest implements ProcessingInt {
       MaximumDistance = null;
     }
 
+    // DistanceStep
+    if (newJSONObject.containsKey(DISTANCESTEP_KEY)) {
+      DistanceStep = (double) newJSONObject.get(DISTANCESTEP_KEY);
+    } else {
+      DistanceStep = null;
+    }
+
     // MaximumTravelTime
     if (newJSONObject.containsKey(MAXIMUMTRAVELTIME_KEY)) {
       MaximumTravelTime = (double) newJSONObject.get(MAXIMUMTRAVELTIME_KEY);
@@ -221,6 +235,7 @@ public class TravelTimePlotRequest implements ProcessingInt {
         sourceObject.ReturnBackBranches,
         sourceObject.ConvertTectonic,
         sourceObject.MaximumDistance,
+        sourceObject.DistanceStep,
         sourceObject.MaximumTravelTime,
         sourceObject.Response);
   }
@@ -238,6 +253,7 @@ public class TravelTimePlotRequest implements ProcessingInt {
    *     phases
    * @param newConvertTectonic - A boolean that indicates whether to convert tectonic phases
    * @param newMaxDistance - A double containing the maximum desired distance in degrees
+   * @param newDistanceStep - A double containing the distance step increment in degrees
    * @param newMaxTT - A double containing the maximum desired travel time in seconds
    * @param newResponse - An ArrayList&lt;TravelTimePlotDataBranch&gt; objects containing the
    *     returned Receivers with travel time data
@@ -250,6 +266,7 @@ public class TravelTimePlotRequest implements ProcessingInt {
       Boolean newReturnBackBranches,
       Boolean newConvertTectonic,
       Double newMaxDistance,
+      Double newDistanceStep,
       Double newMaxTT,
       ArrayList<TravelTimePlotDataBranch> newResponse) {
 
@@ -261,6 +278,7 @@ public class TravelTimePlotRequest implements ProcessingInt {
     ReturnBackBranches = newReturnBackBranches;
     ConvertTectonic = newConvertTectonic;
     MaximumDistance = newMaxDistance;
+    DistanceStep = newDistanceStep;
     MaximumTravelTime = newMaxTT;
     Response = newResponse;
   }
@@ -322,6 +340,11 @@ public class TravelTimePlotRequest implements ProcessingInt {
     // MaximumDistance
     if (MaximumDistance != null) {
       newJSONObject.put(MAXIMUMDISTANCE_KEY, MaximumDistance);
+    }
+
+    // DistanceStep
+    if (DistanceStep != null) {
+      newJSONObject.put(DISTANCESTEP_KEY, DistanceStep);
     }
 
     // MaximumTravelTime
