@@ -350,33 +350,7 @@ class LocationResult:
             if self.secondaryGap < 0 or self.secondaryGap > 360:
                 errorList.append('Secondary gap in LocationResult Class not in the range of 0 to 360.')
         
-        # Locator Exit Code
-        try:
-            match = False
-            
-            if self.locatorExitCode == "Success":
-                match = True
-                
-            elif self.locatorExitCode == "DidNotMove":
-                match = True
-                
-            elif self.locatorExitCode == "ErrorsNotComputed":
-                match = True
-                
-            elif self.locatorExitCode == "Failed":
-                match = True
-                
-            elif self.locatorExitCode == "Unknown":
-                match = True
-                
-            else:
-                match = False
-                
-            if not match:
-                errorList.append("Invalid locator exit code in LocationResult Class")
-        except(NameError, AttributeError):
-            errorList.append('No locator exit code in LocationResult Class.')
-                
+        # Locator Exit Code has no validation                
         
         # Error Ellipse
         if hasattr(self, 'errorEllipse'):

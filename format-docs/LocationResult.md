@@ -140,7 +140,6 @@ kilometers
 kilometers
 * DepthImportance - A number containing the importance from the bayesian
 depth constraint
-* LocatorExitCode - A String containing the locator exit code, allowed values
-are: "Success", "DidNotMove", "ErrorsNotComputed", "Failed", and "Unknown"
+* LocatorExitCode - A String containing the locator exit code.
 * ErrorEllipse - An object containing the error ellipse of the Location, see
 [ErrorEllipse](ErrorEllipse.md)

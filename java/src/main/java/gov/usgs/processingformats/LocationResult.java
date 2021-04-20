@@ -821,29 +821,8 @@ public class LocationResult implements ProcessingInt {
       }
     }
 
-    // locator exit code
-    if (LocatorExitCode != null) {
-      boolean match = false;
-      if (LocatorExitCode.equals("Success")) {
-        match = true;
-      } else if (LocatorExitCode.equals("DidNotMove")) {
-        match = true;
-      } else if (LocatorExitCode.equals("ErrorsNotComputed")) {
-        match = true;
-      } else if (LocatorExitCode.equals("Failed")) {
-        match = true;
-      } else if (LocatorExitCode.equals("Unknown")) {
-        match = true;
-      } else {
-        match = false;
-      }
-
-      if (!match) {
-        // invalid eventType
-        errorList.add("Invalid locator exit code in LocationResult Class.");
-      }
-    }
-
+    // locator exit code has no validation
+    
     // error ellipse
     if (ErrorEllipse != null) {
       if (!ErrorEllipse.isValid()) {
