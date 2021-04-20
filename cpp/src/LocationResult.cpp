@@ -39,7 +39,7 @@ LocationResult::LocationResult() {
 	minimumDistance = std::numeric_limits<double>::quiet_NaN();
 	rms = std::numeric_limits<double>::quiet_NaN();
 	quality = "";
-  bayesianDepth = std::numeric_limits<double>::quiet_NaN();
+  	bayesianDepth = std::numeric_limits<double>::quiet_NaN();
 	bayesianRange = std::numeric_limits<double>::quiet_NaN();
 	depthImportance = std::numeric_limits<double>::quiet_NaN();
 	locatorExitCode = "";
