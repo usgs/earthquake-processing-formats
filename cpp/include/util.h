@@ -29,24 +29,6 @@
  */
 namespace processingformats {
 	/**
-	 * \brief processingformats valid locator exit code index enum. 
-	 */
-	enum locatorExitCodeIndex {
-		unknown = 0,
-		success = 1,
-		didnotmove = 2,
-		errorsnotcomputed = 3,
-		failed = 4,
-		locatorexitcodecount = 9
-	};
-
-	/**
-	 * \brief processingformats valid locator exit code values.
-	 */
-	static const char *locatorExitCodeValues[] = { "Unknown", "Success",
-			"DidNotMove", "ErrorsNotComputed", "Failed", "" };
-
-	/**
 	 * \brief detectionformats function to validate that a string contains just
 	 * characters
 	 */
