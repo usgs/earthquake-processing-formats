@@ -568,25 +568,6 @@ std::vector<std::string> LocationResult::getErrors() {
 		}
 	}
 
-	// pickedPhase
-	if (locatorExitCode.empty() == false) {
-		bool match = false;
-		// check all the valid exit codes to see if this string matches
-		for (int i = processingformats::locatorExitCodeIndex::unknown;
-				i < processingformats::locatorExitCodeIndex::locatorexitcodecount;
-				i++) {
-			if (locatorExitCode == locatorExitCodeValues[i]) {
-				match = true;
-				break;
-			}
-		}
-
-		if (!match) {
-			// invalid eventType
-			errorlist.push_back("Invalid locator exit code in LocationResult Class.");
-		}
-	}
-
 	// errorEllipse
 	if (errorEllipse.isEmpty() == false) {
 		if (errorEllipse.isValid() != true) {
