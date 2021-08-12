@@ -26,6 +26,7 @@ location processing algorithm.
           "Type"     : String
         },
         "EarthModel" : String,
+        "SlabResolution" : String,
         "SourceOriginTime" : Number,
         "SourceLatitude"  : Number,
         "SourceLongitude" : Number,
@@ -78,7 +79,6 @@ location processing algorithm.
 
 * Type - A String containing the name of the algorithm this request is
 valid for. Ex. "RayLoc".
-* EarthModel - A String containing the Travel Time Earth Model to use.
 * SourceOriginTime - A string containing the UTC origin time of this hypocenter, in
 the ISO8601 format `YYYY-MM-DDTHH:MM:SS.SSSZ`.
 * SourceLatitude - A number that identifies the geographic source latitude of  
@@ -96,6 +96,8 @@ The following are supplementary values that **may or may not** be provided.
 * ID - A String containing the identifier for the location request.
 * Source - An object containing the source of the location result, see 
 [Source](Source.md).
+* EarthModel - A String containing the Travel Time Earth Model to use, defaults to 'ak135'
+* SlabResolution - A String containing the Slab Model to use, defaults to '20spd'
 * IsLocationNew - A boolean flag that indicates if the location has been changed
 outside the locator.
 * IsLocationHeld - A boolean flag that indicates whether the location can be

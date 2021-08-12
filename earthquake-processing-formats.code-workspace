@@ -74,7 +74,15 @@
 			"*.tcc": "cpp",
 			"cinttypes": "cpp",
 			"hashtable": "cpp",
-			"__functional_base_03": "cpp"
+			"__functional_base_03": "cpp",
+			"__errc": "cpp",
+			"__node_handle": "cpp",
+			"bit": "cpp",
+			"codecvt": "cpp",
+			"fstream": "cpp",
+			"numeric": "cpp",
+			"optional": "cpp",
+			"random": "cpp"
 		}
 	}
 }

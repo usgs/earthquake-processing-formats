@@ -19,7 +19,8 @@ class LocationRequest:
     TYPE_KEY = "Type" # Required
     ID_KEY = "ID" # Optional
     SOURCE_KEY = "Source" # Optional
-    EARTHMODEL_KEY = "EarthModel" # Required
+    EARTHMODEL_KEY = "EarthModel" # Optional
+    SLABRESOLUTION_KEY = "SlabResolution" # Optional
     SOURCEORIGINTIME_KEY = "SourceOriginTime" # Required
     SOURCELATITUDE_KEY = "SourceLatitude" # Required
     SOURCELONGITUDE_KEY = "SourceLongitude" # Required
@@ -36,7 +37,7 @@ class LocationRequest:
     
     #Intialize members
     def __init__ (self, newID = None, newSource = None, newType = None, newEarthModel = None, 
-                  newSourceLatitude = None, newSourceLongitude = None, 
+                  newSlabResolution = None, newSourceLatitude = None, newSourceLongitude = None, 
                   newSourceOriginTime = None, newSourceDepth = None, 
                   newInputData = None, newIsLocationNew = None, newIsLocationHeld = None, 
                   newIsDepthHeld = None, newIsBayesianDepth = None, newBayesianDepth = None,
@@ -46,7 +47,8 @@ class LocationRequest:
             newID: a string containing the ID
             newSource: a processingformats.source.Source containing desired source (and supporting info)
             newType: a type identifier for this Location Request
-            newEarthModel: an earth model for this Location Request
+            newEarthModel: an earth model for this Location Request, default ak135
+            newSlabResolution: an earth model for this Location Request, default 20spd
             newSourceLatitude: a double containing the source latitude in degrees
             newSourceLongitude: a double containing the source longitude in degrees
             newSourceOriginTime: a Datetime containing the source time
@@ -66,10 +68,7 @@ class LocationRequest:
         # Required Keys
         if newType is not None:
             self.type = newType
-            
-        if newEarthModel is not None:
-            self.earthModel = newEarthModel
-            
+           
         if newSourceLatitude is not None:
             self.sourceLatitude = newSourceLatitude
         
@@ -94,7 +93,17 @@ class LocationRequest:
             self.source = newSource
         else:
             self.source = processingformats.source.Source()
-            
+
+        if newEarthModel is not None:
+            self.earthModel = newEarthModel
+        else:
+            self.earthModel = 'ak135'
+
+        if newSlabResolution is not None:
+            self.slabResolution = newSlabResolution
+        else:
+            self.slabResolution = '20spd'
+
         if newIsLocationNew is not None:
             self.isLocationNew = newIsLocationNew
             
@@ -133,7 +142,6 @@ class LocationRequest:
         #Required Keys
         try:
             self.type = aDict[self.TYPE_KEY]
-            self.earthModel = aDict[self.EARTHMODEL_KEY]
             self.sourceLatitude = aDict[self.SOURCELATITUDE_KEY]
             self.sourceLongitude = aDict[self.SOURCELONGITUDE_KEY]
             self.sourceDepth = aDict[self.SOURCEDEPTH_KEY]
@@ -159,7 +167,17 @@ class LocationRequest:
 
         if self.SOURCE_KEY in aDict:
             self.source.fromDict(aDict[self.SOURCE_KEY])
-            
+
+        if self.EARTHMODEL_KEY in aDict:            
+            self.earthModel = aDict[self.EARTHMODEL_KEY]
+        else:
+            self.earthModel = 'ak135'
+
+        if self.SLABRESOLUTION_KEY in aDict:            
+            self.slabResolution = aDict[self.SLABRESOLUTION_KEY]
+        else:
+            self.slabResolution = '20spd'
+
         if self.ISLOCATIONNEW_KEY in aDict:
             self.isLocationNew = aDict[self.ISLOCATIONNEW_KEY]
             
@@ -201,7 +219,6 @@ class LocationRequest:
         #Required Keys
         try:
             aDict[self.TYPE_KEY] = self.type
-            aDict[self.EARTHMODEL_KEY] = self.earthModel
             aDict[self.SOURCELATITUDE_KEY] = self.sourceLatitude
             aDict[self.SOURCELONGITUDE_KEY] = self.sourceLongitude
             aDict[self.SOURCEDEPTH_KEY] = self.sourceDepth
@@ -225,6 +242,16 @@ class LocationRequest:
             if not self.source.isEmpty():
                 aDict[self.SOURCE_KEY] = self.source.toDict()
 
+        if hasattr (self, 'earthModel'):
+            aDict[self.EARTHMODEL_KEY] = self.earthModel
+        else:
+            aDict[self.EARTHMODEL_KEY] = 'ak135'
+
+        if hasattr (self, 'slabResolution'):
+            aDict[self.SLABRESOLUTION_KEY] = self.slabResolution
+        else:
+            aDict[self.SLABRESOLUTION_KEY] = '20spd'
+
         if hasattr (self, 'isLocationNew'):
             aDict[self.ISLOCATIONNEW_KEY] = self.isLocationNew
         
@@ -245,7 +272,6 @@ class LocationRequest:
             
         if hasattr (self, 'useSVD'):
             aDict[self.USESVD_KEY] = self.useSVD
-            
         
         return aDict
 

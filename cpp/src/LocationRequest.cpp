@@ -9,6 +9,7 @@
 #define SOURCE_KEY "Source"
 #define ID_KEY "ID"
 #define EARTHMODEL_KEY "EarthModel"
+#define SLABRESOLUTION_KEY "SlabResolution"
 #define SOURCEORIGINTIME_KEY "SourceOriginTime"
 #define SOURCELATITUDE_KEY "SourceLatitude"
 #define SOURCELONGITUDE_KEY "SourceLongitude"
@@ -25,10 +26,11 @@
 
 namespace processingformats {
 LocationRequest::LocationRequest() {
-	  id = "";
+	id = "";
     source = processingformats::Source();
     type = "";
-    earthModel = "";
+    earthModel = "ak135";
+	slabResolution = "20spd";
     sourceLatitude = std::numeric_limits<double>::quiet_NaN();
     sourceLongitude = std::numeric_limits<double>::quiet_NaN();
     sourceOriginTime = std::numeric_limits<double>::quiet_NaN();
@@ -51,6 +53,7 @@ LocationRequest::LocationRequest(
       std::string newType,
       std::string newLocType,
       std::string newEarthModel,
+	  std::string newSlabResolution,
       double newSourceLatitude,
       double newSourceLongitude,
       double newSourceOriginTime,
@@ -64,25 +67,31 @@ LocationRequest::LocationRequest(
       double newBayesianSpread,
       bool newUseSVD) {
 	id = newID;
-  LocationRequest::source = processingformats::Source(newAgencyID, newAuthor,
-    newType);
+	LocationRequest::source = processingformats::Source(newAgencyID, newAuthor,
+		newType);
 	type = newLocType;
 	sourceLatitude = newSourceLatitude;
-  sourceLongitude = newSourceLongitude;
-  sourceOriginTime = newSourceOriginTime;
-  sourceDepth = newSourceDepth;
-  inputData.clear();
-  for (int i = 0; i < static_cast<int>(newInputData.size()); i++) {
+	sourceLongitude = newSourceLongitude;
+	sourceOriginTime = newSourceOriginTime;
+	sourceDepth = newSourceDepth;
+	inputData.clear();
+	for (int i = 0; i < static_cast<int>(newInputData.size()); i++) {
 		inputData.push_back(newInputData[i]);
 	}
-  isLocationNew = newIsLocationNew;
-  isLocationHeld = newIsLocationHeld;
-  isDepthHeld = newIsDepthHeld;
-  isBayesianDepth = newIsBayesianDepth;
-  bayesianDepth = newBayesianDepth;
-  bayesianSpread = newBayesianSpread;
-  useSVD = newUseSVD;
-  outputData = processingformats::LocationResult();
+	if (newEarthModel != "") {
+		earthModel = newEarthModel;
+	}
+	if (newSlabResolution != "") {
+		slabResolution= newSlabResolution;
+	}
+	isLocationNew = newIsLocationNew;
+	isLocationHeld = newIsLocationHeld;
+	isDepthHeld = newIsDepthHeld;
+	isBayesianDepth = newIsBayesianDepth;
+	bayesianDepth = newBayesianDepth;
+	bayesianSpread = newBayesianSpread;
+	useSVD = newUseSVD;
+	outputData = processingformats::LocationResult();
 }
 
 LocationRequest::LocationRequest(
@@ -90,6 +99,7 @@ LocationRequest::LocationRequest(
       processingformats::Source newSource,
       std::string newLocType,
       std::string newEarthModel,
+	  std::string newSlabResolution,
       double newSourceLatitude,
       double newSourceLongitude,
       double newSourceOriginTime,
@@ -103,24 +113,30 @@ LocationRequest::LocationRequest(
       double newBayesianSpread,
       bool newUseSVD) {
 	id = newID;
-  LocationRequest::source = newSource;
+	LocationRequest::source = newSource;
 	type = newLocType;
 	sourceLatitude = newSourceLatitude;
-  sourceLongitude = newSourceLongitude;
-  sourceOriginTime = newSourceOriginTime;
-  sourceDepth = newSourceDepth;
-  inputData.clear();
-  for (int i = 0; i < static_cast<int>(newInputData.size()); i++) {
+	sourceLongitude = newSourceLongitude;
+	sourceOriginTime = newSourceOriginTime;
+	sourceDepth = newSourceDepth;
+	inputData.clear();
+	for (int i = 0; i < static_cast<int>(newInputData.size()); i++) {
 		inputData.push_back(newInputData[i]);
 	}
-  isLocationNew = newIsLocationNew;
-  isLocationHeld = newIsLocationHeld;
-  isDepthHeld = newIsDepthHeld;
-  isBayesianDepth = newIsBayesianDepth;
-  bayesianDepth = newBayesianDepth;
-  bayesianSpread = newBayesianSpread;
-  useSVD = newUseSVD;
-  outputData = processingformats::LocationResult();
+	if (newEarthModel != "") {
+		earthModel = newEarthModel;
+	}
+	if (newSlabResolution != "") {
+		slabResolution= newSlabResolution;
+	}  
+	isLocationNew = newIsLocationNew;
+	isLocationHeld = newIsLocationHeld;
+	isDepthHeld = newIsDepthHeld;
+	isBayesianDepth = newIsBayesianDepth;
+	bayesianDepth = newBayesianDepth;
+	bayesianSpread = newBayesianSpread;
+	useSVD = newUseSVD;
+	outputData = processingformats::LocationResult();
 }
 
 LocationRequest::LocationRequest(rapidjson::Value &json) {
@@ -134,16 +150,7 @@ LocationRequest::LocationRequest(rapidjson::Value &json) {
 		type = "";
 	}
 
-	// earthModel
-	if ((json.HasMember(EARTHMODEL_KEY) == true)
-			&& (json[EARTHMODEL_KEY].IsString() == true)) {
-		earthModel = std::string(json[EARTHMODEL_KEY].GetString(),
-								json[EARTHMODEL_KEY].GetStringLength());
-	} else {
-		earthModel = "";
-	}
-
-  // sourceLatitude
+    // sourceLatitude
 	if ((json.HasMember(SOURCELATITUDE_KEY) == true)
 			&& (json[SOURCELATITUDE_KEY].IsNumber() == true)
 			&& (json[SOURCELATITUDE_KEY].IsDouble() == true)) {
@@ -170,17 +177,17 @@ LocationRequest::LocationRequest(rapidjson::Value &json) {
 		sourceDepth = std::numeric_limits<double>::quiet_NaN();
 	}
 
-  // sourceOriginTime
+    // sourceOriginTime
 	if ((json.HasMember(SOURCEORIGINTIME_KEY) == true)
 			&& (json[SOURCEORIGINTIME_KEY].IsString() == true)) {
 		sourceOriginTime = processingformats::ConvertISO8601ToEpochTime(
 				std::string(json[SOURCEORIGINTIME_KEY].GetString(),
 							json[SOURCEORIGINTIME_KEY].GetStringLength()));
-  } else {
+	} else {
 		sourceOriginTime = std::numeric_limits<double>::quiet_NaN();
-  }
+	}
 
-  // input data
+    // input data
 	inputData.clear();
 	if ((json.HasMember(INPUTDATA_KEY) == true)
 			&& (json[INPUTDATA_KEY].IsArray() == true)) {
@@ -199,10 +206,19 @@ LocationRequest::LocationRequest(rapidjson::Value &json) {
 
 	// optional values
 	// id
+	// check type of id object
 	if ((json.HasMember(ID_KEY) == true) && (json[ID_KEY].IsString() == true)) {
+		// the Id *should* be a string
 		id = std::string(json[ID_KEY].GetString(),
 							json[ID_KEY].GetStringLength());
+	} else if ((json.HasMember(ID_KEY) == true) 
+		&& (json[ID_KEY].IsNumber() == true) 
+		&& (json[ID_KEY].IsInt() == true)) {
+		// but the ID *could* be an int, but we 
+        // want it to be a string
+		id = std::to_string(json[SOURCELONGITUDE_KEY].GetInt());
 	} else {
+		// any other type isn't a usable id
 		id = "";
 	}
 
@@ -215,7 +231,25 @@ LocationRequest::LocationRequest(rapidjson::Value &json) {
 		source = processingformats::Source();
 	}
 
-  // isLocationNew
+	// earthModel
+	if ((json.HasMember(EARTHMODEL_KEY) == true)
+			&& (json[EARTHMODEL_KEY].IsString() == true)) {
+		earthModel = std::string(json[EARTHMODEL_KEY].GetString(),
+								json[EARTHMODEL_KEY].GetStringLength());
+	} else {
+		earthModel = "ak135";
+	}
+
+	// slabResolution
+	if ((json.HasMember(SLABRESOLUTION_KEY) == true)
+			&& (json[SLABRESOLUTION_KEY].IsString() == true)) {
+		slabResolution = std::string(json[SLABRESOLUTION_KEY].GetString(),
+								json[SLABRESOLUTION_KEY].GetStringLength());
+	} else {
+		slabResolution = "20spd";
+	}
+
+  	// isLocationNew
 	if ((json.HasMember(ISLOCATIONNEW_KEY) == true)
 			&& (json[ISLOCATIONNEW_KEY].IsBool() == true)) {
 		isLocationNew = json[ISLOCATIONNEW_KEY].GetBool();
@@ -287,7 +321,6 @@ LocationRequest::LocationRequest(const LocationRequest & newLocationRequest) {
 	  id = newLocationRequest.id;
     source = newLocationRequest.source;
     type = newLocationRequest.type;
-    earthModel = newLocationRequest.earthModel;
     sourceLatitude = newLocationRequest.sourceLatitude;
     sourceLongitude = newLocationRequest.sourceLongitude;
     sourceOriginTime = newLocationRequest.sourceOriginTime;
@@ -300,6 +333,8 @@ LocationRequest::LocationRequest(const LocationRequest & newLocationRequest) {
 		  inputData.push_back(newLocationRequest.inputData[i]);
 	  }
 
+    earthModel = newLocationRequest.earthModel;
+	slabResolution = newLocationRequest.slabResolution;
     isLocationNew = newLocationRequest.isLocationNew;
     isLocationHeld = newLocationRequest.isLocationHeld;
     isDepthHeld = newLocationRequest.isDepthHeld;
@@ -328,28 +363,20 @@ rapidjson::Value & LocationRequest::toJSON(
 		json.AddMember(TYPE_KEY, typeValue, allocator);
 	}
 
-	// earthModel
-	if (earthModel != "") {
-		rapidjson::Value earthModelValue;
-		earthModelValue.SetString(rapidjson::StringRef(earthModel.c_str()),
-								allocator);
-		json.AddMember(EARTHMODEL_KEY, earthModelValue, allocator);
-	}
-
 	// sourceLatitude
 	if (std::isnan(sourceLatitude) != true) {
 		json.AddMember(SOURCELATITUDE_KEY, sourceLatitude, allocator);
-  }
+	}
 
 	// sourceLongitude
 	if (std::isnan(sourceLongitude) != true) {
 		json.AddMember(SOURCELONGITUDE_KEY, sourceLongitude, allocator);
-  }
+  	}
 
 	// sourceDepth
 	if (std::isnan(sourceDepth) != true) {
 		json.AddMember(SOURCEDEPTH_KEY, sourceDepth, allocator);
-  }
+  	}
 
 	// sourceOriginTime
 	if (std::isnan(sourceOriginTime) != true) {
@@ -361,7 +388,7 @@ rapidjson::Value & LocationRequest::toJSON(
 		json.AddMember(SOURCEORIGINTIME_KEY, timevalue, allocator);
 	}
 
-  // input data
+  	// input data
 	rapidjson::Value dataarray(rapidjson::kArrayType);
 	if (inputData.size() > 0) {
 		for (int i = 0; i < static_cast<int>(inputData.size()); i++) {
@@ -376,7 +403,7 @@ rapidjson::Value & LocationRequest::toJSON(
 		json.AddMember(INPUTDATA_KEY, dataarray, allocator);
 	}
 
-  // Optional values
+  	// Optional values
 	// id
 	if (id != "") {
 		rapidjson::Value idValue;
@@ -391,6 +418,18 @@ rapidjson::Value & LocationRequest::toJSON(
 		json.AddMember(SOURCE_KEY, sourceValue, allocator);
 	}
 
+	// earthModel
+	rapidjson::Value earthModelValue;
+	earthModelValue.SetString(rapidjson::StringRef(earthModel.c_str()),
+							allocator);
+	json.AddMember(EARTHMODEL_KEY, earthModelValue, allocator);
+
+	// slabResolution
+	rapidjson::Value slabResolutionValue;
+	slabResolutionValue.SetString(rapidjson::StringRef(slabResolution.c_str()),
+							allocator);
+	json.AddMember(SLABRESOLUTION_KEY, slabResolutionValue, allocator);
+
 	// isLocationNew
 	json.AddMember(ISLOCATIONNEW_KEY, isLocationNew, allocator);
 
@@ -403,16 +442,15 @@ rapidjson::Value & LocationRequest::toJSON(
 	// isBayesianDepth
 	json.AddMember(ISBAYESIANDEPTH_KEY, isBayesianDepth, allocator);
 
-
 	// bayesianDepth
 	if (std::isnan(bayesianDepth) != true) {
 		json.AddMember(BAYESIANDEPTH_KEY, bayesianDepth, allocator);
-  }
+  	}
 
 	// bayesianSpread
 	if (std::isnan(bayesianSpread) != true) {
 		json.AddMember(BAYESIANSPREAD_KEY, bayesianSpread, allocator);
-  }
+  	}
 
 	// useSVD
 	json.AddMember(USESVD_KEY, useSVD, allocator);
@@ -471,7 +509,7 @@ std::vector<std::string> LocationRequest::getErrors() {
 		errorlist.push_back("Invalid sourceDepth in LocationRequest class.");
 	}
 
-  // inputData
+  	// inputData
 	if (inputData.size() > 0) {
 		for (int i = 0; i < static_cast<int>(inputData.size()); i++) {
 			if (inputData[i].isValid() != true) {
@@ -490,14 +528,14 @@ std::vector<std::string> LocationRequest::getErrors() {
 		}
 	}
 
-  // optional values
+  	// optional values
 	// source
 	if (source.isEmpty() == false) {
 		if (source.isValid() != true) {
 			std::vector<std::string> sourceErrors = source.getErrors();
 
 			std::string errorString =
-					"Source object did not validate in LocationRequest class:";
+				"Source object did not validate in LocationRequest class:";
 
 			for (int i = 0; i < sourceErrors.size(); i++) {
 				errorString += " " + sourceErrors[i];

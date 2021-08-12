@@ -46,8 +46,10 @@ class LocationRequest : public ProcessingBase {
    * \param newType - A std::string containing the type to Use
    * \param newLocType - A std::string containing the name of the algorithm this 
    *  request is valid for
-   * \param newEarthModel - A std::string containing the name of theTravel Time 
-   *  Earth Model to use
+   * \param newEarthModel - A std::string containing the name of the Travel Time 
+   *  Earth Model to use, empty string for default ("ak135)"
+   * \param newSlabResolution - A std::string containing the name of the slab 
+   *  resolution to use, empty string for default ("20spd")
    * \param newSourceLatitude - A double containing the latitude to use in degrees
    * \param newSourceLongitude - A double containing the longitude to use in 
 	 *  degrees
@@ -73,6 +75,7 @@ class LocationRequest : public ProcessingBase {
       std::string newType,
       std::string newLocType,
       std::string newEarthModel,
+	  std::string newSlabResolution,
       double newSourceLatitude,
       double newSourceLongitude,
       double newSourceOriginTime,
@@ -97,7 +100,9 @@ class LocationRequest : public ProcessingBase {
    * \param newLocType - A std::string containing the name of the algorithm this 
    *  request is valid for
    * \param newEarthModel - A std::string containing the name of the Travel Time 
-   *  Earth Model to use
+   *  Earth Model to use, empty string for default ("ak135)"
+   * \param newSlabResolution - A std::string containing the name of the slab 
+   *  resolution to use, empty string for default ("20spd")
    * \param newSourceLatitude - A double containing the latitude to use in degrees
    * \param newSourceLongitude - A double containing the longitude to use in 
 	 * degrees
@@ -121,6 +126,7 @@ class LocationRequest : public ProcessingBase {
       processingformats::Source newSource,
       std::string newLocType,
       std::string newEarthModel,
+	  std::string newSlabResolution,
       double newSourceLatitude,
       double newSourceLongitude,
       double newSourceOriginTime,
@@ -204,13 +210,6 @@ class LocationRequest : public ProcessingBase {
 	std::string type;
 
 	/**
-	 * \brief The LocationRequest earth model
-	 *
-	 * A required std::string containing the earth model for this LocationRequest.
-	 */
-	std::string earthModel;
-
-	/**
 	 * \brief The source latitude value
 	 *
 	 * A required double defining the source latitude of this LocationRequest in
@@ -226,7 +225,7 @@ class LocationRequest : public ProcessingBase {
 	 */
 	double sourceLongitude;
 
-  /**
+  	/**
 	 * \brief The source origin time value
 	 *
 	 * A required double containing the source origin time for this LocationRequest
@@ -249,35 +248,51 @@ class LocationRequest : public ProcessingBase {
 	 */
 	std::vector<processingformats::Pick> inputData;
 
-  /**
+	/**
+	 * \brief The LocationRequest earth model
+	 *
+	 * An optional std::string containing the earth model for this LocationRequest, 
+	 * default "ak135".
+	 */
+	std::string earthModel;
+
+	/**
+	 * \brief The LocationRequest earth model
+	 *
+	 * An optional std::string containing the slab resolution for this LocationRequest,
+	 * default "20spd".
+	 */
+	std::string slabResolution;
+
+  	/**
 	 * \brief The is location new value
 	 *
 	 * An optional bool indicating whether the location is new
 	 */
 	bool isLocationNew;
 
-  /**
+  	/**
 	 * \brief The is location held value
 	 *
 	 * An optional bool indicating whether the location is held
 	 */
 	bool isLocationHeld;
 
-  /**
+  	/**
 	 * \brief The is depth held value
 	 *
 	 * An optional bool indicating whether the depth is held
 	 */
 	bool isDepthHeld;
 
-  /**
-	 * \brief The is depth bayesian value
+  	/**
+	 * \brief The depth bayesian value
 	 *
 	 * An optional bool indicating whether the depth is bayesian
 	 */
 	bool isBayesianDepth;
 
-  /**
+  	/**
 	 * \brief The bayesian depth value
 	 *
 	 * An optional double containing the bayesian depth for this LocationRequest
@@ -285,7 +300,7 @@ class LocationRequest : public ProcessingBase {
 	 */
 	double bayesianDepth;
 
-  /**
+  	/**
 	 * \brief The bayesian depth spread value
 	 *
 	 * An optional double containing the bayesian depth spread for this 
@@ -293,7 +308,7 @@ class LocationRequest : public ProcessingBase {
 	 */
 	double bayesianSpread;
 
-  /**
+  	/**
 	 * \brief The use svd value
 	 *
 	 * An optional bool indicating whether to use singular value decomposition

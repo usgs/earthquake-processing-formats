@@ -19,6 +19,7 @@ public class LocationRequest implements ProcessingInt {
   public static final String SOURCE_KEY = "Source";
   public static final String ID_KEY = "ID";
   public static final String EARTHMODEL_KEY = "EarthModel";
+  public static final String SLABRESOLUTION_KEY = "SlabResolution";
   public static final String SOURCEORIGINTIME_KEY = "SourceOriginTime";
   public static final String SOURCELATITUDE_KEY = "SourceLatitude";
   public static final String SOURCELONGITUDE_KEY = "SourceLongitude";
@@ -42,9 +43,6 @@ public class LocationRequest implements ProcessingInt {
   /** Required Type identifier for this LocationRequest */
   public String Type;
 
-  /** Required earth model for this LocationRequest */
-  public String EarthModel;
-
   /** Required Double containing the Source latitude in decimal degrees */
   public Double SourceLatitude;
 
@@ -59,6 +57,12 @@ public class LocationRequest implements ProcessingInt {
 
   /** A required vector of input Pick objects for this LocationRequest */
   public ArrayList<Pick> InputData;
+
+  /** Optional earth model for this LocationRequest, defaults to "ak135" */
+  public String EarthModel;
+
+  /** Optional slab resoultion for this LocationRequest defaults to "20spd" */
+  public String SlabResolution;
 
   /** Optional Boolean indicating whether the location is new */
   public Boolean IsLocationNew;
@@ -89,12 +93,13 @@ public class LocationRequest implements ProcessingInt {
     ID = null;
     Source = null;
     Type = null;
-    EarthModel = null;
     SourceLatitude = null;
     SourceLongitude = null;
     SourceOriginTime = null;
     SourceDepth = null;
     InputData = null;
+    EarthModel = "ak135";
+    SlabResolution = "20spd";
     IsLocationNew = null;
     IsLocationHeld = null;
     IsDepthHeld = null;
@@ -116,7 +121,11 @@ public class LocationRequest implements ProcessingInt {
    * @param newAuthor - A String containing the author to Use
    * @param newType - A String containing the type to Use
    * @param newLocType - A String containing the name of the algorithm this request is valid for
-   * @param newEarthModel - A String containing the name of theTravel Time Earth Model to use
+   * @param newEarthModel - A String containing the name of the Travel Time Earth Model to use, null
+   *     for default * @param newEarthModel - A String containing the name of the Travel Time Earth
+   *     Model to use, null for default
+   * @param newSlabResolution - A String containing the name of the slab resolution to use, null for
+   *     default
    * @param newSourceLatitude - A Double containing the latitude to use
    * @param newSourceLongitude - A Double containing the longitude to use
    * @param newSourceOriginTime - A Date containing the origin time to use
@@ -138,6 +147,7 @@ public class LocationRequest implements ProcessingInt {
       String newType,
       String newLocType,
       String newEarthModel,
+      String newSlabResolution,
       Double newSourceLatitude,
       Double newSourceLongitude,
       Date newSourceOriginTime,
@@ -156,6 +166,7 @@ public class LocationRequest implements ProcessingInt {
         new Source(newAgencyID, newAuthor, newType),
         newLocType,
         newEarthModel,
+        newSlabResolution,
         newSourceLatitude,
         newSourceLongitude,
         newSourceOriginTime,
@@ -179,7 +190,10 @@ public class LocationRequest implements ProcessingInt {
    * @param newID - A String containing the optional ID
    * @param newSource - A Source object containing the optional source
    * @param newLocType - A String containing the name of the algorithm this request is valid for
-   * @param newEarthModel - A String containing the name of theTravel Time Earth Model to use
+   * @param newEarthModel - A String containing the name of the Travel Time Earth Model to use, null
+   *     for default
+   * @param newSlabResolution - A String containing the name of the slab resolution to use, null for
+   *     default
    * @param newSourceLatitude - A Double containing the latitude to use
    * @param newSourceLongitude - A Double containing the longitude to use
    * @param newSourceOriginTime - A Date containing the origin time to use
@@ -199,6 +213,7 @@ public class LocationRequest implements ProcessingInt {
       Source newSource,
       String newLocType,
       String newEarthModel,
+      String newSlabResolution,
       Double newSourceLatitude,
       Double newSourceLongitude,
       Date newSourceOriginTime,
@@ -217,6 +232,7 @@ public class LocationRequest implements ProcessingInt {
         newSource,
         newLocType,
         newEarthModel,
+        newSlabResolution,
         newSourceLatitude,
         newSourceLongitude,
         newSourceOriginTime,
@@ -239,7 +255,10 @@ public class LocationRequest implements ProcessingInt {
    * @param newID - A String containing the optional ID
    * @param newSource - A Source containing the optional Source to Use
    * @param newType - A String containing the name of the algorithm this request is valid for
-   * @param newEarthModel - A String containing the name of theTravel Time Earth Model to use
+   * @param newEarthModel - A String containing the name of the Travel Time Earth Model to use, null
+   *     for default
+   * @param newSlabResolution - A String containing the name of the slab resolution to use, null for
+   *     default
    * @param newSourceLatitude - A Double containing the latitude to use
    * @param newSourceLongitude - A Double containing the longitude to use
    * @param newSourceOriginTime - A Date containing the origin time to use
@@ -259,6 +278,7 @@ public class LocationRequest implements ProcessingInt {
       Source newSource,
       String newType,
       String newEarthModel,
+      String newSlabResolution,
       Double newSourceLatitude,
       Double newSourceLongitude,
       Date newSourceOriginTime,
@@ -275,7 +295,12 @@ public class LocationRequest implements ProcessingInt {
     ID = newID;
     Source = newSource;
     Type = newType;
-    EarthModel = newEarthModel;
+    if (newEarthModel != null) {
+      EarthModel = newEarthModel;
+    }
+    if (newSlabResolution != null) {
+      SlabResolution = newSlabResolution;
+    }
     SourceLatitude = newSourceLatitude;
     SourceLongitude = newSourceLongitude;
     SourceOriginTime = newSourceOriginTime;
@@ -304,13 +329,6 @@ public class LocationRequest implements ProcessingInt {
       Type = newJSONObject.get(TYPE_KEY).toString();
     } else {
       Type = null;
-    }
-
-    // EarthModel
-    if (newJSONObject.containsKey(EARTHMODEL_KEY)) {
-      EarthModel = newJSONObject.get(EARTHMODEL_KEY).toString();
-    } else {
-      EarthModel = null;
     }
 
     // latitude
@@ -365,7 +383,19 @@ public class LocationRequest implements ProcessingInt {
     // Optional values
     // ID
     if (newJSONObject.containsKey(ID_KEY)) {
-      ID = newJSONObject.get(ID_KEY).toString();
+      Object idObject = newJSONObject.get(ID_KEY);
+      // check type of id object
+      if (idObject instanceof String) {
+        // the Id *should* be a string
+        ID = idObject.toString();
+      } else if (idObject instanceof Integer) {
+        // but the ID *could* be an int, but we
+        // want it to be a string
+        ID = String.valueOf((int) idObject);
+      } else {
+        // any other type isn't a usable id
+        ID = null;
+      }
     } else {
       ID = null;
     }
@@ -375,6 +405,20 @@ public class LocationRequest implements ProcessingInt {
       Source = new Source((JSONObject) newJSONObject.get(SOURCE_KEY));
     } else {
       Source = null;
+    }
+
+    // EarthModel
+    if (newJSONObject.containsKey(EARTHMODEL_KEY)) {
+      EarthModel = newJSONObject.get(EARTHMODEL_KEY).toString();
+    } else {
+      EarthModel = "ak135";
+    }
+
+    // SlabResolution
+    if (newJSONObject.containsKey(SLABRESOLUTION_KEY)) {
+      SlabResolution = newJSONObject.get(SLABRESOLUTION_KEY).toString();
+    } else {
+      SlabResolution = "20spd";
     }
 
     // IsLocationNew
@@ -461,11 +505,6 @@ public class LocationRequest implements ProcessingInt {
       newJSONObject.put(TYPE_KEY, Type);
     }
 
-    // earth model
-    if (EarthModel != null) {
-      newJSONObject.put(EARTHMODEL_KEY, EarthModel);
-    }
-
     // latitude
     if (SourceLatitude != null) {
       newJSONObject.put(SOURCELATITUDE_KEY, SourceLatitude);
@@ -505,6 +544,16 @@ public class LocationRequest implements ProcessingInt {
     }
 
     // optional values
+    // earth model
+    if (EarthModel != null) {
+      newJSONObject.put(EARTHMODEL_KEY, EarthModel);
+    }
+
+    // slab resolution
+    if (SlabResolution != null) {
+      newJSONObject.put(SLABRESOLUTION_KEY, SlabResolution);
+    }
+
     // IsLocationNew
     if (IsLocationNew != null) {
       newJSONObject.put(ISLOCATIONNEW_KEY, IsLocationNew);

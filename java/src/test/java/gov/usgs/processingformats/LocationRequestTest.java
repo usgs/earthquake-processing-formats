@@ -10,7 +10,7 @@ import org.junit.Test;
 public class LocationRequestTest {
 
   public static final String LOCATIONREQUEST_STRING =
-      "{\"EarthModel\":\"AK135\","
+      "{\"EarthModel\":\"ak135\",\"SlabResolution\":\"20spd\","
           + "\"SourceLatitude\":40.3344,\"SourceLongitude\":-121.44,"
           + "\"IsDepthHeld\":false,\"Type\":\"RayLoc\","
           + "\"SourceDepth\":32.44,\"IsLocationHeld\":false,\"BayesianSpread\":"
@@ -34,7 +34,8 @@ public class LocationRequestTest {
   public static String AUTHOR = "TestAuthor";
   public static String TYPE = "Unknown";
   public static String LOCTYPE = "RayLoc";
-  public static String EARTHMODEL = "AK135";
+  public static String EARTHMODEL = "ak135";
+  public static String SLABRESOLUTION = "20spd";
   public static double SOURCELATITUDE = 40.3344;
   public static double SOURCELONGITUDE = -121.44;
   public static Date SOURCEORIGINTIME = Utility.getDate("2015-12-28T21:32:24.017Z");
@@ -97,6 +98,7 @@ public class LocationRequestTest {
             TYPE,
             LOCTYPE,
             EARTHMODEL,
+            SLABRESOLUTION,
             SOURCELATITUDE,
             SOURCELONGITUDE,
             SOURCEORIGINTIME,
@@ -146,6 +148,7 @@ public class LocationRequestTest {
             TYPE,
             LOCTYPE,
             EARTHMODEL,
+            SLABRESOLUTION,
             SOURCELATITUDE,
             SOURCELONGITUDE,
             SOURCEORIGINTIME,
@@ -173,6 +176,7 @@ public class LocationRequestTest {
             null,
             null,
             EARTHMODEL,
+            SLABRESOLUTION,
             SOURCELATITUDE,
             null,
             SOURCEORIGINTIME,
@@ -217,6 +221,10 @@ public class LocationRequestTest {
     if (locationRequestObject.ID != null) {
       assertEquals(TestName + " ID Equals", ID, locationRequestObject.ID);
     }
+
+    assertEquals(TestName + " Earth Model Equals", EARTHMODEL, locationRequestObject.EarthModel);
+    assertEquals(
+        TestName + " Slab Resolution Equals", SLABRESOLUTION, locationRequestObject.SlabResolution);
 
     // check locationRequestObject.isLocationNew
     if (locationRequestObject.IsLocationNew != null) {
