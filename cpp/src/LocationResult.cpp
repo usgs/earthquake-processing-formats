@@ -88,7 +88,7 @@ LocationResult::LocationResult(std::string newID, std::string newAgencyID,
 	minimumDistance = newMinimumDistance;
 	rms = newRMS;
 	quality = newQuality;
-  bayesianDepth = newBayesianDepth;
+  	bayesianDepth = newBayesianDepth;
 	bayesianRange = newBayesianRange;
 	depthImportance = newDepthImportance;
 	locatorExitCode = newExitCode;

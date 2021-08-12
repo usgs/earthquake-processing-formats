@@ -3,13 +3,14 @@
 
 #include <string>
 
-#define LOCATIONREQUEST_STRING "{\"EarthModel\":\"AK135\",\"SourceLatitude\":40.3344,\"SourceLongitude\":-121.44,\"IsDepthHeld\":false,\"Type\":\"RayLoc\",\"SourceDepth\":32.44,\"IsLocationHeld\":false,\"BayesianSpread\":20.3,\"UseSVD\":true,\"BayesianDepth\":66.7,\"SourceOriginTime\":\"2015-12-28T21:32:24.017Z\",\"InputData\":[{\"Site\":{\"Station\":\"BOZ\",\"Channel\":\"BHZ\",\"Network\":\"US\",\"Location\":\"00\",\"Latitude\":45.59697,\"Longitude\":-111.62967,\"Elevation\":1589.0},\"PickedPhase\":\"P\",\"Use\":true,\"AssociatedPhase\":\"P\",\"Time\":\"2015-12-28T21:32:24.017Z\",\"Residual\":1.05,\"Source\":{\"Type\":\"Unknown\",\"AgencyID\":\"US\",\"Author\":\"TestAuthor\"},\"Weight\":2.65,\"Importance\":3.8,\"Azimuth\":21.5,\"Quality\":0.45,\"Affinity\":1.2,\"ID\":\"12GFH48776857\",\"LocatedPhase\":\"P\",\"Distance\":2.65}],\"IsLocationNew\":false,\"IsBayesianDepth\":true,\"ID\":\"12345678\",\"Source\":{\"Author\":\"TestAuthor\",\"AgencyID\":\"US\",\"Type\":\"Unknown\"}}" // NOLINT
+#define LOCATIONREQUEST_STRING "{\"EarthModel\":\"ak135\",\"SlabResolution\":\"20spd\",\"SourceLatitude\":40.3344,\"SourceLongitude\":-121.44,\"IsDepthHeld\":false,\"Type\":\"RayLoc\",\"SourceDepth\":32.44,\"IsLocationHeld\":false,\"BayesianSpread\":20.3,\"UseSVD\":true,\"BayesianDepth\":66.7,\"SourceOriginTime\":\"2015-12-28T21:32:24.017Z\",\"InputData\":[{\"Site\":{\"Station\":\"BOZ\",\"Channel\":\"BHZ\",\"Network\":\"US\",\"Location\":\"00\",\"Latitude\":45.59697,\"Longitude\":-111.62967,\"Elevation\":1589.0},\"PickedPhase\":\"P\",\"Use\":true,\"AssociatedPhase\":\"P\",\"Time\":\"2015-12-28T21:32:24.017Z\",\"Residual\":1.05,\"Source\":{\"Type\":\"Unknown\",\"AgencyID\":\"US\",\"Author\":\"TestAuthor\"},\"Weight\":2.65,\"Importance\":3.8,\"Azimuth\":21.5,\"Quality\":0.45,\"Affinity\":1.2,\"ID\":\"12GFH48776857\",\"LocatedPhase\":\"P\",\"Distance\":2.65}],\"IsLocationNew\":false,\"IsBayesianDepth\":true,\"ID\":\"12345678\",\"Source\":{\"Author\":\"TestAuthor\",\"AgencyID\":\"US\",\"Type\":\"Unknown\"}}" // NOLINT
 #define ID "12345678"
 #define AGENCYID "US"
 #define AUTHOR "TestAuthor"
 #define TYPE "Unknown"
 #define LOCTYPE "RayLoc"
-#define EARTHMODEL "AK135"
+#define EARTHMODEL "ak135"
+#define SLABRESOLUTION "20spd"
 #define SOURCELATITUDE 40.3344
 #define SOURCELONGITUDE -121.44
 #define SOURCEORIGINTIME "2015-12-28T21:32:24.017Z"
@@ -39,7 +40,7 @@ std::vector<processingformats::Pick> buildInputData() {
 }
 
 void checkdata(processingformats::LocationRequest locationRequestObject, std::string testinfo) {
-  // check id
+  	// check id
 	if (locationRequestObject.id.empty() != true) {
 		std::string id = locationRequestObject.id;
 		std::string expectedID = std::string(ID);
@@ -70,21 +71,21 @@ void checkdata(processingformats::LocationRequest locationRequestObject, std::st
 			expectedtype.c_str())<< testinfo.c_str();
 	}
 
-  // check location type
+  	// check location type
 	if (locationRequestObject.type.empty() != true) {
 		std::string type = locationRequestObject.type;
 		std::string expectedtype = std::string(LOCTYPE);
 		ASSERT_STREQ(type.c_str(), expectedtype.c_str())<< testinfo.c_str();
 	}
 
-  // check earth model
+  	// check earth model
 	if (locationRequestObject.earthModel.empty() != true) {
 		std::string earthModel = locationRequestObject.id;
 		std::string expectedEarthModel = std::string(ID);
 		ASSERT_STREQ(earthModel.c_str(), expectedEarthModel.c_str())<< testinfo.c_str();
 	}
 
-  // check sourceLatitude
+  	// check sourceLatitude
 	if (std::isnan(locationRequestObject.sourceLatitude) != true) {
 		double latitude = locationRequestObject.sourceLatitude;
 		double expectedlatitude = SOURCELATITUDE;
@@ -113,27 +114,37 @@ void checkdata(processingformats::LocationRequest locationRequestObject, std::st
 		ASSERT_EQ(depth, expecteddepth);
 	}
 
+  	// check earth model
+	std::string earthModel = locationRequestObject.earthModel;
+	std::string expectedEarthModel = std::string(EARTHMODEL);
+	ASSERT_STREQ(earthModel.c_str(), expectedEarthModel.c_str()) << testinfo.c_str();
+
+ 	// check slab resolution
+	std::string slabResolution = locationRequestObject.slabResolution;
+	std::string expectedSlabResolution = std::string(SLABRESOLUTION);
+	ASSERT_STREQ(slabResolution.c_str(), expectedSlabResolution.c_str()) << testinfo.c_str();
+
 	// check isLocationNew
-  bool isLocationNew = locationRequestObject.isLocationNew;
+  	bool isLocationNew = locationRequestObject.isLocationNew;
 	bool expectedIsLocationNew = ISLOCATIONNEW;
 	ASSERT_EQ(isLocationNew, expectedIsLocationNew);
 
 	// check isLocationHeld
-  bool isLocationHeld = locationRequestObject.isLocationHeld;
+  	bool isLocationHeld = locationRequestObject.isLocationHeld;
 	bool expectedIsLocationHeld = ISLOCATIONHELD;
 	ASSERT_EQ(isLocationHeld, expectedIsLocationHeld);
 
 	// check isDepthHeld
-  bool isDepthHeld = locationRequestObject.isDepthHeld;
+  	bool isDepthHeld = locationRequestObject.isDepthHeld;
 	bool expectedIsDepthHeld = ISDEPTHHELD;
 	ASSERT_EQ(isDepthHeld, expectedIsDepthHeld);
 
 	// check isBayesianDepth
-  bool isBayesianDepth = locationRequestObject.isBayesianDepth;
+  	bool isBayesianDepth = locationRequestObject.isBayesianDepth;
 	bool expectedIsBayesianDepth = ISBAYESIANDEPTH;
 	ASSERT_EQ(isBayesianDepth, expectedIsBayesianDepth);  
 
-  // check bayesianDepth
+  	// check bayesianDepth
 	if (std::isnan(locationRequestObject.bayesianDepth) != true) {
 		double bayesianDepth = locationRequestObject.bayesianDepth;
 		double expectedBayesianDepth = BAYESIANDEPTH;
@@ -148,18 +159,18 @@ void checkdata(processingformats::LocationRequest locationRequestObject, std::st
 	}
 
 	// check useSVD
-  bool useSVD = locationRequestObject.useSVD;
+  	bool useSVD = locationRequestObject.useSVD;
 	bool expectedUseSVD = USESVD;
 	ASSERT_EQ(useSVD, expectedUseSVD);  
 
-  // check outputData
-  if (locationRequestObject.outputData.isEmpty() != true) {
-    if (std::isnan(locationRequestObject.outputData.hypocenter.latitude) != true) {
-      double hypocenterlatitude = locationRequestObject.outputData.hypocenter.latitude;
-      double expectedlatitude = OUTPUTLATITUDE;
-      ASSERT_EQ(hypocenterlatitude, expectedlatitude);
-    }
-  }
+	// check outputData
+	if (locationRequestObject.outputData.isEmpty() != true) {
+		if (std::isnan(locationRequestObject.outputData.hypocenter.latitude) != true) {
+		double hypocenterlatitude = locationRequestObject.outputData.hypocenter.latitude;
+		double expectedlatitude = OUTPUTLATITUDE;
+		ASSERT_EQ(hypocenterlatitude, expectedlatitude);
+		}
+	}
 }
 
 // tests to see if LocationRequest can successfully
@@ -172,8 +183,9 @@ TEST(LocationRequestTest, WritesJSON) {
 	locationRequestObject.source.agencyId = std::string(AGENCYID);
 	locationRequestObject.source.author = std::string(AUTHOR);
 	locationRequestObject.source.type = std::string(TYPE);
-  locationRequestObject.type = std::string(LOCTYPE);	
-  locationRequestObject.earthModel = std::string(EARTHMODEL);	
+  	locationRequestObject.type = std::string(LOCTYPE);	
+  	locationRequestObject.earthModel = std::string(EARTHMODEL);	
+	locationRequestObject.slabResolution = std::string(SLABRESOLUTION);
 	locationRequestObject.sourceLatitude = SOURCELATITUDE;
 	locationRequestObject.sourceLongitude = SOURCELONGITUDE;
 	locationRequestObject.sourceDepth = SOURCEDEPTH;
@@ -188,7 +200,7 @@ TEST(LocationRequestTest, WritesJSON) {
 	locationRequestObject.bayesianSpread = BAYESIANSPREAD;
 	locationRequestObject.useSVD = USESVD;
 
-  rapidjson::Document ResultDocument;
+  	rapidjson::Document ResultDocument;
 	processingformats::LocationResult locationResultObject(
 			processingformats::FromJSONString(std::string(OUTPUTDATA_STRING),
 												ResultDocument));
@@ -228,7 +240,8 @@ TEST(LocationRequestTest, Constructors) {
 	// use constructor
 	processingformats::LocationRequest locationRequestObject(std::string(ID), 
       std::string(AGENCYID), std::string(AUTHOR), std::string(TYPE),
-      std::string(LOCTYPE), std::string(EARTHMODEL), SOURCELATITUDE, SOURCELONGITUDE,
+      std::string(LOCTYPE), std::string(EARTHMODEL), std::string(SLABRESOLUTION),
+	  SOURCELATITUDE, SOURCELONGITUDE,
       processingformats::ConvertISO8601ToEpochTime(std::string(SOURCEORIGINTIME)),
       SOURCEDEPTH, buildInputData(), ISLOCATIONNEW, ISLOCATIONHELD, ISDEPTHHELD,
       ISBAYESIANDEPTH, BAYESIANDEPTH, BAYESIANSPREAD, USESVD);
@@ -240,7 +253,8 @@ TEST(LocationRequestTest, Constructors) {
 	processingformats::LocationRequest locationRequestObject2(std::string(ID), 
       processingformats::Source(std::string(AGENCYID), std::string(AUTHOR), 
         std::string(TYPE)),
-      std::string(LOCTYPE), std::string(EARTHMODEL), SOURCELATITUDE, SOURCELONGITUDE,
+      std::string(LOCTYPE), std::string(EARTHMODEL), std::string(SLABRESOLUTION),
+	  SOURCELATITUDE, SOURCELONGITUDE,
       processingformats::ConvertISO8601ToEpochTime(std::string(SOURCEORIGINTIME)),
       SOURCEDEPTH, buildInputData(), ISLOCATIONNEW, ISLOCATIONHELD, ISDEPTHHELD,
       ISBAYESIANDEPTH, BAYESIANDEPTH, BAYESIANSPREAD, USESVD);
@@ -259,8 +273,9 @@ TEST(LocationRequestTest, Validate) {
 	locationRequestObject.source.agencyId = std::string(AGENCYID);
 	locationRequestObject.source.author = std::string(AUTHOR);
 	locationRequestObject.source.type = std::string(TYPE);
-  locationRequestObject.type = std::string(LOCTYPE);	
-  locationRequestObject.earthModel = std::string(EARTHMODEL);	
+  	locationRequestObject.type = std::string(LOCTYPE);	
+  	locationRequestObject.earthModel = std::string(EARTHMODEL);	
+	locationRequestObject.slabResolution = std::string(SLABRESOLUTION);	
 	locationRequestObject.sourceLatitude = SOURCELATITUDE;
 	locationRequestObject.sourceLongitude = SOURCELONGITUDE;
 	locationRequestObject.sourceDepth = SOURCEDEPTH;

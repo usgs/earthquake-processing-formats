@@ -822,7 +822,7 @@ public class LocationResult implements ProcessingInt {
     }
 
     // locator exit code has no validation
-    
+
     // error ellipse
     if (ErrorEllipse != null) {
       if (!ErrorEllipse.isValid()) {
