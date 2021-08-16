@@ -3,14 +3,14 @@
 
 #include <string>
 
-#define LOCATIONREQUEST_STRING "{\"EarthModel\":\"ak135\",\"SlabResolution\":\"20spd\",\"SourceLatitude\":40.3344,\"SourceLongitude\":-121.44,\"IsDepthHeld\":false,\"Type\":\"RayLoc\",\"SourceDepth\":32.44,\"IsLocationHeld\":false,\"BayesianSpread\":20.3,\"UseSVD\":true,\"BayesianDepth\":66.7,\"SourceOriginTime\":\"2015-12-28T21:32:24.017Z\",\"InputData\":[{\"Site\":{\"Station\":\"BOZ\",\"Channel\":\"BHZ\",\"Network\":\"US\",\"Location\":\"00\",\"Latitude\":45.59697,\"Longitude\":-111.62967,\"Elevation\":1589.0},\"PickedPhase\":\"P\",\"Use\":true,\"AssociatedPhase\":\"P\",\"Time\":\"2015-12-28T21:32:24.017Z\",\"Residual\":1.05,\"Source\":{\"Type\":\"Unknown\",\"AgencyID\":\"US\",\"Author\":\"TestAuthor\"},\"Weight\":2.65,\"Importance\":3.8,\"Azimuth\":21.5,\"Quality\":0.45,\"Affinity\":1.2,\"ID\":\"12GFH48776857\",\"LocatedPhase\":\"P\",\"Distance\":2.65}],\"IsLocationNew\":false,\"IsBayesianDepth\":true,\"ID\":\"12345678\",\"Source\":{\"Author\":\"TestAuthor\",\"AgencyID\":\"US\",\"Type\":\"Unknown\"}}" // NOLINT
+#define LOCATIONREQUEST_STRING "{\"EarthModel\":\"ak135\",\"SlabResolution\":\"2spd\",\"SourceLatitude\":40.3344,\"SourceLongitude\":-121.44,\"IsDepthHeld\":false,\"Type\":\"RayLoc\",\"SourceDepth\":32.44,\"IsLocationHeld\":false,\"BayesianSpread\":20.3,\"UseSVD\":true,\"BayesianDepth\":66.7,\"SourceOriginTime\":\"2015-12-28T21:32:24.017Z\",\"InputData\":[{\"Site\":{\"Station\":\"BOZ\",\"Channel\":\"BHZ\",\"Network\":\"US\",\"Location\":\"00\",\"Latitude\":45.59697,\"Longitude\":-111.62967,\"Elevation\":1589.0},\"PickedPhase\":\"P\",\"Use\":true,\"AssociatedPhase\":\"P\",\"Time\":\"2015-12-28T21:32:24.017Z\",\"Residual\":1.05,\"Source\":{\"Type\":\"Unknown\",\"AgencyID\":\"US\",\"Author\":\"TestAuthor\"},\"Weight\":2.65,\"Importance\":3.8,\"Azimuth\":21.5,\"Quality\":0.45,\"Affinity\":1.2,\"ID\":\"12GFH48776857\",\"LocatedPhase\":\"P\",\"Distance\":2.65}],\"IsLocationNew\":false,\"IsBayesianDepth\":true,\"ID\":\"12345678\",\"Source\":{\"Author\":\"TestAuthor\",\"AgencyID\":\"US\",\"Type\":\"Unknown\"}}" // NOLINT
 #define ID "12345678"
 #define AGENCYID "US"
 #define AUTHOR "TestAuthor"
 #define TYPE "Unknown"
 #define LOCTYPE "RayLoc"
 #define EARTHMODEL "ak135"
-#define SLABRESOLUTION "20spd"
+#define SLABRESOLUTION "2spd"
 #define SOURCELATITUDE 40.3344
 #define SOURCELONGITUDE -121.44
 #define SOURCEORIGINTIME "2015-12-28T21:32:24.017Z"

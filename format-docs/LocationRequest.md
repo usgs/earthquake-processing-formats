@@ -97,7 +97,7 @@ The following are supplementary values that **may or may not** be provided.
 * Source - An object containing the source of the location result, see 
 [Source](Source.md).
 * EarthModel - A String containing the Travel Time Earth Model to use, defaults to 'ak135'
-* SlabResolution - A String containing the Slab Model to use, defaults to '20spd'
+* SlabResolution - A String containing the Slab Model to use, defaults to '2spd'
 * IsLocationNew - A boolean flag that indicates if the location has been changed
 outside the locator.
 * IsLocationHeld - A boolean flag that indicates whether the location can be

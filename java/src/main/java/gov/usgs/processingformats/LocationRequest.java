@@ -61,7 +61,7 @@ public class LocationRequest implements ProcessingInt {
   /** Optional earth model for this LocationRequest, defaults to "ak135" */
   public String EarthModel;
 
-  /** Optional slab resoultion for this LocationRequest defaults to "20spd" */
+  /** Optional slab resoultion for this LocationRequest defaults to "2spd" */
   public String SlabResolution;
 
   /** Optional Boolean indicating whether the location is new */
@@ -99,7 +99,7 @@ public class LocationRequest implements ProcessingInt {
     SourceDepth = null;
     InputData = null;
     EarthModel = "ak135";
-    SlabResolution = "20spd";
+    SlabResolution = "2spd";
     IsLocationNew = null;
     IsLocationHeld = null;
     IsDepthHeld = null;
@@ -354,7 +354,15 @@ public class LocationRequest implements ProcessingInt {
 
     // depth
     if (newJSONObject.containsKey(SOURCEDEPTH_KEY)) {
-      SourceDepth = (double) newJSONObject.get(SOURCEDEPTH_KEY);
+      Object depthObj = newJSONObject.get(SOURCEDEPTH_KEY);
+
+      // Sometimes json turns this into a int or long
+      // instead of a double and the cast fails
+      if (depthObj instanceof Number) {
+        SourceDepth = ((Number) depthObj).doubleValue();
+      } else {
+        SourceDepth = null;
+      }
     } else {
       SourceDepth = null;
     }
@@ -418,7 +426,7 @@ public class LocationRequest implements ProcessingInt {
     if (newJSONObject.containsKey(SLABRESOLUTION_KEY)) {
       SlabResolution = newJSONObject.get(SLABRESOLUTION_KEY).toString();
     } else {
-      SlabResolution = "20spd";
+      SlabResolution = "2spd";
     }
 
     // IsLocationNew

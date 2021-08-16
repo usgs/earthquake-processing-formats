@@ -48,7 +48,7 @@ class LocationRequest:
             newSource: a processingformats.source.Source containing desired source (and supporting info)
             newType: a type identifier for this Location Request
             newEarthModel: an earth model for this Location Request, default ak135
-            newSlabResolution: an earth model for this Location Request, default 20spd
+            newSlabResolution: an earth model for this Location Request, default 2spd
             newSourceLatitude: a double containing the source latitude in degrees
             newSourceLongitude: a double containing the source longitude in degrees
             newSourceOriginTime: a Datetime containing the source time
@@ -102,7 +102,7 @@ class LocationRequest:
         if newSlabResolution is not None:
             self.slabResolution = newSlabResolution
         else:
-            self.slabResolution = '20spd'
+            self.slabResolution = '2spd'
 
         if newIsLocationNew is not None:
             self.isLocationNew = newIsLocationNew
@@ -176,7 +176,7 @@ class LocationRequest:
         if self.SLABRESOLUTION_KEY in aDict:            
             self.slabResolution = aDict[self.SLABRESOLUTION_KEY]
         else:
-            self.slabResolution = '20spd'
+            self.slabResolution = '2spd'
 
         if self.ISLOCATIONNEW_KEY in aDict:
             self.isLocationNew = aDict[self.ISLOCATIONNEW_KEY]
@@ -250,7 +250,7 @@ class LocationRequest:
         if hasattr (self, 'slabResolution'):
             aDict[self.SLABRESOLUTION_KEY] = self.slabResolution
         else:
-            aDict[self.SLABRESOLUTION_KEY] = '20spd'
+            aDict[self.SLABRESOLUTION_KEY] = '2spd'
 
         if hasattr (self, 'isLocationNew'):
             aDict[self.ISLOCATIONNEW_KEY] = self.isLocationNew

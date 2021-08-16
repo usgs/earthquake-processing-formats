@@ -161,7 +161,15 @@ public class Hypocenter implements ProcessingInt {
 
     // Depth
     if (newJSONObject.containsKey(DEPTH_KEY)) {
-      Depth = (double) newJSONObject.get(DEPTH_KEY);
+      Object depthObj = newJSONObject.get(DEPTH_KEY);
+
+      // Sometimes json turns this into a int or long
+      // instead of a double and the cast fails
+      if (depthObj instanceof Number) {
+        Depth = ((Number) depthObj).doubleValue();
+      } else {
+        Depth = null;
+      }
     } else {
       Depth = null;
     }

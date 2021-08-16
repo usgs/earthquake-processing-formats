@@ -49,7 +49,7 @@ class LocationRequest : public ProcessingBase {
    * \param newEarthModel - A std::string containing the name of the Travel Time 
    *  Earth Model to use, empty string for default ("ak135)"
    * \param newSlabResolution - A std::string containing the name of the slab 
-   *  resolution to use, empty string for default ("20spd")
+   *  resolution to use, empty string for default ("2spd")
    * \param newSourceLatitude - A double containing the latitude to use in degrees
    * \param newSourceLongitude - A double containing the longitude to use in 
 	 *  degrees
@@ -102,7 +102,7 @@ class LocationRequest : public ProcessingBase {
    * \param newEarthModel - A std::string containing the name of the Travel Time 
    *  Earth Model to use, empty string for default ("ak135)"
    * \param newSlabResolution - A std::string containing the name of the slab 
-   *  resolution to use, empty string for default ("20spd")
+   *  resolution to use, empty string for default ("2spd")
    * \param newSourceLatitude - A double containing the latitude to use in degrees
    * \param newSourceLongitude - A double containing the longitude to use in 
 	 * degrees
@@ -260,7 +260,7 @@ class LocationRequest : public ProcessingBase {
 	 * \brief The LocationRequest earth model
 	 *
 	 * An optional std::string containing the slab resolution for this LocationRequest,
-	 * default "20spd".
+	 * default "2spd".
 	 */
 	std::string slabResolution;
 

@@ -30,7 +30,7 @@ LocationRequest::LocationRequest() {
     source = processingformats::Source();
     type = "";
     earthModel = "ak135";
-	slabResolution = "20spd";
+	slabResolution = "2spd";
     sourceLatitude = std::numeric_limits<double>::quiet_NaN();
     sourceLongitude = std::numeric_limits<double>::quiet_NaN();
     sourceOriginTime = std::numeric_limits<double>::quiet_NaN();
@@ -246,7 +246,7 @@ LocationRequest::LocationRequest(rapidjson::Value &json) {
 		slabResolution = std::string(json[SLABRESOLUTION_KEY].GetString(),
 								json[SLABRESOLUTION_KEY].GetStringLength());
 	} else {
-		slabResolution = "20spd";
+		slabResolution = "2spd";
 	}
 
   	// isLocationNew
