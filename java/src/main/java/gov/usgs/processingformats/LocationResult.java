@@ -602,7 +602,15 @@ public class LocationResult implements ProcessingInt {
 
     // baysian range
     if (newJSONObject.containsKey(BAYESIANRANGE_KEY)) {
-      BayesianRange = (double) newJSONObject.get(BAYESIANRANGE_KEY);
+      Object rangeObj = newJSONObject.get(BAYESIANRANGE_KEY);
+
+      // Sometimes json turns this into a int or long
+      // instead of a double and the cast fails
+      if (rangeObj instanceof Number) {
+        BayesianRange = ((Number) rangeObj).doubleValue();
+      } else {
+        BayesianRange = null;
+      }
     } else {
       BayesianRange = null;
     }
