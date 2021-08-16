@@ -587,7 +587,15 @@ public class LocationResult implements ProcessingInt {
 
     // baysian depth
     if (newJSONObject.containsKey(BAYESIANDEPTH_KEY)) {
-      BayesianDepth = (double) newJSONObject.get(BAYESIANDEPTH_KEY);
+      Object depthObj = newJSONObject.get(BAYESIANDEPTH_KEY);
+
+      // Sometimes json turns this into a int or long
+      // instead of a double and the cast fails
+      if (depthObj instanceof Number) {
+        BayesianDepth = ((Number) depthObj).doubleValue();
+      } else {
+        BayesianDepth = null;
+      }
     } else {
       BayesianDepth = null;
     }
