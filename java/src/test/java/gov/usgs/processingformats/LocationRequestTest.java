@@ -10,7 +10,7 @@ import org.junit.Test;
 public class LocationRequestTest {
 
   public static final String LOCATIONREQUEST_STRING =
-      "{\"EarthModel\":\"ak135\",\"SlabResolution\":\"20spd\","
+      "{\"EarthModel\":\"ak135\",\"SlabResolution\":\"2spd\","
           + "\"SourceLatitude\":40.3344,\"SourceLongitude\":-121.44,"
           + "\"IsDepthHeld\":false,\"Type\":\"RayLoc\","
           + "\"SourceDepth\":32.44,\"IsLocationHeld\":false,\"BayesianSpread\":"
@@ -35,7 +35,7 @@ public class LocationRequestTest {
   public static String TYPE = "Unknown";
   public static String LOCTYPE = "RayLoc";
   public static String EARTHMODEL = "ak135";
-  public static String SLABRESOLUTION = "20spd";
+  public static String SLABRESOLUTION = "2spd";
   public static double SOURCELATITUDE = 40.3344;
   public static double SOURCELONGITUDE = -121.44;
   public static Date SOURCEORIGINTIME = Utility.getDate("2015-12-28T21:32:24.017Z");

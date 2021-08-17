@@ -142,7 +142,15 @@ public class Site implements ProcessingInt {
 
     // Elevation
     if (newJSONObject.containsKey(ELEVATION_KEY)) {
-      Elevation = (double) newJSONObject.get(ELEVATION_KEY);
+      Object elevObj = newJSONObject.get(ELEVATION_KEY);
+
+      // Sometimes json turns this into a int or long
+      // instead of a double and the cast fails
+      if (elevObj instanceof Number) {
+        Elevation = ((Number) elevObj).doubleValue();
+      } else {
+        Elevation = null;
+      }
     } else {
       Elevation = null;
     }
