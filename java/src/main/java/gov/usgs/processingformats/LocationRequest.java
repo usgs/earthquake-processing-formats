@@ -32,6 +32,7 @@ public class LocationRequest implements ProcessingInt {
   public static final String BAYESIANDEPTH_KEY = "BayesianDepth";
   public static final String BAYESIANSPREAD_KEY = "BayesianSpread";
   public static final String USESVD_KEY = "UseSVD";
+  public static final String REASSESSINITIALPHASEIDS_KEY = "ReassessInitialPhaseIDs";
   public static final String OUTPUTDATA_KEY = "OutputData";
 
   /** Optional string containing the ID. */
@@ -85,6 +86,9 @@ public class LocationRequest implements ProcessingInt {
   /** Optional Boolean indicating whether use SVD */
   public Boolean UseSVD;
 
+  /** Optional Boolean indicating whether reassess inital phase identifications */
+  public Boolean ReassessInitialPhaseIDs;
+
   /** A LocationResult object to contain the output from the locator */
   public LocationResult OutputData;
 
@@ -107,6 +111,7 @@ public class LocationRequest implements ProcessingInt {
     BayesianDepth = null;
     BayesianSpread = null;
     UseSVD = null;
+    ReassessInitialPhaseIDs = null;
     OutputData = null;
   }
 
@@ -139,6 +144,8 @@ public class LocationRequest implements ProcessingInt {
    * @param newBayesianDepth - A Double containing the bayesian depth to use, null to omit
    * @param newBayesianSpread - A Double containing the bayesian spread to use, null to omit
    * @param newUseSVD - A Boolean indicating whether to use SVD, null to omit
+   * @param newReassessInitialPhaseIDs - A Boolean indicating whether to use reassess initial phase
+   *     identifications, null to omit
    */
   public LocationRequest(
       String newID,
@@ -159,7 +166,8 @@ public class LocationRequest implements ProcessingInt {
       Boolean newIsBayesianDepth,
       Double newBayesianDepth,
       Double newBayesianSpread,
-      Boolean newUseSVD) {
+      Boolean newUseSVD,
+      Boolean newReassessInitialPhaseIDs) {
 
     reload(
         newID,
@@ -178,7 +186,8 @@ public class LocationRequest implements ProcessingInt {
         newIsBayesianDepth,
         newBayesianDepth,
         newBayesianSpread,
-        newUseSVD);
+        newUseSVD,
+        newReassessInitialPhaseIDs);
   }
 
   /**
@@ -207,6 +216,8 @@ public class LocationRequest implements ProcessingInt {
    * @param newBayesianDepth - A Double containing the bayesian depth to use, null to omit
    * @param newBayesianSpread - A Double containing the bayesian spread to use, null to omit
    * @param newUseSVD - A Boolean indicating whether to use SVD, null to omit
+   * @param newReassessInitialPhaseIDs - A Boolean indicating whether to use reassess initial phase
+   *     identifications, null to omit
    */
   public LocationRequest(
       String newID,
@@ -225,7 +236,8 @@ public class LocationRequest implements ProcessingInt {
       Boolean newIsBayesianDepth,
       Double newBayesianDepth,
       Double newBayesianSpread,
-      Boolean newUseSVD) {
+      Boolean newUseSVD,
+      Boolean newReassessInitialPhaseIDs) {
 
     reload(
         newID,
@@ -244,7 +256,8 @@ public class LocationRequest implements ProcessingInt {
         newIsBayesianDepth,
         newBayesianDepth,
         newBayesianSpread,
-        newUseSVD);
+        newUseSVD,
+        newReassessInitialPhaseIDs);
   }
 
   /**
@@ -272,6 +285,8 @@ public class LocationRequest implements ProcessingInt {
    * @param newBayesianDepth - A Double containing the bayesian depth to use, null to omit
    * @param newBayesianSpread - A Double containing the bayesian spread to use, null to omit
    * @param newUseSVD - A Boolean indicating whether to use SVD, null to omit
+   * @param newReassessInitialPhaseIDs - A Boolean indicating whether to use reassess initial phase
+   *     identifications, null to omit
    */
   public void reload(
       String newID,
@@ -290,7 +305,8 @@ public class LocationRequest implements ProcessingInt {
       Boolean newIsBayesianDepth,
       Double newBayesianDepth,
       Double newBayesianSpread,
-      Boolean newUseSVD) {
+      Boolean newUseSVD,
+      Boolean newReassessInitialPhaseIDs) {
 
     ID = newID;
     Source = newSource;
@@ -313,6 +329,7 @@ public class LocationRequest implements ProcessingInt {
     BayesianDepth = newBayesianDepth;
     BayesianSpread = newBayesianSpread;
     UseSVD = newUseSVD;
+    ReassessInitialPhaseIDs = newReassessInitialPhaseIDs;
     OutputData = null;
   }
 
@@ -478,6 +495,13 @@ public class LocationRequest implements ProcessingInt {
       UseSVD = null;
     }
 
+    // ReassessInitialPhaseIDs
+    if (newJSONObject.containsKey(REASSESSINITIALPHASEIDS_KEY)) {
+      ReassessInitialPhaseIDs = (boolean) newJSONObject.get(REASSESSINITIALPHASEIDS_KEY);
+    } else {
+      ReassessInitialPhaseIDs = null;
+    }
+
     // Output values
     // OutputData
     if (newJSONObject.containsKey(OUTPUTDATA_KEY)) {
@@ -595,6 +619,11 @@ public class LocationRequest implements ProcessingInt {
     // use SVD
     if (UseSVD != null) {
       newJSONObject.put(USESVD_KEY, UseSVD);
+    }
+
+    // ReassessInitialPhaseIDs
+    if (ReassessInitialPhaseIDs != null) {
+      newJSONObject.put(REASSESSINITIALPHASEIDS_KEY, ReassessInitialPhaseIDs);
     }
 
     // output values

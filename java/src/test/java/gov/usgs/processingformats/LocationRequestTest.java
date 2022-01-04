@@ -14,7 +14,7 @@ public class LocationRequestTest {
           + "\"SourceLatitude\":40.3344,\"SourceLongitude\":-121.44,"
           + "\"IsDepthHeld\":false,\"Type\":\"RayLoc\","
           + "\"SourceDepth\":32.44,\"IsLocationHeld\":false,\"BayesianSpread\":"
-          + "20.3,\"UseSVD\":true,\"BayesianDepth\":66.7,"
+          + "20.3,\"UseSVD\":true,\"ReassessInitialPhaseIDs\":true,\"BayesianDepth\":66.7,"
           + "\"SourceOriginTime\":\"2015-12-28T21:32:24.017Z\",\"InputData\":"
           + "[{\"Site\":{\"Station\":\"BOZ\",\"Channel\":"
           + "\"BHZ\",\"Network\":\"US\",\"Location\":\"00\","
@@ -61,6 +61,7 @@ public class LocationRequestTest {
   public static double BAYESIANDEPTH = 66.7;
   public static double BAYESIANSPREAD = 20.3;
   public static boolean USESVD = true;
+  public static boolean REASSESSINITIALPHASEIDS = true;
 
   public static final String OUTPUTDATA_STRING =
       "{\"MinimumDistance\":2.14,"
@@ -110,7 +111,8 @@ public class LocationRequestTest {
             ISBAYESIANDEPTH,
             BAYESIANDEPTH,
             BAYESIANSPREAD,
-            USESVD);
+            USESVD,
+            REASSESSINITIALPHASEIDS);
 
     // write out to a string
     String jsonString = Utility.toJSONString(locationRequestObject.toJSON());
@@ -160,7 +162,8 @@ public class LocationRequestTest {
             ISBAYESIANDEPTH,
             BAYESIANDEPTH,
             BAYESIANSPREAD,
-            USESVD);
+            USESVD,
+            REASSESSINITIALPHASEIDS);
 
     // Successful validation
     boolean rc = locationRequestObject.isValid();
@@ -188,7 +191,8 @@ public class LocationRequestTest {
             ISBAYESIANDEPTH,
             BAYESIANDEPTH,
             BAYESIANSPREAD,
-            USESVD);
+            USESVD,
+            REASSESSINITIALPHASEIDS);
 
     rc = badLocationRequestObject.isValid();
 
@@ -275,6 +279,14 @@ public class LocationRequestTest {
     // check locationRequestObject.useSVD
     if (locationRequestObject.UseSVD != null) {
       assertEquals(TestName + " UseSVD Equals", USESVD, locationRequestObject.UseSVD);
+    }
+
+    // check locationRequestObject.ReassessInitialPhaseIDs
+    if (locationRequestObject.ReassessInitialPhaseIDs != null) {
+      assertEquals(
+          TestName + " ReassessInitialPhaseIDs Equals",
+          REASSESSINITIALPHASEIDS,
+          locationRequestObject.ReassessInitialPhaseIDs);
     }
 
     // Need to check output data somehow!!
