@@ -32,10 +32,12 @@ class TestLocationRequest(unittest.TestCase):
     BAYESIANDEPTH = 66.7
     BAYESIANSPREAD = 20.3
     USESVD = True
+    REASSESSINITIALPHASEIDS = True
+
     OUTPUTDATA = '{"MinimumDistance": 2.14, "NumberOfUsedStations": 33, "BayesianRange": 20.3, "ErrorEllipse": {"MaximumVerticalProjection": 1.984, "EquivalentHorizontalRadius": 1.984, "MaximumHorizontalProjection": 1.984, "E0": {"Azimuth": -121.44, "Error": 40.3344, "Dip": 32.44}, "E1": {"Azimuth": 22.64, "Error": 12.5, "Dip": 2.44}, "E2": {"Azimuth": 22.64, "Error": 12.5, "Dip": 2.44}, "SupportingData": [{"Site": {"Station": "BMN", "Network": "LB", "Channel": "HHZ", "Location": "01"}, "PickedPhase": "P", "Use": true, "AssociatedPhase": "P", "Time": "2019-05-21T13:03:59.000Z", "Residual": 1.05, "Source": {"Type": "Unknown", "AgencyID": "US", "Author": "TestAuthor"}, "Weight": 2.65, "Importance": 3.8, "Azimuth": 21.5, "Quality": 0.45, "Affinity": 1.2, "ID": "12GFH48776857", "LocatedPhase": "P", "Distance": 2.65}], "Hypocenter": {"LatitudeError": 12.5, "DepthError": 2.44, "TimeError": 1.984, "Latitude": 40.3344, "Time": "2019-05-21T13:03:59.000Z", "Longitude": -121.44, "Depth": 32.44, "LongitudeError": 22.64}, "DepthImportance": 1.8, "Quality": "A", "Gap": 33.67, "BayesianDepth": 66.7, "SecondaryGap": 33.67, "RMS": 3.8, "NumberOfAssociatedStations": 11, "NumberOfAssociatedPhases": 22, "NumberOfUsedPhases": 44}'
     
-    JSONSTRING = '{"Type": "RayLoc", "EarthModel": "ak135", "SlabResolution": "2spd", "SourceLatitude": 40.3344, "SourceLongitude": -121.44, "SourceDepth": 32.44, "SourceOriginTime": "2019-05-21T13:03:59.000Z", "InputData": [{"ID": "12GFH48776857", "Site": {"Station": "BOZ", "Network": "US", "Latitude": 45.59697, "Longitude": -111.62967, "Elevation": 1589.0, "Channel": "BHZ", "Location": "00"}, "Source": {"AgencyID": "US", "Author": "TestAuthor", "Type": "Unknown"}, "Time": "2015-12-28T21:32:24.017Z", "Affinity": 1.2, "Quality": 0.45, "Use": true, "PickedPhase": "P", "AssociatedPhase": "P", "LocatedPhase": "P", "Residual": 1.05, "Distance": 2.65, "Azimuth": 21.5, "Weight": 2.65, "Importance": 3.8}], "ID": "12345678", "Source": {"AgencyID": "US", "Author": "TestAuthor", "Type": "Unknown"}, "IsLocationNew": false, "IsLocationHeld": false, "IsDepthHeld": false, "IsBayesianDepth": true, "BayesianDepth": 66.7, "BayesianSpread": 20.3, "UseSVD": true}'
-    DICT = {'ID': '12345678', 'Source': {'AgencyID': 'US', 'Author': 'TestAuthor', 'Type': 'Unknown'}, 'Type': 'RayLoc', 'EarthModel': 'ak135', 'SlabResolution': '2spd', 'SourceLatitude': 40.3344, 'SourceLongitude': -121.44, 'SourceOriginTime': '2019-05-21T13:03:59.000Z', 'SourceDepth': 32.44, 'InputData': [{"ID": "12GFH48776857", "Site": {"Station": "BOZ", "Channel": "BHZ", "Network": "US", "Location": "00", "Latitude": 45.59697, "Longitude": -111.62967, "Elevation": 1589.0}, "Source": {"Author": "TestAuthor", "AgencyID": "US", "Type": "Unknown"}, "Time": "2015-12-28T21:32:24.017Z", "Affinity": 1.2, "Quality": 0.45, "Use": True, "PickedPhase": "P", "AssociatedPhase": "P", "LocatedPhase": "P", "Residual": 1.05, "Distance": 2.65, "Azimuth": 21.5, "Weight": 2.65, "Importance": 3.8}], 'IsLocationNew': False, 'IsLocationHeld': False, 'IsDepthHeld': False, 'IsBayesianDepth': True, 'BayesianDepth': 66.7, 'BayesianSpread': 20.3, 'UseSVD': True}
+    JSONSTRING = '{"Type": "RayLoc", "EarthModel": "ak135", "SlabResolution": "2spd", "SourceLatitude": 40.3344, "SourceLongitude": -121.44, "SourceDepth": 32.44, "SourceOriginTime": "2019-05-21T13:03:59.000Z", "InputData": [{"ID": "12GFH48776857", "Site": {"Station": "BOZ", "Network": "US", "Latitude": 45.59697, "Longitude": -111.62967, "Elevation": 1589.0, "Channel": "BHZ", "Location": "00"}, "Source": {"AgencyID": "US", "Author": "TestAuthor", "Type": "Unknown"}, "Time": "2015-12-28T21:32:24.017Z", "Affinity": 1.2, "Quality": 0.45, "Use": true, "PickedPhase": "P", "AssociatedPhase": "P", "LocatedPhase": "P", "Residual": 1.05, "Distance": 2.65, "Azimuth": 21.5, "Weight": 2.65, "Importance": 3.8}], "ID": "12345678", "Source": {"AgencyID": "US", "Author": "TestAuthor", "Type": "Unknown"}, "IsLocationNew": false, "IsLocationHeld": false, "IsDepthHeld": false, "IsBayesianDepth": true, "BayesianDepth": 66.7, "BayesianSpread": 20.3, "UseSVD": true, "ReassessInitialPhaseIDs": true}'
+    DICT = {'ID': '12345678', 'Source': {'AgencyID': 'US', 'Author': 'TestAuthor', 'Type': 'Unknown'}, 'Type': 'RayLoc', 'EarthModel': 'ak135', 'SlabResolution': '2spd', 'SourceLatitude': 40.3344, 'SourceLongitude': -121.44, 'SourceOriginTime': '2019-05-21T13:03:59.000Z', 'SourceDepth': 32.44, 'InputData': [{"ID": "12GFH48776857", "Site": {"Station": "BOZ", "Channel": "BHZ", "Network": "US", "Location": "00", "Latitude": 45.59697, "Longitude": -111.62967, "Elevation": 1589.0}, "Source": {"Author": "TestAuthor", "AgencyID": "US", "Type": "Unknown"}, "Time": "2015-12-28T21:32:24.017Z", "Affinity": 1.2, "Quality": 0.45, "Use": True, "PickedPhase": "P", "AssociatedPhase": "P", "LocatedPhase": "P", "Residual": 1.05, "Distance": 2.65, "Azimuth": 21.5, "Weight": 2.65, "Importance": 3.8}], 'IsLocationNew': False, 'IsLocationHeld': False, 'IsDepthHeld': False, 'IsBayesianDepth': True, 'BayesianDepth': 66.7, 'BayesianSpread': 20.3, 'UseSVD': True, 'ReassessInitialPhaseIDs': True}
     
         
     def test_init(self):
@@ -60,8 +62,9 @@ class TestLocationRequest(unittest.TestCase):
         self.assertFalse(hasattr(locationRequest, 'bayesianDepth'))
         self.assertFalse(hasattr(locationRequest, 'bayesianSpread'))
         self.assertFalse(hasattr(locationRequest, 'useSVD'))
+        self.assertFalse(hasattr(locationRequest, 'reassessInitialPhaseIDs'))
         
-        locationRequest = processingformats.locationRequest.LocationRequest(self.ID, self.SOURCE, self.TYPE, self.EARTHMODEL, self.SOURCELATITUDE, self.SOURCELONGITUDE, self.SOURCEORIGINTIME, self.SOURCEDEPTH, self.INPUTDATA, self.ISLOCATIONNEW, self.ISLOCATIONHELD, self.ISDEPTHHELD, self.ISBAYESIANDEPTH, self.BAYESIANDEPTH, self.BAYESIANSPREAD, self.USESVD)
+        locationRequest = processingformats.locationRequest.LocationRequest(self.ID, self.SOURCE, self.TYPE, self.EARTHMODEL, self.SOURCELATITUDE, self.SOURCELONGITUDE, self.SOURCEORIGINTIME, self.SOURCEDEPTH, self.INPUTDATA, self.ISLOCATIONNEW, self.ISLOCATIONHELD, self.ISDEPTHHELD, self.ISBAYESIANDEPTH, self.BAYESIANDEPTH, self.BAYESIANSPREAD, self.USESVD, self.REASSESSINITIALPHASEIDS)
         
         self.assertTrue(hasattr(locationRequest, 'id'))
         self.assertTrue(hasattr(locationRequest.source, 'agencyID'))
@@ -82,6 +85,7 @@ class TestLocationRequest(unittest.TestCase):
         self.assertTrue(hasattr(locationRequest, 'bayesianDepth'))
         self.assertTrue(hasattr(locationRequest, 'bayesianSpread'))
         self.assertTrue(hasattr(locationRequest, 'useSVD'))
+        self.assertTrue(hasattr(locationRequest, 'reassessInitialPhaseIDs'))
         
         self.assertEqual(locationRequest.id, self.ID)
         self.assertEqual(locationRequest.source.agencyID, self.SOURCE.agencyID)
@@ -102,10 +106,11 @@ class TestLocationRequest(unittest.TestCase):
         self.assertEqual(locationRequest.bayesianDepth, self.BAYESIANDEPTH)
         self.assertEqual(locationRequest.bayesianSpread, self.BAYESIANSPREAD)
         self.assertEqual(locationRequest.useSVD, self.USESVD)
+        self.assertEqual(locationRequest.reassessInitialPhaseIDs, self.REASSESSINITIALPHASEIDS)
         
         
     def test_toJSON(self):
-        locationRequest = processingformats.locationRequest.LocationRequest(self.ID, self.SOURCE, self.TYPE, self.EARTHMODEL, self.SOURCELATITUDE, self.SOURCELONGITUDE, self.SOURCEORIGINTIME, self.SOURCEDEPTH, self.INPUTDATA, self.ISLOCATIONNEW, self.ISLOCATIONHELD, self.ISDEPTHHELD, self.ISBAYESIANDEPTH, self.BAYESIANDEPTH, self.BAYESIANSPREAD, self.USESVD)
+        locationRequest = processingformats.locationRequest.LocationRequest(self.ID, self.SOURCE, self.TYPE, self.EARTHMODEL, self.SOURCELATITUDE, self.SOURCELONGITUDE, self.SOURCEORIGINTIME, self.SOURCEDEPTH, self.INPUTDATA, self.ISLOCATIONNEW, self.ISLOCATIONHELD, self.ISDEPTHHELD, self.ISBAYESIANDEPTH, self.BAYESIANDEPTH, self.BAYESIANSPREAD, self.USESVD, self.REASSESSINITIALPHASEIDS)
         self.maxDiff = None
         self.assertEqual(locationRequest.toJSONString(), self.JSONSTRING)
         
@@ -133,10 +138,11 @@ class TestLocationRequest(unittest.TestCase):
         self.assertEqual(locationRequest.bayesianDepth, self.BAYESIANDEPTH)
         self.assertEqual(locationRequest.bayesianSpread, self.BAYESIANSPREAD)
         self.assertEqual(locationRequest.useSVD, self.USESVD)
+        self.assertEqual(locationRequest.reassessInitialPhaseIDs, self.REASSESSINITIALPHASEIDS)
     
     
     def test_toDict(self):
-        locationRequest = processingformats.locationRequest.LocationRequest(self.ID, self.SOURCE, self.TYPE, self.EARTHMODEL, self.SOURCELATITUDE, self.SOURCELONGITUDE, self.SOURCEORIGINTIME, self.SOURCEDEPTH, self.INPUTDATA, self.ISLOCATIONNEW, self.ISLOCATIONHELD, self.ISDEPTHHELD, self.ISBAYESIANDEPTH, self.BAYESIANDEPTH, self.BAYESIANSPREAD, self.USESVD)
+        locationRequest = processingformats.locationRequest.LocationRequest(self.ID, self.SOURCE, self.TYPE, self.EARTHMODEL, self.SOURCELATITUDE, self.SOURCELONGITUDE, self.SOURCEORIGINTIME, self.SOURCEDEPTH, self.INPUTDATA, self.ISLOCATIONNEW, self.ISLOCATIONHELD, self.ISDEPTHHELD, self.ISBAYESIANDEPTH, self.BAYESIANDEPTH, self.BAYESIANSPREAD, self.USESVD, self.REASSESSINITIALPHASEIDS)
         self.assertEqual(locationRequest.toDict(), self.DICT)
         
         
@@ -163,10 +169,11 @@ class TestLocationRequest(unittest.TestCase):
         self.assertEqual(locationRequest.bayesianDepth, self.BAYESIANDEPTH)
         self.assertEqual(locationRequest.bayesianSpread, self.BAYESIANSPREAD)
         self.assertEqual(locationRequest.useSVD, self.USESVD)
+        self.assertEqual(locationRequest.reassessInitialPhaseIDs, self.REASSESSINITIALPHASEIDS)
         
         
     def test_isValid(self):
-        locationRequest = processingformats.locationRequest.LocationRequest(self.ID, self.SOURCE, self.TYPE, self.EARTHMODEL, self.SOURCELATITUDE, self.SOURCELONGITUDE, self.SOURCEORIGINTIME, self.SOURCEDEPTH, self.INPUTDATA, self.ISLOCATIONNEW, self.ISLOCATIONHELD, self.ISDEPTHHELD, self.ISBAYESIANDEPTH, self.BAYESIANDEPTH, self.BAYESIANSPREAD, self.USESVD)
+        locationRequest = processingformats.locationRequest.LocationRequest(self.ID, self.SOURCE, self.TYPE, self.EARTHMODEL, self.SOURCELATITUDE, self.SOURCELONGITUDE, self.SOURCEORIGINTIME, self.SOURCEDEPTH, self.INPUTDATA, self.ISLOCATIONNEW, self.ISLOCATIONHELD, self.ISDEPTHHELD, self.ISBAYESIANDEPTH, self.BAYESIANDEPTH, self.BAYESIANSPREAD, self.USESVD, self.REASSESSINITIALPHASEIDS)
         self.assertTrue(locationRequest.isValid())
         
         badLocationRequest = processingformats.locationRequest.LocationRequest()
