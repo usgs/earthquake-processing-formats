@@ -67,6 +67,8 @@ class LocationRequest : public ProcessingBase {
    * \param newBayesianSpread - A double containing the bayesian spread to use 
    *  in kilometers, std::numeric_limits<double>::quiet_NaN() to omit
    * \param newUseSVD - A bool indicating whether to use SVD
+   * \param newReassessInitialPhaseIDs - A bool indicating whether to use reassess initial phase
+   *  identifications
    */
 	LocationRequest(
       std::string newID,
@@ -87,7 +89,8 @@ class LocationRequest : public ProcessingBase {
       bool newIsBayesianDepth,
       double newBayesianDepth,
       double newBayesianSpread,
-      bool newUseSVD);
+      bool newUseSVD,
+	  bool newReassessInitialPhaseIDs);
 
   /**
 	 * \brief LocationRequest advanced constructor
@@ -120,6 +123,8 @@ class LocationRequest : public ProcessingBase {
    * \param newBayesianSpread - A double containing the bayesian spread to use 
    *  in kilometers, std::numeric_limits<double>::quiet_NaN() to omit
    * \param newUseSVD - A bool indicating whether to use SVD
+   * \param newReassessInitialPhaseIDs - A bool indicating whether to use reassess initial phase
+   *  identifications
    */
 	LocationRequest(
       std::string newID,
@@ -138,7 +143,8 @@ class LocationRequest : public ProcessingBase {
       bool newIsBayesianDepth,
       double newBayesianDepth,
       double newBayesianSpread,
-      bool newUseSVD);
+      bool newUseSVD,
+	  bool newReassessInitialPhaseIDs);
 
 	/**
 	 * \brief LocationRequest advanced constructor
@@ -315,8 +321,15 @@ class LocationRequest : public ProcessingBase {
 	 */
 	bool useSVD;
 
+  	/**
+	 * \brief The reassess initial phase ids value
+	 *
+	 * An optional bool iindicating whether reassess inital phase identifications
+	 */
+	bool reassessInitialPhaseIDs;
+
 	/**
-	 * \brief Teh output data
+	 * \brief The output data
 	 *
 	 * An optional processingformats::LocationResult containing the output data
    * for this LocationRequest

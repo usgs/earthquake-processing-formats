@@ -3,7 +3,7 @@
 
 #include <string>
 
-#define LOCATIONREQUEST_STRING "{\"EarthModel\":\"ak135\",\"SlabResolution\":\"2spd\",\"SourceLatitude\":40.3344,\"SourceLongitude\":-121.44,\"IsDepthHeld\":false,\"Type\":\"RayLoc\",\"SourceDepth\":32.44,\"IsLocationHeld\":false,\"BayesianSpread\":20.3,\"UseSVD\":true,\"BayesianDepth\":66.7,\"SourceOriginTime\":\"2015-12-28T21:32:24.017Z\",\"InputData\":[{\"Site\":{\"Station\":\"BOZ\",\"Channel\":\"BHZ\",\"Network\":\"US\",\"Location\":\"00\",\"Latitude\":45.59697,\"Longitude\":-111.62967,\"Elevation\":1589.0},\"PickedPhase\":\"P\",\"Use\":true,\"AssociatedPhase\":\"P\",\"Time\":\"2015-12-28T21:32:24.017Z\",\"Residual\":1.05,\"Source\":{\"Type\":\"Unknown\",\"AgencyID\":\"US\",\"Author\":\"TestAuthor\"},\"Weight\":2.65,\"Importance\":3.8,\"Azimuth\":21.5,\"Quality\":0.45,\"Affinity\":1.2,\"ID\":\"12GFH48776857\",\"LocatedPhase\":\"P\",\"Distance\":2.65}],\"IsLocationNew\":false,\"IsBayesianDepth\":true,\"ID\":\"12345678\",\"Source\":{\"Author\":\"TestAuthor\",\"AgencyID\":\"US\",\"Type\":\"Unknown\"}}" // NOLINT
+#define LOCATIONREQUEST_STRING "{\"EarthModel\":\"ak135\",\"SlabResolution\":\"2spd\",\"SourceLatitude\":40.3344,\"SourceLongitude\":-121.44,\"IsDepthHeld\":false,\"Type\":\"RayLoc\",\"SourceDepth\":32.44,\"IsLocationHeld\":false,\"BayesianSpread\":20.3,\"UseSVD\":true,\"ReassessInitialPhaseIDs\":true,\"BayesianDepth\":66.7,\"SourceOriginTime\":\"2015-12-28T21:32:24.017Z\",\"InputData\":[{\"Site\":{\"Station\":\"BOZ\",\"Channel\":\"BHZ\",\"Network\":\"US\",\"Location\":\"00\",\"Latitude\":45.59697,\"Longitude\":-111.62967,\"Elevation\":1589.0},\"PickedPhase\":\"P\",\"Use\":true,\"AssociatedPhase\":\"P\",\"Time\":\"2015-12-28T21:32:24.017Z\",\"Residual\":1.05,\"Source\":{\"Type\":\"Unknown\",\"AgencyID\":\"US\",\"Author\":\"TestAuthor\"},\"Weight\":2.65,\"Importance\":3.8,\"Azimuth\":21.5,\"Quality\":0.45,\"Affinity\":1.2,\"ID\":\"12GFH48776857\",\"LocatedPhase\":\"P\",\"Distance\":2.65}],\"IsLocationNew\":false,\"IsBayesianDepth\":true,\"ID\":\"12345678\",\"Source\":{\"Author\":\"TestAuthor\",\"AgencyID\":\"US\",\"Type\":\"Unknown\"}}" // NOLINT
 #define ID "12345678"
 #define AGENCYID "US"
 #define AUTHOR "TestAuthor"
@@ -23,6 +23,7 @@
 #define BAYESIANDEPTH 66.7
 #define BAYESIANSPREAD 20.3
 #define USESVD true
+#define REASSESSINITIALPHASEIDS true
 #define OUTPUTDATA_STRING "{\"MinimumDistance\":2.14,\"NumberOfUsedStations\":33,\"BayesianRange\":20.3,\"ErrorEllipse\":{\"MaximumVerticalProjection\":1.984,\"EquivalentHorizontalRadius\":1.984,\"MaximumHorizontalProjection\":1.984,\"E0\":{\"Azimuth\":-121.44,\"Error\":40.3344,\"Dip\":32.44},\"E1\":{\"Azimuth\":22.64,\"Error\":12.5,\"Dip\":2.44},\"E2\":{\"Azimuth\":22.64,\"Error\":12.5,\"Dip\":2.44}},\"SupportingData\":[{\"Site\":{\"Station\":\"BMN\",\"Network\":\"LB\",\"Channel\":\"HHZ\",\"Location\":\"01\"},\"PickedPhase\":\"P\",\"Use\":true,\"AssociatedPhase\":\"P\",\"Time\":\"2015-12-28T21:32:24.017Z\",\"Residual\":1.05,\"Source\":{\"Type\":\"Unknown\",\"AgencyID\":\"US\",\"Author\":\"TestAuthor\"},\"Weight\":2.65,\"Importance\":3.8,\"Azimuth\":21.5,\"Quality\":0.45,\"Affinity\":1.2,\"ID\":\"12GFH48776857\",\"LocatedPhase\":\"P\",\"Distance\":2.65}],\"Hypocenter\":{\"LatitudeError\":12.5,\"DepthError\":2.44,\"TimeError\":1.984,\"Latitude\":40.3344,\"Time\":\"2015-12-28T21:32:24.017Z\",\"Longitude\":-121.44,\"Depth\":32.44,\"LongitudeError\":22.64},\"DepthImportance\":1.8,\"Quality\":\"A\",\"Gap\":33.67,\"BayesianDepth\":66.7,\"SecondaryGap\":33.67,\"RMS\":3.8,\"NumberOfAssociatedStations\":11,\"NumberOfAssociatedPhases\":22,\"NumberOfUsedPhases\":44}" // NOLINT
 #define OUTPUTLATITUDE 40.3344
 
@@ -163,6 +164,11 @@ void checkdata(processingformats::LocationRequest locationRequestObject, std::st
 	bool expectedUseSVD = USESVD;
 	ASSERT_EQ(useSVD, expectedUseSVD);  
 
+	// check reassessInitialPhaseIDs
+  	bool reassess = locationRequestObject.reassessInitialPhaseIDs;
+	bool expectedReassess = REASSESSINITIALPHASEIDS;
+	ASSERT_EQ(reassess, expectedReassess);  
+
 	// check outputData
 	if (locationRequestObject.outputData.isEmpty() != true) {
 		if (std::isnan(locationRequestObject.outputData.hypocenter.latitude) != true) {
@@ -199,6 +205,7 @@ TEST(LocationRequestTest, WritesJSON) {
 	locationRequestObject.bayesianDepth = BAYESIANDEPTH;
 	locationRequestObject.bayesianSpread = BAYESIANSPREAD;
 	locationRequestObject.useSVD = USESVD;
+	locationRequestObject.reassessInitialPhaseIDs = REASSESSINITIALPHASEIDS;
 
   	rapidjson::Document ResultDocument;
 	processingformats::LocationResult locationResultObject(
@@ -244,7 +251,7 @@ TEST(LocationRequestTest, Constructors) {
 	  SOURCELATITUDE, SOURCELONGITUDE,
       processingformats::ConvertISO8601ToEpochTime(std::string(SOURCEORIGINTIME)),
       SOURCEDEPTH, buildInputData(), ISLOCATIONNEW, ISLOCATIONHELD, ISDEPTHHELD,
-      ISBAYESIANDEPTH, BAYESIANDEPTH, BAYESIANSPREAD, USESVD);
+      ISBAYESIANDEPTH, BAYESIANDEPTH, BAYESIANSPREAD, USESVD, REASSESSINITIALPHASEIDS);
 
 	// check data values
 	checkdata(locationRequestObject, "");
@@ -257,7 +264,7 @@ TEST(LocationRequestTest, Constructors) {
 	  SOURCELATITUDE, SOURCELONGITUDE,
       processingformats::ConvertISO8601ToEpochTime(std::string(SOURCEORIGINTIME)),
       SOURCEDEPTH, buildInputData(), ISLOCATIONNEW, ISLOCATIONHELD, ISDEPTHHELD,
-      ISBAYESIANDEPTH, BAYESIANDEPTH, BAYESIANSPREAD, USESVD);
+      ISBAYESIANDEPTH, BAYESIANDEPTH, BAYESIANSPREAD, USESVD, REASSESSINITIALPHASEIDS);
 
 	// check data values
 	checkdata(locationRequestObject2, "");
@@ -289,7 +296,7 @@ TEST(LocationRequestTest, Validate) {
 	locationRequestObject.bayesianDepth = BAYESIANDEPTH;
 	locationRequestObject.bayesianSpread = BAYESIANSPREAD;
 	locationRequestObject.useSVD = USESVD;
-
+	locationRequestObject.reassessInitialPhaseIDs = REASSESSINITIALPHASEIDS;
 
 	// successful validation
 	bool result = locationRequestObject.isValid();

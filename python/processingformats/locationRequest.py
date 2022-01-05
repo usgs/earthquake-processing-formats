@@ -33,6 +33,7 @@ class LocationRequest:
     BAYESIANDEPTH_KEY = "BayesianDepth" # Optional
     BAYESIANSPREAD_KEY = "BayesianSpread" # Optional
     USESVD_KEY = "UseSVD" # Optional
+    REASSESSINITIALPHASEIDS_KEY = "ReassessInitialPhaseIDs" # Optional
     OUTPUTDATA_KEY = "OutputData" # Contain output from locator
     
     #Intialize members
@@ -41,7 +42,7 @@ class LocationRequest:
                   newSourceOriginTime = None, newSourceDepth = None, 
                   newInputData = None, newIsLocationNew = None, newIsLocationHeld = None, 
                   newIsDepthHeld = None, newIsBayesianDepth = None, newBayesianDepth = None,
-                  newBayesianSpread = None, newUseSVD = None):
+                  newBayesianSpread = None, newReassessInitialPhaseIDs = None, newUseSVD = None):
         ''' Initializes the pick object. Constructs empty object if all are none
         
             newID: a string containing the ID
@@ -61,6 +62,7 @@ class LocationRequest:
             newBayesianDepth: a double containing the bayesian depth
             newBayesianSpread: a double containing the bayesian spread
             newUseSVD: a boolean indicating whether use SVD
+            newReassessInitialPhaseIDs: a boolean indicating whether reassess inital phase identifications
         '''
         
         self.outputData = None
@@ -124,6 +126,9 @@ class LocationRequest:
             
         if newUseSVD is not None:
             self.useSVD = newUseSVD
+        
+        if newReassessInitialPhaseIDs is not None:
+            self.reassessInitialPhaseIDs = newReassessInitialPhaseIDs
 
     def fromJSONString (self, JSONString):
         ''' Populates object from a JSON formatted string
@@ -199,6 +204,9 @@ class LocationRequest:
         if self.USESVD_KEY in aDict:
             self.useSVD = aDict[self.USESVD_KEY]
 
+        if self.REASSESSINITIALPHASEIDS_KEY in aDict:
+            self.reassessInitialPhaseIDs = aDict[self.REASSESSINITIALPHASEIDS_KEY]
+
     def toJSONString(self):
         ''' Converts object to a JSON formatted string
         
@@ -273,6 +281,9 @@ class LocationRequest:
         if hasattr (self, 'useSVD'):
             aDict[self.USESVD_KEY] = self.useSVD
         
+        if hasattr (self, 'reassessInitialPhaseIDs'):
+            aDict[self.REASSESSINITIALPHASEIDS_KEY] = self.reassessInitialPhaseIDs
+
         return aDict
 
     def isValid(self):

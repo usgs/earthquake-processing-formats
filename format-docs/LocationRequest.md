@@ -67,7 +67,8 @@ location processing algorithm.
         "IsBayesianDepth": Boolean,  
         "BayesianDepth"  : Number,
         "BayesianSpread" : Number,
-        "UseSVD"  : boolean  
+        "UseSVD"         : boolean,
+        "ReassessInitialPhaseIDs" : boolean 
       },
       "OutputData" : { }  
     }
@@ -112,6 +113,8 @@ relative to the WGS84 datum.
 bayesian depth in kilometers.
 * UseSVD - A boolean flag that indicates whether the singular valued
 decomposition logic is to be used.
+* ReassessInitialPhaseIDs - A boolean flag that indicates whether to reasses
+the given phase id's in the InputData.
 
 **Output Values:**
 
