@@ -22,6 +22,7 @@
 #define BAYESIANDEPTH_KEY "BayesianDepth"
 #define BAYESIANSPREAD_KEY "BayesianSpread"
 #define USESVD_KEY "UseSVD"
+#define REASSESSINITIALPHASEIDS_KEY "ReassessInitialPhaseIDs"
 #define OUTPUTDATA_KEY "OutputData"
 
 namespace processingformats {
@@ -43,6 +44,7 @@ LocationRequest::LocationRequest() {
     bayesianDepth = std::numeric_limits<double>::quiet_NaN();
     bayesianSpread = std::numeric_limits<double>::quiet_NaN();
     useSVD = false;
+	reassessInitialPhaseIDs = false;
     outputData = processingformats::LocationResult();
 }
 
@@ -65,7 +67,8 @@ LocationRequest::LocationRequest(
       bool newIsBayesianDepth,
       double newBayesianDepth,
       double newBayesianSpread,
-      bool newUseSVD) {
+      bool newUseSVD,
+	  bool newReassessInitialPhaseIDs) {
 	id = newID;
 	LocationRequest::source = processingformats::Source(newAgencyID, newAuthor,
 		newType);
@@ -82,7 +85,7 @@ LocationRequest::LocationRequest(
 		earthModel = newEarthModel;
 	}
 	if (newSlabResolution != "") {
-		slabResolution= newSlabResolution;
+		slabResolution = newSlabResolution;
 	}
 	isLocationNew = newIsLocationNew;
 	isLocationHeld = newIsLocationHeld;
@@ -91,6 +94,7 @@ LocationRequest::LocationRequest(
 	bayesianDepth = newBayesianDepth;
 	bayesianSpread = newBayesianSpread;
 	useSVD = newUseSVD;
+	reassessInitialPhaseIDs = newReassessInitialPhaseIDs;
 	outputData = processingformats::LocationResult();
 }
 
@@ -111,7 +115,8 @@ LocationRequest::LocationRequest(
       bool newIsBayesianDepth,
       double newBayesianDepth,
       double newBayesianSpread,
-      bool newUseSVD) {
+      bool newUseSVD,
+	  bool newReassessInitialPhaseIDs) {
 	id = newID;
 	LocationRequest::source = newSource;
 	type = newLocType;
@@ -127,8 +132,8 @@ LocationRequest::LocationRequest(
 		earthModel = newEarthModel;
 	}
 	if (newSlabResolution != "") {
-		slabResolution= newSlabResolution;
-	}  
+		slabResolution = newSlabResolution;
+	}
 	isLocationNew = newIsLocationNew;
 	isLocationHeld = newIsLocationHeld;
 	isDepthHeld = newIsDepthHeld;
@@ -136,6 +141,7 @@ LocationRequest::LocationRequest(
 	bayesianDepth = newBayesianDepth;
 	bayesianSpread = newBayesianSpread;
 	useSVD = newUseSVD;
+	reassessInitialPhaseIDs = newReassessInitialPhaseIDs;
 	outputData = processingformats::LocationResult();
 }
 
@@ -211,10 +217,10 @@ LocationRequest::LocationRequest(rapidjson::Value &json) {
 		// the Id *should* be a string
 		id = std::string(json[ID_KEY].GetString(),
 							json[ID_KEY].GetStringLength());
-	} else if ((json.HasMember(ID_KEY) == true) 
-		&& (json[ID_KEY].IsNumber() == true) 
+	} else if ((json.HasMember(ID_KEY) == true)
+		&& (json[ID_KEY].IsNumber() == true)
 		&& (json[ID_KEY].IsInt() == true)) {
-		// but the ID *could* be an int, but we 
+		// but the ID *could* be an int, but we
         // want it to be a string
 		id = std::to_string(json[SOURCELONGITUDE_KEY].GetInt());
 	} else {
@@ -307,6 +313,14 @@ LocationRequest::LocationRequest(rapidjson::Value &json) {
 		useSVD = false;
 	}
 
+	// useSVD
+	if ((json.HasMember(REASSESSINITIALPHASEIDS_KEY) == true)
+			&& (json[REASSESSINITIALPHASEIDS_KEY].IsBool() == true)) {
+		reassessInitialPhaseIDs = json[REASSESSINITIALPHASEIDS_KEY].GetBool();
+	} else {
+		reassessInitialPhaseIDs = false;
+	}
+
 	// outputData
 	if ((json.HasMember(OUTPUTDATA_KEY) == true)
 			&& (json[OUTPUTDATA_KEY].IsObject() == true)) {
@@ -342,6 +356,7 @@ LocationRequest::LocationRequest(const LocationRequest & newLocationRequest) {
     bayesianDepth = newLocationRequest.bayesianDepth;
     bayesianSpread = newLocationRequest.bayesianSpread;
     useSVD = newLocationRequest.useSVD;
+	reassessInitialPhaseIDs = newLocationRequest.reassessInitialPhaseIDs;
     outputData = newLocationRequest.outputData;
 }
 
@@ -454,6 +469,10 @@ rapidjson::Value & LocationRequest::toJSON(
 
 	// useSVD
 	json.AddMember(USESVD_KEY, useSVD, allocator);
+
+	// reassessInitialPhaseIDs
+	json.AddMember(REASSESSINITIALPHASEIDS_KEY, reassessInitialPhaseIDs,
+		allocator);
 
 	// outputData
 	if (outputData.isEmpty() == false) {
