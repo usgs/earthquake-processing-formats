@@ -313,7 +313,7 @@ LocationRequest::LocationRequest(rapidjson::Value &json) {
 		useSVD = false;
 	}
 
-	// useSVD
+	// reassessInitialPhaseIDs
 	if ((json.HasMember(REASSESSINITIALPHASEIDS_KEY) == true)
 			&& (json[REASSESSINITIALPHASEIDS_KEY].IsBool() == true)) {
 		reassessInitialPhaseIDs = json[REASSESSINITIALPHASEIDS_KEY].GetBool();
