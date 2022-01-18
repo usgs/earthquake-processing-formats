@@ -285,6 +285,9 @@ public class Site implements ProcessingInt {
     if (Elevation == null) {
       // Elevation not found
       errorList.add("No Elevation in Site Class.");
+    } else if ((Elevation < -20000) || (Elevation > 10000)) {
+      // invalid Longitude
+      errorList.add("Elevation in site class not in the range of -20000 to 10000 meters.");
     }
 
     // since Station, Channel, Network, and Location are free text
