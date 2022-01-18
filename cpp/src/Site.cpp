@@ -206,9 +206,9 @@ std::vector<std::string> Site::getErrors() {
 
 	// elevation
 	if (std::isnan(elevation) != true) {
-		if ((elevation < -500) || (elevation > 8900)) {
-			errorlist.push_back("Elevation in site class not in the range of -500 "
-				"to 8900 meters.");
+		if ((elevation < -20000) || (elevation > 10000)) {
+			errorlist.push_back("Elevation in site class not in the range of -20000 "
+				"to 10000 meters.");
 		}
 	}
 

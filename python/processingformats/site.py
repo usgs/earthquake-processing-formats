@@ -179,8 +179,8 @@ class Site:
         
         #Elevation
         try:
-            if self.elevation < -10000 or self.elevation > 30000:
-                errorList.append('Elevation in Site Class is out of range.')
+            if self.elevation < -20000 or self.elevation > 10000:
+                errorList.append('Elevation in site class not in the range of -20000 to 10000 meters..')
                 
         except(NameError, AttributeError):
             errorList.append('No Elevation in Site Class')
