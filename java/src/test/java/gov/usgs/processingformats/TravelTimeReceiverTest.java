@@ -1,10 +1,9 @@
 package gov.usgs.processingformats;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import org.json.simple.parser.ParseException;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TravelTimeReceiverTest {
 
@@ -73,7 +72,7 @@ public class TravelTimeReceiverTest {
     boolean rc = sourceObject.isValid();
 
     // check return code
-    assertEquals("Successful Validation", true, rc);
+    Assertions.assertEquals(true, rc, "Successful Validation");
 
     // build bad source object
     TravelTimeReceiver badReceiverObject = new TravelTimeReceiver(ID, null, null, null, null, null);
@@ -81,26 +80,26 @@ public class TravelTimeReceiverTest {
     rc = badReceiverObject.isValid();
 
     // check return code
-    assertEquals("Unsuccessful Validation", false, rc);
+    Assertions.assertEquals(false, rc, "Unsuccessful Validation");
   }
 
   /** Checks the data in the class */
   public void checkData(TravelTimeReceiver ReceiverObject, String TestName) {
 
     // check ReceiverObject.ID
-    assertEquals(TestName + " ID Equals", ID, ReceiverObject.ID);
+    Assertions.assertEquals(ID, ReceiverObject.ID, TestName + " ID Equals");
 
     // check ReceiverObject.Distance
-    assertEquals(TestName + " Distance Equals", DISTANCE, ReceiverObject.Distance, 0);
+    Assertions.assertEquals(DISTANCE, ReceiverObject.Distance, 0, TestName + " Distance Equals");
 
     // check ReceiverObject.Elevation
-    assertEquals(TestName + " Elevation Equals", ELEVATION, ReceiverObject.Elevation, 0);
+    Assertions.assertEquals(ELEVATION, ReceiverObject.Elevation, 0, TestName + " Elevation Equals");
 
     // check ReceiverObject.Latitude
-    assertEquals(TestName + " Latitude Equals", LATITUDE, ReceiverObject.Latitude, 0);
+    Assertions.assertEquals(LATITUDE, ReceiverObject.Latitude, 0, TestName + " Latitude Equals");
 
     // check ReceiverObject.Longitude
-    assertEquals(TestName + " Longitude Equals", LONGITUDE, ReceiverObject.Longitude, 0);
+    Assertions.assertEquals(LONGITUDE, ReceiverObject.Longitude, 0, TestName + " Longitude Equals");
   }
 
   public ArrayList<TravelTimeData> buildData() {

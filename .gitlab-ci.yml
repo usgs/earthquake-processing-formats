@@ -1,0 +1,146 @@
+image: ${DEVOPS_REGISTRY}usgs/centos:latest
+
+stages:
+  - test
+  - publish
+
+variables:
+  JAVA_IMAGE: ${DEVOPS_REGISTRY}usgs/java:11-jdk
+  PYTHON_IMAGE: ${DEVOPS_REGISTRY}usgs/python:3.9-obspy
+  CPP_IMAGE: ${DEVOPS_REGISTRY}usgs/python:3.9-obspy # gets us ubuntu
+
+  # environment variables
+  APP_NAME: earthquake-processing-formats
+  UPSTREAM_PATH: ghsc/neic/utilities/earthquake-processing-formats
+
+## --------------------------------------------------
+# Templates
+## --------------------------------------------------
+
+# rules to define which branches should trigger actions
+.publish-env: &publish-env
+  if: $CI_PROJECT_PATH == $UPSTREAM_PATH
+  variables:
+    ENVIRONMENT: publish
+
+## --------------------------------------------------
+# Test Stage
+## --------------------------------------------------
+
+# Java
+Java Test:
+  after_script:
+    # runs before cache is saved
+    - rm -f  "${CI_PROJECT_DIR}/java/.gradle/caches/modules-2/modules-2.lock"
+    - rm -fr "${CI_PROJECT_DIR}/java/.gradle/caches/*/plugin-resolution/"
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: build/reports/cobertura/cobertura.xml
+      junit: build/test-results/test/TEST-*.xml
+  cache:
+    paths:
+      - java/.gradle/caches
+      - java/.gradle/wrapper
+  image: ${JAVA_IMAGE}
+  script:
+    - cd java
+    # run gradle and javadoc
+    - export GRADLE_USER_HOME="${CI_PROJECT_DIR}/.gradle"
+    - ./gradlew build javadoc
+  stage: test
+  tags:
+    - development
+
+# Python
+Python Build:
+  cache:
+    paths:
+      # cache pip installed dependencies, see PIP_CACHE_DIR variable below
+      - .cache/pip    
+  script:
+    - cd python
+    - poetry config virtualenvs.in-project true --local
+    - poetry install
+    - poetry run safety check   
+    - poetry build
+  stage: test
+  image: ${PYTHON_IMAGE}
+  variables:
+    PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+Python Lint:
+  cache:
+    paths:
+      # cache pip installed dependencies, see PIP_CACHE_DIR variable below
+      - .cache/pip
+  script:
+    - cd python
+    - poetry config virtualenvs.in-project true --local
+    - poetry install
+    - poetry run black --check .
+  stage: test
+  image: ${PYTHON_IMAGE}
+  variables:
+    PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+Python Test:
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
+      junit: junit.xml
+  script:
+    - cd python
+    - poetry config virtualenvs.in-project true --local
+    - poetry install
+    - poetry run pytest --cov=processingformats --junitxml junit.xml
+    - poetry run coverage xml
+  stage: test
+  image: ${PYTHON_IMAGE}
+
+
+# cpp
+#CPP Build:
+#  before_script:
+#    - apt update -y
+#    - apt install gcc=5:5.5.0-12ubuntu1 -y
+#    - apt install cmake -y
+#    - apt install libgtest-dev -y
+#  script:
+#    - cd cpp
+#    - mkdir build
+#    - cd build
+#    - cmake -DRUN_TESTS=1 -DRAPIDJSON_PATH=../lib/rapidjson .. && make
+#  stage: test
+#  image: ${CPP_IMAGE}
+#  variables:
+#    CXX: "g++-5"
+#    CC: "gcc-5"
+
+## --------------------------------------------------
+# Publish stage
+## --------------------------------------------------
+Java Publish:
+  after_script:
+    # runs before cache is saved 
+    - rm -f  "${CI_PROJECT_DIR}/java/.gradle/caches/modules-2/modules-2.lock"
+    - rm -fr "${CI_PROJECT_DIR}/java/.gradle/caches/*/plugin-resolution/"
+  cache:
+    paths:
+      - java/.gradle/caches
+      - java/.gradle/wrapper
+  image: ${JAVA_IMAGE}
+  script:
+    - cd java
+    # use gradle to publish to our maven repository
+    - export GRADLE_USER_HOME="${CI_PROJECT_DIR}/.gradle"
+    - ./gradlew publish
+  stage: publish
+  rules:
+      - <<: *publish-env
+        when: manual
+  tags:
+    - development

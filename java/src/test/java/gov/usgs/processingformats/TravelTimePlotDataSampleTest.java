@@ -1,9 +1,8 @@
 package gov.usgs.processingformats;
 
-import static org.junit.Assert.*;
-
 import org.json.simple.parser.ParseException;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TravelTimePlotDataSampleTest {
 
@@ -113,7 +112,7 @@ public class TravelTimePlotDataSampleTest {
     boolean rc = travelTimePlotDataSampleObject.isValid();
 
     // check return code
-    assertEquals("Successful Validation", true, rc);
+    Assertions.assertEquals(true, rc, "Successful Validation");
 
     // use constructor
     TravelTimePlotDataSample badTravelTimePlotDataSampleObject =
@@ -122,38 +121,38 @@ public class TravelTimePlotDataSampleTest {
     rc = badTravelTimePlotDataSampleObject.isValid();
 
     // check return code
-    assertEquals("Unsuccessful Validation", false, rc);
+    Assertions.assertEquals(false, rc, "Unsuccessful Validation");
   }
 
   public void checkData(TravelTimePlotDataSample travelTimePlotDataSampleObject, String TestName) {
 
     // check travelTimeDataObject.distance
-    assertEquals(
-        TestName + " Distance Equals", DISTANCE, travelTimePlotDataSampleObject.Distance, 0);
+    Assertions.assertEquals(
+        DISTANCE, travelTimePlotDataSampleObject.Distance, 0, TestName + " Distance Equals");
 
     // check travelTimeDataObject.travelTime
-    assertEquals(
-        TestName + " Travel Time Equals", TRAVELTIME, travelTimePlotDataSampleObject.TravelTime, 0);
+    Assertions.assertEquals(
+        TRAVELTIME, travelTimePlotDataSampleObject.TravelTime, 0, TestName + " Travel Time Equals");
 
     // check travelTimeDataObject.statisticalSpread
-    assertEquals(
-        TestName + " Statistical Spread Equals",
+    Assertions.assertEquals(
         STATISTICALSPREAD,
         travelTimePlotDataSampleObject.StatisticalSpread,
-        0);
+        0,
+        TestName + " Statistical Spread Equals");
 
     // check travelTimeDataObject.observability
-    assertEquals(
-        TestName + " Observability Equals",
+    Assertions.assertEquals(
         OBSERVABILITY,
         travelTimePlotDataSampleObject.Observability,
-        0);
+        0,
+        TestName + " Observability Equals");
 
     // check travelTimeDataObject.RayParameter
-    assertEquals(
-        TestName + " RayParameter Equals",
+    Assertions.assertEquals(
         RAYPARAMETER,
         travelTimePlotDataSampleObject.RayParameter,
-        0);
+        0,
+        TestName + " RayParameter Equals");
   }
 }

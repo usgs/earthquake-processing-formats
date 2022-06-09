@@ -1,9 +1,8 @@
 package gov.usgs.processingformats;
 
-import static org.junit.Assert.*;
-
 import org.json.simple.parser.ParseException;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class SiteTest {
 
@@ -58,7 +57,7 @@ public class SiteTest {
     boolean rc = siteObject.isValid();
 
     // check return code
-    assertEquals("Successful Validation", true, rc);
+    Assertions.assertEquals(true, rc, "Successful Validation");
 
     // build bad source object
     Site badSiteObject = new Site(null, null, null, null, null, null, null);
@@ -66,37 +65,37 @@ public class SiteTest {
     rc = badSiteObject.isValid();
 
     // check return code
-    assertEquals("Unsuccessful Validation", false, rc);
+    Assertions.assertEquals(false, rc, "Unsuccessful Validation");
   }
 
   /** Checks the data in the class */
   public void checkData(Site SiteObject, String TestName) {
 
     // check SiteObject.Station
-    assertEquals(TestName + " Site Equals", STATION, SiteObject.Station);
+    Assertions.assertEquals(STATION, SiteObject.Station, TestName + " Site Equals");
 
     // check SiteObject.Channel
-    assertEquals(TestName + " Channel Equals", CHANNEL, SiteObject.Channel);
+    Assertions.assertEquals(CHANNEL, SiteObject.Channel, TestName + " Channel Equals");
 
     // check SiteObject.Network
-    assertEquals(TestName + " Network Equals", NETWORK, SiteObject.Network);
+    Assertions.assertEquals(NETWORK, SiteObject.Network, TestName + " Network Equals");
 
     // check SiteObject.Location
-    assertEquals(TestName + " Location Equals", LOCATION, SiteObject.Location);
+    Assertions.assertEquals(LOCATION, SiteObject.Location, TestName + " Location Equals");
 
     // check SiteObject.Latitude
     if (SiteObject.Latitude != null) {
-      assertEquals(TestName + " Latitude Equals", LATITUDE, SiteObject.Latitude, 0);
+      Assertions.assertEquals(LATITUDE, SiteObject.Latitude, 0, TestName + " Latitude Equals");
     }
 
     // check SiteObject.Longitude
     if (SiteObject.Longitude != null) {
-      assertEquals(TestName + " Longitude Equals", LONGITUDE, SiteObject.Longitude, 0);
+      Assertions.assertEquals(LONGITUDE, SiteObject.Longitude, 0, TestName + " Longitude Equals");
     }
 
     // check SiteObject.Elevation
     if (SiteObject.Elevation != null) {
-      assertEquals(TestName + " Elevation Equals", ELEVATION, SiteObject.Elevation, 0);
+      Assertions.assertEquals(ELEVATION, SiteObject.Elevation, 0, TestName + " Elevation Equals");
     }
   }
 }

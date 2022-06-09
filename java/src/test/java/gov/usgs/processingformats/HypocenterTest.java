@@ -1,10 +1,9 @@
 package gov.usgs.processingformats;
 
-import static org.junit.Assert.*;
-
 import java.util.Date;
 import org.json.simple.parser.ParseException;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class HypocenterTest {
 
@@ -67,7 +66,7 @@ public class HypocenterTest {
     boolean rc = hypoObject.isValid();
 
     // check return code
-    assertEquals("Successful Validation", true, rc);
+    Assertions.assertEquals(true, rc, "Successful Validation");
 
     // build bad Hypo object
     Hypocenter badHypoObject =
@@ -77,33 +76,35 @@ public class HypocenterTest {
     rc = badHypoObject.isValid();
 
     // check return code
-    assertEquals("Unsuccessful Validation", false, rc);
+    Assertions.assertEquals(false, rc, "Unsuccessful Validation");
   }
 
   public void checkData(Hypocenter hypoObject, String TestName) {
 
     // check hypoObject.Latitude
-    assertEquals(TestName + " Latitude Equals", LATITUDE, hypoObject.Latitude, 0);
+    Assertions.assertEquals(LATITUDE, hypoObject.Latitude, 0, TestName + " Latitude Equals");
 
     // check hypoObject.Longitude
-    assertEquals(TestName + " Longitude Equals", LONGITUDE, hypoObject.Longitude, 0);
+    Assertions.assertEquals(LONGITUDE, hypoObject.Longitude, 0, TestName + " Longitude Equals");
 
     // check hypoObject.Depth
-    assertEquals(TestName + " Depth Equals", DEPTH, hypoObject.Depth, 0);
+    Assertions.assertEquals(DEPTH, hypoObject.Depth, 0, TestName + " Depth Equals");
 
     // check hypoObject.Time
-    assertEquals(TestName + " Time Equals", TIME, hypoObject.Time);
+    Assertions.assertEquals(TIME, hypoObject.Time, TestName + " Time Equals");
 
     // check hypoObject.LatitudeError
-    assertEquals(TestName + " LatitudeError Equals", LATITUDEERROR, hypoObject.LatitudeError, 0);
+    Assertions.assertEquals(
+        LATITUDEERROR, hypoObject.LatitudeError, 0, TestName + " LatitudeError Equals");
 
     // check hypoObject.LongitudeError
-    assertEquals(TestName + " LongitudError Equals", LONGITUDEERROR, hypoObject.LongitudeError, 0);
+    Assertions.assertEquals(
+        LONGITUDEERROR, hypoObject.LongitudeError, 0, TestName + " LongitudError Equals");
 
     // check hypoObject.DepthError
-    assertEquals(TestName + " DepthError Equals", DEPTHERROR, hypoObject.DepthError, 0);
+    Assertions.assertEquals(DEPTHERROR, hypoObject.DepthError, 0, TestName + " DepthError Equals");
 
     // check hypoObject.TimeError
-    assertEquals(TestName + " TimeError Equals", TIMEERROR, hypoObject.TimeError, 0);
+    Assertions.assertEquals(TIMEERROR, hypoObject.TimeError, 0, TestName + " TimeError Equals");
   }
 }

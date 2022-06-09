@@ -1,10 +1,9 @@
 package gov.usgs.processingformats;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import org.json.simple.parser.ParseException;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TravelTimePlotDataBranchTest {
 
@@ -121,7 +120,7 @@ public class TravelTimePlotDataBranchTest {
     boolean rc = travelTimePlotDataBranchObject.isValid();
 
     // check return code
-    assertEquals("Successful Validation", true, rc);
+    Assertions.assertEquals(true, rc, "Successful Validation");
 
     // use constructor
     TravelTimePlotDataBranch badTravelTimePlotDataBranchObjectt =
@@ -130,79 +129,80 @@ public class TravelTimePlotDataBranchTest {
     rc = badTravelTimePlotDataBranchObjectt.isValid();
 
     // check return code
-    assertEquals("Unsuccessful Validation", false, rc);
+    Assertions.assertEquals(false, rc, "Unsuccessful Validation");
   }
 
   public void checkData(TravelTimePlotDataBranch travelTimePlotDataBranchObject, String TestName) {
 
     // check travelTimePlotDataBranchObject.phase
-    assertEquals(TestName + " Phase Equals", PHASE, travelTimePlotDataBranchObject.Phase);
+    Assertions.assertEquals(
+        PHASE, travelTimePlotDataBranchObject.Phase, TestName + " Phase Equals");
 
     // check sample data
     // check number of samples
-    assertEquals(
-        TestName + " Number of Samples Equals",
+    Assertions.assertEquals(
         NUMSAMPLES,
         travelTimePlotDataBranchObject.Samples.size(),
-        0);
+        0,
+        TestName + " Number of Samples Equals");
 
     // first sample
     // check travelTimePlotDataBranchObject.samples[0].distance
-    assertEquals(
-        TestName + " Distance Equals",
+    Assertions.assertEquals(
         DISTANCE,
         travelTimePlotDataBranchObject.Samples.get(0).Distance,
-        0);
+        0,
+        TestName + " Distance Equals");
 
     // check ravelTimePlotDataBranchObject.samples[0].travelTime
-    assertEquals(
-        TestName + " Travel Time Equals",
+    Assertions.assertEquals(
         TRAVELTIME,
         travelTimePlotDataBranchObject.Samples.get(0).TravelTime,
-        0);
+        0,
+        TestName + " Travel Time Equals");
 
     // check ravelTimePlotDataBranchObject.samples[0].statisticalSpread
-    assertEquals(
-        TestName + " Statistical Spread Equals",
+    Assertions.assertEquals(
         STATISTICALSPREAD,
         travelTimePlotDataBranchObject.Samples.get(0).StatisticalSpread,
-        0);
+        0,
+        TestName + " Statistical Spread Equals");
 
     // check ravelTimePlotDataBranchObject.samples[0].observability
-    assertEquals(
-        TestName + " Observability Equals",
+    Assertions.assertEquals(
         OBSERVABILITY,
         travelTimePlotDataBranchObject.Samples.get(0).Observability,
-        0);
+        0,
+        TestName + " Observability Equals");
 
     // second sample
     // check travelTimePlotDataBranchObject.samples[1].distance
-    assertEquals(
-        TestName + " Distance Equals",
+    Assertions.assertEquals(
         DISTANCE2,
         travelTimePlotDataBranchObject.Samples.get(1).Distance,
-        0);
+        0,
+        TestName + " Distance Equals");
 
     // check ravelTimePlotDataBranchObject.samples[1].travelTime
-    assertEquals(
-        TestName + " Travel Time Equals",
+    Assertions.assertEquals(
         TRAVELTIME2,
         travelTimePlotDataBranchObject.Samples.get(1).TravelTime,
-        0);
+        0,
+        TestName + " Travel Time Equals");
 
     // check ravelTimePlotDataBranchObject.samples[1].statisticalSpread
-    assertEquals(
-        TestName + " Statistical Spread Equals",
+    Assertions.assertEquals(
         STATISTICALSPREAD2,
         travelTimePlotDataBranchObject.Samples.get(1).StatisticalSpread,
-        0);
+        0,
+        TestName + " Statistical Spread Equals");
 
     // check ravelTimePlotDataBranchObject.samples[1].observability
-    assertEquals(
-        TestName + " Observability Equals",
+    Assertions.assertEquals(
         OBSERVABILITY2,
         travelTimePlotDataBranchObject.Samples.get(1).Observability,
-        0);
+        0,
+        TestName + " Observability Equals");
   }
 
   public ArrayList<TravelTimePlotDataSample> buildSampleData() {

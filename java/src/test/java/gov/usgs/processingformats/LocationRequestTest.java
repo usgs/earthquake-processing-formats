@@ -1,11 +1,10 @@
 package gov.usgs.processingformats;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.Date;
 import org.json.simple.parser.ParseException;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class LocationRequestTest {
 
@@ -169,7 +168,7 @@ public class LocationRequestTest {
     boolean rc = locationRequestObject.isValid();
 
     // check return code
-    assertEquals("Successful Validation", true, rc);
+    Assertions.assertEquals(true, rc, "Successful Validation");
 
     LocationRequest badLocationRequestObject =
         new LocationRequest(
@@ -197,25 +196,26 @@ public class LocationRequestTest {
     rc = badLocationRequestObject.isValid();
 
     // check return code
-    assertEquals("Unsuccessful Validation", false, rc);
+    Assertions.assertEquals(false, rc, "Unsuccessful Validation");
   }
 
   public void checkData(LocationRequest locationRequestObject, String TestName) {
 
     // check LocationResultObject.sourceLatitude
-    assertEquals(
-        TestName + " Latitude Equals", SOURCELATITUDE, locationRequestObject.SourceLatitude, 0);
+    Assertions.assertEquals(
+        SOURCELATITUDE, locationRequestObject.SourceLatitude, 0, TestName + " Latitude Equals");
 
     // check LocationResultObject.sourceLongitude
-    assertEquals(
-        TestName + " Longitude Equals", SOURCELONGITUDE, locationRequestObject.SourceLongitude, 0);
+    Assertions.assertEquals(
+        SOURCELONGITUDE, locationRequestObject.SourceLongitude, 0, TestName + " Longitude Equals");
 
     // check LocationResultObject.sourceDepth
-    assertEquals(TestName + " Depth Equals", SOURCEDEPTH, locationRequestObject.SourceDepth, 0);
+    Assertions.assertEquals(
+        SOURCEDEPTH, locationRequestObject.SourceDepth, 0, TestName + " Depth Equals");
 
     // check LocationResultObject.sourceOriginTime
-    assertEquals(
-        TestName + " OriginTime Equals", SOURCEORIGINTIME, locationRequestObject.SourceOriginTime);
+    Assertions.assertEquals(
+        SOURCEORIGINTIME, locationRequestObject.SourceOriginTime, TestName + " OriginTime Equals");
 
     // need to check data still!!!!!!
     // somehow?
@@ -223,70 +223,72 @@ public class LocationRequestTest {
     // optional values
     // check locationRequestObject.id
     if (locationRequestObject.ID != null) {
-      assertEquals(TestName + " ID Equals", ID, locationRequestObject.ID);
+      Assertions.assertEquals(ID, locationRequestObject.ID, TestName + " ID Equals");
     }
 
-    assertEquals(TestName + " Earth Model Equals", EARTHMODEL, locationRequestObject.EarthModel);
-    assertEquals(
-        TestName + " Slab Resolution Equals", SLABRESOLUTION, locationRequestObject.SlabResolution);
+    Assertions.assertEquals(
+        EARTHMODEL, locationRequestObject.EarthModel, TestName + " Earth Model Equals");
+
+    Assertions.assertEquals(
+        SLABRESOLUTION, locationRequestObject.SlabResolution, TestName + " Slab Resolution Equals");
 
     // check locationRequestObject.isLocationNew
     if (locationRequestObject.IsLocationNew != null) {
-      assertEquals(
-          TestName + " IsLocationNew Equals", ISLOCATIONNEW, locationRequestObject.IsLocationNew);
+      Assertions.assertEquals(
+          ISLOCATIONNEW, locationRequestObject.IsLocationNew, TestName + " IsLocationNew Equals");
     }
 
     // check locationRequestObject.isLocationHeld
     if (locationRequestObject.IsLocationHeld != null) {
-      assertEquals(
-          TestName + " IsLocationHeld Equals",
+      Assertions.assertEquals(
           ISLOCATIONHELD,
-          locationRequestObject.IsLocationHeld);
+          locationRequestObject.IsLocationHeld,
+          TestName + " IsLocationHeld Equals");
     }
 
     // check locationRequestObject.isDepthHeld
     if (locationRequestObject.IsDepthHeld != null) {
-      assertEquals(
-          TestName + " IsDepthHeld Equals", ISDEPTHHELD, locationRequestObject.IsDepthHeld);
+      Assertions.assertEquals(
+          ISDEPTHHELD, locationRequestObject.IsDepthHeld, TestName + " IsDepthHeld Equals");
     }
 
     // check locationRequestObject.isBayesianDepth
     if (locationRequestObject.IsBayesianDepth != null) {
-      assertEquals(
-          TestName + " IsBayesianDepth Equals",
+      Assertions.assertEquals(
           ISBAYESIANDEPTH,
-          locationRequestObject.IsBayesianDepth);
+          locationRequestObject.IsBayesianDepth,
+          TestName + " IsBayesianDepth Equals");
     }
 
     // check locationRequestObject.baysianDepth
     if (locationRequestObject.BayesianDepth != null) {
-      assertEquals(
-          TestName + " Bayesian Depth Equals",
+      Assertions.assertEquals(
           BAYESIANDEPTH,
           locationRequestObject.BayesianDepth,
-          0);
+          0,
+          TestName + " Bayesian Depth Equals");
     }
 
     // check locationRequestObject.baysianSpread
     if (locationRequestObject.BayesianSpread != null) {
-      assertEquals(
-          TestName + " Bayesian Spread Equals",
+      Assertions.assertEquals(
           BAYESIANSPREAD,
           locationRequestObject.BayesianSpread,
-          0);
+          0,
+          TestName + " Bayesian Spread Equals");
     }
 
     // check locationRequestObject.useSVD
     if (locationRequestObject.UseSVD != null) {
-      assertEquals(TestName + " UseSVD Equals", USESVD, locationRequestObject.UseSVD);
+      Assertions.assertEquals(USESVD, locationRequestObject.UseSVD, TestName + " UseSVD Equals");
     }
 
     // check locationRequestObject.ReassessInitialPhaseIDs
     if (locationRequestObject.ReassessInitialPhaseIDs != null) {
-      assertEquals(
-          TestName + " ReassessInitialPhaseIDs Equals",
+      Assertions.assertEquals(
           REASSESSINITIALPHASEIDS,
-          locationRequestObject.ReassessInitialPhaseIDs);
+          locationRequestObject.ReassessInitialPhaseIDs,
+          TestName + " ReassessInitialPhaseIDs Equals");
     }
 
     // Need to check output data somehow!!
