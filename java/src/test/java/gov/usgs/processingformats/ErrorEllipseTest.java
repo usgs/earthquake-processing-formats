@@ -1,9 +1,8 @@
 package gov.usgs.processingformats;
 
-import static org.junit.Assert.*;
-
 import org.json.simple.parser.ParseException;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class ErrorEllipseTest {
 
@@ -94,7 +93,7 @@ public class ErrorEllipseTest {
     boolean rc = ellipseObject.isValid();
 
     // check return code
-    assertEquals("Successful Validation", true, rc);
+    Assertions.assertEquals(true, rc, "Successful Validation");
 
     // build bad ellipse object
     ErrorEllipse badEllipseObject =
@@ -115,57 +114,57 @@ public class ErrorEllipseTest {
     rc = badEllipseObject.isValid();
 
     // check return code
-    assertEquals("Unsuccessful Validation", false, rc);
+    Assertions.assertEquals(false, rc, "Unsuccessful Validation");
   }
 
   public void checkData(ErrorEllipse ellipseObject, String TestName) {
 
     // check ellipseObject.e0Error
-    assertEquals(TestName + " e0Error Equals", E0ERROR, ellipseObject.E0.Error, 0);
+    Assertions.assertEquals(E0ERROR, ellipseObject.E0.Error, 0, TestName + " e0Error Equals");
 
     // check ellipseObject.e0Azimuth
-    assertEquals(TestName + " e0Azimuth Equals", E0AZIMUTH, ellipseObject.E0.Azimuth, 0);
+    Assertions.assertEquals(E0AZIMUTH, ellipseObject.E0.Azimuth, 0, TestName + " e0Azimuth Equals");
 
     // check ellipseObject.e0Dip
-    assertEquals(TestName + " e0Dip Equals", E0DIP, ellipseObject.E0.Dip, 0);
+    Assertions.assertEquals(E0DIP, ellipseObject.E0.Dip, 0, TestName + " e0Dip Equals");
 
     // check ellipseObject.e1Error
-    assertEquals(TestName + " e1Error Equals", E1ERROR, ellipseObject.E1.Error, 0);
+    Assertions.assertEquals(E1ERROR, ellipseObject.E1.Error, 0, TestName + " e1Error Equals");
 
     // check ellipseObject.e1Azimuth
-    assertEquals(TestName + " e1Azimuth Equals", E1AZIMUTH, ellipseObject.E1.Azimuth, 0);
+    Assertions.assertEquals(E1AZIMUTH, ellipseObject.E1.Azimuth, 0, TestName + " e1Azimuth Equals");
 
     // check ellipseObject.e1Dip
-    assertEquals(TestName + " e1Dip Equals", E1DIP, ellipseObject.E1.Dip, 0);
+    Assertions.assertEquals(E1DIP, ellipseObject.E1.Dip, 0, TestName + " e1Dip Equals");
 
     // check ellipseObject.e2Error
-    assertEquals(TestName + " e2Error Equals", E2ERROR, ellipseObject.E2.Error, 0);
+    Assertions.assertEquals(E2ERROR, ellipseObject.E2.Error, 0, TestName + " e2Error Equals");
 
     // check ellipseObject.e2Azimuth
-    assertEquals(TestName + " e2Azimuth Equals", E2AZIMUTH, ellipseObject.E2.Azimuth, 0);
+    Assertions.assertEquals(E2AZIMUTH, ellipseObject.E2.Azimuth, 0, TestName + " e2Azimuth Equals");
 
     // check ellipseObject.e2Dip
-    assertEquals(TestName + " e2Dip Equals", E2DIP, ellipseObject.E2.Dip, 0);
+    Assertions.assertEquals(E2DIP, ellipseObject.E2.Dip, 0, TestName + " e2Dip Equals");
 
     // check ellipseObject.maximumHorizontalProjection
-    assertEquals(
-        TestName + " maximumHorizontalProjection Equals",
+    Assertions.assertEquals(
         MAXIMUMHORIZONTALPROJECTION,
         ellipseObject.MaximumHorizontalProjection,
-        0);
+        0,
+        TestName + " maximumHorizontalProjection Equals");
 
     // check ellipseObject.maximumVerticalProjection
-    assertEquals(
-        TestName + " maximumVerticalProjection Equals",
+    Assertions.assertEquals(
         MAXIMUMVERTICALPROJECTION,
         ellipseObject.MaximumVerticalProjection,
-        0);
+        0,
+        TestName + " maximumVerticalProjection Equals");
 
     // check ellipseObject.equivalentHorizontalRadius
-    assertEquals(
-        TestName + " equivalentHorizontalRadius Equals",
+    Assertions.assertEquals(
         EQUIVILENTHORIZONTALRADIUS,
         ellipseObject.EquivalentHorizontalRadius,
-        0);
+        0,
+        TestName + " equivalentHorizontalRadius Equals");
   }
 }

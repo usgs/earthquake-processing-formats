@@ -1,9 +1,8 @@
 package gov.usgs.processingformats;
 
-import static org.junit.Assert.*;
-
 import org.json.simple.parser.ParseException;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TravelTimeSourceTest {
 
@@ -53,7 +52,7 @@ public class TravelTimeSourceTest {
     boolean rc = sourceObject.isValid();
 
     // check return code
-    assertEquals("Successful Validation", true, rc);
+    Assertions.assertEquals(true, rc, "Successful Validation");
 
     // build bad source object
     TravelTimeSource badSourceObject = new TravelTimeSource(LATITUDE, null, null);
@@ -61,19 +60,19 @@ public class TravelTimeSourceTest {
     rc = badSourceObject.isValid();
 
     // check return code
-    assertEquals("Unsuccessful Validation", false, rc);
+    Assertions.assertEquals(false, rc, "Unsuccessful Validation");
   }
 
   /** Checks the data in the class */
   public void checkData(TravelTimeSource SourceObject, String TestName) {
 
     // check SourceObject.Latitude
-    assertEquals(TestName + " Latitude Equals", LATITUDE, SourceObject.Latitude, 0);
+    Assertions.assertEquals(LATITUDE, SourceObject.Latitude, 0, TestName + " Latitude Equals");
 
     // check SourceObject.Longitude
-    assertEquals(TestName + " Longitude Equals", LONGITUDE, SourceObject.Longitude, 0);
+    Assertions.assertEquals(LONGITUDE, SourceObject.Longitude, 0, TestName + " Longitude Equals");
 
     // check SourceObject.Depth
-    assertEquals(TestName + " Depth Equals", DEPTH, SourceObject.Depth, 0);
+    Assertions.assertEquals(DEPTH, SourceObject.Depth, 0, TestName + " Depth Equals");
   }
 }

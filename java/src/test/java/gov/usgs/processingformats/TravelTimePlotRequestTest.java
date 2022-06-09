@@ -1,10 +1,9 @@
 package gov.usgs.processingformats;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import org.json.simple.parser.ParseException;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TravelTimePlotRequestTest {
 
@@ -179,7 +178,7 @@ public class TravelTimePlotRequestTest {
     ArrayList<String> errors = travelTimeRequestObject.getErrors();
 
     // check return code
-    assertEquals("Successful Validation", true, rc);
+    Assertions.assertEquals(true, rc, "Successful Validation");
 
     // use constructor
     TravelTimePlotRequest badTravelTimePlotRequestObject =
@@ -188,15 +187,15 @@ public class TravelTimePlotRequestTest {
     rc = badTravelTimePlotRequestObject.isValid();
 
     // check return code
-    assertEquals("Unsuccessful Validation", false, rc);
+    Assertions.assertEquals(false, rc, "Unsuccessful Validation");
   }
 
   public void checkData(TravelTimePlotRequest travelTimeRequestObject, String TestName) {
 
     // travelTimeRequestObject.earthModel
     if (travelTimeRequestObject.EarthModel != null) {
-      assertEquals(
-          TestName + " Earth Model Equals", EARTHMODEL, travelTimeRequestObject.EarthModel);
+      Assertions.assertEquals(
+          EARTHMODEL, travelTimeRequestObject.EarthModel, TestName + " Earth Model Equals");
     }
 
     // check travelTimeRequestObject.phaseTypes
@@ -204,67 +203,67 @@ public class TravelTimePlotRequestTest {
         && (!travelTimeRequestObject.PhaseTypes.isEmpty())) {
 
       // check travelTimeRequestObject.phaseTypes[0]
-      assertEquals(
-          TestName + " Phase Type 1 Equals", PHASETYPE1, travelTimeRequestObject.PhaseTypes.get(0));
+      Assertions.assertEquals(
+          PHASETYPE1, travelTimeRequestObject.PhaseTypes.get(0), TestName + " Phase Type 1 Equals");
 
       // check travelTimeRequestObject.phaseTypes[1]
-      assertEquals(
-          TestName + " Phase Type 2 Equals", PHASETYPE2, travelTimeRequestObject.PhaseTypes.get(1));
+      Assertions.assertEquals(
+          PHASETYPE2, travelTimeRequestObject.PhaseTypes.get(1), TestName + " Phase Type 2 Equals");
 
       // check travelTimeRequestObject.phaseTypes[2]
-      assertEquals(
-          TestName + " Phase Type 3 Equals", PHASETYPE3, travelTimeRequestObject.PhaseTypes.get(2));
+      Assertions.assertEquals(
+          PHASETYPE3, travelTimeRequestObject.PhaseTypes.get(2), TestName + " Phase Type 3 Equals");
     }
 
     // check travelTimeRequestObject.returnAllPhases
     if (travelTimeRequestObject.ReturnAllPhases != null) {
-      assertEquals(
-          TestName + " Return All Phases Equals ",
+      Assertions.assertEquals(
           travelTimeRequestObject.ReturnAllPhases,
-          RETURNALLPHASES);
+          RETURNALLPHASES,
+          TestName + " Return All Phases Equals ");
     }
 
     // check travelTimeRequestObject.returnBackBranches
     if (travelTimeRequestObject.ReturnBackBranches != null) {
-      assertEquals(
-          TestName + " Return Back Branchs Equals ",
+      Assertions.assertEquals(
           travelTimeRequestObject.ReturnBackBranches,
-          RETURNBACKBRANCHES);
+          RETURNBACKBRANCHES,
+          TestName + " Return Back Branchs Equals ");
     }
 
     // check travelTimeRequestObject.convertTectonic
     if (travelTimeRequestObject.ConvertTectonic != null) {
-      assertEquals(
-          TestName + " Convert Tectonic Equals ",
+      Assertions.assertEquals(
           travelTimeRequestObject.ConvertTectonic,
-          CONVERTTECTONIC);
+          CONVERTTECTONIC,
+          TestName + " Convert Tectonic Equals ");
     }
 
     // check travelTimeRequestObject.MaximumDistance
     if (travelTimeRequestObject.MaximumDistance != null) {
-      assertEquals(
-          TestName + " Maximum Distance Equals ",
+      Assertions.assertEquals(
           travelTimeRequestObject.MaximumDistance,
           MAXIMUMDISTANCE,
-          0);
+          0,
+          TestName + " Maximum Distance Equals ");
     }
 
     // check travelTimeRequestObject.DistanceStep
     if (travelTimeRequestObject.DistanceStep != null) {
-      assertEquals(
-          TestName + " Distance Step Equals ",
+      Assertions.assertEquals(
           travelTimeRequestObject.DistanceStep,
           DISTANCESTEP,
-          0);
+          0,
+          TestName + " Distance Step Equals ");
     }
 
     // check travelTimeRequestObject.MaximumTravelTime
     if (travelTimeRequestObject.MaximumTravelTime != null) {
-      assertEquals(
-          TestName + " Maximum TravelTime Equals ",
+      Assertions.assertEquals(
           travelTimeRequestObject.MaximumTravelTime,
           MAXIMUMTRAVELTIME,
-          0);
+          0,
+          TestName + " Maximum TravelTime Equals ");
     }
   }
 

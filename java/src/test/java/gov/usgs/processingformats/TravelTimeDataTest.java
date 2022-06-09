@@ -1,9 +1,8 @@
 package gov.usgs.processingformats;
 
-import static org.junit.Assert.*;
-
 import org.json.simple.parser.ParseException;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TravelTimeDataTest {
 
@@ -163,7 +162,7 @@ public class TravelTimeDataTest {
     boolean rc = travelTimeDataObject.isValid();
 
     // check return code
-    assertEquals("Successful Validation", true, rc);
+    Assertions.assertEquals(true, rc, "Successful Validation");
 
     // use constructor
     TravelTimeData badTravelTimeDataObject =
@@ -183,68 +182,69 @@ public class TravelTimeDataTest {
     rc = badTravelTimeDataObject.isValid();
 
     // check return code
-    assertEquals("Unsuccessful Validation", false, rc);
+    Assertions.assertEquals(false, rc, "Unsuccessful Validation");
   }
 
   public void checkData(TravelTimeData travelTimeDataObject, String TestName) {
 
     // check travelTimeDataObject.phase
-    assertEquals(TestName + " Phase Equals", PHASE, travelTimeDataObject.Phase);
+    Assertions.assertEquals(PHASE, travelTimeDataObject.Phase, TestName + " Phase Equals");
 
     // check travelTimeDataObject.travelTime
-    assertEquals(TestName + " Travel Time Equals", TRAVELTIME, travelTimeDataObject.TravelTime, 0);
+    Assertions.assertEquals(
+        TRAVELTIME, travelTimeDataObject.TravelTime, 0, TestName + " Travel Time Equals");
 
     // check travelTimeDataObject.distanceDerivative
-    assertEquals(
-        TestName + " Distance Derivative Equals",
+    Assertions.assertEquals(
         DISTANCEDERIVATIVE,
         travelTimeDataObject.DistanceDerivative,
-        0);
+        0,
+        TestName + " Distance Derivative Equals");
 
     // check travelTimeDataObject.depthDerivative
-    assertEquals(
-        TestName + " Depth Derivative Equals",
+    Assertions.assertEquals(
         DEPTHDERIVATIVE,
         travelTimeDataObject.DepthDerivative,
-        0);
+        0,
+        TestName + " Depth Derivative Equals");
 
     // check travelTimeDataObject.rayDerivative
-    assertEquals(
-        TestName + " Ray Derivative Equals", RAYDERIVATIVE, travelTimeDataObject.RayDerivative, 0);
+    Assertions.assertEquals(
+        RAYDERIVATIVE, travelTimeDataObject.RayDerivative, 0, TestName + " Ray Derivative Equals");
 
     // check travelTimeDataObject.statisticalSpread
-    assertEquals(
-        TestName + " Statistical Spread Equals",
+    Assertions.assertEquals(
         STATISTICALSPREAD,
         travelTimeDataObject.StatisticalSpread,
-        0);
+        0,
+        TestName + " Statistical Spread Equals");
 
     // check travelTimeDataObject.observability
-    assertEquals(
-        TestName + " Observability Equals", OBSERVABILITY, travelTimeDataObject.Observability, 0);
+    Assertions.assertEquals(
+        OBSERVABILITY, travelTimeDataObject.Observability, 0, TestName + " Observability Equals");
 
     // check travelTimeDataObject.teleseismicPhaseGroup
-    assertEquals(
-        TestName + " Teleseismic Phase Group Equals",
+    Assertions.assertEquals(
         TELESEISMICPHASEGROUP,
-        travelTimeDataObject.TeleseismicPhaseGroup);
+        travelTimeDataObject.TeleseismicPhaseGroup,
+        TestName + " Teleseismic Phase Group Equals");
 
     // check travelTimeDataObject.auxiliaryPhaseGroup
-    assertEquals(
-        TestName + " Auxiliary Phase Group Equals",
+    Assertions.assertEquals(
         AUXILIARYPHASEGROUP,
-        travelTimeDataObject.AuxiliaryPhaseGroup);
+        travelTimeDataObject.AuxiliaryPhaseGroup,
+        TestName + " Auxiliary Phase Group Equals");
 
     // check OriginObject.locationUseFlag
-    assertEquals(
-        TestName + " Location Use Flag Equals",
+    Assertions.assertEquals(
         LOCATIONUSEFLAG,
-        travelTimeDataObject.LocationUseFlag);
+        travelTimeDataObject.LocationUseFlag,
+        TestName + " Location Use Flag Equals");
 
     // check travelTimeDataObject.associationWeightFlag
-    assertEquals(
-        TestName + " Association Use Flag Equals",
+    Assertions.assertEquals(
         ASSOCIATIONWEIGHTFLAG,
-        travelTimeDataObject.AssociationWeightFlag);
+        travelTimeDataObject.AssociationWeightFlag,
+        TestName + " Association Use Flag Equals");
   }
 }

@@ -1,10 +1,9 @@
 package gov.usgs.processingformats;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import org.json.simple.parser.ParseException;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TravelTimeRequestTest {
 
@@ -175,7 +174,7 @@ public class TravelTimeRequestTest {
     ArrayList<String> errors = travelTimeRequestObject.getErrors();
 
     // check return code
-    assertEquals("Successful Validation", true, rc);
+    Assertions.assertEquals(true, rc, "Successful Validation");
 
     // use constructor
     TravelTimeRequest badTravelTimeRequestObject =
@@ -184,15 +183,15 @@ public class TravelTimeRequestTest {
     rc = badTravelTimeRequestObject.isValid();
 
     // check return code
-    assertEquals("Unsuccessful Validation", false, rc);
+    Assertions.assertEquals(false, rc, "Unsuccessful Validation");
   }
 
   public void checkData(TravelTimeRequest travelTimeRequestObject, String TestName) {
 
     // travelTimeRequestObject.earthModel
     if (travelTimeRequestObject.EarthModel != null) {
-      assertEquals(
-          TestName + " Earth Model Equals", EARTHMODEL, travelTimeRequestObject.EarthModel);
+      Assertions.assertEquals(
+          EARTHMODEL, travelTimeRequestObject.EarthModel, TestName + " Earth Model Equals");
     }
 
     // check travelTimeRequestObject.phaseTypes
@@ -200,40 +199,40 @@ public class TravelTimeRequestTest {
         && (!travelTimeRequestObject.PhaseTypes.isEmpty())) {
 
       // check travelTimeRequestObject.phaseTypes[0]
-      assertEquals(
-          TestName + " Phase Type 1 Equals", PHASETYPE1, travelTimeRequestObject.PhaseTypes.get(0));
+      Assertions.assertEquals(
+          PHASETYPE1, travelTimeRequestObject.PhaseTypes.get(0), TestName + " Phase Type 1 Equals");
 
       // check travelTimeRequestObject.phaseTypes[1]
-      assertEquals(
-          TestName + " Phase Type 2 Equals", PHASETYPE2, travelTimeRequestObject.PhaseTypes.get(1));
+      Assertions.assertEquals(
+          PHASETYPE2, travelTimeRequestObject.PhaseTypes.get(1), TestName + " Phase Type 2 Equals");
 
       // check travelTimeRequestObject.phaseTypes[2]
-      assertEquals(
-          TestName + " Phase Type 3 Equals", PHASETYPE3, travelTimeRequestObject.PhaseTypes.get(2));
+      Assertions.assertEquals(
+          PHASETYPE3, travelTimeRequestObject.PhaseTypes.get(2), TestName + " Phase Type 3 Equals");
     }
 
     // check travelTimeRequestObject.returnAllPhases
     if (travelTimeRequestObject.ReturnAllPhases != null) {
-      assertEquals(
-          TestName + " Return All Phases Equals ",
+      Assertions.assertEquals(
           travelTimeRequestObject.ReturnAllPhases,
-          RETURNALLPHASES);
+          RETURNALLPHASES,
+          TestName + " Return All Phases Equals ");
     }
 
     // check travelTimeRequestObject.returnBackBranches
     if (travelTimeRequestObject.ReturnBackBranches != null) {
-      assertEquals(
-          TestName + " Return Back Branchs Equals ",
+      Assertions.assertEquals(
           travelTimeRequestObject.ReturnBackBranches,
-          RETURNBACKBRANCHES);
+          RETURNBACKBRANCHES,
+          TestName + " Return Back Branchs Equals ");
     }
 
     // check travelTimeRequestObject.convertTectonic
     if (travelTimeRequestObject.ConvertTectonic != null) {
-      assertEquals(
-          TestName + " Convert Tectonic Equals ",
+      Assertions.assertEquals(
           travelTimeRequestObject.ConvertTectonic,
-          CONVERTTECTONIC);
+          CONVERTTECTONIC,
+          TestName + " Convert Tectonic Equals ");
     }
   }
 

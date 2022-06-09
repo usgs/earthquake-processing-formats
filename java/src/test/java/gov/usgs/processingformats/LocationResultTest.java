@@ -1,11 +1,10 @@
 package gov.usgs.processingformats;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.Date;
 import org.json.simple.parser.ParseException;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class LocationResultTest {
 
@@ -244,7 +243,7 @@ public class LocationResultTest {
     boolean rc = LocationResultObject.isValid();
 
     // check return code
-    assertEquals("Successful Validation", true, rc);
+    Assertions.assertEquals(true, rc, "Successful Validation");
 
     LocationResult badLocationResultObject =
         new LocationResult(
@@ -290,46 +289,48 @@ public class LocationResultTest {
     rc = badLocationResultObject.isValid();
 
     // check return code
-    assertEquals("Unsuccessful Validation", false, rc);
+    Assertions.assertEquals(false, rc, "Unsuccessful Validation");
   }
 
   public void checkData(LocationResult LocationResultObject, String TestName) {
 
     // check LocationResultObject.hypocenter.Latitude
-    assertEquals(
-        TestName + " Latitude Equals", LATITUDE, LocationResultObject.Hypocenter.Latitude, 0);
+    Assertions.assertEquals(
+        LATITUDE, LocationResultObject.Hypocenter.Latitude, 0, TestName + " Latitude Equals");
 
     // check LocationResultObject.hypocenter.Longitude
-    assertEquals(
-        TestName + " Longitude Equals", LONGITUDE, LocationResultObject.Hypocenter.Longitude, 0);
+    Assertions.assertEquals(
+        LONGITUDE, LocationResultObject.Hypocenter.Longitude, 0, TestName + " Longitude Equals");
 
     // check LocationResultObject.hypocenter.Depth
-    assertEquals(TestName + " Depth Equals", DEPTH, LocationResultObject.Hypocenter.Depth, 0);
+    Assertions.assertEquals(
+        DEPTH, LocationResultObject.Hypocenter.Depth, 0, TestName + " Depth Equals");
 
     // check LocationResultObject.hypocenter.Time
-    assertEquals(TestName + " OriginTime Equals", TIME, LocationResultObject.Hypocenter.Time);
+    Assertions.assertEquals(
+        TIME, LocationResultObject.Hypocenter.Time, TestName + " OriginTime Equals");
 
     // check LocationResultObject.hypocenter.LatitudeError
-    assertEquals(
-        TestName + " LatitudeError Equals",
+    Assertions.assertEquals(
         LATITUDEERROR,
         LocationResultObject.Hypocenter.LatitudeError,
-        0);
+        0,
+        TestName + " LatitudeError Equals");
 
     // check LocationResultObject.hypocenter.LongitudeError
-    assertEquals(
-        TestName + " LongitudeError Equals",
+    Assertions.assertEquals(
         LONGITUDEERROR,
         LocationResultObject.Hypocenter.LongitudeError,
-        0);
+        0,
+        TestName + " LongitudeError Equals");
 
     // check LocationResultObject.hypocenter.DepthError
-    assertEquals(
-        TestName + " DepthError Equals", DEPTHERROR, LocationResultObject.Hypocenter.DepthError, 0);
+    Assertions.assertEquals(
+        DEPTHERROR, LocationResultObject.Hypocenter.DepthError, 0, TestName + " DepthError Equals");
 
     // check LocationResultObject.hypocenter.TimeError
-    assertEquals(
-        TestName + " TimeError Equals", TIMEERROR, LocationResultObject.Hypocenter.TimeError, 0);
+    Assertions.assertEquals(
+        TIMEERROR, LocationResultObject.Hypocenter.TimeError, 0, TestName + " TimeError Equals");
 
     // need to check data still!!!!!!
     // somehow?
@@ -337,174 +338,177 @@ public class LocationResultTest {
     // optional values
     // check LocationResultObject.id
     if (LocationResultObject.ID != null) {
-      assertEquals(TestName + " ID Equals", ID, LocationResultObject.ID);
+      Assertions.assertEquals(ID, LocationResultObject.ID, TestName + " ID Equals");
     }
 
     // check LocationResultObject.numberOfAssociatedStations
     if (LocationResultObject.NumberOfAssociatedStations != null) {
-      assertEquals(
-          TestName + " Number of Associated Stations Equals",
+      Assertions.assertEquals(
           NUMASSOCIATEDSTATIONS,
           LocationResultObject.NumberOfAssociatedStations,
-          0);
+          0,
+          TestName + " Number of Associated Stations Equals");
     }
 
     // check LocationResultObject.numberOfAssociatedPhases
     if (LocationResultObject.NumberOfAssociatedPhases != null) {
-      assertEquals(
-          TestName + " Number of Associated Phases Equals",
+      Assertions.assertEquals(
           NUMASSOCIATEDPHASES,
           LocationResultObject.NumberOfAssociatedPhases,
-          0);
+          0,
+          TestName + " Number of Associated Phases Equals");
     }
 
     // check LocationResultObject.numberOfUsedStations
     if (LocationResultObject.NumberOfUsedStations != null) {
-      assertEquals(
-          TestName + " Number of Used Stations Equals",
+      Assertions.assertEquals(
           NUMUSEDSTATIONS,
           LocationResultObject.NumberOfUsedStations,
-          0);
+          0,
+          TestName + " Number of Used Stations Equals");
     }
 
     // check LocationResultObject.numberOfUsedPhases
     if (LocationResultObject.NumberOfUsedPhases != null) {
-      assertEquals(
-          TestName + " Number of Used Phases Equals",
+      Assertions.assertEquals(
           NUMUSEDPHASES,
           LocationResultObject.NumberOfUsedPhases,
-          0);
+          0,
+          TestName + " Number of Used Phases Equals");
     }
 
     // check LocationResultObject.Gap
     if (LocationResultObject.Gap != null) {
-      assertEquals(TestName + " Gap Equals", GAP, LocationResultObject.Gap, 0);
+      Assertions.assertEquals(GAP, LocationResultObject.Gap, 0, TestName + " Gap Equals");
     }
 
     // check LocationResultObject.secondaryGap
     if (LocationResultObject.SecondaryGap != null) {
-      assertEquals(
-          TestName + " Secondary Gap Equals", SECONDARYGAP, LocationResultObject.SecondaryGap, 0);
+      Assertions.assertEquals(
+          SECONDARYGAP, LocationResultObject.SecondaryGap, 0, TestName + " Secondary Gap Equals");
     }
 
     // check LocationResultObject.MinimumDistance
     if (LocationResultObject.MinimumDistance != null) {
-      assertEquals(
-          TestName + " MinimumDistance Equals",
+      Assertions.assertEquals(
           MINIMUMDISTANCE,
           LocationResultObject.MinimumDistance,
-          0);
+          0,
+          TestName + " MinimumDistance Equals");
     }
 
     // check LocationResultObject.RMS
     if (LocationResultObject.RMS != null) {
-      assertEquals(TestName + " RMS Equals", RMS, LocationResultObject.RMS, 0);
+      Assertions.assertEquals(RMS, LocationResultObject.RMS, 0, TestName + " RMS Equals");
     }
 
     // check LocationResultObject.quality
     if (LocationResultObject.Quality != null) {
-      assertEquals(TestName + " Quality Equals", QUALITY, LocationResultObject.Quality);
+      Assertions.assertEquals(QUALITY, LocationResultObject.Quality, TestName + " Quality Equals");
     }
 
     // check LocationResultObject.baysianDepth
     if (LocationResultObject.BayesianDepth != null) {
-      assertEquals(
-          TestName + " Bayesian Depth Equals",
+      Assertions.assertEquals(
           BAYESIANDEPTH,
           LocationResultObject.BayesianDepth,
-          0);
+          0,
+          TestName + " Bayesian Depth Equals");
     }
 
     // check LocationResultObject.baysianRange
     if (LocationResultObject.BayesianRange != null) {
-      assertEquals(
-          TestName + " Bayesian Range Equals",
+      Assertions.assertEquals(
           BAYESIANRANGE,
           LocationResultObject.BayesianRange,
-          0);
+          0,
+          TestName + " Bayesian Range Equals");
     }
 
     // check LocationResultObject.depthImportance
     if (LocationResultObject.DepthImportance != null) {
-      assertEquals(
-          TestName + " Depth Importance Equals",
+      Assertions.assertEquals(
           DEPTHIMPORTANCE,
           LocationResultObject.DepthImportance,
-          0);
+          0,
+          TestName + " Depth Importance Equals");
     }
 
     // check LocationResultObject.locatorExitCode
     if (LocationResultObject.LocatorExitCode != null) {
-      assertEquals(
-          TestName + " Locator Exit Code Equals",
+      Assertions.assertEquals(
           LOCATOREXITCODE,
-          LocationResultObject.LocatorExitCode);
+          LocationResultObject.LocatorExitCode,
+          TestName + " Locator Exit Code Equals");
     }
 
     // error ellipse
     if (LocationResultObject.ErrorEllipse != null) {
       // check ellipseObject.e0Error
-      assertEquals(
-          TestName + " e0Error Equals", E0ERROR, LocationResultObject.ErrorEllipse.E0.Error, 0);
+      Assertions.assertEquals(
+          E0ERROR, LocationResultObject.ErrorEllipse.E0.Error, 0, TestName + " e0Error Equals");
 
       // check ellipseObject.e0Azimuth
-      assertEquals(
-          TestName + " e0Azimuth Equals",
+      Assertions.assertEquals(
           E0AZIMUTH,
           LocationResultObject.ErrorEllipse.E0.Azimuth,
-          0);
+          0,
+          TestName + " e0Azimuth Equals");
 
       // check ellipseObject.e0Dip
-      assertEquals(TestName + " e0Dip Equals", E0DIP, LocationResultObject.ErrorEllipse.E0.Dip, 0);
+      Assertions.assertEquals(
+          E0DIP, LocationResultObject.ErrorEllipse.E0.Dip, 0, TestName + " e0Dip Equals");
 
       // check ellipseObject.e1Error
-      assertEquals(
-          TestName + " e1Error Equals", E1ERROR, LocationResultObject.ErrorEllipse.E1.Error, 0);
+      Assertions.assertEquals(
+          E1ERROR, LocationResultObject.ErrorEllipse.E1.Error, 0, TestName + " e1Error Equals");
 
       // check ellipseObject.e1Azimuth
-      assertEquals(
-          TestName + " e1Azimuth Equals",
+      Assertions.assertEquals(
           E1AZIMUTH,
           LocationResultObject.ErrorEllipse.E1.Azimuth,
-          0);
+          0,
+          TestName + " e1Azimuth Equals");
 
       // check ellipseObject.e1Dip
-      assertEquals(TestName + " e1Dip Equals", E1DIP, LocationResultObject.ErrorEllipse.E1.Dip, 0);
+      Assertions.assertEquals(
+          E1DIP, LocationResultObject.ErrorEllipse.E1.Dip, 0, TestName + " e1Dip Equals");
 
       // check ellipseObject.e2Error
-      assertEquals(
-          TestName + " e2Error Equals", E2ERROR, LocationResultObject.ErrorEllipse.E2.Error, 0);
+      Assertions.assertEquals(
+          E2ERROR, LocationResultObject.ErrorEllipse.E2.Error, 0, TestName + " e2Error Equals");
 
       // check ellipseObject.e2Azimuth
-      assertEquals(
-          TestName + " e2Azimuth Equals",
+      Assertions.assertEquals(
           E2AZIMUTH,
           LocationResultObject.ErrorEllipse.E2.Azimuth,
-          0);
+          0,
+          TestName + " e2Azimuth Equals");
 
       // check ellipseObject.e2Dip
-      assertEquals(TestName + " e2Dip Equals", E2DIP, LocationResultObject.ErrorEllipse.E2.Dip, 0);
+      Assertions.assertEquals(
+          E2DIP, LocationResultObject.ErrorEllipse.E2.Dip, 0, TestName + " e2Dip Equals");
 
       // check ellipseObject.maximumHorizontalProjection
-      assertEquals(
-          TestName + " maximumHorizontalProjection Equals",
+      Assertions.assertEquals(
           MAXIMUMHORIZONTALPROJECTION,
           LocationResultObject.ErrorEllipse.MaximumHorizontalProjection,
-          0);
+          0,
+          TestName + " maximumHorizontalProjection Equals");
 
       // check ellipseObject.maximumVerticalProjection
-      assertEquals(
-          TestName + " maximumVerticalProjection Equals",
+      Assertions.assertEquals(
           MAXIMUMVERTICALPROJECTION,
           LocationResultObject.ErrorEllipse.MaximumVerticalProjection,
-          0);
+          0,
+          TestName + " maximumVerticalProjection Equals");
 
       // check ellipseObject.equivalentHorizontalRadius
-      assertEquals(
-          TestName + " equivalentHorizontalRadius Equals",
+      Assertions.assertEquals(
           EQUIVILENTHORIZONTALRADIUS,
           LocationResultObject.ErrorEllipse.EquivalentHorizontalRadius,
-          0);
+          0,
+          TestName + " equivalentHorizontalRadius Equals");
     }
   }
 

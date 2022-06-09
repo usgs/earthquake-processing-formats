@@ -233,7 +233,7 @@ public class TravelTimeRequest implements ProcessingInt {
    * <p>The reload function for the TravelTimeData class. Initializes members to provided values.
    *
    * @param newSource - A TravelTimeSource object containing the source information
-   * @param newReceiver - An ArrayList&lt;TravelTimeReceiver&gt; objects containing the desired
+   * @param newReceivers - An ArrayList&lt;TravelTimeReceiver&gt; objects containing the desired
    *     Receivers
    * @param newEarthModel - A String containing the earthmodel
    * @param newPhaseTypes - An ArrayList&lt;String&gt; containing the desired display types

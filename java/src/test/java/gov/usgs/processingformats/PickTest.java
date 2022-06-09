@@ -1,10 +1,9 @@
 package gov.usgs.processingformats;
 
-import static org.junit.Assert.*;
-
 import java.util.Date;
 import org.json.simple.parser.ParseException;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class PickTest {
 
@@ -159,7 +158,7 @@ public class PickTest {
     boolean rc = pickObject.isValid();
 
     // check return code
-    assertEquals("Successful Validation", true, rc);
+    Assertions.assertEquals(true, rc, "Successful Validation");
 
     // build bad Pick object
     Pick badPickObject =
@@ -191,85 +190,88 @@ public class PickTest {
     rc = badPickObject.isValid();
 
     // check return code
-    assertEquals("Unsuccessful Validation", false, rc);
+    Assertions.assertEquals(false, rc, "Unsuccessful Validation");
   }
 
   public void checkData(Pick pickObject, String TestName) {
 
     // check pickObject.ID
-    assertEquals(TestName + " ID Equals", ID, pickObject.ID);
+    Assertions.assertEquals(ID, pickObject.ID, TestName + " ID Equals");
 
     // check pickObject.site.Station
-    assertEquals(TestName + " Station Equals", STATION, pickObject.Site.Station);
+    Assertions.assertEquals(STATION, pickObject.Site.Station, TestName + " Station Equals");
 
     // check pickObject.site.Channel
-    assertEquals(TestName + " Channel Equals", CHANNEL, pickObject.Site.Channel);
+    Assertions.assertEquals(CHANNEL, pickObject.Site.Channel, TestName + " Channel Equals");
 
     // check pickObject.site.Network
-    assertEquals(TestName + " Network Equals", NETWORK, pickObject.Site.Network);
+    Assertions.assertEquals(NETWORK, pickObject.Site.Network, TestName + " Network Equals");
 
     // check pickObject.site.Location
-    assertEquals(TestName + " Location Equals", LOCATION, pickObject.Site.Location);
+    Assertions.assertEquals(LOCATION, pickObject.Site.Location, TestName + " Location Equals");
 
     // check pickObject.site.Latitude
     if (pickObject.Site.Latitude != null) {
-      assertEquals(TestName + " Latitude Equals", LATITUDE, pickObject.Site.Latitude, 0);
+      Assertions.assertEquals(LATITUDE, pickObject.Site.Latitude, 0, TestName + " Latitude Equals");
     }
 
     // check pickObject.site.Longitude
     if (pickObject.Site.Longitude != null) {
-      assertEquals(TestName + " Longitude Equals", LONGITUDE, pickObject.Site.Longitude, 0);
+      Assertions.assertEquals(
+          LONGITUDE, pickObject.Site.Longitude, 0, TestName + " Longitude Equals");
     }
 
     // check pickObject.site.Elevation
     if (pickObject.Site.Elevation != null) {
-      assertEquals(TestName + " Elevation Equals", ELEVATION, pickObject.Site.Elevation, 0);
+      Assertions.assertEquals(
+          ELEVATION, pickObject.Site.Elevation, 0, TestName + " Elevation Equals");
     }
 
     // check pickObject.Source.AgencyID
-    assertEquals(TestName + " AgencyID Equals", AGENCYID, pickObject.Source.AgencyID);
+    Assertions.assertEquals(AGENCYID, pickObject.Source.AgencyID, TestName + " AgencyID Equals");
 
     // check pickObject.Source.Author
-    assertEquals(TestName + " Author Equals", AUTHOR, pickObject.Source.Author);
+    Assertions.assertEquals(AUTHOR, pickObject.Source.Author, TestName + " Author Equals");
 
     // check pickObject.Source.Author
-    assertEquals(TestName + " Type Equals", TYPE, pickObject.Source.Type);
+    Assertions.assertEquals(TYPE, pickObject.Source.Type, TestName + " Type Equals");
 
     // check pickObject.Time
-    assertEquals(TestName + " Time Equals", TIME, pickObject.Time);
+    Assertions.assertEquals(TIME, pickObject.Time, TestName + " Time Equals");
 
     // check pickObject.affinity
-    assertEquals(TestName + " Affinity Equals", AFFINITY, pickObject.Affinity, 0);
+    Assertions.assertEquals(AFFINITY, pickObject.Affinity, 0, TestName + " Affinity Equals");
 
     // check pickObject.quality
-    assertEquals(TestName + " Quality Equals", QUALITY, pickObject.Quality, 0);
+    Assertions.assertEquals(QUALITY, pickObject.Quality, 0, TestName + " Quality Equals");
 
     // check pickObject.use
-    assertEquals(TestName + " Use Equals", USE, pickObject.Use);
+    Assertions.assertEquals(USE, pickObject.Use, TestName + " Use Equals");
 
     // check pickObject.pickedPhase
-    assertEquals(TestName + " Picked Phase Equals", PICKEDPHASE, pickObject.PickedPhase);
+    Assertions.assertEquals(PICKEDPHASE, pickObject.PickedPhase, TestName + " Picked Phase Equals");
 
     // check pickObject.associatedPhase
-    assertEquals(
-        TestName + " Associated Phase Equals", ASSOCIATEDPHASE, pickObject.AssociatedPhase);
+    Assertions.assertEquals(
+        ASSOCIATEDPHASE, pickObject.AssociatedPhase, TestName + " Associated Phase Equals");
 
     // check pickObject.locatedPhase
-    assertEquals(TestName + " Located Phase Equals", LOCATEDPHASE, pickObject.LocatedPhase);
+    Assertions.assertEquals(
+        LOCATEDPHASE, pickObject.LocatedPhase, TestName + " Located Phase Equals");
 
     // check pickObject.residual
-    assertEquals(TestName + " Residual Equals", RESIDUAL, pickObject.Residual, 0);
+    Assertions.assertEquals(RESIDUAL, pickObject.Residual, 0, TestName + " Residual Equals");
 
     // check pickObject.distance
-    assertEquals(TestName + " Distance Equals", DISTANCE, pickObject.Distance, 0);
+    Assertions.assertEquals(DISTANCE, pickObject.Distance, 0, TestName + " Distance Equals");
 
     // check pickObject.azimuth
-    assertEquals(TestName + " Azimuth Equals", AZIMUTH, pickObject.Azimuth, 0);
+    Assertions.assertEquals(AZIMUTH, pickObject.Azimuth, 0, TestName + " Azimuth Equals");
 
     // check pickObject.weight
-    assertEquals(TestName + " Weight Equals", WEIGHT, pickObject.Weight, 0);
+    Assertions.assertEquals(WEIGHT, pickObject.Weight, 0, TestName + " Weight Equals");
 
     // check pickObject.importance
-    assertEquals(TestName + " Importance Equals", IMPORTANCE, pickObject.Importance, 0);
+    Assertions.assertEquals(IMPORTANCE, pickObject.Importance, 0, TestName + " Importance Equals");
   }
 }
