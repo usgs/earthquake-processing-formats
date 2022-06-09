@@ -34,7 +34,7 @@ class ProcessingBase {
 	/**
 	 * \brief site destructor
 	 *
-	 * The destructor for the detectionbase class.
+	 * The destructor for the processingbase class.
 	 */
 	~ProcessingBase();
 

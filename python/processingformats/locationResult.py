@@ -71,7 +71,7 @@ class LocationResult:
         newUsedPhases: an int containing the number of used phases
         newGap: a double containing the gap in degrees
         newSecondaryGap: a double containing the secondary gap in degrees
-        newMinimumDistance: a double containing the detection minimum distance in degrees
+        newMinimumDistance: a double containing the  minimum distance in degrees
         newRMS: a double containing the RMS in seconds
         newQuality: a string containing the quality flags
         newBayesianDepth: a double containing the bayesian depth in kilometers

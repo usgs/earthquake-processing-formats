@@ -29,13 +29,13 @@
  */
 namespace processingformats {
 	/**
-	 * \brief detectionformats function to validate that a string contains just
+	 * \brief processingformats function to validate that a string contains just
 	 * characters
 	 */
 	bool IsStringAlpha(const std::string &s);
 
 	/**
-	 * \brief detectionformats function to validate that a string contains an
+	 * \brief processingormats function to validate that a string contains an
 	 * iso8601 time
 	 */
 	bool IsStringISO8601(const std::string &s);

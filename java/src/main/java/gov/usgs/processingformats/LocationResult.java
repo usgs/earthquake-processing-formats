@@ -62,7 +62,7 @@ public class LocationResult implements ProcessingInt {
   /** Optional Double containing the secondary Gap in decimal degrees */
   public Double SecondaryGap;
 
-  /** Required Double containing the Detection minimum distance in decimal degrees */
+  /** Required Double containing the minimum distance in decimal degrees */
   public Double MinimumDistance;
 
   /** Optional Double containing the RMS in seconds */
@@ -901,7 +901,7 @@ public class LocationResult implements ProcessingInt {
     }
 
     csvString += "0.0,"; // mag
-    csvString += "0.0,"; // detectiontime
+    csvString += "0.0,"; // time
 
     return csvString;
   }

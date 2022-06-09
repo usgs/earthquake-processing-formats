@@ -4,8 +4,8 @@
  * the comments so that Doxygen will still
  * be able to work.
  ****************************************/
-#ifndef DETECTION_ERRORELLIPSE_H
-#define DETECTION_ERRORELLIPSE_H
+#ifndef PROCESSING_ERRORELLIPSE_H
+#define PROCESSING_ERRORELLIPSE_H
 
 #include <string>
 #include <exception>
@@ -210,4 +210,4 @@ class ErrorEllipse : public ProcessingBase {
 	double equivalentHorizontalRadius;
 };
 }  // namespace processingformats
-#endif  // DETECTION_ERRORELLIPSE_H
+#endif  // PROCESSING_ERRORELLIPSE_H

@@ -4,8 +4,8 @@
  * the comments so that Doxygen will still
  * be able to work.
  ****************************************/
-#ifndef DETECTION_HYPOCENTER_H
-#define DETECTION_HYPOCENTER_H
+#ifndef PROCESSING_HYPOCENTER_H
+#define PROCESSING_HYPOCENTER_H
 
 #include <string>
 #include <exception>
@@ -170,4 +170,4 @@ class Hypocenter : public ProcessingBase {
 	double depthError;
 };
 }  // namespace processingformats
-#endif  // DETECTION_HYPOCENTER_H
+#endif  // PROCESSING_HYPOCENTER_H
