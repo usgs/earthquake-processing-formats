@@ -144,3 +144,31 @@ Java Publish:
         when: manual
   tags:
     - development
+
+
+Python Publish:
+  cache:
+    paths:
+      # cache pip installed dependencies, see PIP_CACHE_DIR variable below
+      - .cache/pip    
+  script:
+    - cd python
+    - poetry config virtualenvs.in-project true --local
+    - poetry install   
+    - poetry build
+    # push to our package registry with twine and pypi
+    - poetry run twine upload --repository-url ${PACKAGE_URL} dist/*
+  stage: test
+  image: ${PYTHON_IMAGE}
+  variables:
+    PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+    TWINE_PASSWORD: ${CI_JOB_TOKEN}
+    TWINE_USERNAME: "gitlab-ci-token"
+    # The general NEIC package registry
+    PACKAGE_URL: "${CI_API_V4_URL}/projects/8197/packages/pypi"
+  stage: publish
+  rules:
+      - <<: *publish-env
+        when: manual
+  tags:
+    - development

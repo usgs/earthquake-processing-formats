@@ -564,7 +564,7 @@ std::vector<std::string> LocationResult::getErrors() {
 	// minimumDistance
 	if (std::isnan(minimumDistance) != true) {
 		if (minimumDistance < 0) {
-			errorlist.push_back("Invalid Minimum Distance in detection class.");
+			errorlist.push_back("Invalid Minimum Distance in LocationResult class.");
 		}
 	}
 

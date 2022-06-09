@@ -4,8 +4,8 @@
  * the comments so that Doxygen will still
  * be able to work.
  ****************************************/
-#ifndef DETECTION_LOCATIONRESULT_H
-#define DETECTION_LOCATIONRESULT_H
+#ifndef PROCESSING_LOCATIONRESULT_H
+#define PROCESSING_LOCATIONRESULT_H
 
 #include <string>
 #include <exception>
@@ -301,7 +301,7 @@ class LocationResult : public ProcessingBase {
 	/**
 	 * \brief The minimum distance
 	 * 
-	 * An optional double containing the Detection minimum distance for this 
+	 * An optional double containing the result minimum distance for this 
 	 * LocationResult in decimal degrees.
 	 */
 	double minimumDistance;
@@ -362,4 +362,4 @@ class LocationResult : public ProcessingBase {
 	processingformats::ErrorEllipse errorEllipse;
 };
 }  // namespace processingformats
-#endif  // DETECTION_LOCATIONRESULT_H
+#endif  // PROCESSING_LOCATIONRESULT_H

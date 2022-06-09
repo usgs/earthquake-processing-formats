@@ -16,7 +16,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.8,<3.11"
-
+twine = "^4.0.1"
 
 [tool.poetry.dev-dependencies]
 black = "^22.1.0"

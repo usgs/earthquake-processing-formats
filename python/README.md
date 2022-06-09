@@ -15,13 +15,13 @@ project
 Building
 ------
 
-The steps to get and use the python detection-formats are as follows:
+The steps to get and use the python processing-formats are as follows:
 
-1. Clone detection-formats.
+1. Clone processing-formats.
 2. Open a command window and change directories to /python/
 3. To run unit tests, run the command `python -m unittest discover test/`
 
 Using
 -----
 
-Once you have the python distribution, simply import detectionformats
+Once you have the python distribution, simply import processingformats

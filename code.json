@@ -1,31 +1,32 @@
 {
   "name": "earthquake-processing-formats",
   "organization": "U.S. Geological Survey",
-  "description": "REPOSITORY_DESCRIPTION",
-  "status": "Beta",
-  "homepage": "https://github.com/usgs/earthquake-processing-formats",
-  "downloadURL": "https://github.com/usgs/earthquake-processing-formats-formats/archive/master.zip",
+  "description": "Repository containing data exchange formats used to communicate seismic event processing information between seismic data services and/or algorithms.",
+  "version": "master",
+  "status": "Development",
+  "permissions": {
+    "usageType": "openSource",
+    "licenses": [
+      {
+        "name": "Public Domain, CC0-1.0",
+        "URL": "https://code.usgs.gov/ghsc/neic/utilities/earthquake-processing-formats/-/raw/main/LICENSE.md"
+      }
+    ]
+  },
 
-  "openSourceProject": 1,
-  "license": "https://github.com/usgs/earthquake-processing-formats/blob/master/LICENSE.md",
+  "homepage": "https://code.usgs.gov/ghsc/neic/utilities/earthquake-processing-formats",
+  "downloadURL": "https://code.usgs.gov/ghsc/neic/utilities/earthquake-processing-formats/-/archive/master/earthquake-processing-formats.zip",
+  "disclaimerURL": "https://code.usgs.gov/ghsc/neic/utilities/earthquake-processing-formats/-/raw/master/DISCLAIMER.md",
+  "repositoryURL": "https://code.usgs.gov/ghsc/neic/utilities/earthquake-processing-formats.git",
   "vcs": "git",
-  "repository": "https://github.com/usgs/earthquake-processing-formats.git",
-
-  "tags": [
-    "earthquake",
-    "formats",
-    "processing",
-  ],
-  "languages": [
-    "java",
-    "ant"
-  ],
-
+  "laborHours": 0,
+  "tags": ["Open Source", "Earthquakes", "formats", "processing", "NEIC"],
+  "languages": ["java", "python", "cpp"],
   "contact": {
     "name": "John Patton",
     "email": "jpatton@usgs.gov"
   },
-  "updated": {
-    "metadataLastUpdated": "2018-02-28"
+  "date": {
+    "metadataLastUpdated": "2022-05-09"
   }
 }
