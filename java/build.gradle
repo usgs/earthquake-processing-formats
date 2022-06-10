@@ -15,8 +15,6 @@ plugins {
     id "com.kageiit.jacobo" version "2.1.0"
     // static code analysis
     id "pmd"
-    // git clone, etc.
-    id "org.ajoberstar.grgit" version "2.3.0"
     // google java format
     id "com.github.sherter.google-java-format" version "0.9"
     // support publishing to maven repositories
