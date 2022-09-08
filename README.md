@@ -1,3 +1,7 @@
+> **THIS PROJECT HAS BEEN ARCHIVED**
+> 
+> Please see [https://code.usgs.gov/ghsc/neic/utilities/earthquake-processing-formats)
+
 # Processing Formats
 
 The US Geological Survey (USGS) National Earthquake Information Center (NEIC)
